@@ -1,0 +1,53 @@
+<section id="cheat-sheet" class="recall-sheet">
+    <h1 class="chapter-title">Cheat Sheet 6 Chương - Cứu Cánh Trước Giờ G</h1>
+
+    <h2>Chương 1: 5 Khái Niệm Lõi</h2>
+    <ul>
+        <li><strong>Data vs Information:</strong> Dữ liệu là số liệu thô; Thông tin là dữ liệu đã xử lý.</li>
+        <li><strong>DBMS:</strong> Hệ quản trị CSDL.</li>
+        <li><strong>Mức kiến trúc (3 mức):</strong> Ngoài (View) &rarr; Quan niệm (Logic) &rarr; Trong (Vật lý).</li>
+        <li><strong>Độc lập dữ liệu:</strong> Đổi schema vật lý không đổi logic; đổi logic không ảnh hưởng app.</li>
+        <li><strong>Key:</strong> Khóa chính (Primary Key - PK), Khóa ngoại (Foreign Key - FK).</li>
+    </ul>
+
+    <h2>Chương 2: ER & Ánh xạ</h2>
+    <div class="callout-exam">
+        <strong>🎯 Nguyên tắc ánh xạ:</strong>
+        <p>1-1: Nhét FK vào bên nào cũng được (nên bên tham gia toàn phần).</p>
+        <p>1-N: Bốc PK bên 1 thảy sang bên N làm FK.</p>
+        <p>M-N: Tách thành 1 bảng mới, PK là (PK bên A, PK bên B).</p>
+        <p>Đa trị: Tách bảng riêng, PK là (PK gốc, Giá trị thuộc tính đa trị).</p>
+    </div>
+
+    <h2>Chương 3: Đại Số Quan Hệ</h2>
+    <p>Chọn (&sigma;): Lọc dòng. Chiếu (&pi;): Cắt cột. Kết tự nhiên (&bowtie;). Hợp (&cup;), Giao (&cap;), Trừ (-).</p>
+    
+    <h2>Chương 4: SQL T-SQL Tốc Hành</h2>
+    <pre class="sql-block">
+SELECT [DISTINCT] cột
+FROM bảng1 JOIN bảng2 ON bảng1.cột = bảng2.cột
+WHERE điều kiện dòng
+GROUP BY cột gom nhóm
+HAVING điều kiện nhóm
+ORDER BY cột sắp xếp [ASC|DESC]
+    </pre>
+    <div class="callout-trap">
+        <strong>⚠ BẪY (Top 3):</strong>
+        <ol>
+            <li>Trong <code>SELECT</code> có cột không dùng hàm tập hợp (Sum, Count) mà quên bỏ vào <code>GROUP BY</code>.</li>
+            <li>Dùng <code>WHERE</code> cho hàm tập hợp (Phải dùng <code>HAVING</code>).</li>
+            <li>Thiếu điều kiện JOIN khi query nhiều bảng &rarr; Sinh ra tích Đề-các (Cartesian product) làm nổ dữ liệu.</li>
+        </ol>
+    </div>
+
+    <h2>Chương 5: Bảng Tầm Ảnh Hưởng Template</h2>
+    <p>Liệt kê Thêm (Insert), Xóa (Delete), Sửa (Update) trên các bảng liên quan đến ràng buộc toàn vẹn. Nhớ ghi: "+" (kiểm tra), "-" (không kiểm tra).</p>
+
+    <h2>Chương 6: PTH & Chuẩn Hóa</h2>
+    <ul>
+        <li><strong>Bao đóng X⁺:</strong> Thuật toán lấy vế phải gom vào nếu vế trái đã có.</li>
+        <li><strong>Khóa:</strong> Thuộc tính không xuất hiện ở RHS phải có trong mọi khóa; dùng bao đóng để tìm toàn bộ siêu khóa tối thiểu. L/N/R/LR chỉ là mẹo giảm nhánh.</li>
+        <li><strong>3NF:</strong> Với mọi PTH không hiển nhiên <code>X → A</code>: X là siêu khóa hoặc A là prime. <strong>BCNF:</strong> X phải là siêu khóa.</li>
+    </ul>
+
+</section>

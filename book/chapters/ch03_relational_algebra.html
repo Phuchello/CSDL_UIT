@@ -1,0 +1,813 @@
+<section id="ch03">
+<div class="chapter-title">
+  <span class="chapter-number">Chương 3</span>
+  <span class="chapter-name">Đại số quan hệ (Relational Algebra)</span>
+  <span class="chapter-subtitle">Phép chọn • Chiếu • Kết • Tập hợp • Phép chia • Gom nhóm</span>
+</div>
+
+<div class="callout-mental">
+  <strong>🧠 Mental Model: Data Pipeline</strong><br>
+  Đại số quan hệ (ĐSQH) là ngôn ngữ truy vấn có tính thủ tục (procedural). Bạn có thể hình dung mỗi phép toán là một trạm xử lý dữ liệu. Một trạm nhận vào một (hoặc hai) bảng dữ liệu thô (quan hệ), thực hiện biến đổi, và luôn luôn trả ra một bảng dữ liệu mới (quan hệ mới). Kết quả này lại có thể làm đầu vào cho trạm xử lý tiếp theo, tạo thành một <em>pipeline</em> truyền dữ liệu liên tục.
+</div>
+
+<h3>0. Schema tham chiếu (Chương 2)</h3>
+<p>Xuyên suốt chương này, chúng ta sẽ thực hành trên hai lược đồ CSDL quen thuộc:</p>
+
+<h4>CSDL Quản lý Giáo vụ (QLGV)</h4>
+<div class="schema">
+  <div class="schema-table">KHOA(<span class="pk">MAKHOA</span>, TENKHOA, NGANH, TRUONGKHOA)</div>
+  <div class="schema-table">MONHOC(<span class="pk">MAMH</span>, TENMH, TCLT, TCTH, <span class="fk">MAKHOA</span>)</div>
+  <div class="schema-table">DIEUKIEN(<span class="pk fk">MAMH</span>, <span class="pk fk">MAMH_TRUOC</span>)</div>
+  <div class="schema-table">GIAOVIEN(<span class="pk">MAGV</span>, HOTEN, HOCVI, HOCHAM, GIOITINH, NGSINH, NGVL, HESO, MUCLUONG, <span class="fk">MAKHOA</span>)</div>
+  <div class="schema-table">LOP(<span class="pk">MALOP</span>, TENLOP, TRGLOP, SISO, <span class="fk">MAGVCN</span>)</div>
+  <div class="schema-table">HOCVIEN(<span class="pk">MAHV</span>, HO, TEN, NGSINH, GIOITINH, NOISINH, <span class="fk">MALOP</span>)</div>
+  <div class="schema-table">GIANGDAY(<span class="pk fk">MALOP</span>, <span class="pk fk">MAMH</span>, <span class="fk">MAGV</span>, HOCKY, NAM, TUNGAY, DENNGAY)</div>
+  <div class="schema-table">KETQUATHI(<span class="pk fk">MAHV</span>, <span class="pk fk">MAMH</span>, <span class="pk">LANTHI</span>, NGTHI, DIEM, KQUA)</div>
+</div>
+
+<h4>CSDL Quản lý Bán hàng (QLBH)</h4>
+<div class="schema">
+  <div class="schema-table">KHACHHANG(<span class="pk">MAKH</span>, HOTEN, DCHI, SODT, NGSINH, NGDK, DOANHSO)</div>
+  <div class="schema-table">NHANVIEN(<span class="pk">MANV</span>, HOTEN, SODT, NGVL)</div>
+  <div class="schema-table">SANPHAM(<span class="pk">MASP</span>, TENSP, DVT, NUOCSX, GIA)</div>
+  <div class="schema-table">HOADON(<span class="pk">SOHD</span>, NGHD, <span class="fk">MAKH</span>, <span class="fk">MANV</span>, TRIGIA)</div>
+  <div class="schema-table">CTHD(<span class="pk fk">SOHD</span>, <span class="pk fk">MASP</span>, SL)</div>
+</div>
+
+<div class="callout-connection">
+  Xem lại <strong>Chương 2 (Mô hình Dữ liệu Quan hệ)</strong> để nắm rõ ý nghĩa các thuộc tính, khóa chính (gạch dưới nét liền) và khóa ngoại (gạch dưới nét đứt) của hai CSDL này.
+</div>
+
+<h3 id="sec-a">A. Tự điển Từ khóa → Phép toán</h3>
+<p>Khi đọc đề, từ khóa là <strong>tín hiệu gợi ý</strong>, không phải ánh xạ một-một sang phép toán. Phải xét ngữ nghĩa, lược đồ đầu vào và lược đồ kết quả trước khi chọn phép. Bảng sau hỗ trợ <em>Pattern Recognition</em>.</p>
+
+<table class="keyword-dict" style="width: 100%; table-layout: fixed;">
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 25%;">
+    <col style="width: 55%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Từ khóa trong đề</th>
+      <th>Phép toán thường cân nhắc</th>
+      <th>Giải thích & Mental Model</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>"thuộc", "ở", "làm việc", "của"</td>
+      <td>σ (Chọn) hoặc ⋈ (Kết)</td>
+      <td>Nếu điều kiện nằm trên 1 bảng → Chọn. Nối 2 bảng bằng Khóa ngoại → Kết.</td>
+    </tr>
+    <tr>
+      <td>"đã mua", "đã học", "tham gia"</td>
+      <td>⋈ (Phép kết)</td>
+      <td>Liên kết thông tin từ bảng thực thể sang bảng giao dịch (VD: KHACHHANG ⋈ HOADON).</td>
+    </tr>
+    <tr>
+      <td>"cả hai", "vừa...vừa"</td>
+      <td>∩, ⋈ hoặc ∧</td>
+      <td>Giao khi hai tập kết quả khả hợp; kết khi cần ghép quan hệ; ∧ khi hai điều kiện cùng áp dụng trên một bộ.</td>
+    </tr>
+    <tr>
+      <td>"không", "chưa từng", "không có"</td>
+      <td>− hoặc ¬</td>
+      <td>Thường lấy tập ứng viên trừ tập vi phạm; nếu phủ định chỉ nằm trong một điều kiện chọn thì có thể dùng ¬.</td>
+    </tr>
+    <tr>
+      <td>"mỗi", "từng"</td>
+      <td>ℑ (Gom nhóm)</td>
+      <td>Nhóm các bộ dữ liệu theo một/nhiều thuộc tính (GROUP BY).</td>
+    </tr>
+    <tr>
+      <td>"bao nhiêu"</td>
+      <td>COUNT</td>
+      <td>Đếm số dòng thỏa điều kiện (nằm trong hàm kết hợp).</td>
+    </tr>
+    <tr>
+      <td>"tổng"</td>
+      <td>SUM</td>
+      <td>Tính tổng giá trị một cột (nằm trong hàm kết hợp).</td>
+    </tr>
+    <tr>
+      <td>"trung bình"</td>
+      <td>AVG</td>
+      <td>Trung bình cộng.</td>
+    </tr>
+    <tr>
+      <td>"lớn nhất", "cao nhất"</td>
+      <td>− (Phép trừ) / MAX</td>
+      <td>Trong ĐSQH thuần, không dùng MAX trong điều kiện chọn. Phải dùng Phép trừ (Loại những người có người lớn hơn).</td>
+    </tr>
+    <tr>
+      <td>"tất cả", "mọi"</td>
+      <td>÷ hoặc công thức tương đương</td>
+      <td>Gợi ý lượng từ phổ quát. Chỉ dùng phép chia khi xác định được tập bị chia R(X,Y) và tập chia S(Y); SQL thường dùng double <code>NOT EXISTS</code>.</td>
+    </tr>
+    <tr>
+      <td>"có ít nhất"</td>
+      <td>HAVING COUNT >=</td>
+      <td>Gom nhóm xong đếm và lọc kết quả.</td>
+    </tr>
+    <tr>
+      <td>"chỉ", "duy nhất"</td>
+      <td>− (Phép trừ)</td>
+      <td>"Chỉ A" = (Tập người có A) − (Tập người có B/C...).</td>
+    </tr>
+    <tr>
+      <td>"hoặc"</td>
+      <td>∪ hoặc ∨</td>
+      <td>Hợp hai kết quả khả hợp; nếu hai điều kiện áp dụng trên cùng quan hệ thì có thể dùng ∨ trong phép chọn.</td>
+    </tr>
+    <tr>
+      <td>"nếu có"</td>
+      <td>Outer join (ĐSQH mở rộng)</td>
+      <td>Khi đề yêu cầu vẫn giữ bộ ở một phía dù không có bản ghi khớp, dùng ngoại kết thích hợp; phần thiếu được biểu diễn bằng NULL.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="sec-b">B. Các phép toán cơ bản và mở rộng</h3>
+
+<div class="callout-why">
+  <strong>Quy ước ký hiệu của chương:</strong> ĐSQH thuần dùng σ, π, ρ, ×, ∪, − và các phép kết/chia có thể suy dẫn từ chúng. Ngoại kết và gom nhóm/hàm kết hợp được ghi rõ là <strong>ĐSQH mở rộng</strong>. Điều kiện chọn chỉ dùng thuộc tính, hằng và toán tử so sánh/logic; hàm T-SQL như <code>YEAR(...)</code> không được đưa vào biểu thức ĐSQH thuần. Khi cần lọc theo năm, chương dùng khoảng ngày, ví dụ <span class="math">NGHD ≥ '2006-01-01' ∧ NGHD &lt; '2007-01-01'</span>.
+</div>
+
+<h4>B.1 Phép chọn (Selection - σ)</h4>
+<p><strong>1. Trực giác:</strong> Giống như dùng cái rây bột, bạn đổ dữ liệu qua, dòng nào thỏa mãn điều kiện lưới rây thì lọt xuống, dòng nào không thì bị giữ lại và ném đi. Lọc theo <em>chiều ngang</em> (giữ nguyên số cột, giảm số dòng).</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">σ_{&lt;điều kiện&gt;}(R)</span></p>
+<p><strong>3. Input/Output:</strong> Đầu vào: 1 bảng R. Đầu ra: 1 bảng cùng số cột với R, chỉ chứa các dòng thỏa điều kiện.</p>
+<p><strong>4. Điều kiện:</strong> Điều kiện bao gồm các phép so sánh (=, &gt;, &lt;, &gt;=, &lt;=, &lt;&gt;) nối với nhau bởi các phép logic AND (∧), OR (∨), NOT (¬).</p>
+<p><strong>5. Dry Run:</strong></p>
+<div class="before-after">
+  <div class="before">
+    <span class="label">Bảng MONHOC (trước)</span>
+    <table class="data-table">
+      <tr><th>MAMH</th><th>TENMH</th><th>TCLT</th></tr>
+      <tr><td>CSDL</td><td>Cơ sở dữ liệu</td><td>3</td></tr>
+      <tr><td>CTDL</td><td>Cấu trúc DL</td><td>3</td></tr>
+      <tr><td>NMCN</td><td>Nhập môn CN</td><td>2</td></tr>
+    </table>
+  </div>
+  <div class="after">
+    <span class="label">σ_{TCLT > 2}(MONHOC) (sau)</span>
+    <table class="data-table">
+      <tr><th>MAMH</th><th>TENMH</th><th>TCLT</th></tr>
+      <tr><td>CSDL</td><td>Cơ sở dữ liệu</td><td>3</td></tr>
+      <tr><td>CTDL</td><td>Cấu trúc DL</td><td>3</td></tr>
+    </table>
+  </div>
+</div>
+<p><strong>6. Dịch:</strong> "Tìm thông tin môn học có số tín chỉ lý thuyết lớn hơn 2" → σ_{TCLT > 2}(MONHOC)</p>
+<div class="callout-trap">
+  <strong>☢ BẪY:</strong> Không được dùng hàm MAX/MIN bên trong điều kiện của phép chọn σ. VD: σ_{MUCLUONG = MAX(MUCLUONG)}(GIAOVIEN) là SAI về mặt cú pháp học thuật.
+</div>
+
+<h4>B.2 Phép chiếu (Projection - π)</h4>
+<p><strong>1. Trực giác:</strong> Giống như dùng con dao cắt dọc cái bảng. Bạn chỉ giữ lại những cột mình quan tâm và vứt đi các cột còn lại. Quan trọng: Khi cắt cột, nếu có 2 dòng giống hệt nhau (do phần phân biệt bị cắt mất), ĐSQH sẽ <em>tự động xóa dòng trùng lặp</em> (Distinct).</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">π_{A_1, A_2, ..., A_k}(R)</span></p>
+<p><strong>3. Input/Output:</strong> Đầu vào: 1 bảng R. Đầu ra: 1 bảng chỉ chứa các cột A_1, A_2..., số dòng có thể giảm nếu có trùng lặp.</p>
+<p><strong>4. Điều kiện:</strong> Danh sách cột chiếu phải nằm trong schema của bảng R.</p>
+<p><strong>5. Dry Run:</strong></p>
+<div class="before-after">
+  <div class="before">
+    <span class="label">GIAOVIEN</span>
+    <table class="data-table">
+      <tr><th>MAGV</th><th>HOTEN</th><th>MAKHOA</th></tr>
+      <tr><td>GV01</td><td>Vũ Tuyết Trâm</td><td>HTTT</td></tr>
+      <tr><td>GV02</td><td>Nguyễn Nhật Tinh</td><td>HTTT</td></tr>
+      <tr><td>GV03</td><td>Lê Hoài Ân</td><td>KTPM</td></tr>
+    </table>
+  </div>
+  <div class="after">
+    <span class="label">π_{MAKHOA}(GIAOVIEN)</span>
+    <table class="data-table">
+      <tr><th>MAKHOA</th></tr>
+      <tr><td>HTTT</td></tr>
+      <tr><td>KTPM</td></tr>
+    </table>
+  </div>
+</div>
+<p><strong>6. Dịch:</strong> "In ra danh sách mã khoa có giáo viên đang công tác" → π_{MAKHOA}(GIAOVIEN)</p>
+
+<h4>B.3 Phép đổi tên (Rename - ρ)</h4>
+<p><strong>1. Trực giác:</strong> Dán lại nhãn cho bảng hoặc cho cột. Thường dùng nhất khi cần nối một bảng với chính nó (Self-Join) - không đổi tên thì máy không biết cột nào của bảng nào (do trùng tên hoàn toàn).</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">ρ_{S}(R)</span> (Đổi tên bảng R thành S) hoặc <span class="math-block">ρ_{S(A, B, C)}(R)</span> (Đổi tên bảng và tên cột tương ứng).</p>
+<p><strong>3. Input/Output:</strong> Bảng mới y hệt bảng cũ về dữ liệu, chỉ đổi tên ở phần header.</p>
+<div class="callout-fast">
+  <strong>⚡ Fast Pattern:</strong> Dạng câu hỏi "Tìm X <em>có cùng</em> Y với Z" (Tìm nhân viên làm cùng phòng với 'Nguyen Van A') thường cần phép đổi tên và self-join.
+</div>
+
+<h4>B.4 Tích Đề-các (Cartesian Product - ×)</h4>
+<p><strong>1. Trực giác:</strong> Phép lai giống "mọi người với mọi người". Mỗi dòng của bảng A sẽ đi ghép cặp với TẤT CẢ các dòng của bảng B. Gây bùng nổ dữ liệu.</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">R × S</span></p>
+<p><strong>3. Input/Output:</strong> Bảng R (n dòng, a cột) × Bảng S (m dòng, b cột) = Bảng kết quả (n×m dòng, a+b cột).</p>
+<p><strong>4. Điều kiện:</strong> Thường phải đổi tên nếu có cột trùng tên để tránh nhập nhằng.</p>
+<div class="callout-trap">
+  <strong>☢ BẪY:</strong> Thực tế Rất hiếm khi dùng × đứng một mình mà thường dùng kết hợp với phép chọn (σ) để lọc ra dòng có ý nghĩa (bản chất đó là phép Kết Theta).
+</div>
+
+<h4>B.5 Phép kết (Join - ⋈)</h4>
+<p>Đây là nhóm phép toán sống còn nhất trong CSDL quan hệ.</p>
+<ul>
+  <li><strong>Kết Theta (Theta-join):</strong> Nối 2 bảng dựa trên một điều kiện bất kỳ (>, <, =).<br><span class="math-block">R ⋈_{R.A < S.B} S</span></li>
+  <li><strong>Kết bằng (Equi-join):</strong> Trường hợp riêng của kết Theta, điều kiện chỉ dùng dấu bằng (=).</li>
+  <li><strong>Kết tự nhiên (Natural join - ⋈):</strong> Nối bằng trên TẤT CẢ các cột có tên giống nhau, và kết quả <em>tự động xóa bớt đi cột trùng lặp</em>.</li>
+</ul>
+<p><strong>1. Trực giác (Natural Join):</strong> Tìm mảnh ghép phù hợp. Bảng Sinh viên có cột Mã lớp. Bảng Lớp cũng có cột Mã lớp. Hai bảng sẽ "hút" nhau và nối lại thành một dòng dài nếu Mã lớp khớp nhau.</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">R ⋈ S</span></p>
+<p><strong>3. Input/Output:</strong> Đầu vào: 2 bảng. Đầu ra: Bảng lớn chứa thông tin ghép của cả 2.</p>
+<p><strong>5. Dry Run:</strong></p>
+<div class="before-after">
+  <div class="before">
+    <span class="label">MON (MAMH, TENMH) và KQ(MAMH, MAHV, DIEM)</span>
+    <table class="data-table">
+      <tr><th>MAMH</th><th>TENMH</th></tr>
+      <tr><td>CSDL</td><td>DB</td></tr>
+      <tr><td>NM</td><td>Intro</td></tr>
+    </table>
+    <table class="data-table" style="margin-top:10px;">
+      <tr><th>MAMH</th><th>MAHV</th><th>DIEM</th></tr>
+      <tr><td>CSDL</td><td>HV01</td><td>8</td></tr>
+      <tr><td>CTDL</td><td>HV02</td><td>9</td></tr>
+    </table>
+  </div>
+  <div class="after">
+    <span class="label">MON ⋈ KQ</span>
+    <table class="data-table">
+      <tr><th>MAMH</th><th>TENMH</th><th>MAHV</th><th>DIEM</th></tr>
+      <tr><td>CSDL</td><td>DB</td><td>HV01</td><td>8</td></tr>
+    </table>
+  </div>
+</div>
+<div class="callout-why">
+  <strong>🤔 Tại sao dòng chứa 'NM' và 'CTDL' biến mất?</strong> Vì chúng là những mảnh ghép lẻ loi không tìm được đối tác ở bảng bên kia. Đây là đặc tính của Inner Join.
+</div>
+
+<h4>B.6 Phép hợp (Union - ∪)</h4>
+<p><strong>1. Trực giác:</strong> Gom chung kết quả của 2 tập hợp lại. Ai có trong tập 1 HOẶC tập 2 đều lấy. Trùng nhau thì chỉ lấy 1 lần.</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">R ∪ S</span></p>
+<p><strong>4. Điều kiện Khả hợp (Union-compatible):</strong> 2 bảng phải có <em>cùng số lượng cột</em> và các cột tương ứng phải <em>cùng kiểu dữ liệu</em>.</p>
+<p><strong>6. Ví dụ tổng quát (không thuộc lược đồ QLGV chuẩn):</strong> Giả sử có quan hệ phụ trợ NHANVIEN(MANV, ...). Để hợp mã giáo viên và mã nhân viên, đổi tên hai thuộc tính kết quả về cùng tên rồi áp dụng phép hợp:<br>
+<span class="math-block">ρ_{MA_NGUOI←MAGV}(π_{MAGV}(GIAOVIEN)) ∪ ρ_{MA_NGUOI←MANV}(π_{MANV}(NHANVIEN))</span></p>
+
+<h4>B.7 Phép giao (Intersection - ∩)</h4>
+<p><strong>1. Trực giác:</strong> Chỉ những đối tượng VỪA nằm trong tập A VỪA nằm trong tập B mới được lấy.</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">R ∩ S</span></p>
+<p><strong>4. Điều kiện:</strong> Phải khả hợp.</p>
+
+<h4>B.8 Phép trừ (Difference - −)</h4>
+<p><strong>1. Trực giác:</strong> Lọc bỏ. Có A nhưng không có B.</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">R − S</span></p>
+<p><strong>4. Điều kiện:</strong> Phải khả hợp. Lưu ý: R - S khác hoàn toàn S - R (Không có tính giao hoán).</p>
+<p><strong>6. Dịch:</strong> "Môn học chưa từng có ai thi rớt". Phân tích: Tập tất cả môn học − Tập những môn học đã có người rớt (Điểm &lt; 5).<br>
+<span class="math-block">π_{MAMH}(MONHOC) − π_{MAMH}(σ_{DIEM < 5}(KETQUATHI))</span>
+</p>
+
+<h4>B.9 Phép ngoại kết (Outer Join — ĐSQH mở rộng)</h4>
+<p><strong>1. Trực giác:</strong> Giống phép Kết tự nhiên, nhưng bảo tồn dữ liệu. Nhờ "Outer", những mảnh ghép lẻ loi (không có đối tác) cũng được giữ lại, phần thông tin thiếu bên kia sẽ được điền bằng NULL.</p>
+<p><strong>2. Ký hiệu:</strong> Kết trái ⟕, Kết phải ⟖, Kết đầy đủ ⟗.</p>
+<p><strong>6. Dịch:</strong> "Liệt kê danh sách lớp và giáo viên chủ nhiệm (nếu có)". Tức là lớp chưa có GVCN vẫn hiển thị.</p>
+
+<h4>B.10 Gom nhóm và Hàm kết hợp (Grouping / Aggregation — ĐSQH mở rộng, ℑ)</h4>
+<p><strong>1. Trực giác:</strong> Chia bảng lớn thành các rổ (group) dựa trên một thuộc tính. Sau đó ở mỗi rổ, áp dụng một phép tính (đếm, tính tổng, tìm Max/Min).</p>
+<p><strong>2. Ký hiệu dùng trong chương:</strong> <span class="math-block">_{G} \Im _{F(A) \to B}(R)</span>, trong đó <em>G</em> là danh sách thuộc tính gom nhóm (có thể rỗng), <em>F</em> là COUNT/SUM/AVG/MIN/MAX và <em>B</em> là tên thuộc tính kết quả. Đây là phép của <strong>ĐSQH mở rộng</strong>, tương đương ý tưởng <code>GROUP BY</code> trong SQL.</p>
+<p><strong>6. Dịch:</strong> "Tính tổng số hóa đơn của mỗi khách hàng"<br>
+<span class="math-block">_{MAKH} \Im _{COUNT(SOHD) \to SoHoaDon}(HOADON)</span>
+</p>
+
+<hr>
+
+<h3 id="sec-c">C. Phép chia (Division ÷) - Bậc thầy truy vấn "Tất cả"</h3>
+<p>Đây là phần khó và tinh túy nhất của Đại số quan hệ.</p>
+
+<h4>C.1 Trực giác: "X nào bao xài TẤT CẢ Y?"</h4>
+<p>Hãy tưởng tượng bạn (X) vào một siêu thị và có một danh sách mua sắm (Y) gồm: Sữa, Bánh, Kẹo. Nếu giỏ hàng của bạn <strong>chứa toàn bộ</strong> 3 món trên (có thể mua thêm thứ khác không quan tâm, miễn là đủ 3 món này), thì bạn là người vượt qua bài kiểm tra "Phép chia".</p>
+<p><strong>Dấu hiệu nhận biết (Exam Pattern):</strong> Đề bài chứa các từ khóa <em>"tất cả", "toàn bộ", "mọi"</em>.</p>
+
+<h4>C.2 Định nghĩa Formal</h4>
+<p>Cho quan hệ R(X, Y) và quan hệ S(Y). Phép chia R ÷ S sẽ trả về các giá trị x ∈ X sao cho với <strong>mọi</strong> giá trị y ∈ S, tổ hợp (x, y) đều xuất hiện trong R.</p>
+<div class="math-block">
+R(X,Y) ÷ S(Y) = { x | ∀y ∈ S, (x,y) ∈ R }
+</div>
+<p>Về bản chất, phép chia có thể được định nghĩa thông qua các phép toán cơ bản (Chiếu, Tích Đề-các, Trừ):</p>
+<div class="math-block">
+R ÷ S = π_X(R) − π_X( (π_X(R) × S) − R )
+</div>
+<div class="callout-mental">
+  <strong>Tại sao công thức rườm rà vậy?</strong> Đọc ngược từ trong ra ngoài:
+  <ol>
+    <li><code>π_X(R) × S</code>: Tập hợp TẤT CẢ các khả năng lý tưởng (Ai cũng mua tất cả mọi thứ).</li>
+    <li><code>(π_X(R) × S) − R</code>: Lấy cái lý tưởng trừ đi cái thực tế R → Lòi ra những món bị THIẾU. Mảng này chứa những người "Không mua đủ".</li>
+    <li><code>π_X(R) - (những người thiếu)</code>: Lấy tổng số người trừ đi người thiếu → Ra người MUA ĐỦ!</li>
+  </ol>
+</div>
+
+<h4>C.3 Dry Run: Phép chia hoạt động ra sao?</h4>
+<div class="before-after" style="grid-template-columns: 1fr 1fr 1fr;">
+  <div class="before">
+    <span class="label">R (MAHV, MAMH) - Đã học</span>
+    <table class="data-table">
+      <tr><th>MAHV</th><th>MAMH</th></tr>
+      <tr><td>H1</td><td>Toán</td></tr>
+      <tr><td>H1</td><td>Lý</td></tr>
+      <tr><td>H2</td><td>Toán</td></tr>
+      <tr><td>H3</td><td>Toán</td></tr>
+      <tr><td>H3</td><td>Lý</td></tr>
+      <tr><td>H3</td><td>Hóa</td></tr>
+    </table>
+  </div>
+  <div class="before">
+    <span class="label">S (MAMH) - Điều kiện</span>
+    <table class="data-table">
+      <tr><th>MAMH</th></tr>
+      <tr><td>Toán</td></tr>
+      <tr><td>Lý</td></tr>
+    </table>
+  </div>
+  <div class="after">
+    <span class="label">R ÷ S Kết quả (Ai học đủ Toán & Lý)</span>
+    <table class="data-table">
+      <tr><th>MAHV</th></tr>
+      <tr><td>H1</td></tr>
+      <tr><td>H3</td></tr>
+    </table>
+  </div>
+</div>
+<p>H2 bị loại vì chỉ học Toán mà thiếu Lý.</p>
+
+<h4>C.4 Ví dụ với QLGV</h4>
+<p><strong>Đề bài:</strong> "Tìm mã học viên thi tất cả các môn của khoa CNTT"</p>
+<ul class="steps">
+  <li class="step">B1: Xác định tập chia (Y) - Danh sách các môn của khoa CNTT.<br> <span class="math-block">S = π_{MAMH}(σ_{MAKHOA='CNTT'}(MONHOC))</span></li>
+  <li class="step">B2: Xác định tập bị chia (X, Y) - Lịch sử thi của học viên.<br> <span class="math-block">R = π_{MAHV, MAMH}(KETQUATHI)</span></li>
+  <li class="step">B3: Chia!<br> <span class="math-block">KetQua = R ÷ S</span></li>
+</ul>
+
+<h4>C.5 Ví dụ với QLBH</h4>
+<p><strong>Đề bài:</strong> "Tìm mã khách hàng mua tất cả các sản phẩm do Việt Nam sản xuất"</p>
+<ul class="steps">
+  <li class="step">Y = Mọi mã SP do Việt Nam SX: <span class="math-block">S = π_{MASP}(σ_{NUOCSX='Viet Nam'}(SANPHAM))</span></li>
+  <li class="step">X, Y = Hóa đơn và Sản phẩm khách hàng đã mua: <span class="math-block">R = π_{MAKH, MASP}(HOADON ⋈ CTHD)</span></li>
+  <li class="step">Đáp án = R ÷ S</li>
+</ul>
+
+<h4>C.6 Các biểu diễn tương đương trong SQL (Chương 4 Review)</h4>
+<p>SQL không có toán tử DIVIDE. Chúng ta mô phỏng bằng 2 cách chính:</p>
+
+<strong>Cách 1: Double NOT EXISTS (Không có môn nào mà KHÔNG học)</strong>
+<pre class="sql-block">
+SELECT MAHV
+FROM HOCVIEN HV
+WHERE NOT EXISTS (
+    -- Các môn khoa CNTT
+    SELECT MAMH FROM MONHOC WHERE MAKHOA = 'CNTT'
+    EXCEPT 
+    -- Các môn HV này đã thi
+    SELECT MAMH FROM KETQUATHI KQ WHERE KQ.MAHV = HV.MAHV
+)
+</pre>
+
+<strong>Cách 2: COUNT DISTINCT (Đếm số môn đậu == Tổng số môn CNTT)</strong>
+<pre class="sql-block">
+SELECT KQ.MAHV
+FROM KETQUATHI KQ JOIN MONHOC MH ON KQ.MAMH = MH.MAMH
+WHERE MH.MAKHOA = 'CNTT'
+GROUP BY KQ.MAHV
+HAVING COUNT(DISTINCT KQ.MAMH) = (
+    SELECT COUNT(*) FROM MONHOC WHERE MAKHOA = 'CNTT'
+)
+</pre>
+
+<table>
+  <thead>
+    <tr><th>Cách</th><th>Ưu điểm</th><th>Nhược điểm</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Double NOT EXISTS</td><td>Bám sát lượng từ phổ quát và cho kết quả đúng theo quy ước đúng-hiển-nhiên khi tập S rỗng.</td><td>Nhiều mức lồng nên khó đọc với người mới.</td></tr>
+    <tr><td>COUNT DISTINCT</td><td>Đọc như ngôn ngữ tự nhiên, dễ tư duy.</td><td>Nếu tập S rỗng (ví dụ khoa CNTT không có môn nào), câu truy vấn trên dùng INNER JOIN nên tập kết quả trước khi gom nhóm sẽ rỗng. Bảng KQ trả về 0 dòng chứ không trả về toàn bộ học viên như lý thuyết (đếm = 0 = 0).</td></tr>
+  </tbody>
+</table>
+
+<div class="callout-trap">
+  <strong>☢ BẪY CHẾT NGƯỜI (Common Errors):</strong><br>
+  - <strong>Nhầm Divisor:</strong> Chọn sai tập chia S.<br>
+  - <strong>Không Project ở R:</strong> Tập R trước khi chia bắt buộc phải chỉ có đúng 2 thuộc tính (X, Y). Nếu R có chứa cả điểm số, ngày thi... thì phép chia sẽ hiểu là "Tìm những người thi đủ môn vào <em>cùng 1 ngày và cùng 1 số điểm</em>". Do đó bước <span class="math">π_{MAHV, MAMH}(KETQUATHI)</span> ở trên là BẮT BUỘC.
+</div>
+
+<hr>
+
+<h3 id="sec-d">D. Bài tập (30 bài phân cấp độ)</h3>
+
+<h4>D.1 Nhóm 1: Phép chọn, Chiếu đơn (Level 1)</h4>
+<div class="exercise-block level-1">
+  <p><strong>Câu 1:</strong> (QLGV) In ra danh sách các giáo viên khoa 'HTTT'.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Cần lấy toàn bộ thông tin → phép chọn σ. Điều kiện: MAKHOA = 'HTTT'.</p>
+      <div class="math-block">σ_{MAKHOA='HTTT'}(GIAOVIEN)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-1">
+  <p><strong>Câu 2:</strong> (QLBH) Liệt kê thông tin các sản phẩm do 'Viet Nam' sản xuất.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Phép chọn trên bảng SANPHAM.</p>
+      <div class="math-block">σ_{NUOCSX='Viet Nam'}(SANPHAM)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-1">
+  <p><strong>Câu 3:</strong> (QLBH) In ra mã và tên của tất cả khách hàng.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Phép chiếu π trên bảng KHACHHANG.</p>
+      <div class="math-block">π_{MAKH, HOTEN}(KHACHHANG)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-1">
+  <p><strong>Câu 4:</strong> (QLGV) Liệt kê mã học viên đã từng thi (có điểm trong bảng KETQUATHI).</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Chiếu cột MAHV từ bảng KETQUATHI (sẽ tự động loại trùng lặp).</p>
+      <div class="math-block">π_{MAHV}(KETQUATHI)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-1">
+  <p><strong>Câu 5:</strong> (QLBH) Tìm hóa đơn có trị giá trên 500.000.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Phép chọn trên bảng HOADON.</p>
+      <div class="math-block">σ_{TRIGIA > 500000}(HOADON)</div>
+    </div>
+  </details>
+</div>
+
+<h4>D.2 Nhóm 2: Phép Kết (Level 2)</h4>
+<div class="exercise-block level-2">
+  <p><strong>Câu 6:</strong> (QLBH) In ra mã và tên khách hàng đã từng mua hàng.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Join KHACHHANG và HOADON.</p>
+      <div class="math-block">π_{MAKH, HOTEN}(KHACHHANG ⋈ HOADON)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 7:</strong> (QLGV) In ra tên học viên và tên lớp của họ.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Join HOCVIEN và LOP.</p>
+      <div class="math-block">π_{HO, TEN, TENLOP}(HOCVIEN ⋈ LOP)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 8:</strong> (QLBH) Liệt kê các sản phẩm (Tên SP) được bán ra vào ngày '1/1/2006'.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Join SANPHAM, CTHD, và HOADON, sau đó chọn ngày.</p>
+      <div class="math-block">π_{TENSP}(SANPHAM ⋈ CTHD ⋈ σ_{NGHD='1/1/2006'}(HOADON))</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 9:</strong> (QLGV) In ra tên môn học mà học viên 'Nguyen Van A' đã thi.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Join HOCVIEN, KETQUATHI, MONHOC.</p>
+      <div class="math-block">π_{TENMH}(σ_{HO='Nguyen' ∧ TEN='Van A'}(HOCVIEN) ⋈ KETQUATHI ⋈ MONHOC)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 10:</strong> (QLGV) Tìm tên giáo viên dạy môn 'CSDL' cho lớp 'K11'.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Join GIAOVIEN, GIANGDAY, LOP, MONHOC.</p>
+      <div class="math-block">π_{HOTEN}(GIAOVIEN ⋈ GIANGDAY ⋈ σ_{TENLOP='K11'}(LOP) ⋈ σ_{TENMH='CSDL'}(MONHOC))</div>
+    </div>
+  </details>
+</div>
+
+<h4>D.3 Nhóm 3: Phép Tập Hợp (Level 2)</h4>
+<div class="exercise-block level-2">
+  <p><strong>Câu 11:</strong> (QLGV) Tìm học viên vừa thi Toán, vừa thi Lý.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Giao (∩) giữa tập HV thi Toán và tập HV thi Lý.</p>
+      <div class="math-block">
+        (π_{MAHV}(KETQUATHI ⋈ σ_{TENMH='Toan'}(MONHOC))) ∩ 
+        (π_{MAHV}(KETQUATHI ⋈ σ_{TENMH='Ly'}(MONHOC)))
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 12:</strong> (QLBH) Khách hàng đã mua SP do 'Viet Nam' hoặc 'Singapore' sản xuất.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Hợp (∪) hoặc dùng OR trong phép chọn.</p>
+      <div class="math-block">
+        π_{MAKH}(HOADON ⋈ CTHD ⋈ σ_{NUOCSX='Viet Nam' ∨ NUOCSX='Singapore'}(SANPHAM))
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 13:</strong> (Ví dụ tổng quát) Cho hai quan hệ GIAOVIEN(MAGV, ...) và NHANVIEN(MANV, ...), trong đó NHANVIEN là quan hệ phụ trợ không thuộc lược đồ QLGV chuẩn. In ra danh sách tất cả mã giáo viên và mã nhân viên.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Hai phép chiếu đều trả về một cột mã có kiểu dữ liệu tương thích. Đổi tên hai cột về cùng tên MA_NGUOI để biểu diễn rõ tính khả hợp, rồi dùng phép hợp.</p>
+      <div class="math-block">ρ_{MA_NGUOI←MAGV}(π_{MAGV}(GIAOVIEN)) ∪ ρ_{MA_NGUOI←MANV}(π_{MANV}(NHANVIEN))</div>
+    </div>
+  </details>
+</div>
+
+<h4>D.4 Nhóm 4: "Có nhưng không có" (Level 3)</h4>
+<div class="exercise-block level-3">
+  <p><strong>Câu 14:</strong> (QLGV) Tìm học viên thi Toán nhưng chưa từng thi Lý.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Lấy tập (đã thi Toán) TRỪ ĐI tập (đã thi Lý).</p>
+      <div class="math-block">
+        (π_{MAHV}(KETQUATHI ⋈ σ_{TENMH='Toan'}(MONHOC))) − 
+        (π_{MAHV}(KETQUATHI ⋈ σ_{TENMH='Ly'}(MONHOC)))
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-3">
+  <p><strong>Câu 15:</strong> (QLBH) Khách hàng không mua bất kỳ SP nào trong năm 2006.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Tập tất cả KH − Tập KH mua năm 2006.</p>
+      <div class="math-block">
+        π_{MAKH}(KHACHHANG) − π_{MAKH}(σ_{NGHD ≥ '2006-01-01' ∧ NGHD &lt; '2007-01-01'}(HOADON))
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-3">
+  <p><strong>Câu 16:</strong> (QLGV) Môn học chưa từng có học viên nào rớt (Điểm dưới 5).</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Tất cả môn − Môn có người rớt.</p>
+      <div class="math-block">
+        π_{MAMH}(MONHOC) − π_{MAMH}(σ_{DIEM < 5}(KETQUATHI))
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-3">
+  <p><strong>Câu 17:</strong> (QLBH) Sản phẩm chưa từng được bán ra.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Tất cả MASP − MASP có trong CTHD.</p>
+      <div class="math-block">
+        π_{MASP}(SANPHAM) − π_{MASP}(CTHD)
+      </div>
+    </div>
+  </details>
+</div>
+
+<h4>D.5 Nhóm 5: Aggregation (Level 3)</h4>
+<div class="exercise-block level-3">
+  <p><strong>Câu 18:</strong> (QLBH) Tính tổng trị giá của mỗi hóa đơn.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Gom nhóm theo SOHD, tính tổng SUM(SL * GIA).</p>
+      <div class="math-block">
+        _{SOHD} \Im _{SUM(SL \times GIA) \to TongTriGia}(CTHD ⋈ SANPHAM)
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-3">
+  <p><strong>Câu 19:</strong> (QLGV) Đếm số lượng học viên của mỗi lớp.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Group by MALOP, COUNT.</p>
+      <div class="math-block">
+        _{MALOP} \Im _{COUNT(MAHV) \to SoHocVien}(HOCVIEN)
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-3">
+  <p><strong>Câu 20:</strong> (QLBH) Tìm hóa đơn có từ 3 sản phẩm trở lên.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Gom nhóm theo SOHD đếm MASP, sau đó lọc những dòng COUNT >= 3.</p>
+      <div class="math-block">
+        σ_{CountSP \ge 3}(_{SOHD} \Im _{COUNT(MASP) \to CountSP} (CTHD))
+      </div>
+    </div>
+  </details>
+</div>
+
+<h4>D.6 Nhóm 6: Maximum / Cực trị không hàm Max (Level 4)</h4>
+<div class="exercise-block level-4">
+  <p><strong>Câu 21:</strong> (QLGV) <span class="badge-advanced">Thi Hóa học</span> Tìm giáo viên có mức lương cao nhất.</p>
+  <div class="callout-exam">🎯 Exam Signal: Dấu hiệu Cực trị trong ĐSQH thuần. Cấm dùng <code>MUCLUONG = MAX(MUCLUONG)</code>.</div>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Tìm người cao nhất = Toàn bộ giáo viên TRỪ ĐI những giáo viên có lương THẤP HƠN một ai đó. Ai còn sống sót sau phép trừ chính là nhà vua (Cao nhất).</p>
+      <ul class="steps">
+        <li class="step">Tập A (Kẻ bị đánh bại): Gồm những GV1 mà mức lương nhỏ hơn GV2. <br>
+          <span class="math-block">A = π_{GV1.*}(ρ_{GV1}(GIAOVIEN) ⋈_{GV1.MUCLUONG < GV2.MUCLUONG} ρ_{GV2}(GIAOVIEN))</span>
+        </li>
+        <li class="step">Tập B: Toàn bộ GV ban đầu.</li>
+        <li class="step">Kết quả: B − A <br>
+          <span class="math-block">GIAOVIEN − A</span>
+        </li>
+      </ul>
+      <p><strong>Nếu đề cho phép ĐSQH mở rộng:</strong></p>
+      <div class="math-block">
+        M = _{\varnothing} \Im _{MAX(MUCLUONG) \to LuongMax}(GIAOVIEN) <br>
+        KetQua = GIAOVIEN ⋈_{MUCLUONG=LuongMax} M
+      </div>
+      <p><strong>SQL tương đương:</strong> <code>SELECT * FROM GIAOVIEN WHERE MUCLUONG = (SELECT MAX(MUCLUONG) FROM GIAOVIEN);</code></p>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-4">
+  <p><strong>Câu 22:</strong> (QLBH) Tìm sản phẩm có giá bán đắt nhất.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Tương tự câu 21. Tập sản phẩm thua người khác = SP1 có GIA < SP2.GIA. Rồi lấy tất cả trừ đi tập thua.</p>
+      <div class="math-block">
+        A = π_{SP1.MASP}(ρ_{SP1}(SANPHAM) ⋈_{SP1.GIA < SP2.GIA} ρ_{SP2}(SANPHAM)) <br>
+        π_{MASP}(SANPHAM) − A
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-4">
+  <p><strong>Câu 23:</strong> (QLGV) Lớp nào có đông sinh viên nhất?</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Lấy bảng có sĩ số, tạo 2 bản, tìm những lớp có SISO < SISO của lớp khác, trừ đi.</p>
+      <div class="math-block">
+        A = π_{L1.MALOP}(ρ_{L1}(LOP) ⋈_{L1.SISO < L2.SISO} ρ_{L2}(LOP)) <br>
+        π_{MALOP}(LOP) − A
+      </div>
+    </div>
+  </details>
+</div>
+
+<h4>D.7 Nhóm 7: Phép chia (Level 5)</h4>
+<div class="exercise-block level-5">
+  <p><strong>Câu 24:</strong> (QLBH) Tìm mã KH đã mua TẤT CẢ sản phẩm do 'Singapore' sản xuất.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Từ khóa "tất cả" → Phép chia.</p>
+      <ul class="steps">
+        <li class="step">S = Tập các MASP của Singapore. <br> <span class="math-block">S = π_{MASP}(σ_{NUOCSX='Singapore'}(SANPHAM))</span></li>
+        <li class="step">R = Cặp (MAKH, MASP) thể hiện KH nào đã mua món nào (bỏ qua ngày, giá, số lượng).<br> <span class="math-block">R = π_{MAKH, MASP}(HOADON ⋈ CTHD)</span></li>
+        <li class="step">Kết quả = R ÷ S</li>
+      </ul>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-5">
+  <p><strong>Câu 25:</strong> (QLGV) Tìm môn học được tất cả các lớp có giáo viên chủ nhiệm thuộc khoa 'CNTT' học.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Y = Các lớp có GVCN thuộc khoa CNTT. X, Y = Lịch học môn của các lớp.</p>
+      <div class="math-block">
+        S = π_{MALOP}(LOP ⋈_{MAGVCN=MAGV} σ_{MAKHOA='CNTT'}(GIAOVIEN)) <br>
+        R = π_{MAMH, MALOP}(GIANGDAY) <br>
+        Kết quả = R ÷ S
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-5">
+  <p><strong>Câu 26:</strong> (QLBH) Có hóa đơn nào chứa tất cả các sản phẩm hay không?</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Chia lấy SOHD.</p>
+      <div class="math-block">
+        S = π_{MASP}(SANPHAM) <br>
+        R = π_{SOHD, MASP}(CTHD) <br>
+        Kết quả = R ÷ S
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-5">
+  <p><strong>Câu 27:</strong> (QLGV) Tìm giáo viên dạy toàn bộ các môn do khoa 'KTPM' phụ trách.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Ý tưởng:</em> Xác định tập môn của KTPM rồi chia tập cặp (giáo viên, môn đã dạy) cho tập môn đó.</p>
+      <div class="math-block">
+        S = π_{MAMH}(σ_{MAKHOA='KTPM'}(MONHOC)) <br>
+        R = π_{MAGV, MAMH}(GIANGDAY) <br>
+        Kết quả = R ÷ S
+      </div>
+    </div>
+  </details>
+</div>
+
+<h4>D.8 Nhóm 8: Tổng hợp hầm bà lằng (Level 5)</h4>
+<div class="exercise-block level-5">
+  <p><strong>Câu 28:</strong> (QLGV) Tìm lớp (MALOP) đã học tất cả các môn của khoa 'KTPM' và có giáo viên chủ nhiệm là 'Nguyen Hoai An'.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Bước 1: Giải quyết phần "tất cả" bằng phép chia để lấy MALOP đạt chuẩn. Bước 2: Join kết quả đó với LOP và GIAOVIEN để lọc tiếp điều kiện GVCN.</p>
+      <div class="math-block">
+        T1 = π_{MAMH}(σ_{MAKHOA='KTPM'}(MONHOC)) <br>
+        T2 = π_{MALOP, MAMH}(GIANGDAY) <br>
+        T_CHIA = T2 ÷ T1 <br>
+        GV_AN = σ_{HOTEN='Nguyen Hoai An'}(GIAOVIEN) <br>
+        KetQua = π_{MALOP}(T_CHIA ⋈ LOP ⋈_{MAGVCN=MAGV} GV_AN)
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-5">
+  <p><strong>Câu 29:</strong> (QLBH) Khách hàng thân thiết (mua số lượng SP nhiều nhất) đã từng mua sản phẩm của Singapore.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Ý tưởng:</em> Dùng ĐSQH mở rộng để tính tổng số lượng đã mua của mỗi khách hàng, tìm tổng lớn nhất, rồi giao với tập khách từng mua sản phẩm Singapore.</p>
+      <div class="math-block">
+        T = _{MAKH} \Im _{SUM(SL) \to TongSL}(HOADON ⋈ CTHD) <br>
+        M = _{\varnothing} \Im _{MAX(TongSL) \to MaxSL}(T) <br>
+        Top = π_{MAKH}(T ⋈_{TongSL=MaxSL} M) <br>
+        SG = π_{MAKH}(HOADON ⋈ CTHD ⋈ σ_{NUOCSX='Singapore'}(SANPHAM)) <br>
+        KetQua = Top ∩ SG
+      </div>
+      <p><em>SQL tương đương:</em> <code>GROUP BY MAKH</code>, tính <code>SUM(SL)</code>, so với giá trị lớn nhất, rồi kiểm tra tồn tại sản phẩm Singapore.</p>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-5">
+  <p><strong>Câu 30:</strong> (QLGV) Lớp học đông sinh viên nhất khoa CNTT.</p>
+  <details><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Ý tưởng:</em> Theo lược đồ hiện có, hiểu “lớp khoa CNTT” là lớp có GVCN thuộc CNTT. Tạo tập lớp CNTT, loại mọi lớp có sĩ số nhỏ hơn một lớp khác trong cùng tập.</p>
+      <div class="math-block">
+        L = π_{MALOP,SISO}(LOP ⋈_{MAGVCN=MAGV} σ_{MAKHOA='CNTT'}(GIAOVIEN)) <br>
+        NhoHon = π_{L1.MALOP}(ρ_{L1}(L) ⋈_{L1.SISO &lt; L2.SISO} ρ_{L2}(L)) <br>
+        KetQua = π_{MALOP}(L) − NhoHon
+      </div>
+    </div>
+  </details>
+</div>
+
+<hr>
+
+<div class="recall-sheet">
+  <h2 id="sec-e">E. Recall Sheet - Ôn tập nhanh 1 trang</h2>
+  <table class="data-table">
+    <tr>
+      <th>Phép toán</th>
+      <th>Ký hiệu</th>
+      <th>Ứng dụng / Mẹo nhớ</th>
+    </tr>
+    <tr>
+      <td>Chọn</td>
+      <td>σ (Sigma)</td>
+      <td>Lọc dòng (ngang). Đưa ĐK vào subscript.</td>
+    </tr>
+    <tr>
+      <td>Chiếu</td>
+      <td>π (Pi)</td>
+      <td>Lọc cột (dọc). Tự động Distinct. Cần Distinct bao nhiêu cột thì Pi bấy nhiêu.</td>
+    </tr>
+    <tr>
+      <td>Kết tự nhiên</td>
+      <td>⋈</td>
+      <td>Gắn 2 bảng theo Khóa Chính-Khóa Ngoại. Cột trùng tự xóa.</td>
+    </tr>
+    <tr>
+      <td>Giao / Hợp</td>
+      <td>∩ / ∪</td>
+      <td>Bắt buộc phải cùng cấu trúc cột (Khả hợp). Dùng cho "Và" / "Hoặc".</td>
+    </tr>
+    <tr>
+      <td>Trừ</td>
+      <td>−</td>
+      <td>Dùng cho "Chỉ có A không có B". Dùng tìm Max/Min nâng cao.</td>
+    </tr>
+    <tr>
+      <td>Phép chia</td>
+      <td>÷</td>
+      <td>Thần chú "R ÷ S". R là bảng hai cột (Chủ thể, Đối tượng). S là bảng Đối tượng cần "bao trọn".</td>
+    </tr>
+  </table>
+  <div class="callout-dryrun">
+    <strong>🏃 Kỹ năng sống còn phòng thi:</strong><br>
+    1. Đọc đề, tô màu từ khóa (Tất cả, Lớn nhất, Chưa từng, Mỗi).<br>
+    2. Xác định các bảng cần đụng tới.<br>
+    3. Luôn luôn viết phép chiếu (π) nhỏ nhất có thể trước khi Trừ/Giao/Chia để tránh sai schema.<br>
+    4. Gặp "Lớn nhất": Dùng Self-join theo điều kiện bé hơn để ra tập loại.
+  </div>
+</div>
+
+</section>

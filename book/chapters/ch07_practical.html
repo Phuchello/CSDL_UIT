@@ -1,0 +1,226 @@
+<!-- ============================================================
+     CHƯƠNG 7: THỰC HÀNH SQL SERVER
+     IT004 – Cẩm nang CSDL • Võ Trọng Phúc
+     ============================================================ -->
+<section id="ch07">
+<div class="chapter-title">
+  <span class="chapter-number">Chương 7</span>
+  <span class="chapter-name">Thực hành SQL Server</span>
+  <span class="chapter-subtitle">SSMS • Tạo Database • Workflow Lab</span>
+</div>
+
+<h2>7.1 Tổng quan môi trường</h2>
+
+<p>IT004 sử dụng <strong>Microsoft SQL Server</strong> làm HQTCSDL thực hành. Bạn cần:</p>
+<ul>
+  <li><strong>SQL Server</strong> — engine xử lý dữ liệu (cài bản Developer hoặc Express — miễn phí)</li>
+  <li><strong>SQL Server Management Studio (SSMS)</strong> — giao diện đồ họa để làm việc với SQL Server</li>
+</ul>
+
+<div class="callout callout-mental">
+  <div class="callout-title">🧠 Mental Model — SQL Server = Bếp, SSMS = Nhà bếp</div>
+  <div class="callout-body">
+    <p>SQL Server là <strong>bếp</strong> (nơi nấu/xử lý dữ liệu). SSMS là <strong>nhà bếp</strong> (nơi bạn đứng, có dao thớt, bảng điều khiển). Bạn viết lệnh SQL trên SSMS → SSMS gửi xuống SQL Server → SQL Server thực thi → trả kết quả lên SSMS.</p>
+  </div>
+</div>
+
+<h2>7.2 Cài đặt SQL Server & SSMS</h2>
+
+<div class="steps">
+  <div class="step"><strong>Tải SQL Server:</strong> Vào <code>https://www.microsoft.com/en-us/sql-server/sql-server-downloads</code>. Chọn bản <strong>Developer</strong> (miễn phí, đầy đủ tính năng) hoặc <strong>Express</strong> (nhẹ hơn).</div>
+  <div class="step"><strong>Cài đặt SQL Server:</strong> Chạy installer → chọn "Basic" installation → chờ hoàn tất. Ghi nhớ <strong>Server Name</strong> (thường là <code>localhost</code> hoặc <code>.\SQLEXPRESS</code>).</div>
+  <div class="step"><strong>Tải SSMS:</strong> Tìm "SSMS download" trên Microsoft Learn → tải bản mới nhất → cài đặt.</div>
+  <div class="step"><strong>Kết nối:</strong> Mở SSMS → nhập Server Name → chọn "Windows Authentication" → Connect.</div>
+</div>
+
+<div class="callout callout-trap">
+  <div class="callout-title">⚠ BẪY — Lỗi kết nối phổ biến</div>
+  <div class="callout-body">
+    <ul>
+      <li><strong>"Cannot connect to server":</strong> Kiểm tra SQL Server service đã chạy chưa (Services → SQL Server → Start)</li>
+      <li><strong>Sai Server Name:</strong> Thử <code>localhost</code>, <code>.</code>, <code>.\SQLEXPRESS</code>, hoặc <code>(localdb)\MSSQLLocalDB</code></li>
+      <li><strong>Authentication fail:</strong> Dùng Windows Authentication nếu không đặt SA password</li>
+    </ul>
+  </div>
+</div>
+
+<h2>7.3 Tạo Database từ script</h2>
+
+<p>Trong IT004, giảng viên cung cấp file <code>.sql</code> chứa cả DDL (tạo bảng) và DML (thêm dữ liệu). Workflow:</p>
+
+<div class="steps">
+  <div class="step"><strong>Tạo database mới:</strong> Trong SSMS, chuột phải "Databases" → "New Database" → nhập tên (vd: <code>QLGV</code>) → OK.</div>
+  <div class="step"><strong>Mở file SQL:</strong> File → Open → File → chọn file <code>.sql</code> được cung cấp.</div>
+  <div class="step"><strong>Chọn đúng database:</strong> Ở dropdown phía trên, chọn database vừa tạo (QLGV). <span style="color: var(--c-danger); font-weight: 600;">Nếu quên bước này, lệnh sẽ chạy trên database sai!</span></div>
+  <div class="step"><strong>Thực thi:</strong> Nhấn <code>F5</code> hoặc nút "Execute" → kiểm tra kết quả ở tab Messages.</div>
+  <div class="step"><strong>Kiểm tra:</strong> Expand database → Tables → kiểm tra các bảng đã tạo → chuột phải → "Select Top 1000 Rows" để xem dữ liệu.</div>
+</div>
+
+<h3>Ví dụ: Tạo database QLGV</h3>
+<pre class="sql-block">
+<span class="cmt">-- Bước 1: Tạo database</span>
+<span class="kw">CREATE DATABASE</span> QLGV;
+<span class="kw">GO</span>
+
+<span class="cmt">-- Bước 2: Chuyển sang database vừa tạo</span>
+<span class="kw">USE</span> QLGV;
+<span class="kw">GO</span>
+
+<span class="cmt">-- Bước 3: Tạo bảng KHOA</span>
+<span class="kw">CREATE TABLE</span> KHOA (
+    MAKHOA  <span class="kw">NVARCHAR</span>(<span class="num">4</span>),
+    TENKHOA <span class="kw">NVARCHAR</span>(<span class="num">40</span>),
+    NGANH   <span class="kw">NVARCHAR</span>(<span class="num">30</span>),
+    TRUONGKHOA <span class="kw">CHAR</span>(<span class="num">4</span>),
+    <span class="kw">CONSTRAINT</span> pk_KHOA <span class="kw">PRIMARY KEY</span> (MAKHOA)
+);
+
+<span class="cmt">-- Bước 4: Thêm dữ liệu</span>
+<span class="kw">SET DATEFORMAT</span> DMY;
+<span class="kw">INSERT INTO</span> KHOA <span class="kw">VALUES</span>(<span class="str">'KHMT'</span>, <span class="str">'Khoa hoc may tinh'</span>, <span class="str">'CNTT'</span>, <span class="str">'GV01'</span>);
+<span class="kw">INSERT INTO</span> KHOA <span class="kw">VALUES</span>(<span class="str">'HTTT'</span>, <span class="str">'He thong thong tin'</span>, <span class="str">'CNTT'</span>, <span class="str">'GV02'</span>);
+<span class="kw">INSERT INTO</span> KHOA <span class="kw">VALUES</span>(<span class="str">'CNPM'</span>, <span class="str">'Cong nghe phan mem'</span>, <span class="str">'CNTT'</span>, <span class="str">'GV04'</span>);
+<span class="kw">INSERT INTO</span> KHOA <span class="kw">VALUES</span>(<span class="str">'MTT'</span>, <span class="str">'Mang va truyen thong'</span>, <span class="str">'CNTT'</span>, <span class="str">'GV03'</span>);
+</pre>
+
+<h2>7.4 Chạy query và đọc kết quả</h2>
+
+<h3>Query Window</h3>
+<p>Trong SSMS, nhấn <code>Ctrl+N</code> để mở query window mới. Viết SQL rồi nhấn <code>F5</code> (toàn bộ) hoặc chọn một đoạn rồi nhấn <code>F5</code> (chỉ chạy đoạn đó).</p>
+
+<h3>Đọc kết quả</h3>
+<table>
+  <thead><tr><th>Tab</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Results</strong></td><td>Bảng kết quả của SELECT — dữ liệu trả về</td></tr>
+    <tr><td><strong>Messages</strong></td><td>Thông báo: "(X rows affected)" hoặc lỗi</td></tr>
+  </tbody>
+</table>
+
+<h3>Đọc Error Messages</h3>
+<table>
+  <thead><tr><th>Lỗi thường gặp</th><th>Nguyên nhân</th><th>Cách sửa</th></tr></thead>
+  <tbody>
+    <tr><td><code>Invalid object name 'HOCVIEN'</code></td><td>Bảng chưa tạo hoặc sai database</td><td>Kiểm tra USE database, kiểm tra tên bảng</td></tr>
+    <tr><td><code>Invalid column name 'XYZ'</code></td><td>Cột không tồn tại</td><td>Kiểm tra schema bảng</td></tr>
+    <tr><td><code>Violation of PRIMARY KEY constraint</code></td><td>INSERT giá trị PK trùng</td><td>Kiểm tra dữ liệu đã có</td></tr>
+    <tr><td><code>FOREIGN KEY constraint... conflict</code></td><td>FK reference không tồn tại</td><td>INSERT bảng cha trước bảng con</td></tr>
+    <tr><td><code>Conversion failed</code></td><td>Kiểu dữ liệu không khớp</td><td>Kiểm tra data type</td></tr>
+    <tr><td><code>Ambiguous column name</code></td><td>Cột trùng tên khi JOIN nhiều bảng</td><td>Dùng alias: <code>GV.MAGV</code></td></tr>
+  </tbody>
+</table>
+
+<h2>7.5 Xem Relationships (Database Diagram)</h2>
+<div class="steps">
+  <div class="step">Expand database → chuột phải <strong>Database Diagrams</strong> → New Database Diagram</div>
+  <div class="step">Chọn tất cả bảng → Add → Close</div>
+  <div class="step">SSMS tự vẽ diagram với các đường nối PK–FK</div>
+</div>
+
+<h2>7.6 Workflow làm bài Lab IT004</h2>
+
+<div class="callout callout-fast">
+  <div class="callout-title">⚡ Fast Pattern — Quy trình làm bài Lab</div>
+  <div class="callout-body">
+    <ol>
+      <li><strong>Đọc đề:</strong> Hiểu yêu cầu trước khi viết code</li>
+      <li><strong>Chọn đúng DB:</strong> <code>USE QLGV;</code> hoặc <code>USE QLBH;</code></li>
+      <li><strong>Viết query:</strong> Bắt đầu từ đơn giản, thêm dần</li>
+      <li><strong>Chạy từng câu:</strong> Select đoạn code → F5</li>
+      <li><strong>Kiểm tra kết quả:</strong> Có đúng không? Đủ dòng không?</li>
+      <li><strong>Debug nếu sai:</strong> Đọc error message, kiểm tra từng phần</li>
+      <li><strong>Comment code:</strong> <code>-- Câu 1: Liệt kê...</code></li>
+    </ol>
+  </div>
+</div>
+
+<h2>7.7 Mẹo SSMS hữu ích</h2>
+
+<table>
+  <thead><tr><th>Phím tắt</th><th>Chức năng</th></tr></thead>
+  <tbody>
+    <tr><td><code>F5</code></td><td>Execute query</td></tr>
+    <tr><td><code>Ctrl+N</code></td><td>Mở query tab mới</td></tr>
+    <tr><td><code>Ctrl+R</code></td><td>Ẩn/hiện Results pane</td></tr>
+    <tr><td><code>Ctrl+Shift+U</code></td><td>Chữ hoa (UPPERCASE)</td></tr>
+    <tr><td><code>Ctrl+Shift+L</code></td><td>Chữ thường (lowercase)</td></tr>
+    <tr><td><code>Ctrl+K, Ctrl+C</code></td><td>Comment dòng đang chọn</td></tr>
+    <tr><td><code>Ctrl+K, Ctrl+U</code></td><td>Uncomment dòng đang chọn</td></tr>
+    <tr><td><code>Alt+F1</code></td><td>Xem thông tin bảng (đặt con trỏ vào tên bảng)</td></tr>
+  </tbody>
+</table>
+
+<h2>7.8 Pattern từ bài lab IT004</h2>
+
+<p>Phân tích từ các file SQL thực hành, những pattern phổ biến:</p>
+
+<h3>Lab 1–2: DDL + DML cơ bản</h3>
+<pre class="sql-block">
+<span class="cmt">-- Tạo bảng với PK/FK</span>
+<span class="kw">CREATE TABLE</span> HOADON (
+    SOHD    <span class="kw">INT</span>,
+    NGHD    <span class="kw">SMALLDATETIME</span>,
+    MAKH    <span class="kw">CHAR</span>(<span class="num">4</span>),
+    MANV    <span class="kw">CHAR</span>(<span class="num">4</span>),
+    TRIGIA  <span class="kw">MONEY</span>,
+    <span class="kw">CONSTRAINT</span> pk_hd <span class="kw">PRIMARY KEY</span>(SOHD)
+);
+<span class="kw">ALTER TABLE</span> HOADON <span class="kw">ADD CONSTRAINT</span> fk01_HD
+    <span class="kw">FOREIGN KEY</span>(MAKH) <span class="kw">REFERENCES</span> KHACHHANG(MAKH);
+</pre>
+
+<h3>Lab 3–4: SELECT + JOIN + GROUP BY</h3>
+<pre class="sql-block">
+<span class="cmt">-- Đếm số hóa đơn của mỗi khách hàng trong năm 2006</span>
+<span class="kw">SELECT</span> KH.MAKH, KH.HOTEN, <span class="fn">COUNT</span>(HD.SOHD) <span class="kw">AS</span> SoHD
+<span class="kw">FROM</span> KHACHHANG KH
+<span class="kw">JOIN</span> HOADON HD <span class="kw">ON</span> KH.MAKH <span class="op">=</span> HD.MAKH
+<span class="kw">WHERE</span> <span class="fn">YEAR</span>(HD.NGHD) <span class="op">=</span> <span class="num">2006</span>
+<span class="kw">GROUP BY</span> KH.MAKH, KH.HOTEN;
+</pre>
+
+<h3>Lab 5–6: Subquery + NOT EXISTS + Trigger</h3>
+<pre class="sql-block">
+<span class="cmt">-- Tìm khách hàng đã mua TẤT CẢ sản phẩm Việt Nam</span>
+<span class="kw">SELECT</span> KH.MAKH, KH.HOTEN
+<span class="kw">FROM</span> KHACHHANG KH
+<span class="kw">WHERE NOT EXISTS</span> (
+    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> SANPHAM SP
+    <span class="kw">WHERE</span> SP.NUOCSX <span class="op">=</span> <span class="str">'Viet Nam'</span>
+    <span class="kw">AND NOT EXISTS</span> (
+        <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> CTHD CT
+        <span class="kw">JOIN</span> HOADON HD <span class="kw">ON</span> CT.SOHD <span class="op">=</span> HD.SOHD
+        <span class="kw">WHERE</span> HD.MAKH <span class="op">=</span> KH.MAKH
+        <span class="kw">AND</span> CT.MASP <span class="op">=</span> SP.MASP
+    )
+);
+</pre>
+
+<div class="callout callout-connection">
+  <div class="callout-title">🔗 Connection</div>
+  <div class="callout-body">
+    <p>Query "tất cả" ở trên là SQL tương đương của <strong>phép chia</strong> (Division) trong ĐSQH (Chương 3, mục 3.9). Đây là double NOT EXISTS pattern — pattern quan trọng nhất cho cả thi lý thuyết lẫn thực hành.</p>
+  </div>
+</div>
+
+<!-- ONE-PAGE RECALL -->
+<div class="recall-sheet">
+  <h2>ONE-PAGE RECALL — Chương 7</h2>
+
+  <h4>Workflow Lab</h4>
+  <p><code>Tạo DB</code> → <code>USE DB</code> → <code>Chạy script DDL</code> → <code>Chạy script DML</code> → <code>Kiểm tra</code> → <code>Viết query</code> → <code>Debug</code></p>
+
+  <h4>Phím tắt quan trọng</h4>
+  <p><code>F5</code> Execute • <code>Ctrl+N</code> New query • <code>Ctrl+R</code> Toggle results • <code>Alt+F1</code> Table info</p>
+
+  <h4>⚠ Common Traps</h4>
+  <ul>
+    <li>Quên <code>USE database</code> → query chạy trên DB sai</li>
+    <li>Quên <code>SET DATEFORMAT DMY</code> → ngày tháng sai format</li>
+    <li>Tạo FK trước khi tạo bảng cha → lỗi reference</li>
+    <li>SELECT * quá nhiều dữ liệu → SSMS treo</li>
+  </ul>
+</div>
+
+</section>
+

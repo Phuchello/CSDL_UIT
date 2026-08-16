@@ -1,0 +1,3361 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT004 – Cơ sở dữ liệu: Cẩm nang từ nền tảng đến Exam Mastery</title>
+  <meta name="author" content="Võ Trọng Phúc">
+  <meta name="description" content="IT004 – Cơ sở dữ liệu – Cẩm nang từ nền tảng đến Exam Mastery – UIT">
+  <meta name="keywords" content="IT004, Cơ sở dữ liệu, Database, UIT, SQL Server, Đại số quan hệ, Võ Trọng Phúc">
+  <link rel="stylesheet" href="css/book.css">
+</head>
+<body>
+
+<!-- === ch00_intro.html === -->
+<!-- ============================================================
+     PHẦN 0: BÌA + THÔNG TIN BIÊN SOẠN + MỤC LỤC + CÁCH HỌC IT004
+     IT004 – CƠ SỞ DỮ LIỆU: Cẩm nang từ nền tảng đến Exam Mastery
+     Biên soạn bởi Võ Trọng Phúc
+     ============================================================ -->
+
+<!-- ========== BÌA ========== -->
+<div class="cover-page">
+  <div class="school-name">Trường Đại học Công nghệ Thông tin – ĐHQG-HCM</div>
+  <div class="book-code">IT004</div>
+  <div class="book-title">CƠ SỞ DỮ LIỆU</div>
+  <div class="book-subtitle">Cẩm nang từ nền tảng đến Exam Mastery</div>
+  <hr class="cover-divider">
+  <div class="author-label">Biên soạn bởi</div>
+  <div class="author-name">VÕ TRỌNG PHÚC</div>
+  <div class="edition-info">Personal Study Edition • IT004 • 2026</div>
+</div>
+
+<!-- ========== THÔNG TIN BIÊN SOẠN ========== -->
+<div class="info-page">
+  <h2>THÔNG TIN BIÊN SOẠN</h2>
+  <p><strong>Biên soạn và hệ thống hóa:</strong> Võ Trọng Phúc</p>
+  <p><strong>Phiên bản:</strong> 1.0</p>
+  <p><strong>Năm biên soạn:</strong> 2026</p>
+  <br>
+  <h3 style="margin-top: 1.5em;">Quyền đối với bản biên soạn</h3>
+  <p>© 2026 Võ Trọng Phúc.</p>
+  <p>Bản quyền đối với <strong>cấu trúc biên soạn, hệ thống hóa kiến thức, phần diễn giải nguyên bản, ví dụ tự xây dựng, bài tập tự biên soạn, sơ đồ được vẽ lại, hệ thống Exam Playbook, bố cục, thiết kế và các nội dung nguyên bản được tạo riêng cho cuốn cẩm nang này</strong> thuộc về người biên soạn, trong phạm vi pháp luật cho phép.</p>
+  <p>Tài liệu được xây dựng phục vụ mục đích học tập cá nhân.</p>
+  <p>Các kiến thức, tài liệu bài giảng, đề thi, tài liệu tham khảo, tiêu chuẩn, hình ảnh hoặc nội dung có nguồn gốc từ bên thứ ba vẫn thuộc quyền của tác giả hoặc chủ sở hữu tương ứng.</p>
+  <p style="margin-top: 1em; color: var(--c-text-secondary); font-style: italic;">Việc ghi "Biên soạn bởi Võ Trọng Phúc" không được hiểu là tuyên bố quyền tác giả đối với các tài liệu nguồn của UIT, giảng viên, Microsoft, tác giả giáo trình hoặc các nguồn tham khảo khác.</p>
+  <br>
+  <h3 style="margin-top: 1.5em;">Giáo trình & Tài liệu tham khảo chính</h3>
+  <ul>
+    <li><em>Giáo trình Cơ sở dữ liệu</em> — Đồng Thị Bích Thủy, Phạm Thị Bạch Huệ, Nguyễn Trần Minh Thư (NXB KH&KT)</li>
+    <li><em>Database System Concepts</em> — Silberschatz, Korth, Sudarshan</li>
+    <li><em>Fundamentals of Database Systems</em> — Elmasri, Navathe</li>
+    <li>Slide bài giảng IT004 – Khoa HTTT, UIT</li>
+    <li>Microsoft SQL Server Documentation (Microsoft Learn)</li>
+  </ul>
+  <p style="margin-top: 1.5em; font-size: 9pt; color: var(--c-text-muted);">Đây không phải tài liệu chính thức của Trường Đại học Công nghệ Thông tin – ĐHQG-HCM.</p>
+</div>
+
+<!-- ========== MỤC LỤC ========== -->
+<div class="toc">
+  <h1>MỤC LỤC</h1>
+
+  <div class="toc-chapter"><span>Phần 0 — Cách học IT004</span></div>
+  <div class="toc-section"><span>Bản đồ toàn môn</span></div>
+  <div class="toc-section"><span>Quan hệ giữa các chương</span></div>
+  <div class="toc-section"><span>Chiến lược học & Roadmap</span></div>
+
+  <div class="toc-chapter"><span>Chương 1 — Tổng quan Cơ sở dữ liệu</span></div>
+  <div class="toc-section"><span>Data, Database, DBMS</span></div>
+  <div class="toc-section"><span>Kiến trúc 3 mức & Data Independence</span></div>
+  <div class="toc-section"><span>Mô hình dữ liệu</span></div>
+
+  <div class="toc-chapter"><span>Chương 2 — Mô hình Thực thể–Kết hợp & Mô hình Quan hệ</span></div>
+  <div class="toc-section"><span>Relational Model</span></div>
+  <div class="toc-section"><span>ER Model & Ký hiệu</span></div>
+  <div class="toc-section"><span>Quy trình phân tích đề ER (9 bước)</span></div>
+  <div class="toc-section"><span>Ánh xạ ER → Relational Schema</span></div>
+  <div class="toc-section"><span>Bài tập ER/Modeling</span></div>
+
+  <div class="toc-chapter"><span>Chương 3 — Đại số quan hệ</span></div>
+  <div class="toc-section"><span>Các phép toán cơ bản & nâng cao</span></div>
+  <div class="toc-section"><span>Từ điển từ khóa đề</span></div>
+  <div class="toc-section"><span>Phép chia — "Tất cả"</span></div>
+  <div class="toc-section"><span>30+ bài luyện ĐSQH</span></div>
+
+  <div class="toc-chapter"><span>Chương 4 — SQL Server / T-SQL</span></div>
+  <div class="toc-section"><span>DDL, DML, SELECT</span></div>
+  <div class="toc-section"><span>JOIN, Aggregation, Set operators</span></div>
+  <div class="toc-section"><span>Subquery, NOT EXISTS, "Tất cả" pattern</span></div>
+  <div class="toc-section"><span>Max/min patterns, Common traps</span></div>
+
+  <div class="toc-chapter"><span>Chương 5 — Ràng buộc toàn vẹn</span></div>
+  <div class="toc-section"><span>Các loại RBTV</span></div>
+  <div class="toc-section"><span>Bảng tầm ảnh hưởng</span></div>
+  <div class="toc-section"><span>SQL Implementation</span></div>
+
+  <div class="toc-chapter"><span>Chương 6 — Phụ thuộc hàm, Khóa & Dạng chuẩn</span></div>
+  <div class="toc-section"><span>Armstrong, Closure, Minimal Cover</span></div>
+  <div class="toc-section"><span>Candidate Key Search</span></div>
+  <div class="toc-section"><span>1NF → 2NF → 3NF → BCNF</span></div>
+
+  <div class="toc-chapter"><span>Chương 7 — Thực hành SQL Server</span></div>
+  <div class="toc-section"><span>Cài đặt & Hướng dẫn SSMS</span></div>
+  <div class="toc-section"><span>Workflow làm bài Lab</span></div>
+
+  <div class="toc-chapter"><span>IT004 Exam Playbook</span></div>
+  <div class="toc-chapter"><span>IT004 Last-Minute Cheat Sheet</span></div>
+  <div class="toc-chapter"><span>Nguồn tham khảo</span></div>
+</div>
+
+<!-- ========== PHẦN 0: CÁCH HỌC IT004 ========== -->
+<section id="ch00">
+<div class="chapter-title">
+  <span class="chapter-number">Phần 0</span>
+  <span class="chapter-name">Cách học IT004</span>
+  <span class="chapter-subtitle">Bản đồ tư duy • Chiến lược • Roadmap</span>
+</div>
+
+<h2>Môn IT004 đang học gì?</h2>
+
+<p>IT004 – Cơ sở dữ liệu (Database) là môn <strong>nền tảng thiết kế và vận hành dữ liệu</strong>. Bạn sẽ học cách:</p>
+
+<ol>
+  <li><strong>Mô hình hóa thế giới thực</strong> thành cấu trúc dữ liệu (ER → Relational Schema)</li>
+  <li><strong>Truy vấn dữ liệu</strong> bằng ngôn ngữ toán học (Đại số quan hệ) và ngôn ngữ lập trình (SQL)</li>
+  <li><strong>Bảo vệ dữ liệu</strong> khỏi sai sót (Ràng buộc toàn vẹn)</li>
+  <li><strong>Tối ưu cấu trúc</strong> để giảm dư thừa (Chuẩn hóa)</li>
+</ol>
+
+<div class="callout callout-mental">
+  <div class="callout-title">🧠 Mental Model — IT004 = Kiến trúc sư dữ liệu</div>
+  <div class="callout-body">
+    <p>Hãy nghĩ về cơ sở dữ liệu như việc thiết kế một <strong>tòa nhà dữ liệu</strong>:</p>
+    <ul>
+      <li><strong>Chương 1:</strong> Hiểu tại sao cần nhà (File system → DBMS)</li>
+      <li><strong>Chương 2:</strong> Vẽ bản thiết kế (ER → Schema)</li>
+      <li><strong>Chương 3:</strong> Ngôn ngữ đặc tả yêu cầu (Đại số quan hệ)</li>
+      <li><strong>Chương 4:</strong> Xây nhà thật (SQL)</li>
+      <li><strong>Chương 5:</strong> Lắp hệ thống an toàn (RBTV)</li>
+      <li><strong>Chương 6:</strong> Kiểm định chất lượng (Chuẩn hóa)</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Bản đồ toàn môn</h2>
+
+<p>Dưới đây là pipeline xuyên suốt IT004. Mọi kiến thức đều kết nối với nhau:</p>
+
+<!-- ASCII Pipeline Diagram -->
+<div style="background: var(--c-bg-alt); border: 2px solid var(--c-primary); border-radius: 8px; padding: 20px; margin: 1.5em 0; text-align: center; font-family: var(--f-mono); font-size: 9pt; line-height: 2.2; page-break-inside: avoid;">
+  <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px;">
+    <div style="background: var(--c-primary); color: white; padding: 6px 14px; border-radius: 4px; font-weight: 600;">Bài toán thực tế</div>
+    <span style="font-size: 14pt; color: var(--c-primary);">→</span>
+    <div style="background: #dbeafe; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #1e40af;">ER Diagram<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 2</span></div>
+    <span style="font-size: 14pt; color: var(--c-primary);">→</span>
+    <div style="background: #dcfce7; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #166534;">Relational Schema<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 2</span></div>
+    <span style="font-size: 14pt; color: var(--c-primary);">→</span>
+    <div style="background: #fef9c3; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #854d0e;">Đại số QH<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 3</span></div>
+    <span style="font-size: 14pt; color: var(--c-primary);">→</span>
+    <div style="background: #fee2e2; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #991b1b;">SQL / T-SQL<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 4</span></div>
+  </div>
+  <div style="margin-top: 12px; display: flex; justify-content: center; gap: 12px;">
+    <div style="background: #f3e8ff; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #6b21a8;">RBTV<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 5</span></div>
+    <span style="font-size: 14pt; color: var(--c-text-muted);">↔</span>
+    <div style="background: #fdf4ff; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #a855f7;">Chuẩn hóa<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 6</span></div>
+  </div>
+</div>
+
+<h2>Quan hệ phụ thuộc giữa các chương</h2>
+
+<table>
+  <thead>
+    <tr><th>Để học</th><th>Cần biết trước</th><th>Ghi chú</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Ch.1 – Tổng quan</td><td>Không</td><td>Điểm xuất phát</td></tr>
+    <tr><td>Ch.2 – ER & Relational</td><td>Ch.1 (khái niệm DB)</td><td>Nền tảng cho tất cả</td></tr>
+    <tr><td>Ch.3 – Đại số QH</td><td>Ch.2 (relation, tuple, schema)</td><td>Phải vững relation trước</td></tr>
+    <tr><td>Ch.4 – SQL</td><td>Ch.2 + Ch.3</td><td>SQL "dịch" ĐSQH sang code</td></tr>
+    <tr><td>Ch.5 – RBTV</td><td>Ch.2 (PK, FK, schema)</td><td>Hiểu schema trước</td></tr>
+    <tr><td>Ch.6 – PTH/NF</td><td>Ch.2 (relation, key)</td><td>Toán nhiều, cần closure vững</td></tr>
+  </tbody>
+</table>
+
+<h2>Chiến lược học IT004</h2>
+
+<h3>Nguyên tắc vàng</h3>
+<ol>
+  <li><strong>Hiểu trước, nhớ sau.</strong> Đừng học thuộc công thức — hãy hiểu tại sao nó đúng.</li>
+  <li><strong>Làm bài trước khi đọc lời giải.</strong> Sai rồi sửa sẽ nhớ lâu hơn đọc 10 lần.</li>
+  <li><strong>Dùng bảng nhỏ.</strong> Mỗi khi học phép toán mới, thử trên bảng 3–5 dòng.</li>
+  <li><strong>Chạy SQL thật.</strong> Cài SQL Server + SSMS, tạo database mẫu, gõ query.</li>
+  <li><strong>Giải thích cho người khác.</strong> Nếu không giải thích được = chưa hiểu.</li>
+</ol>
+
+<h3>Cách đọc lược đồ quan hệ</h3>
+<p>Khi bạn thấy một lược đồ như:</p>
+<div class="schema">
+  HOCVIEN(<span class="pk">MAHV</span>, HO, TEN, NGSINH, GIOITINH, NOISINH, <span class="fk">MALOP</span>)
+</div>
+<p>Đọc như sau:</p>
+<ul>
+  <li>Tên bảng: <code>HOCVIEN</code></li>
+  <li>Các cột: MAHV, HO, TEN, NGSINH, GIOITINH, NOISINH, MALOP</li>
+  <li><span class="pk" style="text-decoration: underline; font-weight: 700;">Gạch chân</span> = khóa chính (Primary Key)</li>
+  <li><span class="fk" style="font-style: italic; color: var(--c-primary);">In nghiêng</span> = khóa ngoại (Foreign Key)</li>
+</ul>
+
+<h3>Cách đọc "tân từ" (predicate)</h3>
+<p><strong>Tân từ (predicate)</strong> mô tả ý nghĩa/ngữ nghĩa mà một quan hệ biểu diễn; khi gắn các giá trị cụ thể vào một bộ, tân từ cho biết phát biểu tương ứng với bộ đó. Điều kiện logic trong truy vấn là một cách sử dụng predicate để chọn các bộ, nhưng predicate không chỉ là mệnh đề <code>WHERE</code>.</p>
+<p>Ví dụ — tân từ cho bảng HOCVIEN:</p>
+<blockquote style="background: var(--c-bg-alt); border-left: 4px solid var(--c-primary); padding: 12px 16px; margin: 0.5em 0; font-style: italic;">
+  "Học viên có mã số <em>MAHV</em>, họ là <em>HO</em>, tên là <em>TEN</em>, sinh ngày <em>NGSINH</em>, giới tính <em>GIOITINH</em>, nơi sinh <em>NOISINH</em>, thuộc lớp <em>MALOP</em>."
+</blockquote>
+<p>Tân từ giúp bạn: (1) kiểm tra ER có đúng không, (2) viết ràng buộc toàn vẹn, (3) hiểu nghĩa của query.</p>
+
+<h3>Cách phân tích đề</h3>
+<div class="steps">
+  <div class="step"><strong>Đọc toàn bộ đề 1 lần.</strong> Không làm gì cả. Chỉ đọc.</div>
+  <div class="step"><strong>Xác định dạng bài:</strong> ER? ĐSQH? SQL? RBTV? PTH? Chuẩn hóa?</div>
+  <div class="step"><strong>Gạch chân từ khóa</strong> trong đề. Từ khóa → phép toán / pattern.</div>
+  <div class="step"><strong>Lập kế hoạch giải</strong> trước khi viết. Sketch nháp.</div>
+  <div class="step"><strong>Giải và kiểm tra lại</strong> bằng cách đọc ngược kết quả.</div>
+</div>
+
+<h2>Roadmap Giữa kỳ</h2>
+
+<div class="callout callout-exam">
+  <div class="callout-title">🎯 Exam Signal — Cấu trúc thi giữa kỳ IT004</div>
+  <div class="callout-body">
+    <p>Thi tự luận, 60–90 phút. Các dạng bài thường gặp:</p>
+    <ol>
+      <li><strong>Câu 1:</strong> Vẽ ER diagram từ bài toán tiếng Việt (Chương 2)</li>
+      <li><strong>Câu 2:</strong> Chuyển ER → Relational Schema (Chương 2)</li>
+      <li><strong>Câu 3:</strong> Viết biểu thức Đại số quan hệ (Chương 3)</li>
+      <li><strong>Câu 4:</strong> Viết SQL queries (Chương 4 – phần DDL/DML cơ bản)</li>
+    </ol>
+    <p><strong>Trọng tâm:</strong> Chương 2 và Chương 3 chiếm ~60–70% giữa kỳ.</p>
+  </div>
+</div>
+
+<table>
+  <thead>
+    <tr><th>Tuần</th><th>Nội dung ôn</th><th>Mục tiêu</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Tuần 1–2</td><td>Ch.1 (nhanh) + Ch.2 (kỹ)</td><td>Vẽ ER chính xác, ánh xạ không sai</td></tr>
+    <tr><td>Tuần 3–4</td><td>Ch.3 Đại số QH</td><td>Giải được 20+ bài ĐSQH</td></tr>
+    <tr><td>Tuần 5–6</td><td>Ch.4 SQL (cơ bản)</td><td>DDL, SELECT, JOIN, GROUP BY</td></tr>
+    <tr><td>Tuần 7</td><td>Ôn tổng + đề mẫu</td><td>Giải đề trong thời gian thật</td></tr>
+  </tbody>
+</table>
+
+<h2>Roadmap Cuối kỳ</h2>
+
+<div class="callout callout-exam">
+  <div class="callout-title">🎯 Exam Signal — Cấu trúc thi cuối kỳ IT004</div>
+  <div class="callout-body">
+    <p><strong>Lý thuyết</strong> (tự luận, 90 phút):</p>
+    <ol>
+      <li>Bao đóng thuộc tính, tìm khóa (Chương 6)</li>
+      <li>Phủ tối thiểu (Chương 6)</li>
+      <li>Xác định dạng chuẩn (Chương 6)</li>
+      <li>Bảng tầm ảnh hưởng RBTV (Chương 5)</li>
+      <li>ĐSQH / SQL nâng cao (Chương 3, 4)</li>
+    </ol>
+    <p><strong>Thực hành</strong> (thi máy SQL Server, 60–90 phút):</p>
+    <ol>
+      <li>Tạo bảng, khóa (DDL)</li>
+      <li>Truy vấn phức tạp (subquery, NOT EXISTS, GROUP BY + HAVING)</li>
+      <li>Stored Procedure / Trigger</li>
+    </ol>
+  </div>
+</div>
+
+<h2>Lỗi người mới thường mắc</h2>
+
+<div class="callout callout-trap">
+  <div class="callout-title">⚠ BẪY — Top 10 lỗi sinh viên IT004 hay mắc</div>
+  <div class="callout-body">
+    <ol>
+      <li><strong>Nhầm entity và attribute:</strong> "Địa chỉ" là entity hay attribute? → Phụ thuộc ngữ cảnh!</li>
+      <li><strong>Cardinality một chiều:</strong> Chỉ hỏi "A quan hệ bao nhiêu B?" mà quên hỏi ngược lại.</li>
+      <li><strong>M:N không tạo bảng trung gian</strong> khi ánh xạ sang relation.</li>
+      <li><strong>Projection quá sớm</strong> trong ĐSQH khiến mất thông tin join.</li>
+      <li><strong>Division sai divisor:</strong> Chọn sai tập "tất cả" để chia.</li>
+      <li><strong>SQL JOIN gây duplicate:</strong> Quên DISTINCT hoặc join sai điều kiện.</li>
+      <li><strong><code>NOT IN</code> gặp NULL:</strong> Kết quả rỗng mà không hiểu vì sao!</li>
+      <li><strong>WHERE vs HAVING:</strong> Đặt aggregate trong WHERE → lỗi.</li>
+      <li><strong>Closure dừng quá sớm:</strong> Kết luận X⁺ khi chưa chạy hết vòng.</li>
+      <li><strong>Nhầm 3NF với BCNF:</strong> Với mọi PTH không hiển nhiên X → A, cả 3NF và BCNF đều hợp lệ nếu X là siêu khóa (superkey). Sự khác biệt chỉ nằm ở chỗ 3NF có thêm một ngoại lệ cho phép vế phải A là thuộc tính khóa (prime attribute), còn BCNF thì tuyệt đối không.</li>
+    </ol>
+  </div>
+</div>
+
+<h2>Dataset minh họa xuyên suốt</h2>
+
+<p>Cuốn sách sử dụng 2 database chính — giống với database thực hành chính thức IT004:</p>
+
+<h3>Database 1: Quản lý Giáo vụ (QLGV)</h3>
+<div class="schema">KHOA(<span class="pk">MAKHOA</span>, TENKHOA, NGANH, TRUONGKHOA)</div>
+<div class="schema">MONHOC(<span class="pk">MAMH</span>, TENMH, TCLT, TCTH, <span class="fk">MAKHOA</span>)</div>
+<div class="schema">DIEUKIEN(<span class="pk"><span class="fk">MAMH</span>, <span class="fk">MAMH_TRUOC</span></span>)</div>
+<div class="schema">GIAOVIEN(<span class="pk">MAGV</span>, HOTEN, HOCVI, HOCHAM, GIOITINH, NGSINH, NGVL, HESO, MUCLUONG, <span class="fk">MAKHOA</span>)</div>
+<div class="schema">LOP(<span class="pk">MALOP</span>, TENLOP, <span class="fk">TRGLOP</span>, SISO, <span class="fk">MAGVCN</span>)</div>
+<div class="schema">HOCVIEN(<span class="pk">MAHV</span>, HO, TEN, NGSINH, GIOITINH, NOISINH, <span class="fk">MALOP</span>)</div>
+<div class="schema">GIANGDAY(<span class="pk"><span class="fk">MALOP</span>, <span class="fk">MAMH</span></span>, <span class="fk">MAGV</span>, HOCKY, NAM, TUNGAY, DENNGAY)</div>
+<div class="schema">KETQUATHI(<span class="pk"><span class="fk">MAHV</span>, <span class="fk">MAMH</span>, LANTHI</span>, NGTHI, DIEM, KQUA)</div>
+
+<h3>Database 2: Quản lý Bán hàng (QLBH)</h3>
+<div class="schema">KHACHHANG(<span class="pk">MAKH</span>, HOTEN, DCHI, SODT, NGSINH, NGDK, DOANHSO)</div>
+<div class="schema">NHANVIEN(<span class="pk">MANV</span>, HOTEN, SODT, NGVL)</div>
+<div class="schema">SANPHAM(<span class="pk">MASP</span>, TENSP, DVT, NUOCSX, GIA)</div>
+<div class="schema">HOADON(<span class="pk">SOHD</span>, NGHD, <span class="fk">MAKH</span>, <span class="fk">MANV</span>, TRIGIA)</div>
+<div class="schema">CTHD(<span class="pk"><span class="fk">SOHD</span>, <span class="fk">MASP</span></span>, SL)</div>
+
+<div class="callout callout-connection">
+  <div class="callout-title">🔗 Connection — Dataset xuyên suốt</div>
+  <div class="callout-body">
+    <p>Hai database này sẽ được dùng để minh họa <strong>tất cả các chương</strong>: ER (Ch.2), ĐSQH (Ch.3), SQL (Ch.4), RBTV (Ch.5), PTH/Chuẩn hóa (Ch.6). Hãy làm quen với schema ngay từ bây giờ — bạn sẽ gặp lại chúng rất nhiều lần.</p>
+  </div>
+</div>
+
+</section>
+
+<!-- === ch01_overview.html === -->
+<!-- ============================================================
+     CHƯƠNG 1: TỔNG QUAN CƠ SỞ DỮ LIỆU
+     IT004 – Cẩm nang CSDL • Võ Trọng Phúc
+     ============================================================ -->
+<section id="ch01">
+<div class="chapter-title">
+  <span class="chapter-number">Chương 1</span>
+  <span class="chapter-name">Tổng quan Cơ sở dữ liệu</span>
+  <span class="chapter-subtitle">Data • Database • DBMS • Kiến trúc 3 mức</span>
+</div>
+
+<!-- ===== 1.1 DATA VS INFORMATION ===== -->
+<h2>1.1 Dữ liệu và Thông tin</h2>
+
+<h3>① Trực giác</h3>
+<p>Bạn nhìn vào dãy số <code>25, 30, 22, 28</code>. Đó là <strong>dữ liệu</strong> (data) — các giá trị thô, chưa có ngữ cảnh. Khi bạn biết đó là "nhiệt độ Tp.HCM 4 ngày qua, đơn vị °C", nó trở thành <strong>thông tin</strong> (information) — dữ liệu đã được xử lý, có ý nghĩa.</p>
+
+<h3>② Định nghĩa</h3>
+<ul>
+  <li><strong>Dữ liệu (Data):</strong> Các sự kiện, giá trị thô được ghi nhận. Có thể là số, chữ, hình ảnh, âm thanh.</li>
+  <li><strong>Thông tin (Information):</strong> Dữ liệu đã được xử lý, tổ chức, đặt trong ngữ cảnh để có ý nghĩa và hỗ trợ ra quyết định.</li>
+</ul>
+
+<div class="callout callout-fast">
+  <div class="callout-title">⚡ Fast Pattern</div>
+  <div class="callout-body"><strong>Data + Ngữ cảnh + Xử lý = Information</strong></div>
+</div>
+
+<h3>③ Ví dụ</h3>
+<table>
+  <thead><tr><th>Data (thô)</th><th>Information (có nghĩa)</th></tr></thead>
+  <tbody>
+    <tr><td><code>K1101</code></td><td>Mã số của học viên Nguyễn Văn A, lớp K11</td></tr>
+    <tr><td><code>10</code></td><td>Điểm thi môn CSDL lần 1 của K1101</td></tr>
+    <tr><td><code>3500</code></td><td>Giá bán (VNĐ) của một cây bút chì sản xuất tại Việt Nam</td></tr>
+  </tbody>
+</table>
+
+<div class="quick-check">
+  <h4>✓ Quick Check</h4>
+  <ol>
+    <li>Con số "9.5" một mình có phải thông tin không? Tại sao?</li>
+    <li>Cho ví dụ một dữ liệu trở thành thông tin khi đặt vào ngữ cảnh.</li>
+  </ol>
+</div>
+
+<!-- ===== 1.2 FILE SYSTEM ===== -->
+<h2>1.2 Hệ thống File truyền thống</h2>
+
+<h3>① Trực giác</h3>
+<p>Trước khi có CSDL, người ta lưu dữ liệu bằng <strong>tập tin riêng lẻ</strong> cho từng ứng dụng. Phòng Kế toán có file riêng, Phòng Nhân sự có file riêng — mặc dù cả hai đều lưu thông tin nhân viên.</p>
+
+<h3>② Vấn đề</h3>
+<table>
+  <thead><tr><th>Vấn đề</th><th>Giải thích</th><th>Ví dụ</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Dư thừa dữ liệu</strong><br>(Data Redundancy)</td>
+      <td>Cùng một dữ liệu được lưu ở nhiều nơi</td>
+      <td>Họ tên nhân viên lưu cả ở file Kế toán lẫn file Nhân sự</td>
+    </tr>
+    <tr>
+      <td><strong>Không nhất quán</strong><br>(Data Inconsistency)</td>
+      <td>Sửa ở một nơi, quên sửa ở nơi khác</td>
+      <td>Nhân viên đổi địa chỉ: Kế toán cập nhật, Nhân sự chưa</td>
+    </tr>
+    <tr>
+      <td><strong>Khó chia sẻ</strong><br>(Data Sharing)</td>
+      <td>Mỗi ứng dụng có format riêng, khó truy cập chéo</td>
+      <td>Phần mềm A dùng .dat, phần mềm B dùng .csv</td>
+    </tr>
+    <tr>
+      <td><strong>Phụ thuộc chương trình–dữ liệu</strong><br>(Program-Data Dependence)</td>
+      <td>Thay đổi cấu trúc file → phải sửa chương trình</td>
+      <td>Thêm cột "email" → tất cả chương trình đọc file phải sửa</td>
+    </tr>
+    <tr>
+      <td><strong>Khó kiểm soát toàn vẹn</strong></td>
+      <td>Không có cơ chế chung để đảm bảo dữ liệu hợp lệ</td>
+      <td>Điểm thi = -5 vẫn lưu được</td>
+    </tr>
+    <tr>
+      <td><strong>Khó bảo mật</strong></td>
+      <td>Không phân quyền truy cập theo cấp</td>
+      <td>Ai mở được file thì đọc hết</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-mental">
+  <div class="callout-title">🧠 Mental Model — File System = Phòng trọ riêng lẻ</div>
+  <div class="callout-body">
+    <p>Mỗi ứng dụng giống một phòng trọ riêng — có tủ sách riêng, bản sao tài liệu riêng. Khi cần cập nhật, phải đi từng phòng sửa. CSDL giống <strong>thư viện chung</strong>: một bản chính, ai cũng truy cập được (đúng quyền).</p>
+  </div>
+</div>
+
+<!-- ===== 1.3 DATABASE & DBMS ===== -->
+<h2>1.3 Cơ sở dữ liệu và Hệ quản trị CSDL</h2>
+
+<h3>② Định nghĩa</h3>
+<ul>
+  <li><strong>Cơ sở dữ liệu (Database – DB):</strong> Tập hợp dữ liệu có cấu trúc, được tổ chức và lưu trữ để phục vụ nhiều ứng dụng và người dùng.</li>
+  <li><strong>Hệ quản trị CSDL (Database Management System – DBMS):</strong> Phần mềm cho phép tạo, quản lý, truy vấn và bảo vệ cơ sở dữ liệu. Ví dụ: Microsoft SQL Server, Oracle, MySQL, PostgreSQL.</li>
+  <li><strong>Hệ cơ sở dữ liệu (Database System – DBS):</strong> DB + DBMS + Ứng dụng + Người dùng.</li>
+</ul>
+
+<h3>③ DBMS giải quyết vấn đề gì?</h3>
+<table>
+  <thead><tr><th>Vấn đề File System</th><th>DBMS giải quyết bằng</th></tr></thead>
+  <tbody>
+    <tr><td>Dư thừa</td><td>Lưu một lần, truy cập nhiều nơi</td></tr>
+    <tr><td>Không nhất quán</td><td>Một nguồn chân lý duy nhất</td></tr>
+    <tr><td>Khó chia sẻ</td><td>Truy cập đồng thời qua giao diện chuẩn</td></tr>
+    <tr><td>Phụ thuộc CT–DL</td><td>Data independence (xem mục 1.5)</td></tr>
+    <tr><td>Khó kiểm soát toàn vẹn</td><td>Ràng buộc toàn vẹn (Chương 5)</td></tr>
+    <tr><td>Khó bảo mật</td><td>Phân quyền (GRANT/REVOKE)</td></tr>
+  </tbody>
+</table>
+
+<div class="callout callout-trap">
+  <div class="callout-title">⚠ BẪY — DBMS ≠ Database</div>
+  <div class="callout-body">
+    <p>SQL Server là <strong>DBMS</strong> (phần mềm quản lý). Database QLGV hay QLBH mà bạn tạo bên trong SQL Server mới là <strong>DB</strong> (cơ sở dữ liệu). Đừng nhầm lẫn hai khái niệm này khi thi.</p>
+  </div>
+</div>
+
+<!-- ===== 1.4 ABSTRACTION & 3-LEVEL ARCHITECTURE ===== -->
+<h2>1.4 Trừu tượng hóa dữ liệu và Kiến trúc 3 mức</h2>
+
+<h3>① Trực giác</h3>
+<p>Khi bạn dùng ứng dụng đăng ký học phần: bạn thấy "danh sách môn học" (giao diện). Bên trong, DBMS tổ chức dữ liệu thành bảng có quan hệ (logic). Trên đĩa cứng, dữ liệu được lưu thành các file nhị phân (vật lý). Ba mức nhìn khác nhau của cùng một dữ liệu.</p>
+
+<h3>② Kiến trúc ANSI/SPARC 3 mức</h3>
+
+<div style="background: var(--c-bg-alt); border: 2px solid var(--c-primary); border-radius: 8px; padding: 20px; margin: 1em 0; text-align: center; page-break-inside: avoid;">
+  <div style="margin-bottom: 12px;">
+    <div style="background: #dbeafe; border: 2px solid #2563eb; padding: 10px; border-radius: 6px; display: inline-block; min-width: 250px;">
+      <strong style="color: #1e40af;">Mức ngoài (External Level)</strong><br>
+      <span style="font-size: 9pt;">View của từng nhóm user</span><br>
+      <span style="font-size: 8.5pt; color: #475569;">External Schema 1, 2, 3...</span>
+    </div>
+  </div>
+  <div style="font-size: 11pt; color: var(--c-primary);">↕ Ánh xạ Ngoài/Quan niệm</div>
+  <div style="margin: 12px 0;">
+    <div style="background: #dcfce7; border: 2px solid #059669; padding: 10px; border-radius: 6px; display: inline-block; min-width: 250px;">
+      <strong style="color: #166534;">Mức quan niệm (Conceptual Level)</strong><br>
+      <span style="font-size: 9pt;">Cấu trúc logic toàn bộ DB</span><br>
+      <span style="font-size: 8.5pt; color: #475569;">Conceptual Schema</span>
+    </div>
+  </div>
+  <div style="font-size: 11pt; color: var(--c-primary);">↕ Ánh xạ Quan niệm/Trong</div>
+  <div style="margin-top: 12px;">
+    <div style="background: #fef9c3; border: 2px solid #d97706; padding: 10px; border-radius: 6px; display: inline-block; min-width: 250px;">
+      <strong style="color: #854d0e;">Mức trong (Internal Level)</strong><br>
+      <span style="font-size: 9pt;">Cách lưu trữ vật lý trên đĩa</span><br>
+      <span style="font-size: 8.5pt; color: #475569;">Internal Schema</span>
+    </div>
+  </div>
+</div>
+
+<table>
+  <thead><tr><th>Mức</th><th>Mô tả</th><th>Quan tâm bởi</th><th>Ví dụ</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Mức ngoài</strong><br>(External)</td>
+      <td>Phần dữ liệu mà <em>một nhóm người dùng</em> quan tâm</td>
+      <td>End users, Developers</td>
+      <td>View "Danh sách sinh viên" chỉ hiện Mã SV, Tên, Lớp</td>
+    </tr>
+    <tr>
+      <td><strong>Mức quan niệm</strong><br>(Conceptual)</td>
+      <td>Cấu trúc logic <em>toàn bộ</em> database</td>
+      <td>DBA, DB Designer</td>
+      <td>Tất cả bảng: HOCVIEN, MONHOC, KETQUATHI... với PK/FK</td>
+    </tr>
+    <tr>
+      <td><strong>Mức trong</strong><br>(Internal)</td>
+      <td>Cách dữ liệu <em>được lưu vật lý</em></td>
+      <td>DBMS, System Admin</td>
+      <td>File .mdf, .ldf, index B-tree, page size 8KB</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== 1.5 SCHEMA VS INSTANCE ===== -->
+<h2>1.5 Schema và Instance</h2>
+
+<h3>② Định nghĩa</h3>
+<ul>
+  <li><strong>Schema (Lược đồ):</strong> Cấu trúc / thiết kế của database. Thay đổi rất ít. Giống <em>bản vẽ nhà</em>.</li>
+  <li><strong>Instance (Thể hiện):</strong> Dữ liệu thực tế tại một thời điểm. Thay đổi liên tục. Giống <em>đồ đạc trong nhà</em>.</li>
+</ul>
+
+<h3>③ Ví dụ</h3>
+<div class="before-after">
+  <div class="before">
+    <div class="label">Schema (cấu trúc)</div>
+    <div style="padding: 12px; font-family: var(--f-mono); font-size: 9pt;">
+      HOCVIEN(MAHV, HO, TEN, NGSINH, GIOITINH, NOISINH, MALOP)
+    </div>
+  </div>
+  <div class="after">
+    <div class="label">Instance (dữ liệu)</div>
+    <div style="padding: 12px; font-family: var(--f-mono); font-size: 8.5pt;">
+      K1101 | Nguyen Van | A | 27/1/1986 | Nam | TpHCM | K11<br>
+      K1102 | Tran Ngoc | Han | 14/3/1986 | Nu | Kien Giang | K11
+    </div>
+  </div>
+</div>
+
+<div class="callout callout-trap">
+  <div class="callout-title">⚠ BẪY — Schema ≠ Instance</div>
+  <div class="callout-body">
+    <p>Khi đề hỏi "cho lược đồ quan hệ R(A, B, C)" — họ hỏi về <strong>cấu trúc</strong>, không phải dữ liệu cụ thể. Khi đề cho bảng có dòng dữ liệu — đó là <strong>instance</strong>.</p>
+  </div>
+</div>
+
+<!-- ===== 1.6 DATA INDEPENDENCE ===== -->
+<h2>1.6 Tính độc lập dữ liệu</h2>
+
+<h3>① Trực giác</h3>
+<p>Khi bạn đổi ổ cứng (mức vật lý), ứng dụng vẫn chạy bình thường (mức ngoài). Khi thêm cột mới vào bảng (mức quan niệm), các ứng dụng cũ vẫn hoạt động nếu không cần cột đó.</p>
+
+<h3>② Hai loại</h3>
+<table>
+  <thead><tr><th>Loại</th><th>Nghĩa là</th><th>Ví dụ</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Logical Data Independence</strong><br>(Độc lập logic)</td>
+      <td>Thay đổi conceptual schema không ảnh hưởng external schema</td>
+      <td>Thêm cột EMAIL vào HOCVIEN → View cũ vẫn chạy</td>
+    </tr>
+    <tr>
+      <td><strong>Physical Data Independence</strong><br>(Độc lập vật lý)</td>
+      <td>Thay đổi internal schema không ảnh hưởng conceptual schema</td>
+      <td>Đổi từ HDD sang SSD, thêm index → Query không đổi</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-exam">
+  <div class="callout-title">🎯 Exam Signal</div>
+  <div class="callout-body">
+    <p>Đề có thể hỏi: "Giải thích tính độc lập dữ liệu logic và vật lý. Cho ví dụ." Hãy đảm bảo bạn phân biệt được hai loại và cho ví dụ cụ thể.</p>
+  </div>
+</div>
+
+<!-- ===== 1.7 USER ROLES ===== -->
+<h2>1.7 Các vai trò trong hệ CSDL</h2>
+
+<table>
+  <thead><tr><th>Vai trò</th><th>Nhiệm vụ</th></tr></thead>
+  <tbody>
+    <tr><td><strong>DBA</strong> (Database Administrator)</td><td>Quản trị, bảo trì, phân quyền, backup/restore</td></tr>
+    <tr><td><strong>DB Designer</strong></td><td>Thiết kế schema, ER, chuẩn hóa</td></tr>
+    <tr><td><strong>Application Developer</strong></td><td>Viết ứng dụng sử dụng DB</td></tr>
+    <tr><td><strong>End User</strong></td><td>Sử dụng ứng dụng, truy vấn dữ liệu</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== 1.8 DATA MODELS ===== -->
+<h2>1.8 Mô hình dữ liệu</h2>
+
+<h3>② Định nghĩa</h3>
+<p><strong>Mô hình dữ liệu (Data Model)</strong> là tập hợp các khái niệm dùng để mô tả cấu trúc, thao tác và ràng buộc của dữ liệu.</p>
+
+<h3>③ Các mô hình phổ biến</h3>
+<table>
+  <thead><tr><th>Mô hình</th><th>Mức</th><th>Đặc điểm</th><th>Trong IT004</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>ER Model</strong><br>(Thực thể–Kết hợp)</td>
+      <td>Conceptual</td>
+      <td>Entity, Relationship, Attribute</td>
+      <td>✅ Chương 2</td>
+    </tr>
+    <tr>
+      <td><strong>Relational Model</strong><br>(Mô hình quan hệ)</td>
+      <td>Logical</td>
+      <td>Bảng (relation), hàng (tuple), cột (attribute)</td>
+      <td>✅ Chương 2–6</td>
+    </tr>
+    <tr>
+      <td>Hierarchical</td>
+      <td>Logical</td>
+      <td>Cấu trúc cây (cũ)</td>
+      <td>Biết tên</td>
+    </tr>
+    <tr>
+      <td>Network</td>
+      <td>Logical</td>
+      <td>Cấu trúc đồ thị (cũ)</td>
+      <td>Biết tên</td>
+    </tr>
+    <tr>
+      <td>Object-Oriented</td>
+      <td>Logical</td>
+      <td>Kết hợp OOP với DB</td>
+      <td>Biết tên</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-mental">
+  <div class="callout-title">🧠 Mental Model — Tại sao Relational Model thắng?</div>
+  <div class="callout-body">
+    <p>Relational Model (E.F. Codd, 1970) thắng vì <strong>đơn giản và mạnh mẽ</strong>: dữ liệu biểu diễn bằng bảng 2 chiều — ai cũng hiểu bảng. Thêm vào đó, nền tảng toán học vững chắc (lý thuyết tập hợp, đại số quan hệ) cho phép truy vấn chính xác và tối ưu hóa tự động.</p>
+  </div>
+</div>
+
+<!-- ===== 1.9 RELATIONAL DATABASE ===== -->
+<h2>1.9 Cơ sở dữ liệu quan hệ</h2>
+
+<p>Đây là loại CSDL mà bạn sẽ học suốt IT004. Đặc điểm:</p>
+<ul>
+  <li>Dữ liệu tổ chức thành <strong>bảng</strong> (relation/table)</li>
+  <li>Mỗi bảng có <strong>cột</strong> (attribute) và <strong>dòng</strong> (tuple/record)</li>
+  <li>Các bảng liên kết qua <strong>khóa chính</strong> (Primary Key) và <strong>khóa ngoại</strong> (Foreign Key)</li>
+  <li>Truy vấn bằng <strong>SQL</strong> (Structured Query Language)</li>
+</ul>
+
+<h3>Ví dụ minh họa</h3>
+
+<p>Hai bảng từ database QLBH:</p>
+
+<table class="data-table">
+  <thead><tr><th>MAKH</th><th>HOTEN</th><th>DCHI</th><th>SODT</th></tr></thead>
+  <tbody>
+    <tr><td>KH01</td><td>Nguyen Van A</td><td>731 Tran Hung Dao, Q5</td><td>8823451</td></tr>
+    <tr><td>KH02</td><td>Tran Ngoc Han</td><td>23/5 Nguyen Trai, Q5</td><td>908256478</td></tr>
+    <tr><td>KH03</td><td>Tran Ngoc Linh</td><td>45 Nguyen Canh Chan, Q1</td><td>938776266</td></tr>
+  </tbody>
+</table>
+<p class="text-small text-muted text-center" style="margin-top: -0.5em;">Bảng KHACHHANG (trích)</p>
+
+<table class="data-table">
+  <thead><tr><th>SOHD</th><th>NGHD</th><th>MAKH</th><th>MANV</th><th>TRIGIA</th></tr></thead>
+  <tbody>
+    <tr><td>1001</td><td>23/07/2006</td><td>KH01</td><td>NV01</td><td>320000</td></tr>
+    <tr><td>1002</td><td>12/08/2006</td><td>KH01</td><td>NV02</td><td>840000</td></tr>
+    <tr><td>1003</td><td>23/08/2006</td><td>KH02</td><td>NV01</td><td>100000</td></tr>
+  </tbody>
+</table>
+<p class="text-small text-muted text-center" style="margin-top: -0.5em;">Bảng HOADON (trích) — MAKH là khóa ngoại tham chiếu KHACHHANG</p>
+
+<div class="callout callout-connection">
+  <div class="callout-title">🔗 Connection</div>
+  <div class="callout-body">
+    <p>Khái niệm "relation" ở Chương 1 sẽ được phát triển đầy đủ ở <strong>Chương 2</strong> (relation schema, degree, cardinality, key). Khả năng truy vấn dữ liệu từ nhiều bảng sẽ được dạy ở <strong>Chương 3</strong> (ĐSQH) và <strong>Chương 4</strong> (SQL JOIN).</p>
+  </div>
+</div>
+
+<!-- ===== ONE-PAGE RECALL ===== -->
+<div class="recall-sheet">
+  <h2>ONE-PAGE RECALL — Chương 1</h2>
+
+  <h4>Công thức & Khái niệm cốt lõi</h4>
+  <table>
+    <thead><tr><th>Khái niệm</th><th>Ghi nhớ</th></tr></thead>
+    <tbody>
+      <tr><td>Data vs Information</td><td>Data + Ngữ cảnh = Information</td></tr>
+      <tr><td>DB vs DBMS vs DBS</td><td>DB = dữ liệu; DBMS = phần mềm quản lý; DBS = cả hệ thống</td></tr>
+      <tr><td>File System problems</td><td>Redundancy, Inconsistency, No sharing, Program-data dependence</td></tr>
+      <tr><td>3 mức kiến trúc</td><td>External (views) → Conceptual (toàn bộ logic) → Internal (vật lý)</td></tr>
+      <tr><td>Schema vs Instance</td><td>Schema = cấu trúc (ít đổi); Instance = dữ liệu (đổi liên tục)</td></tr>
+      <tr><td>Data Independence</td><td>Logical: sửa conceptual ≠ hỏng external. Physical: sửa internal ≠ hỏng conceptual</td></tr>
+      <tr><td>Relational Model</td><td>Dữ liệu = bảng. Liên kết qua PK/FK. Truy vấn bằng SQL</td></tr>
+    </tbody>
+  </table>
+
+  <h4>⚠ Common Traps</h4>
+  <ul>
+    <li><strong>DBMS ≠ DB:</strong> SQL Server là DBMS, QLGV là DB</li>
+    <li><strong>Schema ≠ Instance:</strong> Đừng nhầm cấu trúc với dữ liệu</li>
+    <li><strong>Logical ≠ Physical independence:</strong> Nắm rõ 2 loại</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- === ch02_er_relational.html === -->
+<div id="ch02" class="chapter-content">
+  <h1 class="chapter-title">Chương 2: Mô Hình Thực Thể - Kết Hợp (ER) & Mô Hình Dữ Liệu Quan Hệ</h1>
+  <p class="author-attribution" style="font-style: italic; text-align: right;">Biên soạn bởi Võ Trọng Phúc</p>
+
+  <div class="callout-mental">
+    <strong>🧠 Mental Model: Hành trình từ Hiện thực đến Máy tính</strong><br/>
+    Để máy tính quản lý được dữ liệu của một trường đại học hay công ty, ta không thể "nhét" nguyên xi ngoài đời thật vào máy. Ta cần qua 2 bước chuyển đổi:
+    <br/>1. <strong>Thế giới thực</strong> → <strong>Mô hình ER</strong> (Bản vẽ phác thảo khái niệm để con người hiểu).
+    <br/>2. <strong>Mô hình ER</strong> → <strong>Mô hình Quan hệ (Relational Model)</strong> (Bản vẽ kỹ thuật dưới dạng các bảng để cài đặt vào máy tính - RDBMS).
+  </div>
+
+  <hr>
+
+  <h2>A. Mô Hình Dữ Liệu Quan Hệ (Relational Model)</h2>
+  
+  <p>Được đề xuất bởi Edgar F. Codd (1970), đây là nền tảng của mọi hệ quản trị CSDL quan hệ như SQL Server, MySQL, Oracle.</p>
+
+  <h3>1. Các khái niệm nền tảng</h3>
+  <div class="steps">
+    <div class="step">
+      <h4>① Trực giác</h4>
+      <p>Hãy nghĩ về một tờ bảng tính Excel (Spreadsheet). Một bảng là một danh sách, mỗi cột lưu một loại thông tin, mỗi dòng là một đối tượng cụ thể.</p>
+    </div>
+    <div class="step">
+      <h4>② Định nghĩa</h4>
+      <ul>
+        <li><strong>Thuộc tính (Attribute)</strong>: Tên của cột (vd: MASP, TENSP).</li>
+        <li><strong>Miền giá trị (Domain)</strong>: Tập hợp các giá trị hợp lệ của một thuộc tính (vd: Tuổi phải là số nguyên > 0).</li>
+        <li><strong>Bộ (Tuple)</strong>: Một dòng dữ liệu (record/row) trong bảng.</li>
+        <li><strong>Quan hệ (Relation)</strong>: Một tập các bộ trên cùng lược đồ, thường được trình bày dưới dạng bảng. Lưu ý: "Relation" ở đây khác với "Relationship" (mối kết hợp) trong ER.</li>
+        <li><strong>Lược đồ quan hệ (Relation Schema)</strong>: Cấu trúc của bảng (Tên bảng + Các thuộc tính). Ký hiệu: <code>R(A1, A2, ..., An)</code>.</li>
+        <li><strong>Lược đồ cơ sở dữ liệu (Database Schema)</strong>: Tập hợp các lược đồ quan hệ trong hệ thống.</li>
+        <li><strong>Thể hiện (Instance)</strong>: Dữ liệu thực tế đang có trong bảng tại một thời điểm cụ thể.</li>
+      </ul>
+    </div>
+    <div class="step">
+      <h4>③ Visual</h4>
+      <pre class="data-table">
+Relation: KHACHHANG
++-------+----------------+-------------+ (Lược đồ - Schema)
+| MAKH  | TENKH          | DTHOAI      | <- Attributes
++-------+----------------+-------------+
+| KH01  | Nguyễn Văn A   | 0901234567  | <- Tuple 1 \
+| KH02  | Trần Thị B     | 0987654321  | <- Tuple 2  } Instance
++-------+----------------+-------------+
+      </pre>
+    </div>
+  </div>
+
+  <div class="callout-trap">
+    <strong>⚠ BẪY: Relation vs Relationship</strong><br/>
+    Rất nhiều sinh viên dịch "Relation" là "mối quan hệ". Trong môn này:
+    - <strong>Relation</strong>: BẢNG (Table) - Mô hình quan hệ.
+    - <strong>Relationship</strong>: MỐI KẾT HỢP - Mô hình ER.
+  </div>
+
+  <h3>2. Bậc (Degree) và Lực lượng (Cardinality)</h3>
+  <ul>
+    <li><strong>Bậc (Degree)</strong>: Số lượng thuộc tính (cột) của một quan hệ.</li>
+    <li><strong>Lực lượng (Cardinality)</strong>: Số lượng bộ (dòng) hiện có trong quan hệ.</li>
+  </ul>
+  <div class="callout-exam">
+    <strong>🎯 Exam Pattern:</strong> Đề thi trắc nghiệm hay hỏi: "Thêm 1 dòng vào bảng thì Bậc hay Lực lượng thay đổi?" → Lực lượng (Cardinality) tăng 1, Bậc (Degree) không đổi (trừ khi alter table thêm cột).
+  </div>
+
+  <h3>3. NULL và Tân từ (Predicate)</h3>
+  <ul>
+    <li><strong>NULL</strong>: Đại diện cho giá trị chưa biết (unknown) hoặc không áp dụng được (inapplicable). <strong>NULL không phải là 0, cũng không phải chuỗi rỗng.</strong></li>
+    <li><strong>Tân từ (Predicate)</strong>: Mô tả ý nghĩa/ngữ nghĩa mà quan hệ biểu diễn; với các giá trị cụ thể của một bộ, predicate trở thành phát biểu về bộ đó. Điều kiện logic trong <code>WHERE</code> là một ứng dụng của predicate, không phải toàn bộ khái niệm.</li>
+  </ul>
+
+  <h3>4. Các loại khóa (Keys)</h3>
+  <div class="steps">
+    <div class="step">
+      <h4>① Trực giác</h4>
+      <p>Làm sao để phân biệt 2 sinh viên trùng tên? Cần mã số sinh viên. "Khóa" chính là công cụ để định danh duy nhất mỗi dòng.</p>
+    </div>
+    <div class="step">
+      <h4>② Định nghĩa</h4>
+      <ul>
+        <li><strong>Siêu khóa (Superkey)</strong>: Một tập thuộc tính giúp xác định duy nhất một dòng. (Có thể chứa các thuộc tính dư thừa).</li>
+        <li><strong>Khóa ứng viên (Candidate Key)</strong>: Siêu khóa nhỏ nhất (không chứa thuộc tính dư thừa). Một bảng có thể có nhiều khóa ứng viên.</li>
+        <li><strong>Khóa chính (Primary Key - PK)</strong>: Khóa ứng viên được người thiết kế chọn làm khóa chính thức cho bảng. Gạch chân thuộc tính này: <u>MASP</u>.</li>
+        <li><strong>Khóa ngoại (Foreign Key - FK)</strong>: Một tập thuộc tính ở quan hệ này tham chiếu đến khóa chính hoặc một khóa ứng viên/khóa duy nhất phù hợp của quan hệ được tham chiếu.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout-dryrun">
+    <strong>⑤ Dry run: Khóa trên bảng NHANVIEN(MANV, CCCD, HOTEN, DIACHI)</strong><br/>
+    - Superkey: {MANV}, {CCCD}, {MANV, HOTEN}, {CCCD, DIACHI}...<br/>
+    - Candidate Key: {MANV}, {CCCD}. (Lưu ý: {MANV, HOTEN} bị loại vì dư HOTEN).<br/>
+    - Primary Key: Chức năng chọn một, giả sử là <u>MANV</u>.
+  </div>
+
+  <hr>
+
+  <h2>B. Mô Hình Thực Thể - Kết Hợp (ER Model)</h2>
+  
+  <p>Mô hình ER (Peter Chen, 1976) dùng để biểu diễn cấu trúc dữ liệu tổng thể trước khi cài đặt.</p>
+
+  <h3>1. Thực thể và Thuộc tính (Entity & Attribute)</h3>
+  <ul>
+    <li><strong>Thực thể (Entity)</strong>: Một đối tượng trong thế giới thực (Sinh viên Nguyễn Văn A).</li>
+    <li><strong>Tập thực thể (Entity Set)</strong>: Tập các thực thể cùng loại (Tập SINH VIÊN). Ký hiệu: Hình chữ nhật.</li>
+    <li><strong>Thuộc tính (Attribute)</strong>: Ký hiệu hình oval.
+      <ul>
+        <li><strong>Thuộc tính khóa (Key)</strong>: Gạch chân.</li>
+        <li><strong>Thuộc tính đa trị (Multivalued)</strong>: Hình oval nét đôi (ví dụ: Số điện thoại - một người có nhiều số).</li>
+        <li><strong>Thuộc tính kết hợp (Composite)</strong>: Tách ra nhiều oval con (ví dụ: Địa chỉ gồm Số nhà, Đường, Quận).</li>
+        <li><strong>Thuộc tính suy dẫn (Derived)</strong>: Oval nét đứt (ví dụ: Tuổi - suy ra từ ngày sinh).</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>2. Mối kết hợp (Relationship)</h3>
+  <p>Sự liên kết giữa các tập thực thể. Ký hiệu: Hình thoi.</p>
+  <ul>
+    <li><strong>Bậc của relationship (Degree)</strong>: Số tập thực thể tham gia (Nhị phân - Binary là phổ biến nhất).</li>
+    <li><strong>Bản số (Cardinality Ratio)</strong>:
+      <ul>
+        <li><strong>1:1 (One-to-One)</strong>: 1 Trưởng khoa quản lý 1 Khoa.</li>
+        <li><strong>1:N (One-to-Many)</strong>: 1 Khoa có nhiều Sinh viên.</li>
+        <li><strong>M:N (Many-to-Many)</strong>: 1 Sinh viên học nhiều Môn, 1 Môn có nhiều Sinh viên.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>3. Ràng buộc tham gia (Participation Constraint) và Min-max Notation</h3>
+  <div class="callout-fast">
+    <strong>⚡ Fast Pattern: Min-Max Notation (min, max)</strong><br/>
+    Ký hiệu (min, max) đặt trên đường nối giữa Entity và Relationship:<br/>
+    - <strong>min</strong>: Bắt buộc (1) hay Tùy chọn (0)? (Participation: Total/Partial).<br/>
+    - <strong>max</strong>: Tối đa là 1 (1) hay nhiều (n)? (Cardinality).
+  </div>
+  
+  <div class="callout-exam">
+    <strong>🎯 Phân tích kỹ ví dụ tiếng Việt: "Nhân viên thuộc về một Phòng ban"</strong><br/>
+    Hãy xét NHANVIEN - [THUOC_VE] - PHONGBAN:<br/>
+    - Hỏi chiều 1: "1 NHANVIEN thuộc về tối thiểu mấy PHONGBAN? Tối đa mấy?" -> Tối thiểu 1 (bắt buộc phải có phòng), Tối đa 1. Cạnh bên NHANVIEN ghi <strong>(1,1)</strong>.<br/>
+    - Hỏi chiều 2: "1 PHONGBAN có tối thiểu mấy NHANVIEN? Tối đa mấy?" -> Tối thiểu 0 (phòng mới lập chưa có ai), Tối đa n (nhiều người). Cạnh bên PHONGBAN ghi <strong>(0,n)</strong>.<br/>
+    <em>Lưu ý UIT: Quy ước đặt (min,max) ở UIT thường đặt sát bên tập thực thể đang được xét. Hãy tuân thủ hướng dẫn của giảng viên lý thuyết.</em>
+  </div>
+
+  <hr>
+
+  <h2>C. Quy Trình Phân Tích Đề ER (9 Bước)</h2>
+  
+  <div class="decision-tree">
+    <div class="decision-node">Quy Trình Chuẩn UIT</div>
+    <ul>
+      <li>1. Gạch chân danh từ (Tiềm năng là Entity/Attribute)</li>
+      <li>2. Xác định Tập thực thể (Entity)</li>
+      <li>3. Xác định Thuộc tính (Attribute) cho từng Entity</li>
+      <li>4. Chỉ định Thuộc tính Khóa (Key)</li>
+      <li>5. Gạch chân động từ -> Nhận diện Mối kết hợp (Relationship)</li>
+      <li>6. Đặt câu hỏi 2 chiều tìm Cardinality / (Min-Max)</li>
+      <li>7. Tìm thuộc tính cho Mối kết hợp (nếu có, thường ở M:N)</li>
+      <li>8. Kiểm tra lại sự tham gia (Total/Partial)</li>
+      <li>9. Audit (Đọc lại đề bằng tân từ xem biểu đồ có đúng không)</li>
+    </ul>
+  </div>
+
+  <div class="callout-mental">
+    <strong>Ví dụ Trung bình: HỆ THỐNG ĐĂNG KÝ MÔN HỌC</strong><br/>
+    Đề: "Trường lưu trữ thông tin sinh viên (MSSV, tên, ngày sinh). Có các môn học (Mã MH, tên môn, số tín chỉ). Sinh viên đăng ký môn học và nhận điểm số."<br/>
+    <strong>B1-4:</strong> <br/>
+    - SINHVIEN(<u>MSSV</u>, Tên, NgàySinh). <br/>
+    - MONHOC(<u>MaMH</u>, TênMôn, SốTC).<br/>
+    <strong>B5:</strong> Động từ "đăng ký" -> Relationship [DANG_KY] nối SINHVIEN và MONHOC.<br/>
+    <strong>B6:</strong> 1 SV đăng ký mấy MH? (0,n). 1 MH có mấy SV đăng ký? (0,n). -> Đây là M:N.<br/>
+    <strong>B7:</strong> "nhận điểm số" -> Điểm số không thuộc về riêng SV (vì SV có nhiều điểm cho nhiều môn), không thuộc về riêng MH. Điểm số là của sự kiện đăng ký -> <strong>Thuộc tính của Relationship [DANG_KY]</strong>.<br/>
+    <strong>B9:</strong> Audit OK.
+  </div>
+
+  <hr>
+
+  <h2>D. Ánh Xạ ER Sang Lược Đồ Quan Hệ (Mapping Rules)</h2>
+  
+  <p>Làm sao biến hình vẽ ER thành các bảng (Relation) để viết SQL?</p>
+
+  <h3>1. Nguyên tắc cốt lõi</h3>
+  <div class="schema">
+    <strong>Thực thể mạnh (Regular Entity) -> Tạo 1 bảng mới.</strong><br/>
+    Các thuộc tính đơn -> Cột trong bảng.<br/>
+    Khóa của entity -> Khóa chính (PK) của bảng.
+  </div>
+
+  <h3>2. Ánh xạ Mối kết hợp (Relationship Mapping)</h3>
+  
+  <h4>a) Mối kết hợp 1:N (One-to-Many)</h4>
+  <p><strong>Quy tắc:</strong> Khóa chính của bảng bên 1 chạy sang làm <strong>Khóa ngoại (FK)</strong> ở bảng bên N.</p>
+  <div class="before-after">
+    <strong>ER:</strong> KHOA(1) ---- [CÓ] ---- (N)SINHVIEN<br/>
+    <strong>Schema:</strong> <br/>
+    KHOA(<u>MAKHOA</u>, TENKHOA)<br/>
+    SINHVIEN(<u>MASV</u>, TENSV, <em>MAKHOA</em>) -- MAKHOA là FK tham chiếu KHOA.
+  </div>
+
+  <h4>b) Mối kết hợp M:N (Many-to-Many)</h4>
+  <div class="callout-trap">
+    <strong>⚠ BẪY CHẾT NGƯỜI:</strong> Không bao giờ được đem PK của bảng này bỏ vào bảng kia làm FK đối với quan hệ M:N! Phải tạo bảng thứ 3.
+  </div>
+  <p><strong>Quy tắc:</strong> Tạo một <strong>Bảng trung gian</strong> (Junction Table). Khóa chính của 2 bảng ban đầu bay vào bảng trung gian, cùng nhau tạo thành <strong>Composite PK</strong> (Khóa chính kết hợp), đồng thời là 2 Khóa ngoại (FK).</p>
+  <div class="before-after">
+    <strong>ER:</strong> SINHVIEN(M) ---- [DANG_KY] (có thuộc tính DIEM) ---- (N)MONHOC<br/>
+    <strong>Schema:</strong><br/>
+    SINHVIEN(<u>MASV</u>, HOTEN)<br/>
+    MONHOC(<u>MAMH</u>, TENMH)<br/>
+    DANG_KY(<u><em>MASV</em></u>, <u><em>MAMH</em></u>, DIEM) -- Khóa chính là (MASV, MAMH). Cả 2 đều là FK.
+  </div>
+
+  <h4>c) Mối kết hợp 1:1 (One-to-One)</h4>
+  <p><strong>Quy tắc:</strong> Xem xét Participation. Bảng nào có Total Participation (min=1) thì nhận khóa của bảng kia làm FK. Nếu cả 2 đều là Total Participation, về mặt lý thuyết <em>có thể</em> gộp chung thành 1 bảng, nhưng thực tế nên giữ 2 bảng riêng nếu chúng đại diện cho 2 thực thể độc lập rõ ràng (ví dụ: Sinh viên và Học bạ).</p>
+
+  <h4>d) Thuộc tính đa trị (Multivalued Attribute)</h4>
+  <p><strong>Quy tắc:</strong> Tạo 1 bảng mới. Khóa chính = (Khóa của thực thể chứa nó + Thuộc tính đó).</p>
+  <div class="before-after">
+    <strong>ER:</strong> NHANVIEN(<u>MANV</u>, HOTEN, {SDT}) -- SDT là đa trị<br/>
+    <strong>Schema:</strong><br/>
+    NHANVIEN(<u>MANV</u>, HOTEN)<br/>
+    SDT_NHANVIEN(<u><em>MANV</em></u>, <u>SDT</u>) -- (MANV, SDT) là PK. MANV là FK.
+  </div>
+
+  <hr>
+
+  <h2>E. Bài Tập Thực Hành (Phong cách thi UIT)</h2>
+
+  <div class="exercise-block level-1">
+    <h3>Bài 1: Hệ thống Quản Lý Giáo Viên (QLGV) - Dễ</h3>
+    <p><strong>Đề bài:</strong> Một trường học cần quản lý KHOA (Mã Khoa, Tên Khoa, Năm Thành Lập), GIAOVIEN (Mã GV, Họ Tên, Mức Lương). Mỗi giáo viên chỉ thuộc một khoa, một khoa có nhiều giáo viên. Một giáo viên làm trưởng khoa cho tối đa 1 khoa.</p>
+    <p><strong>Yêu cầu:</strong> Vẽ ERD và chuyển sang Lược đồ quan hệ.</p>
+    <div class="solution">
+      <strong>Ánh xạ Schema:</strong><br/>
+      KHOA(<u>MAKHOA</u>, TENKHOA, NAMTL, <em>TRUONGKHOA_MAGV</em>)<br/>
+      GIAOVIEN(<u>MAGV</u>, HOTEN, LUONG, <em>MAKHOA</em>)<br/>
+      <em>Lưu ý: Mối kết hợp "thuộc về" (1:N) -> MAKHOA là FK trong GIAOVIEN. Mối kết hợp "làm trưởng" (1:1) -> Đem MAGV sang KHOA làm FK.</em>
+    </div>
+  </div>
+
+  <div class="exercise-block level-3">
+    <h3>Bài 2: Hệ thống Quản Lý Bán Hàng (QLBH) - Trung bình</h3>
+    <p><strong>Đề bài:</strong> Quản lý KHACHHANG (MaKH, TenKH, DiaChi, DienThoai), SANPHAM (MaSP, TenSP, DVT, NuocSX, Gia). Khách hàng lập HOADON (SoHD, NgayHD, TriGia). Mỗi hóa đơn do 1 khách hàng lập và có sự phục vụ của 1 NHANVIEN (MaNV, HoTen, NgayVL). Một hóa đơn có thể có nhiều sản phẩm, mỗi sản phẩm có Số Lượng mua.</p>
+    <p><strong>Yêu cầu:</strong> Ánh xạ thành schema.</p>
+    <div class="solution">
+      <strong>Lược đồ quan hệ:</strong><br/>
+      KHACHHANG(<u>MAKH</u>, HOTEN, DCHI, SODT)<br/>
+      NHANVIEN(<u>MANV</u>, HOTEN, NGVL)<br/>
+      SANPHAM(<u>MASP</u>, TENSP, DVT, NUOCSX, GIA)<br/>
+      HOADON(<u>SOHD</u>, NGHD, <em>MAKH</em>, <em>MANV</em>, TRIGIA)<br/>
+      CTHD(<u><em>SOHD</em></u>, <u><em>MASP</em></u>, SL) -- Bảng trung gian chi tiết hóa đơn do quan hệ M:N giữa HOADON và SANPHAM.
+    </div>
+  </div>
+
+  <p><em>(Các bài tập 3-10 bao gồm: CSDL Chung Cư, Phòng Máy, Vận động viên, Đăng ký dịch vụ, Logistics... sinh viên tự rèn luyện theo quy trình 9 bước trên).</em></p>
+
+  <hr>
+
+  <h2>F. One-Page Recall (Bản đồ ôn thi)</h2>
+  
+  <div class="callout-connection">
+    <strong>TỔNG KẾT CHƯƠNG 2:</strong>
+    <ul>
+      <li><strong>Relation Model:</strong> Bảng (Relation), Dòng (Tuple), Cột (Attribute), Khóa (PK/FK/Candidate/Superkey). Bậc = Cột, Lực lượng = Dòng.</li>
+      <li><strong>ER Model:</strong> Thực thể (Chữ nhật), Thuộc tính (Oval), Kết hợp (Thoi). Chú ý thuộc tính đa trị, dẫn xuất.</li>
+      <li><strong>Mapping cốt lõi:</strong>
+        <ul>
+          <li><strong>1:N</strong> => Khóa 1 chạy sang N làm FK.</li>
+          <li><strong>M:N</strong> => Tạo bảng thứ 3, bế 2 PK vào làm Composite PK.</li>
+          <li><strong>Đa trị</strong> => Tách bảng mới, PK = Khóa cha + Giá trị đa trị.</li>
+        </ul>
+      </li>
+    </ul>
+    <em>Sẵn sàng cho Chương 3 (Đại số quan hệ) và Chương 4, 5 (SQL): Các bảng được thiết kế đúng ở Chương 2 này sẽ là đối tượng để chúng ta dùng lệnh SELECT truy vấn ở các chương sau!</em>
+  </div>
+
+</div>
+
+<!-- === ch03_relational_algebra.html === -->
+<section id="ch03">
+<div class="chapter-title">
+  <span class="chapter-number">Chương 3</span>
+  <span class="chapter-name">Đại số quan hệ (Relational Algebra)</span>
+  <span class="chapter-subtitle">Phép chọn • Chiếu • Kết • Tập hợp • Phép chia • Gom nhóm</span>
+</div>
+
+<div class="callout-mental">
+  <strong>🧠 Mental Model: Data Pipeline</strong><br>
+  Đại số quan hệ (ĐSQH) là ngôn ngữ truy vấn có tính thủ tục (procedural). Bạn có thể hình dung mỗi phép toán là một trạm xử lý dữ liệu. Một trạm nhận vào một (hoặc hai) bảng dữ liệu thô (quan hệ), thực hiện biến đổi, và luôn luôn trả ra một bảng dữ liệu mới (quan hệ mới). Kết quả này lại có thể làm đầu vào cho trạm xử lý tiếp theo, tạo thành một <em>pipeline</em> truyền dữ liệu liên tục.
+</div>
+
+<h3>0. Schema tham chiếu (Chương 2)</h3>
+<p>Xuyên suốt chương này, chúng ta sẽ thực hành trên hai lược đồ CSDL quen thuộc:</p>
+
+<h4>CSDL Quản lý Giáo vụ (QLGV)</h4>
+<div class="schema">
+  <div class="schema-table">KHOA(<span class="pk">MAKHOA</span>, TENKHOA, NGANH, TRUONGKHOA)</div>
+  <div class="schema-table">MONHOC(<span class="pk">MAMH</span>, TENMH, TCLT, TCTH, <span class="fk">MAKHOA</span>)</div>
+  <div class="schema-table">DIEUKIEN(<span class="pk fk">MAMH</span>, <span class="pk fk">MAMH_TRUOC</span>)</div>
+  <div class="schema-table">GIAOVIEN(<span class="pk">MAGV</span>, HOTEN, HOCVI, HOCHAM, GIOITINH, NGSINH, NGVL, HESO, MUCLUONG, <span class="fk">MAKHOA</span>)</div>
+  <div class="schema-table">LOP(<span class="pk">MALOP</span>, TENLOP, TRGLOP, SISO, <span class="fk">MAGVCN</span>)</div>
+  <div class="schema-table">HOCVIEN(<span class="pk">MAHV</span>, HO, TEN, NGSINH, GIOITINH, NOISINH, <span class="fk">MALOP</span>)</div>
+  <div class="schema-table">GIANGDAY(<span class="pk fk">MALOP</span>, <span class="pk fk">MAMH</span>, <span class="fk">MAGV</span>, HOCKY, NAM, TUNGAY, DENNGAY)</div>
+  <div class="schema-table">KETQUATHI(<span class="pk fk">MAHV</span>, <span class="pk fk">MAMH</span>, <span class="pk">LANTHI</span>, NGTHI, DIEM, KQUA)</div>
+</div>
+
+<h4>CSDL Quản lý Bán hàng (QLBH)</h4>
+<div class="schema">
+  <div class="schema-table">KHACHHANG(<span class="pk">MAKH</span>, HOTEN, DCHI, SODT, NGSINH, NGDK, DOANHSO)</div>
+  <div class="schema-table">NHANVIEN(<span class="pk">MANV</span>, HOTEN, SODT, NGVL)</div>
+  <div class="schema-table">SANPHAM(<span class="pk">MASP</span>, TENSP, DVT, NUOCSX, GIA)</div>
+  <div class="schema-table">HOADON(<span class="pk">SOHD</span>, NGHD, <span class="fk">MAKH</span>, <span class="fk">MANV</span>, TRIGIA)</div>
+  <div class="schema-table">CTHD(<span class="pk fk">SOHD</span>, <span class="pk fk">MASP</span>, SL)</div>
+</div>
+
+<div class="callout-connection">
+  Xem lại <strong>Chương 2 (Mô hình Dữ liệu Quan hệ)</strong> để nắm rõ ý nghĩa các thuộc tính, khóa chính (gạch dưới nét liền) và khóa ngoại (gạch dưới nét đứt) của hai CSDL này.
+</div>
+
+<h3 id="sec-a">A. Tự điển Từ khóa → Phép toán</h3>
+<p>Khi đọc đề, từ khóa là <strong>tín hiệu gợi ý</strong>, không phải ánh xạ một-một sang phép toán. Phải xét ngữ nghĩa, lược đồ đầu vào và lược đồ kết quả trước khi chọn phép. Bảng sau hỗ trợ <em>Pattern Recognition</em>.</p>
+
+<table class="keyword-dict" style="width: 100%; table-layout: fixed;">
+  <colgroup>
+    <col style="width: 20%;">
+    <col style="width: 25%;">
+    <col style="width: 55%;">
+  </colgroup>
+  <thead>
+    <tr>
+      <th>Từ khóa trong đề</th>
+      <th>Phép toán thường cân nhắc</th>
+      <th>Giải thích & Mental Model</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>"thuộc", "ở", "làm việc", "của"</td>
+      <td>σ (Chọn) hoặc ⋈ (Kết)</td>
+      <td>Nếu điều kiện nằm trên 1 bảng → Chọn. Nối 2 bảng bằng Khóa ngoại → Kết.</td>
+    </tr>
+    <tr>
+      <td>"đã mua", "đã học", "tham gia"</td>
+      <td>⋈ (Phép kết)</td>
+      <td>Liên kết thông tin từ bảng thực thể sang bảng giao dịch (VD: KHACHHANG ⋈ HOADON).</td>
+    </tr>
+    <tr>
+      <td>"cả hai", "vừa...vừa"</td>
+      <td>∩, ⋈ hoặc ∧</td>
+      <td>Giao khi hai tập kết quả khả hợp; kết khi cần ghép quan hệ; ∧ khi hai điều kiện cùng áp dụng trên một bộ.</td>
+    </tr>
+    <tr>
+      <td>"không", "chưa từng", "không có"</td>
+      <td>− hoặc ¬</td>
+      <td>Thường lấy tập ứng viên trừ tập vi phạm; nếu phủ định chỉ nằm trong một điều kiện chọn thì có thể dùng ¬.</td>
+    </tr>
+    <tr>
+      <td>"mỗi", "từng"</td>
+      <td>ℑ (Gom nhóm)</td>
+      <td>Nhóm các bộ dữ liệu theo một/nhiều thuộc tính (GROUP BY).</td>
+    </tr>
+    <tr>
+      <td>"bao nhiêu"</td>
+      <td>COUNT</td>
+      <td>Đếm số dòng thỏa điều kiện (nằm trong hàm kết hợp).</td>
+    </tr>
+    <tr>
+      <td>"tổng"</td>
+      <td>SUM</td>
+      <td>Tính tổng giá trị một cột (nằm trong hàm kết hợp).</td>
+    </tr>
+    <tr>
+      <td>"trung bình"</td>
+      <td>AVG</td>
+      <td>Trung bình cộng.</td>
+    </tr>
+    <tr>
+      <td>"lớn nhất", "cao nhất"</td>
+      <td>− (Phép trừ) / MAX</td>
+      <td>Trong ĐSQH thuần, không dùng MAX trong điều kiện chọn. Phải dùng Phép trừ (Loại những người có người lớn hơn).</td>
+    </tr>
+    <tr>
+      <td>"tất cả", "mọi"</td>
+      <td>÷ hoặc công thức tương đương</td>
+      <td>Gợi ý lượng từ phổ quát. Chỉ dùng phép chia khi xác định được tập bị chia R(X,Y) và tập chia S(Y); SQL thường dùng double <code>NOT EXISTS</code>.</td>
+    </tr>
+    <tr>
+      <td>"có ít nhất"</td>
+      <td>HAVING COUNT >=</td>
+      <td>Gom nhóm xong đếm và lọc kết quả.</td>
+    </tr>
+    <tr>
+      <td>"chỉ", "duy nhất"</td>
+      <td>− (Phép trừ)</td>
+      <td>"Chỉ A" = (Tập người có A) − (Tập người có B/C...).</td>
+    </tr>
+    <tr>
+      <td>"hoặc"</td>
+      <td>∪ hoặc ∨</td>
+      <td>Hợp hai kết quả khả hợp; nếu hai điều kiện áp dụng trên cùng quan hệ thì có thể dùng ∨ trong phép chọn.</td>
+    </tr>
+    <tr>
+      <td>"nếu có"</td>
+      <td>Outer join (ĐSQH mở rộng)</td>
+      <td>Khi đề yêu cầu vẫn giữ bộ ở một phía dù không có bản ghi khớp, dùng ngoại kết thích hợp; phần thiếu được biểu diễn bằng NULL.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="sec-b">B. Các phép toán cơ bản và mở rộng</h3>
+
+<div class="callout-why">
+  <strong>Quy ước ký hiệu của chương:</strong> ĐSQH thuần dùng σ, π, ρ, ×, ∪, − và các phép kết/chia có thể suy dẫn từ chúng. Ngoại kết và gom nhóm/hàm kết hợp được ghi rõ là <strong>ĐSQH mở rộng</strong>. Điều kiện chọn chỉ dùng thuộc tính, hằng và toán tử so sánh/logic; hàm T-SQL như <code>YEAR(...)</code> không được đưa vào biểu thức ĐSQH thuần. Khi cần lọc theo năm, chương dùng khoảng ngày, ví dụ <span class="math">NGHD ≥ '2006-01-01' ∧ NGHD &lt; '2007-01-01'</span>.
+</div>
+
+<h4>B.1 Phép chọn (Selection - σ)</h4>
+<p><strong>1. Trực giác:</strong> Giống như dùng cái rây bột, bạn đổ dữ liệu qua, dòng nào thỏa mãn điều kiện lưới rây thì lọt xuống, dòng nào không thì bị giữ lại và ném đi. Lọc theo <em>chiều ngang</em> (giữ nguyên số cột, giảm số dòng).</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">σ_{&lt;điều kiện&gt;}(R)</span></p>
+<p><strong>3. Input/Output:</strong> Đầu vào: 1 bảng R. Đầu ra: 1 bảng cùng số cột với R, chỉ chứa các dòng thỏa điều kiện.</p>
+<p><strong>4. Điều kiện:</strong> Điều kiện bao gồm các phép so sánh (=, &gt;, &lt;, &gt;=, &lt;=, &lt;&gt;) nối với nhau bởi các phép logic AND (∧), OR (∨), NOT (¬).</p>
+<p><strong>5. Dry Run:</strong></p>
+<div class="before-after">
+  <div class="before">
+    <span class="label">Bảng MONHOC (trước)</span>
+    <table class="data-table">
+      <tr><th>MAMH</th><th>TENMH</th><th>TCLT</th></tr>
+      <tr><td>CSDL</td><td>Cơ sở dữ liệu</td><td>3</td></tr>
+      <tr><td>CTDL</td><td>Cấu trúc DL</td><td>3</td></tr>
+      <tr><td>NMCN</td><td>Nhập môn CN</td><td>2</td></tr>
+    </table>
+  </div>
+  <div class="after">
+    <span class="label">σ_{TCLT > 2}(MONHOC) (sau)</span>
+    <table class="data-table">
+      <tr><th>MAMH</th><th>TENMH</th><th>TCLT</th></tr>
+      <tr><td>CSDL</td><td>Cơ sở dữ liệu</td><td>3</td></tr>
+      <tr><td>CTDL</td><td>Cấu trúc DL</td><td>3</td></tr>
+    </table>
+  </div>
+</div>
+<p><strong>6. Dịch:</strong> "Tìm thông tin môn học có số tín chỉ lý thuyết lớn hơn 2" → σ_{TCLT > 2}(MONHOC)</p>
+<div class="callout-trap">
+  <strong>☢ BẪY:</strong> Không được dùng hàm MAX/MIN bên trong điều kiện của phép chọn σ. VD: σ_{MUCLUONG = MAX(MUCLUONG)}(GIAOVIEN) là SAI về mặt cú pháp học thuật.
+</div>
+
+<h4>B.2 Phép chiếu (Projection - π)</h4>
+<p><strong>1. Trực giác:</strong> Giống như dùng con dao cắt dọc cái bảng. Bạn chỉ giữ lại những cột mình quan tâm và vứt đi các cột còn lại. Quan trọng: Khi cắt cột, nếu có 2 dòng giống hệt nhau (do phần phân biệt bị cắt mất), ĐSQH sẽ <em>tự động xóa dòng trùng lặp</em> (Distinct).</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">π_{A_1, A_2, ..., A_k}(R)</span></p>
+<p><strong>3. Input/Output:</strong> Đầu vào: 1 bảng R. Đầu ra: 1 bảng chỉ chứa các cột A_1, A_2..., số dòng có thể giảm nếu có trùng lặp.</p>
+<p><strong>4. Điều kiện:</strong> Danh sách cột chiếu phải nằm trong schema của bảng R.</p>
+<p><strong>5. Dry Run:</strong></p>
+<div class="before-after">
+  <div class="before">
+    <span class="label">GIAOVIEN</span>
+    <table class="data-table">
+      <tr><th>MAGV</th><th>HOTEN</th><th>MAKHOA</th></tr>
+      <tr><td>GV01</td><td>Vũ Tuyết Trâm</td><td>HTTT</td></tr>
+      <tr><td>GV02</td><td>Nguyễn Nhật Tinh</td><td>HTTT</td></tr>
+      <tr><td>GV03</td><td>Lê Hoài Ân</td><td>KTPM</td></tr>
+    </table>
+  </div>
+  <div class="after">
+    <span class="label">π_{MAKHOA}(GIAOVIEN)</span>
+    <table class="data-table">
+      <tr><th>MAKHOA</th></tr>
+      <tr><td>HTTT</td></tr>
+      <tr><td>KTPM</td></tr>
+    </table>
+  </div>
+</div>
+<p><strong>6. Dịch:</strong> "In ra danh sách mã khoa có giáo viên đang công tác" → π_{MAKHOA}(GIAOVIEN)</p>
+
+<h4>B.3 Phép đổi tên (Rename - ρ)</h4>
+<p><strong>1. Trực giác:</strong> Dán lại nhãn cho bảng hoặc cho cột. Thường dùng nhất khi cần nối một bảng với chính nó (Self-Join) - không đổi tên thì máy không biết cột nào của bảng nào (do trùng tên hoàn toàn).</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">ρ_{S}(R)</span> (Đổi tên bảng R thành S) hoặc <span class="math-block">ρ_{S(A, B, C)}(R)</span> (Đổi tên bảng và tên cột tương ứng).</p>
+<p><strong>3. Input/Output:</strong> Bảng mới y hệt bảng cũ về dữ liệu, chỉ đổi tên ở phần header.</p>
+<div class="callout-fast">
+  <strong>⚡ Fast Pattern:</strong> Dạng câu hỏi "Tìm X <em>có cùng</em> Y với Z" (Tìm nhân viên làm cùng phòng với 'Nguyen Van A') thường cần phép đổi tên và self-join.
+</div>
+
+<h4>B.4 Tích Đề-các (Cartesian Product - ×)</h4>
+<p><strong>1. Trực giác:</strong> Phép lai giống "mọi người với mọi người". Mỗi dòng của bảng A sẽ đi ghép cặp với TẤT CẢ các dòng của bảng B. Gây bùng nổ dữ liệu.</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">R × S</span></p>
+<p><strong>3. Input/Output:</strong> Bảng R (n dòng, a cột) × Bảng S (m dòng, b cột) = Bảng kết quả (n×m dòng, a+b cột).</p>
+<p><strong>4. Điều kiện:</strong> Thường phải đổi tên nếu có cột trùng tên để tránh nhập nhằng.</p>
+<div class="callout-trap">
+  <strong>☢ BẪY:</strong> Thực tế Rất hiếm khi dùng × đứng một mình mà thường dùng kết hợp với phép chọn (σ) để lọc ra dòng có ý nghĩa (bản chất đó là phép Kết Theta).
+</div>
+
+<h4>B.5 Phép kết (Join - ⋈)</h4>
+<p>Đây là nhóm phép toán sống còn nhất trong CSDL quan hệ.</p>
+<ul>
+  <li><strong>Kết Theta (Theta-join):</strong> Nối 2 bảng dựa trên một điều kiện bất kỳ (>, <, =).<br><span class="math-block">R ⋈_{R.A < S.B} S</span></li>
+  <li><strong>Kết bằng (Equi-join):</strong> Trường hợp riêng của kết Theta, điều kiện chỉ dùng dấu bằng (=).</li>
+  <li><strong>Kết tự nhiên (Natural join - ⋈):</strong> Nối bằng trên TẤT CẢ các cột có tên giống nhau, và kết quả <em>tự động xóa bớt đi cột trùng lặp</em>.</li>
+</ul>
+<p><strong>1. Trực giác (Natural Join):</strong> Tìm mảnh ghép phù hợp. Bảng Sinh viên có cột Mã lớp. Bảng Lớp cũng có cột Mã lớp. Hai bảng sẽ "hút" nhau và nối lại thành một dòng dài nếu Mã lớp khớp nhau.</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">R ⋈ S</span></p>
+<p><strong>3. Input/Output:</strong> Đầu vào: 2 bảng. Đầu ra: Bảng lớn chứa thông tin ghép của cả 2.</p>
+<p><strong>5. Dry Run:</strong></p>
+<div class="before-after">
+  <div class="before">
+    <span class="label">MON (MAMH, TENMH) và KQ(MAMH, MAHV, DIEM)</span>
+    <table class="data-table">
+      <tr><th>MAMH</th><th>TENMH</th></tr>
+      <tr><td>CSDL</td><td>DB</td></tr>
+      <tr><td>NM</td><td>Intro</td></tr>
+    </table>
+    <table class="data-table" style="margin-top:10px;">
+      <tr><th>MAMH</th><th>MAHV</th><th>DIEM</th></tr>
+      <tr><td>CSDL</td><td>HV01</td><td>8</td></tr>
+      <tr><td>CTDL</td><td>HV02</td><td>9</td></tr>
+    </table>
+  </div>
+  <div class="after">
+    <span class="label">MON ⋈ KQ</span>
+    <table class="data-table">
+      <tr><th>MAMH</th><th>TENMH</th><th>MAHV</th><th>DIEM</th></tr>
+      <tr><td>CSDL</td><td>DB</td><td>HV01</td><td>8</td></tr>
+    </table>
+  </div>
+</div>
+<div class="callout-why">
+  <strong>🤔 Tại sao dòng chứa 'NM' và 'CTDL' biến mất?</strong> Vì chúng là những mảnh ghép lẻ loi không tìm được đối tác ở bảng bên kia. Đây là đặc tính của Inner Join.
+</div>
+
+<h4>B.6 Phép hợp (Union - ∪)</h4>
+<p><strong>1. Trực giác:</strong> Gom chung kết quả của 2 tập hợp lại. Ai có trong tập 1 HOẶC tập 2 đều lấy. Trùng nhau thì chỉ lấy 1 lần.</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">R ∪ S</span></p>
+<p><strong>4. Điều kiện Khả hợp (Union-compatible):</strong> 2 bảng phải có <em>cùng số lượng cột</em> và các cột tương ứng phải <em>cùng kiểu dữ liệu</em>.</p>
+<p><strong>6. Ví dụ tổng quát (không thuộc lược đồ QLGV chuẩn):</strong> Giả sử có quan hệ phụ trợ NHANVIEN(MANV, ...). Để hợp mã giáo viên và mã nhân viên, đổi tên hai thuộc tính kết quả về cùng tên rồi áp dụng phép hợp:<br>
+<span class="math-block">ρ_{MA_NGUOI←MAGV}(π_{MAGV}(GIAOVIEN)) ∪ ρ_{MA_NGUOI←MANV}(π_{MANV}(NHANVIEN))</span></p>
+
+<h4>B.7 Phép giao (Intersection - ∩)</h4>
+<p><strong>1. Trực giác:</strong> Chỉ những đối tượng VỪA nằm trong tập A VỪA nằm trong tập B mới được lấy.</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">R ∩ S</span></p>
+<p><strong>4. Điều kiện:</strong> Phải khả hợp.</p>
+
+<h4>B.8 Phép trừ (Difference - −)</h4>
+<p><strong>1. Trực giác:</strong> Lọc bỏ. Có A nhưng không có B.</p>
+<p><strong>2. Ký hiệu:</strong> <span class="math-block">R − S</span></p>
+<p><strong>4. Điều kiện:</strong> Phải khả hợp. Lưu ý: R - S khác hoàn toàn S - R (Không có tính giao hoán).</p>
+<p><strong>6. Dịch:</strong> "Môn học chưa từng có ai thi rớt". Phân tích: Tập tất cả môn học − Tập những môn học đã có người rớt (Điểm &lt; 5).<br>
+<span class="math-block">π_{MAMH}(MONHOC) − π_{MAMH}(σ_{DIEM < 5}(KETQUATHI))</span>
+</p>
+
+<h4>B.9 Phép ngoại kết (Outer Join — ĐSQH mở rộng)</h4>
+<p><strong>1. Trực giác:</strong> Giống phép Kết tự nhiên, nhưng bảo tồn dữ liệu. Nhờ "Outer", những mảnh ghép lẻ loi (không có đối tác) cũng được giữ lại, phần thông tin thiếu bên kia sẽ được điền bằng NULL.</p>
+<p><strong>2. Ký hiệu:</strong> Kết trái ⟕, Kết phải ⟖, Kết đầy đủ ⟗.</p>
+<p><strong>6. Dịch:</strong> "Liệt kê danh sách lớp và giáo viên chủ nhiệm (nếu có)". Tức là lớp chưa có GVCN vẫn hiển thị.</p>
+
+<h4>B.10 Gom nhóm và Hàm kết hợp (Grouping / Aggregation — ĐSQH mở rộng, ℑ)</h4>
+<p><strong>1. Trực giác:</strong> Chia bảng lớn thành các rổ (group) dựa trên một thuộc tính. Sau đó ở mỗi rổ, áp dụng một phép tính (đếm, tính tổng, tìm Max/Min).</p>
+<p><strong>2. Ký hiệu dùng trong chương:</strong> <span class="math-block">_{G} \Im _{F(A) \to B}(R)</span>, trong đó <em>G</em> là danh sách thuộc tính gom nhóm (có thể rỗng), <em>F</em> là COUNT/SUM/AVG/MIN/MAX và <em>B</em> là tên thuộc tính kết quả. Đây là phép của <strong>ĐSQH mở rộng</strong>, tương đương ý tưởng <code>GROUP BY</code> trong SQL.</p>
+<p><strong>6. Dịch:</strong> "Tính tổng số hóa đơn của mỗi khách hàng"<br>
+<span class="math-block">_{MAKH} \Im _{COUNT(SOHD) \to SoHoaDon}(HOADON)</span>
+</p>
+
+<hr>
+
+<h3 id="sec-c">C. Phép chia (Division ÷) - Bậc thầy truy vấn "Tất cả"</h3>
+<p>Đây là phần khó và tinh túy nhất của Đại số quan hệ.</p>
+
+<h4>C.1 Trực giác: "X nào bao xài TẤT CẢ Y?"</h4>
+<p>Hãy tưởng tượng bạn (X) vào một siêu thị và có một danh sách mua sắm (Y) gồm: Sữa, Bánh, Kẹo. Nếu giỏ hàng của bạn <strong>chứa toàn bộ</strong> 3 món trên (có thể mua thêm thứ khác không quan tâm, miễn là đủ 3 món này), thì bạn là người vượt qua bài kiểm tra "Phép chia".</p>
+<p><strong>Dấu hiệu nhận biết (Exam Pattern):</strong> Đề bài chứa các từ khóa <em>"tất cả", "toàn bộ", "mọi"</em>.</p>
+
+<h4>C.2 Định nghĩa Formal</h4>
+<p>Cho quan hệ R(X, Y) và quan hệ S(Y). Phép chia R ÷ S sẽ trả về các giá trị x ∈ X sao cho với <strong>mọi</strong> giá trị y ∈ S, tổ hợp (x, y) đều xuất hiện trong R.</p>
+<div class="math-block">
+R(X,Y) ÷ S(Y) = { x | ∀y ∈ S, (x,y) ∈ R }
+</div>
+<p>Về bản chất, phép chia có thể được định nghĩa thông qua các phép toán cơ bản (Chiếu, Tích Đề-các, Trừ):</p>
+<div class="math-block">
+R ÷ S = π_X(R) − π_X( (π_X(R) × S) − R )
+</div>
+<div class="callout-mental">
+  <strong>Tại sao công thức rườm rà vậy?</strong> Đọc ngược từ trong ra ngoài:
+  <ol>
+    <li><code>π_X(R) × S</code>: Tập hợp TẤT CẢ các khả năng lý tưởng (Ai cũng mua tất cả mọi thứ).</li>
+    <li><code>(π_X(R) × S) − R</code>: Lấy cái lý tưởng trừ đi cái thực tế R → Lòi ra những món bị THIẾU. Mảng này chứa những người "Không mua đủ".</li>
+    <li><code>π_X(R) - (những người thiếu)</code>: Lấy tổng số người trừ đi người thiếu → Ra người MUA ĐỦ!</li>
+  </ol>
+</div>
+
+<h4>C.3 Dry Run: Phép chia hoạt động ra sao?</h4>
+<div class="before-after" style="grid-template-columns: 1fr 1fr 1fr;">
+  <div class="before">
+    <span class="label">R (MAHV, MAMH) - Đã học</span>
+    <table class="data-table">
+      <tr><th>MAHV</th><th>MAMH</th></tr>
+      <tr><td>H1</td><td>Toán</td></tr>
+      <tr><td>H1</td><td>Lý</td></tr>
+      <tr><td>H2</td><td>Toán</td></tr>
+      <tr><td>H3</td><td>Toán</td></tr>
+      <tr><td>H3</td><td>Lý</td></tr>
+      <tr><td>H3</td><td>Hóa</td></tr>
+    </table>
+  </div>
+  <div class="before">
+    <span class="label">S (MAMH) - Điều kiện</span>
+    <table class="data-table">
+      <tr><th>MAMH</th></tr>
+      <tr><td>Toán</td></tr>
+      <tr><td>Lý</td></tr>
+    </table>
+  </div>
+  <div class="after">
+    <span class="label">R ÷ S Kết quả (Ai học đủ Toán & Lý)</span>
+    <table class="data-table">
+      <tr><th>MAHV</th></tr>
+      <tr><td>H1</td></tr>
+      <tr><td>H3</td></tr>
+    </table>
+  </div>
+</div>
+<p>H2 bị loại vì chỉ học Toán mà thiếu Lý.</p>
+
+<h4>C.4 Ví dụ với QLGV</h4>
+<p><strong>Đề bài:</strong> "Tìm mã học viên thi tất cả các môn của khoa CNTT"</p>
+<ul class="steps">
+  <li class="step">B1: Xác định tập chia (Y) - Danh sách các môn của khoa CNTT.<br> <span class="math-block">S = π_{MAMH}(σ_{MAKHOA='CNTT'}(MONHOC))</span></li>
+  <li class="step">B2: Xác định tập bị chia (X, Y) - Lịch sử thi của học viên.<br> <span class="math-block">R = π_{MAHV, MAMH}(KETQUATHI)</span></li>
+  <li class="step">B3: Chia!<br> <span class="math-block">KetQua = R ÷ S</span></li>
+</ul>
+
+<h4>C.5 Ví dụ với QLBH</h4>
+<p><strong>Đề bài:</strong> "Tìm mã khách hàng mua tất cả các sản phẩm do Việt Nam sản xuất"</p>
+<ul class="steps">
+  <li class="step">Y = Mọi mã SP do Việt Nam SX: <span class="math-block">S = π_{MASP}(σ_{NUOCSX='Viet Nam'}(SANPHAM))</span></li>
+  <li class="step">X, Y = Hóa đơn và Sản phẩm khách hàng đã mua: <span class="math-block">R = π_{MAKH, MASP}(HOADON ⋈ CTHD)</span></li>
+  <li class="step">Đáp án = R ÷ S</li>
+</ul>
+
+<h4>C.6 Các biểu diễn tương đương trong SQL (Chương 4 Review)</h4>
+<p>SQL không có toán tử DIVIDE. Chúng ta mô phỏng bằng 2 cách chính:</p>
+
+<strong>Cách 1: Double NOT EXISTS (Không có môn nào mà KHÔNG học)</strong>
+<pre class="sql-block">
+SELECT MAHV
+FROM HOCVIEN HV
+WHERE NOT EXISTS (
+    -- Các môn khoa CNTT
+    SELECT MAMH FROM MONHOC WHERE MAKHOA = 'CNTT'
+    EXCEPT 
+    -- Các môn HV này đã thi
+    SELECT MAMH FROM KETQUATHI KQ WHERE KQ.MAHV = HV.MAHV
+)
+</pre>
+
+<strong>Cách 2: COUNT DISTINCT (Đếm số môn đậu == Tổng số môn CNTT)</strong>
+<pre class="sql-block">
+SELECT KQ.MAHV
+FROM KETQUATHI KQ JOIN MONHOC MH ON KQ.MAMH = MH.MAMH
+WHERE MH.MAKHOA = 'CNTT'
+GROUP BY KQ.MAHV
+HAVING COUNT(DISTINCT KQ.MAMH) = (
+    SELECT COUNT(*) FROM MONHOC WHERE MAKHOA = 'CNTT'
+)
+</pre>
+
+<table>
+  <thead>
+    <tr><th>Cách</th><th>Ưu điểm</th><th>Nhược điểm</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Double NOT EXISTS</td><td>Bám sát lượng từ phổ quát và cho kết quả đúng theo quy ước đúng-hiển-nhiên khi tập S rỗng.</td><td>Nhiều mức lồng nên khó đọc với người mới.</td></tr>
+    <tr><td>COUNT DISTINCT</td><td>Đọc như ngôn ngữ tự nhiên, dễ tư duy.</td><td>Nếu tập S rỗng (ví dụ khoa CNTT không có môn nào), câu truy vấn trên dùng INNER JOIN nên tập kết quả trước khi gom nhóm sẽ rỗng. Bảng KQ trả về 0 dòng chứ không trả về toàn bộ học viên như lý thuyết (đếm = 0 = 0).</td></tr>
+  </tbody>
+</table>
+
+<div class="callout-trap">
+  <strong>☢ BẪY CHẾT NGƯỜI (Common Errors):</strong><br>
+  - <strong>Nhầm Divisor:</strong> Chọn sai tập chia S.<br>
+  - <strong>Không Project ở R:</strong> Tập R trước khi chia bắt buộc phải chỉ có đúng 2 thuộc tính (X, Y). Nếu R có chứa cả điểm số, ngày thi... thì phép chia sẽ hiểu là "Tìm những người thi đủ môn vào <em>cùng 1 ngày và cùng 1 số điểm</em>". Do đó bước <span class="math">π_{MAHV, MAMH}(KETQUATHI)</span> ở trên là BẮT BUỘC.
+</div>
+
+<hr>
+
+<h3 id="sec-d">D. Bài tập (30 bài phân cấp độ)</h3>
+
+<h4>D.1 Nhóm 1: Phép chọn, Chiếu đơn (Level 1)</h4>
+<div class="exercise-block level-1">
+  <p><strong>Câu 1:</strong> (QLGV) In ra danh sách các giáo viên khoa 'HTTT'.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Cần lấy toàn bộ thông tin → phép chọn σ. Điều kiện: MAKHOA = 'HTTT'.</p>
+      <div class="math-block">σ_{MAKHOA='HTTT'}(GIAOVIEN)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-1">
+  <p><strong>Câu 2:</strong> (QLBH) Liệt kê thông tin các sản phẩm do 'Viet Nam' sản xuất.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Phép chọn trên bảng SANPHAM.</p>
+      <div class="math-block">σ_{NUOCSX='Viet Nam'}(SANPHAM)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-1">
+  <p><strong>Câu 3:</strong> (QLBH) In ra mã và tên của tất cả khách hàng.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Phép chiếu π trên bảng KHACHHANG.</p>
+      <div class="math-block">π_{MAKH, HOTEN}(KHACHHANG)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-1">
+  <p><strong>Câu 4:</strong> (QLGV) Liệt kê mã học viên đã từng thi (có điểm trong bảng KETQUATHI).</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Chiếu cột MAHV từ bảng KETQUATHI (sẽ tự động loại trùng lặp).</p>
+      <div class="math-block">π_{MAHV}(KETQUATHI)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-1">
+  <p><strong>Câu 5:</strong> (QLBH) Tìm hóa đơn có trị giá trên 500.000.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Phép chọn trên bảng HOADON.</p>
+      <div class="math-block">σ_{TRIGIA > 500000}(HOADON)</div>
+    </div>
+  </details>
+</div>
+
+<h4>D.2 Nhóm 2: Phép Kết (Level 2)</h4>
+<div class="exercise-block level-2">
+  <p><strong>Câu 6:</strong> (QLBH) In ra mã và tên khách hàng đã từng mua hàng.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Join KHACHHANG và HOADON.</p>
+      <div class="math-block">π_{MAKH, HOTEN}(KHACHHANG ⋈ HOADON)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 7:</strong> (QLGV) In ra tên học viên và tên lớp của họ.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Join HOCVIEN và LOP.</p>
+      <div class="math-block">π_{HO, TEN, TENLOP}(HOCVIEN ⋈ LOP)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 8:</strong> (QLBH) Liệt kê các sản phẩm (Tên SP) được bán ra vào ngày '1/1/2006'.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Join SANPHAM, CTHD, và HOADON, sau đó chọn ngày.</p>
+      <div class="math-block">π_{TENSP}(SANPHAM ⋈ CTHD ⋈ σ_{NGHD='1/1/2006'}(HOADON))</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 9:</strong> (QLGV) In ra tên môn học mà học viên 'Nguyen Van A' đã thi.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Join HOCVIEN, KETQUATHI, MONHOC.</p>
+      <div class="math-block">π_{TENMH}(σ_{HO='Nguyen' ∧ TEN='Van A'}(HOCVIEN) ⋈ KETQUATHI ⋈ MONHOC)</div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 10:</strong> (QLGV) Tìm tên giáo viên dạy môn 'CSDL' cho lớp 'K11'.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Join GIAOVIEN, GIANGDAY, LOP, MONHOC.</p>
+      <div class="math-block">π_{HOTEN}(GIAOVIEN ⋈ GIANGDAY ⋈ σ_{TENLOP='K11'}(LOP) ⋈ σ_{TENMH='CSDL'}(MONHOC))</div>
+    </div>
+  </details>
+</div>
+
+<h4>D.3 Nhóm 3: Phép Tập Hợp (Level 2)</h4>
+<div class="exercise-block level-2">
+  <p><strong>Câu 11:</strong> (QLGV) Tìm học viên vừa thi Toán, vừa thi Lý.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Giao (∩) giữa tập HV thi Toán và tập HV thi Lý.</p>
+      <div class="math-block">
+        (π_{MAHV}(KETQUATHI ⋈ σ_{TENMH='Toan'}(MONHOC))) ∩ 
+        (π_{MAHV}(KETQUATHI ⋈ σ_{TENMH='Ly'}(MONHOC)))
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 12:</strong> (QLBH) Khách hàng đã mua SP do 'Viet Nam' hoặc 'Singapore' sản xuất.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Hợp (∪) hoặc dùng OR trong phép chọn.</p>
+      <div class="math-block">
+        π_{MAKH}(HOADON ⋈ CTHD ⋈ σ_{NUOCSX='Viet Nam' ∨ NUOCSX='Singapore'}(SANPHAM))
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-2">
+  <p><strong>Câu 13:</strong> (Ví dụ tổng quát) Cho hai quan hệ GIAOVIEN(MAGV, ...) và NHANVIEN(MANV, ...), trong đó NHANVIEN là quan hệ phụ trợ không thuộc lược đồ QLGV chuẩn. In ra danh sách tất cả mã giáo viên và mã nhân viên.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Hai phép chiếu đều trả về một cột mã có kiểu dữ liệu tương thích. Đổi tên hai cột về cùng tên MA_NGUOI để biểu diễn rõ tính khả hợp, rồi dùng phép hợp.</p>
+      <div class="math-block">ρ_{MA_NGUOI←MAGV}(π_{MAGV}(GIAOVIEN)) ∪ ρ_{MA_NGUOI←MANV}(π_{MANV}(NHANVIEN))</div>
+    </div>
+  </details>
+</div>
+
+<h4>D.4 Nhóm 4: "Có nhưng không có" (Level 3)</h4>
+<div class="exercise-block level-3">
+  <p><strong>Câu 14:</strong> (QLGV) Tìm học viên thi Toán nhưng chưa từng thi Lý.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Lấy tập (đã thi Toán) TRỪ ĐI tập (đã thi Lý).</p>
+      <div class="math-block">
+        (π_{MAHV}(KETQUATHI ⋈ σ_{TENMH='Toan'}(MONHOC))) − 
+        (π_{MAHV}(KETQUATHI ⋈ σ_{TENMH='Ly'}(MONHOC)))
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-3">
+  <p><strong>Câu 15:</strong> (QLBH) Khách hàng không mua bất kỳ SP nào trong năm 2006.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Tập tất cả KH − Tập KH mua năm 2006.</p>
+      <div class="math-block">
+        π_{MAKH}(KHACHHANG) − π_{MAKH}(σ_{NGHD ≥ '2006-01-01' ∧ NGHD &lt; '2007-01-01'}(HOADON))
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-3">
+  <p><strong>Câu 16:</strong> (QLGV) Môn học chưa từng có học viên nào rớt (Điểm dưới 5).</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Tất cả môn − Môn có người rớt.</p>
+      <div class="math-block">
+        π_{MAMH}(MONHOC) − π_{MAMH}(σ_{DIEM < 5}(KETQUATHI))
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-3">
+  <p><strong>Câu 17:</strong> (QLBH) Sản phẩm chưa từng được bán ra.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Tất cả MASP − MASP có trong CTHD.</p>
+      <div class="math-block">
+        π_{MASP}(SANPHAM) − π_{MASP}(CTHD)
+      </div>
+    </div>
+  </details>
+</div>
+
+<h4>D.5 Nhóm 5: Aggregation (Level 3)</h4>
+<div class="exercise-block level-3">
+  <p><strong>Câu 18:</strong> (QLBH) Tính tổng trị giá của mỗi hóa đơn.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Gom nhóm theo SOHD, tính tổng SUM(SL * GIA).</p>
+      <div class="math-block">
+        _{SOHD} \Im _{SUM(SL \times GIA) \to TongTriGia}(CTHD ⋈ SANPHAM)
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-3">
+  <p><strong>Câu 19:</strong> (QLGV) Đếm số lượng học viên của mỗi lớp.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Group by MALOP, COUNT.</p>
+      <div class="math-block">
+        _{MALOP} \Im _{COUNT(MAHV) \to SoHocVien}(HOCVIEN)
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-3">
+  <p><strong>Câu 20:</strong> (QLBH) Tìm hóa đơn có từ 3 sản phẩm trở lên.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Gom nhóm theo SOHD đếm MASP, sau đó lọc những dòng COUNT >= 3.</p>
+      <div class="math-block">
+        σ_{CountSP \ge 3}(_{SOHD} \Im _{COUNT(MASP) \to CountSP} (CTHD))
+      </div>
+    </div>
+  </details>
+</div>
+
+<h4>D.6 Nhóm 6: Maximum / Cực trị không hàm Max (Level 4)</h4>
+<div class="exercise-block level-4">
+  <p><strong>Câu 21:</strong> (QLGV) <span class="badge-advanced">Thi Hóa học</span> Tìm giáo viên có mức lương cao nhất.</p>
+  <div class="callout-exam">🎯 Exam Signal: Dấu hiệu Cực trị trong ĐSQH thuần. Cấm dùng <code>MUCLUONG = MAX(MUCLUONG)</code>.</div>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Tìm người cao nhất = Toàn bộ giáo viên TRỪ ĐI những giáo viên có lương THẤP HƠN một ai đó. Ai còn sống sót sau phép trừ chính là nhà vua (Cao nhất).</p>
+      <ul class="steps">
+        <li class="step">Tập A (Kẻ bị đánh bại): Gồm những GV1 mà mức lương nhỏ hơn GV2. <br>
+          <span class="math-block">A = π_{GV1.*}(ρ_{GV1}(GIAOVIEN) ⋈_{GV1.MUCLUONG < GV2.MUCLUONG} ρ_{GV2}(GIAOVIEN))</span>
+        </li>
+        <li class="step">Tập B: Toàn bộ GV ban đầu.</li>
+        <li class="step">Kết quả: B − A <br>
+          <span class="math-block">GIAOVIEN − A</span>
+        </li>
+      </ul>
+      <p><strong>Nếu đề cho phép ĐSQH mở rộng:</strong></p>
+      <div class="math-block">
+        M = _{\varnothing} \Im _{MAX(MUCLUONG) \to LuongMax}(GIAOVIEN) <br>
+        KetQua = GIAOVIEN ⋈_{MUCLUONG=LuongMax} M
+      </div>
+      <p><strong>SQL tương đương:</strong> <code>SELECT * FROM GIAOVIEN WHERE MUCLUONG = (SELECT MAX(MUCLUONG) FROM GIAOVIEN);</code></p>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-4">
+  <p><strong>Câu 22:</strong> (QLBH) Tìm sản phẩm có giá bán đắt nhất.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Tương tự câu 21. Tập sản phẩm thua người khác = SP1 có GIA < SP2.GIA. Rồi lấy tất cả trừ đi tập thua.</p>
+      <div class="math-block">
+        A = π_{SP1.MASP}(ρ_{SP1}(SANPHAM) ⋈_{SP1.GIA < SP2.GIA} ρ_{SP2}(SANPHAM)) <br>
+        π_{MASP}(SANPHAM) − A
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-4">
+  <p><strong>Câu 23:</strong> (QLGV) Lớp nào có đông sinh viên nhất?</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Lấy bảng có sĩ số, tạo 2 bản, tìm những lớp có SISO < SISO của lớp khác, trừ đi.</p>
+      <div class="math-block">
+        A = π_{L1.MALOP}(ρ_{L1}(LOP) ⋈_{L1.SISO < L2.SISO} ρ_{L2}(LOP)) <br>
+        π_{MALOP}(LOP) − A
+      </div>
+    </div>
+  </details>
+</div>
+
+<h4>D.7 Nhóm 7: Phép chia (Level 5)</h4>
+<div class="exercise-block level-5">
+  <p><strong>Câu 24:</strong> (QLBH) Tìm mã KH đã mua TẤT CẢ sản phẩm do 'Singapore' sản xuất.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Từ khóa "tất cả" → Phép chia.</p>
+      <ul class="steps">
+        <li class="step">S = Tập các MASP của Singapore. <br> <span class="math-block">S = π_{MASP}(σ_{NUOCSX='Singapore'}(SANPHAM))</span></li>
+        <li class="step">R = Cặp (MAKH, MASP) thể hiện KH nào đã mua món nào (bỏ qua ngày, giá, số lượng).<br> <span class="math-block">R = π_{MAKH, MASP}(HOADON ⋈ CTHD)</span></li>
+        <li class="step">Kết quả = R ÷ S</li>
+      </ul>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-5">
+  <p><strong>Câu 25:</strong> (QLGV) Tìm môn học được tất cả các lớp có giáo viên chủ nhiệm thuộc khoa 'CNTT' học.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Y = Các lớp có GVCN thuộc khoa CNTT. X, Y = Lịch học môn của các lớp.</p>
+      <div class="math-block">
+        S = π_{MALOP}(LOP ⋈_{MAGVCN=MAGV} σ_{MAKHOA='CNTT'}(GIAOVIEN)) <br>
+        R = π_{MAMH, MALOP}(GIANGDAY) <br>
+        Kết quả = R ÷ S
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-5">
+  <p><strong>Câu 26:</strong> (QLBH) Có hóa đơn nào chứa tất cả các sản phẩm hay không?</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Chia lấy SOHD.</p>
+      <div class="math-block">
+        S = π_{MASP}(SANPHAM) <br>
+        R = π_{SOHD, MASP}(CTHD) <br>
+        Kết quả = R ÷ S
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-5">
+  <p><strong>Câu 27:</strong> (QLGV) Tìm giáo viên dạy toàn bộ các môn do khoa 'KTPM' phụ trách.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Ý tưởng:</em> Xác định tập môn của KTPM rồi chia tập cặp (giáo viên, môn đã dạy) cho tập môn đó.</p>
+      <div class="math-block">
+        S = π_{MAMH}(σ_{MAKHOA='KTPM'}(MONHOC)) <br>
+        R = π_{MAGV, MAMH}(GIANGDAY) <br>
+        Kết quả = R ÷ S
+      </div>
+    </div>
+  </details>
+</div>
+
+<h4>D.8 Nhóm 8: Tổng hợp hầm bà lằng (Level 5)</h4>
+<div class="exercise-block level-5">
+  <p><strong>Câu 28:</strong> (QLGV) Tìm lớp (MALOP) đã học tất cả các môn của khoa 'KTPM' và có giáo viên chủ nhiệm là 'Nguyen Hoai An'.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Phân tích:</em> Bước 1: Giải quyết phần "tất cả" bằng phép chia để lấy MALOP đạt chuẩn. Bước 2: Join kết quả đó với LOP và GIAOVIEN để lọc tiếp điều kiện GVCN.</p>
+      <div class="math-block">
+        T1 = π_{MAMH}(σ_{MAKHOA='KTPM'}(MONHOC)) <br>
+        T2 = π_{MALOP, MAMH}(GIANGDAY) <br>
+        T_CHIA = T2 ÷ T1 <br>
+        GV_AN = σ_{HOTEN='Nguyen Hoai An'}(GIAOVIEN) <br>
+        KetQua = π_{MALOP}(T_CHIA ⋈ LOP ⋈_{MAGVCN=MAGV} GV_AN)
+      </div>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-5">
+  <p><strong>Câu 29:</strong> (QLBH) Khách hàng thân thiết (mua số lượng SP nhiều nhất) đã từng mua sản phẩm của Singapore.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Ý tưởng:</em> Dùng ĐSQH mở rộng để tính tổng số lượng đã mua của mỗi khách hàng, tìm tổng lớn nhất, rồi giao với tập khách từng mua sản phẩm Singapore.</p>
+      <div class="math-block">
+        T = _{MAKH} \Im _{SUM(SL) \to TongSL}(HOADON ⋈ CTHD) <br>
+        M = _{\varnothing} \Im _{MAX(TongSL) \to MaxSL}(T) <br>
+        Top = π_{MAKH}(T ⋈_{TongSL=MaxSL} M) <br>
+        SG = π_{MAKH}(HOADON ⋈ CTHD ⋈ σ_{NUOCSX='Singapore'}(SANPHAM)) <br>
+        KetQua = Top ∩ SG
+      </div>
+      <p><em>SQL tương đương:</em> <code>GROUP BY MAKH</code>, tính <code>SUM(SL)</code>, so với giá trị lớn nhất, rồi kiểm tra tồn tại sản phẩm Singapore.</p>
+    </div>
+  </details>
+</div>
+<div class="exercise-block level-5">
+  <p><strong>Câu 30:</strong> (QLGV) Lớp học đông sinh viên nhất khoa CNTT.</p>
+  <details open><summary>Lời giải chi tiết</summary>
+    <div class="solution">
+      <p><em>Ý tưởng:</em> Theo lược đồ hiện có, hiểu “lớp khoa CNTT” là lớp có GVCN thuộc CNTT. Tạo tập lớp CNTT, loại mọi lớp có sĩ số nhỏ hơn một lớp khác trong cùng tập.</p>
+      <div class="math-block">
+        L = π_{MALOP,SISO}(LOP ⋈_{MAGVCN=MAGV} σ_{MAKHOA='CNTT'}(GIAOVIEN)) <br>
+        NhoHon = π_{L1.MALOP}(ρ_{L1}(L) ⋈_{L1.SISO &lt; L2.SISO} ρ_{L2}(L)) <br>
+        KetQua = π_{MALOP}(L) − NhoHon
+      </div>
+    </div>
+  </details>
+</div>
+
+<hr>
+
+<div class="recall-sheet">
+  <h2 id="sec-e">E. Recall Sheet - Ôn tập nhanh 1 trang</h2>
+  <table class="data-table">
+    <tr>
+      <th>Phép toán</th>
+      <th>Ký hiệu</th>
+      <th>Ứng dụng / Mẹo nhớ</th>
+    </tr>
+    <tr>
+      <td>Chọn</td>
+      <td>σ (Sigma)</td>
+      <td>Lọc dòng (ngang). Đưa ĐK vào subscript.</td>
+    </tr>
+    <tr>
+      <td>Chiếu</td>
+      <td>π (Pi)</td>
+      <td>Lọc cột (dọc). Tự động Distinct. Cần Distinct bao nhiêu cột thì Pi bấy nhiêu.</td>
+    </tr>
+    <tr>
+      <td>Kết tự nhiên</td>
+      <td>⋈</td>
+      <td>Gắn 2 bảng theo Khóa Chính-Khóa Ngoại. Cột trùng tự xóa.</td>
+    </tr>
+    <tr>
+      <td>Giao / Hợp</td>
+      <td>∩ / ∪</td>
+      <td>Bắt buộc phải cùng cấu trúc cột (Khả hợp). Dùng cho "Và" / "Hoặc".</td>
+    </tr>
+    <tr>
+      <td>Trừ</td>
+      <td>−</td>
+      <td>Dùng cho "Chỉ có A không có B". Dùng tìm Max/Min nâng cao.</td>
+    </tr>
+    <tr>
+      <td>Phép chia</td>
+      <td>÷</td>
+      <td>Thần chú "R ÷ S". R là bảng hai cột (Chủ thể, Đối tượng). S là bảng Đối tượng cần "bao trọn".</td>
+    </tr>
+  </table>
+  <div class="callout-dryrun">
+    <strong>🏃 Kỹ năng sống còn phòng thi:</strong><br>
+    1. Đọc đề, tô màu từ khóa (Tất cả, Lớn nhất, Chưa từng, Mỗi).<br>
+    2. Xác định các bảng cần đụng tới.<br>
+    3. Luôn luôn viết phép chiếu (π) nhỏ nhất có thể trước khi Trừ/Giao/Chia để tránh sai schema.<br>
+    4. Gặp "Lớn nhất": Dùng Self-join theo điều kiện bé hơn để ra tập loại.
+  </div>
+</div>
+
+</section>
+
+<!-- === ch04_sql.html === -->
+<section id="ch04">
+<!-- CHAPTER TITLE -->
+<div class="chapter-title">
+  <span class="chapter-number">Chương 4</span>
+  <span class="chapter-name">SQL Server / T-SQL</span>
+  <span class="chapter-subtitle">DDL • DML • SELECT • JOIN • Subquery • "Tất cả" Pattern</span>
+</div>
+
+<div class="callout-mental">
+  <strong>🧠 Mental Model: SQL không phải là lập trình thông thường</strong><br>
+  Trong C/C++ hay Python, bạn viết <i>cách (HOW)</i> để máy tính lấy dữ liệu (vòng lặp, if-else). 
+  Trong SQL, bạn chỉ mô tả <i>cái bạn muốn (WHAT)</i>, và Hệ Quản Trị CSDL (DBMS) sẽ tự tìm đường đi tối ưu nhất để trả về kết quả. SQL là ngôn ngữ khai báo (Declarative).
+</div>
+
+<h2 id="4-1">4.1 DDL (Data Definition Language) - Định nghĩa dữ liệu</h2>
+<p>DDL bao gồm các lệnh dùng để thao tác với <i>cấu trúc</i> của các đối tượng trong CSDL (Database, Table, View, Index...).</p>
+
+<h3>1. Tạo Database và Table</h3>
+<pre class="sql-block">
+<span class="kw">CREATE DATABASE</span> QLBH;
+<span class="kw">GO</span>
+<span class="kw">USE</span> QLBH;
+<span class="kw">GO</span>
+</pre>
+
+<p>Các kiểu dữ liệu phổ biến trong T-SQL / SQL Server:</p>
+<ul>
+  <li><code>INT</code>, <code>TINYINT</code>, <code>SMALLINT</code>: Số nguyên.</li>
+  <li><code>FLOAT</code>, <code>REAL</code>: Số thực.</li>
+  <li><code>CHAR(n)</code>: Chuỗi ký tự độ dài cố định.</li>
+  <li><code>VARCHAR(n)</code>: Chuỗi ký tự độ dài thay đổi.</li>
+  <li><code>NVARCHAR(n)</code>: Chuỗi ký tự Unicode (tiếng Việt).</li>
+  <li><code>SMALLDATETIME</code>, <code>DATETIME</code>: Ngày giờ.</li>
+  <li><code>MONEY</code>: Tiền tệ.</li>
+  <li><code>BIT</code>: Lưu giá trị 0, 1 hoặc NULL (tương đương Boolean).</li>
+</ul>
+
+<h3>2. Ràng buộc (Constraints)</h3>
+<p>Ràng buộc toàn vẹn đảm bảo dữ liệu hợp lệ và nhất quán.</p>
+<ul>
+  <li><code>PRIMARY KEY</code>: Khóa chính (duy nhất & không NULL).</li>
+  <li><code>FOREIGN KEY (REFERENCES)</code>: Khóa ngoại, trỏ tới bảng khác.</li>
+  <li><code>UNIQUE</code>: Giá trị duy nhất, nhưng cho phép NULL.</li>
+  <li><code>NOT NULL</code>: Bắt buộc phải có giá trị.</li>
+  <li><code>DEFAULT</code>: Giá trị mặc định nếu không nhập.</li>
+  <li><code>CHECK</code>: Điều kiện kiểm tra dữ liệu trước khi lưu.</li>
+</ul>
+
+<div class="callout-fast">
+  <strong>⚡ Fast Pattern: Inline vs Named Constraints</strong><br>
+  - <b>Inline:</b> Viết ngay sau khai báo cột. (Nhanh, nhưng SQL Server tự đặt tên ngẫu nhiên).<br>
+  - <b>Named:</b> Khai báo riêng ở dưới cùng hoặc ALTER TABLE với <code>CONSTRAINT &lt;tên&gt;</code> (Khuyên dùng trong thi để dễ DROP/ALTER sau này).
+</div>
+
+<p>Ví dụ tạo bảng QLBH:</p>
+<pre class="sql-block">
+<span class="kw">CREATE TABLE</span> KHACHHANG (
+    MAKH <span class="kw">CHAR</span>(4) <span class="kw">NOT NULL</span>,
+    HOTEN <span class="kw">NVARCHAR</span>(50) <span class="kw">NOT NULL</span>,
+    DCHI <span class="kw">NVARCHAR</span>(100),
+    NGSINH <span class="kw">SMALLDATETIME</span>,
+    DOANHSO <span class="kw">MONEY DEFAULT</span> 0,
+    <span class="kw">CONSTRAINT</span> PK_KHACHHANG <span class="kw">PRIMARY KEY</span> (MAKH)
+);
+
+<span class="kw">CREATE TABLE</span> SANPHAM (
+    MASP <span class="kw">CHAR</span>(4) <span class="kw">NOT NULL</span>,
+    TENSP <span class="kw">NVARCHAR</span>(50),
+    DVT <span class="kw">VARCHAR</span>(20),
+    NUOCSX <span class="kw">VARCHAR</span>(40),
+    GIA <span class="kw">MONEY</span>,
+    <span class="kw">CONSTRAINT</span> PK_SANPHAM <span class="kw">PRIMARY KEY</span> (MASP)
+);
+
+<span class="kw">CREATE TABLE</span> HOADON (
+    SOHD <span class="kw">INT NOT NULL</span>,
+    NGHD <span class="kw">SMALLDATETIME</span>,
+    MAKH <span class="kw">CHAR</span>(4),
+    MANV <span class="kw">CHAR</span>(4),
+    TRIGIA <span class="kw">MONEY</span>,
+    <span class="kw">CONSTRAINT</span> PK_HOADON <span class="kw">PRIMARY KEY</span> (SOHD),
+    <span class="kw">CONSTRAINT</span> FK_HOADON_KH <span class="kw">FOREIGN KEY</span> (MAKH) <span class="kw">REFERENCES</span> KHACHHANG(MAKH)
+);
+</pre>
+<pre class="sql-block keep-together">
+<span class="kw">CREATE TABLE</span> CTHD (
+    SOHD <span class="kw">INT NOT NULL</span>,
+    MASP <span class="kw">CHAR</span>(4) <span class="kw">NOT NULL</span>,
+    SL <span class="kw">INT CHECK</span> (SL > 0),
+    <span class="kw">CONSTRAINT</span> PK_CTHD <span class="kw">PRIMARY KEY</span> (SOHD, MASP),
+    <span class="kw">CONSTRAINT</span> FK_CTHD_HD <span class="kw">FOREIGN KEY</span> (SOHD) <span class="kw">REFERENCES</span> HOADON(SOHD),
+    <span class="kw">CONSTRAINT</span> FK_CTHD_SP <span class="kw">FOREIGN KEY</span> (MASP) <span class="kw">REFERENCES</span> SANPHAM(MASP)
+);
+</pre>
+
+<h3>3. ALTER TABLE và DROP TABLE</h3>
+<pre class="sql-block">
+<span class="cmt">-- Thêm cột</span>
+<span class="kw">ALTER TABLE</span> KHACHHANG <span class="kw">ADD</span> LOAIKH <span class="kw">TINYINT</span>;
+
+<span class="cmt">-- Xóa cột</span>
+<span class="kw">ALTER TABLE</span> KHACHHANG <span class="kw">DROP COLUMN</span> LOAIKH;
+
+<span class="cmt">-- Thêm ràng buộc (vd: CHECK giá phải > 0)</span>
+<span class="kw">ALTER TABLE</span> SANPHAM <span class="kw">ADD CONSTRAINT</span> CHK_GIA <span class="kw">CHECK</span> (GIA > 0);
+
+<span class="cmt">-- Xóa ràng buộc</span>
+<span class="kw">ALTER TABLE</span> SANPHAM <span class="kw">DROP CONSTRAINT</span> CHK_GIA;
+
+<span class="cmt">-- Xóa bảng</span>
+<span class="kw">DROP TABLE</span> CTHD;
+</pre>
+<div class="callout-trap">
+  <strong>⚠ BẪY: Thứ tự DROP TABLE</strong><br>
+  Bạn không thể <code>DROP TABLE KHACHHANG</code> nếu bảng <code>HOADON</code> vẫn đang <code>REFERENCES</code> tới nó. Quy tắc: <strong>Xóa bảng con trước (CTHD, HOADON), bảng cha sau (KHACHHANG, SANPHAM).</strong>
+</div>
+
+<h2 id="4-2">4.2 DML (Data Manipulation Language) - Thao tác dữ liệu</h2>
+<p>DML là các lệnh thay đổi dữ liệu bên trong các bảng: INSERT, UPDATE, DELETE.</p>
+
+<div class="callout-exam">
+  <strong>🎯 Exam Signal: SET DATEFORMAT DMY</strong><br>
+  Trong phòng máy thực hành UIT, hoặc khi chấm bài thi máy, định dạng ngày tháng mặc định thường là mdy. Nếu đề bài cho chuỗi '31/12/2006', máy sẽ báo lỗi <em>"The conversion of a varchar data type to a datetime data type resulted in an out-of-range value"</em>. Luôn luôn bắt đầu file script của bạn bằng lệnh:<br>
+  <code><span class="kw">SET DATEFORMAT</span> DMY;</code>
+</div>
+
+<h3>1. INSERT INTO</h3>
+<pre class="sql-block">
+<span class="kw">SET DATEFORMAT</span> DMY;
+
+<span class="cmt">-- Chèn đầy đủ các cột (đúng thứ tự định nghĩa)</span>
+<span class="kw">INSERT INTO</span> KHACHHANG <span class="kw">VALUES</span> ('KH01', N'Nguyễn Văn A', N'731 Trần Hưng Đạo, Q5, TpHCM', '22/10/1960', 13060000);
+
+<span class="cmt">-- Chèn nhiều dòng cùng lúc (SQL Server 2008+)</span>
+<span class="kw">INSERT INTO</span> KHACHHANG(MAKH, HOTEN, NGSINH) <span class="kw">VALUES</span> 
+('KH02', N'Trần Ngọc Hân', '15/05/1974'),
+('KH03', N'Lê Thị Ba', '25/11/1980');
+</pre>
+
+<h3>2. UPDATE</h3>
+<pre class="sql-block">
+<span class="cmt">-- Tăng giá sản phẩm lên 10% đối với sản phẩm do 'Viet Nam' sản xuất</span>
+<span class="kw">UPDATE</span> SANPHAM
+<span class="kw">SET</span> GIA = GIA * 1.1
+<span class="kw">WHERE</span> NUOCSX = 'Viet Nam';
+</pre>
+
+<h3>3. DELETE</h3>
+<pre class="sql-block">
+<span class="cmt">-- Xóa khách hàng tên 'Lê Thị Ba'</span>
+<span class="kw">DELETE FROM</span> KHACHHANG
+<span class="kw">WHERE</span> HOTEN = N'Lê Thị Ba';
+</pre>
+
+<div class="callout-trap">
+  <strong>⚠ BẪY CHẾT NGƯỜI: Quên mệnh đề WHERE</strong><br>
+  <code>UPDATE SANPHAM SET GIA = 0;</code> → Thay đổi giá của TẤT CẢ sản phẩm trong bảng về 0!<br>
+  <code>DELETE FROM KHACHHANG;</code> → Xóa sạch TẤT CẢ khách hàng!<br>
+  Luôn luôn bôi đen và chạy câu lệnh <code>SELECT * FROM ... WHERE ...</code> trước khi chuyển thành <code>UPDATE / DELETE</code> để đảm bảo bạn sửa/xóa đúng dòng.
+</div>
+
+<h2 id="4-3">4.3 SELECT Cơ bản</h2>
+<p>Lệnh SELECT dùng để truy xuất dữ liệu. Không làm thay đổi dữ liệu gốc.</p>
+
+<pre class="sql-block">
+<span class="kw">SELECT DISTINCT</span> TENCUACDT
+<span class="kw">FROM</span> BANG_DU_LIEU
+<span class="kw">WHERE</span> DIEU_KIEN
+<span class="kw">ORDER BY</span> COT_SAP_XEP <span class="kw">ASC</span>|<span class="kw">DESC</span>;
+</pre>
+
+<ul>
+  <li><code>SELECT *</code>: Lấy tất cả các cột. Không nên dùng trong thực tế (gây chậm), nhưng trong môn học / bài thi để xem nhanh thì ok.</li>
+  <li><code>AS alias</code>: Đặt tên thay thế cho cột hoặc bảng (vd: <code>SELECT HOTEN AS 'Tên Khách Hàng'</code>).</li>
+  <li><code>DISTINCT</code>: Loại bỏ các dòng kết quả trùng lặp.</li>
+  <li><code>ORDER BY</code>: Sắp xếp kết quả. <code>ASC</code> (tăng dần - mặc định), <code>DESC</code> (giảm dần).</li>
+</ul>
+
+<h3>Toán tử trong WHERE</h3>
+<ul>
+  <li><strong>So sánh:</strong> <code>=</code>, <code>&lt;&gt;</code> (khác), <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+  <li><strong>Logic:</strong> <code>AND</code>, <code>OR</code>, <code>NOT</code> (Cẩn thận độ ưu tiên: NOT > AND > OR, hãy dùng dấu ngoặc <code>()</code>).</li>
+  <li><strong>LIKE:</strong> Tìm kiếm mẫu chuỗi.
+    <ul>
+      <li><code>%</code> : Đại diện cho 0 hoặc nhiều ký tự.</li>
+      <li><code>_</code> : Đại diện cho đúng 1 ký tự.</li>
+      <li>Vd: <code>WHERE HOTEN LIKE 'Nguyen%'</code> (Bắt đầu bằng 'Nguyen'), <code>WHERE HOTEN LIKE '%Thi%'</code> (Chứa chữ 'Thi').</li>
+    </ul>
+  </li>
+  <li><strong>IN:</strong> Nằm trong một tập hợp. Vd: <code>WHERE NUOCSX IN ('Viet Nam', 'Trung Quoc')</code>.</li>
+  <li><strong>BETWEEN ... AND ...:</strong> Nằm trong đoạn. Vd: <code>WHERE GIA BETWEEN 10000 AND 50000</code>.</li>
+</ul>
+
+<div class="callout-trap">
+  <strong>⚠ BẪY: So sánh với NULL</strong><br>
+  Trong SQL, <code>NULL</code> nghĩa là "không xác định" (unknown). Bạn <strong>không thể</strong> dùng dấu bằng <code>= NULL</code> hoặc khác <code>&lt;&gt; NULL</code>.<br>
+  Sai: <code>WHERE DCHI = NULL</code><br>
+  Đúng: <code>WHERE DCHI IS NULL</code> hoặc <code>IS NOT NULL</code>.
+</div>
+
+<h2 id="4-4">4.4 Phép KẾT (JOIN)</h2>
+<p>JOIN dùng để ghép dữ liệu từ 2 hay nhiều bảng dựa trên cột chung (thường là Khóa chính - Khóa ngoại).</p>
+
+<div class="callout-mental">
+  <strong>🧠 Mental Model: JOIN là phép chiếu ánh sáng qua các lớp kính</strong><br>
+  Hãy tưởng tượng mỗi bảng là một tờ giấy trong suốt có ghi thông tin. JOIN là việc dán các tờ giấy lại với nhau sao cho "mã" khớp nhau, tạo thành một tờ giấy lớn chứa toàn bộ thông tin.
+</div>
+
+<div class="before-after">
+  <div class="before">
+    <div class="label">Bảng HOADON (L)</div>
+    <table class="data-table">
+      <tr><th>SOHD</th><th>MAKH</th></tr>
+      <tr><td>101</td><td>KH01</td></tr>
+      <tr><td>102</td><td>KH02</td></tr>
+      <tr><td>103</td><td>NULL</td></tr>
+    </table>
+  </div>
+  <div class="after">
+    <div class="label">Bảng KHACHHANG (R)</div>
+    <table class="data-table">
+      <tr><th>MAKH</th><th>HOTEN</th></tr>
+      <tr><td>KH01</td><td>Nguyễn A</td></tr>
+      <tr><td>KH02</td><td>Lê B</td></tr>
+      <tr><td>KH03</td><td>Trần C</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>a) INNER JOIN (Phép kết bằng)</h3>
+<p><strong>Trực giác:</strong> Chỉ giữ lại những dòng <strong>có khớp nối</strong> ở CẢ 2 BẢNG.</p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> HD.SOHD, KH.HOTEN
+<span class="kw">FROM</span> HOADON HD <span class="kw">INNER JOIN</span> KHACHHANG KH 
+  <span class="kw">ON</span> HD.MAKH = KH.MAKH;
+</pre>
+<table class="data-table">
+  <tr><th>SOHD</th><th>HOTEN</th></tr>
+  <tr><td>101</td><td>Nguyễn A</td></tr>
+  <tr><td>102</td><td>Lê B</td></tr>
+</table>
+<p><em>KH03 (chưa mua) và SOHD 103 (khách vãng lai) bị loại bỏ.</em></p>
+
+<h3>b) LEFT (OUTER) JOIN</h3>
+<p><strong>Trực giác:</strong> Giữ lại <strong>TOÀN BỘ</strong> bảng bên TRÁI. Nếu bảng bên Phải không có dòng khớp, điền NULL.</p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> KH.MAKH, KH.HOTEN, HD.SOHD
+<span class="kw">FROM</span> KHACHHANG KH <span class="kw">LEFT JOIN</span> HOADON HD 
+  <span class="kw">ON</span> KH.MAKH = HD.MAKH;
+</pre>
+<table class="data-table">
+  <tr><th>MAKH</th><th>HOTEN</th><th>SOHD</th></tr>
+  <tr><td>KH01</td><td>Nguyễn A</td><td>101</td></tr>
+  <tr><td>KH02</td><td>Lê B</td><td>102</td></tr>
+  <tr><td>KH03</td><td>Trần C</td><td>NULL (Chưa mua hàng)</td></tr>
+</table>
+
+<div class="callout-trap">
+  <strong>⚠ BẪY: LEFT JOIN bị biến thành INNER JOIN!</strong><br>
+  Nếu bạn dùng <code>LEFT JOIN</code>, nhưng sau đó lại thêm điều kiện <code>WHERE</code> lên cột của bảng bên Phải, bạn vô tình lọc mất các dòng NULL.<br>
+  Vd: <code>LEFT JOIN HOADON HD ON ... WHERE HD.TRIGIA > 0</code>. Các dòng NULL (do KH chưa mua) sẽ bị loại bỏ vì NULL không thể > 0. LEFT JOIN trở thành INNER JOIN.<br>
+  <strong>Cách sửa:</strong> Đưa điều kiện lên mệnh đề <code>ON</code>: <code>LEFT JOIN HOADON HD ON KH.MAKH = HD.MAKH AND HD.TRIGIA > 0</code>, HOẶC thêm <code>OR HD.SOHD IS NULL</code> vào WHERE.
+</div>
+
+<h3>c) RIGHT (OUTER) JOIN</h3>
+<p>Giống LEFT JOIN, nhưng ưu tiên giữ toàn bộ bảng bên PHẢI.</p>
+
+<h3>d) FULL (OUTER) JOIN</h3>
+<p>Giữ lại toàn bộ dữ liệu của CẢ 2 BẢNG. Dòng nào không khớp sẽ điền NULL ở phía còn lại.</p>
+
+<h3>e) SELF JOIN (Kết với chính nó)</h3>
+<p>Dùng khi muốn so sánh các dòng trong cùng 1 bảng với nhau. Bắt buộc phải đặt Alias (tên giả) để SQL phân biệt được.</p>
+<pre class="sql-block keep-together">
+<span class="cmt">-- Ví dụ: Tìm các cặp học viên sinh cùng ngày</span>
+<span class="kw">SELECT</span> A.MAHV, A.HO, A.TEN, B.MAHV, B.HO, B.TEN
+<span class="kw">FROM</span> HOCVIEN A <span class="kw">JOIN</span> HOCVIEN B <span class="kw">ON</span> A.NGSINH = B.NGSINH 
+<span class="kw">WHERE</span> A.MAHV &lt; B.MAHV; <span class="cmt">-- Chặn đảo hợp (A,B) và (B,A)</span>
+</pre>
+
+<h2 id="4-5">4.5 Gom nhóm & Hàm kết hợp (Aggregation)</h2>
+
+<h3>1. Các hàm kết hợp (Aggregate functions)</h3>
+<ul>
+  <li><code>COUNT(cột)</code>: Đếm số lượng giá trị KHÁC NULL của cột.</li>
+  <li><code>COUNT(*)</code>: Đếm TỔNG số dòng (bao gồm cả dòng có NULL).</li>
+  <li><code>COUNT(DISTINCT cột)</code>: Đếm số lượng giá trị ĐỘC LẬP (duy nhất) của cột.</li>
+  <li><code>SUM(cột)</code>: Tổng.</li>
+  <li><code>AVG(cột)</code>: Trung bình.</li>
+  <li><code>MAX(cột)</code>, <code>MIN(cột)</code>: Lớn/Nhỏ nhất.</li>
+</ul>
+
+<h3>2. GROUP BY và HAVING</h3>
+<p><code>GROUP BY</code> chia bảng thành các nhóm dựa trên các giá trị giống nhau của một hoặc nhiều cột. Sau đó hàm aggregate sẽ tính toán TRÊN TỪNG NHÓM đó.</p>
+
+<div class="callout-fast">
+  <strong>⚡ Fast Pattern: Quy tắc GROUP BY</strong><br>
+  BẤT CỨ cột nào nằm trong mệnh đề <code>SELECT</code> mà <strong>KHÔNG</strong> bị bọc bởi hàm aggregate (SUM, COUNT...) thì <strong>BẮT BUỘC</strong> phải xuất hiện trong mệnh đề <code>GROUP BY</code>.
+</div>
+
+<div class="callout-mental">
+  <strong>🧠 Mental Model: PIPELINE THỰC THI CỦA SQL</strong><br>
+  Khi bạn viết một câu truy vấn, máy tính sẽ xử lý theo thứ tự sau chứ KHÔNG PHẢI thứ tự đọc từ trên xuống:<br>
+  <strong>FROM</strong> (Lấy bảng) → <strong>WHERE</strong> (Lọc dòng) → <strong>GROUP BY</strong> (Chia nhóm) → <strong>HAVING</strong> (Lọc nhóm) → <strong>SELECT</strong> (Chiếu cột/Tính toán) → <strong>ORDER BY</strong> (Sắp xếp).
+</div>
+
+<div class="callout-trap">
+  <strong>⚠ BẪY: WHERE vs HAVING</strong><br>
+  - <code>WHERE</code> lọc dữ liệu <strong>TRƯỚC KHI</strong> gom nhóm. KHÔNG ĐƯỢC chứa hàm aggregate. (Sai: <code>WHERE SUM(GIA) > 100</code>).<br>
+  - <code>HAVING</code> lọc dữ liệu <strong>SAU KHI</strong> đã gom nhóm. Nơi duy nhất để đặt điều kiện lên hàm aggregate. (Đúng: <code>HAVING SUM(GIA) > 100</code>).
+</div>
+
+<p>Ví dụ: Tính tổng trị giá của mỗi khách hàng, chỉ in ra khách hàng có tổng trị giá > 500.000đ.</p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> MAKH, <span class="kw">SUM</span>(TRIGIA) <span class="kw">AS</span> TONG_TG
+<span class="kw">FROM</span> HOADON
+<span class="kw">GROUP BY</span> MAKH
+<span class="kw">HAVING SUM</span>(TRIGIA) > 500000;
+</pre>
+
+<h2 id="4-6">4.6 Phép toán tập hợp (Set Operators)</h2>
+<p>Kết hợp kết quả của NHIỀU câu SELECT lại với nhau (theo chiều dọc).</p>
+<p><strong>Điều kiện:</strong> Số lượng cột và kiểu dữ liệu của các cột tương ứng giữa các câu SELECT phải khớp nhau (tương thích).</p>
+
+<ul>
+  <li><code>UNION</code>: Hợp của 2 tập hợp, <strong>tự động loại bỏ dòng trùng lặp</strong>.</li>
+  <li><code>UNION ALL</code>: Hợp của 2 tập hợp, <strong>giữ nguyên dòng trùng lặp</strong> (Nhanh hơn UNION vì không tốn chi phí sort/khử trùng).</li>
+  <li><code>INTERSECT</code>: Giao của 2 tập hợp (Các dòng xuất hiện ở CẢ 2 bên).</li>
+  <li><code>EXCEPT</code>: Hiệu của 2 tập hợp (Lấy các dòng của SELECT 1 mà KHÔNG xuất hiện ở SELECT 2). Lưu ý: Trong MySQL không có EXCEPT (nhưng SQL Server/T-SQL thì có!).</li>
+</ul>
+
+<h2 id="4-7">4.7 Truy vấn con (Subquery)</h2>
+<p>Subquery là một câu SELECT nằm lồng bên trong một câu SELECT khác. Thường dùng trong mệnh đề WHERE, HAVING, hoặc FROM.</p>
+
+<h3>a) Scalar subquery (Trả về 1 ô duy nhất)</h3>
+<p>Chỉ trả về 1 dòng và 1 cột. Có thể dùng các toán tử so sánh: <code>=</code>, <code>></code>, <code>&lt;</code>.</p>
+<pre class="sql-block">
+<span class="cmt">-- Tìm sản phẩm đắt nhất</span>
+<span class="kw">SELECT</span> MASP, TENSP, GIA
+<span class="kw">FROM</span> SANPHAM
+<span class="kw">WHERE</span> GIA = (<span class="kw">SELECT MAX</span>(GIA) <span class="kw">FROM</span> SANPHAM);
+</pre>
+
+<h3>b) Cột trả về nhiều dòng: Dùng IN / NOT IN</h3>
+<pre class="sql-block">
+<span class="cmt">-- Tìm mã khách hàng có mua sản phẩm 'Máy giặt'</span>
+<span class="kw">SELECT DISTINCT</span> MAKH
+<span class="kw">FROM</span> HOADON
+<span class="kw">WHERE</span> SOHD <span class="kw">IN</span> (
+    <span class="kw">SELECT</span> SOHD <span class="kw">FROM</span> CTHD 
+    <span class="kw">JOIN</span> SANPHAM <span class="kw">ON</span> CTHD.MASP = SANPHAM.MASP
+    <span class="kw">WHERE</span> TENSP = N'Máy giặt'
+);
+</pre>
+<div class="callout-trap">
+  <strong>⚠ BẪY: NOT IN và NULL</strong><br>
+  Nếu danh sách trả về của subquery IN có chứa 1 giá trị <code>NULL</code>, phép toán <code>NOT IN</code> sẽ luốn trả về <strong>rỗng (không dòng nào)</strong>. (Vì X NOT IN (A, B, NULL) tương đương X &lt;&gt; A AND X &lt;&gt; B AND X &lt;&gt; NULL. Mà X &lt;&gt; NULL luôn là UNKNOWN, làm sập toàn bộ chuỗi AND).<br>
+  Khắc phục: Dùng <code>NOT EXISTS</code> hoặc thêm <code>WHERE cột IS NOT NULL</code> trong subquery.
+</div>
+
+<h3>c) EXISTS / NOT EXISTS</h3>
+<p>Không quan tâm subquery trả về cột gì, chỉ quan tâm subquery đó <strong>CÓ DỮ LIỆU</strong> (ít nhất 1 dòng) hay <strong>KHÔNG CÓ DỮ LIỆU</strong>. <code>EXISTS</code> thường biểu đạt kiểm tra tồn tại tự nhiên hơn <code>IN</code>; hiệu năng thực tế phụ thuộc dữ liệu, chỉ mục và execution plan.</p>
+
+<h3>d) Correlated Subquery (Truy vấn con tương quan)</h3>
+<p>Subquery chứa tham chiếu đến cột của truy vấn cha bên ngoài. Với mỗi dòng của câu cha, subquery sẽ được chạy lại một lần (Giống như 2 vòng lặp lồng nhau). Thường dùng với EXISTS.</p>
+
+<h2 id="4-8">4.8 Tuyệt kỹ "Tất Cả" Pattern (TRỌNG ĐIỂM THI) 🎯</h2>
+<p>Dạng toán kinh điển: <em>"Tìm sinh viên đã học <strong>TẤT CẢ</strong> các môn", "Tìm khách hàng mua <strong>TẤT CẢ</strong> sản phẩm do Việt Nam sản xuất".</em></p>
+<p>Có 3 cách giải chính:</p>
+
+<h3>CÁCH A: Double NOT EXISTS (Lật ngược vấn đề)</h3>
+<p><em>"Tìm khách hàng sao cho <strong>KHÔNG TỒN TẠI</strong> sản phẩm Việt Nam nào mà khách hàng đó <strong>CHƯA MUA</strong>."</em></p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> KH.MAKH, KH.HOTEN
+<span class="kw">FROM</span> KHACHHANG KH
+<span class="kw">WHERE NOT EXISTS</span> (
+    <span class="cmt">-- 1. Quét tất cả Sản phẩm VN</span>
+    <span class="kw">SELECT</span> * <span class="kw">FROM</span> SANPHAM SP
+    <span class="kw">WHERE</span> SP.NUOCSX = 'Viet Nam'
+    <span class="kw">AND NOT EXISTS</span> (
+        <span class="cmt">-- 2. Kiểm tra xem KH đang xét có mua SP này chưa?</span>
+        <span class="kw">SELECT</span> * <span class="kw">FROM</span> CTHD CT <span class="kw">JOIN</span> HOADON HD <span class="kw">ON</span> CT.SOHD = HD.SOHD
+        <span class="kw">WHERE</span> HD.MAKH = KH.MAKH <span class="cmt">-- Correlated với câu bên ngoài cùng!</span>
+        <span class="kw">AND</span> CT.MASP = SP.MASP   <span class="cmt">-- Correlated với câu giữa!</span>
+    )
+);
+</pre>
+
+<h3>CÁCH B: Đếm và So Sánh (COUNT DISTINCT)</h3>
+<p><em>"Số lượng MÃ SẢN PHẨM KHÁC NHAU của VN mà khách hàng đã mua BẰNG với Tổng số sản phẩm của VN hiện có".</em></p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> HD.MAKH
+<span class="kw">FROM</span> HOADON HD
+<span class="kw">JOIN</span> CTHD CT <span class="kw">ON</span> HD.SOHD = CT.SOHD
+<span class="kw">JOIN</span> SANPHAM SP <span class="kw">ON</span> CT.MASP = SP.MASP
+<span class="kw">WHERE</span> SP.NUOCSX = 'Viet Nam'
+<span class="kw">GROUP BY</span> HD.MAKH
+<span class="kw">HAVING COUNT</span>(<span class="kw">DISTINCT</span> CT.MASP) = (
+    <span class="kw">SELECT COUNT</span>(*) <span class="kw">FROM</span> SANPHAM <span class="kw">WHERE</span> NUOCSX = 'Viet Nam'
+);
+</pre>
+
+<div class="callout-why">
+  <strong>🤔 Góc nhìn chuyên sâu: Khi tập chia bị rỗng (Không có sản phẩm VN nào)</strong><br>
+  Theo toán học (đại số quan hệ), mệnh đề "Khách hàng mua MỌI sản phẩm VN" sẽ đúng một cách hiển nhiên (vacuously true) với TẤT CẢ khách hàng nếu không có sản phẩm VN nào.
+  <ul>
+    <li><strong>Cách Double NOT EXISTS:</strong> Bắt đầu bằng <code>FROM KHACHHANG</code>. Vòng lặp kiểm tra thấy không có SP VN nào, nên điều kiện <code>NOT EXISTS</code> bên trong lập tức đúng cho mọi khách hàng. Kết quả: <strong>Trả về toàn bộ khách hàng.</strong> (Đúng với lý thuyết chuẩn).</li>
+    <li><strong>Cách COUNT + GROUP BY ở trên:</strong> Bắt đầu bằng việc <code>JOIN</code> bảng <code>HOADON</code> với <code>SANPHAM</code> của VN. Vì không có SP VN nào, tập kết quả bị rỗng <em>ngay từ trước khi gom nhóm</em>. Do đó, dù <code>0 = 0</code>, truy vấn vẫn <strong>không trả về khách hàng nào</strong>. <em>(Nếu muốn Cách Count trả về mọi KH như lý thuyết, ta phải đặt Subquery đếm số lượng vào mệnh đề WHERE của bảng KHACHHANG thay vì dùng GROUP BY).</em></li>
+  </ul>
+</div>
+
+<h3>CÁCH C: Phép Chia (Division Mindset)</h3>
+<p>Dùng <code>EXCEPT</code>. Nếu tập (Tất cả SP VN) TRỪ ĐI tập (Các SP VN mà KH x đã mua) = RỖNG → Tức là KH x đã mua hết!</p>
+
+<table class="data-table" style="width: 100%; table-layout: fixed; margin: 1em 0;">
+  <colgroup>
+    <col style="width: 22%;">
+    <col style="width: 38%;">
+    <col style="width: 40%;">
+  </colgroup>
+  <thead>
+    <tr><th>Cách</th><th>Ưu điểm</th><th>Nhược điểm</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Double NOT EXISTS</td><td>Bám sát logic “mọi”, trả về đúng mọi KH khi tập chia rỗng (chuẩn lý thuyết).</td><td>Cú pháp nhiều mức lồng, dễ rối; hiệu năng phụ thuộc execution plan.</td></tr>
+    <tr><td>COUNT DISTINCT</td><td>Dễ suy nghĩ, dễ viết, quen thuộc.</td><td>Hành vi khi tập chia rỗng khác với lý thuyết trừ khi viết cẩn thận. Với cấu trúc JOIN và GROUP BY ở trên, tập kết quả sẽ bị rỗng trước khi gom nhóm, trả về 0 dòng thay vì mọi KH.</td></tr>
+    <tr><td>Division (EXCEPT)</td><td>Tư duy Đại số quan hệ rõ ràng.</td><td>Ít người dùng, code khá dài.</td></tr>
+  </tbody>
+</table>
+
+<div class="callout-exam">
+  <strong>🎯 Lời khuyên thi cử:</strong><br>
+  Giảng viên thường <strong>khuyến khích</strong> làm theo cách <code>NOT EXISTS</code>. Hãy học thuộc pattern này (Template):<br>
+  <code>SELECT x FROM B1 WHERE NOT EXISTS (SELECT y FROM B2 WHERE &lt;Điều kiện B2&gt; AND NOT EXISTS (SELECT z FROM B3 WHERE B3.x = B1.x AND B3.y = B2.y))</code>
+</div>
+
+<h2 id="4-9">4.9 Các thủ thuật tìm Max / Min</h2>
+<p>Tìm thực thể có giá trị lớn nhất/nhỏ nhất (Vd: Khách hàng mua nhiều tiền nhất, Môn học có nhiều sinh viên rớt nhất). Có 4 cách:</p>
+
+<p><strong>1. Dùng Subquery (An toàn, dễ hiểu nhất)</strong></p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> MAKH, DOANHSO
+<span class="kw">FROM</span> KHACHHANG
+<span class="kw">WHERE</span> DOANHSO = (<span class="kw">SELECT MAX</span>(DOANHSO) <span class="kw">FROM</span> KHACHHANG);
+</pre>
+
+<p><strong>2. TOP 1 WITH TIES (Đặc sản SQL Server)</strong></p>
+<pre class="sql-block">
+<span class="kw">SELECT TOP</span> 1 <span class="kw">WITH TIES</span> MAKH, DOANHSO
+<span class="kw">FROM</span> KHACHHANG
+<span class="kw">ORDER BY</span> DOANHSO <span class="kw">DESC</span>;
+</pre>
+<p><em>(WITH TIES lấy luôn các dòng đồng hạng với TOP 1). Cách viết này ngắn gọn cho bài tập SQL Server.</em></p>
+
+<p><strong>3. WHERE >= ALL</strong></p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> MAKH, DOANHSO
+<span class="kw">FROM</span> KHACHHANG
+<span class="kw">WHERE</span> DOANHSO >= <span class="kw">ALL</span>(<span class="kw">SELECT</span> DOANHSO <span class="kw">FROM</span> KHACHHANG);
+</pre>
+
+<p><strong>4. NOT EXISTS lật ngược</strong></p>
+<pre class="sql-block">
+<span class="cmt">-- Không tồn tại KH nào khác có doanh số > doanh số của KH này</span>
+<span class="kw">SELECT</span> MAKH, DOANHSO
+<span class="kw">FROM</span> KHACHHANG KH1
+<span class="kw">WHERE NOT EXISTS</span> (
+    <span class="kw">SELECT</span> * <span class="kw">FROM</span> KHACHHANG KH2 
+    <span class="kw">WHERE</span> KH2.DOANHSO > KH1.DOANHSO
+);
+</pre>
+
+<h2 id="4-10">4.10 Thao tác Ngày Tháng (Date/Time)</h2>
+<ul>
+  <li>Lấy ngày giờ hiện tại: <code>GETDATE()</code></li>
+  <li>Lấy phần riêng lẻ: <code>YEAR(cột)</code>, <code>MONTH(cột)</code>, <code>DAY(cột)</code></li>
+  <li>Cộng trừ ngày: <code>DATEADD(day, 10, NGSINH)</code> (Cộng 10 ngày)</li>
+  <li>Khoảng cách 2 ngày: <code>DATEDIFF(year, NGSINH, GETDATE())</code> (Tính khoảng cách năm, <strong>không phải tuổi chính xác</strong> vì nó chỉ đếm số lần qua Tết Tây. Tuổi chính xác cần so sánh thêm ngày tháng sinh).</li>
+</ul>
+
+<h2 id="4-11">4.11 Common Traps - Các lỗi ngớ ngẩn làm mất điểm</h2>
+<div class="callout-trap">
+  <ol>
+    <li><strong>Viết WHERE sau GROUP BY hoặc ORDER BY:</strong> Sai cú pháp. (Pipeline: FROM > WHERE > GROUP > HAVING > ORDER).</li>
+    <li><strong>Sử dụng aggregate trong WHERE:</strong> <code>WHERE SUM(SL) > 10</code>. Sai! Phải chuyển xuống HAVING.</li>
+    <li><strong>Thiếu GROUP BY:</strong> Trong SELECT có <code>MAKH</code> và <code>SUM(TRIGIA)</code> nhưng không có <code>GROUP BY MAKH</code>. SQL sẽ chửi thề ngay lập tức.</li>
+    <li><strong>COUNT(*) vs COUNT(cột):</strong> Khi cột có NULL, COUNT(*) đếm luôn cả dòng NULL, COUNT(cột) thì bỏ qua. Sai một li đi một dặm.</li>
+    <li><strong>COUNT thay vì COUNT(DISTINCT):</strong> Đếm số môn học sinh viên đó thi rớt. SV rớt môn CSDL 3 lần -> COUNT trả về 3, COUNT DISTINCT trả về 1. Tùy đề bài mà dùng cho đúng.</li>
+    <li><strong>Dùng = NULL thay vì IS NULL.</strong> (Đã nói ở trên).</li>
+    <li><strong>JOIN nhiều bảng nhưng quên mất điều kiện ON/WHERE liên kết:</strong> Dẫn tới hiện tượng Cartesian Product (Nhân chéo). 2 bảng 100 dòng -> ra 10.000 dòng. Treo máy chấm!</li>
+    <li><strong>Duplicate dữ liệu khi JOIN:</strong> 1 KH có 3 Hóa đơn. SELECT KH JOIN HOADON sẽ in ra 3 dòng họ tên KH. Đừng quên chữ <code>DISTINCT</code> nếu đề chỉ hỏi "Liệt kê danh sách KH...".</li>
+    <li><strong>Nhầm lẫn AND và OR:</strong> <code>WHERE GIA > 100 AND MACG = 'A' OR MACG = 'B'</code>. Máy tính sẽ hiểu là: <code>(GIA > 100 AND MACG='A') OR (MACG = 'B')</code> (Mọi món hàng của B đều được lấy). Dùng ngoặc ngay: <code>WHERE GIA > 100 AND (MACG = 'A' OR MACG = 'B')</code>.</li>
+  </ol>
+</div>
+
+<h2 id="4-12">=== BÀI TẬP THỰC HÀNH ===</h2>
+<p>Sử dụng cơ sở dữ liệu QLBH (Khách hàng, Nhân viên, Sản phẩm, Hóa đơn, CTHD).</p>
+
+<div class="exercise-block level-1">
+  <strong>Level 1: SELECT Cơ Bản</strong><br>
+  1. In ra danh sách các sản phẩm (MASP, TENSP) do "Viet Nam" sản xuất.<br>
+  2. In ra danh sách các khách hàng (MAKH, HOTEN) có địa chỉ ở "TpHCM".<br>
+  3. In ra danh sách các sản phẩm (MASP, TENSP) có giá từ 20.000 đến 50.000.<br>
+  4. In ra danh sách các khách hàng sinh năm 1990.<br>
+  5. In ra hóa đơn (SOHD, TRIGIA) có trị giá trên 100.000 trong năm 2006.
+  
+  <details open class="solution">
+    <summary class="solution-header">Xem lời giải</summary>
+    <div class="solution-body">
+      <pre class="sql-block">
+-- Câu 1
+SELECT MASP, TENSP FROM SANPHAM WHERE NUOCSX = 'Viet Nam';
+-- Câu 2
+SELECT MAKH, HOTEN FROM KHACHHANG WHERE DCHI LIKE '%TpHCM%';
+-- Câu 4
+SELECT MAKH, HOTEN FROM KHACHHANG WHERE YEAR(NGSINH) = 1990;
+      </pre>
+    </div>
+  </details>
+</div>
+
+<div class="exercise-block level-2">
+  <strong>Level 2: JOIN & GROUP BY</strong><br>
+  1. In ra chi tiết hóa đơn SOHD = 1001 (TENSP, SL, GIA, THANHTIEN).<br>
+  2. In ra doanh thu tổng cộng của từng tháng trong năm 2006.<br>
+  3. Liệt kê tổng số lượng mua của từng khách hàng (MAKH, HOTEN, TONGSL).<br>
+  4. In ra danh sách những nhân viên chưa bán được hóa đơn nào.<br>
+  5. Tìm số hóa đơn có mua ít nhất 3 sản phẩm khác nhau.
+  
+  <details open class="solution">
+    <summary class="solution-header">Xem lời giải</summary>
+    <div class="solution-body">
+      <pre class="sql-block">
+-- Câu 4: Dùng LEFT JOIN hoặc NOT EXISTS
+SELECT NV.MANV, NV.HOTEN
+FROM NHANVIEN NV LEFT JOIN HOADON HD ON NV.MANV = HD.MANV
+WHERE HD.SOHD IS NULL;
+
+-- Câu 5:
+SELECT SOHD FROM CTHD GROUP BY SOHD HAVING COUNT(MASP) >= 3;
+      </pre>
+    </div>
+  </details>
+</div>
+
+<div class="exercise-block level-3">
+  <strong>Level 3: Subquery & Max/Min</strong><br>
+  1. Tìm khách hàng mua nhiều tiền nhất.<br>
+  2. Tìm sản phẩm đắt nhất do Việt Nam sản xuất.<br>
+  3. Tìm khách hàng mua nhiều lần nhất (đếm số SOHD).<br>
+  4. Trong năm 2006, sản phẩm nào bán được với số lượng nhiều nhất?<br>
+  5. Tìm hóa đơn có trị giá cao nhất trong năm 2006.
+</div>
+
+<div class="exercise-block level-4">
+  <strong>Level 4: Tuyệt kỹ "Tất Cả"</strong><br>
+  1. Tìm khách hàng đã mua tất cả các sản phẩm do Singapore sản xuất.<br>
+  2. Tìm khách hàng (MAKH, HOTEN) đã mua tất cả các sản phẩm (của tất cả các nước).<br>
+  3. Tìm hóa đơn có chứa tất cả các sản phẩm do Việt Nam sản xuất.
+  
+  <details open class="solution">
+    <summary class="solution-header">Xem lời giải (NOT EXISTS pattern)</summary>
+    <div class="solution-body">
+      <pre class="sql-block">
+-- Câu 1: Tìm KH không tồn tại SP của Sing nào mà KH đó chưa mua.
+SELECT KH.MAKH, KH.HOTEN
+FROM KHACHHANG KH
+WHERE NOT EXISTS (
+    SELECT * FROM SANPHAM SP WHERE NUOCSX = 'Singapore'
+    AND NOT EXISTS (
+        SELECT * FROM HOADON HD JOIN CTHD CT ON HD.SOHD = CT.SOHD
+        WHERE HD.MAKH = KH.MAKH AND CT.MASP = SP.MASP
+    )
+);
+      </pre>
+    </div>
+  </details>
+</div>
+
+<h2 id="4-13">=== ONE-PAGE RECALL ===</h2>
+<div class="recall-sheet">
+  <ul>
+    <li><strong>Pipeline:</strong> <code>FROM &gt; WHERE &gt; GROUP BY &gt; HAVING &gt; SELECT &gt; ORDER BY</code>.</li>
+    <li><strong>WHERE:</strong> lọc dòng trước gom nhóm; <strong>HAVING:</strong> lọc nhóm sau khi có hàm toán học (SUM, COUNT).</li>
+    <li><code>COUNT(*)</code> đếm cả dòng NULL; <code>COUNT(col)</code> đếm giá trị không NULL; <code>COUNT(DISTINCT col)</code> đếm số loại.</li>
+    <li>So sánh rỗng: Dùng <code>IS NULL</code> hoặc <code>IS NOT NULL</code>, không dùng dấu <code>=</code>.</li>
+    <li><strong>Double NOT EXISTS Template:</strong> <code>SELECT ... FROM T1 WHERE NOT EXISTS (SELECT * FROM T2 WHERE ... AND NOT EXISTS (SELECT * FROM T3 WHERE T3.T1_ID=T1.ID AND T3.T2_ID=T2.ID))</code></li>
+    <li>Nếu bài dùng chuỗi ngày theo dạng ngày/tháng/năm, nên đặt <code>SET DATEFORMAT DMY;</code>; trong mã thực tế, ưu tiên literal ngày không nhập nhằng như <code>YYYYMMDD</code> hoặc tham số kiểu ngày.</li>
+  </ul>
+</div>
+</section>
+
+<!-- === ch05_constraints.html === -->
+<section id="ch05">
+<h1 class="chapter-title">Chương 5: Ràng Buộc Toàn Vẹn (Integrity Constraints)</h1>
+
+<div class="callout callout-why">
+    <h4>🤔 Trực giác: Tại sao cần Ràng Buộc Toàn Vẹn?</h4>
+    <p>Hãy tưởng tượng bạn đang quản lý một trường đại học. Chuyện gì sẽ xảy ra nếu:</p>
+    <ul>
+        <li>Điểm thi của sinh viên là <code>-5</code> hoặc <code>15</code> (trong khi thang điểm là 0-10)?</li>
+        <li>Một sinh viên có hai mã số sinh viên khác nhau?</li>
+        <li>Bạn phân công giảng viên dạy một môn học không tồn tại?</li>
+    </ul>
+    <p>Dữ liệu sai lệch (rác) sẽ dẫn đến quyết định sai lầm. <strong>Ràng buộc toàn vẹn (RBTV)</strong> chính là các "quy tắc" (rules) mà CSDL phải tuân thủ mọi lúc để đảm bảo dữ liệu luôn <strong>chính xác, hợp lệ và nhất quán</strong>.</p>
+</div>
+
+<h2>5.1 Khái niệm Ràng Buộc Toàn Vẹn</h2>
+
+<p><strong>Định nghĩa:</strong> Ràng buộc toàn vẹn (Integrity Constraints - IC) là các điều kiện (quy tắc) mà trạng thái của cơ sở dữ liệu phải thỏa mãn tại mọi thời điểm.</p>
+
+<p>Mỗi RBTV được mô tả qua hai yếu tố chính:</p>
+<ol>
+    <li><strong>Nội dung (Điều kiện):</strong> Quy tắc cụ thể là gì (thường biểu diễn bằng ngôn ngữ tự nhiên, đại số quan hệ hoặc SQL).</li>
+    <li><strong>Bối cảnh (Context/Scope):</strong> Các quan hệ (bảng) nào chịu sự chi phối của quy tắc này.</li>
+</ol>
+
+<div class="callout callout-mental">
+    <h4>🧠 Mental Model: Người gác cổng</h4>
+    <p>Hãy xem RBTV như những người gác cổng tại một câu lạc bộ đêm. Trước khi cho phép bất kỳ ai (dữ liệu mới) vào, hoặc cho phép người đang ở trong thay đổi trang phục (cập nhật), hoặc rời đi (xóa), người gác cổng sẽ kiểm tra xem hành động đó có vi phạm "quy định của quán" hay không. Nếu vi phạm, hành động bị từ chối thẳng thừng.</p>
+</div>
+
+<h2>5.2 Phân loại Ràng Buộc Toàn Vẹn</h2>
+
+<p>Các RBTV thường được phân loại dựa trên "tầm vực" và tính chất của chúng.</p>
+
+<h3>a) Ràng buộc miền giá trị (Domain Constraint)</h3>
+<p>Quy định miền giá trị hợp lệ cho một thuộc tính. Nghĩa là giá trị của cột đó phải thuộc một kiểu dữ liệu nhất định, hoặc nằm trong một khoảng nhất định.</p>
+<ul>
+    <li><strong>Ví dụ:</strong> Điểm thi phải từ 0 đến 10. Giới tính chỉ được là 'Nam' hoặc 'Nữ'.</li>
+    <li><strong>SQL Server:</strong> Sử dụng <code>CHECK</code> constraint.</li>
+</ul>
+
+<h3>b) Ràng buộc khóa (Key Constraint)</h3>
+<p>Đảm bảo tính duy nhất của các bộ (dòng) trong một quan hệ. Không thể có hai dòng khác nhau có cùng giá trị trên thuộc tính Khóa chính (Primary Key).</p>
+<ul>
+    <li><strong>Khái niệm liên quan:</strong> Siêu khóa (Superkey), Khóa ứng viên (Candidate key), Khóa chính (Primary key).</li>
+    <li><strong>Ví dụ:</strong> Trong bảng <code>GIAOVIEN</code>, <code>MAGV</code> là khóa chính. Không thể có hai giảng viên trùng MAGV.</li>
+</ul>
+
+<h3>c) Ràng buộc toàn vẹn thực thể (Entity Integrity)</h3>
+<p>Một quy tắc bất di bất dịch: <strong>Các thuộc tính khóa chính không được phép mang giá trị rỗng (NULL).</strong></p>
+<p><em>Lý do:</em> Khóa chính dùng để xác định duy nhất một dòng. Nếu nó NULL, ta không biết đó là dòng nào.</p>
+
+<h3>d) Ràng buộc toàn vẹn tham chiếu (Referential Integrity) - CỰC QUAN TRỌNG</h3>
+<p>Đảm bảo sự nhất quán giữa hai bảng có mối quan hệ với nhau (thông qua Khóa ngoại - Foreign Key).</p>
+<p><strong>Quy tắc:</strong> Giá trị của Khóa ngoại trong bảng con (Child table) phải <strong>tồn tại</strong> trong Khóa chính của bảng cha (Parent table), hoặc có thể bằng NULL (nếu không có quy định bắt buộc phải có).</p>
+<ul>
+    <li><strong>Ví dụ:</strong> Bảng <code>GIAOVIEN(MAGV, TENGV, MAKHOA)</code> tham chiếu tới <code>KHOA(MAKHOA, TENKHOA)</code>.<br>
+    Một giáo viên chỉ có thể thuộc về một <code>MAKHOA</code> đã có trong bảng <code>KHOA</code>. Không thể có một GV thuộc khoa 'K99' nếu 'K99' chưa tồn tại.</li>
+</ul>
+
+<div class="callout callout-exam">
+    <h4>🎯 Exam Signal: Xử lý khi vi phạm khóa ngoại (Cascade Actions)</h4>
+    <p>Đề thi thường hỏi: "Khi xóa một dòng ở bảng cha thì chuyện gì xảy ra với các dòng ở bảng con?". SQL hỗ trợ 4 hành động:</p>
+    <ul>
+        <li><strong>NO ACTION (Mặc định):</strong> Báo lỗi và ngăn chặn việc xóa/sửa bảng cha.</li>
+        <li><strong>CASCADE:</strong> Xóa (hoặc sửa) luôn các dòng tương ứng ở bảng con. (Ví dụ: Xóa khoa thì xóa luôn các GV thuộc khoa đó).</li>
+        <li><strong>SET NULL:</strong> Cập nhật giá trị FK ở bảng con thành NULL (nếu cột đó cho phép NULL).</li>
+        <li><strong>SET DEFAULT:</strong> Cập nhật FK về giá trị mặc định.</li>
+    </ul>
+</div>
+
+<h3>e) Ràng buộc liên thuộc tính (Inter-attribute Constraint)</h3>
+<p>Là ràng buộc giữa các thuộc tính <strong>trong cùng một bảng (cùng 1 dòng)</strong>.</p>
+<ul>
+    <li><strong>Ví dụ:</strong> Trong bảng <code>NHANVIEN</code>, Ngày sinh (NGSINH) phải nhỏ hơn Ngày vào làm (NGVL). <code>NGSINH < NGVL</code>.</li>
+</ul>
+
+<h3>f) Ràng buộc liên bộ (Inter-tuple Constraint)</h3>
+<p>Là ràng buộc giữa các dòng (bộ) <strong>khác nhau trong cùng một bảng</strong>.</p>
+<ul>
+    <li><strong>Ví dụ:</strong> Không có hai giáo viên nào trong cùng một khoa có cùng học vị và học hàm.</li>
+</ul>
+
+<h3>g) Ràng buộc liên quan hệ (Multi-relation Constraints)</h3>
+<p>Là những ràng buộc phức tạp, liên quan đến dữ liệu trải dài trên <strong>nhiều bảng khác nhau</strong>.</p>
+<ul>
+    <li><strong>Ví dụ:</strong> Trưởng khoa của một khoa phải là giáo viên thuộc chính khoa đó. (Liên quan bảng KHOA và GIAOVIEN).</li>
+</ul>
+
+<hr>
+
+<h2>5.3 BẢNG TẦM ẢNH HƯỞNG (TRỌNG ĐIỂM THI UIT)</h2>
+
+<div class="callout callout-connection">
+    <h4>🔗 Connection: Bảng Tầm Ảnh Hưởng là gì?</h4>
+    <p>Trong dạng bài RBTV của UIT, đề thường yêu cầu lập <strong>Bảng Tầm Ảnh Hưởng</strong> sau khi phát biểu nội dung và bối cảnh. Bảng liệt kê các thao tác Thêm (Insert), Xóa (Delete), Sửa (Update) trên các quan hệ có thể làm <strong>vi phạm</strong> ràng buộc đang xét.</p>
+</div>
+
+<h3>Ký hiệu trong bảng tầm ảnh hưởng UIT:</h3>
+<ul>
+    <li><strong>+</strong> : Thao tác <strong>có khả năng</strong> làm vi phạm RBTV (cần phải kiểm tra/viết trigger).</li>
+    <li><strong>-</strong> : Thao tác không thể làm trạng thái đang hợp lệ trở thành vi phạm đối với RBTV đang xét (không cần kiểm tra RBTV này).</li>
+    <li><strong>+(Thuộc Tính)</strong> : Thao tác Sửa (Update) chỉ có khả năng gây vi phạm khi sửa trên thuộc tính được chỉ định. (Ví dụ: +(MAKHOA)).</li>
+</ul>
+
+<h3>Cách tư duy lập bảng:</h3>
+<ol>
+    <li><strong>Thêm (Insert) vào một bảng:</strong> Hỏi "Nếu ta thêm dòng mới vào bảng này, nó có phá vỡ quy tắc không?".</li>
+    <li><strong>Xóa (Delete) từ một bảng:</strong> Hỏi "Nếu ta bớt đi một dòng ở bảng này, nó có phá vỡ quy tắc không?".</li>
+    <li><strong>Sửa (Update):</strong> Hỏi "Nếu ta sửa cột X, quy tắc có bị ảnh hưởng không?".</li>
+</ol>
+
+<div class="callout callout-trap">
+    <h4>⚠ BẪY: Xóa dữ liệu có làm vi phạm RBTV không?</h4>
+    <p>Sinh viên thường đánh dấu <code>+</code> cho thao tác XÓA mà không suy nghĩ. Thực tế:</p>
+    <ul>
+        <li>Xóa một khóa ngoại (bảng con): Càng xóa càng an toàn, <strong>KHÔNG</strong> vi phạm (-).</li>
+        <li>Xóa một khóa chính (bảng cha): <strong>CÓ THỂ</strong> vi phạm (+) nếu có bảng con đang tham chiếu đến nó.</li>
+        <li>Các ràng buộc như "Tổng tiền = Sum(Trị giá)": Cả Thêm, Xóa, Sửa đều là (+).</li>
+    </ul>
+</div>
+
+<h3>Ví dụ chi tiết: Lập Bảng Tầm Ảnh Hưởng</h3>
+
+<h4>Ví dụ 1: Ràng buộc Khóa Ngoại (Tham chiếu)</h4>
+<p><strong>RB1:</strong> "Mỗi giáo viên phải thuộc về một khoa tồn tại."</p>
+<ul>
+    <li><strong>Nội dung:</strong> ∀ gv ∈ GIAOVIEN, ∃ k ∈ KHOA: gv.MAKHOA = k.MAKHOA (Hoặc GIAOVIEN.MAKHOA ⊆ KHOA.MAKHOA).</li>
+    <li><strong>Bối cảnh:</strong> GIAOVIEN, KHOA.</li>
+</ul>
+
+<table class="bth-table">
+    <thead>
+        <tr>
+            <th>Quan hệ</th>
+            <th>Thêm (Insert)</th>
+            <th>Xóa (Delete)</th>
+            <th>Sửa (Update)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>GIAOVIEN</td>
+            <td>+</td>
+            <td>-</td>
+            <td>+(MAKHOA)</td>
+        </tr>
+        <tr>
+            <td>KHOA</td>
+            <td>-</td>
+            <td>+</td>
+            <td>+(MAKHOA)</td>
+        </tr>
+    </tbody>
+</table>
+<div class="callout callout-dryrun">
+    <h4>Bước chạy khô (Dry run) phân tích:</h4>
+    <ul>
+        <li><strong>Bảng GIAOVIEN:</strong>
+            <ul>
+                <li><strong>Thêm:</strong> (+) Vì nếu thêm một GV với MAKHOA = 'Vip', mà khoa 'Vip' không có trong KHOA → Vi phạm!</li>
+                <li><strong>Xóa:</strong> (-) Xóa bớt GV thì chỉ giảm đi người, không ảnh hưởng luật.</li>
+                <li><strong>Sửa:</strong> +(MAKHOA) Nếu đổi GV từ khoa 'CNTT' sang khoa 'MaThuật' không tồn tại → Vi phạm! (Chỉ quan tâm cột MAKHOA).</li>
+            </ul>
+        </li>
+        <li><strong>Bảng KHOA:</strong>
+            <ul>
+                <li><strong>Thêm:</strong> (-) Thêm khoa mới thì kệ nó, GV vẫn đang thuộc khoa cũ hợp lệ.</li>
+                <li><strong>Xóa:</strong> (+) Nếu xóa khoa 'CNTT' trong khi vẫn còn GV đang thuộc khoa này → GV bị mồ côi → Vi phạm!</li>
+                <li><strong>Sửa:</strong> +(MAKHOA) Đổi mã khoa 'CNTT' thành 'IT' thì GV cũ mang mã 'CNTT' sẽ vi phạm.</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<h4>Ví dụ 2: Ràng buộc Liên Quan Hệ Phức Tạp</h4>
+<p><strong>RB2:</strong> "Nếu một khoa có trưởng khoa, người đó phải tồn tại trong GIAOVIEN và thuộc chính khoa đó."</p>
+<ul>
+    <li><strong>Nội dung:</strong> ∀ k ∈ KHOA, nếu <code>k.TRUONGKHOA IS NOT NULL</code> thì ∃ gv ∈ GIAOVIEN: gv.MAGV = k.TRUONGKHOA ∧ gv.MAKHOA = k.MAKHOA.</li>
+    <li><strong>Bối cảnh:</strong> KHOA, GIAOVIEN</li>
+    <li><strong>Giả định cài đặt:</strong> Có khóa ngoại <code>KHOA(TRUONGKHOA) REFERENCES GIAOVIEN(MAGV)</code> (<code>TRUONGKHOA</code> được phép NULL). Khóa ngoại bảo đảm sự tồn tại; trigger bên dưới kiểm tra điều kiện “cùng khoa”.</li>
+</ul>
+
+<table class="bth-table">
+    <thead>
+        <tr>
+            <th>Quan hệ</th>
+            <th>Thêm</th>
+            <th>Xóa</th>
+            <th>Sửa</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>KHOA</td>
+            <td>+</td>
+            <td>-</td>
+            <td>+(TRUONGKHOA, MAKHOA)</td>
+        </tr>
+        <tr>
+            <td>GIAOVIEN</td>
+            <td>- (*)</td>
+            <td>+</td>
+            <td>+(MAGV, MAKHOA)</td>
+        </tr>
+    </tbody>
+</table>
+<p><em>(*) Thêm GV không làm vi phạm một trạng thái đang hợp lệ. Xóa/đổi MAGV của trưởng khoa được khóa ngoại xử lý; đổi MAKHOA của giáo viên đang làm trưởng khoa phải kiểm tra RB2.</em></p>
+
+
+<h4>Ví dụ 3: Ràng buộc tính toán (Derived attributes)</h4>
+<p><strong>RB3:</strong> "Trị giá của hóa đơn bằng tổng <code>SL × GIA</code> của các sản phẩm trong chi tiết hóa đơn đó."</p>
+<ul>
+    <li><strong>Lược đồ dùng đúng theo QLBH:</strong> <code>HOADON(SOHD, ..., TRIGIA)</code>, <code>CTHD(SOHD, MASP, SL)</code>, <code>SANPHAM(MASP, ..., GIA)</code>.</li>
+    <li><strong>Nội dung:</strong> Với mỗi hóa đơn <code>h</code>, <code>h.TRIGIA = COALESCE(SUM(ct.SL × sp.GIA), 0)</code> trên <code>CTHD ct JOIN SANPHAM sp ON ct.MASP = sp.MASP</code> và <code>ct.SOHD = h.SOHD</code>; hóa đơn chưa có chi tiết có tổng bằng 0.</li>
+    <li><strong>Bối cảnh:</strong> HOADON, CTHD, SANPHAM.</li>
+</ul>
+<table class="bth-table">
+    <thead>
+        <tr>
+            <th>Quan hệ</th>
+            <th>Thêm</th>
+            <th>Xóa</th>
+            <th>Sửa</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>HOADON</td>
+            <td>+</td>
+            <td>-</td>
+            <td>+(SOHD, TRIGIA)</td>
+        </tr>
+        <tr>
+            <td>CTHD</td>
+            <td>+</td>
+            <td>+</td>
+            <td>+(SOHD, MASP, SL)</td>
+        </tr>
+        <tr>
+            <td>SANPHAM</td>
+            <td>-</td>
+            <td>+</td>
+            <td>+(GIA)</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>5.4 Cài đặt RBTV bằng SQL</h2>
+
+<h3>1. Sử dụng CHECK Constraint (Ràng buộc miền giá trị, Liên thuộc tính cùng bảng)</h3>
+
+<pre class="sql-block">
+<span class="sql-comment">-- Ràng buộc điểm thi từ 0 đến 10 (Domain constraint)</span>
+<span class="sql-keyword">ALTER TABLE</span> KETQUATHI 
+<span class="sql-keyword">ADD CONSTRAINT</span> CHK_DIEM <span class="sql-keyword">CHECK</span> (DIEM &gt;= 0 <span class="sql-keyword">AND</span> DIEM &lt;= 10);
+
+<span class="sql-comment">-- Ràng buộc ngày sinh phải trước ngày vào làm (Inter-attribute constraint)</span>
+<span class="sql-keyword">ALTER TABLE</span> GIAOVIEN
+<span class="sql-keyword">ADD CONSTRAINT</span> CHK_NGAY <span class="sql-keyword">CHECK</span> (NGSINH &lt; NGVL);
+</pre>
+
+<h3>2. Sử dụng TRIGGER (Cho Ràng buộc Liên quan hệ, Phức tạp)</h3>
+<p>Trong SQL Server, <code>CHECK</code> không được tham chiếu dữ liệu ở bảng khác. Với ràng buộc liên quan hệ hoặc phép gộp, trigger là cách cài đặt thường dùng ở mức CSDL (ngoài ra có thể kiểm soát qua thủ tục/giao dịch của ứng dụng). Trigger chạy khi có sự kiện INSERT, UPDATE hoặc DELETE.</p>
+
+<p>SQL Server sử dụng hai bảng ảo (virtual tables) trong quá trình thực thi Trigger: <code>inserted</code> (chứa dữ liệu mới vừa thêm/sửa) và <code>deleted</code> (chứa dữ liệu cũ vừa xóa/trước khi sửa).</p>
+
+<div class="callout callout-exam">
+    <h4>🎯 Code Template Trigger Kiểm tra RBTV:</h4>
+    <p>RBTV: "Trưởng khoa của một khoa phải là giáo viên thuộc khoa đó"</p>
+    <pre class="sql-block">
+<span class="sql-comment">-- Giả định đã có FK KHOA(TRUONGKHOA) -&gt; GIAOVIEN(MAGV).</span>
+<span class="sql-comment">-- Trigger 1: kiểm tra mọi dòng KHOA vừa thêm hoặc sửa.</span>
+<span class="sql-keyword">CREATE TRIGGER</span> TRG_KHOA_TRUONGKHOA <span class="sql-keyword">ON</span> KHOA
+<span class="sql-keyword">AFTER INSERT, UPDATE</span>
+<span class="sql-keyword">AS</span>
+<span class="sql-keyword">BEGIN</span>
+    <span class="sql-keyword">SET NOCOUNT ON</span>;
+    <span class="sql-keyword">IF EXISTS</span> (
+        <span class="sql-keyword">SELECT</span> 1
+        <span class="sql-keyword">FROM</span> inserted AS i
+        <span class="sql-keyword">LEFT JOIN</span> GIAOVIEN AS g <span class="sql-keyword">ON</span> g.MAGV = i.TRUONGKHOA
+        <span class="sql-keyword">WHERE</span> i.TRUONGKHOA <span class="sql-keyword">IS NOT NULL</span>
+          <span class="sql-keyword">AND</span> (g.MAGV <span class="sql-keyword">IS NULL</span> <span class="sql-keyword">OR</span> g.MAKHOA &lt;&gt; i.MAKHOA)
+    )
+    <span class="sql-keyword">BEGIN</span>
+        <span class="sql-keyword">ROLLBACK TRANSACTION</span>;
+        <span class="sql-keyword">THROW</span> 50001, 'Truong khoa phai ton tai va thuoc chinh khoa do.', 1;
+    <span class="sql-keyword">END</span>
+<span class="sql-keyword">END</span>
+
+<span class="sql-comment">-- Trigger 2: giáo viên đang làm trưởng khoa không được chuyển sang khoa khác.</span>
+<span class="sql-keyword">CREATE TRIGGER</span> TRG_GIAOVIEN_TRUONGKHOA <span class="sql-keyword">ON</span> GIAOVIEN
+<span class="sql-keyword">AFTER UPDATE</span>
+<span class="sql-keyword">AS</span>
+<span class="sql-keyword">BEGIN</span>
+    <span class="sql-keyword">SET NOCOUNT ON</span>;
+    <span class="sql-keyword">IF NOT UPDATE</span>(MAKHOA) <span class="sql-keyword">RETURN</span>;
+
+    <span class="sql-keyword">IF EXISTS</span> (
+        <span class="sql-keyword">SELECT</span> 1
+        <span class="sql-keyword">FROM</span> inserted AS i
+        <span class="sql-keyword">JOIN</span> KHOA AS k <span class="sql-keyword">ON</span> k.TRUONGKHOA = i.MAGV
+        <span class="sql-keyword">WHERE</span> k.MAKHOA &lt;&gt; i.MAKHOA
+    )
+    <span class="sql-keyword">BEGIN</span>
+        <span class="sql-keyword">ROLLBACK TRANSACTION</span>;
+        <span class="sql-keyword">THROW</span> 50002, 'Khong the chuyen truong khoa sang khoa khac.', 1;
+    <span class="sql-keyword">END</span>
+<span class="sql-keyword">END</span>
+    </pre>
+</div>
+
+<hr>
+
+<h2>5.5 Bài tập thực hành & Bảng Tầm Ảnh Hưởng</h2>
+
+<div class="exercise-block">
+    <h4>Bài tập 1: Tuổi của Giảng viên</h4>
+    <p>Trong CSDL QLGV, hãy phát biểu nội dung, bối cảnh, lập bảng tầm ảnh hưởng và viết SQL cho ràng buộc: <strong>"Giáo viên khi vào làm phải từ 22 tuổi trở lên."</strong> (Biết bảng <code>GIAOVIEN(MAGV, HOTEN, NGSINH, NGVL)</code>)</p>
+    
+    <label class="show-solution-label">
+        <input type="checkbox" class="show-solution" style="display:none;">
+        <span class="solution-toggle">Xem lời giải</span>
+        <div class="solution">
+            <p><strong>Nội dung:</strong> Ngày vào làm phải không sớm hơn sinh nhật lần thứ 22: <code>NGVL ≥ DATEADD(YEAR, 22, NGSINH)</code>.</p>
+            <p><strong>Bối cảnh:</strong> GIAOVIEN</p>
+            <table class="bth-table">
+                <tr><th>Quan hệ</th><th>Thêm</th><th>Xóa</th><th>Sửa</th></tr>
+                <tr><td>GIAOVIEN</td><td>+</td><td>-</td><td>+(NGSINH, NGVL)</td></tr>
+            </table>
+            <p><strong>SQL:</strong> (Dùng CHECK là đủ vì trong cùng 1 bảng)</p>
+            <pre class="sql-block">
+<span class="sql-keyword">ALTER TABLE</span> GIAOVIEN
+<span class="sql-keyword">ADD CONSTRAINT</span> CHK_TUOIGV <span class="sql-keyword">CHECK</span> (NGVL &gt;= DATEADD(YEAR, 22, NGSINH));
+            </pre>
+        </div>
+    </label>
+</div>
+
+<div class="exercise-block">
+    <h4>Bài tập 2: Số lượng chuyên đề</h4>
+    <p>Phát biểu và lập bảng cho RBTV: <strong>"Mỗi giáo viên chỉ được hướng dẫn tối đa 3 sinh viên làm khóa luận."</strong> (Biết <code>KHOALUAN(MAKL, MASV, MAGV_HD)</code>)</p>
+    
+    <label class="show-solution-label">
+        <input type="checkbox" class="show-solution" style="display:none;">
+        <span class="solution-toggle">Xem lời giải</span>
+        <div class="solution">
+            <p><strong>Nội dung:</strong> ∀ gv ∈ KHOALUAN, COUNT(MASV) <= 3</p>
+            <p><strong>Bối cảnh:</strong> KHOALUAN</p>
+            <table class="bth-table">
+                <tr><th>Quan hệ</th><th>Thêm</th><th>Xóa</th><th>Sửa</th></tr>
+                <tr><td>KHOALUAN</td><td>+</td><td>-</td><td>+(MAGV_HD)</td></tr>
+            </table>
+            <p><em>Giải thích:</em> Thêm khóa luận mới làm tăng số lượng KL của GV (+). Xóa khóa luận đi thì số KL giảm đi nên không bao giờ vi phạm (-). Đổi GV HD cho một khóa luận có thể làm GV mới vượt quá 3 (+).</p>
+        </div>
+    </label>
+</div>
+
+<div class="exercise-block">
+    <h4>Bài tập 3: Ngày thi và Ngày kết thúc môn</h4>
+    <p>RBTV: <strong>"Ngày thi của một môn phải lớn hơn hoặc bằng ngày kết thúc của lớp học môn đó."</strong> <br>Biết: <code>GIANGDAY(MALOP, MAMH, MAGV, TUNGAY, DENNGAY)</code>, <code>HOCVIEN(MAHV, HO, TEN, NGSINH, GIOITINH, NOISINH, MALOP)</code> và <code>KETQUATHI(MAHV, MAMH, LANTHI, NGTHI, DIEM)</code></p>
+    
+    <label class="show-solution-label">
+        <input type="checkbox" class="show-solution" style="display:none;">
+        <span class="solution-toggle">Xem lời giải</span>
+        <div class="solution">
+            <p><strong>Bối cảnh:</strong> GIANGDAY, HOCVIEN, KETQUATHI</p>
+            <table class="bth-table">
+                <tr><th>Quan hệ</th><th>Thêm</th><th>Xóa</th><th>Sửa</th></tr>
+                <tr><td>GIANGDAY</td><td>- (*)</td><td>-</td><td>+(DENNGAY, MAMH, MALOP)</td></tr>
+                <tr><td>HOCVIEN</td><td>- (**)</td><td>-</td><td>+(MALOP)</td></tr>
+                <tr><td>KETQUATHI</td><td>+</td><td>-</td><td>+(NGTHI, MAMH, MAHV)</td></tr>
+            </table>
+            <p><em>(*) Khi thêm lớp học giảng dạy mới, lớp đó chưa có ai thi nên không thể vi phạm.</em><br>
+            <em>(**) Khi thêm học viên mới, học viên đó chưa có điểm thi nào nên không thể vi phạm.</em></p>
+        </div>
+    </label>
+</div>
+
+<hr>
+
+<div class="recall-sheet">
+    <h2>ONE-PAGE RECALL: Ràng Buộc Toàn Vẹn</h2>
+    <div class="recall-grid">
+        <div class="recall-card">
+            <h3>1. Các loại RBTV chính</h3>
+            <ul>
+                <li><strong>Miền giá trị (Domain):</strong> Kiểu dữ liệu, CHECK (>=0, IN ('Nam', 'Nu')).</li>
+                <li><strong>Khóa chính (Entity):</strong> Không được trùng lặp, KHÔNG NULL.</li>
+                <li><strong>Khóa ngoại (Referential):</strong> Bảng con tham chiếu bảng cha. Dữ liệu bảng con phải có trong bảng cha.</li>
+                <li><strong>Liên quan hệ:</strong> Ràng buộc nghiệp vụ kéo dài 2 bảng trở lên (dùng Trigger).</li>
+            </ul>
+        </div>
+        
+        <div class="recall-card">
+            <h3>2. Lập Bảng Tầm Ảnh Hưởng</h3>
+            <ul>
+                <li><strong>Thêm (+):</strong> Thường vi phạm nếu quy định giới hạn số lượng (MAX), hoặc phải lấy dữ liệu từ bảng kia.</li>
+                <li><strong>Xóa (-):</strong> Xóa hiếm khi vi phạm trừ khi là: (1) Xóa cha mà con vẫn còn (FK), (2) RBTV tính toán (SUM, COUNT).</li>
+                <li><strong>Sửa +(Cột):</strong> Chỉ điền dấu + nếu thay đổi cột liên quan đến điều kiện.</li>
+            </ul>
+        </div>
+
+        <div class="recall-card">
+            <h3>3. Công cụ SQL Server</h3>
+            <ul>
+                <li><code>CHECK</code>: Bắt lỗi 1 dòng, 1 bảng (Tuổi > 18, Ngày A < Ngày B).</li>
+                <li><code>FOREIGN KEY</code>: Cài đặt toàn vẹn tham chiếu chuẩn.</li>
+                <li><code>TRIGGER</code>: Bắt lỗi khó. Chặn thao tác bằng <code>ROLLBACK TRAN</code>. Dữ liệu mới = <code>inserted</code>, Dữ liệu cũ = <code>deleted</code>.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- === ch06_fd_normalization.html === -->
+<section id="ch06">
+    <h1 class="chapter-title">Chương 6: Phụ Thuộc Hàm & Chuẩn Hóa Dữ Liệu</h1>
+
+    <div class="callout-mental">
+        <strong>🧠 Mental Model</strong>
+        <p>Chuẩn hóa (Normalization) là quá trình "làm sạch" dữ liệu để tránh dư thừa và dị thường (anomaly). Phụ thuộc hàm (Functional Dependency) là công cụ toán học để tìm ra những "mảnh ghép" dữ liệu đang bị dính chặt vào nhau một cách không hợp lý.</p>
+    </div>
+
+    <h2>6.1 Functional Dependency (Phụ thuộc hàm - PTH)</h2>
+    <p><strong>Intuition:</strong> Trong mọi thể hiện hợp lệ của quan hệ, nếu hai bộ trùng giá trị A thì chúng có buộc phải trùng giá trị B hay không? Nếu có, B phụ thuộc hàm vào A. PTH xuất phát từ ngữ nghĩa của lược đồ, không được kết luận chỉ từ vài dòng dữ liệu mẫu.</p>
+    <p><strong>Definition:</strong> Cho lược đồ quan hệ R, tập thuộc tính X, Y ⊆ R. X → Y (X xác định Y, hay Y phụ thuộc hàm vào X) nghĩa là: với mọi bộ t1, t2 trong R, nếu <code>t1[X] = t2[X]</code> thì <code>t1[Y] = t2[Y]</code>.</p>
+    
+    <div class="callout-why">
+        <strong>🤔 Trivial vs Non-trivial</strong>
+        <ul>
+            <li><strong>Trivial (Hiển nhiên):</strong> X → Y với Y ⊆ X (ví dụ: AB → A). Không có ý nghĩa thực tế.</li>
+            <li><strong>Non-trivial (Không hiển nhiên):</strong> X → Y với Y không là tập con của X. Đây là cái chúng ta quan tâm.</li>
+        </ul>
+    </div>
+
+    <p><strong>Ví dụ:</strong> Xét bảng sinh viên:</p>
+    <table class="data-table">
+        <tr><th>MSSV</th><th>HoTen</th><th>MaKhoa</th><th>TenKhoa</th></tr>
+        <tr><td>123</td><td>An</td><td>K01</td><td>CNTT</td></tr>
+        <tr><td>124</td><td>Bình</td><td>K01</td><td>CNTT</td></tr>
+    </table>
+    <p>Ta thấy <code>MSSV → HoTen</code>, <code>MaKhoa → TenKhoa</code>.</p>
+
+    <h2>6.2 Armstrong Axioms (Luật Armstrong)</h2>
+    <p>Gồm 3 tiên đề và 3 hệ quả.</p>
+    <ul>
+        <li><strong>Reflexivity (Phản xạ):</strong> Nếu Y ⊆ X thì X → Y. <em>Trực giác: Có cả họ lẫn tên thì đương nhiên biết được tên.</em></li>
+        <li><strong>Augmentation (Tăng trưởng):</strong> Nếu X → Y thì XZ → YZ. <em>Trực giác: Thêm cùng một thông tin Z vào cả 2 vế thì vẫn đúng.</em></li>
+        <li><strong>Transitivity (Bắc cầu):</strong> Nếu X → Y và Y → Z thì X → Z. <em>Trực giác: MSSV → MaKhoa, MaKhoa → TenKhoa nên MSSV → TenKhoa.</em></li>
+        <li><strong>Union (Hợp):</strong> Nếu X → Y và X → Z thì X → YZ.</li>
+        <li><strong>Decomposition (Tách):</strong> Nếu X → YZ thì X → Y và X → Z.</li>
+        <li><strong>Pseudotransitivity (Bắc cầu giả):</strong> Nếu X → Y và WY → Z thì XW → Z.</li>
+    </ul>
+
+    <h2>6.3 Chứng minh PTH</h2>
+    <p><strong>Template:</strong> Cho tập F, chứng minh X → Y.</p>
+    <div class="steps">
+        <div class="step">Ví dụ: F = {A → B, B → C}. Chứng minh A → C.
+            <ol>
+                <li>A → B (Giả thiết)</li>
+                <li>B → C (Giả thiết)</li>
+                <li>A → C (Luật bắc cầu 1,2) (Q.E.D)</li>
+            </ol>
+        </div>
+    </div>
+
+    <h2>6.4 Attribute Closure X⁺ (Bao đóng của tập thuộc tính)</h2>
+    <p><strong>Thuật toán:</strong> Bắt đầu với X⁺ = X. Duyệt các PTH, nếu vế trái nằm trong X⁺, thêm vế phải vào X⁺. Lặp tới khi X⁺ không đổi.</p>
+    
+    <div class="callout-dryrun">
+        <strong>🏃 Dry run:</strong>
+        <p>R(A, B, C, D, E), F = {A → BC, CD → E, B → D, E → A}. Tính B⁺</p>
+        <ul>
+            <li>Vòng 0: B⁺ = {B}</li>
+            <li>Vòng 1: Dùng B → D, B⁺ = {B, D}</li>
+            <li>Vòng 2: Không thể dùng gì thêm. B⁺ = {B, D}</li>
+        </ul>
+        <p>Tính A⁺</p>
+        <ul>
+            <li>Vòng 0: A⁺ = {A}</li>
+            <li>Vòng 1: Dùng A → BC, A⁺ = {A, B, C}</li>
+            <li>Vòng 2: Dùng B → D, A⁺ = {A, B, C, D}</li>
+            <li>Vòng 3: Dùng CD → E, A⁺ = {A, B, C, D, E} = R⁺. A là siêu khóa!</li>
+        </ul>
+    </div>
+
+    <div class="callout-fast">
+        <strong>⚡ Fast Pattern: Ứng dụng của X⁺</strong>
+        <ul>
+            <li>Kiểm tra X → Y: Xem Y có thuộc X⁺ không.</li>
+            <li>Tìm khóa: X⁺ = R thì X là siêu khóa (superkey).</li>
+        </ul>
+    </div>
+
+    <h2>6.5 Minimal Cover (Phủ tối thiểu - Fc)</h2>
+    <div class="steps">
+        <div class="step">Bước 1: Tách vế phải (chỉ còn 1 thuộc tính).</div>
+        <div class="step">Bước 2: Loại thuộc tính dư ở vế trái (Thử bỏ A trong AB → C, nếu B⁺ chứa C thì A dư).</div>
+        <div class="step">Bước 3: Loại PTH dư (Thử bỏ X → Y, tính lại X⁺ mà vẫn chứa Y thì X → Y dư).</div>
+    </div>
+
+    <div class="callout-dryrun">
+        <strong>🏃 Dry Run đầy đủ</strong>
+        <p>Cho <code>F = {A → BC, AB → C, C → D, A → D}</code>. Tìm một phủ tối thiểu.</p>
+        <ol>
+            <li><strong>Tách vế phải:</strong> <code>F1 = {A → B, A → C, AB → C, C → D, A → D}</code>.</li>
+            <li><strong>Loại thuộc tính dư ở vế trái:</strong> Trong <code>AB → C</code>, B là dư vì với tập hiện tại <code>A⁺</code> đã chứa C nhờ <code>A → C</code>. Thay <code>AB → C</code> bằng <code>A → C</code> và bỏ bản trùng.</li>
+            <li><strong>Loại PTH dư:</strong> Tạm bỏ <code>A → D</code>. Từ <code>A → C</code> và <code>C → D</code> vẫn suy ra D ∈ A⁺, nên <code>A → D</code> là dư.</li>
+            <li><strong>Kết quả:</strong> <code>Fc = {A → B, A → C, C → D}</code>.</li>
+        </ol>
+        <p><strong>Kiểm tra cuối:</strong> <code>Fc</code> suy ra <code>A → BC</code> (hợp), <code>AB → C</code> (tăng trưởng từ A → C) và <code>A → D</code> (bắc cầu). Ngược lại, các PTH của <code>Fc</code> đều có trong hoặc suy ra từ F. Mỗi vế phải chỉ còn một thuộc tính, không còn thuộc tính trái hay PTH dư.</p>
+    </div>
+
+    <h2>6.6 Candidate Key (Khóa ứng viên)</h2>
+    <p><strong>Siêu khóa</strong> là tập X có <code>X⁺ = R</code>. <strong>Khóa ứng viên</strong> là siêu khóa tối thiểu theo phép bao hàm: bỏ bất kỳ thuộc tính nào khỏi X thì không còn là siêu khóa.</p>
+    <div class="callout-exam">
+        <strong>🎯 Exam Signal: Phân tích trái phải</strong>
+        <ul>
+            <li>Thuộc tính <strong>không xuất hiện ở bất kỳ vế phải nào</strong> không thể được suy ra từ thuộc tính khác, nên phải có trong mọi khóa ứng viên.</li>
+            <li>Phân nhóm L/R/LR/N là mẹo sàng lọc để giảm số nhánh, không thay thế phép tính bao đóng và kiểm tra tối thiểu.</li>
+            <li>Chỉ rẽ nhánh trên các thuộc tính còn thiếu khi bao đóng của tập bắt buộc chưa phủ R.</li>
+        </ul>
+    </div>
+
+    <div class="callout-dryrun">
+        <strong>🏃 Dry Run: tìm TẤT CẢ khóa ứng viên</strong>
+        <p>Cho <code>R(A,B,C,D,E,F)</code> và tập PTH <code>G = {A → B, B → A, C → D, D → C, AC → E}</code>.</p>
+        <ol>
+            <li><strong>Thuộc tính bắt buộc:</strong> F không xuất hiện ở vế phải của PTH nào, nên F thuộc mọi khóa. <code>F⁺ = {F}</code>, chưa là siêu khóa.</li>
+            <li><strong>Nhánh cần thiết:</strong> Muốn suy ra cả A,B phải chọn ít nhất một trong {A,B}; muốn suy ra cả C,D phải chọn ít nhất một trong {C,D}. E sẽ được suy ra khi đã có A và C.</li>
+            <li><strong>Tính bao đóng:</strong>
+                <ul>
+                    <li><code>(ACF)⁺ = R</code>: A → B, C → D, AC → E.</li>
+                    <li><code>(ADF)⁺ = R</code>: A → B, D → C, rồi AC → E.</li>
+                    <li><code>(BCF)⁺ = R</code>: B → A, C → D, rồi AC → E.</li>
+                    <li><code>(BDF)⁺ = R</code>: B → A, D → C, rồi AC → E.</li>
+                </ul>
+            </li>
+            <li><strong>Kiểm tra tối thiểu:</strong> Bỏ F thì không thể suy ra F; bỏ lựa chọn từ {A,B} thì thiếu A,B,E; bỏ lựa chọn từ {C,D} thì thiếu C,D,E. Vì vậy cả bốn tập đều tối thiểu.</li>
+        </ol>
+        <p><strong>Tất cả khóa ứng viên:</strong> <code>{ACF, ADF, BCF, BDF}</code>. Ví dụ <code>ABCF</code> là siêu khóa nhưng không phải khóa ứng viên vì chứa thuộc tính dư.</p>
+    </div>
+
+    <h2>6.7 Normal Forms (Các dạng chuẩn)</h2>
+    <p>Thuộc tính <strong>prime</strong> là thuộc tính thuộc ít nhất một khóa ứng viên; thuộc tính còn lại là <strong>non-prime</strong>.</p>
+    <ul>
+        <li><strong>1NF:</strong> Mọi thuộc tính đều đơn trị (atomic).</li>
+        <li><strong>2NF:</strong> Đạt 1NF và không có thuộc tính non-prime phụ thuộc hàm vào một tập con thực sự của bất kỳ khóa ứng viên nào.</li>
+        <li><strong>3NF (tiêu chuẩn chính thức):</strong> Với mọi PTH không hiển nhiên <code>X → A</code> trong F⁺, ít nhất một điều đúng: (1) X là siêu khóa; hoặc (2) A là thuộc tính prime.</li>
+        <li><strong>BCNF:</strong> Với mọi PTH không hiển nhiên <code>X → A</code> trong F⁺, X phải là siêu khóa.</li>
+    </ul>
+    
+    <div class="callout-trap">
+        <strong>⚠ BẪY:</strong> BCNF không cho phép vế phải là prime attribute cứu vãn như 3NF. Nếu X không là siêu khóa, vi phạm BCNF ngay!
+    </div>
+
+    <div class="callout-why">
+        <strong>Vì sao BCNF ⊂ 3NF?</strong>
+        <p>BCNF yêu cầu chặt hơn nên mọi quan hệ đạt BCNF đều đạt 3NF. Chiều ngược lại không đúng. Ví dụ <code>R(A,B,C)</code>, <code>F = {AB → C, C → B}</code> có các khóa ứng viên AB và AC, nên A, B, C đều là prime. PTH <code>C → B</code> vi phạm BCNF vì C không là siêu khóa, nhưng vẫn thỏa 3NF vì B là prime.</p>
+    </div>
+
+    <h2>6.8 Decision Tree Xác Định Dạng Chuẩn</h2>
+    <ol class="steps">
+        <li class="step"><strong>Tìm tất cả khóa ứng viên</strong> bằng bao đóng và kiểm tra tối thiểu; từ đó đánh dấu thuộc tính prime/non-prime.</li>
+        <li class="step"><strong>Kiểm tra 1NF.</strong> Nếu một ô còn chứa danh sách, nhóm lặp hoặc giá trị không nguyên tử theo miền đã chọn thì chưa đạt 1NF.</li>
+        <li class="step"><strong>Kiểm tra 2NF.</strong> Với từng khóa ứng viên ghép, xét mọi tập con thực sự: nếu một tập con xác định thuộc tính non-prime thì vi phạm 2NF. Quan hệ chỉ có khóa đơn không thể vi phạm 2NF do phụ thuộc từng phần.</li>
+        <li class="step"><strong>Kiểm tra 3NF.</strong> Với mỗi PTH không hiển nhiên <code>X → A</code>, tính X⁺: nếu X không là siêu khóa và A không prime thì vi phạm. Không suy luận chỉ từ câu “thuộc tính không khóa xác định thuộc tính không khóa”.</li>
+        <li class="step"><strong>Kiểm tra BCNF.</strong> Với mỗi PTH không hiển nhiên, nếu X⁺ ≠ R thì vi phạm BCNF.</li>
+        <li class="step"><strong>Kết luận dạng chuẩn cao nhất</strong> theo thứ tự 1NF → 2NF → 3NF → BCNF. Tiêu chuẩn chính thức áp dụng cho các PTH trong F⁺; khi làm bài, thường bắt đầu từ phủ tối thiểu rồi dùng bao đóng để kiểm tra các trường hợp cần thiết.</li>
+    </ol>
+
+    <div class="badge-advanced">
+        <h2>6.9 Decomposition (Phân rã) - Nâng cao</h2>
+        <p>Phân rã R thành R1, R2... cần đảm bảo: Không mất dữ liệu (Lossless-join) và Bảo toàn phụ thuộc hàm (Dependency preservation).</p>
+    </div>
+
+    <h2>One-Page Recall & Bài tập</h2>
+    <p>1. Tìm X⁺. 2. Tìm tất cả khóa ứng viên. 3. Tìm phủ tối thiểu. 4. Xác định dạng chuẩn bằng tiêu chuẩn chính thức. Đây là bốn dạng bài rất quan trọng và thường gặp.</p>
+</section>
+
+<!-- === ch07_practical.html === -->
+<!-- ============================================================
+     CHƯƠNG 7: THỰC HÀNH SQL SERVER
+     IT004 – Cẩm nang CSDL • Võ Trọng Phúc
+     ============================================================ -->
+<section id="ch07">
+<div class="chapter-title">
+  <span class="chapter-number">Chương 7</span>
+  <span class="chapter-name">Thực hành SQL Server</span>
+  <span class="chapter-subtitle">SSMS • Tạo Database • Workflow Lab</span>
+</div>
+
+<h2>7.1 Tổng quan môi trường</h2>
+
+<p>IT004 sử dụng <strong>Microsoft SQL Server</strong> làm HQTCSDL thực hành. Bạn cần:</p>
+<ul>
+  <li><strong>SQL Server</strong> — engine xử lý dữ liệu (cài bản Developer hoặc Express — miễn phí)</li>
+  <li><strong>SQL Server Management Studio (SSMS)</strong> — giao diện đồ họa để làm việc với SQL Server</li>
+</ul>
+
+<div class="callout callout-mental">
+  <div class="callout-title">🧠 Mental Model — SQL Server = Bếp, SSMS = Nhà bếp</div>
+  <div class="callout-body">
+    <p>SQL Server là <strong>bếp</strong> (nơi nấu/xử lý dữ liệu). SSMS là <strong>nhà bếp</strong> (nơi bạn đứng, có dao thớt, bảng điều khiển). Bạn viết lệnh SQL trên SSMS → SSMS gửi xuống SQL Server → SQL Server thực thi → trả kết quả lên SSMS.</p>
+  </div>
+</div>
+
+<h2>7.2 Cài đặt SQL Server & SSMS</h2>
+
+<div class="steps">
+  <div class="step"><strong>Tải SQL Server:</strong> Vào <code>https://www.microsoft.com/en-us/sql-server/sql-server-downloads</code>. Chọn bản <strong>Developer</strong> (miễn phí, đầy đủ tính năng) hoặc <strong>Express</strong> (nhẹ hơn).</div>
+  <div class="step"><strong>Cài đặt SQL Server:</strong> Chạy installer → chọn "Basic" installation → chờ hoàn tất. Ghi nhớ <strong>Server Name</strong> (thường là <code>localhost</code> hoặc <code>.\SQLEXPRESS</code>).</div>
+  <div class="step"><strong>Tải SSMS:</strong> Tìm "SSMS download" trên Microsoft Learn → tải bản mới nhất → cài đặt.</div>
+  <div class="step"><strong>Kết nối:</strong> Mở SSMS → nhập Server Name → chọn "Windows Authentication" → Connect.</div>
+</div>
+
+<div class="callout callout-trap">
+  <div class="callout-title">⚠ BẪY — Lỗi kết nối phổ biến</div>
+  <div class="callout-body">
+    <ul>
+      <li><strong>"Cannot connect to server":</strong> Kiểm tra SQL Server service đã chạy chưa (Services → SQL Server → Start)</li>
+      <li><strong>Sai Server Name:</strong> Thử <code>localhost</code>, <code>.</code>, <code>.\SQLEXPRESS</code>, hoặc <code>(localdb)\MSSQLLocalDB</code></li>
+      <li><strong>Authentication fail:</strong> Dùng Windows Authentication nếu không đặt SA password</li>
+    </ul>
+  </div>
+</div>
+
+<h2>7.3 Tạo Database từ script</h2>
+
+<p>Trong IT004, giảng viên cung cấp file <code>.sql</code> chứa cả DDL (tạo bảng) và DML (thêm dữ liệu). Workflow:</p>
+
+<div class="steps">
+  <div class="step"><strong>Tạo database mới:</strong> Trong SSMS, chuột phải "Databases" → "New Database" → nhập tên (vd: <code>QLGV</code>) → OK.</div>
+  <div class="step"><strong>Mở file SQL:</strong> File → Open → File → chọn file <code>.sql</code> được cung cấp.</div>
+  <div class="step"><strong>Chọn đúng database:</strong> Ở dropdown phía trên, chọn database vừa tạo (QLGV). <span style="color: var(--c-danger); font-weight: 600;">Nếu quên bước này, lệnh sẽ chạy trên database sai!</span></div>
+  <div class="step"><strong>Thực thi:</strong> Nhấn <code>F5</code> hoặc nút "Execute" → kiểm tra kết quả ở tab Messages.</div>
+  <div class="step"><strong>Kiểm tra:</strong> Expand database → Tables → kiểm tra các bảng đã tạo → chuột phải → "Select Top 1000 Rows" để xem dữ liệu.</div>
+</div>
+
+<h3>Ví dụ: Tạo database QLGV</h3>
+<pre class="sql-block">
+<span class="cmt">-- Bước 1: Tạo database</span>
+<span class="kw">CREATE DATABASE</span> QLGV;
+<span class="kw">GO</span>
+
+<span class="cmt">-- Bước 2: Chuyển sang database vừa tạo</span>
+<span class="kw">USE</span> QLGV;
+<span class="kw">GO</span>
+
+<span class="cmt">-- Bước 3: Tạo bảng KHOA</span>
+<span class="kw">CREATE TABLE</span> KHOA (
+    MAKHOA  <span class="kw">NVARCHAR</span>(<span class="num">4</span>),
+    TENKHOA <span class="kw">NVARCHAR</span>(<span class="num">40</span>),
+    NGANH   <span class="kw">NVARCHAR</span>(<span class="num">30</span>),
+    TRUONGKHOA <span class="kw">CHAR</span>(<span class="num">4</span>),
+    <span class="kw">CONSTRAINT</span> pk_KHOA <span class="kw">PRIMARY KEY</span> (MAKHOA)
+);
+
+<span class="cmt">-- Bước 4: Thêm dữ liệu</span>
+<span class="kw">SET DATEFORMAT</span> DMY;
+<span class="kw">INSERT INTO</span> KHOA <span class="kw">VALUES</span>(<span class="str">'KHMT'</span>, <span class="str">'Khoa hoc may tinh'</span>, <span class="str">'CNTT'</span>, <span class="str">'GV01'</span>);
+<span class="kw">INSERT INTO</span> KHOA <span class="kw">VALUES</span>(<span class="str">'HTTT'</span>, <span class="str">'He thong thong tin'</span>, <span class="str">'CNTT'</span>, <span class="str">'GV02'</span>);
+<span class="kw">INSERT INTO</span> KHOA <span class="kw">VALUES</span>(<span class="str">'CNPM'</span>, <span class="str">'Cong nghe phan mem'</span>, <span class="str">'CNTT'</span>, <span class="str">'GV04'</span>);
+<span class="kw">INSERT INTO</span> KHOA <span class="kw">VALUES</span>(<span class="str">'MTT'</span>, <span class="str">'Mang va truyen thong'</span>, <span class="str">'CNTT'</span>, <span class="str">'GV03'</span>);
+</pre>
+
+<h2>7.4 Chạy query và đọc kết quả</h2>
+
+<h3>Query Window</h3>
+<p>Trong SSMS, nhấn <code>Ctrl+N</code> để mở query window mới. Viết SQL rồi nhấn <code>F5</code> (toàn bộ) hoặc chọn một đoạn rồi nhấn <code>F5</code> (chỉ chạy đoạn đó).</p>
+
+<h3>Đọc kết quả</h3>
+<table>
+  <thead><tr><th>Tab</th><th>Ý nghĩa</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Results</strong></td><td>Bảng kết quả của SELECT — dữ liệu trả về</td></tr>
+    <tr><td><strong>Messages</strong></td><td>Thông báo: "(X rows affected)" hoặc lỗi</td></tr>
+  </tbody>
+</table>
+
+<h3>Đọc Error Messages</h3>
+<table>
+  <thead><tr><th>Lỗi thường gặp</th><th>Nguyên nhân</th><th>Cách sửa</th></tr></thead>
+  <tbody>
+    <tr><td><code>Invalid object name 'HOCVIEN'</code></td><td>Bảng chưa tạo hoặc sai database</td><td>Kiểm tra USE database, kiểm tra tên bảng</td></tr>
+    <tr><td><code>Invalid column name 'XYZ'</code></td><td>Cột không tồn tại</td><td>Kiểm tra schema bảng</td></tr>
+    <tr><td><code>Violation of PRIMARY KEY constraint</code></td><td>INSERT giá trị PK trùng</td><td>Kiểm tra dữ liệu đã có</td></tr>
+    <tr><td><code>FOREIGN KEY constraint... conflict</code></td><td>FK reference không tồn tại</td><td>INSERT bảng cha trước bảng con</td></tr>
+    <tr><td><code>Conversion failed</code></td><td>Kiểu dữ liệu không khớp</td><td>Kiểm tra data type</td></tr>
+    <tr><td><code>Ambiguous column name</code></td><td>Cột trùng tên khi JOIN nhiều bảng</td><td>Dùng alias: <code>GV.MAGV</code></td></tr>
+  </tbody>
+</table>
+
+<h2>7.5 Xem Relationships (Database Diagram)</h2>
+<div class="steps">
+  <div class="step">Expand database → chuột phải <strong>Database Diagrams</strong> → New Database Diagram</div>
+  <div class="step">Chọn tất cả bảng → Add → Close</div>
+  <div class="step">SSMS tự vẽ diagram với các đường nối PK–FK</div>
+</div>
+
+<h2>7.6 Workflow làm bài Lab IT004</h2>
+
+<div class="callout callout-fast">
+  <div class="callout-title">⚡ Fast Pattern — Quy trình làm bài Lab</div>
+  <div class="callout-body">
+    <ol>
+      <li><strong>Đọc đề:</strong> Hiểu yêu cầu trước khi viết code</li>
+      <li><strong>Chọn đúng DB:</strong> <code>USE QLGV;</code> hoặc <code>USE QLBH;</code></li>
+      <li><strong>Viết query:</strong> Bắt đầu từ đơn giản, thêm dần</li>
+      <li><strong>Chạy từng câu:</strong> Select đoạn code → F5</li>
+      <li><strong>Kiểm tra kết quả:</strong> Có đúng không? Đủ dòng không?</li>
+      <li><strong>Debug nếu sai:</strong> Đọc error message, kiểm tra từng phần</li>
+      <li><strong>Comment code:</strong> <code>-- Câu 1: Liệt kê...</code></li>
+    </ol>
+  </div>
+</div>
+
+<h2>7.7 Mẹo SSMS hữu ích</h2>
+
+<table>
+  <thead><tr><th>Phím tắt</th><th>Chức năng</th></tr></thead>
+  <tbody>
+    <tr><td><code>F5</code></td><td>Execute query</td></tr>
+    <tr><td><code>Ctrl+N</code></td><td>Mở query tab mới</td></tr>
+    <tr><td><code>Ctrl+R</code></td><td>Ẩn/hiện Results pane</td></tr>
+    <tr><td><code>Ctrl+Shift+U</code></td><td>Chữ hoa (UPPERCASE)</td></tr>
+    <tr><td><code>Ctrl+Shift+L</code></td><td>Chữ thường (lowercase)</td></tr>
+    <tr><td><code>Ctrl+K, Ctrl+C</code></td><td>Comment dòng đang chọn</td></tr>
+    <tr><td><code>Ctrl+K, Ctrl+U</code></td><td>Uncomment dòng đang chọn</td></tr>
+    <tr><td><code>Alt+F1</code></td><td>Xem thông tin bảng (đặt con trỏ vào tên bảng)</td></tr>
+  </tbody>
+</table>
+
+<h2>7.8 Pattern từ bài lab IT004</h2>
+
+<p>Phân tích từ các file SQL thực hành, những pattern phổ biến:</p>
+
+<h3>Lab 1–2: DDL + DML cơ bản</h3>
+<pre class="sql-block">
+<span class="cmt">-- Tạo bảng với PK/FK</span>
+<span class="kw">CREATE TABLE</span> HOADON (
+    SOHD    <span class="kw">INT</span>,
+    NGHD    <span class="kw">SMALLDATETIME</span>,
+    MAKH    <span class="kw">CHAR</span>(<span class="num">4</span>),
+    MANV    <span class="kw">CHAR</span>(<span class="num">4</span>),
+    TRIGIA  <span class="kw">MONEY</span>,
+    <span class="kw">CONSTRAINT</span> pk_hd <span class="kw">PRIMARY KEY</span>(SOHD)
+);
+<span class="kw">ALTER TABLE</span> HOADON <span class="kw">ADD CONSTRAINT</span> fk01_HD
+    <span class="kw">FOREIGN KEY</span>(MAKH) <span class="kw">REFERENCES</span> KHACHHANG(MAKH);
+</pre>
+
+<h3>Lab 3–4: SELECT + JOIN + GROUP BY</h3>
+<pre class="sql-block">
+<span class="cmt">-- Đếm số hóa đơn của mỗi khách hàng trong năm 2006</span>
+<span class="kw">SELECT</span> KH.MAKH, KH.HOTEN, <span class="fn">COUNT</span>(HD.SOHD) <span class="kw">AS</span> SoHD
+<span class="kw">FROM</span> KHACHHANG KH
+<span class="kw">JOIN</span> HOADON HD <span class="kw">ON</span> KH.MAKH <span class="op">=</span> HD.MAKH
+<span class="kw">WHERE</span> <span class="fn">YEAR</span>(HD.NGHD) <span class="op">=</span> <span class="num">2006</span>
+<span class="kw">GROUP BY</span> KH.MAKH, KH.HOTEN;
+</pre>
+
+<h3>Lab 5–6: Subquery + NOT EXISTS + Trigger</h3>
+<pre class="sql-block">
+<span class="cmt">-- Tìm khách hàng đã mua TẤT CẢ sản phẩm Việt Nam</span>
+<span class="kw">SELECT</span> KH.MAKH, KH.HOTEN
+<span class="kw">FROM</span> KHACHHANG KH
+<span class="kw">WHERE NOT EXISTS</span> (
+    <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> SANPHAM SP
+    <span class="kw">WHERE</span> SP.NUOCSX <span class="op">=</span> <span class="str">'Viet Nam'</span>
+    <span class="kw">AND NOT EXISTS</span> (
+        <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> CTHD CT
+        <span class="kw">JOIN</span> HOADON HD <span class="kw">ON</span> CT.SOHD <span class="op">=</span> HD.SOHD
+        <span class="kw">WHERE</span> HD.MAKH <span class="op">=</span> KH.MAKH
+        <span class="kw">AND</span> CT.MASP <span class="op">=</span> SP.MASP
+    )
+);
+</pre>
+
+<div class="callout callout-connection">
+  <div class="callout-title">🔗 Connection</div>
+  <div class="callout-body">
+    <p>Query "tất cả" ở trên là SQL tương đương của <strong>phép chia</strong> (Division) trong ĐSQH (Chương 3, mục 3.9). Đây là double NOT EXISTS pattern — pattern quan trọng nhất cho cả thi lý thuyết lẫn thực hành.</p>
+  </div>
+</div>
+
+<!-- ONE-PAGE RECALL -->
+<div class="recall-sheet">
+  <h2>ONE-PAGE RECALL — Chương 7</h2>
+
+  <h4>Workflow Lab</h4>
+  <p><code>Tạo DB</code> → <code>USE DB</code> → <code>Chạy script DDL</code> → <code>Chạy script DML</code> → <code>Kiểm tra</code> → <code>Viết query</code> → <code>Debug</code></p>
+
+  <h4>Phím tắt quan trọng</h4>
+  <p><code>F5</code> Execute • <code>Ctrl+N</code> New query • <code>Ctrl+R</code> Toggle results • <code>Alt+F1</code> Table info</p>
+
+  <h4>⚠ Common Traps</h4>
+  <ul>
+    <li>Quên <code>USE database</code> → query chạy trên DB sai</li>
+    <li>Quên <code>SET DATEFORMAT DMY</code> → ngày tháng sai format</li>
+    <li>Tạo FK trước khi tạo bảng cha → lỗi reference</li>
+    <li>SELECT * quá nhiều dữ liệu → SSMS treo</li>
+  </ul>
+</div>
+
+</section>
+
+<!-- === exam_playbook.html === -->
+<section id="exam-playbook">
+    <h1 class="chapter-title">Exam Playbook - Kỹ Năng Giải Đề Tốc Độ</h1>
+
+    <h2>1. ER Diagram: Checklist 60 giây</h2>
+    <ul>
+        <li>Thực thể yếu: Nhớ nét đôi (hộp và thoi) và khóa một phần (nét đứt).</li>
+        <li>Đa trị: Hình oval nét đôi.</li>
+        <li>Bản số: (min, max). Đừng nhầm lẫn chiều đọc. UIT đọc theo chuẩn (x,y) hướng từ thực thể sang mối kết hợp.</li>
+    </ul>
+
+    <h2>2. Đại Số Quan Hệ (ĐSQH): Từ Khóa &rarr; Phép toán cần cân nhắc</h2>
+    <p>Các từ khóa dưới đây chỉ là tín hiệu. Chọn phép toán dựa trên ngữ nghĩa và lược đồ kết quả, không ánh xạ máy móc.</p>
+    <table class="data-table">
+        <tr><th>Keyword trong đề</th><th>Toán tử ĐSQH</th></tr>
+        <tr><td>"Và", "Cả hai"</td><td>Giao (&cap;), kết (&bowtie;) hoặc điều kiện ∧</td></tr>
+        <tr><td>"Hoặc"</td><td>Hợp (&cup;) hoặc điều kiện ∨</td></tr>
+        <tr><td>"Không", "Ngoại trừ"</td><td>Trừ (-) hoặc phủ định trong phép chọn</td></tr>
+        <tr><td>"Tất cả", "Mỗi"</td><td>Phép chia (&divide;) khi có dạng R(X,Y) và S(Y), hoặc biểu thức phổ quát tương đương</td></tr>
+    </table>
+
+    <h2>3. SQL: Từ Khóa &rarr; Pattern</h2>
+    <table class="data-table">
+        <tr><th>Keyword trong đề</th><th>SQL Pattern</th></tr>
+        <tr><td>Sắp xếp, lớn nhất (của 1 thuộc tính)</td><td><code>ORDER BY ... DESC</code>, <code>TOP 1 / FETCH FIRST</code></td></tr>
+        <tr><td>Gom nhóm, mỗi, tính tổng/đếm theo</td><td><code>GROUP BY</code> + Aggregation</td></tr>
+        <tr><td>Lọc trên nhóm (những nhóm có đếm > 5)</td><td><code>HAVING</code></td></tr>
+    </table>
+
+    <div class="callout-fast">
+        <strong>⚡ Fast Pattern: Truy vấn "Tất cả" (Division)</strong>
+        <p>1. Phép chia: <code>R1 &divide; R2</code> (ít hỗ trợ trong SQL Server)</p>
+        <p>2. Dùng <code>NOT EXISTS</code> lồng nhau: Không tồn tại x mà không tồn tại y để chúng kết nối.</p>
+        <p>3. Dùng <code>COUNT(DISTINCT ...) = (SELECT COUNT...)</code>: Đếm số lượng, nếu bằng đúng tổng số thì thỏa mãn.</p>
+    </div>
+
+    <div class="callout-trap">
+        <strong>⚠ BẪY: "NẾU CÓ"</strong>
+        <p>Đề yêu cầu in ra sinh viên và điểm số, "nếu không có điểm thì để NULL". Đây là ngữ nghĩa ngoại kết: thường viết <code>LEFT JOIN</code> từ tập sinh viên cần giữ sang bảng điểm. <code>INNER JOIN</code> sẽ làm mất sinh viên chưa có điểm.</p>
+    </div>
+
+    <h2>4. Tìm Giá Trị Maximum (4 cách)</h2>
+    <ul>
+        <li>Cách 1: <code>MAX()</code></li>
+        <li>Cách 2: <code>ORDER BY ... DESC</code> + <code>TOP 1</code> (hoặc LIMIT 1 tùy DBMS, SQL Server dùng TOP).</li>
+        <li>Cách 3: <code>ALL (SELECT ...)</code></li>
+        <li>Cách 4: <code>NOT EXISTS</code> (không có thằng nào lớn hơn nó)</li>
+    </ul>
+
+    <h2>5. Timeline Phân Bổ 90 Phút</h2>
+    <ul>
+        <li><strong>0-15m:</strong> Chữa ER / Lược đồ. Đừng vẽ nháp quá kỹ, dùng bút chì tẩy cho nhanh.</li>
+        <li><strong>15-35m:</strong> Đại số quan hệ & SQL cơ bản (3-4 câu đầu).</li>
+        <li><strong>35-60m:</strong> SQL nâng cao (gom nhóm, truy vấn con, tất cả).</li>
+        <li><strong>60-80m:</strong> Phụ thuộc hàm, chuẩn hóa. Theo đúng thuật toán tính bao đóng, tìm khóa. Đừng nhẩm.</li>
+        <li><strong>80-90m:</strong> Dò bài, check lỗi cú pháp SQL (dấu phẩy, nhóm ngoặc), check điều kiện kết.</li>
+    </ul>
+
+</section>
+
+<!-- === cheat_sheet.html === -->
+<section id="cheat-sheet" class="recall-sheet">
+    <h1 class="chapter-title">Cheat Sheet 6 Chương - Cứu Cánh Trước Giờ G</h1>
+
+    <h2>Chương 1: 5 Khái Niệm Lõi</h2>
+    <ul>
+        <li><strong>Data vs Information:</strong> Dữ liệu là số liệu thô; Thông tin là dữ liệu đã xử lý.</li>
+        <li><strong>DBMS:</strong> Hệ quản trị CSDL.</li>
+        <li><strong>Mức kiến trúc (3 mức):</strong> Ngoài (View) &rarr; Quan niệm (Logic) &rarr; Trong (Vật lý).</li>
+        <li><strong>Độc lập dữ liệu:</strong> Đổi schema vật lý không đổi logic; đổi logic không ảnh hưởng app.</li>
+        <li><strong>Key:</strong> Khóa chính (Primary Key - PK), Khóa ngoại (Foreign Key - FK).</li>
+    </ul>
+
+    <h2>Chương 2: ER & Ánh xạ</h2>
+    <div class="callout-exam">
+        <strong>🎯 Nguyên tắc ánh xạ:</strong>
+        <p>1-1: Nhét FK vào bên nào cũng được (nên bên tham gia toàn phần).</p>
+        <p>1-N: Bốc PK bên 1 thảy sang bên N làm FK.</p>
+        <p>M-N: Tách thành 1 bảng mới, PK là (PK bên A, PK bên B).</p>
+        <p>Đa trị: Tách bảng riêng, PK là (PK gốc, Giá trị thuộc tính đa trị).</p>
+    </div>
+
+    <h2>Chương 3: Đại Số Quan Hệ</h2>
+    <p>Chọn (&sigma;): Lọc dòng. Chiếu (&pi;): Cắt cột. Kết tự nhiên (&bowtie;). Hợp (&cup;), Giao (&cap;), Trừ (-).</p>
+    
+    <h2>Chương 4: SQL T-SQL Tốc Hành</h2>
+    <pre class="sql-block">
+SELECT [DISTINCT] cột
+FROM bảng1 JOIN bảng2 ON bảng1.cột = bảng2.cột
+WHERE điều kiện dòng
+GROUP BY cột gom nhóm
+HAVING điều kiện nhóm
+ORDER BY cột sắp xếp [ASC|DESC]
+    </pre>
+    <div class="callout-trap">
+        <strong>⚠ BẪY (Top 3):</strong>
+        <ol>
+            <li>Trong <code>SELECT</code> có cột không dùng hàm tập hợp (Sum, Count) mà quên bỏ vào <code>GROUP BY</code>.</li>
+            <li>Dùng <code>WHERE</code> cho hàm tập hợp (Phải dùng <code>HAVING</code>).</li>
+            <li>Thiếu điều kiện JOIN khi query nhiều bảng &rarr; Sinh ra tích Đề-các (Cartesian product) làm nổ dữ liệu.</li>
+        </ol>
+    </div>
+
+    <h2>Chương 5: Bảng Tầm Ảnh Hưởng Template</h2>
+    <p>Liệt kê Thêm (Insert), Xóa (Delete), Sửa (Update) trên các bảng liên quan đến ràng buộc toàn vẹn. Nhớ ghi: "+" (kiểm tra), "-" (không kiểm tra).</p>
+
+    <h2>Chương 6: PTH & Chuẩn Hóa</h2>
+    <ul>
+        <li><strong>Bao đóng X⁺:</strong> Thuật toán lấy vế phải gom vào nếu vế trái đã có.</li>
+        <li><strong>Khóa:</strong> Thuộc tính không xuất hiện ở RHS phải có trong mọi khóa; dùng bao đóng để tìm toàn bộ siêu khóa tối thiểu. L/N/R/LR chỉ là mẹo giảm nhánh.</li>
+        <li><strong>3NF:</strong> Với mọi PTH không hiển nhiên <code>X → A</code>: X là siêu khóa hoặc A là prime. <strong>BCNF:</strong> X phải là siêu khóa.</li>
+    </ul>
+
+</section>
+
+<!-- === references.html === -->
+<!-- ============================================================
+     TRANG NGUỒN THAM KHẢO
+     ============================================================ -->
+<section id="references" class="break-before">
+<h1>Nguồn tham khảo & Tài liệu đối chiếu</h1>
+
+<h3>Giáo trình chính</h3>
+<ul>
+  <li>Đồng Thị Bích Thủy, Phạm Thị Bạch Huệ, Nguyễn Trần Minh Thư. <em>Giáo trình Cơ sở dữ liệu</em>. NXB Khoa học và Kỹ thuật.</li>
+  <li>Slide bài giảng IT004 – Khoa Hệ thống Thông tin, Trường ĐH Công nghệ Thông tin – ĐHQG-HCM.</li>
+</ul>
+
+<h3>Tài liệu tham khảo quốc tế</h3>
+<ul>
+  <li>Silberschatz, A., Korth, H. F., & Sudarshan, S. <em>Database System Concepts</em>. McGraw-Hill.</li>
+  <li>Elmasri, R. & Navathe, S. B. <em>Fundamentals of Database Systems</em>. Pearson.</li>
+  <li>Ramakrishnan, R. & Gehrke, J. <em>Database Management Systems</em>. McGraw-Hill.</li>
+</ul>
+
+<h3>Tài liệu kỹ thuật</h3>
+<ul>
+  <li>Microsoft. <em>SQL Server Technical Documentation</em>. Microsoft Learn. <code>https://learn.microsoft.com/en-us/sql/</code></li>
+  <li>Microsoft. <em>Transact-SQL Reference</em>. Microsoft Learn.</li>
+</ul>
+
+<p class="text-small text-muted" style="margin-top: 2em;">Danh sách đầy đủ các nguồn web đã sử dụng xem tại file <code>research/web_sources.md</code> đi kèm.</p>
+</section>
+
+<!-- ============================================================
+     TRANG CUỐI — COLOPHON
+     ============================================================ -->
+<div class="colophon">
+  <hr>
+  <p style="font-size: 14pt; font-weight: 700; color: var(--c-primary-dark);">IT004 – CƠ SỞ DỮ LIỆU</p>
+  <p style="font-size: 11pt; font-style: italic; color: var(--c-text-secondary);">Cẩm nang từ nền tảng đến Exam Mastery</p>
+  <hr>
+  <p style="font-size: 12pt; font-weight: 600; margin-top: 20px;">Biên soạn bởi Võ Trọng Phúc</p>
+  <p style="font-size: 9pt; color: var(--c-text-muted); margin-top: 12px;">Phiên bản 1.0 • 2026</p>
+  <hr>
+  <p style="font-size: 8pt; color: var(--c-text-muted); margin-top: 20px;">IT004 Cẩm nang CSDL • Compiled by Võ Trọng Phúc</p>
+</div>
+</body>
+</html>

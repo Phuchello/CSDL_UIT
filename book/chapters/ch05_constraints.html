@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chương 5: Ràng Buộc Toàn Vẹn (RBTV)</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --success: #10b981;
+            --purple: #8b5cf6;
+            --dark: #1f2937;
+            --light: #f3f4f6;
+        }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; }
+        .chapter-title { font-size: 2.5em; color: var(--primary); border-bottom: 3px solid var(--primary); padding-bottom: 10px; margin-bottom: 30px; }
+        h2 { color: var(--dark); border-bottom: 2px solid #e5e7eb; padding-bottom: 8px; margin-top: 40px; }
+        h3 { color: var(--primary); }
+        
+        /* Callouts */
+        .callout { padding: 15px; border-radius: 8px; margin: 20px 0; border-left: 5px solid; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .callout h4 { margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        
+        .callout-trap { border-color: var(--danger); background-color: #fef2f2; }
+        .callout-trap h4 { color: var(--danger); }
+        
+        .callout-mental { border-color: var(--purple); background-color: #f5f3ff; }
+        .callout-mental h4 { color: var(--purple); }
+        
+        .callout-fast { border-color: var(--success); background-color: #ecfdf5; }
+        .callout-fast h4 { color: var(--success); }
+        
+        .callout-exam { border-color: var(--warning); background-color: #fffbeb; }
+        .callout-exam h4 { color: var(--warning); }
+        
+        .callout-why { border-color: var(--primary); background-color: #eff6ff; }
+        .callout-why h4 { color: var(--primary); }
+
+        .callout-dryrun { border-color: #6366f1; background-color: #eef2ff; }
+        .callout-dryrun h4 { color: #6366f1; }
+
+        .callout-connection { border-color: #0ea5e9; background-color: #f0f9ff; }
+        .callout-connection h4 { color: #0ea5e9; }
+
+        .quick-check { background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 15px; margin: 20px 0; }
+        .quick-check h4 { color: #334155; margin-top: 0; }
+        
+        .exercise-block { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; margin: 20px 0; }
+        .exercise-block h4 { margin-top: 0; color: var(--primary); }
+        
+        .solution { display: none; background: #f1f5f9; padding: 15px; border-radius: 6px; margin-top: 15px; border-left: 3px solid var(--success); }
+        .show-solution:checked + .solution-toggle + .solution { display: block; }
+        .solution-toggle { cursor: pointer; color: var(--primary); font-weight: bold; text-decoration: underline; display: inline-block; margin-top: 10px; }
+        
+        pre.sql-block { background: #1e1e1e; color: #d4d4d4; padding: 15px; border-radius: 8px; overflow-x: auto; font-family: 'Consolas', monospace; }
+        .sql-keyword { color: #569cd6; }
+        .sql-string { color: #ce9178; }
+        .sql-comment { color: #6a9955; }
+        .sql-func { color: #dcdcaa; }
+
+        .data-table { width: 100%; border-collapse: collapse; margin: 15px 0; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .data-table th, .data-table td { border: 1px solid #e5e7eb; padding: 12px; text-align: left; }
+        .data-table th { background: var(--light); font-weight: 600; color: var(--dark); }
+        
+        .bth-table { width: 100%; border-collapse: collapse; margin: 15px 0; text-align: center; }
+        .bth-table th, .bth-table td { border: 1px solid #000; padding: 8px; }
+        .bth-table th { background: #f3f4f6; }
+        
+        .recall-sheet { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border-radius: 12px; padding: 25px; margin-top: 50px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border: 1px solid #bae6fd; }
+        .recall-sheet h2 { border-bottom: none; color: #0369a1; text-align: center; font-size: 2em; margin-top: 0; }
+        .recall-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .recall-card { background: #fff; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-top: 4px solid var(--primary); }
+    </style>
+</head>
+<body>
+
+<h1 class="chapter-title">Chương 5: Ràng Buộc Toàn Vẹn (Integrity Constraints)</h1>
+
+<div class="callout callout-why">
+    <h4>🤔 Trực giác: Tại sao cần Ràng Buộc Toàn Vẹn?</h4>
+    <p>Hãy tưởng tượng bạn đang quản lý một trường đại học. Chuyện gì sẽ xảy ra nếu:</p>
+    <ul>
+        <li>Điểm thi của sinh viên là <code>-5</code> hoặc <code>15</code> (trong khi thang điểm là 0-10)?</li>
+        <li>Một sinh viên có hai mã số sinh viên khác nhau?</li>
+        <li>Bạn phân công giảng viên dạy một môn học không tồn tại?</li>
+    </ul>
+    <p>Dữ liệu sai lệch (rác) sẽ dẫn đến quyết định sai lầm. <strong>Ràng buộc toàn vẹn (RBTV)</strong> chính là các "quy tắc" (rules) mà CSDL phải tuân thủ mọi lúc để đảm bảo dữ liệu luôn <strong>chính xác, hợp lệ và nhất quán</strong>.</p>
+</div>
+
+<h2>5.1 Khái niệm Ràng Buộc Toàn Vẹn</h2>
+
+<p><strong>Định nghĩa:</strong> Ràng buộc toàn vẹn (Integrity Constraints - IC) là các điều kiện (quy tắc) mà trạng thái của cơ sở dữ liệu phải thỏa mãn tại mọi thời điểm.</p>
+
+<p>Mỗi RBTV được mô tả qua hai yếu tố chính:</p>
+<ol>
+    <li><strong>Nội dung (Điều kiện):</strong> Quy tắc cụ thể là gì (thường biểu diễn bằng ngôn ngữ tự nhiên, đại số quan hệ hoặc SQL).</li>
+    <li><strong>Bối cảnh (Context/Scope):</strong> Các quan hệ (bảng) nào chịu sự chi phối của quy tắc này.</li>
+</ol>
+
+<div class="callout callout-mental">
+    <h4>🧠 Mental Model: Người gác cổng</h4>
+    <p>Hãy xem RBTV như những người gác cổng tại một câu lạc bộ đêm. Trước khi cho phép bất kỳ ai (dữ liệu mới) vào, hoặc cho phép người đang ở trong thay đổi trang phục (cập nhật), hoặc rời đi (xóa), người gác cổng sẽ kiểm tra xem hành động đó có vi phạm "quy định của quán" hay không. Nếu vi phạm, hành động bị từ chối thẳng thừng.</p>
+</div>
+
+<h2>5.2 Phân loại Ràng Buộc Toàn Vẹn</h2>
+
+<p>Các RBTV thường được phân loại dựa trên "tầm vực" và tính chất của chúng.</p>
+
+<h3>a) Ràng buộc miền giá trị (Domain Constraint)</h3>
+<p>Quy định miền giá trị hợp lệ cho một thuộc tính. Nghĩa là giá trị của cột đó phải thuộc một kiểu dữ liệu nhất định, hoặc nằm trong một khoảng nhất định.</p>
+<ul>
+    <li><strong>Ví dụ:</strong> Điểm thi phải từ 0 đến 10. Giới tính chỉ được là 'Nam' hoặc 'Nữ'.</li>
+    <li><strong>SQL Server:</strong> Sử dụng <code>CHECK</code> constraint.</li>
+</ul>
+
+<h3>b) Ràng buộc khóa (Key Constraint)</h3>
+<p>Đảm bảo tính duy nhất của các bộ (dòng) trong một quan hệ. Không thể có hai dòng khác nhau có cùng giá trị trên thuộc tính Khóa chính (Primary Key).</p>
+<ul>
+    <li><strong>Khái niệm liên quan:</strong> Siêu khóa (Superkey), Khóa ứng viên (Candidate key), Khóa chính (Primary key).</li>
+    <li><strong>Ví dụ:</strong> Trong bảng <code>GIAOVIEN</code>, <code>MAGV</code> là khóa chính. Không thể có hai giảng viên trùng MAGV.</li>
+</ul>
+
+<h3>c) Ràng buộc toàn vẹn thực thể (Entity Integrity)</h3>
+<p>Một quy tắc bất di bất dịch: <strong>Các thuộc tính khóa chính không được phép mang giá trị rỗng (NULL).</strong></p>
+<p><em>Lý do:</em> Khóa chính dùng để xác định duy nhất một dòng. Nếu nó NULL, ta không biết đó là dòng nào.</p>
+
+<h3>d) Ràng buộc toàn vẹn tham chiếu (Referential Integrity) - CỰC QUAN TRỌNG</h3>
+<p>Đảm bảo sự nhất quán giữa hai bảng có mối quan hệ với nhau (thông qua Khóa ngoại - Foreign Key).</p>
+<p><strong>Quy tắc:</strong> Giá trị của Khóa ngoại trong bảng con (Child table) phải <strong>tồn tại</strong> trong Khóa chính của bảng cha (Parent table), hoặc có thể bằng NULL (nếu không có quy định bắt buộc phải có).</p>
+<ul>
+    <li><strong>Ví dụ:</strong> Bảng <code>GIAOVIEN(MAGV, TENGV, MAKHOA)</code> tham chiếu tới <code>KHOA(MAKHOA, TENKHOA)</code>.<br>
+    Một giáo viên chỉ có thể thuộc về một <code>MAKHOA</code> đã có trong bảng <code>KHOA</code>. Không thể có một GV thuộc khoa 'K99' nếu 'K99' chưa tồn tại.</li>
+</ul>
+
+<div class="callout callout-exam">
+    <h4>🎯 Exam Signal: Xử lý khi vi phạm khóa ngoại (Cascade Actions)</h4>
+    <p>Đề thi thường hỏi: "Khi xóa một dòng ở bảng cha thì chuyện gì xảy ra với các dòng ở bảng con?". SQL hỗ trợ 4 hành động:</p>
+    <ul>
+        <li><strong>NO ACTION (Mặc định):</strong> Báo lỗi và ngăn chặn việc xóa/sửa bảng cha.</li>
+        <li><strong>CASCADE:</strong> Xóa (hoặc sửa) luôn các dòng tương ứng ở bảng con. (Ví dụ: Xóa khoa thì xóa luôn các GV thuộc khoa đó).</li>
+        <li><strong>SET NULL:</strong> Cập nhật giá trị FK ở bảng con thành NULL (nếu cột đó cho phép NULL).</li>
+        <li><strong>SET DEFAULT:</strong> Cập nhật FK về giá trị mặc định.</li>
+    </ul>
+</div>
+
+<h3>e) Ràng buộc liên thuộc tính (Inter-attribute Constraint)</h3>
+<p>Là ràng buộc giữa các thuộc tính <strong>trong cùng một bảng (cùng 1 dòng)</strong>.</p>
+<ul>
+    <li><strong>Ví dụ:</strong> Trong bảng <code>NHANVIEN</code>, Ngày sinh (NGSINH) phải nhỏ hơn Ngày vào làm (NGVL). <code>NGSINH < NGVL</code>.</li>
+</ul>
+
+<h3>f) Ràng buộc liên bộ (Inter-tuple Constraint)</h3>
+<p>Là ràng buộc giữa các dòng (bộ) <strong>khác nhau trong cùng một bảng</strong>.</p>
+<ul>
+    <li><strong>Ví dụ:</strong> Không có hai giáo viên nào trong cùng một khoa có cùng học vị và học hàm.</li>
+</ul>
+
+<h3>g) Ràng buộc liên quan hệ (Multi-relation Constraints)</h3>
+<p>Là những ràng buộc phức tạp, liên quan đến dữ liệu trải dài trên <strong>nhiều bảng khác nhau</strong>.</p>
+<ul>
+    <li><strong>Ví dụ:</strong> Trưởng khoa của một khoa phải là giáo viên thuộc chính khoa đó. (Liên quan bảng KHOA và GIAOVIEN).</li>
+</ul>
+
+<hr>
+
+<h2>5.3 BẢNG TẦM ẢNH HƯỞNG (TRỌNG ĐIỂM THI UIT)</h2>
+
+<div class="callout callout-connection">
+    <h4>🔗 Connection: Bảng Tầm Ảnh Hưởng là gì?</h4>
+    <p>Trong dạng bài RBTV của UIT, đề thường yêu cầu lập <strong>Bảng Tầm Ảnh Hưởng</strong> sau khi phát biểu nội dung và bối cảnh. Bảng liệt kê các thao tác Thêm (Insert), Xóa (Delete), Sửa (Update) trên các quan hệ có thể làm <strong>vi phạm</strong> ràng buộc đang xét.</p>
+</div>
+
+<h3>Ký hiệu trong bảng tầm ảnh hưởng UIT:</h3>
+<ul>
+    <li><strong>+</strong> : Thao tác <strong>có khả năng</strong> làm vi phạm RBTV (cần phải kiểm tra/viết trigger).</li>
+    <li><strong>-</strong> : Thao tác không thể làm trạng thái đang hợp lệ trở thành vi phạm đối với RBTV đang xét (không cần kiểm tra RBTV này).</li>
+    <li><strong>+(Thuộc Tính)</strong> : Thao tác Sửa (Update) chỉ có khả năng gây vi phạm khi sửa trên thuộc tính được chỉ định. (Ví dụ: +(MAKHOA)).</li>
+</ul>
+
+<h3>Cách tư duy lập bảng:</h3>
+<ol>
+    <li><strong>Thêm (Insert) vào một bảng:</strong> Hỏi "Nếu ta thêm dòng mới vào bảng này, nó có phá vỡ quy tắc không?".</li>
+    <li><strong>Xóa (Delete) từ một bảng:</strong> Hỏi "Nếu ta bớt đi một dòng ở bảng này, nó có phá vỡ quy tắc không?".</li>
+    <li><strong>Sửa (Update):</strong> Hỏi "Nếu ta sửa cột X, quy tắc có bị ảnh hưởng không?".</li>
+</ol>
+
+<div class="callout callout-trap">
+    <h4>⚠ BẪY: Xóa dữ liệu có làm vi phạm RBTV không?</h4>
+    <p>Sinh viên thường đánh dấu <code>+</code> cho thao tác XÓA mà không suy nghĩ. Thực tế:</p>
+    <ul>
+        <li>Xóa một khóa ngoại (bảng con): Càng xóa càng an toàn, <strong>KHÔNG</strong> vi phạm (-).</li>
+        <li>Xóa một khóa chính (bảng cha): <strong>CÓ THỂ</strong> vi phạm (+) nếu có bảng con đang tham chiếu đến nó.</li>
+        <li>Các ràng buộc như "Tổng tiền = Sum(Trị giá)": Cả Thêm, Xóa, Sửa đều là (+).</li>
+    </ul>
+</div>
+
+<h3>Ví dụ chi tiết: Lập Bảng Tầm Ảnh Hưởng</h3>
+
+<h4>Ví dụ 1: Ràng buộc Khóa Ngoại (Tham chiếu)</h4>
+<p><strong>RB1:</strong> "Mỗi giáo viên phải thuộc về một khoa tồn tại."</p>
+<ul>
+    <li><strong>Nội dung:</strong> ∀ gv ∈ GIAOVIEN, ∃ k ∈ KHOA: gv.MAKHOA = k.MAKHOA (Hoặc GIAOVIEN.MAKHOA ⊆ KHOA.MAKHOA).</li>
+    <li><strong>Bối cảnh:</strong> GIAOVIEN, KHOA.</li>
+</ul>
+
+<table class="bth-table">
+    <thead>
+        <tr>
+            <th>Quan hệ</th>
+            <th>Thêm (Insert)</th>
+            <th>Xóa (Delete)</th>
+            <th>Sửa (Update)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>GIAOVIEN</td>
+            <td>+</td>
+            <td>-</td>
+            <td>+(MAKHOA)</td>
+        </tr>
+        <tr>
+            <td>KHOA</td>
+            <td>-</td>
+            <td>+</td>
+            <td>+(MAKHOA)</td>
+        </tr>
+    </tbody>
+</table>
+<div class="callout callout-dryrun">
+    <h4>Bước chạy khô (Dry run) phân tích:</h4>
+    <ul>
+        <li><strong>Bảng GIAOVIEN:</strong>
+            <ul>
+                <li><strong>Thêm:</strong> (+) Vì nếu thêm một GV với MAKHOA = 'Vip', mà khoa 'Vip' không có trong KHOA → Vi phạm!</li>
+                <li><strong>Xóa:</strong> (-) Xóa bớt GV thì chỉ giảm đi người, không ảnh hưởng luật.</li>
+                <li><strong>Sửa:</strong> +(MAKHOA) Nếu đổi GV từ khoa 'CNTT' sang khoa 'MaThuật' không tồn tại → Vi phạm! (Chỉ quan tâm cột MAKHOA).</li>
+            </ul>
+        </li>
+        <li><strong>Bảng KHOA:</strong>
+            <ul>
+                <li><strong>Thêm:</strong> (-) Thêm khoa mới thì kệ nó, GV vẫn đang thuộc khoa cũ hợp lệ.</li>
+                <li><strong>Xóa:</strong> (+) Nếu xóa khoa 'CNTT' trong khi vẫn còn GV đang thuộc khoa này → GV bị mồ côi → Vi phạm!</li>
+                <li><strong>Sửa:</strong> +(MAKHOA) Đổi mã khoa 'CNTT' thành 'IT' thì GV cũ mang mã 'CNTT' sẽ vi phạm.</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<h4>Ví dụ 2: Ràng buộc Liên Quan Hệ Phức Tạp</h4>
+<p><strong>RB2:</strong> "Nếu một khoa có trưởng khoa, người đó phải tồn tại trong GIAOVIEN và thuộc chính khoa đó."</p>
+<ul>
+    <li><strong>Nội dung:</strong> ∀ k ∈ KHOA, nếu <code>k.TRUONGKHOA IS NOT NULL</code> thì ∃ gv ∈ GIAOVIEN: gv.MAGV = k.TRUONGKHOA ∧ gv.MAKHOA = k.MAKHOA.</li>
+    <li><strong>Bối cảnh:</strong> KHOA, GIAOVIEN</li>
+    <li><strong>Giả định cài đặt:</strong> Có khóa ngoại <code>KHOA(TRUONGKHOA) REFERENCES GIAOVIEN(MAGV)</code> (<code>TRUONGKHOA</code> được phép NULL). Khóa ngoại bảo đảm sự tồn tại; trigger bên dưới kiểm tra điều kiện “cùng khoa”.</li>
+</ul>
+
+<table class="bth-table">
+    <thead>
+        <tr>
+            <th>Quan hệ</th>
+            <th>Thêm</th>
+            <th>Xóa</th>
+            <th>Sửa</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>KHOA</td>
+            <td>+</td>
+            <td>-</td>
+            <td>+(TRUONGKHOA, MAKHOA)</td>
+        </tr>
+        <tr>
+            <td>GIAOVIEN</td>
+            <td>- (*)</td>
+            <td>+</td>
+            <td>+(MAGV, MAKHOA)</td>
+        </tr>
+    </tbody>
+</table>
+<p><em>(*) Thêm GV không làm vi phạm một trạng thái đang hợp lệ. Xóa/đổi MAGV của trưởng khoa được khóa ngoại xử lý; đổi MAKHOA của giáo viên đang làm trưởng khoa phải kiểm tra RB2.</em></p>
+
+
+<h4>Ví dụ 3: Ràng buộc tính toán (Derived attributes)</h4>
+<p><strong>RB3:</strong> "Trị giá của hóa đơn bằng tổng <code>SL × GIA</code> của các sản phẩm trong chi tiết hóa đơn đó."</p>
+<ul>
+    <li><strong>Lược đồ dùng đúng theo QLBH:</strong> <code>HOADON(SOHD, ..., TRIGIA)</code>, <code>CTHD(SOHD, MASP, SL)</code>, <code>SANPHAM(MASP, ..., GIA)</code>.</li>
+    <li><strong>Nội dung:</strong> Với mỗi hóa đơn <code>h</code>, <code>h.TRIGIA = COALESCE(SUM(ct.SL × sp.GIA), 0)</code> trên <code>CTHD ct JOIN SANPHAM sp ON ct.MASP = sp.MASP</code> và <code>ct.SOHD = h.SOHD</code>; hóa đơn chưa có chi tiết có tổng bằng 0.</li>
+    <li><strong>Bối cảnh:</strong> HOADON, CTHD, SANPHAM.</li>
+</ul>
+<table class="bth-table">
+    <thead>
+        <tr>
+            <th>Quan hệ</th>
+            <th>Thêm</th>
+            <th>Xóa</th>
+            <th>Sửa</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>HOADON</td>
+            <td>+</td>
+            <td>-</td>
+            <td>+(SOHD, TRIGIA)</td>
+        </tr>
+        <tr>
+            <td>CTHD</td>
+            <td>+</td>
+            <td>+</td>
+            <td>+(SOHD, MASP, SL)</td>
+        </tr>
+        <tr>
+            <td>SANPHAM</td>
+            <td>-</td>
+            <td>+</td>
+            <td>+(GIA)</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>5.4 Cài đặt RBTV bằng SQL</h2>
+
+<h3>1. Sử dụng CHECK Constraint (Ràng buộc miền giá trị, Liên thuộc tính cùng bảng)</h3>
+
+<pre class="sql-block">
+<span class="sql-comment">-- Ràng buộc điểm thi từ 0 đến 10 (Domain constraint)</span>
+<span class="sql-keyword">ALTER TABLE</span> KETQUATHI 
+<span class="sql-keyword">ADD CONSTRAINT</span> CHK_DIEM <span class="sql-keyword">CHECK</span> (DIEM &gt;= 0 <span class="sql-keyword">AND</span> DIEM &lt;= 10);
+
+<span class="sql-comment">-- Ràng buộc ngày sinh phải trước ngày vào làm (Inter-attribute constraint)</span>
+<span class="sql-keyword">ALTER TABLE</span> GIAOVIEN
+<span class="sql-keyword">ADD CONSTRAINT</span> CHK_NGAY <span class="sql-keyword">CHECK</span> (NGSINH &lt; NGVL);
+</pre>
+
+<h3>2. Sử dụng TRIGGER (Cho Ràng buộc Liên quan hệ, Phức tạp)</h3>
+<p>Trong SQL Server, <code>CHECK</code> không được tham chiếu dữ liệu ở bảng khác. Với ràng buộc liên quan hệ hoặc phép gộp, trigger là cách cài đặt thường dùng ở mức CSDL (ngoài ra có thể kiểm soát qua thủ tục/giao dịch của ứng dụng). Trigger chạy khi có sự kiện INSERT, UPDATE hoặc DELETE.</p>
+
+<p>SQL Server sử dụng hai bảng ảo (virtual tables) trong quá trình thực thi Trigger: <code>inserted</code> (chứa dữ liệu mới vừa thêm/sửa) và <code>deleted</code> (chứa dữ liệu cũ vừa xóa/trước khi sửa).</p>
+
+<div class="callout callout-exam">
+    <h4>🎯 Code Template Trigger Kiểm tra RBTV:</h4>
+    <p>RBTV: "Trưởng khoa của một khoa phải là giáo viên thuộc khoa đó"</p>
+    <pre class="sql-block">
+<span class="sql-comment">-- Giả định đã có FK KHOA(TRUONGKHOA) -&gt; GIAOVIEN(MAGV).</span>
+<span class="sql-comment">-- Trigger 1: kiểm tra mọi dòng KHOA vừa thêm hoặc sửa.</span>
+<span class="sql-keyword">CREATE TRIGGER</span> TRG_KHOA_TRUONGKHOA <span class="sql-keyword">ON</span> KHOA
+<span class="sql-keyword">AFTER INSERT, UPDATE</span>
+<span class="sql-keyword">AS</span>
+<span class="sql-keyword">BEGIN</span>
+    <span class="sql-keyword">SET NOCOUNT ON</span>;
+    <span class="sql-keyword">IF EXISTS</span> (
+        <span class="sql-keyword">SELECT</span> 1
+        <span class="sql-keyword">FROM</span> inserted AS i
+        <span class="sql-keyword">LEFT JOIN</span> GIAOVIEN AS g <span class="sql-keyword">ON</span> g.MAGV = i.TRUONGKHOA
+        <span class="sql-keyword">WHERE</span> i.TRUONGKHOA <span class="sql-keyword">IS NOT NULL</span>
+          <span class="sql-keyword">AND</span> (g.MAGV <span class="sql-keyword">IS NULL</span> <span class="sql-keyword">OR</span> g.MAKHOA &lt;&gt; i.MAKHOA)
+    )
+    <span class="sql-keyword">BEGIN</span>
+        <span class="sql-keyword">ROLLBACK TRANSACTION</span>;
+        <span class="sql-keyword">THROW</span> 50001, 'Truong khoa phai ton tai va thuoc chinh khoa do.', 1;
+    <span class="sql-keyword">END</span>
+<span class="sql-keyword">END</span>
+
+<span class="sql-comment">-- Trigger 2: giáo viên đang làm trưởng khoa không được chuyển sang khoa khác.</span>
+<span class="sql-keyword">CREATE TRIGGER</span> TRG_GIAOVIEN_TRUONGKHOA <span class="sql-keyword">ON</span> GIAOVIEN
+<span class="sql-keyword">AFTER UPDATE</span>
+<span class="sql-keyword">AS</span>
+<span class="sql-keyword">BEGIN</span>
+    <span class="sql-keyword">SET NOCOUNT ON</span>;
+    <span class="sql-keyword">IF NOT UPDATE</span>(MAKHOA) <span class="sql-keyword">RETURN</span>;
+
+    <span class="sql-keyword">IF EXISTS</span> (
+        <span class="sql-keyword">SELECT</span> 1
+        <span class="sql-keyword">FROM</span> inserted AS i
+        <span class="sql-keyword">JOIN</span> KHOA AS k <span class="sql-keyword">ON</span> k.TRUONGKHOA = i.MAGV
+        <span class="sql-keyword">WHERE</span> k.MAKHOA &lt;&gt; i.MAKHOA
+    )
+    <span class="sql-keyword">BEGIN</span>
+        <span class="sql-keyword">ROLLBACK TRANSACTION</span>;
+        <span class="sql-keyword">THROW</span> 50002, 'Khong the chuyen truong khoa sang khoa khac.', 1;
+    <span class="sql-keyword">END</span>
+<span class="sql-keyword">END</span>
+    </pre>
+</div>
+
+<hr>
+
+<h2>5.5 Bài tập thực hành & Bảng Tầm Ảnh Hưởng</h2>
+
+<div class="exercise-block">
+    <h4>Bài tập 1: Tuổi của Giảng viên</h4>
+    <p>Trong CSDL QLGV, hãy phát biểu nội dung, bối cảnh, lập bảng tầm ảnh hưởng và viết SQL cho ràng buộc: <strong>"Giáo viên khi vào làm phải từ 22 tuổi trở lên."</strong> (Biết bảng <code>GIAOVIEN(MAGV, HOTEN, NGSINH, NGVL)</code>)</p>
+    
+    <label class="show-solution-label">
+        <input type="checkbox" class="show-solution" style="display:none;">
+        <span class="solution-toggle">Xem lời giải</span>
+        <div class="solution">
+            <p><strong>Nội dung:</strong> Ngày vào làm phải không sớm hơn sinh nhật lần thứ 22: <code>NGVL ≥ DATEADD(YEAR, 22, NGSINH)</code>.</p>
+            <p><strong>Bối cảnh:</strong> GIAOVIEN</p>
+            <table class="bth-table">
+                <tr><th>Quan hệ</th><th>Thêm</th><th>Xóa</th><th>Sửa</th></tr>
+                <tr><td>GIAOVIEN</td><td>+</td><td>-</td><td>+(NGSINH, NGVL)</td></tr>
+            </table>
+            <p><strong>SQL:</strong> (Dùng CHECK là đủ vì trong cùng 1 bảng)</p>
+            <pre class="sql-block">
+<span class="sql-keyword">ALTER TABLE</span> GIAOVIEN
+<span class="sql-keyword">ADD CONSTRAINT</span> CHK_TUOIGV <span class="sql-keyword">CHECK</span> (NGVL &gt;= DATEADD(YEAR, 22, NGSINH));
+            </pre>
+        </div>
+    </label>
+</div>
+
+<div class="exercise-block">
+    <h4>Bài tập 2: Số lượng chuyên đề</h4>
+    <p>Phát biểu và lập bảng cho RBTV: <strong>"Mỗi giáo viên chỉ được hướng dẫn tối đa 3 sinh viên làm khóa luận."</strong> (Biết <code>KHOALUAN(MAKL, MASV, MAGV_HD)</code>)</p>
+    
+    <label class="show-solution-label">
+        <input type="checkbox" class="show-solution" style="display:none;">
+        <span class="solution-toggle">Xem lời giải</span>
+        <div class="solution">
+            <p><strong>Nội dung:</strong> ∀ gv ∈ KHOALUAN, COUNT(MASV) <= 3</p>
+            <p><strong>Bối cảnh:</strong> KHOALUAN</p>
+            <table class="bth-table">
+                <tr><th>Quan hệ</th><th>Thêm</th><th>Xóa</th><th>Sửa</th></tr>
+                <tr><td>KHOALUAN</td><td>+</td><td>-</td><td>+(MAGV_HD)</td></tr>
+            </table>
+            <p><em>Giải thích:</em> Thêm khóa luận mới làm tăng số lượng KL của GV (+). Xóa khóa luận đi thì số KL giảm đi nên không bao giờ vi phạm (-). Đổi GV HD cho một khóa luận có thể làm GV mới vượt quá 3 (+).</p>
+        </div>
+    </label>
+</div>
+
+<div class="exercise-block">
+    <h4>Bài tập 3: Ngày thi và Ngày kết thúc môn</h4>
+    <p>RBTV: <strong>"Ngày thi của một môn phải lớn hơn hoặc bằng ngày kết thúc của lớp học môn đó."</strong> <br>Biết: <code>GIANGDAY(MALOP, MAMH, MAGV, TUNGAY, DENNGAY)</code>, <code>HOCVIEN(MAHV, HO, TEN, NGSINH, GIOITINH, NOISINH, MALOP)</code> và <code>KETQUATHI(MAHV, MAMH, LANTHI, NGTHI, DIEM)</code></p>
+    
+    <label class="show-solution-label">
+        <input type="checkbox" class="show-solution" style="display:none;">
+        <span class="solution-toggle">Xem lời giải</span>
+        <div class="solution">
+            <p><strong>Bối cảnh:</strong> GIANGDAY, HOCVIEN, KETQUATHI</p>
+            <table class="bth-table">
+                <tr><th>Quan hệ</th><th>Thêm</th><th>Xóa</th><th>Sửa</th></tr>
+                <tr><td>GIANGDAY</td><td>- (*)</td><td>-</td><td>+(DENNGAY, MAMH, MALOP)</td></tr>
+                <tr><td>HOCVIEN</td><td>- (**)</td><td>-</td><td>+(MALOP)</td></tr>
+                <tr><td>KETQUATHI</td><td>+</td><td>-</td><td>+(NGTHI, MAMH, MAHV)</td></tr>
+            </table>
+            <p><em>(*) Khi thêm lớp học giảng dạy mới, lớp đó chưa có ai thi nên không thể vi phạm.</em><br>
+            <em>(**) Khi thêm học viên mới, học viên đó chưa có điểm thi nào nên không thể vi phạm.</em></p>
+        </div>
+    </label>
+</div>
+
+<hr>
+
+<div class="recall-sheet">
+    <h2>ONE-PAGE RECALL: Ràng Buộc Toàn Vẹn</h2>
+    <div class="recall-grid">
+        <div class="recall-card">
+            <h3>1. Các loại RBTV chính</h3>
+            <ul>
+                <li><strong>Miền giá trị (Domain):</strong> Kiểu dữ liệu, CHECK (>=0, IN ('Nam', 'Nu')).</li>
+                <li><strong>Khóa chính (Entity):</strong> Không được trùng lặp, KHÔNG NULL.</li>
+                <li><strong>Khóa ngoại (Referential):</strong> Bảng con tham chiếu bảng cha. Dữ liệu bảng con phải có trong bảng cha.</li>
+                <li><strong>Liên quan hệ:</strong> Ràng buộc nghiệp vụ kéo dài 2 bảng trở lên (dùng Trigger).</li>
+            </ul>
+        </div>
+        
+        <div class="recall-card">
+            <h3>2. Lập Bảng Tầm Ảnh Hưởng</h3>
+            <ul>
+                <li><strong>Thêm (+):</strong> Thường vi phạm nếu quy định giới hạn số lượng (MAX), hoặc phải lấy dữ liệu từ bảng kia.</li>
+                <li><strong>Xóa (-):</strong> Xóa hiếm khi vi phạm trừ khi là: (1) Xóa cha mà con vẫn còn (FK), (2) RBTV tính toán (SUM, COUNT).</li>
+                <li><strong>Sửa +(Cột):</strong> Chỉ điền dấu + nếu thay đổi cột liên quan đến điều kiện.</li>
+            </ul>
+        </div>
+
+        <div class="recall-card">
+            <h3>3. Công cụ SQL Server</h3>
+            <ul>
+                <li><code>CHECK</code>: Bắt lỗi 1 dòng, 1 bảng (Tuổi > 18, Ngày A < Ngày B).</li>
+                <li><code>FOREIGN KEY</code>: Cài đặt toàn vẹn tham chiếu chuẩn.</li>
+                <li><code>TRIGGER</code>: Bắt lỗi khó. Chặn thao tác bằng <code>ROLLBACK TRAN</code>. Dữ liệu mới = <code>inserted</code>, Dữ liệu cũ = <code>deleted</code>.</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

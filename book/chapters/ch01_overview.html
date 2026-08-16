@@ -1,0 +1,379 @@
+<!-- ============================================================
+     CHƯƠNG 1: TỔNG QUAN CƠ SỞ DỮ LIỆU
+     IT004 – Cẩm nang CSDL • Võ Trọng Phúc
+     ============================================================ -->
+<section id="ch01">
+<div class="chapter-title">
+  <span class="chapter-number">Chương 1</span>
+  <span class="chapter-name">Tổng quan Cơ sở dữ liệu</span>
+  <span class="chapter-subtitle">Data • Database • DBMS • Kiến trúc 3 mức</span>
+</div>
+
+<!-- ===== 1.1 DATA VS INFORMATION ===== -->
+<h2>1.1 Dữ liệu và Thông tin</h2>
+
+<h3>① Trực giác</h3>
+<p>Bạn nhìn vào dãy số <code>25, 30, 22, 28</code>. Đó là <strong>dữ liệu</strong> (data) — các giá trị thô, chưa có ngữ cảnh. Khi bạn biết đó là "nhiệt độ Tp.HCM 4 ngày qua, đơn vị °C", nó trở thành <strong>thông tin</strong> (information) — dữ liệu đã được xử lý, có ý nghĩa.</p>
+
+<h3>② Định nghĩa</h3>
+<ul>
+  <li><strong>Dữ liệu (Data):</strong> Các sự kiện, giá trị thô được ghi nhận. Có thể là số, chữ, hình ảnh, âm thanh.</li>
+  <li><strong>Thông tin (Information):</strong> Dữ liệu đã được xử lý, tổ chức, đặt trong ngữ cảnh để có ý nghĩa và hỗ trợ ra quyết định.</li>
+</ul>
+
+<div class="callout callout-fast">
+  <div class="callout-title">⚡ Fast Pattern</div>
+  <div class="callout-body"><strong>Data + Ngữ cảnh + Xử lý = Information</strong></div>
+</div>
+
+<h3>③ Ví dụ</h3>
+<table>
+  <thead><tr><th>Data (thô)</th><th>Information (có nghĩa)</th></tr></thead>
+  <tbody>
+    <tr><td><code>K1101</code></td><td>Mã số của học viên Nguyễn Văn A, lớp K11</td></tr>
+    <tr><td><code>10</code></td><td>Điểm thi môn CSDL lần 1 của K1101</td></tr>
+    <tr><td><code>3500</code></td><td>Giá bán (VNĐ) của một cây bút chì sản xuất tại Việt Nam</td></tr>
+  </tbody>
+</table>
+
+<div class="quick-check">
+  <h4>✓ Quick Check</h4>
+  <ol>
+    <li>Con số "9.5" một mình có phải thông tin không? Tại sao?</li>
+    <li>Cho ví dụ một dữ liệu trở thành thông tin khi đặt vào ngữ cảnh.</li>
+  </ol>
+</div>
+
+<!-- ===== 1.2 FILE SYSTEM ===== -->
+<h2>1.2 Hệ thống File truyền thống</h2>
+
+<h3>① Trực giác</h3>
+<p>Trước khi có CSDL, người ta lưu dữ liệu bằng <strong>tập tin riêng lẻ</strong> cho từng ứng dụng. Phòng Kế toán có file riêng, Phòng Nhân sự có file riêng — mặc dù cả hai đều lưu thông tin nhân viên.</p>
+
+<h3>② Vấn đề</h3>
+<table>
+  <thead><tr><th>Vấn đề</th><th>Giải thích</th><th>Ví dụ</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Dư thừa dữ liệu</strong><br>(Data Redundancy)</td>
+      <td>Cùng một dữ liệu được lưu ở nhiều nơi</td>
+      <td>Họ tên nhân viên lưu cả ở file Kế toán lẫn file Nhân sự</td>
+    </tr>
+    <tr>
+      <td><strong>Không nhất quán</strong><br>(Data Inconsistency)</td>
+      <td>Sửa ở một nơi, quên sửa ở nơi khác</td>
+      <td>Nhân viên đổi địa chỉ: Kế toán cập nhật, Nhân sự chưa</td>
+    </tr>
+    <tr>
+      <td><strong>Khó chia sẻ</strong><br>(Data Sharing)</td>
+      <td>Mỗi ứng dụng có format riêng, khó truy cập chéo</td>
+      <td>Phần mềm A dùng .dat, phần mềm B dùng .csv</td>
+    </tr>
+    <tr>
+      <td><strong>Phụ thuộc chương trình–dữ liệu</strong><br>(Program-Data Dependence)</td>
+      <td>Thay đổi cấu trúc file → phải sửa chương trình</td>
+      <td>Thêm cột "email" → tất cả chương trình đọc file phải sửa</td>
+    </tr>
+    <tr>
+      <td><strong>Khó kiểm soát toàn vẹn</strong></td>
+      <td>Không có cơ chế chung để đảm bảo dữ liệu hợp lệ</td>
+      <td>Điểm thi = -5 vẫn lưu được</td>
+    </tr>
+    <tr>
+      <td><strong>Khó bảo mật</strong></td>
+      <td>Không phân quyền truy cập theo cấp</td>
+      <td>Ai mở được file thì đọc hết</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-mental">
+  <div class="callout-title">🧠 Mental Model — File System = Phòng trọ riêng lẻ</div>
+  <div class="callout-body">
+    <p>Mỗi ứng dụng giống một phòng trọ riêng — có tủ sách riêng, bản sao tài liệu riêng. Khi cần cập nhật, phải đi từng phòng sửa. CSDL giống <strong>thư viện chung</strong>: một bản chính, ai cũng truy cập được (đúng quyền).</p>
+  </div>
+</div>
+
+<!-- ===== 1.3 DATABASE & DBMS ===== -->
+<h2>1.3 Cơ sở dữ liệu và Hệ quản trị CSDL</h2>
+
+<h3>② Định nghĩa</h3>
+<ul>
+  <li><strong>Cơ sở dữ liệu (Database – DB):</strong> Tập hợp dữ liệu có cấu trúc, được tổ chức và lưu trữ để phục vụ nhiều ứng dụng và người dùng.</li>
+  <li><strong>Hệ quản trị CSDL (Database Management System – DBMS):</strong> Phần mềm cho phép tạo, quản lý, truy vấn và bảo vệ cơ sở dữ liệu. Ví dụ: Microsoft SQL Server, Oracle, MySQL, PostgreSQL.</li>
+  <li><strong>Hệ cơ sở dữ liệu (Database System – DBS):</strong> DB + DBMS + Ứng dụng + Người dùng.</li>
+</ul>
+
+<h3>③ DBMS giải quyết vấn đề gì?</h3>
+<table>
+  <thead><tr><th>Vấn đề File System</th><th>DBMS giải quyết bằng</th></tr></thead>
+  <tbody>
+    <tr><td>Dư thừa</td><td>Lưu một lần, truy cập nhiều nơi</td></tr>
+    <tr><td>Không nhất quán</td><td>Một nguồn chân lý duy nhất</td></tr>
+    <tr><td>Khó chia sẻ</td><td>Truy cập đồng thời qua giao diện chuẩn</td></tr>
+    <tr><td>Phụ thuộc CT–DL</td><td>Data independence (xem mục 1.5)</td></tr>
+    <tr><td>Khó kiểm soát toàn vẹn</td><td>Ràng buộc toàn vẹn (Chương 5)</td></tr>
+    <tr><td>Khó bảo mật</td><td>Phân quyền (GRANT/REVOKE)</td></tr>
+  </tbody>
+</table>
+
+<div class="callout callout-trap">
+  <div class="callout-title">⚠ BẪY — DBMS ≠ Database</div>
+  <div class="callout-body">
+    <p>SQL Server là <strong>DBMS</strong> (phần mềm quản lý). Database QLGV hay QLBH mà bạn tạo bên trong SQL Server mới là <strong>DB</strong> (cơ sở dữ liệu). Đừng nhầm lẫn hai khái niệm này khi thi.</p>
+  </div>
+</div>
+
+<!-- ===== 1.4 ABSTRACTION & 3-LEVEL ARCHITECTURE ===== -->
+<h2>1.4 Trừu tượng hóa dữ liệu và Kiến trúc 3 mức</h2>
+
+<h3>① Trực giác</h3>
+<p>Khi bạn dùng ứng dụng đăng ký học phần: bạn thấy "danh sách môn học" (giao diện). Bên trong, DBMS tổ chức dữ liệu thành bảng có quan hệ (logic). Trên đĩa cứng, dữ liệu được lưu thành các file nhị phân (vật lý). Ba mức nhìn khác nhau của cùng một dữ liệu.</p>
+
+<h3>② Kiến trúc ANSI/SPARC 3 mức</h3>
+
+<div style="background: var(--c-bg-alt); border: 2px solid var(--c-primary); border-radius: 8px; padding: 20px; margin: 1em 0; text-align: center; page-break-inside: avoid;">
+  <div style="margin-bottom: 12px;">
+    <div style="background: #dbeafe; border: 2px solid #2563eb; padding: 10px; border-radius: 6px; display: inline-block; min-width: 250px;">
+      <strong style="color: #1e40af;">Mức ngoài (External Level)</strong><br>
+      <span style="font-size: 9pt;">View của từng nhóm user</span><br>
+      <span style="font-size: 8.5pt; color: #475569;">External Schema 1, 2, 3...</span>
+    </div>
+  </div>
+  <div style="font-size: 11pt; color: var(--c-primary);">↕ Ánh xạ Ngoài/Quan niệm</div>
+  <div style="margin: 12px 0;">
+    <div style="background: #dcfce7; border: 2px solid #059669; padding: 10px; border-radius: 6px; display: inline-block; min-width: 250px;">
+      <strong style="color: #166534;">Mức quan niệm (Conceptual Level)</strong><br>
+      <span style="font-size: 9pt;">Cấu trúc logic toàn bộ DB</span><br>
+      <span style="font-size: 8.5pt; color: #475569;">Conceptual Schema</span>
+    </div>
+  </div>
+  <div style="font-size: 11pt; color: var(--c-primary);">↕ Ánh xạ Quan niệm/Trong</div>
+  <div style="margin-top: 12px;">
+    <div style="background: #fef9c3; border: 2px solid #d97706; padding: 10px; border-radius: 6px; display: inline-block; min-width: 250px;">
+      <strong style="color: #854d0e;">Mức trong (Internal Level)</strong><br>
+      <span style="font-size: 9pt;">Cách lưu trữ vật lý trên đĩa</span><br>
+      <span style="font-size: 8.5pt; color: #475569;">Internal Schema</span>
+    </div>
+  </div>
+</div>
+
+<table>
+  <thead><tr><th>Mức</th><th>Mô tả</th><th>Quan tâm bởi</th><th>Ví dụ</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Mức ngoài</strong><br>(External)</td>
+      <td>Phần dữ liệu mà <em>một nhóm người dùng</em> quan tâm</td>
+      <td>End users, Developers</td>
+      <td>View "Danh sách sinh viên" chỉ hiện Mã SV, Tên, Lớp</td>
+    </tr>
+    <tr>
+      <td><strong>Mức quan niệm</strong><br>(Conceptual)</td>
+      <td>Cấu trúc logic <em>toàn bộ</em> database</td>
+      <td>DBA, DB Designer</td>
+      <td>Tất cả bảng: HOCVIEN, MONHOC, KETQUATHI... với PK/FK</td>
+    </tr>
+    <tr>
+      <td><strong>Mức trong</strong><br>(Internal)</td>
+      <td>Cách dữ liệu <em>được lưu vật lý</em></td>
+      <td>DBMS, System Admin</td>
+      <td>File .mdf, .ldf, index B-tree, page size 8KB</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ===== 1.5 SCHEMA VS INSTANCE ===== -->
+<h2>1.5 Schema và Instance</h2>
+
+<h3>② Định nghĩa</h3>
+<ul>
+  <li><strong>Schema (Lược đồ):</strong> Cấu trúc / thiết kế của database. Thay đổi rất ít. Giống <em>bản vẽ nhà</em>.</li>
+  <li><strong>Instance (Thể hiện):</strong> Dữ liệu thực tế tại một thời điểm. Thay đổi liên tục. Giống <em>đồ đạc trong nhà</em>.</li>
+</ul>
+
+<h3>③ Ví dụ</h3>
+<div class="before-after">
+  <div class="before">
+    <div class="label">Schema (cấu trúc)</div>
+    <div style="padding: 12px; font-family: var(--f-mono); font-size: 9pt;">
+      HOCVIEN(MAHV, HO, TEN, NGSINH, GIOITINH, NOISINH, MALOP)
+    </div>
+  </div>
+  <div class="after">
+    <div class="label">Instance (dữ liệu)</div>
+    <div style="padding: 12px; font-family: var(--f-mono); font-size: 8.5pt;">
+      K1101 | Nguyen Van | A | 27/1/1986 | Nam | TpHCM | K11<br>
+      K1102 | Tran Ngoc | Han | 14/3/1986 | Nu | Kien Giang | K11
+    </div>
+  </div>
+</div>
+
+<div class="callout callout-trap">
+  <div class="callout-title">⚠ BẪY — Schema ≠ Instance</div>
+  <div class="callout-body">
+    <p>Khi đề hỏi "cho lược đồ quan hệ R(A, B, C)" — họ hỏi về <strong>cấu trúc</strong>, không phải dữ liệu cụ thể. Khi đề cho bảng có dòng dữ liệu — đó là <strong>instance</strong>.</p>
+  </div>
+</div>
+
+<!-- ===== 1.6 DATA INDEPENDENCE ===== -->
+<h2>1.6 Tính độc lập dữ liệu</h2>
+
+<h3>① Trực giác</h3>
+<p>Khi bạn đổi ổ cứng (mức vật lý), ứng dụng vẫn chạy bình thường (mức ngoài). Khi thêm cột mới vào bảng (mức quan niệm), các ứng dụng cũ vẫn hoạt động nếu không cần cột đó.</p>
+
+<h3>② Hai loại</h3>
+<table>
+  <thead><tr><th>Loại</th><th>Nghĩa là</th><th>Ví dụ</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>Logical Data Independence</strong><br>(Độc lập logic)</td>
+      <td>Thay đổi conceptual schema không ảnh hưởng external schema</td>
+      <td>Thêm cột EMAIL vào HOCVIEN → View cũ vẫn chạy</td>
+    </tr>
+    <tr>
+      <td><strong>Physical Data Independence</strong><br>(Độc lập vật lý)</td>
+      <td>Thay đổi internal schema không ảnh hưởng conceptual schema</td>
+      <td>Đổi từ HDD sang SSD, thêm index → Query không đổi</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-exam">
+  <div class="callout-title">🎯 Exam Signal</div>
+  <div class="callout-body">
+    <p>Đề có thể hỏi: "Giải thích tính độc lập dữ liệu logic và vật lý. Cho ví dụ." Hãy đảm bảo bạn phân biệt được hai loại và cho ví dụ cụ thể.</p>
+  </div>
+</div>
+
+<!-- ===== 1.7 USER ROLES ===== -->
+<h2>1.7 Các vai trò trong hệ CSDL</h2>
+
+<table>
+  <thead><tr><th>Vai trò</th><th>Nhiệm vụ</th></tr></thead>
+  <tbody>
+    <tr><td><strong>DBA</strong> (Database Administrator)</td><td>Quản trị, bảo trì, phân quyền, backup/restore</td></tr>
+    <tr><td><strong>DB Designer</strong></td><td>Thiết kế schema, ER, chuẩn hóa</td></tr>
+    <tr><td><strong>Application Developer</strong></td><td>Viết ứng dụng sử dụng DB</td></tr>
+    <tr><td><strong>End User</strong></td><td>Sử dụng ứng dụng, truy vấn dữ liệu</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== 1.8 DATA MODELS ===== -->
+<h2>1.8 Mô hình dữ liệu</h2>
+
+<h3>② Định nghĩa</h3>
+<p><strong>Mô hình dữ liệu (Data Model)</strong> là tập hợp các khái niệm dùng để mô tả cấu trúc, thao tác và ràng buộc của dữ liệu.</p>
+
+<h3>③ Các mô hình phổ biến</h3>
+<table>
+  <thead><tr><th>Mô hình</th><th>Mức</th><th>Đặc điểm</th><th>Trong IT004</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>ER Model</strong><br>(Thực thể–Kết hợp)</td>
+      <td>Conceptual</td>
+      <td>Entity, Relationship, Attribute</td>
+      <td>✅ Chương 2</td>
+    </tr>
+    <tr>
+      <td><strong>Relational Model</strong><br>(Mô hình quan hệ)</td>
+      <td>Logical</td>
+      <td>Bảng (relation), hàng (tuple), cột (attribute)</td>
+      <td>✅ Chương 2–6</td>
+    </tr>
+    <tr>
+      <td>Hierarchical</td>
+      <td>Logical</td>
+      <td>Cấu trúc cây (cũ)</td>
+      <td>Biết tên</td>
+    </tr>
+    <tr>
+      <td>Network</td>
+      <td>Logical</td>
+      <td>Cấu trúc đồ thị (cũ)</td>
+      <td>Biết tên</td>
+    </tr>
+    <tr>
+      <td>Object-Oriented</td>
+      <td>Logical</td>
+      <td>Kết hợp OOP với DB</td>
+      <td>Biết tên</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-mental">
+  <div class="callout-title">🧠 Mental Model — Tại sao Relational Model thắng?</div>
+  <div class="callout-body">
+    <p>Relational Model (E.F. Codd, 1970) thắng vì <strong>đơn giản và mạnh mẽ</strong>: dữ liệu biểu diễn bằng bảng 2 chiều — ai cũng hiểu bảng. Thêm vào đó, nền tảng toán học vững chắc (lý thuyết tập hợp, đại số quan hệ) cho phép truy vấn chính xác và tối ưu hóa tự động.</p>
+  </div>
+</div>
+
+<!-- ===== 1.9 RELATIONAL DATABASE ===== -->
+<h2>1.9 Cơ sở dữ liệu quan hệ</h2>
+
+<p>Đây là loại CSDL mà bạn sẽ học suốt IT004. Đặc điểm:</p>
+<ul>
+  <li>Dữ liệu tổ chức thành <strong>bảng</strong> (relation/table)</li>
+  <li>Mỗi bảng có <strong>cột</strong> (attribute) và <strong>dòng</strong> (tuple/record)</li>
+  <li>Các bảng liên kết qua <strong>khóa chính</strong> (Primary Key) và <strong>khóa ngoại</strong> (Foreign Key)</li>
+  <li>Truy vấn bằng <strong>SQL</strong> (Structured Query Language)</li>
+</ul>
+
+<h3>Ví dụ minh họa</h3>
+
+<p>Hai bảng từ database QLBH:</p>
+
+<table class="data-table">
+  <thead><tr><th>MAKH</th><th>HOTEN</th><th>DCHI</th><th>SODT</th></tr></thead>
+  <tbody>
+    <tr><td>KH01</td><td>Nguyen Van A</td><td>731 Tran Hung Dao, Q5</td><td>8823451</td></tr>
+    <tr><td>KH02</td><td>Tran Ngoc Han</td><td>23/5 Nguyen Trai, Q5</td><td>908256478</td></tr>
+    <tr><td>KH03</td><td>Tran Ngoc Linh</td><td>45 Nguyen Canh Chan, Q1</td><td>938776266</td></tr>
+  </tbody>
+</table>
+<p class="text-small text-muted text-center" style="margin-top: -0.5em;">Bảng KHACHHANG (trích)</p>
+
+<table class="data-table">
+  <thead><tr><th>SOHD</th><th>NGHD</th><th>MAKH</th><th>MANV</th><th>TRIGIA</th></tr></thead>
+  <tbody>
+    <tr><td>1001</td><td>23/07/2006</td><td>KH01</td><td>NV01</td><td>320000</td></tr>
+    <tr><td>1002</td><td>12/08/2006</td><td>KH01</td><td>NV02</td><td>840000</td></tr>
+    <tr><td>1003</td><td>23/08/2006</td><td>KH02</td><td>NV01</td><td>100000</td></tr>
+  </tbody>
+</table>
+<p class="text-small text-muted text-center" style="margin-top: -0.5em;">Bảng HOADON (trích) — MAKH là khóa ngoại tham chiếu KHACHHANG</p>
+
+<div class="callout callout-connection">
+  <div class="callout-title">🔗 Connection</div>
+  <div class="callout-body">
+    <p>Khái niệm "relation" ở Chương 1 sẽ được phát triển đầy đủ ở <strong>Chương 2</strong> (relation schema, degree, cardinality, key). Khả năng truy vấn dữ liệu từ nhiều bảng sẽ được dạy ở <strong>Chương 3</strong> (ĐSQH) và <strong>Chương 4</strong> (SQL JOIN).</p>
+  </div>
+</div>
+
+<!-- ===== ONE-PAGE RECALL ===== -->
+<div class="recall-sheet">
+  <h2>ONE-PAGE RECALL — Chương 1</h2>
+
+  <h4>Công thức & Khái niệm cốt lõi</h4>
+  <table>
+    <thead><tr><th>Khái niệm</th><th>Ghi nhớ</th></tr></thead>
+    <tbody>
+      <tr><td>Data vs Information</td><td>Data + Ngữ cảnh = Information</td></tr>
+      <tr><td>DB vs DBMS vs DBS</td><td>DB = dữ liệu; DBMS = phần mềm quản lý; DBS = cả hệ thống</td></tr>
+      <tr><td>File System problems</td><td>Redundancy, Inconsistency, No sharing, Program-data dependence</td></tr>
+      <tr><td>3 mức kiến trúc</td><td>External (views) → Conceptual (toàn bộ logic) → Internal (vật lý)</td></tr>
+      <tr><td>Schema vs Instance</td><td>Schema = cấu trúc (ít đổi); Instance = dữ liệu (đổi liên tục)</td></tr>
+      <tr><td>Data Independence</td><td>Logical: sửa conceptual ≠ hỏng external. Physical: sửa internal ≠ hỏng conceptual</td></tr>
+      <tr><td>Relational Model</td><td>Dữ liệu = bảng. Liên kết qua PK/FK. Truy vấn bằng SQL</td></tr>
+    </tbody>
+  </table>
+
+  <h4>⚠ Common Traps</h4>
+  <ul>
+    <li><strong>DBMS ≠ DB:</strong> SQL Server là DBMS, QLGV là DB</li>
+    <li><strong>Schema ≠ Instance:</strong> Đừng nhầm cấu trúc với dữ liệu</li>
+    <li><strong>Logical ≠ Physical independence:</strong> Nắm rõ 2 loại</li>
+  </ul>
+</div>
+
+</section>

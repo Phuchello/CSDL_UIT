@@ -1,0 +1,277 @@
+<div id="ch02" class="chapter-content">
+  <h1 class="chapter-title">Chương 2: Mô Hình Thực Thể - Kết Hợp (ER) & Mô Hình Dữ Liệu Quan Hệ</h1>
+  <p class="author-attribution" style="font-style: italic; text-align: right;">Biên soạn bởi Võ Trọng Phúc</p>
+
+  <div class="callout-mental">
+    <strong>🧠 Mental Model: Hành trình từ Hiện thực đến Máy tính</strong><br/>
+    Để máy tính quản lý được dữ liệu của một trường đại học hay công ty, ta không thể "nhét" nguyên xi ngoài đời thật vào máy. Ta cần qua 2 bước chuyển đổi:
+    <br/>1. <strong>Thế giới thực</strong> → <strong>Mô hình ER</strong> (Bản vẽ phác thảo khái niệm để con người hiểu).
+    <br/>2. <strong>Mô hình ER</strong> → <strong>Mô hình Quan hệ (Relational Model)</strong> (Bản vẽ kỹ thuật dưới dạng các bảng để cài đặt vào máy tính - RDBMS).
+  </div>
+
+  <hr>
+
+  <h2>A. Mô Hình Dữ Liệu Quan Hệ (Relational Model)</h2>
+  
+  <p>Được đề xuất bởi Edgar F. Codd (1970), đây là nền tảng của mọi hệ quản trị CSDL quan hệ như SQL Server, MySQL, Oracle.</p>
+
+  <h3>1. Các khái niệm nền tảng</h3>
+  <div class="steps">
+    <div class="step">
+      <h4>① Trực giác</h4>
+      <p>Hãy nghĩ về một tờ bảng tính Excel (Spreadsheet). Một bảng là một danh sách, mỗi cột lưu một loại thông tin, mỗi dòng là một đối tượng cụ thể.</p>
+    </div>
+    <div class="step">
+      <h4>② Định nghĩa</h4>
+      <ul>
+        <li><strong>Thuộc tính (Attribute)</strong>: Tên của cột (vd: MASP, TENSP).</li>
+        <li><strong>Miền giá trị (Domain)</strong>: Tập hợp các giá trị hợp lệ của một thuộc tính (vd: Tuổi phải là số nguyên > 0).</li>
+        <li><strong>Bộ (Tuple)</strong>: Một dòng dữ liệu (record/row) trong bảng.</li>
+        <li><strong>Quan hệ (Relation)</strong>: Một tập các bộ trên cùng lược đồ, thường được trình bày dưới dạng bảng. Lưu ý: "Relation" ở đây khác với "Relationship" (mối kết hợp) trong ER.</li>
+        <li><strong>Lược đồ quan hệ (Relation Schema)</strong>: Cấu trúc của bảng (Tên bảng + Các thuộc tính). Ký hiệu: <code>R(A1, A2, ..., An)</code>.</li>
+        <li><strong>Lược đồ cơ sở dữ liệu (Database Schema)</strong>: Tập hợp các lược đồ quan hệ trong hệ thống.</li>
+        <li><strong>Thể hiện (Instance)</strong>: Dữ liệu thực tế đang có trong bảng tại một thời điểm cụ thể.</li>
+      </ul>
+    </div>
+    <div class="step">
+      <h4>③ Visual</h4>
+      <pre class="data-table">
+Relation: KHACHHANG
++-------+----------------+-------------+ (Lược đồ - Schema)
+| MAKH  | TENKH          | DTHOAI      | <- Attributes
++-------+----------------+-------------+
+| KH01  | Nguyễn Văn A   | 0901234567  | <- Tuple 1 \
+| KH02  | Trần Thị B     | 0987654321  | <- Tuple 2  } Instance
++-------+----------------+-------------+
+      </pre>
+    </div>
+  </div>
+
+  <div class="callout-trap">
+    <strong>⚠ BẪY: Relation vs Relationship</strong><br/>
+    Rất nhiều sinh viên dịch "Relation" là "mối quan hệ". Trong môn này:
+    - <strong>Relation</strong>: BẢNG (Table) - Mô hình quan hệ.
+    - <strong>Relationship</strong>: MỐI KẾT HỢP - Mô hình ER.
+  </div>
+
+  <h3>2. Bậc (Degree) và Lực lượng (Cardinality)</h3>
+  <ul>
+    <li><strong>Bậc (Degree)</strong>: Số lượng thuộc tính (cột) của một quan hệ.</li>
+    <li><strong>Lực lượng (Cardinality)</strong>: Số lượng bộ (dòng) hiện có trong quan hệ.</li>
+  </ul>
+  <div class="callout-exam">
+    <strong>🎯 Exam Pattern:</strong> Đề thi trắc nghiệm hay hỏi: "Thêm 1 dòng vào bảng thì Bậc hay Lực lượng thay đổi?" → Lực lượng (Cardinality) tăng 1, Bậc (Degree) không đổi (trừ khi alter table thêm cột).
+  </div>
+
+  <h3>3. NULL và Tân từ (Predicate)</h3>
+  <ul>
+    <li><strong>NULL</strong>: Đại diện cho giá trị chưa biết (unknown) hoặc không áp dụng được (inapplicable). <strong>NULL không phải là 0, cũng không phải chuỗi rỗng.</strong></li>
+    <li><strong>Tân từ (Predicate)</strong>: Mô tả ý nghĩa/ngữ nghĩa mà quan hệ biểu diễn; với các giá trị cụ thể của một bộ, predicate trở thành phát biểu về bộ đó. Điều kiện logic trong <code>WHERE</code> là một ứng dụng của predicate, không phải toàn bộ khái niệm.</li>
+  </ul>
+
+  <h3>4. Các loại khóa (Keys)</h3>
+  <div class="steps">
+    <div class="step">
+      <h4>① Trực giác</h4>
+      <p>Làm sao để phân biệt 2 sinh viên trùng tên? Cần mã số sinh viên. "Khóa" chính là công cụ để định danh duy nhất mỗi dòng.</p>
+    </div>
+    <div class="step">
+      <h4>② Định nghĩa</h4>
+      <ul>
+        <li><strong>Siêu khóa (Superkey)</strong>: Một tập thuộc tính giúp xác định duy nhất một dòng. (Có thể chứa các thuộc tính dư thừa).</li>
+        <li><strong>Khóa ứng viên (Candidate Key)</strong>: Siêu khóa nhỏ nhất (không chứa thuộc tính dư thừa). Một bảng có thể có nhiều khóa ứng viên.</li>
+        <li><strong>Khóa chính (Primary Key - PK)</strong>: Khóa ứng viên được người thiết kế chọn làm khóa chính thức cho bảng. Gạch chân thuộc tính này: <u>MASP</u>.</li>
+        <li><strong>Khóa ngoại (Foreign Key - FK)</strong>: Một tập thuộc tính ở quan hệ này tham chiếu đến khóa chính hoặc một khóa ứng viên/khóa duy nhất phù hợp của quan hệ được tham chiếu.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="callout-dryrun">
+    <strong>⑤ Dry run: Khóa trên bảng NHANVIEN(MANV, CCCD, HOTEN, DIACHI)</strong><br/>
+    - Superkey: {MANV}, {CCCD}, {MANV, HOTEN}, {CCCD, DIACHI}...<br/>
+    - Candidate Key: {MANV}, {CCCD}. (Lưu ý: {MANV, HOTEN} bị loại vì dư HOTEN).<br/>
+    - Primary Key: Chức năng chọn một, giả sử là <u>MANV</u>.
+  </div>
+
+  <hr>
+
+  <h2>B. Mô Hình Thực Thể - Kết Hợp (ER Model)</h2>
+  
+  <p>Mô hình ER (Peter Chen, 1976) dùng để biểu diễn cấu trúc dữ liệu tổng thể trước khi cài đặt.</p>
+
+  <h3>1. Thực thể và Thuộc tính (Entity & Attribute)</h3>
+  <ul>
+    <li><strong>Thực thể (Entity)</strong>: Một đối tượng trong thế giới thực (Sinh viên Nguyễn Văn A).</li>
+    <li><strong>Tập thực thể (Entity Set)</strong>: Tập các thực thể cùng loại (Tập SINH VIÊN). Ký hiệu: Hình chữ nhật.</li>
+    <li><strong>Thuộc tính (Attribute)</strong>: Ký hiệu hình oval.
+      <ul>
+        <li><strong>Thuộc tính khóa (Key)</strong>: Gạch chân.</li>
+        <li><strong>Thuộc tính đa trị (Multivalued)</strong>: Hình oval nét đôi (ví dụ: Số điện thoại - một người có nhiều số).</li>
+        <li><strong>Thuộc tính kết hợp (Composite)</strong>: Tách ra nhiều oval con (ví dụ: Địa chỉ gồm Số nhà, Đường, Quận).</li>
+        <li><strong>Thuộc tính suy dẫn (Derived)</strong>: Oval nét đứt (ví dụ: Tuổi - suy ra từ ngày sinh).</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>2. Mối kết hợp (Relationship)</h3>
+  <p>Sự liên kết giữa các tập thực thể. Ký hiệu: Hình thoi.</p>
+  <ul>
+    <li><strong>Bậc của relationship (Degree)</strong>: Số tập thực thể tham gia (Nhị phân - Binary là phổ biến nhất).</li>
+    <li><strong>Bản số (Cardinality Ratio)</strong>:
+      <ul>
+        <li><strong>1:1 (One-to-One)</strong>: 1 Trưởng khoa quản lý 1 Khoa.</li>
+        <li><strong>1:N (One-to-Many)</strong>: 1 Khoa có nhiều Sinh viên.</li>
+        <li><strong>M:N (Many-to-Many)</strong>: 1 Sinh viên học nhiều Môn, 1 Môn có nhiều Sinh viên.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>3. Ràng buộc tham gia (Participation Constraint) và Min-max Notation</h3>
+  <div class="callout-fast">
+    <strong>⚡ Fast Pattern: Min-Max Notation (min, max)</strong><br/>
+    Ký hiệu (min, max) đặt trên đường nối giữa Entity và Relationship:<br/>
+    - <strong>min</strong>: Bắt buộc (1) hay Tùy chọn (0)? (Participation: Total/Partial).<br/>
+    - <strong>max</strong>: Tối đa là 1 (1) hay nhiều (n)? (Cardinality).
+  </div>
+  
+  <div class="callout-exam">
+    <strong>🎯 Phân tích kỹ ví dụ tiếng Việt: "Nhân viên thuộc về một Phòng ban"</strong><br/>
+    Hãy xét NHANVIEN - [THUOC_VE] - PHONGBAN:<br/>
+    - Hỏi chiều 1: "1 NHANVIEN thuộc về tối thiểu mấy PHONGBAN? Tối đa mấy?" -> Tối thiểu 1 (bắt buộc phải có phòng), Tối đa 1. Cạnh bên NHANVIEN ghi <strong>(1,1)</strong>.<br/>
+    - Hỏi chiều 2: "1 PHONGBAN có tối thiểu mấy NHANVIEN? Tối đa mấy?" -> Tối thiểu 0 (phòng mới lập chưa có ai), Tối đa n (nhiều người). Cạnh bên PHONGBAN ghi <strong>(0,n)</strong>.<br/>
+    <em>Lưu ý UIT: Quy ước đặt (min,max) ở UIT thường đặt sát bên tập thực thể đang được xét. Hãy tuân thủ hướng dẫn của giảng viên lý thuyết.</em>
+  </div>
+
+  <hr>
+
+  <h2>C. Quy Trình Phân Tích Đề ER (9 Bước)</h2>
+  
+  <div class="decision-tree">
+    <div class="decision-node">Quy Trình Chuẩn UIT</div>
+    <ul>
+      <li>1. Gạch chân danh từ (Tiềm năng là Entity/Attribute)</li>
+      <li>2. Xác định Tập thực thể (Entity)</li>
+      <li>3. Xác định Thuộc tính (Attribute) cho từng Entity</li>
+      <li>4. Chỉ định Thuộc tính Khóa (Key)</li>
+      <li>5. Gạch chân động từ -> Nhận diện Mối kết hợp (Relationship)</li>
+      <li>6. Đặt câu hỏi 2 chiều tìm Cardinality / (Min-Max)</li>
+      <li>7. Tìm thuộc tính cho Mối kết hợp (nếu có, thường ở M:N)</li>
+      <li>8. Kiểm tra lại sự tham gia (Total/Partial)</li>
+      <li>9. Audit (Đọc lại đề bằng tân từ xem biểu đồ có đúng không)</li>
+    </ul>
+  </div>
+
+  <div class="callout-mental">
+    <strong>Ví dụ Trung bình: HỆ THỐNG ĐĂNG KÝ MÔN HỌC</strong><br/>
+    Đề: "Trường lưu trữ thông tin sinh viên (MSSV, tên, ngày sinh). Có các môn học (Mã MH, tên môn, số tín chỉ). Sinh viên đăng ký môn học và nhận điểm số."<br/>
+    <strong>B1-4:</strong> <br/>
+    - SINHVIEN(<u>MSSV</u>, Tên, NgàySinh). <br/>
+    - MONHOC(<u>MaMH</u>, TênMôn, SốTC).<br/>
+    <strong>B5:</strong> Động từ "đăng ký" -> Relationship [DANG_KY] nối SINHVIEN và MONHOC.<br/>
+    <strong>B6:</strong> 1 SV đăng ký mấy MH? (0,n). 1 MH có mấy SV đăng ký? (0,n). -> Đây là M:N.<br/>
+    <strong>B7:</strong> "nhận điểm số" -> Điểm số không thuộc về riêng SV (vì SV có nhiều điểm cho nhiều môn), không thuộc về riêng MH. Điểm số là của sự kiện đăng ký -> <strong>Thuộc tính của Relationship [DANG_KY]</strong>.<br/>
+    <strong>B9:</strong> Audit OK.
+  </div>
+
+  <hr>
+
+  <h2>D. Ánh Xạ ER Sang Lược Đồ Quan Hệ (Mapping Rules)</h2>
+  
+  <p>Làm sao biến hình vẽ ER thành các bảng (Relation) để viết SQL?</p>
+
+  <h3>1. Nguyên tắc cốt lõi</h3>
+  <div class="schema">
+    <strong>Thực thể mạnh (Regular Entity) -> Tạo 1 bảng mới.</strong><br/>
+    Các thuộc tính đơn -> Cột trong bảng.<br/>
+    Khóa của entity -> Khóa chính (PK) của bảng.
+  </div>
+
+  <h3>2. Ánh xạ Mối kết hợp (Relationship Mapping)</h3>
+  
+  <h4>a) Mối kết hợp 1:N (One-to-Many)</h4>
+  <p><strong>Quy tắc:</strong> Khóa chính của bảng bên 1 chạy sang làm <strong>Khóa ngoại (FK)</strong> ở bảng bên N.</p>
+  <div class="before-after">
+    <strong>ER:</strong> KHOA(1) ---- [CÓ] ---- (N)SINHVIEN<br/>
+    <strong>Schema:</strong> <br/>
+    KHOA(<u>MAKHOA</u>, TENKHOA)<br/>
+    SINHVIEN(<u>MASV</u>, TENSV, <em>MAKHOA</em>) -- MAKHOA là FK tham chiếu KHOA.
+  </div>
+
+  <h4>b) Mối kết hợp M:N (Many-to-Many)</h4>
+  <div class="callout-trap">
+    <strong>⚠ BẪY CHẾT NGƯỜI:</strong> Không bao giờ được đem PK của bảng này bỏ vào bảng kia làm FK đối với quan hệ M:N! Phải tạo bảng thứ 3.
+  </div>
+  <p><strong>Quy tắc:</strong> Tạo một <strong>Bảng trung gian</strong> (Junction Table). Khóa chính của 2 bảng ban đầu bay vào bảng trung gian, cùng nhau tạo thành <strong>Composite PK</strong> (Khóa chính kết hợp), đồng thời là 2 Khóa ngoại (FK).</p>
+  <div class="before-after">
+    <strong>ER:</strong> SINHVIEN(M) ---- [DANG_KY] (có thuộc tính DIEM) ---- (N)MONHOC<br/>
+    <strong>Schema:</strong><br/>
+    SINHVIEN(<u>MASV</u>, HOTEN)<br/>
+    MONHOC(<u>MAMH</u>, TENMH)<br/>
+    DANG_KY(<u><em>MASV</em></u>, <u><em>MAMH</em></u>, DIEM) -- Khóa chính là (MASV, MAMH). Cả 2 đều là FK.
+  </div>
+
+  <h4>c) Mối kết hợp 1:1 (One-to-One)</h4>
+  <p><strong>Quy tắc:</strong> Xem xét Participation. Bảng nào có Total Participation (min=1) thì nhận khóa của bảng kia làm FK. Nếu cả 2 đều là Total Participation, về mặt lý thuyết <em>có thể</em> gộp chung thành 1 bảng, nhưng thực tế nên giữ 2 bảng riêng nếu chúng đại diện cho 2 thực thể độc lập rõ ràng (ví dụ: Sinh viên và Học bạ).</p>
+
+  <h4>d) Thuộc tính đa trị (Multivalued Attribute)</h4>
+  <p><strong>Quy tắc:</strong> Tạo 1 bảng mới. Khóa chính = (Khóa của thực thể chứa nó + Thuộc tính đó).</p>
+  <div class="before-after">
+    <strong>ER:</strong> NHANVIEN(<u>MANV</u>, HOTEN, {SDT}) -- SDT là đa trị<br/>
+    <strong>Schema:</strong><br/>
+    NHANVIEN(<u>MANV</u>, HOTEN)<br/>
+    SDT_NHANVIEN(<u><em>MANV</em></u>, <u>SDT</u>) -- (MANV, SDT) là PK. MANV là FK.
+  </div>
+
+  <hr>
+
+  <h2>E. Bài Tập Thực Hành (Phong cách thi UIT)</h2>
+
+  <div class="exercise-block level-1">
+    <h3>Bài 1: Hệ thống Quản Lý Giáo Viên (QLGV) - Dễ</h3>
+    <p><strong>Đề bài:</strong> Một trường học cần quản lý KHOA (Mã Khoa, Tên Khoa, Năm Thành Lập), GIAOVIEN (Mã GV, Họ Tên, Mức Lương). Mỗi giáo viên chỉ thuộc một khoa, một khoa có nhiều giáo viên. Một giáo viên làm trưởng khoa cho tối đa 1 khoa.</p>
+    <p><strong>Yêu cầu:</strong> Vẽ ERD và chuyển sang Lược đồ quan hệ.</p>
+    <div class="solution">
+      <strong>Ánh xạ Schema:</strong><br/>
+      KHOA(<u>MAKHOA</u>, TENKHOA, NAMTL, <em>TRUONGKHOA_MAGV</em>)<br/>
+      GIAOVIEN(<u>MAGV</u>, HOTEN, LUONG, <em>MAKHOA</em>)<br/>
+      <em>Lưu ý: Mối kết hợp "thuộc về" (1:N) -> MAKHOA là FK trong GIAOVIEN. Mối kết hợp "làm trưởng" (1:1) -> Đem MAGV sang KHOA làm FK.</em>
+    </div>
+  </div>
+
+  <div class="exercise-block level-3">
+    <h3>Bài 2: Hệ thống Quản Lý Bán Hàng (QLBH) - Trung bình</h3>
+    <p><strong>Đề bài:</strong> Quản lý KHACHHANG (MaKH, TenKH, DiaChi, DienThoai), SANPHAM (MaSP, TenSP, DVT, NuocSX, Gia). Khách hàng lập HOADON (SoHD, NgayHD, TriGia). Mỗi hóa đơn do 1 khách hàng lập và có sự phục vụ của 1 NHANVIEN (MaNV, HoTen, NgayVL). Một hóa đơn có thể có nhiều sản phẩm, mỗi sản phẩm có Số Lượng mua.</p>
+    <p><strong>Yêu cầu:</strong> Ánh xạ thành schema.</p>
+    <div class="solution">
+      <strong>Lược đồ quan hệ:</strong><br/>
+      KHACHHANG(<u>MAKH</u>, HOTEN, DCHI, SODT)<br/>
+      NHANVIEN(<u>MANV</u>, HOTEN, NGVL)<br/>
+      SANPHAM(<u>MASP</u>, TENSP, DVT, NUOCSX, GIA)<br/>
+      HOADON(<u>SOHD</u>, NGHD, <em>MAKH</em>, <em>MANV</em>, TRIGIA)<br/>
+      CTHD(<u><em>SOHD</em></u>, <u><em>MASP</em></u>, SL) -- Bảng trung gian chi tiết hóa đơn do quan hệ M:N giữa HOADON và SANPHAM.
+    </div>
+  </div>
+
+  <p><em>(Các bài tập 3-10 bao gồm: CSDL Chung Cư, Phòng Máy, Vận động viên, Đăng ký dịch vụ, Logistics... sinh viên tự rèn luyện theo quy trình 9 bước trên).</em></p>
+
+  <hr>
+
+  <h2>F. One-Page Recall (Bản đồ ôn thi)</h2>
+  
+  <div class="callout-connection">
+    <strong>TỔNG KẾT CHƯƠNG 2:</strong>
+    <ul>
+      <li><strong>Relation Model:</strong> Bảng (Relation), Dòng (Tuple), Cột (Attribute), Khóa (PK/FK/Candidate/Superkey). Bậc = Cột, Lực lượng = Dòng.</li>
+      <li><strong>ER Model:</strong> Thực thể (Chữ nhật), Thuộc tính (Oval), Kết hợp (Thoi). Chú ý thuộc tính đa trị, dẫn xuất.</li>
+      <li><strong>Mapping cốt lõi:</strong>
+        <ul>
+          <li><strong>1:N</strong> => Khóa 1 chạy sang N làm FK.</li>
+          <li><strong>M:N</strong> => Tạo bảng thứ 3, bế 2 PK vào làm Composite PK.</li>
+          <li><strong>Đa trị</strong> => Tách bảng mới, PK = Khóa cha + Giá trị đa trị.</li>
+        </ul>
+      </li>
+    </ul>
+    <em>Sẵn sàng cho Chương 3 (Đại số quan hệ) và Chương 4, 5 (SQL): Các bảng được thiết kế đúng ở Chương 2 này sẽ là đối tượng để chúng ta dùng lệnh SELECT truy vấn ở các chương sau!</em>
+  </div>
+
+</div>

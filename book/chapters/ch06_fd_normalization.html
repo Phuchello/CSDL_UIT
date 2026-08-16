@@ -1,0 +1,164 @@
+<section id="ch06">
+    <h1 class="chapter-title">Chương 6: Phụ Thuộc Hàm & Chuẩn Hóa Dữ Liệu</h1>
+
+    <div class="callout-mental">
+        <strong>🧠 Mental Model</strong>
+        <p>Chuẩn hóa (Normalization) là quá trình "làm sạch" dữ liệu để tránh dư thừa và dị thường (anomaly). Phụ thuộc hàm (Functional Dependency) là công cụ toán học để tìm ra những "mảnh ghép" dữ liệu đang bị dính chặt vào nhau một cách không hợp lý.</p>
+    </div>
+
+    <h2>6.1 Functional Dependency (Phụ thuộc hàm - PTH)</h2>
+    <p><strong>Intuition:</strong> Trong mọi thể hiện hợp lệ của quan hệ, nếu hai bộ trùng giá trị A thì chúng có buộc phải trùng giá trị B hay không? Nếu có, B phụ thuộc hàm vào A. PTH xuất phát từ ngữ nghĩa của lược đồ, không được kết luận chỉ từ vài dòng dữ liệu mẫu.</p>
+    <p><strong>Definition:</strong> Cho lược đồ quan hệ R, tập thuộc tính X, Y ⊆ R. X → Y (X xác định Y, hay Y phụ thuộc hàm vào X) nghĩa là: với mọi bộ t1, t2 trong R, nếu <code>t1[X] = t2[X]</code> thì <code>t1[Y] = t2[Y]</code>.</p>
+    
+    <div class="callout-why">
+        <strong>🤔 Trivial vs Non-trivial</strong>
+        <ul>
+            <li><strong>Trivial (Hiển nhiên):</strong> X → Y với Y ⊆ X (ví dụ: AB → A). Không có ý nghĩa thực tế.</li>
+            <li><strong>Non-trivial (Không hiển nhiên):</strong> X → Y với Y không là tập con của X. Đây là cái chúng ta quan tâm.</li>
+        </ul>
+    </div>
+
+    <p><strong>Ví dụ:</strong> Xét bảng sinh viên:</p>
+    <table class="data-table">
+        <tr><th>MSSV</th><th>HoTen</th><th>MaKhoa</th><th>TenKhoa</th></tr>
+        <tr><td>123</td><td>An</td><td>K01</td><td>CNTT</td></tr>
+        <tr><td>124</td><td>Bình</td><td>K01</td><td>CNTT</td></tr>
+    </table>
+    <p>Ta thấy <code>MSSV → HoTen</code>, <code>MaKhoa → TenKhoa</code>.</p>
+
+    <h2>6.2 Armstrong Axioms (Luật Armstrong)</h2>
+    <p>Gồm 3 tiên đề và 3 hệ quả.</p>
+    <ul>
+        <li><strong>Reflexivity (Phản xạ):</strong> Nếu Y ⊆ X thì X → Y. <em>Trực giác: Có cả họ lẫn tên thì đương nhiên biết được tên.</em></li>
+        <li><strong>Augmentation (Tăng trưởng):</strong> Nếu X → Y thì XZ → YZ. <em>Trực giác: Thêm cùng một thông tin Z vào cả 2 vế thì vẫn đúng.</em></li>
+        <li><strong>Transitivity (Bắc cầu):</strong> Nếu X → Y và Y → Z thì X → Z. <em>Trực giác: MSSV → MaKhoa, MaKhoa → TenKhoa nên MSSV → TenKhoa.</em></li>
+        <li><strong>Union (Hợp):</strong> Nếu X → Y và X → Z thì X → YZ.</li>
+        <li><strong>Decomposition (Tách):</strong> Nếu X → YZ thì X → Y và X → Z.</li>
+        <li><strong>Pseudotransitivity (Bắc cầu giả):</strong> Nếu X → Y và WY → Z thì XW → Z.</li>
+    </ul>
+
+    <h2>6.3 Chứng minh PTH</h2>
+    <p><strong>Template:</strong> Cho tập F, chứng minh X → Y.</p>
+    <div class="steps">
+        <div class="step">Ví dụ: F = {A → B, B → C}. Chứng minh A → C.
+            <ol>
+                <li>A → B (Giả thiết)</li>
+                <li>B → C (Giả thiết)</li>
+                <li>A → C (Luật bắc cầu 1,2) (Q.E.D)</li>
+            </ol>
+        </div>
+    </div>
+
+    <h2>6.4 Attribute Closure X⁺ (Bao đóng của tập thuộc tính)</h2>
+    <p><strong>Thuật toán:</strong> Bắt đầu với X⁺ = X. Duyệt các PTH, nếu vế trái nằm trong X⁺, thêm vế phải vào X⁺. Lặp tới khi X⁺ không đổi.</p>
+    
+    <div class="callout-dryrun">
+        <strong>🏃 Dry run:</strong>
+        <p>R(A, B, C, D, E), F = {A → BC, CD → E, B → D, E → A}. Tính B⁺</p>
+        <ul>
+            <li>Vòng 0: B⁺ = {B}</li>
+            <li>Vòng 1: Dùng B → D, B⁺ = {B, D}</li>
+            <li>Vòng 2: Không thể dùng gì thêm. B⁺ = {B, D}</li>
+        </ul>
+        <p>Tính A⁺</p>
+        <ul>
+            <li>Vòng 0: A⁺ = {A}</li>
+            <li>Vòng 1: Dùng A → BC, A⁺ = {A, B, C}</li>
+            <li>Vòng 2: Dùng B → D, A⁺ = {A, B, C, D}</li>
+            <li>Vòng 3: Dùng CD → E, A⁺ = {A, B, C, D, E} = R⁺. A là siêu khóa!</li>
+        </ul>
+    </div>
+
+    <div class="callout-fast">
+        <strong>⚡ Fast Pattern: Ứng dụng của X⁺</strong>
+        <ul>
+            <li>Kiểm tra X → Y: Xem Y có thuộc X⁺ không.</li>
+            <li>Tìm khóa: X⁺ = R thì X là siêu khóa (superkey).</li>
+        </ul>
+    </div>
+
+    <h2>6.5 Minimal Cover (Phủ tối thiểu - Fc)</h2>
+    <div class="steps">
+        <div class="step">Bước 1: Tách vế phải (chỉ còn 1 thuộc tính).</div>
+        <div class="step">Bước 2: Loại thuộc tính dư ở vế trái (Thử bỏ A trong AB → C, nếu B⁺ chứa C thì A dư).</div>
+        <div class="step">Bước 3: Loại PTH dư (Thử bỏ X → Y, tính lại X⁺ mà vẫn chứa Y thì X → Y dư).</div>
+    </div>
+
+    <div class="callout-dryrun">
+        <strong>🏃 Dry Run đầy đủ</strong>
+        <p>Cho <code>F = {A → BC, AB → C, C → D, A → D}</code>. Tìm một phủ tối thiểu.</p>
+        <ol>
+            <li><strong>Tách vế phải:</strong> <code>F1 = {A → B, A → C, AB → C, C → D, A → D}</code>.</li>
+            <li><strong>Loại thuộc tính dư ở vế trái:</strong> Trong <code>AB → C</code>, B là dư vì với tập hiện tại <code>A⁺</code> đã chứa C nhờ <code>A → C</code>. Thay <code>AB → C</code> bằng <code>A → C</code> và bỏ bản trùng.</li>
+            <li><strong>Loại PTH dư:</strong> Tạm bỏ <code>A → D</code>. Từ <code>A → C</code> và <code>C → D</code> vẫn suy ra D ∈ A⁺, nên <code>A → D</code> là dư.</li>
+            <li><strong>Kết quả:</strong> <code>Fc = {A → B, A → C, C → D}</code>.</li>
+        </ol>
+        <p><strong>Kiểm tra cuối:</strong> <code>Fc</code> suy ra <code>A → BC</code> (hợp), <code>AB → C</code> (tăng trưởng từ A → C) và <code>A → D</code> (bắc cầu). Ngược lại, các PTH của <code>Fc</code> đều có trong hoặc suy ra từ F. Mỗi vế phải chỉ còn một thuộc tính, không còn thuộc tính trái hay PTH dư.</p>
+    </div>
+
+    <h2>6.6 Candidate Key (Khóa ứng viên)</h2>
+    <p><strong>Siêu khóa</strong> là tập X có <code>X⁺ = R</code>. <strong>Khóa ứng viên</strong> là siêu khóa tối thiểu theo phép bao hàm: bỏ bất kỳ thuộc tính nào khỏi X thì không còn là siêu khóa.</p>
+    <div class="callout-exam">
+        <strong>🎯 Exam Signal: Phân tích trái phải</strong>
+        <ul>
+            <li>Thuộc tính <strong>không xuất hiện ở bất kỳ vế phải nào</strong> không thể được suy ra từ thuộc tính khác, nên phải có trong mọi khóa ứng viên.</li>
+            <li>Phân nhóm L/R/LR/N là mẹo sàng lọc để giảm số nhánh, không thay thế phép tính bao đóng và kiểm tra tối thiểu.</li>
+            <li>Chỉ rẽ nhánh trên các thuộc tính còn thiếu khi bao đóng của tập bắt buộc chưa phủ R.</li>
+        </ul>
+    </div>
+
+    <div class="callout-dryrun">
+        <strong>🏃 Dry Run: tìm TẤT CẢ khóa ứng viên</strong>
+        <p>Cho <code>R(A,B,C,D,E,F)</code> và tập PTH <code>G = {A → B, B → A, C → D, D → C, AC → E}</code>.</p>
+        <ol>
+            <li><strong>Thuộc tính bắt buộc:</strong> F không xuất hiện ở vế phải của PTH nào, nên F thuộc mọi khóa. <code>F⁺ = {F}</code>, chưa là siêu khóa.</li>
+            <li><strong>Nhánh cần thiết:</strong> Muốn suy ra cả A,B phải chọn ít nhất một trong {A,B}; muốn suy ra cả C,D phải chọn ít nhất một trong {C,D}. E sẽ được suy ra khi đã có A và C.</li>
+            <li><strong>Tính bao đóng:</strong>
+                <ul>
+                    <li><code>(ACF)⁺ = R</code>: A → B, C → D, AC → E.</li>
+                    <li><code>(ADF)⁺ = R</code>: A → B, D → C, rồi AC → E.</li>
+                    <li><code>(BCF)⁺ = R</code>: B → A, C → D, rồi AC → E.</li>
+                    <li><code>(BDF)⁺ = R</code>: B → A, D → C, rồi AC → E.</li>
+                </ul>
+            </li>
+            <li><strong>Kiểm tra tối thiểu:</strong> Bỏ F thì không thể suy ra F; bỏ lựa chọn từ {A,B} thì thiếu A,B,E; bỏ lựa chọn từ {C,D} thì thiếu C,D,E. Vì vậy cả bốn tập đều tối thiểu.</li>
+        </ol>
+        <p><strong>Tất cả khóa ứng viên:</strong> <code>{ACF, ADF, BCF, BDF}</code>. Ví dụ <code>ABCF</code> là siêu khóa nhưng không phải khóa ứng viên vì chứa thuộc tính dư.</p>
+    </div>
+
+    <h2>6.7 Normal Forms (Các dạng chuẩn)</h2>
+    <p>Thuộc tính <strong>prime</strong> là thuộc tính thuộc ít nhất một khóa ứng viên; thuộc tính còn lại là <strong>non-prime</strong>.</p>
+    <ul>
+        <li><strong>1NF:</strong> Mọi thuộc tính đều đơn trị (atomic).</li>
+        <li><strong>2NF:</strong> Đạt 1NF và không có thuộc tính non-prime phụ thuộc hàm vào một tập con thực sự của bất kỳ khóa ứng viên nào.</li>
+        <li><strong>3NF (tiêu chuẩn chính thức):</strong> Với mọi PTH không hiển nhiên <code>X → A</code> trong F⁺, ít nhất một điều đúng: (1) X là siêu khóa; hoặc (2) A là thuộc tính prime.</li>
+        <li><strong>BCNF:</strong> Với mọi PTH không hiển nhiên <code>X → A</code> trong F⁺, X phải là siêu khóa.</li>
+    </ul>
+    
+    <div class="callout-trap">
+        <strong>⚠ BẪY:</strong> BCNF không cho phép vế phải là prime attribute cứu vãn như 3NF. Nếu X không là siêu khóa, vi phạm BCNF ngay!
+    </div>
+
+    <div class="callout-why">
+        <strong>Vì sao BCNF ⊂ 3NF?</strong>
+        <p>BCNF yêu cầu chặt hơn nên mọi quan hệ đạt BCNF đều đạt 3NF. Chiều ngược lại không đúng. Ví dụ <code>R(A,B,C)</code>, <code>F = {AB → C, C → B}</code> có các khóa ứng viên AB và AC, nên A, B, C đều là prime. PTH <code>C → B</code> vi phạm BCNF vì C không là siêu khóa, nhưng vẫn thỏa 3NF vì B là prime.</p>
+    </div>
+
+    <h2>6.8 Decision Tree Xác Định Dạng Chuẩn</h2>
+    <ol class="steps">
+        <li class="step"><strong>Tìm tất cả khóa ứng viên</strong> bằng bao đóng và kiểm tra tối thiểu; từ đó đánh dấu thuộc tính prime/non-prime.</li>
+        <li class="step"><strong>Kiểm tra 1NF.</strong> Nếu một ô còn chứa danh sách, nhóm lặp hoặc giá trị không nguyên tử theo miền đã chọn thì chưa đạt 1NF.</li>
+        <li class="step"><strong>Kiểm tra 2NF.</strong> Với từng khóa ứng viên ghép, xét mọi tập con thực sự: nếu một tập con xác định thuộc tính non-prime thì vi phạm 2NF. Quan hệ chỉ có khóa đơn không thể vi phạm 2NF do phụ thuộc từng phần.</li>
+        <li class="step"><strong>Kiểm tra 3NF.</strong> Với mỗi PTH không hiển nhiên <code>X → A</code>, tính X⁺: nếu X không là siêu khóa và A không prime thì vi phạm. Không suy luận chỉ từ câu “thuộc tính không khóa xác định thuộc tính không khóa”.</li>
+        <li class="step"><strong>Kiểm tra BCNF.</strong> Với mỗi PTH không hiển nhiên, nếu X⁺ ≠ R thì vi phạm BCNF.</li>
+        <li class="step"><strong>Kết luận dạng chuẩn cao nhất</strong> theo thứ tự 1NF → 2NF → 3NF → BCNF. Tiêu chuẩn chính thức áp dụng cho các PTH trong F⁺; khi làm bài, thường bắt đầu từ phủ tối thiểu rồi dùng bao đóng để kiểm tra các trường hợp cần thiết.</li>
+    </ol>
+
+    <div class="badge-advanced">
+        <h2>6.9 Decomposition (Phân rã) - Nâng cao</h2>
+        <p>Phân rã R thành R1, R2... cần đảm bảo: Không mất dữ liệu (Lossless-join) và Bảo toàn phụ thuộc hàm (Dependency preservation).</p>
+    </div>
+
+    <h2>One-Page Recall & Bài tập</h2>
+    <p>1. Tìm X⁺. 2. Tìm tất cả khóa ứng viên. 3. Tìm phủ tối thiểu. 4. Xác định dạng chuẩn bằng tiêu chuẩn chính thức. Đây là bốn dạng bài rất quan trọng và thường gặp.</p>
+</section>

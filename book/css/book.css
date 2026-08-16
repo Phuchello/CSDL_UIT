@@ -1,0 +1,1011 @@
+/* ============================================================
+   IT004 CSDL UIT – Book CSS Engine
+   Biên soạn: Võ Trọng Phúc
+   Target: A4 PDF / Screen
+   ============================================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Colors - Modern Engineering Palette */
+  --c-primary: #1a56db;
+  --c-primary-light: #e1effe;
+  --c-primary-dark: #1e3a5f;
+  --c-accent: #d97706;
+  --c-accent-light: #fef3c7;
+  --c-bg: #ffffff;
+  --c-bg-alt: #f8fafc;
+  --c-bg-code: #f1f5f9;
+  --c-text: #1e293b;
+  --c-text-secondary: #475569;
+  --c-text-muted: #94a3b8;
+  --c-border: #e2e8f0;
+  --c-border-dark: #cbd5e1;
+  --c-success: #059669;
+  --c-success-bg: #ecfdf5;
+  --c-warning: #d97706;
+  --c-warning-bg: #fffbeb;
+  --c-danger: #dc2626;
+  --c-danger-bg: #fef2f2;
+  --c-info: #2563eb;
+  --c-info-bg: #eff6ff;
+
+  /* Typography */
+  --f-body: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --f-serif: 'Merriweather', 'Georgia', serif;
+  --f-mono: 'JetBrains Mono', 'Cascadia Code', 'Consolas', monospace;
+
+  /* Sizing */
+  --fs-base: 10.5pt;
+  --fs-sm: 9.5pt;
+  --fs-xs: 8.5pt;
+  --fs-lg: 12pt;
+  --fs-xl: 14pt;
+  --fs-h1: 22pt;
+  --fs-h2: 16pt;
+  --fs-h3: 13pt;
+  --fs-h4: 11.5pt;
+  --fs-code: 9.5pt;
+
+  /* Spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+
+  /* Line height */
+  --lh-body: 1.7;
+  --lh-heading: 1.3;
+  --lh-code: 1.5;
+}
+
+/* --- Base Reset --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* --- Page Setup --- */
+@page {
+  size: A4;
+  margin: 22mm 18mm 25mm 20mm;
+
+  @bottom-center {
+    content: counter(page);
+    font-family: var(--f-body);
+    font-size: var(--fs-xs);
+    color: var(--c-text-muted);
+  }
+}
+
+@page :first {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+@page :left {
+  @bottom-left {
+    content: "IT004 Cẩm nang CSDL • Võ Trọng Phúc";
+    font-family: var(--f-body);
+    font-size: var(--fs-xs);
+    color: var(--c-text-muted);
+  }
+}
+
+@page :right {
+  @bottom-right {
+    content: "IT004 Cẩm nang CSDL • Võ Trọng Phúc";
+    font-family: var(--f-body);
+    font-size: var(--fs-xs);
+    color: var(--c-text-muted);
+  }
+}
+
+/* --- Body --- */
+html {
+  font-size: var(--fs-base);
+}
+
+body {
+  font-family: var(--f-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-body);
+  color: var(--c-text);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 20mm 18mm;
+}
+
+/* --- Headings --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--f-body);
+  line-height: var(--lh-heading);
+  color: var(--c-primary-dark);
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  page-break-after: avoid;
+  break-after: avoid;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: var(--fs-h1);
+  font-weight: 800;
+  border-bottom: 3px solid var(--c-primary);
+  padding-bottom: var(--sp-3);
+  margin-top: 0;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  border-bottom: 1.5px solid var(--c-border-dark);
+  padding-bottom: var(--sp-2);
+  color: var(--c-primary);
+}
+
+h3 {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+}
+
+h4 {
+  font-size: var(--fs-h4);
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+/* --- Chapter Title --- */
+.chapter-title {
+  text-align: center;
+  margin: 0;
+  padding: 40px 0 30px;
+  page-break-before: always;
+  break-before: page;
+}
+
+.chapter-title .chapter-number {
+  display: block;
+  font-size: var(--fs-lg);
+  font-weight: 500;
+  color: var(--c-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--sp-3);
+}
+
+.chapter-title .chapter-name {
+  display: block;
+  font-size: 26pt;
+  font-weight: 800;
+  color: var(--c-primary-dark);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.chapter-title .chapter-subtitle {
+  display: block;
+  font-size: var(--fs-lg);
+  color: var(--c-text-secondary);
+  margin-top: var(--sp-3);
+  font-weight: 400;
+}
+
+/* --- Paragraphs --- */
+p {
+  margin-bottom: 0.75em;
+  orphans: 3;
+  widows: 3;
+}
+
+/* --- Strong / Emphasis --- */
+strong {
+  font-weight: 600;
+  color: var(--c-primary-dark);
+}
+
+em {
+  font-style: italic;
+}
+
+/* --- Lists --- */
+ul, ol {
+  margin-bottom: 0.75em;
+  padding-left: 1.5em;
+}
+
+li {
+  margin-bottom: 0.3em;
+}
+
+li > ul, li > ol {
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+/* --- Links --- */
+a {
+  color: var(--c-primary);
+  text-decoration: none;
+}
+
+/* --- Tables --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1em 0;
+  font-size: var(--fs-sm);
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+thead {
+  display: table-header-group;
+}
+
+th {
+  background: var(--c-primary);
+  color: white;
+  font-weight: 600;
+  text-align: left;
+  padding: var(--sp-2) var(--sp-3);
+  font-size: var(--fs-sm);
+  letter-spacing: 0.02em;
+}
+
+td {
+  padding: var(--sp-2) var(--sp-3);
+  border-bottom: 1px solid var(--c-border);
+  vertical-align: top;
+}
+
+tr:nth-child(even) {
+  background: var(--c-bg-alt);
+}
+
+/* Data table - for showing query results */
+table.data-table {
+  font-family: var(--f-mono);
+  font-size: var(--fs-xs);
+}
+
+table.data-table th {
+  background: var(--c-primary-dark);
+  font-family: var(--f-mono);
+  font-size: var(--fs-xs);
+}
+
+table.data-table td {
+  padding: var(--sp-1) var(--sp-2);
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* --- Keyword Dictionary Table --- */
+table.keyword-dict {
+  display: table !important;
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin: 1em 0 !important;
+  font-size: var(--fs-sm) !important;
+  table-layout: fixed !important;
+  page-break-inside: auto !important;
+  break-inside: auto !important;
+}
+
+table.keyword-dict thead {
+  display: table-header-group !important;
+}
+
+table.keyword-dict tr {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important;
+}
+
+table.keyword-dict th {
+  background: var(--c-primary) !important;
+  color: white !important;
+  padding: var(--sp-2) var(--sp-3) !important;
+  text-align: left !important;
+  font-family: var(--f-body) !important;
+  font-weight: 600 !important;
+}
+
+table.keyword-dict td {
+  padding: var(--sp-2) var(--sp-3) !important;
+  border-bottom: 1px solid var(--c-border) !important;
+  vertical-align: top !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+table.keyword-dict tr:nth-child(even) {
+  background: var(--c-bg-alt) !important;
+}
+
+/* --- Code Blocks --- */
+pre {
+  background: var(--c-bg-code);
+  border: 1px solid var(--c-border);
+  border-left: 4px solid var(--c-primary);
+  border-radius: 4px;
+  padding: var(--sp-4);
+  margin: 1em 0;
+  overflow-x: auto;
+  font-family: var(--f-mono);
+  font-size: var(--fs-code);
+  line-height: var(--lh-code);
+  page-break-inside: auto;
+  break-inside: auto;
+}
+
+pre.sql-block {
+  border-left-color: var(--c-accent);
+  position: relative;
+}
+
+pre.sql-block::before {
+  content: "SQL Server / T-SQL";
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: var(--c-accent);
+  color: white;
+  font-size: 7pt;
+  padding: 2px 8px;
+  border-radius: 0 3px 0 4px;
+  font-family: var(--f-body);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+code {
+  font-family: var(--f-mono);
+  font-size: 0.9em;
+  background: var(--c-bg-code);
+  padding: 1px 5px;
+  border-radius: 3px;
+  color: var(--c-danger);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}
+
+/* SQL syntax highlighting basics */
+.kw { color: #2563eb; font-weight: 600; }     /* Keywords */
+.fn { color: #7c3aed; }                         /* Functions */
+.str { color: #059669; }                         /* Strings */
+.num { color: #d97706; }                         /* Numbers */
+.cmt { color: #94a3b8; font-style: italic; }    /* Comments */
+.op { color: #dc2626; }                          /* Operators */
+
+/* --- Callout Boxes --- */
+.callout {
+  margin: 1em 0;
+  padding: var(--sp-4);
+  border-radius: 6px;
+  page-break-inside: avoid;
+  break-inside: avoid;
+  border-left: 4px solid;
+}
+
+.callout-title {
+  font-weight: 700;
+  font-size: var(--fs-base);
+  margin-bottom: var(--sp-2);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.callout-body {
+  font-size: var(--fs-sm);
+}
+
+/* Trap/Bẫy */
+.callout-trap {
+  background: var(--c-danger-bg);
+  border-color: var(--c-danger);
+}
+.callout-trap .callout-title { color: var(--c-danger); }
+
+/* Mental Model */
+.callout-mental {
+  background: var(--c-info-bg);
+  border-color: var(--c-info);
+}
+.callout-mental .callout-title { color: var(--c-info); }
+
+/* Fast Pattern */
+.callout-fast {
+  background: var(--c-warning-bg);
+  border-color: var(--c-warning);
+}
+.callout-fast .callout-title { color: var(--c-warning); }
+
+/* Exam Signal */
+.callout-exam {
+  background: #f5f3ff;
+  border-color: #7c3aed;
+}
+.callout-exam .callout-title { color: #7c3aed; }
+
+/* Why it works */
+.callout-why {
+  background: var(--c-success-bg);
+  border-color: var(--c-success);
+}
+.callout-why .callout-title { color: var(--c-success); }
+
+/* Dry Run */
+.callout-dryrun {
+  background: #f0f9ff;
+  border-color: #0284c7;
+}
+.callout-dryrun .callout-title { color: #0284c7; }
+
+/* Connection */
+.callout-connection {
+  background: #fdf4ff;
+  border-color: #a855f7;
+}
+.callout-connection .callout-title { color: #a855f7; }
+
+/* --- Quick Check Box --- */
+.quick-check {
+  background: var(--c-bg-alt);
+  border: 2px dashed var(--c-border-dark);
+  border-radius: 6px;
+  padding: var(--sp-4);
+  margin: 1em 0;
+  page-break-inside: avoid;
+}
+
+.quick-check h4 {
+  color: var(--c-primary);
+  margin-top: 0;
+  font-size: var(--fs-base);
+}
+
+/* --- Exercise Levels --- */
+.exercise-block {
+  margin: 1.5em 0;
+  padding: var(--sp-4);
+  background: var(--c-bg-alt);
+  border-radius: 6px;
+  border: 1px solid var(--c-border);
+  page-break-inside: avoid;
+}
+
+.exercise-block .level-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 12px;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  margin-bottom: var(--sp-2);
+  letter-spacing: 0.02em;
+}
+
+.level-0 .level-badge { background: #dbeafe; color: #1e40af; }
+.level-1 .level-badge { background: #dcfce7; color: #166534; }
+.level-2 .level-badge { background: #fef9c3; color: #854d0e; }
+.level-3 .level-badge { background: #fee2e2; color: #991b1b; }
+.level-4 .level-badge { background: #f3e8ff; color: #6b21a8; }
+.level-5 .level-badge { background: #1e293b; color: #f8fafc; }
+
+/* --- Solution Block --- */
+.solution {
+  margin: 0.5em 0 1em;
+  border: 1px solid var(--c-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.solution-header {
+  background: var(--c-bg-alt);
+  padding: var(--sp-2) var(--sp-4);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--c-primary);
+  border-bottom: 1px solid var(--c-border);
+  cursor: pointer;
+}
+
+.solution-body {
+  padding: var(--sp-4);
+  font-size: var(--fs-sm);
+}
+
+/* --- One-Page Recall --- */
+.recall-sheet {
+  background: var(--c-primary-light);
+  padding: var(--sp-6);
+  border-radius: 8px;
+  margin: 2em 0;
+  page-break-before: always;
+}
+
+.recall-sheet h2 {
+  color: var(--c-primary-dark);
+  border-bottom-color: var(--c-primary);
+  text-align: center;
+}
+
+/* --- Advanced Badge --- */
+.badge-advanced {
+  display: inline-block;
+  background: var(--c-accent);
+  color: white;
+  font-size: 7.5pt;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 3px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  vertical-align: middle;
+  margin-left: var(--sp-2);
+}
+
+/* --- Cover Page --- */
+.cover-page {
+  page-break-after: always;
+  break-after: page;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.cover-page .school-name {
+  font-size: 11pt;
+  font-weight: 500;
+  color: var(--c-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 40px;
+}
+
+.cover-page .book-code {
+  font-size: 14pt;
+  font-weight: 700;
+  color: var(--c-primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.cover-page .book-title {
+  font-size: 32pt;
+  font-weight: 900;
+  color: var(--c-primary-dark);
+  line-height: 1.15;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.cover-page .book-subtitle {
+  font-size: 14pt;
+  font-weight: 400;
+  color: var(--c-text-secondary);
+  margin-bottom: 60px;
+  font-style: italic;
+}
+
+.cover-page .cover-divider {
+  width: 80px;
+  height: 4px;
+  background: var(--c-primary);
+  margin: 0 auto 40px;
+  border: none;
+}
+
+.cover-page .author-label {
+  font-size: 10pt;
+  font-weight: 500;
+  color: var(--c-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+
+.cover-page .author-name {
+  font-size: 18pt;
+  font-weight: 700;
+  color: var(--c-primary-dark);
+  letter-spacing: 0.02em;
+}
+
+.cover-page .edition-info {
+  margin-top: 60px;
+  font-size: 9pt;
+  color: var(--c-text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* --- Info Page (Copyright) --- */
+.info-page {
+  page-break-after: always;
+  break-after: page;
+  padding: 60px 0;
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+}
+
+.info-page h2 {
+  font-size: var(--fs-h3);
+  border-bottom: none;
+  color: var(--c-text);
+  margin-bottom: var(--sp-6);
+}
+
+/* --- TOC --- */
+.toc {
+  page-break-after: always;
+  break-after: page;
+}
+
+.toc h1 {
+  text-align: center;
+  border-bottom: none;
+}
+
+.toc-chapter {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--sp-2) 0;
+  border-bottom: 1px dotted var(--c-border);
+  font-weight: 600;
+  color: var(--c-primary-dark);
+}
+
+.toc-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: var(--sp-1) 0 var(--sp-1) var(--sp-6);
+  font-weight: 400;
+  color: var(--c-text-secondary);
+  font-size: var(--fs-sm);
+}
+
+/* --- Figures / Diagrams --- */
+figure {
+  margin: 1.5em 0;
+  text-align: center;
+  page-break-inside: avoid;
+  break-inside: avoid;
+}
+
+figure img, figure svg {
+  max-width: 100%;
+  height: auto;
+}
+
+figcaption {
+  font-size: var(--fs-sm);
+  color: var(--c-text-secondary);
+  margin-top: var(--sp-2);
+  font-style: italic;
+}
+
+/* --- ER Diagram Elements --- */
+.er-entity {
+  display: inline-block;
+  border: 2px solid var(--c-primary);
+  padding: var(--sp-2) var(--sp-4);
+  font-weight: 600;
+  background: var(--c-primary-light);
+}
+
+.er-attribute {
+  display: inline-block;
+  border: 1px solid var(--c-text-secondary);
+  border-radius: 50%;
+  padding: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-sm);
+}
+
+.er-relationship {
+  display: inline-block;
+  border: 2px solid var(--c-accent);
+  transform: rotate(45deg);
+  padding: var(--sp-2);
+  background: var(--c-accent-light);
+}
+
+/* --- Mathematical Symbols --- */
+.math {
+  font-family: 'Cambria Math', 'STIX Two Math', 'Latin Modern Math', serif;
+  font-style: normal;
+}
+
+.math-block {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+  font-size: var(--fs-lg);
+  font-family: 'Cambria Math', 'STIX Two Math', serif;
+}
+
+/* --- Schema Notation --- */
+.schema {
+  font-family: var(--f-mono);
+  font-size: var(--fs-sm);
+  background: var(--c-bg-code);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: 4px;
+  margin: 0.5em 0;
+  border: 1px solid var(--c-border);
+}
+
+.schema .pk {
+  text-decoration: underline;
+  font-weight: 700;
+}
+
+.schema .fk {
+  font-style: italic;
+  color: var(--c-primary);
+}
+
+/* --- Step-by-step Process --- */
+.steps {
+  counter-reset: step;
+  margin: 1em 0;
+}
+
+.step {
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: var(--sp-4);
+  min-height: 28px;
+}
+
+.step::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  background: var(--c-primary);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+
+/* --- Decision Tree --- */
+.decision-tree {
+  font-size: var(--fs-sm);
+  background: var(--c-bg-alt);
+  padding: var(--sp-4);
+  border-radius: 6px;
+  border: 1px solid var(--c-border);
+  margin: 1em 0;
+  page-break-inside: avoid;
+}
+
+.decision-node {
+  background: var(--c-primary-light);
+  border: 1px solid var(--c-primary);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: 4px;
+  margin: var(--sp-2) 0;
+  font-weight: 500;
+}
+
+.decision-leaf {
+  background: var(--c-success-bg);
+  border: 1px solid var(--c-success);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: 4px;
+  margin: var(--sp-2) 0;
+  font-weight: 600;
+  color: var(--c-success);
+}
+
+/* --- Before/After Tables --- */
+.before-after {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-4);
+  margin: 1em 0;
+  page-break-inside: avoid;
+}
+
+.before-after .before,
+.before-after .after {
+  border: 1px solid var(--c-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.before-after .label {
+  padding: var(--sp-1) var(--sp-3);
+  font-weight: 600;
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.before .label {
+  background: var(--c-bg-code);
+  color: var(--c-text-secondary);
+}
+
+.after .label {
+  background: var(--c-primary);
+  color: white;
+}
+
+/* --- Keyword Dictionary (handled by table.keyword-dict above) --- */
+
+/* --- Footer (for pages) --- */
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--c-text-muted);
+  padding: var(--sp-2);
+}
+
+/* --- Last page --- */
+.colophon {
+  page-break-before: always;
+  break-before: page;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  text-align: center;
+  padding: 60px 0;
+}
+
+.colophon hr {
+  width: 60px;
+  border: none;
+  border-top: 2px solid var(--c-border-dark);
+  margin: var(--sp-6) 0;
+}
+
+/* --- Print Specifics --- */
+@media print {
+  body {
+    padding: 0;
+    max-width: none;
+    background: white;
+  }
+
+  .no-print { display: none !important; }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid !important;
+    break-after: avoid !important;
+  }
+
+  table, figure, .callout, .quick-check {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  pre, code, pre.sql-block, .sql-block {
+    overflow: visible !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    white-space: pre-wrap !important;
+    word-wrap: break-word !important;
+    word-break: break-word !important;
+    font-size: 8.5pt !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+
+  /* Surgical print control for code samples known to fit on one page. */
+  pre.keep-together {
+    page-break-inside: avoid !important;
+    break-inside: avoid-page !important;
+  }
+
+  ::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+
+  /* Exercise Solutions Print Expansion */
+  details {
+    display: block !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+  details > * {
+    display: block !important;
+  }
+  details:not([open]) > *:not(summary) {
+    display: block !important;
+  }
+  summary {
+    display: block !important;
+    font-weight: 700 !important;
+    color: var(--c-primary-dark) !important;
+    margin-bottom: 0.5em !important;
+  }
+  .solution, .solution-body {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+  }
+  .exercise-block {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
+    margin-bottom: 1.5em !important;
+  }
+
+  p {
+    orphans: 3;
+    widows: 3;
+  }
+
+  a { color: var(--c-text); }
+  a[href]::after { content: none; }
+}
+
+/* --- Screen reading helpers (not printed) --- */
+@media screen {
+  body {
+    padding: 40px 60px;
+    max-width: 900px;
+    background: #eef2f7;
+  }
+
+  .cover-page, .info-page, .toc,
+  .chapter-title, .colophon {
+    background: white;
+    margin: -40px -60px 20px;
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+
+/* --- Utility Classes --- */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-small { font-size: var(--fs-sm); }
+.text-muted { color: var(--c-text-secondary); }
+.mt-0 { margin-top: 0; }
+.mb-0 { margin-bottom: 0; }
+.pb-0 { padding-bottom: 0; }
+.no-break { page-break-inside: avoid; break-inside: avoid; }
+.break-before { page-break-before: always; break-before: page; }
+.break-after { page-break-after: always; break-after: page; }

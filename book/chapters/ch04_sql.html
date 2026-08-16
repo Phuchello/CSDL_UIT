@@ -1,0 +1,590 @@
+<section id="ch04">
+<!-- CHAPTER TITLE -->
+<div class="chapter-title">
+  <span class="chapter-number">Chương 4</span>
+  <span class="chapter-name">SQL Server / T-SQL</span>
+  <span class="chapter-subtitle">DDL • DML • SELECT • JOIN • Subquery • "Tất cả" Pattern</span>
+</div>
+
+<div class="callout-mental">
+  <strong>🧠 Mental Model: SQL không phải là lập trình thông thường</strong><br>
+  Trong C/C++ hay Python, bạn viết <i>cách (HOW)</i> để máy tính lấy dữ liệu (vòng lặp, if-else). 
+  Trong SQL, bạn chỉ mô tả <i>cái bạn muốn (WHAT)</i>, và Hệ Quản Trị CSDL (DBMS) sẽ tự tìm đường đi tối ưu nhất để trả về kết quả. SQL là ngôn ngữ khai báo (Declarative).
+</div>
+
+<h2 id="4-1">4.1 DDL (Data Definition Language) - Định nghĩa dữ liệu</h2>
+<p>DDL bao gồm các lệnh dùng để thao tác với <i>cấu trúc</i> của các đối tượng trong CSDL (Database, Table, View, Index...).</p>
+
+<h3>1. Tạo Database và Table</h3>
+<pre class="sql-block">
+<span class="kw">CREATE DATABASE</span> QLBH;
+<span class="kw">GO</span>
+<span class="kw">USE</span> QLBH;
+<span class="kw">GO</span>
+</pre>
+
+<p>Các kiểu dữ liệu phổ biến trong T-SQL / SQL Server:</p>
+<ul>
+  <li><code>INT</code>, <code>TINYINT</code>, <code>SMALLINT</code>: Số nguyên.</li>
+  <li><code>FLOAT</code>, <code>REAL</code>: Số thực.</li>
+  <li><code>CHAR(n)</code>: Chuỗi ký tự độ dài cố định.</li>
+  <li><code>VARCHAR(n)</code>: Chuỗi ký tự độ dài thay đổi.</li>
+  <li><code>NVARCHAR(n)</code>: Chuỗi ký tự Unicode (tiếng Việt).</li>
+  <li><code>SMALLDATETIME</code>, <code>DATETIME</code>: Ngày giờ.</li>
+  <li><code>MONEY</code>: Tiền tệ.</li>
+  <li><code>BIT</code>: Lưu giá trị 0, 1 hoặc NULL (tương đương Boolean).</li>
+</ul>
+
+<h3>2. Ràng buộc (Constraints)</h3>
+<p>Ràng buộc toàn vẹn đảm bảo dữ liệu hợp lệ và nhất quán.</p>
+<ul>
+  <li><code>PRIMARY KEY</code>: Khóa chính (duy nhất & không NULL).</li>
+  <li><code>FOREIGN KEY (REFERENCES)</code>: Khóa ngoại, trỏ tới bảng khác.</li>
+  <li><code>UNIQUE</code>: Giá trị duy nhất, nhưng cho phép NULL.</li>
+  <li><code>NOT NULL</code>: Bắt buộc phải có giá trị.</li>
+  <li><code>DEFAULT</code>: Giá trị mặc định nếu không nhập.</li>
+  <li><code>CHECK</code>: Điều kiện kiểm tra dữ liệu trước khi lưu.</li>
+</ul>
+
+<div class="callout-fast">
+  <strong>⚡ Fast Pattern: Inline vs Named Constraints</strong><br>
+  - <b>Inline:</b> Viết ngay sau khai báo cột. (Nhanh, nhưng SQL Server tự đặt tên ngẫu nhiên).<br>
+  - <b>Named:</b> Khai báo riêng ở dưới cùng hoặc ALTER TABLE với <code>CONSTRAINT &lt;tên&gt;</code> (Khuyên dùng trong thi để dễ DROP/ALTER sau này).
+</div>
+
+<p>Ví dụ tạo bảng QLBH:</p>
+<pre class="sql-block">
+<span class="kw">CREATE TABLE</span> KHACHHANG (
+    MAKH <span class="kw">CHAR</span>(4) <span class="kw">NOT NULL</span>,
+    HOTEN <span class="kw">NVARCHAR</span>(50) <span class="kw">NOT NULL</span>,
+    DCHI <span class="kw">NVARCHAR</span>(100),
+    NGSINH <span class="kw">SMALLDATETIME</span>,
+    DOANHSO <span class="kw">MONEY DEFAULT</span> 0,
+    <span class="kw">CONSTRAINT</span> PK_KHACHHANG <span class="kw">PRIMARY KEY</span> (MAKH)
+);
+
+<span class="kw">CREATE TABLE</span> SANPHAM (
+    MASP <span class="kw">CHAR</span>(4) <span class="kw">NOT NULL</span>,
+    TENSP <span class="kw">NVARCHAR</span>(50),
+    DVT <span class="kw">VARCHAR</span>(20),
+    NUOCSX <span class="kw">VARCHAR</span>(40),
+    GIA <span class="kw">MONEY</span>,
+    <span class="kw">CONSTRAINT</span> PK_SANPHAM <span class="kw">PRIMARY KEY</span> (MASP)
+);
+
+<span class="kw">CREATE TABLE</span> HOADON (
+    SOHD <span class="kw">INT NOT NULL</span>,
+    NGHD <span class="kw">SMALLDATETIME</span>,
+    MAKH <span class="kw">CHAR</span>(4),
+    MANV <span class="kw">CHAR</span>(4),
+    TRIGIA <span class="kw">MONEY</span>,
+    <span class="kw">CONSTRAINT</span> PK_HOADON <span class="kw">PRIMARY KEY</span> (SOHD),
+    <span class="kw">CONSTRAINT</span> FK_HOADON_KH <span class="kw">FOREIGN KEY</span> (MAKH) <span class="kw">REFERENCES</span> KHACHHANG(MAKH)
+);
+</pre>
+<pre class="sql-block keep-together">
+<span class="kw">CREATE TABLE</span> CTHD (
+    SOHD <span class="kw">INT NOT NULL</span>,
+    MASP <span class="kw">CHAR</span>(4) <span class="kw">NOT NULL</span>,
+    SL <span class="kw">INT CHECK</span> (SL > 0),
+    <span class="kw">CONSTRAINT</span> PK_CTHD <span class="kw">PRIMARY KEY</span> (SOHD, MASP),
+    <span class="kw">CONSTRAINT</span> FK_CTHD_HD <span class="kw">FOREIGN KEY</span> (SOHD) <span class="kw">REFERENCES</span> HOADON(SOHD),
+    <span class="kw">CONSTRAINT</span> FK_CTHD_SP <span class="kw">FOREIGN KEY</span> (MASP) <span class="kw">REFERENCES</span> SANPHAM(MASP)
+);
+</pre>
+
+<h3>3. ALTER TABLE và DROP TABLE</h3>
+<pre class="sql-block">
+<span class="cmt">-- Thêm cột</span>
+<span class="kw">ALTER TABLE</span> KHACHHANG <span class="kw">ADD</span> LOAIKH <span class="kw">TINYINT</span>;
+
+<span class="cmt">-- Xóa cột</span>
+<span class="kw">ALTER TABLE</span> KHACHHANG <span class="kw">DROP COLUMN</span> LOAIKH;
+
+<span class="cmt">-- Thêm ràng buộc (vd: CHECK giá phải > 0)</span>
+<span class="kw">ALTER TABLE</span> SANPHAM <span class="kw">ADD CONSTRAINT</span> CHK_GIA <span class="kw">CHECK</span> (GIA > 0);
+
+<span class="cmt">-- Xóa ràng buộc</span>
+<span class="kw">ALTER TABLE</span> SANPHAM <span class="kw">DROP CONSTRAINT</span> CHK_GIA;
+
+<span class="cmt">-- Xóa bảng</span>
+<span class="kw">DROP TABLE</span> CTHD;
+</pre>
+<div class="callout-trap">
+  <strong>⚠ BẪY: Thứ tự DROP TABLE</strong><br>
+  Bạn không thể <code>DROP TABLE KHACHHANG</code> nếu bảng <code>HOADON</code> vẫn đang <code>REFERENCES</code> tới nó. Quy tắc: <strong>Xóa bảng con trước (CTHD, HOADON), bảng cha sau (KHACHHANG, SANPHAM).</strong>
+</div>
+
+<h2 id="4-2">4.2 DML (Data Manipulation Language) - Thao tác dữ liệu</h2>
+<p>DML là các lệnh thay đổi dữ liệu bên trong các bảng: INSERT, UPDATE, DELETE.</p>
+
+<div class="callout-exam">
+  <strong>🎯 Exam Signal: SET DATEFORMAT DMY</strong><br>
+  Trong phòng máy thực hành UIT, hoặc khi chấm bài thi máy, định dạng ngày tháng mặc định thường là mdy. Nếu đề bài cho chuỗi '31/12/2006', máy sẽ báo lỗi <em>"The conversion of a varchar data type to a datetime data type resulted in an out-of-range value"</em>. Luôn luôn bắt đầu file script của bạn bằng lệnh:<br>
+  <code><span class="kw">SET DATEFORMAT</span> DMY;</code>
+</div>
+
+<h3>1. INSERT INTO</h3>
+<pre class="sql-block">
+<span class="kw">SET DATEFORMAT</span> DMY;
+
+<span class="cmt">-- Chèn đầy đủ các cột (đúng thứ tự định nghĩa)</span>
+<span class="kw">INSERT INTO</span> KHACHHANG <span class="kw">VALUES</span> ('KH01', N'Nguyễn Văn A', N'731 Trần Hưng Đạo, Q5, TpHCM', '22/10/1960', 13060000);
+
+<span class="cmt">-- Chèn nhiều dòng cùng lúc (SQL Server 2008+)</span>
+<span class="kw">INSERT INTO</span> KHACHHANG(MAKH, HOTEN, NGSINH) <span class="kw">VALUES</span> 
+('KH02', N'Trần Ngọc Hân', '15/05/1974'),
+('KH03', N'Lê Thị Ba', '25/11/1980');
+</pre>
+
+<h3>2. UPDATE</h3>
+<pre class="sql-block">
+<span class="cmt">-- Tăng giá sản phẩm lên 10% đối với sản phẩm do 'Viet Nam' sản xuất</span>
+<span class="kw">UPDATE</span> SANPHAM
+<span class="kw">SET</span> GIA = GIA * 1.1
+<span class="kw">WHERE</span> NUOCSX = 'Viet Nam';
+</pre>
+
+<h3>3. DELETE</h3>
+<pre class="sql-block">
+<span class="cmt">-- Xóa khách hàng tên 'Lê Thị Ba'</span>
+<span class="kw">DELETE FROM</span> KHACHHANG
+<span class="kw">WHERE</span> HOTEN = N'Lê Thị Ba';
+</pre>
+
+<div class="callout-trap">
+  <strong>⚠ BẪY CHẾT NGƯỜI: Quên mệnh đề WHERE</strong><br>
+  <code>UPDATE SANPHAM SET GIA = 0;</code> → Thay đổi giá của TẤT CẢ sản phẩm trong bảng về 0!<br>
+  <code>DELETE FROM KHACHHANG;</code> → Xóa sạch TẤT CẢ khách hàng!<br>
+  Luôn luôn bôi đen và chạy câu lệnh <code>SELECT * FROM ... WHERE ...</code> trước khi chuyển thành <code>UPDATE / DELETE</code> để đảm bảo bạn sửa/xóa đúng dòng.
+</div>
+
+<h2 id="4-3">4.3 SELECT Cơ bản</h2>
+<p>Lệnh SELECT dùng để truy xuất dữ liệu. Không làm thay đổi dữ liệu gốc.</p>
+
+<pre class="sql-block">
+<span class="kw">SELECT DISTINCT</span> TENCUACDT
+<span class="kw">FROM</span> BANG_DU_LIEU
+<span class="kw">WHERE</span> DIEU_KIEN
+<span class="kw">ORDER BY</span> COT_SAP_XEP <span class="kw">ASC</span>|<span class="kw">DESC</span>;
+</pre>
+
+<ul>
+  <li><code>SELECT *</code>: Lấy tất cả các cột. Không nên dùng trong thực tế (gây chậm), nhưng trong môn học / bài thi để xem nhanh thì ok.</li>
+  <li><code>AS alias</code>: Đặt tên thay thế cho cột hoặc bảng (vd: <code>SELECT HOTEN AS 'Tên Khách Hàng'</code>).</li>
+  <li><code>DISTINCT</code>: Loại bỏ các dòng kết quả trùng lặp.</li>
+  <li><code>ORDER BY</code>: Sắp xếp kết quả. <code>ASC</code> (tăng dần - mặc định), <code>DESC</code> (giảm dần).</li>
+</ul>
+
+<h3>Toán tử trong WHERE</h3>
+<ul>
+  <li><strong>So sánh:</strong> <code>=</code>, <code>&lt;&gt;</code> (khác), <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code></li>
+  <li><strong>Logic:</strong> <code>AND</code>, <code>OR</code>, <code>NOT</code> (Cẩn thận độ ưu tiên: NOT > AND > OR, hãy dùng dấu ngoặc <code>()</code>).</li>
+  <li><strong>LIKE:</strong> Tìm kiếm mẫu chuỗi.
+    <ul>
+      <li><code>%</code> : Đại diện cho 0 hoặc nhiều ký tự.</li>
+      <li><code>_</code> : Đại diện cho đúng 1 ký tự.</li>
+      <li>Vd: <code>WHERE HOTEN LIKE 'Nguyen%'</code> (Bắt đầu bằng 'Nguyen'), <code>WHERE HOTEN LIKE '%Thi%'</code> (Chứa chữ 'Thi').</li>
+    </ul>
+  </li>
+  <li><strong>IN:</strong> Nằm trong một tập hợp. Vd: <code>WHERE NUOCSX IN ('Viet Nam', 'Trung Quoc')</code>.</li>
+  <li><strong>BETWEEN ... AND ...:</strong> Nằm trong đoạn. Vd: <code>WHERE GIA BETWEEN 10000 AND 50000</code>.</li>
+</ul>
+
+<div class="callout-trap">
+  <strong>⚠ BẪY: So sánh với NULL</strong><br>
+  Trong SQL, <code>NULL</code> nghĩa là "không xác định" (unknown). Bạn <strong>không thể</strong> dùng dấu bằng <code>= NULL</code> hoặc khác <code>&lt;&gt; NULL</code>.<br>
+  Sai: <code>WHERE DCHI = NULL</code><br>
+  Đúng: <code>WHERE DCHI IS NULL</code> hoặc <code>IS NOT NULL</code>.
+</div>
+
+<h2 id="4-4">4.4 Phép KẾT (JOIN)</h2>
+<p>JOIN dùng để ghép dữ liệu từ 2 hay nhiều bảng dựa trên cột chung (thường là Khóa chính - Khóa ngoại).</p>
+
+<div class="callout-mental">
+  <strong>🧠 Mental Model: JOIN là phép chiếu ánh sáng qua các lớp kính</strong><br>
+  Hãy tưởng tượng mỗi bảng là một tờ giấy trong suốt có ghi thông tin. JOIN là việc dán các tờ giấy lại với nhau sao cho "mã" khớp nhau, tạo thành một tờ giấy lớn chứa toàn bộ thông tin.
+</div>
+
+<div class="before-after">
+  <div class="before">
+    <div class="label">Bảng HOADON (L)</div>
+    <table class="data-table">
+      <tr><th>SOHD</th><th>MAKH</th></tr>
+      <tr><td>101</td><td>KH01</td></tr>
+      <tr><td>102</td><td>KH02</td></tr>
+      <tr><td>103</td><td>NULL</td></tr>
+    </table>
+  </div>
+  <div class="after">
+    <div class="label">Bảng KHACHHANG (R)</div>
+    <table class="data-table">
+      <tr><th>MAKH</th><th>HOTEN</th></tr>
+      <tr><td>KH01</td><td>Nguyễn A</td></tr>
+      <tr><td>KH02</td><td>Lê B</td></tr>
+      <tr><td>KH03</td><td>Trần C</td></tr>
+    </table>
+  </div>
+</div>
+
+<h3>a) INNER JOIN (Phép kết bằng)</h3>
+<p><strong>Trực giác:</strong> Chỉ giữ lại những dòng <strong>có khớp nối</strong> ở CẢ 2 BẢNG.</p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> HD.SOHD, KH.HOTEN
+<span class="kw">FROM</span> HOADON HD <span class="kw">INNER JOIN</span> KHACHHANG KH 
+  <span class="kw">ON</span> HD.MAKH = KH.MAKH;
+</pre>
+<table class="data-table">
+  <tr><th>SOHD</th><th>HOTEN</th></tr>
+  <tr><td>101</td><td>Nguyễn A</td></tr>
+  <tr><td>102</td><td>Lê B</td></tr>
+</table>
+<p><em>KH03 (chưa mua) và SOHD 103 (khách vãng lai) bị loại bỏ.</em></p>
+
+<h3>b) LEFT (OUTER) JOIN</h3>
+<p><strong>Trực giác:</strong> Giữ lại <strong>TOÀN BỘ</strong> bảng bên TRÁI. Nếu bảng bên Phải không có dòng khớp, điền NULL.</p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> KH.MAKH, KH.HOTEN, HD.SOHD
+<span class="kw">FROM</span> KHACHHANG KH <span class="kw">LEFT JOIN</span> HOADON HD 
+  <span class="kw">ON</span> KH.MAKH = HD.MAKH;
+</pre>
+<table class="data-table">
+  <tr><th>MAKH</th><th>HOTEN</th><th>SOHD</th></tr>
+  <tr><td>KH01</td><td>Nguyễn A</td><td>101</td></tr>
+  <tr><td>KH02</td><td>Lê B</td><td>102</td></tr>
+  <tr><td>KH03</td><td>Trần C</td><td>NULL (Chưa mua hàng)</td></tr>
+</table>
+
+<div class="callout-trap">
+  <strong>⚠ BẪY: LEFT JOIN bị biến thành INNER JOIN!</strong><br>
+  Nếu bạn dùng <code>LEFT JOIN</code>, nhưng sau đó lại thêm điều kiện <code>WHERE</code> lên cột của bảng bên Phải, bạn vô tình lọc mất các dòng NULL.<br>
+  Vd: <code>LEFT JOIN HOADON HD ON ... WHERE HD.TRIGIA > 0</code>. Các dòng NULL (do KH chưa mua) sẽ bị loại bỏ vì NULL không thể > 0. LEFT JOIN trở thành INNER JOIN.<br>
+  <strong>Cách sửa:</strong> Đưa điều kiện lên mệnh đề <code>ON</code>: <code>LEFT JOIN HOADON HD ON KH.MAKH = HD.MAKH AND HD.TRIGIA > 0</code>, HOẶC thêm <code>OR HD.SOHD IS NULL</code> vào WHERE.
+</div>
+
+<h3>c) RIGHT (OUTER) JOIN</h3>
+<p>Giống LEFT JOIN, nhưng ưu tiên giữ toàn bộ bảng bên PHẢI.</p>
+
+<h3>d) FULL (OUTER) JOIN</h3>
+<p>Giữ lại toàn bộ dữ liệu của CẢ 2 BẢNG. Dòng nào không khớp sẽ điền NULL ở phía còn lại.</p>
+
+<h3>e) SELF JOIN (Kết với chính nó)</h3>
+<p>Dùng khi muốn so sánh các dòng trong cùng 1 bảng với nhau. Bắt buộc phải đặt Alias (tên giả) để SQL phân biệt được.</p>
+<pre class="sql-block keep-together">
+<span class="cmt">-- Ví dụ: Tìm các cặp học viên sinh cùng ngày</span>
+<span class="kw">SELECT</span> A.MAHV, A.HO, A.TEN, B.MAHV, B.HO, B.TEN
+<span class="kw">FROM</span> HOCVIEN A <span class="kw">JOIN</span> HOCVIEN B <span class="kw">ON</span> A.NGSINH = B.NGSINH 
+<span class="kw">WHERE</span> A.MAHV &lt; B.MAHV; <span class="cmt">-- Chặn đảo hợp (A,B) và (B,A)</span>
+</pre>
+
+<h2 id="4-5">4.5 Gom nhóm & Hàm kết hợp (Aggregation)</h2>
+
+<h3>1. Các hàm kết hợp (Aggregate functions)</h3>
+<ul>
+  <li><code>COUNT(cột)</code>: Đếm số lượng giá trị KHÁC NULL của cột.</li>
+  <li><code>COUNT(*)</code>: Đếm TỔNG số dòng (bao gồm cả dòng có NULL).</li>
+  <li><code>COUNT(DISTINCT cột)</code>: Đếm số lượng giá trị ĐỘC LẬP (duy nhất) của cột.</li>
+  <li><code>SUM(cột)</code>: Tổng.</li>
+  <li><code>AVG(cột)</code>: Trung bình.</li>
+  <li><code>MAX(cột)</code>, <code>MIN(cột)</code>: Lớn/Nhỏ nhất.</li>
+</ul>
+
+<h3>2. GROUP BY và HAVING</h3>
+<p><code>GROUP BY</code> chia bảng thành các nhóm dựa trên các giá trị giống nhau của một hoặc nhiều cột. Sau đó hàm aggregate sẽ tính toán TRÊN TỪNG NHÓM đó.</p>
+
+<div class="callout-fast">
+  <strong>⚡ Fast Pattern: Quy tắc GROUP BY</strong><br>
+  BẤT CỨ cột nào nằm trong mệnh đề <code>SELECT</code> mà <strong>KHÔNG</strong> bị bọc bởi hàm aggregate (SUM, COUNT...) thì <strong>BẮT BUỘC</strong> phải xuất hiện trong mệnh đề <code>GROUP BY</code>.
+</div>
+
+<div class="callout-mental">
+  <strong>🧠 Mental Model: PIPELINE THỰC THI CỦA SQL</strong><br>
+  Khi bạn viết một câu truy vấn, máy tính sẽ xử lý theo thứ tự sau chứ KHÔNG PHẢI thứ tự đọc từ trên xuống:<br>
+  <strong>FROM</strong> (Lấy bảng) → <strong>WHERE</strong> (Lọc dòng) → <strong>GROUP BY</strong> (Chia nhóm) → <strong>HAVING</strong> (Lọc nhóm) → <strong>SELECT</strong> (Chiếu cột/Tính toán) → <strong>ORDER BY</strong> (Sắp xếp).
+</div>
+
+<div class="callout-trap">
+  <strong>⚠ BẪY: WHERE vs HAVING</strong><br>
+  - <code>WHERE</code> lọc dữ liệu <strong>TRƯỚC KHI</strong> gom nhóm. KHÔNG ĐƯỢC chứa hàm aggregate. (Sai: <code>WHERE SUM(GIA) > 100</code>).<br>
+  - <code>HAVING</code> lọc dữ liệu <strong>SAU KHI</strong> đã gom nhóm. Nơi duy nhất để đặt điều kiện lên hàm aggregate. (Đúng: <code>HAVING SUM(GIA) > 100</code>).
+</div>
+
+<p>Ví dụ: Tính tổng trị giá của mỗi khách hàng, chỉ in ra khách hàng có tổng trị giá > 500.000đ.</p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> MAKH, <span class="kw">SUM</span>(TRIGIA) <span class="kw">AS</span> TONG_TG
+<span class="kw">FROM</span> HOADON
+<span class="kw">GROUP BY</span> MAKH
+<span class="kw">HAVING SUM</span>(TRIGIA) > 500000;
+</pre>
+
+<h2 id="4-6">4.6 Phép toán tập hợp (Set Operators)</h2>
+<p>Kết hợp kết quả của NHIỀU câu SELECT lại với nhau (theo chiều dọc).</p>
+<p><strong>Điều kiện:</strong> Số lượng cột và kiểu dữ liệu của các cột tương ứng giữa các câu SELECT phải khớp nhau (tương thích).</p>
+
+<ul>
+  <li><code>UNION</code>: Hợp của 2 tập hợp, <strong>tự động loại bỏ dòng trùng lặp</strong>.</li>
+  <li><code>UNION ALL</code>: Hợp của 2 tập hợp, <strong>giữ nguyên dòng trùng lặp</strong> (Nhanh hơn UNION vì không tốn chi phí sort/khử trùng).</li>
+  <li><code>INTERSECT</code>: Giao của 2 tập hợp (Các dòng xuất hiện ở CẢ 2 bên).</li>
+  <li><code>EXCEPT</code>: Hiệu của 2 tập hợp (Lấy các dòng của SELECT 1 mà KHÔNG xuất hiện ở SELECT 2). Lưu ý: Trong MySQL không có EXCEPT (nhưng SQL Server/T-SQL thì có!).</li>
+</ul>
+
+<h2 id="4-7">4.7 Truy vấn con (Subquery)</h2>
+<p>Subquery là một câu SELECT nằm lồng bên trong một câu SELECT khác. Thường dùng trong mệnh đề WHERE, HAVING, hoặc FROM.</p>
+
+<h3>a) Scalar subquery (Trả về 1 ô duy nhất)</h3>
+<p>Chỉ trả về 1 dòng và 1 cột. Có thể dùng các toán tử so sánh: <code>=</code>, <code>></code>, <code>&lt;</code>.</p>
+<pre class="sql-block">
+<span class="cmt">-- Tìm sản phẩm đắt nhất</span>
+<span class="kw">SELECT</span> MASP, TENSP, GIA
+<span class="kw">FROM</span> SANPHAM
+<span class="kw">WHERE</span> GIA = (<span class="kw">SELECT MAX</span>(GIA) <span class="kw">FROM</span> SANPHAM);
+</pre>
+
+<h3>b) Cột trả về nhiều dòng: Dùng IN / NOT IN</h3>
+<pre class="sql-block">
+<span class="cmt">-- Tìm mã khách hàng có mua sản phẩm 'Máy giặt'</span>
+<span class="kw">SELECT DISTINCT</span> MAKH
+<span class="kw">FROM</span> HOADON
+<span class="kw">WHERE</span> SOHD <span class="kw">IN</span> (
+    <span class="kw">SELECT</span> SOHD <span class="kw">FROM</span> CTHD 
+    <span class="kw">JOIN</span> SANPHAM <span class="kw">ON</span> CTHD.MASP = SANPHAM.MASP
+    <span class="kw">WHERE</span> TENSP = N'Máy giặt'
+);
+</pre>
+<div class="callout-trap">
+  <strong>⚠ BẪY: NOT IN và NULL</strong><br>
+  Nếu danh sách trả về của subquery IN có chứa 1 giá trị <code>NULL</code>, phép toán <code>NOT IN</code> sẽ luốn trả về <strong>rỗng (không dòng nào)</strong>. (Vì X NOT IN (A, B, NULL) tương đương X &lt;&gt; A AND X &lt;&gt; B AND X &lt;&gt; NULL. Mà X &lt;&gt; NULL luôn là UNKNOWN, làm sập toàn bộ chuỗi AND).<br>
+  Khắc phục: Dùng <code>NOT EXISTS</code> hoặc thêm <code>WHERE cột IS NOT NULL</code> trong subquery.
+</div>
+
+<h3>c) EXISTS / NOT EXISTS</h3>
+<p>Không quan tâm subquery trả về cột gì, chỉ quan tâm subquery đó <strong>CÓ DỮ LIỆU</strong> (ít nhất 1 dòng) hay <strong>KHÔNG CÓ DỮ LIỆU</strong>. <code>EXISTS</code> thường biểu đạt kiểm tra tồn tại tự nhiên hơn <code>IN</code>; hiệu năng thực tế phụ thuộc dữ liệu, chỉ mục và execution plan.</p>
+
+<h3>d) Correlated Subquery (Truy vấn con tương quan)</h3>
+<p>Subquery chứa tham chiếu đến cột của truy vấn cha bên ngoài. Với mỗi dòng của câu cha, subquery sẽ được chạy lại một lần (Giống như 2 vòng lặp lồng nhau). Thường dùng với EXISTS.</p>
+
+<h2 id="4-8">4.8 Tuyệt kỹ "Tất Cả" Pattern (TRỌNG ĐIỂM THI) 🎯</h2>
+<p>Dạng toán kinh điển: <em>"Tìm sinh viên đã học <strong>TẤT CẢ</strong> các môn", "Tìm khách hàng mua <strong>TẤT CẢ</strong> sản phẩm do Việt Nam sản xuất".</em></p>
+<p>Có 3 cách giải chính:</p>
+
+<h3>CÁCH A: Double NOT EXISTS (Lật ngược vấn đề)</h3>
+<p><em>"Tìm khách hàng sao cho <strong>KHÔNG TỒN TẠI</strong> sản phẩm Việt Nam nào mà khách hàng đó <strong>CHƯA MUA</strong>."</em></p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> KH.MAKH, KH.HOTEN
+<span class="kw">FROM</span> KHACHHANG KH
+<span class="kw">WHERE NOT EXISTS</span> (
+    <span class="cmt">-- 1. Quét tất cả Sản phẩm VN</span>
+    <span class="kw">SELECT</span> * <span class="kw">FROM</span> SANPHAM SP
+    <span class="kw">WHERE</span> SP.NUOCSX = 'Viet Nam'
+    <span class="kw">AND NOT EXISTS</span> (
+        <span class="cmt">-- 2. Kiểm tra xem KH đang xét có mua SP này chưa?</span>
+        <span class="kw">SELECT</span> * <span class="kw">FROM</span> CTHD CT <span class="kw">JOIN</span> HOADON HD <span class="kw">ON</span> CT.SOHD = HD.SOHD
+        <span class="kw">WHERE</span> HD.MAKH = KH.MAKH <span class="cmt">-- Correlated với câu bên ngoài cùng!</span>
+        <span class="kw">AND</span> CT.MASP = SP.MASP   <span class="cmt">-- Correlated với câu giữa!</span>
+    )
+);
+</pre>
+
+<h3>CÁCH B: Đếm và So Sánh (COUNT DISTINCT)</h3>
+<p><em>"Số lượng MÃ SẢN PHẨM KHÁC NHAU của VN mà khách hàng đã mua BẰNG với Tổng số sản phẩm của VN hiện có".</em></p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> HD.MAKH
+<span class="kw">FROM</span> HOADON HD
+<span class="kw">JOIN</span> CTHD CT <span class="kw">ON</span> HD.SOHD = CT.SOHD
+<span class="kw">JOIN</span> SANPHAM SP <span class="kw">ON</span> CT.MASP = SP.MASP
+<span class="kw">WHERE</span> SP.NUOCSX = 'Viet Nam'
+<span class="kw">GROUP BY</span> HD.MAKH
+<span class="kw">HAVING COUNT</span>(<span class="kw">DISTINCT</span> CT.MASP) = (
+    <span class="kw">SELECT COUNT</span>(*) <span class="kw">FROM</span> SANPHAM <span class="kw">WHERE</span> NUOCSX = 'Viet Nam'
+);
+</pre>
+
+<div class="callout-why">
+  <strong>🤔 Góc nhìn chuyên sâu: Khi tập chia bị rỗng (Không có sản phẩm VN nào)</strong><br>
+  Theo toán học (đại số quan hệ), mệnh đề "Khách hàng mua MỌI sản phẩm VN" sẽ đúng một cách hiển nhiên (vacuously true) với TẤT CẢ khách hàng nếu không có sản phẩm VN nào.
+  <ul>
+    <li><strong>Cách Double NOT EXISTS:</strong> Bắt đầu bằng <code>FROM KHACHHANG</code>. Vòng lặp kiểm tra thấy không có SP VN nào, nên điều kiện <code>NOT EXISTS</code> bên trong lập tức đúng cho mọi khách hàng. Kết quả: <strong>Trả về toàn bộ khách hàng.</strong> (Đúng với lý thuyết chuẩn).</li>
+    <li><strong>Cách COUNT + GROUP BY ở trên:</strong> Bắt đầu bằng việc <code>JOIN</code> bảng <code>HOADON</code> với <code>SANPHAM</code> của VN. Vì không có SP VN nào, tập kết quả bị rỗng <em>ngay từ trước khi gom nhóm</em>. Do đó, dù <code>0 = 0</code>, truy vấn vẫn <strong>không trả về khách hàng nào</strong>. <em>(Nếu muốn Cách Count trả về mọi KH như lý thuyết, ta phải đặt Subquery đếm số lượng vào mệnh đề WHERE của bảng KHACHHANG thay vì dùng GROUP BY).</em></li>
+  </ul>
+</div>
+
+<h3>CÁCH C: Phép Chia (Division Mindset)</h3>
+<p>Dùng <code>EXCEPT</code>. Nếu tập (Tất cả SP VN) TRỪ ĐI tập (Các SP VN mà KH x đã mua) = RỖNG → Tức là KH x đã mua hết!</p>
+
+<table class="data-table" style="width: 100%; table-layout: fixed; margin: 1em 0;">
+  <colgroup>
+    <col style="width: 22%;">
+    <col style="width: 38%;">
+    <col style="width: 40%;">
+  </colgroup>
+  <thead>
+    <tr><th>Cách</th><th>Ưu điểm</th><th>Nhược điểm</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Double NOT EXISTS</td><td>Bám sát logic “mọi”, trả về đúng mọi KH khi tập chia rỗng (chuẩn lý thuyết).</td><td>Cú pháp nhiều mức lồng, dễ rối; hiệu năng phụ thuộc execution plan.</td></tr>
+    <tr><td>COUNT DISTINCT</td><td>Dễ suy nghĩ, dễ viết, quen thuộc.</td><td>Hành vi khi tập chia rỗng khác với lý thuyết trừ khi viết cẩn thận. Với cấu trúc JOIN và GROUP BY ở trên, tập kết quả sẽ bị rỗng trước khi gom nhóm, trả về 0 dòng thay vì mọi KH.</td></tr>
+    <tr><td>Division (EXCEPT)</td><td>Tư duy Đại số quan hệ rõ ràng.</td><td>Ít người dùng, code khá dài.</td></tr>
+  </tbody>
+</table>
+
+<div class="callout-exam">
+  <strong>🎯 Lời khuyên thi cử:</strong><br>
+  Giảng viên thường <strong>khuyến khích</strong> làm theo cách <code>NOT EXISTS</code>. Hãy học thuộc pattern này (Template):<br>
+  <code>SELECT x FROM B1 WHERE NOT EXISTS (SELECT y FROM B2 WHERE &lt;Điều kiện B2&gt; AND NOT EXISTS (SELECT z FROM B3 WHERE B3.x = B1.x AND B3.y = B2.y))</code>
+</div>
+
+<h2 id="4-9">4.9 Các thủ thuật tìm Max / Min</h2>
+<p>Tìm thực thể có giá trị lớn nhất/nhỏ nhất (Vd: Khách hàng mua nhiều tiền nhất, Môn học có nhiều sinh viên rớt nhất). Có 4 cách:</p>
+
+<p><strong>1. Dùng Subquery (An toàn, dễ hiểu nhất)</strong></p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> MAKH, DOANHSO
+<span class="kw">FROM</span> KHACHHANG
+<span class="kw">WHERE</span> DOANHSO = (<span class="kw">SELECT MAX</span>(DOANHSO) <span class="kw">FROM</span> KHACHHANG);
+</pre>
+
+<p><strong>2. TOP 1 WITH TIES (Đặc sản SQL Server)</strong></p>
+<pre class="sql-block">
+<span class="kw">SELECT TOP</span> 1 <span class="kw">WITH TIES</span> MAKH, DOANHSO
+<span class="kw">FROM</span> KHACHHANG
+<span class="kw">ORDER BY</span> DOANHSO <span class="kw">DESC</span>;
+</pre>
+<p><em>(WITH TIES lấy luôn các dòng đồng hạng với TOP 1). Cách viết này ngắn gọn cho bài tập SQL Server.</em></p>
+
+<p><strong>3. WHERE >= ALL</strong></p>
+<pre class="sql-block">
+<span class="kw">SELECT</span> MAKH, DOANHSO
+<span class="kw">FROM</span> KHACHHANG
+<span class="kw">WHERE</span> DOANHSO >= <span class="kw">ALL</span>(<span class="kw">SELECT</span> DOANHSO <span class="kw">FROM</span> KHACHHANG);
+</pre>
+
+<p><strong>4. NOT EXISTS lật ngược</strong></p>
+<pre class="sql-block">
+<span class="cmt">-- Không tồn tại KH nào khác có doanh số > doanh số của KH này</span>
+<span class="kw">SELECT</span> MAKH, DOANHSO
+<span class="kw">FROM</span> KHACHHANG KH1
+<span class="kw">WHERE NOT EXISTS</span> (
+    <span class="kw">SELECT</span> * <span class="kw">FROM</span> KHACHHANG KH2 
+    <span class="kw">WHERE</span> KH2.DOANHSO > KH1.DOANHSO
+);
+</pre>
+
+<h2 id="4-10">4.10 Thao tác Ngày Tháng (Date/Time)</h2>
+<ul>
+  <li>Lấy ngày giờ hiện tại: <code>GETDATE()</code></li>
+  <li>Lấy phần riêng lẻ: <code>YEAR(cột)</code>, <code>MONTH(cột)</code>, <code>DAY(cột)</code></li>
+  <li>Cộng trừ ngày: <code>DATEADD(day, 10, NGSINH)</code> (Cộng 10 ngày)</li>
+  <li>Khoảng cách 2 ngày: <code>DATEDIFF(year, NGSINH, GETDATE())</code> (Tính khoảng cách năm, <strong>không phải tuổi chính xác</strong> vì nó chỉ đếm số lần qua Tết Tây. Tuổi chính xác cần so sánh thêm ngày tháng sinh).</li>
+</ul>
+
+<h2 id="4-11">4.11 Common Traps - Các lỗi ngớ ngẩn làm mất điểm</h2>
+<div class="callout-trap">
+  <ol>
+    <li><strong>Viết WHERE sau GROUP BY hoặc ORDER BY:</strong> Sai cú pháp. (Pipeline: FROM > WHERE > GROUP > HAVING > ORDER).</li>
+    <li><strong>Sử dụng aggregate trong WHERE:</strong> <code>WHERE SUM(SL) > 10</code>. Sai! Phải chuyển xuống HAVING.</li>
+    <li><strong>Thiếu GROUP BY:</strong> Trong SELECT có <code>MAKH</code> và <code>SUM(TRIGIA)</code> nhưng không có <code>GROUP BY MAKH</code>. SQL sẽ chửi thề ngay lập tức.</li>
+    <li><strong>COUNT(*) vs COUNT(cột):</strong> Khi cột có NULL, COUNT(*) đếm luôn cả dòng NULL, COUNT(cột) thì bỏ qua. Sai một li đi một dặm.</li>
+    <li><strong>COUNT thay vì COUNT(DISTINCT):</strong> Đếm số môn học sinh viên đó thi rớt. SV rớt môn CSDL 3 lần -> COUNT trả về 3, COUNT DISTINCT trả về 1. Tùy đề bài mà dùng cho đúng.</li>
+    <li><strong>Dùng = NULL thay vì IS NULL.</strong> (Đã nói ở trên).</li>
+    <li><strong>JOIN nhiều bảng nhưng quên mất điều kiện ON/WHERE liên kết:</strong> Dẫn tới hiện tượng Cartesian Product (Nhân chéo). 2 bảng 100 dòng -> ra 10.000 dòng. Treo máy chấm!</li>
+    <li><strong>Duplicate dữ liệu khi JOIN:</strong> 1 KH có 3 Hóa đơn. SELECT KH JOIN HOADON sẽ in ra 3 dòng họ tên KH. Đừng quên chữ <code>DISTINCT</code> nếu đề chỉ hỏi "Liệt kê danh sách KH...".</li>
+    <li><strong>Nhầm lẫn AND và OR:</strong> <code>WHERE GIA > 100 AND MACG = 'A' OR MACG = 'B'</code>. Máy tính sẽ hiểu là: <code>(GIA > 100 AND MACG='A') OR (MACG = 'B')</code> (Mọi món hàng của B đều được lấy). Dùng ngoặc ngay: <code>WHERE GIA > 100 AND (MACG = 'A' OR MACG = 'B')</code>.</li>
+  </ol>
+</div>
+
+<h2 id="4-12">=== BÀI TẬP THỰC HÀNH ===</h2>
+<p>Sử dụng cơ sở dữ liệu QLBH (Khách hàng, Nhân viên, Sản phẩm, Hóa đơn, CTHD).</p>
+
+<div class="exercise-block level-1">
+  <strong>Level 1: SELECT Cơ Bản</strong><br>
+  1. In ra danh sách các sản phẩm (MASP, TENSP) do "Viet Nam" sản xuất.<br>
+  2. In ra danh sách các khách hàng (MAKH, HOTEN) có địa chỉ ở "TpHCM".<br>
+  3. In ra danh sách các sản phẩm (MASP, TENSP) có giá từ 20.000 đến 50.000.<br>
+  4. In ra danh sách các khách hàng sinh năm 1990.<br>
+  5. In ra hóa đơn (SOHD, TRIGIA) có trị giá trên 100.000 trong năm 2006.
+  
+  <details class="solution">
+    <summary class="solution-header">Xem lời giải</summary>
+    <div class="solution-body">
+      <pre class="sql-block">
+-- Câu 1
+SELECT MASP, TENSP FROM SANPHAM WHERE NUOCSX = 'Viet Nam';
+-- Câu 2
+SELECT MAKH, HOTEN FROM KHACHHANG WHERE DCHI LIKE '%TpHCM%';
+-- Câu 4
+SELECT MAKH, HOTEN FROM KHACHHANG WHERE YEAR(NGSINH) = 1990;
+      </pre>
+    </div>
+  </details>
+</div>
+
+<div class="exercise-block level-2">
+  <strong>Level 2: JOIN & GROUP BY</strong><br>
+  1. In ra chi tiết hóa đơn SOHD = 1001 (TENSP, SL, GIA, THANHTIEN).<br>
+  2. In ra doanh thu tổng cộng của từng tháng trong năm 2006.<br>
+  3. Liệt kê tổng số lượng mua của từng khách hàng (MAKH, HOTEN, TONGSL).<br>
+  4. In ra danh sách những nhân viên chưa bán được hóa đơn nào.<br>
+  5. Tìm số hóa đơn có mua ít nhất 3 sản phẩm khác nhau.
+  
+  <details class="solution">
+    <summary class="solution-header">Xem lời giải</summary>
+    <div class="solution-body">
+      <pre class="sql-block">
+-- Câu 4: Dùng LEFT JOIN hoặc NOT EXISTS
+SELECT NV.MANV, NV.HOTEN
+FROM NHANVIEN NV LEFT JOIN HOADON HD ON NV.MANV = HD.MANV
+WHERE HD.SOHD IS NULL;
+
+-- Câu 5:
+SELECT SOHD FROM CTHD GROUP BY SOHD HAVING COUNT(MASP) >= 3;
+      </pre>
+    </div>
+  </details>
+</div>
+
+<div class="exercise-block level-3">
+  <strong>Level 3: Subquery & Max/Min</strong><br>
+  1. Tìm khách hàng mua nhiều tiền nhất.<br>
+  2. Tìm sản phẩm đắt nhất do Việt Nam sản xuất.<br>
+  3. Tìm khách hàng mua nhiều lần nhất (đếm số SOHD).<br>
+  4. Trong năm 2006, sản phẩm nào bán được với số lượng nhiều nhất?<br>
+  5. Tìm hóa đơn có trị giá cao nhất trong năm 2006.
+</div>
+
+<div class="exercise-block level-4">
+  <strong>Level 4: Tuyệt kỹ "Tất Cả"</strong><br>
+  1. Tìm khách hàng đã mua tất cả các sản phẩm do Singapore sản xuất.<br>
+  2. Tìm khách hàng (MAKH, HOTEN) đã mua tất cả các sản phẩm (của tất cả các nước).<br>
+  3. Tìm hóa đơn có chứa tất cả các sản phẩm do Việt Nam sản xuất.
+  
+  <details class="solution">
+    <summary class="solution-header">Xem lời giải (NOT EXISTS pattern)</summary>
+    <div class="solution-body">
+      <pre class="sql-block">
+-- Câu 1: Tìm KH không tồn tại SP của Sing nào mà KH đó chưa mua.
+SELECT KH.MAKH, KH.HOTEN
+FROM KHACHHANG KH
+WHERE NOT EXISTS (
+    SELECT * FROM SANPHAM SP WHERE NUOCSX = 'Singapore'
+    AND NOT EXISTS (
+        SELECT * FROM HOADON HD JOIN CTHD CT ON HD.SOHD = CT.SOHD
+        WHERE HD.MAKH = KH.MAKH AND CT.MASP = SP.MASP
+    )
+);
+      </pre>
+    </div>
+  </details>
+</div>
+
+<h2 id="4-13">=== ONE-PAGE RECALL ===</h2>
+<div class="recall-sheet">
+  <ul>
+    <li><strong>Pipeline:</strong> <code>FROM &gt; WHERE &gt; GROUP BY &gt; HAVING &gt; SELECT &gt; ORDER BY</code>.</li>
+    <li><strong>WHERE:</strong> lọc dòng trước gom nhóm; <strong>HAVING:</strong> lọc nhóm sau khi có hàm toán học (SUM, COUNT).</li>
+    <li><code>COUNT(*)</code> đếm cả dòng NULL; <code>COUNT(col)</code> đếm giá trị không NULL; <code>COUNT(DISTINCT col)</code> đếm số loại.</li>
+    <li>So sánh rỗng: Dùng <code>IS NULL</code> hoặc <code>IS NOT NULL</code>, không dùng dấu <code>=</code>.</li>
+    <li><strong>Double NOT EXISTS Template:</strong> <code>SELECT ... FROM T1 WHERE NOT EXISTS (SELECT * FROM T2 WHERE ... AND NOT EXISTS (SELECT * FROM T3 WHERE T3.T1_ID=T1.ID AND T3.T2_ID=T2.ID))</code></li>
+    <li>Nếu bài dùng chuỗi ngày theo dạng ngày/tháng/năm, nên đặt <code>SET DATEFORMAT DMY;</code>; trong mã thực tế, ưu tiên literal ngày không nhập nhằng như <code>YYYYMMDD</code> hoặc tham số kiểu ngày.</li>
+  </ul>
+</div>
+</section>
