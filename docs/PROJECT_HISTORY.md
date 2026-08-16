@@ -1,34 +1,33 @@
-# Lịch Sử Dự Án & Quá Trình Phát Triển (Project History)
+# Lịch sử dự án
 
-Tài liệu này ghi nhận quá trình nghiên cứu, biên soạn, kiểm toán học thuật và hoàn thiện xuất bản của dự án Cẩm nang CSDL IT004 UIT.
+Tài liệu này ghi lại các giai đoạn chính trong quá trình nghiên cứu, biên soạn và hoàn thiện Cẩm nang CSDL IT004 UIT.
 
 ---
 
-## 1. Dòng Thời Gian Phát Triển
+## 1. Dòng thời gian phát triển
 
-### Giai đoạn 1: Khảo sát & Xây dựng Cấu trúc Sách (Research & Architecture)
-- Thu thập và phân loại toàn bộ giáo trình chính khóa, slide bài giảng môn Cơ sở dữ liệu (IT004) của Khoa Hệ thống Thông tin – UIT.
-- Tổng hợp ngân hàng câu hỏi ôn tập, bài tập thực hành Lab SQL Server và đề thi chính thức từ năm 2017 đến 2025.
-- Thiết lập ma trận bao phủ kiến thức (`coverage_matrix.md`) và bảng đối chiếu mâu thuẫn ký hiệu giữa các nguồn tài liệu (`source_conflicts.md`).
+### Giai đoạn 1: Khảo sát & xây dựng cấu trúc sách
+- Thu thập và phân loại giáo trình, slide bài giảng và tài liệu tham khảo liên quan đến học phần Cơ sở dữ liệu (IT004).
+- Tổng hợp bài tập thực hành SQL Server và đề thi tham khảo.
+- Thiết lập ma trận bao phủ kiến thức (`research/coverage_matrix.md`) và bảng đối chiếu khác biệt giữa các nguồn (`research/source_conflicts.md`).
 
-### Giai đoạn 2: Thiết kế Hệ thống Chế bản & Soạn thảo (Authoring & Print CSS)
-- Xây dựng động cơ in ấn CSS A4 chuẩn hóa (`book/css/book.css`) hỗ trợ ngắt trang thông minh, kiểm soát lề gáy sách và hiển thị khối mã lệnh.
-- Soạn thảo tuần tự 8 chương chuyên đề, bao gồm 30 bài tập Đại số quan hệ mẫu, các bài thực chiến T-SQL Server, ràng buộc toàn vẹn và lý thuyết chuẩn hóa.
+### Giai đoạn 2: Soạn thảo & chế bản
+- Xây dựng Print CSS A4 trong `book/css/book.css` để kiểm soát lề, ngắt trang, bảng và khối mã lệnh.
+- Soạn các chương về ER, mô hình quan hệ, Đại số quan hệ, SQL Server, ràng buộc toàn vẹn, phụ thuộc hàm, chuẩn hóa và thực hành.
+- Bổ sung Exam Playbook, Cheat Sheet và bài tập có lời giải.
 
-### Giai đoạn 3: Kiểm toán Học thuật Độc lập (Academic Audits)
-- Thẩm định chuyên sâu về tính đúng đắn học thuật của các khái niệm then chốt:
-  - Phân định rõ 3NF và BCNF theo định nghĩa hình thức.
-  - Xử lý ngữ nghĩa phép chia và tập chia rỗng giữa Đại số quan hệ và SQL.
-  - Chuẩn hóa lược đồ quan hệ trong các ví dụ nâng cao (phép hợp tổng quát với quan hệ mở rộng `NHANVIEN`).
-  - Kiểm tra tính đúng đắn của trigger đa dòng trên SQL Server.
+### Giai đoạn 3: Rà soát học thuật
+- Kiểm tra các điểm dễ nhầm như 3NF/BCNF, phép chia và trường hợp tập chia rỗng, tính khả hợp của phép hợp và trigger đa dòng trên SQL Server.
+- Đối chiếu lại tên thuộc tính, lược đồ ví dụ và cách dùng ký hiệu giữa các chương.
 
-### Giai đoạn 4: Tinh chỉnh Chế bản & Xuất bản Canonical (Final Surgical Gate)
-- Loại bỏ triệt để các lỗi ngắt trang (tiêu đề mồ côi, bảng chia cắt vụn).
-- Tối ưu hóa các bảng so sánh dài chống tràn lề trang.
-- Nhúng siêu dữ liệu chuẩn hóa vào tệp PDF (Title, Author, Subject).
-- Hoàn thiện tệp PDF chính thức: **88 trang A4 hoàn hảo**.
+### Giai đoạn 4: Tinh chỉnh trước phát hành
+- Sửa các lỗi ngắt trang, tiêu đề mồ côi và khối code bị chia cắt.
+- Điều chỉnh bảng dài để tránh tràn lề.
+- Nhúng metadata Title, Author và Subject vào PDF.
+- Hoàn thiện bản PDF 88 trang A4.
 
-### Giai đoạn 5: Tích hợp & Đóng gói Kho lưu trữ Mở (Repository Integration)
-- Tái cấu trúc kho lưu trữ sạch sẽ, bảo mật, độc lập nền tảng.
-- Xây dựng bộ công cụ kiểm thử tự động (Validation Suite) và hệ thống CI/CD với GitHub Actions.
-- Chuẩn bị trang xem trước trực tuyến qua GitHub Pages.
+### Giai đoạn 5: Tích hợp repository công khai
+- Chuẩn hóa cấu trúc repository và loại bỏ tệp tạm, đường dẫn cục bộ cùng dữ liệu không phù hợp để công khai.
+- Xây dựng `scripts/build.py`, `scripts/validate.py` và GitHub Actions.
+- Triển khai bản HTML đọc trực tuyến bằng GitHub Pages.
+- Bổ sung bản đồ kiến thức IT004 làm hình ảnh chính cho README.
