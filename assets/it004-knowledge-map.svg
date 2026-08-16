@@ -1,0 +1,168 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="100%" height="100%" style="background: #0b1120; border-radius: 12px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b" />
+      <stop offset="100%" stop-color="#0f172a" />
+    </linearGradient>
+    <linearGradient id="accentBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="100%" stop-color="#0369a1" />
+    </linearGradient>
+    <linearGradient id="accentCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#06b6d4" />
+      <stop offset="100%" stop-color="#0891b2" />
+    </linearGradient>
+    <linearGradient id="accentIndigo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366f1" />
+      <stop offset="100%" stop-color="#4f46e5" />
+    </linearGradient>
+    <linearGradient id="accentAmber" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b" />
+      <stop offset="100%" stop-color="#d97706" />
+    </linearGradient>
+    <linearGradient id="accentEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10b981" />
+      <stop offset="100%" stop-color="#059669" />
+    </linearGradient>
+
+    <!-- Markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38bdf8" />
+    </marker>
+    <marker id="arrowIndigo" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#818cf8" />
+    </marker>
+    <marker id="arrowCyan" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#22d3ee" />
+    </marker>
+    <marker id="arrowAmber" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#fbbf24" />
+    </marker>
+    <marker id="arrowEmerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#34d399" />
+    </marker>
+  </defs>
+
+  <!-- Canvas Border -->
+  <rect x="1" y="1" width="958" height="618" rx="11" fill="none" stroke="#1e293b" stroke-width="2"/>
+
+  <!-- Top Title Banner -->
+  <g transform="translate(40, 24)">
+    <rect x="0" y="0" width="130" height="22" rx="4" fill="#0369a1" />
+    <text x="65" y="15" fill="#f0f9ff" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="0.05em">KNOWLEDGE MAP</text>
+    <text x="145" y="16" fill="#f8fafc" font-size="18" font-weight="800">IT004 – CƠ SỞ DỮ LIỆU • HỆ THỐNG KIẾN TRÚC MÔN HỌC</text>
+    <text x="145" y="34" fill="#94a3b8" font-size="12">Lộ trình xuyên suốt: Từ phân tích hiện thực, mô hình hóa toán học đến lập trình T-SQL &amp; Tối ưu hóa</text>
+  </g>
+
+  <!-- Connectors (Background Layer) -->
+  <g fill="none" stroke-width="2">
+    <!-- Main spine connectors -->
+    <path d="M 210 135 L 210 165" stroke="#38bdf8" marker-end="url(#arrow)" />
+    <path d="M 210 235 L 210 265" stroke="#38bdf8" marker-end="url(#arrow)" />
+    <path d="M 210 335 L 210 365" stroke="#38bdf8" marker-end="url(#arrow)" />
+    <path d="M 210 435 L 210 465" stroke="#38bdf8" marker-end="url(#arrow)" />
+
+    <!-- Branch from Relational Model (Node 3) to Integrity Constraints -->
+    <path d="M 370 300 H 510" stroke="#818cf8" stroke-dasharray="4,4" />
+    <path d="M 510 300 V 205 H 550" stroke="#818cf8" marker-end="url(#arrowIndigo)" />
+
+    <!-- Branch from Relational Model (Node 3) to Normalization -->
+    <path d="M 370 300 H 510" stroke="#22d3ee" stroke-dasharray="4,4" />
+    <path d="M 510 300 V 335 H 550" stroke="#22d3ee" marker-end="url(#arrowCyan)" />
+
+    <!-- Convergence to Practical Lab -->
+    <path d="M 210 535 L 210 550" stroke="#34d399" marker-end="url(#arrowEmerald)" />
+
+    <!-- Convergence to Exam Mastery -->
+    <path d="M 370 500 H 450 V 550" stroke="#fbbf24" stroke-dasharray="3,3" />
+    <path d="M 730 235 V 450 H 450" stroke="#fbbf24" stroke-dasharray="3,3" />
+    <path d="M 730 365 V 450" stroke="#fbbf24" stroke-dasharray="3,3" />
+    <path d="M 450 450 V 550" stroke="#fbbf24" marker-end="url(#arrowAmber)" />
+  </g>
+
+  <!-- ==================== COLUMN 1: CORE ENGINE PIPELINE ==================== -->
+
+  <!-- Node 1: Real-world Problem -->
+  <g transform="translate(50, 75)">
+    <rect width="320" height="60" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5" />
+    <circle cx="24" cy="30" r="12" fill="#0284c7" />
+    <text x="24" y="34" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">01</text>
+    <text x="46" y="24" fill="#38bdf8" font-size="13" font-weight="700">Thế giới thực &amp; Yêu cầu bài toán</text>
+    <text x="46" y="42" fill="#94a3b8" font-size="11">Khảo sát thực tế • Phân tích nghiệp vụ • Dữ liệu thô</text>
+  </g>
+
+  <!-- Node 2: ER Modeling -->
+  <g transform="translate(50, 175)">
+    <rect width="320" height="60" rx="8" fill="#1e293b" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="24" cy="30" r="12" fill="#0284c7" />
+    <text x="24" y="34" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">02</text>
+    <text x="46" y="24" fill="#38bdf8" font-size="13" font-weight="700">Mô hình Thực thể – Kết hợp (ER)</text>
+    <text x="46" y="42" fill="#cbd5e1" font-size="11">Entity • Relationship • Bản số Cardinality • Min-Max</text>
+  </g>
+
+  <!-- Node 3: Relational Model (HUB) -->
+  <g transform="translate(50, 275)">
+    <rect width="320" height="60" rx="8" fill="#0f172a" stroke="#38bdf8" stroke-width="2" />
+    <circle cx="24" cy="30" r="12" fill="#0284c7" />
+    <text x="24" y="34" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">03</text>
+    <text x="46" y="24" fill="#f8fafc" font-size="13" font-weight="700">Mô hình Quan hệ (Relational Model)</text>
+    <text x="46" y="42" fill="#38bdf8" font-size="11">Relation Schema • Cột / Dòng • Khóa PK / Khóa ngoại FK</text>
+  </g>
+
+  <!-- Node 4: Relational Algebra -->
+  <g transform="translate(50, 375)">
+    <rect width="320" height="60" rx="8" fill="#1e293b" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="24" cy="30" r="12" fill="#0284c7" />
+    <text x="24" y="34" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">04</text>
+    <text x="46" y="24" fill="#38bdf8" font-size="13" font-weight="700">Đại số quan hệ (Relational Algebra)</text>
+    <text x="46" y="42" fill="#cbd5e1" font-size="11">Chọn σ • Chiếu π • Kết ⋈ • Gom nhóm ℑ • Phép chia ÷</text>
+  </g>
+
+  <!-- Node 5: SQL Server / T-SQL -->
+  <g transform="translate(50, 475)">
+    <rect width="320" height="60" rx="8" fill="#1e293b" stroke="#0284c7" stroke-width="1.5" />
+    <circle cx="24" cy="30" r="12" fill="#0284c7" />
+    <text x="24" y="34" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">05</text>
+    <text x="46" y="24" fill="#38bdf8" font-size="13" font-weight="700">Ngôn ngữ SQL Server / T-SQL</text>
+    <text x="46" y="42" fill="#cbd5e1" font-size="11">DDL • DML • JOIN • Subquery • Double NOT EXISTS</text>
+  </g>
+
+  <!-- ==================== COLUMN 2: CRITICAL STRUCTURAL BRANCHES ==================== -->
+
+  <!-- Branch 1: Integrity Constraints -->
+  <g transform="translate(560, 165)">
+    <rect width="350" height="80" rx="8" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.5" />
+    <rect x="14" y="12" width="56" height="18" rx="3" fill="#4f46e5" />
+    <text x="42" y="25" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle">CHƯƠNG 5</text>
+    <text x="80" y="26" fill="#c7d2fe" font-size="13" font-weight="700">Ràng buộc toàn vẹn (RBTV)</text>
+    <text x="14" y="48" fill="#e0e7ff" font-size="11">• Phân loại: Miền giá trị, Thực thể, Tham chiếu, Liên quan hệ</text>
+    <text x="14" y="66" fill="#a5b4fc" font-size="11">• Kỹ thuật: Bảng tầm ảnh hưởng 3 thao tác &amp; T-SQL Trigger</text>
+  </g>
+
+  <!-- Branch 2: Normalization & Functional Dependencies -->
+  <g transform="translate(560, 295)">
+    <rect width="350" height="80" rx="8" fill="#083344" stroke="#06b6d4" stroke-width="1.5" />
+    <rect x="14" y="12" width="56" height="18" rx="3" fill="#0891b2" />
+    <text x="42" y="25" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle">CHƯƠNG 6</text>
+    <text x="80" y="26" fill="#a5f3fc" font-size="13" font-weight="700">Phụ thuộc hàm &amp; Chuẩn hóa</text>
+    <text x="14" y="48" fill="#cffafe" font-size="11">• Tiên đề Armstrong • Bao đóng X⁺ • Phủ tối thiểu Fc • Khóa</text>
+    <text x="14" y="66" fill="#67e8f9" font-size="11">• Dạng chuẩn 1NF → 2NF → 3NF → BCNF &amp; Phân rã Lossless</text>
+  </g>
+
+  <!-- ==================== BOTTOM CONVERGENCE ==================== -->
+
+  <!-- Convergence Left: Practical Database Engineering -->
+  <g transform="translate(50, 555)">
+    <rect width="380" height="48" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1.5" />
+    <text x="16" y="20" fill="#a7f3d0" font-size="12" font-weight="700">Chương 7: Thực hành SQL Server &amp; SSMS</text>
+    <text x="16" y="38" fill="#ecfdf5" font-size="10.5">Workflow phòng máy • Xử lý lỗi script • View • Stored Procedure</text>
+  </g>
+
+  <!-- Convergence Right: Exam Mastery -->
+  <g transform="translate(470, 555)">
+    <rect width="440" height="48" rx="6" fill="#451a03" stroke="#f59e0b" stroke-width="1.5" />
+    <text x="16" y="20" fill="#fde68a" font-size="12" font-weight="700">IT004 Exam Playbook &amp; Last-Minute Cheat Sheet</text>
+    <text x="16" y="38" fill="#fffbeb" font-size="10.5">Chiến thuật 90p • 20+ Bẫy đề thi kinh điển • Tra nhanh công thức phòng thi</text>
+  </g>
+</svg>

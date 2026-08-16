@@ -20,7 +20,7 @@ ROOT = Path(__file__).resolve().parent.parent
 INDEX_PATH = ROOT / "book" / "index.html"
 CHAPTER_DIR = ROOT / "book" / "chapters"
 PDF_PATH = ROOT / "dist" / "IT004_CSDL_UIT_CamNang_VoTrongPhuc.pdf"
-PREVIEW_DIR = ROOT / "assets" / "preview"
+KNOWLEDGE_MAP_SVG = ROOT / "assets" / "it004-knowledge-map.svg"
 
 EXPECTED_SHA256 = "2fa50b54c553634c0408bfc6f5def71cf44e0961e5f74eea8198ece21821b25e"
 EXPECTED_PAGES = 88
@@ -136,9 +136,8 @@ def validate():
                     assert False, f"Safety violation: Pattern '{pat}' found in {path.relative_to(ROOT)}"
     print("  [OK] Zero hardcoded private paths, zero leaked credentials in repository")
 
-    for preview_file in ["cover.png", "roadmap.png", "handbook-preview.png"]:
-        assert (PREVIEW_DIR / preview_file).exists(), f"Missing preview asset: {preview_file}"
-    print("  [OK] All preview assets verified")
+    assert KNOWLEDGE_MAP_SVG.exists(), f"Missing knowledge map SVG at {KNOWLEDGE_MAP_SVG}"
+    print("  [OK] IT004 Knowledge Map SVG asset verified")
 
     print("\n==========================================")
     print("✅ ALL VALIDATION CHECKS PASSED (6/6)!")
