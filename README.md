@@ -11,16 +11,20 @@ Biên soạn: **Võ Trọng Phúc**<br>
 <div align="center">
 
 [![Tải Cẩm nang PDF](https://img.shields.io/badge/T%E1%BA%A3i_PDF-B%E1%BA%A3n_Chu%E1%BA%A9n_88_Trang_A4-0284c7?style=for-the-badge&logo=adobeacrobatreader&logoColor=white)](dist/IT004_CSDL_UIT_CamNang_VoTrongPhuc.pdf)
+[![Đọc Trực Tuyến](https://img.shields.io/badge/%C4%90%E1%BB%8Dc_Tr%E1%BB%B1c_Tuy%E1%BA%BFn-GitHub_Pages-059669?style=for-the-badge&logo=githubpages&logoColor=white)](https://phuchello.github.io/CSDL_UIT/)
 [![Hướng dẫn Biên dịch](https://img.shields.io/badge/H%C6%B0%E1%BB%9Bng_d%E1%BA%ABn-Bi%C3%AAn_d%E1%BB%8Bch_ngu%E1%BB%93n-475569?style=for-the-badge&logo=markdown&logoColor=white)](docs/BUILD.md)
+
+<br>
+
 [![CI](https://github.com/Phuchello/CSDL_UIT/actions/workflows/validate.yml/badge.svg)](https://github.com/Phuchello/CSDL_UIT/actions/workflows/validate.yml)
 
 </div>
 
 ---
 
-## Hệ thống Kiến trúc Môn học (Knowledge Map)
+## Bản đồ kiến thức IT004
 
-Sơ đồ trực quan hóa toàn bộ mạch kiến trúc của môn học IT004: từ khảo sát nghiệp vụ thực tế, mô hình hóa thực thể (ER), chuyển dịch lược đồ quan hệ, truy vấn toán học (Đại số quan hệ) đến lập trình T-SQL, bảo đảm an toàn toàn vẹn dữ liệu và tối ưu hóa chuẩn hóa dữ liệu.
+Sơ đồ tổng quan luồng kiến thức xuyên suốt môn học: từ phân tích yêu cầu thực tế, mô hình hóa ER, chuyển sang lược đồ quan hệ, truy vấn với Đại số quan hệ / SQL, đến ràng buộc toàn vẹn và chuẩn hóa dữ liệu.
 
 <div align="center">
   <img src="assets/it004-knowledge-map.svg" alt="IT004 Database Systems Knowledge Map" width="100%" />
@@ -28,14 +32,14 @@ Sơ đồ trực quan hóa toàn bộ mạch kiến trúc của môn học IT004
 
 ---
 
-## Mục tiêu & Nội dung cốt lõi
+## Nội dung cốt lõi
 
-- **Mô hình hóa thực thể (ER $\rightarrow$ Schema)**: Nắm vững thực thể, mối kết hợp, thuộc tính, bản số (min, max) và bộ quy tắc ánh xạ chuẩn mực sang mô hình quan hệ (1:1, 1:N, M:N).
-- **Đại số quan hệ (Relational Algebra)**: Thành thạo các phép toán thuần $(\sigma, \pi, \rho, \times, \cup, \cap, -, \div)$ và mở rộng (gom nhóm $\Im$, outer join) cùng 30 bài tập mẫu phân cấp độ có lời giải chi tiết.
-- **Truy vấn SQL Server / T-SQL**: Viết chuẩn xác DDL, DML, `JOIN`, `GROUP BY`, Correlated Subquery và các kỹ thuật giải quyết bài toán "Tất cả" (Universal Queries) qua Double `NOT EXISTS`.
-- **Ràng buộc toàn vẹn (RBTV)**: Phân tích ngữ cảnh, phát biểu tân từ hình thức, lập Bảng tầm ảnh hưởng 3 thao tác và viết Trigger T-SQL an toàn đa dòng.
-- **Phụ thuộc hàm & Chuẩn hóa (Normalization)**: Nắm vững hệ tiên đề Armstrong, thuật toán tính bao đóng $X^+$, tìm tập khóa tối thiểu, phủ tối thiểu $F_c$, kiểm tra 1NF $\rightarrow$ 2NF $\rightarrow$ 3NF $\rightarrow$ BCNF và phân rã bảo toàn.
-- **Chiến thuật phòng thi & Tra cứu nhanh**: Nhận diện hơn 20 bẫy trừ điểm kinh điển, phân bổ thời gian làm bài 90 phút tối ưu và bảng tra cứu cứu cánh trước giờ thi.
+- **Mô hình hóa thực thể (ER $\rightarrow$ Schema)**: Thực thể, mối kết hợp, thuộc tính, bản số (min, max) và quy tắc ánh xạ chuẩn sang quan hệ (1:1, 1:N, M:N).
+- **Đại số quan hệ (Relational Algebra)**: Các phép toán thuần $(\sigma, \pi, \rho, \times, \cup, \cap, -, \div)$ và mở rộng (gom nhóm $\Im$, outer join) cùng 30 bài tập mẫu phân cấp độ có lời giải chi tiết.
+- **Truy vấn SQL Server / T-SQL**: Cú pháp DDL, DML, `JOIN`, `GROUP BY`, Correlated Subquery và kỹ thuật giải bài toán "Tất cả" (Universal Queries) qua Double `NOT EXISTS`.
+- **Ràng buộc toàn vẹn (RBTV)**: Phân tích ngữ cảnh, phát biểu tân từ, lập Bảng tầm ảnh hưởng 3 thao tác và viết Trigger T-SQL an toàn cho nhiều dòng dữ liệu.
+- **Phụ thuộc hàm & Chuẩn hóa (Normalization)**: Hệ tiên đề Armstrong, thuật toán tính bao đóng $X^+$, tìm tập khóa tối thiểu, phủ tối thiểu $F_c$, kiểm tra 1NF $\rightarrow$ 2NF $\rightarrow$ 3NF $\rightarrow$ BCNF và phân rã bảo toàn.
+- **Chiến thuật phòng thi & Tra cứu nhanh**: Nhận diện hơn 20 bẫy đề thi hay gặp, phân bổ thời gian làm bài 90 phút và bảng tra cứu cứu cánh trước giờ thi.
 
 ---
 
@@ -59,24 +63,24 @@ Cẩm nang được biên soạn cô đọng trong **88 trang A4 tiêu chuẩn**
 
 ---
 
-## Hệ thống Khung Sư phạm (Pedagogical System)
+## Phương pháp trình bày
 
-Mỗi chủ đề trong cẩm nang được xây dựng theo hệ thống nhận diện trực quan:
+Mỗi chủ đề trong cẩm nang được hệ thống hóa trực quan:
 
-- 🧠 **Mental Models**: Trực quan hóa bản chất khái niệm bằng các mô hình trực giác trước khi đi vào công thức toán học.
-- ⚡ **Fast Patterns**: Đúc kết quy tắc nhận diện mẫu câu hỏi và hướng giải quyết tối ưu.
+- 🧠 **Mental Models**: Trực quan hóa bản chất khái niệm bằng các hình ảnh gần gũi trước khi đi vào công thức toán học.
+- ⚡ **Fast Patterns**: Đúc kết quy tắc nhận diện mẫu câu hỏi và hướng giải quyết ngắn gọn.
 - ☢️ **Common Traps**: Cảnh báo các bẫy đề thi và lỗi sai ngữ nghĩa sinh viên thường mắc phải.
 - 🎯 **Exam Signals**: Tín hiệu từ khóa trong đề thi giúp định hướng ngay phép toán cần sử dụng.
 - 🏃 **Dry Runs**: Bảng chạy khô từng bước cho các giải thuật bao đóng, tìm khóa, phép chia.
 - 📝 **30+ Bài tập có lời giải**: Tuyển tập bài tập ĐSQH và SQL phân bậc kèm phân tích chi tiết.
-- 📋 **One-Page Recall**: Bảng tổng kết 1 trang cuối mỗi chương để kích hoạt trí nhớ chủ động.
-- ⏱️ **Exam Playbook**: Cẩm nang chiến thuật phòng thi phân bổ thời gian tối ưu điểm số.
+- 📋 **One-Page Recall**: Bảng tổng kết 1 trang cuối mỗi chương để ôn tập nhanh.
+- ⏱️ **Exam Playbook**: Chiến thuật phân bổ thời gian và mẹo xử lý đề thi 90 phút.
 
 ---
 
 ## Khởi động & Biên dịch nhanh (Quick Start)
 
-Kho lưu trữ hỗ trợ công cụ tự động hóa độc lập nền tảng để biên dịch và kiểm thử tài liệu:
+Kho lưu trữ hỗ trợ công cụ tự động hóa để biên dịch và kiểm thử tài liệu:
 
 ```bash
 # 1. Biên dịch lại toàn bộ sách thành 1 tệp HTML hoàn chỉnh
@@ -86,7 +90,7 @@ python scripts/build.py
 python scripts/validate.py
 ```
 
-*Xem hướng dẫn chi tiết về cấu hình in ấn PDF chất lượng cao tại [docs/BUILD.md](docs/BUILD.md).*
+*Xem hướng dẫn chi tiết về cấu hình in ấn PDF và kích hoạt Pages tại [docs/BUILD.md](docs/BUILD.md).*
 
 ---
 
