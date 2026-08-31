@@ -14,7 +14,7 @@ v1.1 Phase A — research gate and editorial/practical handoff
 
 ## Status
 
-Phase A research artifacts are prepared for mentor review. The v1.0.0 handbook, canonical PDF, `main`, and the draft Quartz direction remain unchanged.
+Phase A correction pass is prepared for mentor re-review. The v1.0.0 handbook, canonical PDF, `main`, and the draft Quartz direction remain unchanged.
 
 ## Scope completed in this checkpoint
 
@@ -25,6 +25,10 @@ Phase A research artifacts are prepared for mentor review. The v1.0.0 handbook, 
 - theory front-matter/cover editorial audit;
 - Quartz/Knowledge Garden information architecture and deployment plan;
 - source gaps, conflicts, and redistribution risks.
+- local-corpus access limitations and explicit `ACCESS BLOCKED` records;
+- authority/ownership separation and evidence-kind labels;
+- direct 2023–2024 community exam artifacts and official 2025–2026 notices;
+- corrected Microsoft source mapping for triggers, procedures, EXISTS, set operators, and views.
 
 ## Explicit hold
 

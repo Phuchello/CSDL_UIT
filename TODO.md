@@ -1,6 +1,6 @@
 # TODO — CSDL_UIT v1.1
 
-## Phase A — complete on `v1.1-editorial-practice`
+## Phase A correction pass — complete on `v1.1-editorial-practice`
 
 - [x] Audit official UIT and Microsoft sources.
 - [x] Audit major textbook and open academic references.
@@ -11,6 +11,14 @@
 - [x] Audit current theory front matter and propose cover directions.
 - [x] Plan Knowledge Garden architecture, tags, links, graph, and deployment.
 - [x] Record source gaps, conflicts, and rights limits.
+- [x] Re-scan the mounted/user corpus and record unavailable named files as `ACCESS BLOCKED`.
+- [x] Separate `authority_tier` from `ownership` throughout the source ledger.
+- [x] Add direct 2023–2024 exam-artifact previews and official 2025–2026 UIT notices.
+- [x] Correct Microsoft trigger/procedure/query source IDs.
+- [x] Rebuild exam and essay maps around artifact counts and evidence kinds.
+- [x] Add raw-lab audit table and explicit practical feature disposition.
+- [x] Remove duplicate exam tree views from the Quartz architecture plan.
+- [x] Correct the future cover brief to the minimal relational-schema text treatment.
 
 ## Human review gate
 
@@ -18,6 +26,7 @@
 - [ ] Approve theory cover direction.
 - [ ] Approve practical skill scope.
 - [ ] Approve essay-bank taxonomy and verification rules.
+- [ ] Provide or mount the blocked local corpus for document-level inspection.
 
 ## Phase B/C — blocked until review
 

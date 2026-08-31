@@ -1,55 +1,55 @@
-# Phase A Essay Bank Plan
+# Phase A Essay / Tự luận Bank Plan
+
+The bank is organized primarily by topic and secondarily filterable by year, semester, type, and provenance. `verified-artifact` means that an identifiable exam artifact exists (including a community mirror); it does not mean UIT published the file online.
 
 ## Provenance classes
 
-### Verified exam questions
+### 1. verified-artifact
 
-Current publishable inventory: **0**. Official UIT sources found in this pass are course/curriculum pages and exam announcements, not question papers. Community previews and personal scripts are not sufficient to label a question `verified-exam`.
+- `COM-C08`: identifiable IT004/O117 HK1 2023–2024 practical paper preview with UIT/Khoa header and 90-minute duration.
+- `COM-C09`: identifiable IT004 HK1 2023–2024 final-exam preview with date 09/01/2024 and 90-minute duration.
 
-If a future paper is provenance-confirmed, store only a short independent paraphrase with:
+These are link-only evidence records. Do not reproduce scans or call them official-public documents.
 
-`type: verified-exam`, `year`, `semester`, `exam`, `source_ids`, `topics`, `difficulty`, `provenance_note`, `redistribution_status`.
+### 2. reconstructed-exam-pattern
 
-### Reconstructed/paraphrased exam patterns
+Independent paraphrases may be drafted from the two artifact previews, official assessment notices, and review/lab evidence, but must retain the label `reconstructed-exam-pattern` and source IDs. No paraphrase should be presented as original wording.
 
-These are independent prompts based on the pattern map, never presented as official wording:
+### 3. original-practice
 
-- DB/DBMS/file-system comparison and three-level architecture — `UIT-O01`, `UIT-O02`, `GH-C01`.
-- ER entities, cardinality, participation, and ER→relation mapping — `UIT-O01`, `TXT-A02`, `COM-C01`.
-- Relational-algebra translation and division/“tất cả” — `UIT-O01`, `TXT-A03`, `COM-C03`, `COM-C04`.
-- SQL `JOIN`, `SELF JOIN`, grouping, `HAVING`, `NULL`, nested queries — `TECH-A01`, `TECH-A02`, `GH-C02`, `COM-C04`.
-- Integrity predicate, impact table, constraints, and trigger reasoning — `TECH-A03`, `GH-C07`, `COM-C02`.
-- Closure, candidate keys, minimal cover, and normalization decisions — `TXT-A02`, `COM-C03`, `COM-C07` (low confidence until official evidence is found).
-- Mixed schema-to-query cases using QLGV/QLBH — `GH-C03`, `LOC-A07` (current-handbook examples, not exam proof).
+New prompts fill gaps where no identifiable artifact supports a claim. They must be labelled `original-practice`, not “past exam”.
 
-### Original questions needed
+## Topic-first coverage plan
 
-Original material is needed for missing or weakly evidenced coverage:
+| topic | observed artifact count | years | source_ids | planned question count | priority |
+|---|---:|---|---|---:|---|
+| Ch1 Tổng quan: DB/DBMS, file system, schema/instance, data independence | 0 | 2020–21, 2022–23, 2025–26 (indexes/schedules) | UIT-O01, UIT-O02, UIT-O09, UIT-O11, COM-C10 | 4 original + 1 reconstructed | high |
+| Ch2 ER / mô hình quan hệ / ER→relation / keys | 0 | 2017–18 through 2024–25 (review indexes) | UIT-O01, TXT-A02, COM-C01, COM-C10, LOC-B02 | 5 original + 1 reconstructed | high |
+| Ch3 Đại số quan hệ: translation, union compatibility, division/“tất cả” | 0 | 2022–23, 2024–25 (review material) | UIT-O01, TXT-A03, TECH-A09, COM-C03, COM-C04, LOC-B02 | 6 original + 1 reconstructed | high |
+| Ch4 SQL reasoning: NULL, JOIN/SELF JOIN, GROUP BY/HAVING, EXISTS | 2 | 2023–24 | COM-C08, COM-C09, TECH-A02, TECH-A08, LOC-A07 | 6 reconstructed + 4 original | high |
+| Ch5 RBTV / impact tables / trigger reasoning | 2 | 2023–24, 2024–25 | COM-C08, COM-C09, TECH-A03, TECH-A04, TECH-A05, TECH-A06 | 4 reconstructed + 4 original | high |
+| Ch6 PTH / khóa / chuẩn hóa: closure, candidate keys, minimal cover | 0 | 2022–23, 2025–26 (review/index only) | TXT-A02, COM-C03, COM-C07, LOC-B06, LOC-B16 | 8 original | high |
+| Ch6 decomposition: lossless and dependency preservation, 2NF/3NF/BCNF | 0 | 2022–23, 2025–26 (review/index only) | TXT-A02, COM-C07, LOC-B06, LOC-B16 | 6 original | high |
+| Mixed exams: schema design → constraints → RA/SQL explanation | 2 | 2023–24 | COM-C08, COM-C09, LOC-A07 | 4 reconstructed + 4 original | medium-high |
 
-- a clean Chapter 1 architecture essay;
-- weak entities, recursive relationships, and mapping edge cases;
-- union compatibility and division with an auxiliary relation clearly labelled;
-- SQL/RA equivalence and NULL/JOIN counterexamples;
-- multi-row trigger and impact-table reasoning;
-- fully worked closure, all candidate keys, minimal cover, lossless decomposition, and dependency preservation;
-- mixed final-exam cases combining schema design, constraints, and query semantics;
-- practical incident/debugging scenarios.
+## Required page metadata
 
-## Required page template
+```yaml
+type: verified-artifact # reconstructed-exam-pattern | original-practice
+year: 2023-2024
+semester: HK1
+exam_type: final
+source_ids: [COM-C09]
+provenance: community-mirror-preview
+topics: [sql, joins, group-by]
+difficulty: unknown
+```
 
-Every important question page should contain:
+Each question page should contain: Đề bài; knowledge needed; 3–5 “before solution” prompts; answer outline; collapsible detailed solution; why; common errors; variants; meaningful Wikilinks; and a rights/provenance note. Long scans, answer dumps, and verbatim copyrighted text are excluded.
 
-1. Đề bài
-2. Kiến thức cần dùng
-3. 3–5 “Trước khi xem lời giải” prompts
-4. Sườn trả lời
-5. Collapsible Lời giải chi tiết
-6. Vì sao?
-7. Sai lầm thường gặp
-8. Biến thể đề
-9. Liên kết kiến thức
-10. Nguồn and rights/provenance note
+## Editorial rules
 
-## Editorial rule
-
-Never reproduce long copyrighted scans. When a source is weak or rights are unclear, link to it, summarize independently, and label the limitation. `exam-pattern` is the default for recurring community evidence; `original` is required for newly authored questions.
+- Never infer frequency from curriculum scope or a textbook.
+- Preserve `verified-artifact`, `reconstructed-exam-pattern`, and `original-practice` labels in filenames/frontmatter.
+- If an accessible local exam file is later recovered, add its exact filename, document fingerprint, and provenance before changing any count.
+- Student answers and scripts are pattern evidence only, never authoritative solutions.
