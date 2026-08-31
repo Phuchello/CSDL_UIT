@@ -16,17 +16,16 @@
       <div class="cover-author">BIÊN SOẠN: VÕ TRỌNG PHÚC</div>
     </div>
     <div class="cover-diagram">
-      <svg viewBox="0 0 760 300" role="img" aria-label="Semantic relational schema chain">
+      <svg viewBox="0 0 700 260" role="img" aria-label="Editorial relational key chain">
         <defs>
           <marker id="arrowA" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1e7881"/></marker>
         </defs>
-        <path d="M150 134 H255 M330 134 H425 M500 134 H610" fill="none" stroke="#1e7881" stroke-width="3" marker-end="url(#arrowA)"/>
+        <path d="M132 126 H202 M317 126 H387 M502 126 H572" fill="none" stroke="#1e7881" stroke-width="2.5" marker-end="url(#arrowA)"/>
         <g font-family="Arial,Segoe UI,sans-serif">
-          <g transform="translate(35 90)"><rect width="120" height="90" fill="#203047"/><text x="60" y="31" fill="#fff" text-anchor="middle" font-size="16" font-weight="700">CUSTOMER</text><text x="60" y="57" fill="#b8d9d8" text-anchor="middle" font-size="12">PK customer_id</text><text x="60" y="76" fill="#b8d9d8" text-anchor="middle" font-size="11">name · email</text></g>
-          <g transform="translate(255 90)"><rect width="120" height="90" fill="#e7f1f1" stroke="#1e7881" stroke-width="3"/><text x="60" y="31" fill="#203047" text-anchor="middle" font-size="16" font-weight="700">ORDER</text><text x="60" y="57" fill="#1e7881" text-anchor="middle" font-size="12">PK order_id</text><text x="60" y="76" fill="#1e7881" text-anchor="middle" font-size="11">FK customer_id</text></g>
-          <g transform="translate(425 90)"><rect width="120" height="90" fill="#f6efe5" stroke="#b57b36" stroke-width="3"/><text x="60" y="26" fill="#203047" text-anchor="middle" font-size="14" font-weight="700">ORDER_DETAIL</text><text x="60" y="53" fill="#8c5b20" text-anchor="middle" font-size="12">PK order_id</text><text x="60" y="71" fill="#8c5b20" text-anchor="middle" font-size="11">FK product_id</text></g>
-          <g transform="translate(610 90)"><rect width="120" height="90" fill="#203047"/><text x="60" y="31" fill="#fff" text-anchor="middle" font-size="16" font-weight="700">PRODUCT</text><text x="60" y="57" fill="#f1d6aa" text-anchor="middle" font-size="12">PK product_id</text><text x="60" y="76" fill="#f1d6aa" text-anchor="middle" font-size="11">price · stock</text></g>
-          <text x="380" y="226" fill="#5f6d78" text-anchor="middle" font-size="12" letter-spacing="2">RELATIONAL SCHEMA / KEY PATH</text>
+          <g transform="translate(20 90)"><rect width="112" height="72" fill="#203047"/><text x="56" y="29" fill="#fff" text-anchor="middle" font-size="18" font-weight="700">R1</text><text x="56" y="52" fill="#c6dddd" text-anchor="middle" font-size="12">PK</text><text x="56" y="64" fill="#c6dddd" text-anchor="middle" font-size="9">· ·</text></g>
+          <g transform="translate(205 90)"><rect width="112" height="72" fill="#e7f1f1" stroke="#1e7881" stroke-width="2.5"/><text x="56" y="29" fill="#203047" text-anchor="middle" font-size="18" font-weight="700">R2</text><text x="56" y="52" fill="#1e7881" text-anchor="middle" font-size="12">PK · FK</text><text x="56" y="64" fill="#1e7881" text-anchor="middle" font-size="9">· ·</text></g>
+          <g transform="translate(390 90)"><rect width="112" height="72" fill="#f6efe5" stroke="#b57b36" stroke-width="2.5"/><text x="56" y="29" fill="#203047" text-anchor="middle" font-size="18" font-weight="700">R3</text><text x="56" y="52" fill="#8c5b20" text-anchor="middle" font-size="12">PK · FK</text><text x="56" y="64" fill="#8c5b20" text-anchor="middle" font-size="9">· ·</text></g>
+          <g transform="translate(575 90)"><rect width="112" height="72" fill="#203047"/><text x="56" y="29" fill="#fff" text-anchor="middle" font-size="18" font-weight="700">R4</text><text x="56" y="52" fill="#f1d6aa" text-anchor="middle" font-size="12">PK</text><text x="56" y="64" fill="#f1d6aa" text-anchor="middle" font-size="9">· ·</text></g>
         </g>
       </svg>
     </div>
@@ -40,18 +39,13 @@
       <div class="cover-author">BIÊN SOẠN: VÕ TRỌNG PHÚC</div>
     </div>
     <div class="cover-diagram">
-      <svg viewBox="0 0 760 330" role="img" aria-label="Formal relational algebra composition">
+      <svg viewBox="0 0 700 300" role="img" aria-label="Formal relational algebra expression and relation structure">
         <g font-family="Cambria Math,Segoe UI Symbol,Arial,sans-serif" fill="#203047">
-          <text x="32" y="58" font-size="35" font-weight="700">R</text><text x="63" y="58" font-size="18">(A, B, C, D)</text>
-          <text x="225" y="58" font-size="33" fill="#1e7881">→</text><text x="278" y="58" font-size="28">σ</text><text x="310" y="58" font-size="15">B = 1</text>
-          <text x="445" y="58" font-size="33" fill="#b57b36">→</text><text x="500" y="58" font-size="28">π</text><text x="535" y="58" font-size="15">A,C</text>
-          <text x="650" y="58" font-size="33" fill="#1e7881">→</text>
-          <rect x="32" y="95" width="180" height="112" fill="#fff" stroke="#203047" stroke-width="2"/><text x="48" y="123" font-size="16" font-weight="700">R</text><text x="48" y="151" font-size="13">A̲ · B · C · D</text><text x="48" y="179" font-size="12" fill="#5f6d78">relation instance</text>
-          <rect x="288" y="95" width="180" height="112" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="304" y="123" font-size="16" font-weight="700">σ<tspan baseline-shift="sub" font-size="11">B=1</tspan>(R)</text><text x="304" y="151" font-size="13">A̲ · B · C · D</text><text x="304" y="179" font-size="12" fill="#1e7881">select tuples</text>
-          <rect x="544" y="95" width="180" height="112" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="560" y="123" font-size="16" font-weight="700">π<tspan baseline-shift="sub" font-size="11">A,C</tspan>(…)</text><text x="560" y="151" font-size="13">A̲ · C</text><text x="560" y="179" font-size="12" fill="#8c5b20">project attributes</text>
-          <path d="M212 151 H286 M468 151 H542" stroke="#1e7881" stroke-width="2"/>
-          <text x="32" y="266" font-size="30" fill="#203047">R ⋈ S</text><text x="185" y="266" font-size="30" fill="#1e7881">→</text><text x="240" y="266" font-size="30" fill="#203047">R ÷ S</text><text x="405" y="266" font-size="30" fill="#b57b36">→</text><text x="460" y="266" font-size="21" fill="#5f6d78">X⁺ = X ∪ {A,B}</text>
-          <text x="380" y="310" font-size="12" text-anchor="middle" letter-spacing="2" fill="#5f6d78">OPERATIONS / CLOSURE / UNIVERSAL CONDITION</text>
+          <text x="350" y="57" text-anchor="middle" font-size="36" font-weight="700">π<tspan baseline-shift="sub" font-size="18">A,C</tspan>(σ<tspan baseline-shift="sub" font-size="18">B=1</tspan>(R))</text>
+          <path d="M350 72 V101" stroke="#1e7881" stroke-width="2"/>
+          <rect x="88" y="110" width="210" height="112" fill="#fff" stroke="#203047" stroke-width="2"/><text x="112" y="143" font-size="19" font-weight="700">R</text><text x="112" y="177" font-size="15">A̲ · B · C · D</text><text x="112" y="202" font-size="12" fill="#5f6d78">· · ·</text>
+          <path d="M298 166 H399" stroke="#1e7881" stroke-width="2"/>
+          <rect x="402" y="110" width="210" height="112" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="426" y="143" font-size="19" font-weight="700">R′</text><text x="426" y="177" font-size="15">A̲ · C</text><text x="426" y="202" font-size="12" fill="#8c5b20">· ·</text>
         </g>
       </svg>
     </div>
@@ -65,13 +59,13 @@
       <div class="cover-author">BIÊN SOẠN: VÕ TRỌNG PHÚC</div>
     </div>
     <div class="cover-diagram">
-      <svg viewBox="0 0 170 700" role="img" aria-label="Minimal structural relation spine">
+      <svg viewBox="0 0 140 600" role="img" aria-label="Minimal structural relation and key spine">
         <g font-family="Arial,Segoe UI,sans-serif">
-          <path d="M84 25 V665" stroke="#1e7881" stroke-width="2"/>
-          <circle cx="84" cy="105" r="12" fill="#203047"/><circle cx="84" cy="290" r="12" fill="#1e7881"/><circle cx="84" cy="480" r="12" fill="#b57b36"/>
-          <g transform="translate(2 55)"><rect width="164" height="96" fill="#fff" stroke="#203047" stroke-width="2"/><text x="82" y="32" text-anchor="middle" fill="#203047" font-size="15" font-weight="700">RELATION</text><text x="82" y="58" text-anchor="middle" fill="#5f6d78" font-size="12">tuples · attributes</text><text x="82" y="78" text-anchor="middle" fill="#1e7881" font-size="11">R(A, B, C)</text></g>
-          <g transform="translate(2 240)"><rect width="164" height="96" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="82" y="32" text-anchor="middle" fill="#203047" font-size="15" font-weight="700">KEY</text><text x="82" y="58" text-anchor="middle" fill="#1e7881" font-size="12">PK → FK</text><text x="82" y="78" text-anchor="middle" fill="#5f6d78" font-size="11">identity · reference</text></g>
-          <g transform="translate(2 430)"><rect width="164" height="96" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="82" y="32" text-anchor="middle" fill="#203047" font-size="15" font-weight="700">FORM</text><text x="82" y="58" text-anchor="middle" fill="#8c5b20" font-size="12">X → Y</text><text x="82" y="78" text-anchor="middle" fill="#5f6d78" font-size="11">structure · meaning</text></g>
+          <path d="M70 18 V575" stroke="#1e7881" stroke-width="2"/>
+          <circle cx="70" cy="92" r="9" fill="#203047"/><circle cx="70" cy="292" r="9" fill="#1e7881"/><circle cx="70" cy="492" r="9" fill="#b57b36"/>
+          <g transform="translate(4 48)"><rect width="132" height="88" fill="#fff" stroke="#203047" stroke-width="2"/><text x="66" y="34" text-anchor="middle" fill="#203047" font-size="17" font-weight="700">R1</text><text x="66" y="60" text-anchor="middle" fill="#1e7881" font-size="13">PK</text><text x="66" y="76" text-anchor="middle" fill="#5f6d78" font-size="11">A · B · C</text></g>
+          <g transform="translate(4 248)"><rect width="132" height="88" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="66" y="34" text-anchor="middle" fill="#203047" font-size="17" font-weight="700">R2</text><text x="66" y="60" text-anchor="middle" fill="#1e7881" font-size="13">PK → FK</text><text x="66" y="76" text-anchor="middle" fill="#5f6d78" font-size="11">B · C</text></g>
+          <g transform="translate(4 448)"><rect width="132" height="88" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="66" y="34" text-anchor="middle" fill="#203047" font-size="17" font-weight="700">R3</text><text x="66" y="60" text-anchor="middle" fill="#8c5b20" font-size="13">X → Y</text><text x="66" y="76" text-anchor="middle" fill="#5f6d78" font-size="11">· ·</text></g>
         </g>
       </svg>
     </div>
@@ -241,7 +235,7 @@
       <div class="card"><div class="label">Selection σ</div><p>Lọc <em>tuple</em>; số cột giữ nguyên.</p></div>
       <div class="card"><div class="label">Projection π</div><p>Lọc <em>attribute</em>; có thể loại bản trùng theo ngữ nghĩa relation.</p></div>
     </div>
-    <div class="note warning"><strong>Sai lầm thường gặp</strong><br>Chiếu bỏ <code>customer_id</code> trước khi join sẽ làm mất cầu nối giữa hai relation.</div>
+    <div class="note warning"><strong>Sai lầm thường gặp</strong><br>Chiếu bỏ <code>customer_id</code> trước khi join sẽ làm mất cầu nối giữa hai relation. Đổi tên bằng <span class="math">ρ</span> chỉ thay nhãn, không tạo tuple mới.</div>
     <div class="page-footer"><span>Chương 3 · Theo dõi relation trung gian</span><span>10</span></div>
   </section>
 
@@ -264,7 +258,7 @@
       </svg>
       <figcaption>Hình 3.1 — Divisor định nghĩa “tất cả”. Đổi divisor là đổi câu hỏi.</figcaption>
     </figure>
-    <pre><code>SELECT e.X
+    <pre><code>SELECT DISTINCT e.X
 FROM ENROLL AS e
 WHERE NOT EXISTS (
   SELECT 1 FROM REQUIRED AS r
@@ -273,6 +267,7 @@ WHERE NOT EXISTS (
     WHERE e2.X = e.X AND e2.Y = r.Y
   )
 );</code></pre>
+    <div class="code-caption">Dùng <code>DISTINCT</code> vì đại số quan hệ làm việc trên tập, còn SQL giữ ngữ nghĩa bag nếu không yêu cầu loại bản trùng.</div>
     <div class="note"><strong>Khi làm bài</strong><br>Hãy nói thành lời: “Không tồn tại một yêu cầu nào mà X chưa đáp ứng”. Câu nói này giúp kiểm tra đúng hai lớp phủ định.</div>
     <div class="page-footer"><span>Chương 3 · Division / universal condition</span><span>11</span></div>
   </section>
@@ -389,7 +384,7 @@ WHERE NOT EXISTS (
       <p class="math">π<sub>MAHV</sub>(ENROLL) − π<sub>MAHV</sub>((π<sub>MAHV</sub>(ENROLL) × REQUIRED) − ENROLL)</p>
       <p>Phần trong ngoặc tạo mọi cặp học viên–môn bắt buộc, rồi trừ những cặp đã có. Lấy <code>MAHV</code> của các cặp còn thiếu và trừ khỏi toàn bộ học viên.</p>
     </div>
-    <pre><code>SELECT e.MAHV
+    <pre><code>SELECT DISTINCT e.MAHV
 FROM ENROLL AS e
 WHERE NOT EXISTS (
   SELECT 1
@@ -402,7 +397,7 @@ WHERE NOT EXISTS (
   )
 );</code></pre>
     <div class="code-caption">Hai lớp NOT EXISTS: lớp ngoài chọn học viên; lớp trong tìm một môn bắt buộc chưa có.</div>
-    <div class="note"><strong>Cách kiểm tra kết quả</strong><br>Với MAHV = HV01 và REQUIRED = {CSDL, HĐH}, nếu HV01 chỉ có CSDL thì lớp trong tìm thấy HĐH bị thiếu và HV01 bị loại.</div>
+    <div class="note"><strong>Cách kiểm tra kết quả</strong><br>Với MAHV = HV01 và REQUIRED = {CSDL, HĐH}, nếu HV01 chỉ có CSDL thì lớp trong tìm thấy HĐH bị thiếu và HV01 bị loại. <code>DISTINCT</code> loại các dòng ENROLL lặp cùng MAHV; phép chiếu trong đại số quan hệ vốn là tập.</div>
     <div class="grid-2">
       <div class="card"><div class="label">Đúng</div><p>Divisor được giữ nguyên là REQUIRED.</p></div>
       <div class="card"><div class="label">Cần tránh</div><p>Đếm số môn mà không kiểm tra trùng hoặc môn ngoài divisor.</p></div>
@@ -421,7 +416,7 @@ WHERE NOT EXISTS (
       <thead><tr><th>Triệu chứng</th><th>Nguyên nhân có thể</th><th>Cách kiểm tra</th></tr></thead>
       <tbody>
         <tr><td>Kết quả division rỗng</td><td>Divisor nhầm relation hoặc lớp NOT EXISTS bị đảo.</td><td>Viết câu “không có yêu cầu bị thiếu” bằng tiếng Việt.</td></tr>
-        <tr><td>Join nhân đôi dòng</td><td>Điều kiện join không dùng đủ khóa hoặc cần DISTINCT.</td><td>Đếm bội số trước và sau join trên bảng nhỏ.</td></tr>
+        <tr><td>SQL trả X/MAHV lặp</td><td>SQL dùng bag semantics; một X có nhiều dòng ENROLL.</td><td>Dùng <code>DISTINCT</code> hoặc tạo miền X bằng projection trước.</td></tr>
         <tr><td>3NF đúng nhưng BCNF sai</td><td>Determinant chưa là superkey nhưng vế phải là prime.</td><td>Tính closure của vế trái; không dùng ngoại lệ 3NF cho BCNF.</td></tr>
         <tr><td>FK bị mồ côi</td><td>Thêm/sửa bảng con hoặc xóa/sửa bảng cha không kiểm tra.</td><td>Đọc bảng tầm ảnh hưởng theo từng thao tác.</td></tr>
       </tbody>

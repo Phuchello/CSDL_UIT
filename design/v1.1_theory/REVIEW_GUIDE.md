@@ -21,6 +21,17 @@ Please review the proof PDF at actual A4 size. This is a design decision gate; n
 - Header/footer: quiet, consistent, and not repetitive branding.
 - Human-authored feel: restrained Vietnamese headings (Ý chính, Cách hiểu, Ví dụ, Nhận xét, Sai lầm thường gặp, Bài tập, Ghi nhớ, Khi làm bài, Cách kiểm tra kết quả) rather than promotional labels.
 
+## Required reviewer decisions
+
+Please record a decision on each point before a full-book redesign is authorized:
+
+1. Cover A, B, or C.
+2. Comfort of the serif body at actual A4 reading distance.
+3. Overall page density and the balance of information with whitespace.
+4. Whether cards and small labels feel editorial rather than like web UI badges.
+5. Diagram density: enough mechanism to teach, without turning figures into information panels.
+6. Whether this proof feels suitable as the foundation for a complete 80–100 page book.
+
 ## Approval question
 
 Does one of the three cover directions and the interior page system provide a credible, comfortable foundation for converting the full theory handbook while preserving the current academic content? Record the selected cover and any required changes before Phase B2.

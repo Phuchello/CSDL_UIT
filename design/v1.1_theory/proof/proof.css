@@ -11,8 +11,8 @@
   --line: #cad4d4;
   --muted: #5f6d78;
   --white: #ffffff;
-  --serif: "Segoe UI", Arial, sans-serif;
-  --sans: Arial, "Segoe UI", sans-serif;
+  --serif: Georgia, Cambria, "Times New Roman", "Liberation Serif", serif;
+  --sans: "Segoe UI", Arial, "Liberation Sans", sans-serif;
   --mono: Consolas, "Cascadia Mono", "Courier New", monospace;
 }
 
@@ -33,7 +33,7 @@ body { font-family: var(--serif); font-size: 10.5pt; line-height: 1.48; }
 }
 .page:last-child { break-after: auto; page-break-after: auto; }
 .cover { padding: 23mm; background: var(--paper); }
-.cover::before { content: ""; position: absolute; inset: 12mm; border: 1px solid rgba(32,48,71,.18); pointer-events: none; }
+.cover::before { content: ""; position: absolute; inset: 16mm; border: 1px solid rgba(32,48,71,.10); pointer-events: none; }
 
 .page-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8mm; padding-bottom: 3mm; border-bottom: 1px solid var(--line); font: 8.3pt var(--sans); color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
 .page-footer { position: absolute; left: 18mm; right: 18mm; bottom: 8mm; display: flex; justify-content: space-between; padding-top: 2.5mm; border-top: 1px solid var(--line); font: 8pt var(--sans); color: var(--muted); }
@@ -83,7 +83,7 @@ pre code { color: var(--ink); background: transparent; padding: 0; }
 .card { padding: 4mm; border: 1px solid var(--line); background: #fff; break-inside: avoid; page-break-inside: avoid; }
 .card h3 { margin-top: 0; }
 .card p:last-child { margin-bottom: 0; }
-.label { display: inline-block; margin-bottom: 1.5mm; padding: 1mm 2mm; font: 700 7.8pt var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--teal); background: var(--soft-teal); }
+.label { display: block; width: max-content; margin-bottom: 1.5mm; padding: 0 0 1mm; border-bottom: 1px solid var(--teal); font: 700 7.8pt var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--teal); }
 
 figure { margin: 3mm 0; break-inside: avoid; page-break-inside: avoid; }
 figure svg { display: block; width: 100%; height: auto; }
@@ -95,12 +95,13 @@ figcaption { margin-top: 1.5mm; font: 8.5pt/1.3 var(--sans); color: var(--muted)
 .cover-title { margin-top: 6mm; font: 800 34pt/1.03 var(--sans); letter-spacing: .02em; color: var(--ink); }
 .cover-author { margin-top: 10mm; font: 700 10pt var(--sans); letter-spacing: .16em; color: var(--muted); }
 .cover-a .cover-lockup { margin-top: 4mm; }
-.cover-a .cover-diagram { position: absolute; left: 19mm; right: 19mm; bottom: 24mm; }
+.cover-a::before { border-color: transparent; }
+.cover-a .cover-diagram { position: absolute; left: 26mm; right: 26mm; bottom: 28mm; }
 .cover-b .cover-lockup { margin-top: 2mm; text-align: right; margin-left: 35mm; }
-.cover-b .cover-diagram { position: absolute; left: 18mm; right: 18mm; bottom: 21mm; }
+.cover-b .cover-diagram { position: absolute; left: 22mm; right: 22mm; bottom: 26mm; }
 .cover-c .cover-lockup { margin-top: 33mm; margin-left: 8mm; }
 .cover-c .cover-title { max-width: 120mm; font-size: 36pt; }
-.cover-c .cover-diagram { position: absolute; top: 23mm; right: 22mm; width: 45mm; height: 185mm; }
+.cover-c .cover-diagram { position: absolute; top: 25mm; right: 25mm; width: 38mm; height: 175mm; }
 .cover-c .cover-author { margin-top: 14mm; }
 .cover-mark { position: absolute; z-index: 1; font: 8pt var(--sans); letter-spacing: .14em; color: var(--muted); writing-mode: vertical-rl; }
 .cover-a .cover-mark { top: 27mm; right: 28mm; }
