@@ -35,7 +35,7 @@
     <div>
       <div class="callout callout-danger" style="margin-top: 0;">
         <div class="callout-title">Bắt buộc dùng IS NULL</div>
-        <pre class="sql-block" style="margin: 0;"><span class="cmt">-- SAI: Luôn trả về 0 dòng!</span>
+        <pre class="sql-block" style="margin: 0;"><span class="cmt">-- SAI: có thể trả về 0 dòng nếu NULL/điều kiện không khớp</span>
 <span class="kw">SELECT</span> * <span class="kw">FROM</span> KHACHHANG <span class="kw">WHERE</span> SODT = <span class="kw">NULL</span>;
 
 <span class="cmt">-- ĐÚNG: Cú pháp chuẩn SQL Server</span>

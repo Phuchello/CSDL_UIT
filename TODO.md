@@ -56,9 +56,15 @@
 - [ ] Mentor review of 10-point rubric in `design/v1.1_practice/REVIEW_GUIDE.md`.
 - [ ] Mentor approval to begin full Phase C2 authoring of the practical handbook.
 
-## Phase C2 & Beyond — Strictly Blocked Until Mentor Approval
+## Phase C2 — Full Practical Handbook Complete on v1.1-practice-handbook
 
-- [ ] Author the complete practical SQL Server handbook chapters.
+- [x] Author Parts 0–12 plus appendices and Labs 01–04 against the deterministic tr_* fixture.
+- [x] Add practice/sql scripts, static semantic validator, final PDF build and normalization.
+- [x] Render all pages and publish contact sheets and reports/v1.1_practice_full_qa.md.
+- [x] Record SQL runtime as NOT AVAILABLE when the local client cannot connect; static validation passes.
+
+## Phase C2 & Beyond — Held by scope
+
 - [ ] Build or scaffold Quartz site.
 - [ ] Merge to `main`.
 - [ ] Tag and release v1.1.

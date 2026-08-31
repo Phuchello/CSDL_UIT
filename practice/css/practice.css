@@ -290,6 +290,14 @@ table.result-table tbody tr:nth-child(even) { background: #fdfdfd; }
 .tag-adv { background: var(--ochre); color: var(--white); }
 .tag-exam { background: var(--ink); color: var(--white); }
 
+/* C2 full-book additions: restrained provenance and lab checkpoints. */
+.source-note { margin-top: 2mm; padding-top: 1.5mm; border-top: 1px solid var(--line); color: var(--muted); font: 8pt/1.35 var(--sans); }
+.checkpoint { margin-top: 3mm; padding: 2.5mm 3mm; border-left: 3px solid var(--teal); background: var(--soft-teal); }
+.checkpoint h3 { margin-top: 0; color: var(--teal); }
+.lab-index { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 4mm; margin: 2mm 0; }
+.lab-index div { padding: 1.8mm 2.5mm; background: var(--white); border: 1px solid var(--line); }
+.small-table { font-size: 8pt !important; }
+
 /* Print safety */
 @media print {
   body { background: transparent; }

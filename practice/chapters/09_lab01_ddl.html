@@ -1,0 +1,211 @@
+<!-- Lab 01 — DDL và RBTV: full practical treatment -->
+<div class="page">
+  <div class="page-header"><span>PHẦN 9: LAB 01 — XÂY DỰNG CSDL</span><span>THỰC HÀNH T-SQL</span></div>
+  <span class="lab-badge">LAB 01 · DDL &amp; RBTV</span>
+  <h2>Khởi tạo CSDL và đọc một lược đồ trước khi viết mã</h2>
+  <p>Lab 01 đi từ một thư mục trống đến một schema có khóa, miền giá trị và quan hệ tham chiếu. Mục tiêu không phải gõ nhanh mà là biết vì sao từng đối tượng phải xuất hiện ở vị trí đó.</p>
+  <h3>Mục tiêu</h3>
+  <ul><li>Tạo database <code>IT004_Training</code> mà không xóa dữ liệu ngoài phạm vi.</li><li>Đọc PK, FK, kiểu dữ liệu và thứ tự phụ thuộc.</li><li>Biết điểm dừng kiểm tra sau mỗi nhóm lệnh.</li></ul>
+  <h3>Lược đồ liên quan</h3>
+  <div class="schema">tr_customers → tr_orders → tr_order_items ← tr_products</div>
+  <p class="source-note">Nguồn định hướng: tiến trình LOC-SQL-LAB01; kiểu cú pháp và ràng buộc đối chiếu TECH-A01, TECH-A03. Các tên tr_* và dữ liệu trong lab là bộ huấn luyện tự biên soạn.</p>
+  <div class="callout callout-why"><div class="callout-title">Suy luận trước khi viết</div><p style="margin-bottom:0">Bảng cha phải tồn tại trước bảng con. Vì vậy tr_customers và tr_products đứng trước tr_orders, rồi mới đến tr_order_items.</p></div>
+  <div class="checkpoint"><h3>Câu hỏi chuyển tiếp</h3><p>Trước khi chạy, hãy đánh dấu trên giấy: cột nào là định danh, cột nào có thể rỗng, cột nào tham chiếu sang bảng khác?</p></div>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 01</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 01 — BẮT ĐẦU</span><span>00_CREATE_TRAINING_DB.SQL</span></div>
+  <h2>1. Tạo database và chọn đúng ngữ cảnh</h2>
+  <p><strong>Các bước:</strong> mở SSMS, kết nối đúng instance, mở tệp practice/sql/00_create_training_db.sql, chạy riêng batch tạo database rồi xác nhận tên database trong Object Explorer.</p>
+  <pre class="sql-block"><span class="kw">IF</span> DB_ID(N<span class="str">'IT004_Training'</span>) <span class="kw">IS NULL</span>
+    <span class="kw">EXEC</span>(N<span class="str">'CREATE DATABASE [IT004_Training]'</span>);
+<span class="kw">GO</span>
+<span class="kw">USE</span> IT004_Training;
+<span class="kw">GO</span></pre>
+  <h3>Cách kiểm tra</h3>
+  <pre class="sql-block"><span class="kw">SELECT</span> DB_NAME() <span class="kw">AS</span> CurrentDatabase;
+<span class="kw">SELECT</span> name, state_desc
+<span class="kw">FROM</span> sys.databases
+<span class="kw">WHERE</span> name = N<span class="str">'IT004_Training'</span>;</pre>
+  <table class="result-table"><thead><tr><th>Kiểm tra</th><th>Kết quả mong đợi từ script</th></tr></thead><tbody>
+    <tr><td>DB_ID</td><td>Có một dòng với trạng thái <code>ONLINE</code>.</td></tr>
+    <tr><td>DB_NAME()</td><td>IT004_Training; nếu là master thì chưa chạy USE.</td></tr>
+  </tbody></table>
+  <div class="callout callout-danger"><div class="callout-title">Lỗi thường gặp: chạy nhầm database</div><p style="margin-bottom:0">Msg 208 sau đó thường không phải do bảng “mất”, mà do cửa sổ query đang ở master. Đọc dòng DB_NAME() trước khi sửa câu lệnh.</p></div>
+  <p class="source-note">Nguồn / provenance note: TECH-A01 cho CREATE DATABASE; quy trình kiểm tra là thực hành biên soạn riêng, không phải quy tắc chấm điểm của UIT.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 01</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 01 — KIỂU DỮ LIỆU</span><span>01_SCHEMA.SQL</span></div>
+  <h2>2. Kiểu dữ liệu, NULL và tên ràng buộc</h2>
+  <table class="data-table"><thead><tr><th>Cột</th><th>Kiểu trong fixture</th><th>Lý do thực hành</th></tr></thead><tbody>
+    <tr><td>CustomerId</td><td>CHAR(4)</td><td>Mã ổn định, độ dài cố định; là PK.</td></tr>
+    <tr><td>FullName</td><td>NVARCHAR(60)</td><td>Giữ Unicode cho tên tiếng Việt; dùng tiền tố N ở literal.</td></tr>
+    <tr><td>RegisteredOn</td><td>DATE</td><td>Chỉ cần ngày, không giả định giờ.</td></tr>
+    <tr><td>OrderDate</td><td>DATETIME2(0)</td><td>Giữ cả giờ để minh họa khoảng nửa kín.</td></tr>
+    <tr><td>Price, Salary</td><td>DECIMAL(10,2)</td><td>Tiền tệ có phần lẻ; tránh phụ thuộc cách định dạng hiển thị.</td></tr>
+  </tbody></table>
+  <div class="callout callout-why"><div class="callout-title">NULL là trạng thái chưa biết, không phải 0</div><p style="margin-bottom:0">HeadEmployeeId được phép NULL ở thời điểm tạo phòng ban. Dùng IS NULL để kiểm tra; không dùng = NULL.</p></div>
+  <h3>Quy ước đặt tên</h3>
+  <p>PK_tr_products, FK_tr_items_product, CK_tr_items_qty cho biết loại và đối tượng. Tên rõ giúp đọc Msg 547 hoặc Msg 2627 mà không phải đoán.</p>
+  <h3>Bài tự làm</h3>
+  <p>Thêm cột Phone kiểu VARCHAR(15) vào bản nháp, rồi giải thích vì sao không nên dùng INT cho số điện thoại.</p>
+  <p class="source-note">Nguồn định hướng: TECH-A01, TECH-A03; việc chọn kích thước là quyết định minh họa cho fixture, không phải chuẩn duy nhất.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 01</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 01 — KHÓA</span><span>01_SCHEMA.SQL</span></div>
+  <h2>3. PRIMARY KEY và khóa phức hợp</h2>
+  <p><strong>Suy luận:</strong> PK phải định danh duy nhất mỗi dòng và không nhận NULL. Với chi tiết đơn hàng, một sản phẩm chỉ xuất hiện một lần trong cùng đơn, nhưng có thể xuất hiện ở đơn khác.</p>
+  <pre class="sql-block"><span class="kw">CREATE TABLE</span> dbo.tr_order_items (
+    OrderId   <span class="dt">INT</span>           <span class="kw">NOT NULL</span>,
+    ProductId <span class="dt">CHAR(4)</span>       <span class="kw">NOT NULL</span>,
+    Qty       <span class="dt">INT</span>           <span class="kw">NOT NULL</span>,
+    UnitPrice <span class="dt">DECIMAL(10,2)</span> <span class="kw">NOT NULL</span>,
+    <span class="kw">CONSTRAINT</span> PK_tr_order_items <span class="kw">PRIMARY KEY</span> (OrderId, ProductId)
+);</pre>
+  <table class="result-table"><thead><tr><th>Khóa</th><th>Ý nghĩa trong fixture</th><th>Thử nghiệm sai</th></tr></thead><tbody>
+    <tr><td>PK_tr_customers(CustomerId)</td><td>Mỗi khách một mã.</td><td>Chèn lại C001 → Msg 2627.</td></tr>
+    <tr><td>PK_tr_order_items(OrderId, ProductId)</td><td>Một cặp đơn–sản phẩm là duy nhất.</td><td>Chèn lại (1001, P001) → vi phạm PK.</td></tr>
+    <tr><td>PK_tr_results(StudentId, CourseId, AttemptNo)</td><td>Cho phép nhiều lần thi, nhưng số lần không trùng.</td><td>Chèn lại (S001,C101,2) → vi phạm PK.</td></tr>
+  </tbody></table>
+  <div class="trace-box"><div class="trace-header">TRACE SUY LUẬN LOGIC</div><div class="trace-steps">
+    <div class="trace-step"><span class="step-badge">BƯỚC 1</span><div class="step-desc">Xác định “một dòng” là gì: một dòng chi tiết = một sản phẩm trong một đơn.</div></div>
+    <div class="trace-step"><span class="step-badge">BƯỚC 2</span><div class="step-desc">Chọn các thuộc tính đủ để định danh: (OrderId, ProductId).</div></div>
+    <div class="trace-step"><span class="step-badge">BƯỚC 3</span><div class="step-desc">Đặt PRIMARY KEY, sau đó mới tạo FK sang cha.</div></div>
+  </div></div>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 01</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 01 — NGOẠI KHÓA</span><span>01_SCHEMA.SQL</span></div>
+  <h2>4. FOREIGN KEY và thứ tự phụ thuộc</h2>
+  <p>FK bảo đảm giá trị con phải tồn tại ở khóa cha. Đây là liên kết dữ liệu, không chỉ là “dòng trang trí” trong schema.</p>
+  <pre class="sql-block"><span class="kw">CONSTRAINT</span> FK_tr_orders_customer
+    <span class="kw">FOREIGN KEY</span> (CustomerId)
+    <span class="kw">REFERENCES</span> dbo.tr_customers(CustomerId)
+
+<span class="kw">CONSTRAINT</span> FK_tr_items_order
+    <span class="kw">FOREIGN KEY</span> (OrderId)
+    <span class="kw">REFERENCES</span> dbo.tr_orders(OrderId)</pre>
+  <div class="trace-box"><div class="trace-header">THỨ TỰ CHẠY SCRIPT</div><div class="trace-steps">
+    <div class="trace-step"><span class="step-badge">1. CHA</span><div class="step-desc">tr_customers, tr_products không phụ thuộc bảng huấn luyện khác.</div></div>
+    <div class="trace-step"><span class="step-badge">2. CON</span><div class="step-desc">tr_orders cần khách; tr_order_items cần đơn và sản phẩm.</div></div>
+    <div class="trace-step"><span class="step-badge">3. KIỂM</span><div class="step-desc">Chỉ nạp child row sau khi parent row tồn tại.</div></div>
+  </div></div>
+  <h3>Cách kiểm tra FK</h3>
+  <pre class="sql-block"><span class="kw">SELECT</span> fk.name, OBJECT_NAME(fk.parent_object_id) <span class="kw">AS</span> ChildTable,
+       OBJECT_NAME(fk.referenced_object_id) <span class="kw">AS</span> ParentTable
+<span class="kw">FROM</span> sys.foreign_keys AS fk
+<span class="kw">WHERE</span> fk.name <span class="kw">LIKE</span> <span class="str">'FK_tr_%'</span>;</pre>
+  <div class="callout callout-danger"><div class="callout-title">Lỗi thường gặp: chèn con trước cha</div><p style="margin-bottom:0">Thử chèn OrderId 1999 với CustomerId C999 sẽ nhận Msg 547. Cách sửa là bổ sung parent hợp lệ hoặc sửa mã con; không tắt FK để “cho chạy”.</p></div>
+  <p class="source-note">Nguồn định hướng: TECH-A01, LOC-SQL-LAB01; lỗi 547 được dùng như bài kiểm tra trong fixture, không phải kết quả chạy đã xác nhận ở môi trường này.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 01</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 01 — CHECK / DEFAULT</span><span>01_SCHEMA.SQL</span></div>
+  <h2>5. CHECK, DEFAULT và miền giá trị</h2>
+  <p>CHECK mô tả miền giá trị ngay tại database. Nó không thay thế việc kiểm tra nghiệp vụ liên bảng; với điều kiện liên bảng, cần FK hoặc trigger.</p>
+  <table class="compact-table"><thead><tr><th>Ràng buộc</th><th>Ví dụ</th><th>Ý nghĩa</th></tr></thead><tbody>
+    <tr><td>Giá dương</td><td>CHECK (Price &gt; 0)</td><td>Không nhận giá 0 hoặc âm.</td></tr>
+    <tr><td>Trạng thái hữu hạn</td><td>CHECK (Status IN (...))</td><td>Chặn chính tả và giá trị ngoài tập.</td></tr>
+    <tr><td>Giá trị mặc định</td><td>DEFAULT (1)</td><td>Chỉ dùng khi người gọi không cung cấp cột.</td></tr>
+    <tr><td>Điểm</td><td>CHECK (Score BETWEEN 0 AND 10)</td><td>10.00 hợp lệ; NUMERIC(2,2) không đủ miền.</td></tr>
+  </tbody></table>
+  <h3>Kiểm tra âm thầm trước khi INSERT</h3>
+  <pre class="sql-block"><span class="kw">SELECT</span> <span class="kw">CASE</span>
+         <span class="kw">WHEN</span> @Score <span class="kw">BETWEEN</span> 0 <span class="kw">AND</span> 10 <span class="kw">THEN</span> <span class="str">'accepted'</span>
+         <span class="kw">ELSE</span> <span class="str">'reject before write'</span>
+       <span class="kw">END</span>;</pre>
+  <div class="callout callout-why"><div class="callout-title">Suy luận</div><p style="margin-bottom:0">Kiểm tra trước giúp thông báo thân thiện; CHECK vẫn là lớp bảo vệ cuối nếu một ứng dụng khác ghi vào database.</p></div>
+  <h3>Bài tự làm</h3><p>Viết một CHECK cho Segment chỉ nhận A/B/C, sau đó nêu một giá trị cố ý vi phạm và thông báo dự kiến.</p>
+  <p class="source-note">Nguồn / provenance note: TECH-A03 cho CHECK; ví dụ và tên đối tượng thuộc bộ huấn luyện tự biên soạn.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 01</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 01 — ALTER TABLE</span><span>01_SCHEMA.SQL</span></div>
+  <h2>6. ALTER TABLE: thay đổi có kiểm soát</h2>
+  <p>Trong phòng lab, sửa schema là một thao tác có rủi ro. Đọc dữ liệu hiện có, kiểm tra phụ thuộc, rồi mới thêm cột hoặc constraint.</p>
+  <pre class="sql-block"><span class="kw">ALTER TABLE</span> dbo.tr_products
+    <span class="kw">ADD</span> SKU VARCHAR(12) <span class="kw">NULL</span>;
+
+<span class="kw">ALTER TABLE</span> dbo.tr_products
+    <span class="kw">ADD CONSTRAINT</span> UQ_tr_products_sku <span class="kw">UNIQUE</span> (SKU);
+
+<span class="kw">ALTER TABLE</span> dbo.tr_products
+    <span class="kw">DROP CONSTRAINT</span> UQ_tr_products_sku;</pre>
+  <table class="result-table"><thead><tr><th>Trước khi sửa</th><th>Câu hỏi cần trả lời</th></tr></thead><tbody>
+    <tr><td>Thêm cột NOT NULL</td><td>Dòng cũ lấy giá trị nào? Có cần DEFAULT tạm thời không?</td></tr>
+    <tr><td>Thêm FK</td><td>Có dòng mồ côi đang tồn tại không?</td></tr>
+    <tr><td>Đổi kiểu</td><td>Giá trị cũ có chuyển được không? Có mất độ chính xác không?</td></tr>
+  </tbody></table>
+  <div class="callout callout-danger"><div class="callout-title">Không đổi kiểu để che lỗi dữ liệu</div><p style="margin-bottom:0">Nếu cột chứa chuỗi không chuyển được sang số, hãy lập danh sách vi phạm bằng TRY_CONVERT, xử lý từng nhóm rồi mới ALTER COLUMN.</p></div>
+  <h3>Cách kiểm tra</h3><pre class="sql-block"><span class="kw">SELECT</span> c.name, t.name <span class="kw">AS</span> DataType, c.max_length, c.is_nullable
+<span class="kw">FROM</span> sys.columns c <span class="kw">JOIN</span> sys.types t <span class="kw">ON</span> c.user_type_id = t.user_type_id
+<span class="kw">WHERE</span> c.object_id = OBJECT_ID(N<span class="str">'dbo.tr_products'</span>);</pre>
+  <p class="source-note">Nguồn định hướng: LOC-SQL-LAB01; câu lệnh ALTER trong trang là ví dụ chuyển giao, không bắt buộc chạy trong seed chính.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 01</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 01 — CIRCULAR FK</span><span>01_SCHEMA.SQL</span></div>
+  <h2>7. Xử lý phụ thuộc vòng KHOA — NHÂN VIÊN</h2>
+  <p>Hai bảng tr_departments và tr_employees có vòng: nhân viên cần phòng ban, phòng ban có thể trỏ trưởng phòng. Tách “tạo cấu trúc” khỏi “gán dữ liệu” để vòng không chặn việc khởi tạo.</p>
+  <div class="trace-box"><div class="trace-header">CÁC BƯỚC PHÁ VÒNG</div><div class="trace-steps">
+    <div class="trace-step"><span class="step-badge">A</span><div class="step-desc">Tạo tr_departments với HeadEmployeeId NULL, chưa thêm FK head.</div></div>
+    <div class="trace-step"><span class="step-badge">B</span><div class="step-desc">Tạo tr_employees; FK DeptId trỏ về departments.</div></div>
+    <div class="trace-step"><span class="step-badge">C</span><div class="step-desc">Thêm FK HeadEmployeeId sau khi bảng employee đã tồn tại.</div></div>
+    <div class="trace-step"><span class="step-badge">D</span><div class="step-desc">Nạp nhân viên, rồi UPDATE trưởng phòng trong seed.</div></div>
+  </div></div>
+  <pre class="sql-block"><span class="kw">ALTER TABLE</span> dbo.tr_departments
+    <span class="kw">ADD CONSTRAINT</span> FK_tr_departments_head
+    <span class="kw">FOREIGN KEY</span> (HeadEmployeeId)
+    <span class="kw">REFERENCES</span> dbo.tr_employees(EmployeeId);</pre>
+  <div class="callout callout-why"><div class="callout-title">Cách kiểm tra</div><p style="margin-bottom:0">Sau seed, truy vấn JOIN departments với employees và xác nhận E001 thuộc D001, E004 thuộc D002. Nếu không khớp, chưa được xem là hoàn tất.</p></div>
+  <p class="source-note">Nguồn định hướng: LOC-SQL-LAB01 và thực hành circular-FK tự biên soạn trong 01_schema.sql/02_seed.sql.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 01</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 01 — CHẠY VÀ KIỂM</span><span>01_SCHEMA.SQL</span></div>
+  <h2>8. Một vòng chạy DDL có điểm dừng</h2>
+  <ol><li>Chạy 00_create_training_db.sql.</li><li>Chạy 01_schema.sql từng batch.</li><li>Liệt kê bảng và constraint.</li><li>Chỉ chuyển sang Lab 02 khi các tên bảng đúng.</li></ol>
+  <pre class="sql-block"><span class="kw">SELECT</span> name <span class="kw">FROM</span> sys.tables <span class="kw">WHERE</span> name <span class="kw">LIKE</span> <span class="str">'tr_%'</span> <span class="kw">ORDER BY</span> name;
+
+<span class="kw">SELECT</span> name, type_desc
+<span class="kw">FROM</span> sys.objects
+<span class="kw">WHERE</span> parent_object_id &gt; 0
+  <span class="kw">AND</span> name <span class="kw">LIKE</span> <span class="str">'%tr_%'</span>;</pre>
+  <table class="compact-table"><thead><tr><th>Checkpoint</th><th>PASS khi</th><th>Nếu FAIL</th></tr></thead><tbody>
+    <tr><td>Bảng</td><td>10 bảng tr_* xuất hiện.</td><td>Kiểm tra batch trước đó và DB context.</td></tr>
+    <tr><td>PK</td><td>Mỗi bảng có khóa phù hợp.</td><td>Đọc lại định nghĩa ở 01_schema.sql.</td></tr>
+    <tr><td>FK</td><td>Các quan hệ cha–con hiển thị trong sys.foreign_keys.</td><td>Kiểm tra thứ tự và dữ liệu mồ côi.</td></tr>
+  </tbody></table>
+  <div class="callout callout-exam"><div class="callout-title">Bài tự làm chuyển Lab 02</div><p style="margin-bottom:0">Viết một truy vấn kiểm tra mọi FK của tr_order_items và giải thích vì sao bảng này phải được nạp sau orders/products.</p></div>
+  <p class="source-note">Validation mode: STATIC — script được kiểm tra tên đối tượng bằng bộ kiểm tra đi kèm; chưa tuyên bố đã chạy SQL Server trong môi trường này.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 01</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 01 — CHECKPOINT</span><span>TỰ ĐÁNH GIÁ</span></div>
+  <h2>Tôi có thể…</h2>
+  <div class="checkpoint"><ul>
+    <li>tạo IT004_Training và chứng minh cửa sổ query đang ở đúng database;</li>
+    <li>giải thích vì sao DATETIME2 và DATE được dùng ở hai cột khác nhau;</li>
+    <li>chọn PK đơn hoặc PK phức hợp từ câu mô tả “một dòng là gì”;</li>
+    <li>vẽ thứ tự parent → child trước khi chạy DDL;</li>
+    <li>nêu nguyên nhân của lỗi FK, CHECK, duplicate PK;</li>
+    <li>xử lý circular FK bằng cách trì hoãn constraint/gán head;</li>
+    <li>đọc danh sách constraint từ catalog view thay vì đoán.</li>
+  </ul></div>
+  <h3>Bài tự làm tổng hợp</h3>
+  <p>Tạo bảng tr_lab_notes(StudentId, NoteNo, Body) với PK phức hợp, Body NOT NULL và FK về tr_students. Viết thêm truy vấn kiểm tra orphan (nếu có) trước khi tạo FK.</p>
+  <div class="callout callout-why"><div class="callout-title">Kết quả mong đợi</div><p style="margin-bottom:0">Bài làm đạt khi bạn có thể trình bày được: mục tiêu → lược đồ → suy luận → mã → kiểm tra → lỗi → sửa. Không cần tạo thêm dữ liệu ngoài fixture.</p></div>
+  <p class="source-note">Nguồn: tổng hợp LOC-SQL-LAB01, TECH-A01, TECH-A03; không sao chép mã nguồn lab gốc.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 01</span></div>
+</div>

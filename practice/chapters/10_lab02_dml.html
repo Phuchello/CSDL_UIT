@@ -1,0 +1,179 @@
+<!-- Lab 02 — DML và truy vấn cơ bản -->
+<div class="page">
+  <div class="page-header"><span>PHẦN 10: LAB 02 — DML</span><span>THỰC HÀNH T-SQL</span></div>
+  <span class="lab-badge">LAB 02 · DML &amp; SELECT</span>
+  <h2>Nạp dữ liệu, kiểm tra lỗi và đọc kết quả</h2>
+  <p>Lab 02 dùng đúng fixture <code>IT004_Training</code>. Mỗi truy vấn đều có mã Bxx để đối chiếu với <code>practice/sql/03_queries_basic.sql</code>; dữ liệu trong <code>02_seed.sql</code> là dữ liệu nhỏ, xác định và có thể nạp lại.</p>
+  <h3>Mục tiêu</h3>
+  <ul><li>Chèn theo thứ tự bảng cha → bảng con.</li><li>Phân biệt INSERT, UPDATE, SELECT và điều kiện lọc.</li><li>Đọc lỗi khóa, CHECK, ngày và kiểu dữ liệu trước khi sửa.</li></ul>
+  <div class="schema">tr_customers → tr_orders → tr_order_items ← tr_products</div>
+  <p class="source-note">Provenance: tiến trình thao tác đối chiếu LOC-SQL-LAB02; cú pháp DML đối chiếu TECH-A02, TECH-A04. Fixture là dữ liệu huấn luyện tự biên soạn.</p>
+  <div class="checkpoint"><h3>Checkpoint</h3><p>Tôi có thể nêu bảng cha của từng FK và dự đoán lệnh INSERT nào phải chạy trước.</p></div>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 02</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 02 — NẠP DỮ LIỆU</span><span>02_SEED.SQL</span></div>
+  <h2>1. Tải dữ liệu theo dependency</h2>
+  <p>Chạy <code>01_schema.sql</code> rồi <code>02_seed.sql</code>. Nếu chạy lại, schema được tạo lại có chủ đích; không trộn một nửa seed với dữ liệu cũ.</p>
+  <pre class="sql-block"><span class="kw">INSERT INTO</span> dbo.tr_customers(CustomerId, FullName, City, RegisteredOn, CreditLimit, Segment)
+<span class="kw">VALUES</span> (<span class="str">'C001'</span>, N<span class="str">'An Phạm'</span>, N<span class="str">'Thủ Đức'</span>, <span class="str">'20240115'</span>, 5000.00, <span class="str">'A'</span>);
+
+<span class="kw">INSERT INTO</span> dbo.tr_orders(OrderId, CustomerId, OrderDate, Status)
+<span class="kw">VALUES</span> (1001, <span class="str">'C001'</span>, <span class="str">'2024-10-15T09:00:00'</span>, <span class="str">'PAID'</span>);
+
+<span class="kw">INSERT INTO</span> dbo.tr_order_items(OrderId, ProductId, Qty, UnitPrice)
+<span class="kw">VALUES</span> (1001, <span class="str">'P001'</span>, 2, 120000.00);</pre>
+  <table class="result-table"><thead><tr><th>Nhóm</th><th>Thứ tự</th><th>Kiểm tra</th></tr></thead><tbody>
+    <tr><td>Customers, products</td><td>1</td><td>PK tồn tại, số dòng đúng fixture.</td></tr>
+    <tr><td>Orders, departments, students, courses</td><td>2</td><td>FK cha đã có.</td></tr>
+    <tr><td>Items, employees, results</td><td>3</td><td>FK và khóa ghép hợp lệ.</td></tr>
+  </tbody></table>
+  <p class="source-note">Kết quả mong đợi chỉ áp dụng khi chạy nguyên bộ seed trên schema mới; nếu dữ liệu đã bị sửa, hãy dùng <code>reset.sql</code>.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 02</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 02 — INSERT AN TOÀN</span><span>CHECK / FK / PK</span></div>
+  <h2>2. Thử nghiệm lỗi có chủ đích</h2>
+  <p>Chạy từng khối riêng trong transaction rồi rollback. Không biến lỗi minh họa thành dữ liệu của fixture.</p>
+  <pre class="sql-block"><span class="kw">BEGIN TRAN</span>;
+<span class="kw">INSERT INTO</span> dbo.tr_order_items(OrderId, ProductId, Qty, UnitPrice)
+<span class="kw">VALUES</span> (9999, <span class="str">'P001'</span>, 1, 10.00); <span class="cm">-- FK order: Msg 547</span>
+<span class="kw">ROLLBACK</span>;
+
+<span class="kw">BEGIN TRAN</span>;
+<span class="kw">INSERT INTO</span> dbo.tr_products(ProductId, ProductName, Category, Price, IsActive)
+<span class="kw">VALUES</span> (<span class="str">'P001'</span>, N<span class="str">'Trùng mã'</span>, <span class="str">'DB'</span>, 1.00, 1); <span class="cm">-- PK: Msg 2627</span>
+<span class="kw">ROLLBACK</span>;</pre>
+  <pre class="sql-block"><span class="kw">BEGIN TRAN</span>;
+<span class="kw">INSERT INTO</span> dbo.tr_products(ProductId, ProductName, Category, Price, IsActive)
+<span class="kw">VALUES</span> (<span class="str">'PX01'</span>, N<span class="str">'Giá âm'</span>, <span class="str">'DB'</span>, -5.00, 1); <span class="cm">-- CHECK: Msg 547</span>
+<span class="kw">ROLLBACK</span>;</pre>
+  <div class="callout callout-danger"><div class="callout-title">Đọc thông báo, không đoán</div><p style="margin-bottom:0">Msg 547 có thể là FK hoặc CHECK. Đọc tên constraint trong thông báo và đối chiếu <code>01_schema.sql</code>.</p></div>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 02</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 02 — UPDATE</span><span>NULL / DATE</span></div>
+  <h2>3. Sửa dữ liệu với điều kiện đủ hẹp</h2>
+  <p>Trước UPDATE, chạy SELECT cùng WHERE để biết số dòng bị tác động. Cột <code>OrderDate</code> là <code>DATETIME2</code>; dùng khoảng nửa kín để không bỏ sót giờ cuối ngày.</p>
+  <pre class="sql-block"><span class="kw">SELECT</span> OrderId, Status
+<span class="kw">FROM</span> dbo.tr_orders
+<span class="kw">WHERE</span> OrderDate &gt;= <span class="str">'2024-10-01'</span>
+  <span class="kw">AND</span> OrderDate &lt;  <span class="str">'2024-11-01'</span>;
+
+<span class="kw">UPDATE</span> dbo.tr_orders
+<span class="kw">SET</span> Status = <span class="str">'CANCELLED'</span>
+<span class="kw">WHERE</span> OrderId = 1002;
+
+<span class="kw">SELECT</span> OrderId, Status
+<span class="kw">FROM</span> dbo.tr_orders
+<span class="kw">WHERE</span> OrderId = 1002;</pre>
+  <table class="result-table"><thead><tr><th>Biểu thức</th><th>Ý nghĩa</th></tr></thead><tbody>
+    <tr><td><code>City IS NULL</code></td><td>Tìm giá trị chưa biết; không dùng <code>= NULL</code>.</td></tr>
+    <tr><td><code>OrderDate &gt;= d AND OrderDate &lt; d+1</code></td><td>Khoảng thời gian [d, d+1), an toàn với phần giờ.</td></tr>
+    <tr><td><code>Qty &gt; 0</code></td><td>Điều kiện CHECK trong fixture.</td></tr>
+  </tbody></table>
+  <div class="checkpoint"><h3>Thử mình</h3><p>Viết UPDATE chỉ đổi trạng thái đơn 1003. SELECT trước và sau phải trả cùng một khóa đơn.</p></div>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 02</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 02 — PROJECTION</span><span>B01</span></div>
+  <h2>4. SELECT, WHERE, LIKE, BETWEEN</h2>
+  <p>Projection chọn cột; selection chọn dòng. Tên cột nên có alias khi câu lệnh bắt đầu dài hơn một bảng.</p>
+  <pre class="sql-block"><span class="kw">SELECT</span> ProductId, ProductName, Price
+<span class="kw">FROM</span> dbo.tr_products
+<span class="kw">WHERE</span> Category = N<span class="str">'Thiết bị'</span>
+  <span class="kw">AND</span> Price <span class="kw">BETWEEN</span> 80 <span class="kw">AND</span> 1500
+<span class="kw">ORDER BY</span> Price <span class="kw">DESC</span>, ProductId;</pre>
+  <pre class="sql-block"><span class="kw">SELECT</span> CustomerId, FullName
+<span class="kw">FROM</span> dbo.tr_customers
+<span class="kw">WHERE</span> FullName <span class="kw">LIKE</span> N<span class="str">'%An%'</span>;
+
+<span class="kw">SELECT</span> OrderId, OrderDate
+<span class="kw">FROM</span> dbo.tr_orders
+<span class="kw">WHERE</span> OrderDate &gt;= <span class="str">'2024-10-15'</span>
+  <span class="kw">AND</span> OrderDate &lt;  <span class="str">'2024-10-16'</span>;</pre>
+  <table class="result-table"><thead><tr><th>Mã</th><th>Kiểm tra tĩnh</th><th>Giá trị then chốt</th></tr></thead><tbody>
+    <tr><td>B01</td><td>Category/Price trên tr_products; ORDER BY có khóa phụ.</td><td>P001, P006, P007 thuộc miền lọc.</td></tr>
+    <tr><td>B02</td><td>Khoảng ngày nửa kín trên tr_orders.</td><td>Các đơn 1001–1004 thuộc 15–18/10/2024.</td></tr>
+  </tbody></table>
+  <p class="source-note">Expected rows được xác định từ <code>02_seed.sql</code>; nếu đổi seed, cập nhật mã ví dụ thay vì ghi kết quả cũ.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 02</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 02 — JOIN</span><span>B03 / B04</span></div>
+  <h2>5. Nối bảng và giữ dòng không khớp</h2>
+  <pre class="sql-block"><span class="kw">SELECT</span> o.OrderId, c.FullName, p.ProductName, i.Qty
+<span class="kw">FROM</span> dbo.tr_orders <span class="kw">AS</span> o
+<span class="kw">JOIN</span> dbo.tr_customers <span class="kw">AS</span> c <span class="kw">ON</span> c.CustomerId = o.CustomerId
+<span class="kw">JOIN</span> dbo.tr_order_items <span class="kw">AS</span> i <span class="kw">ON</span> i.OrderId = o.OrderId
+<span class="kw">JOIN</span> dbo.tr_products <span class="kw">AS</span> p <span class="kw">ON</span> p.ProductId = i.ProductId
+<span class="kw">ORDER BY</span> o.OrderId, i.ProductId;</pre>
+  <pre class="sql-block"><span class="kw">SELECT</span> c.CustomerId, c.FullName, o.OrderId
+<span class="kw">FROM</span> dbo.tr_customers <span class="kw">AS</span> c
+<span class="kw">LEFT JOIN</span> dbo.tr_orders <span class="kw">AS</span> o <span class="kw">ON</span> o.CustomerId = c.CustomerId
+<span class="kw">ORDER BY</span> c.CustomerId, o.OrderId;</pre>
+  <table class="result-table"><thead><tr><th>Join</th><th>Dòng giữ lại</th><th>Điểm kiểm tra</th></tr></thead><tbody>
+    <tr><td>INNER JOIN B03</td><td>Chỉ cặp có đơn, chi tiết, sản phẩm.</td><td>Không xuất hiện sản phẩm chưa bán.</td></tr>
+    <tr><td>LEFT JOIN B04</td><td>Tất cả khách hàng.</td><td>C005 vẫn có dòng với OrderId NULL.</td></tr>
+  </tbody></table>
+  <div class="callout callout-why"><div class="callout-title">NULL ở phía phải</div><p style="margin-bottom:0">NULL của cột o.OrderId ở B04 là dấu hiệu “không có dòng khớp”, không phải đơn hàng có mã rỗng.</p></div>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 02</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 02 — UNION</span><span>B05</span></div>
+  <h2>6. Self join và UNION tương thích</h2>
+  <pre class="sql-block"><span class="kw">SELECT</span> e.EmployeeId, e.FullName,
+       h.EmployeeId <span class="kw">AS</span> HeadId, h.FullName <span class="kw">AS</span> HeadName
+<span class="kw">FROM</span> dbo.tr_employees <span class="kw">AS</span> e
+<span class="kw">LEFT JOIN</span> dbo.tr_employees <span class="kw">AS</span> h
+  <span class="kw">ON</span> h.EmployeeId = e.ManagerId
+<span class="kw">ORDER BY</span> e.EmployeeId;</pre>
+  <pre class="sql-block"><span class="kw">SELECT</span> CustomerId <span class="kw">AS</span> EntityId
+<span class="kw">FROM</span> dbo.tr_customers
+<span class="kw">UNION</span>
+<span class="kw">SELECT</span> StudentId
+<span class="kw">FROM</span> dbo.tr_students;</pre>
+  <p>Hai nhánh UNION có cùng số cột và kiểu tương thích. Đây là minh họa tổng quát trên hai quan hệ độc lập; không gán chúng vào cùng một nghiệp vụ.</p>
+  <table class="result-table"><thead><tr><th>Toán tử</th><th>Đặc tính</th></tr></thead><tbody>
+    <tr><td>UNION</td><td>Gộp và loại bản sao theo toàn bộ dòng.</td></tr>
+    <tr><td>UNION ALL</td><td>Giữ bản sao; dùng khi bản sao có ý nghĩa.</td></tr>
+    <tr><td>Self join</td><td>Một bảng đóng hai vai; mọi cột nên có alias.</td></tr>
+  </tbody></table>
+  <p class="source-note">B05 nằm trong <code>03_queries_basic.sql</code>. Semantics UNION đối chiếu TECH-A05; schema và dữ liệu là fixture nội bộ.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 02</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 02 — NẠP LẠI</span><span>RESET</span></div>
+  <h2>7. Quy trình phục hồi và tự kiểm</h2>
+  <ol><li>Đóng các cửa sổ query đang giữ transaction.</li><li>Chạy <code>reset.sql</code> từ thư mục <code>practice/sql</code> bằng SQLCMD mode hoặc mở từng tệp theo thứ tự.</li><li>Kiểm tra số dòng và các khóa mẫu.</li></ol>
+  <pre class="sql-block"><span class="kw">SELECT</span> <span class="str">'customers'</span> <span class="kw">AS</span> TableName, COUNT_BIG(*) <span class="kw">AS</span> RowCount <span class="kw">FROM</span> dbo.tr_customers
+<span class="kw">UNION ALL SELECT</span> <span class="str">'orders'</span>, COUNT_BIG(*) <span class="kw">FROM</span> dbo.tr_orders
+<span class="kw">UNION ALL SELECT</span> <span class="str">'order_items'</span>, COUNT_BIG(*) <span class="kw">FROM</span> dbo.tr_order_items;</pre>
+  <table class="result-table"><thead><tr><th>Bảng</th><th>Số dòng fixture</th><th>Khóa mẫu</th></tr></thead><tbody>
+    <tr><td>tr_customers</td><td>5</td><td>C001…C005</td></tr>
+    <tr><td>tr_products</td><td>7</td><td>P007 chưa bán</td></tr>
+    <tr><td>tr_orders</td><td>5</td><td>1001…1005</td></tr>
+    <tr><td>tr_order_items</td><td>11</td><td>1001/P001</td></tr>
+  </tbody></table>
+  <div class="checkpoint"><h3>Tôi có thể...</h3><p>giải thích vì sao seed phải nạp parent trước child, dùng ngày nửa kín, và chọn LEFT JOIN khi cần giữ khách chưa có đơn.</p></div>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 02</span></div>
+</div>
+
+<div class="page">
+  <div class="page-header"><span>LAB 02 — PHIẾU THỰC HÀNH</span><span>TRY YOURSELF</span></div>
+  <h2>8. Bài tự làm có kiểm chứng</h2>
+  <div class="callout callout-exam"><div class="callout-title">Nhiệm vụ A</div><p style="margin-bottom:0">Tìm khách hàng chưa có đơn, chỉ dùng LEFT JOIN và điều kiện NULL ở phía phải. Ghi rõ cột nào là khóa của bảng phải.</p></div>
+  <div class="callout callout-exam"><div class="callout-title">Nhiệm vụ B</div><p style="margin-bottom:0">Chèn một dòng sản phẩm hợp lệ, sau đó chèn một order_item tham chiếu dòng đó. Chụp lại hai câu SELECT xác nhận.</p></div>
+  <div class="callout callout-exam"><div class="callout-title">Nhiệm vụ C</div><p style="margin-bottom:0">Viết truy vấn UNION giữa mã khách và mã sinh viên. Nêu số cột, kiểu dữ liệu và ý nghĩa của việc loại bản sao.</p></div>
+  <h3>Checklist trước khi chuyển Lab 03</h3>
+  <ul><li>Đã chạy đúng database.</li><li>Đã phân biệt NULL với 0/chuỗi rỗng.</li><li>Đã kiểm tra số dòng bị UPDATE.</li><li>Đã giữ nguyên seed để expected rows còn đối chiếu được.</li></ul>
+  <p class="source-note">Mã bài B01–B05 được ánh xạ sang script cơ bản; không phải đề thi chính thức. Xem phần source map ở phụ lục.</p>
+  <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 02</span></div>
+</div>

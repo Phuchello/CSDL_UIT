@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Compile IT004 Practical Handbook Phase C1 Design Proof into a standalone index.html
+Compile IT004 Practical Handbook Phase C2 into a standalone index.html
 """
 
 import sys
@@ -22,6 +22,12 @@ CHAPTER_FILES = [
     "06_debugging_system.html",
     "07_lab_progression.html",
     "08_exam_workflow_references.html",
+    "09_lab01_ddl.html",
+    "10_lab02_dml.html",
+    "11_lab03_advanced.html",
+    "12_lab04_analytics.html",
+    "13_debugging_expanded.html",
+    "14_appendices_exam.html",
 ]
 
 HTML_TEMPLATE = """<!DOCTYPE html>
@@ -29,7 +35,9 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IT004 – Cơ sở dữ liệu — Sổ tay thực hành</title>
+  <title>IT004 – Thực hành Cơ sở dữ liệu</title>
+  <meta name="author" content="Võ Trọng Phúc">
+  <meta name="subject" content="IT004 – Cơ sở dữ liệu — Sổ tay thực hành">
   <link rel="stylesheet" href="css/practice.css">
 </head>
 <body>

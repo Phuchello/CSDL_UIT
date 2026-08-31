@@ -2,7 +2,7 @@
 
 ## Checkpoint
 
-v1.1 Phase C1 — Practical Handbook Architecture & Representative Proof (Technical Correction Complete)
+v1.1 Phase C2 — Full Practical Handbook Complete
 
 ## Date
 
@@ -14,7 +14,7 @@ v1.1 Phase C1 — Practical Handbook Architecture & Representative Proof (Techni
 
 ## Status
 
-PHASE A and THEORY v1.1 remain FROZEN and UNTOUCHED. PHASE C1 is 100% COMPLETE on `v1.1-practice-handbook`: created the separate practical handbook architecture, authored and technically corrected the 21-page representative proof PDF (`dist/proofs/IT004_CSDL_UIT_v1.1_Practice_DesignProof.pdf`), audited SQL semantics (TOP WITH TIES, explicit Self-Join mini-schema, half-open date range, granular GIAOVIEN trigger logic with test cases, logical query processing trace, DML sandbox vs persist mode, 8-error debugging dictionary, restrained exam provenance, and Microsoft Learn source-role separation). Theory v1.1 (`61eb5c8`), Phase A (`6aef91e`), `main` (`6ccf5a4`) and `phuchello/phuchello` remain completely untouched. Ready for Human Mentor C1 Approval.
+PHASE A and THEORY v1.1 remain FROZEN and UNTOUCHED. PHASE C2 is complete on `v1.1-practice-handbook`: the full practical handbook, deterministic fixture/scripts, final PDF, contact sheets and QA report are present. SQL Server client probing could not establish a trusted local connection, so runtime is reported NOT AVAILABLE; static semantic validation passes. Theory v1.1 (`61eb5c8`), Phase A (`6aef91e`), `main` (`6ccf5a4`) and `phuchello/phuchello` remain untouched. Ready for Human Mentor full-practice review.
 
 ## Scope completed in this checkpoint
 
@@ -31,7 +31,7 @@ PHASE A and THEORY v1.1 remain FROZEN and UNTOUCHED. PHASE C1 is 100% COMPLETE o
 
 ## Explicit hold
 
-Do not author the full Phase C2 practical book, build Quartz, merge to `main`, tag, or release until the mentor approves the Phase C1 design proof.
+Do not build Quartz, merge to `main`, tag, or release from this branch.
 
 ## Deliverables
 
@@ -40,3 +40,8 @@ Do not author the full Phase C2 practical book, build Quartz, merge to `main`, t
 - `dist/proofs/IT004_CSDL_UIT_v1.1_Practice_DesignProof.pdf`
 - `dist/review/v1.1_practice/`
 - `reports/v1.1_practice_c1_qa.md`
+- `practice/sql/` deterministic training fixture and test scripts
+- `dist/IT004_CSDL_UIT_ThucHanh_VoTrongPhuc.pdf` (76 pages, normalized metadata)
+- `dist/review/v1.1_practice_full/` contact sheets
+- `reports/v1.1_practice_full_qa.md`
+- `scripts/validate_practice_static.py`
