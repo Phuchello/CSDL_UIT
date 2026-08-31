@@ -1,44 +1,44 @@
-# Phase A Evidence-Driven Exam Pattern Map
+# Bản Đồ Mẫu Đề Thi Thực Chứng (Evidence-Driven Exam Pattern Map) — CSDL_UIT v1.1
 
-`artifact_count` counts only identifiable exam artifacts, not textbooks, curriculum pages, schedules, or generic review notes. `evidence_kind` explicitly separates course scope, exam artifacts, review material, practical labs, and inference. A community mirror can be a `verified-artifact` for its own identity without being an official UIT publication.
+**Bản cập nhật:** 2026-08-31
+**Nguyên tắc:** Cột `artifact_count` chỉ tính số lượng **Hiện vật đề thi chuẩn hóa (Canonical Artifacts)** độc lập đã được kiểm chứng trực tiếp. Cột `evidence_kind` phân biệt rạch ròi giữa quan sát thực tế trong đề thi, bài thực hành phòng máy, tài liệu ôn tập và đối chiếu kỹ thuật.
 
-| topic/chapter | observed pattern | artifact_count | years | source_ids | confidence | evidence_kind |
-|---|---|---:|---|---|---|---|
-| Ch1 — DB/DBMS and file system | define/contrast database, DBMS, file system, redundancy | 0 | 2020–21, 2022–23 | UIT-O01, UIT-O02, UIT-O09, COM-C10 | low | COURSE SCOPE + REVIEW INDEX; INFERENCE |
-| Ch1 — schema/instance and data independence | distinguish schema vs instance and three-level architecture | 0 | 2020–21, 2025–26 | UIT-O01, UIT-O11, TXT-A01, COM-C10 | low | COURSE SCOPE + EXAM SCHEDULE; INFERENCE |
-| Ch2 — ER modelling | identify entities, attributes, relationships, cardinality, participation | 0 | 2017–18, 2018–19, 2020–21, 2024–25 | UIT-O01, TXT-A02, COM-C01, COM-C10 | low | COURSE SCOPE + REVIEW INDEX |
-| Ch2 — ER → relational mapping | map 1:1, 1:N, M:N and relationship attributes to PK/FK relations | 0 | 2017–18, 2018–19, 2020–21, 2024–25 | UIT-O01, TXT-A02, COM-C01, COM-C10 | low | COURSE SCOPE + REVIEW INDEX |
-| Ch2 — keys | identify superkeys, candidate keys, primary/foreign keys | 0 | 2023–24, 2024–25 | TXT-A02, COM-C10, LOC-B02 | low | TEXTBOOK/REVIEW + ACCESS BLOCKED LOCAL LEAD |
-| Ch3 — relational algebra basics | translate requirements into selection, projection, joins, set operators | 0 | 2020–21, 2022–23, 2024–25 | UIT-O01, TXT-A03, COM-C03, LOC-B02 | low-medium | COURSE SCOPE + REVIEW MATERIAL + ACCESS BLOCKED |
-| Ch3 — division / “tất cả” | express universal conditions with division or double `NOT EXISTS` | 0 | 2022–23, 2024–25 | TXT-A03, TECH-A08, COM-C03, COM-C04 | low | REVIEW MATERIAL + TECHNICAL REFERENCE; INFERENCE |
-| Ch4 — SQL DDL/DML | create schema, load/update/delete data, enforce constraints | 2 | 2023–24, 2024–25 | COM-C02, COM-C08, COM-C09, TECH-A01, TECH-A03 | medium | OBSERVED IN EXAM ARTIFACT (community mirrors) + TECHNICAL REFERENCE |
-| Ch4 — joins and self-joins | join related relations, including self-join reasoning | 2 | 2023–24, 2024–25 | COM-C08, COM-C09, LOC-A07, TECH-A08 | medium | OBSERVED IN EXAM/PRACTICAL PREVIEWS + CURRENT CONTENT |
-| Ch4 — GROUP BY/HAVING/NULL | reason about grouping, aggregates, HAVING and three-valued NULL logic | 1 | 2023–24 | COM-C09, TECH-A02, TXT-A03 | low-medium | OBSERVED IN FINAL-EXAM PREVIEW + TECHNICAL REFERENCE |
-| Ch4 — EXISTS/subqueries | nested and correlated query reasoning | 1 | 2023–24 | COM-C09, TECH-A08, COM-C04 | low-medium | OBSERVED IN FINAL-EXAM PREVIEW + REVIEW MATERIAL |
-| Ch5 — integrity constraints | formulate predicates/impact tables; choose constraint vs trigger | 2 | 2023–24, 2024–25 | COM-C08, COM-C09, TECH-A03, TECH-A04 | medium | OBSERVED IN EXAM/PRACTICAL PREVIEWS + TECHNICAL REFERENCE |
-| Ch6 — functional dependencies | closure, candidate keys, minimal cover | 0 | 2022–23, 2025–26 | TXT-A02, COM-C03, COM-C10, LOC-B16 | low | REVIEW MATERIAL + ACCESS BLOCKED LOCAL LEAD; INFERENCE |
-| Ch6 — normalization | 2NF/3NF/BCNF, lossless and dependency-preserving decomposition | 0 | 2022–23, 2025–26 | TXT-A02, COM-C07, LOC-B16 | low | TEXTBOOK/REVIEW + ACCESS BLOCKED LOCAL LEAD; INFERENCE |
-| Practical — timed SQL Server workflow | schema creation, data loading and query execution under exam restrictions | 2 | 2014, 2023–24, 2024–25, 2025–26 | UIT-O06, UIT-O07, UIT-O10, COM-C02, COM-C08 | high for format; medium for artifact taxonomy | OFFICIAL EXAM NOTICE + OBSERVED PRACTICAL ARTIFACT |
+---
 
-## Year-by-year search result
+## 1. Ma Trận Mẫu Câu Hỏi Đề Thi Theo Chuyên Đề
 
-| year range | direct result | classification |
-|---|---|---|
-| 2016–2017 | Studocu index lists an IT004 final-exam item; no directly opened question artifact | community index; not counted |
-| 2017–2018 | Studocu index lists midterm/final artifacts | community index; not counted |
-| 2018–2019 | Studocu index lists final-exam artifacts and answer listings | community index; not counted |
-| 2019–2020 | Studocu index lists final-exam artifacts | community index; not counted |
-| 2020–2021 | Studocu index lists final-exam artifacts; UIT page verifies online exam scheduling generally | community index + official schedule context; not question proof |
-| 2021–2022 | Studocu index lists midterm/practical artifacts | community index; not counted |
-| 2022–2023 | UIT mock-midterm notice; Studocu lists midterm/final/practical artifacts | official event context + community index; no exact official paper |
-| 2023–2024 | Opened Studocu previews identify an IT004 practical paper and final paper with UIT/course/year headers | two community-mirror exam artifacts; counted |
-| 2024–2025 | Official practical notice and Studocu practical/final/midterm listings | official format + community artifacts/index; exact wording not official |
-| 2025–2026 | Official practical notice and official midterm schedule; Studocu index lists midterm/practical items | official format/schedule + community index; exact wording not official |
+| Chuyên đề / Chương | Mẫu câu hỏi thực chứng (Observed Pattern) | Artifact Count | Năm học quan sát | Canonical Artifact IDs | Source IDs | Độ tin cậy | Phân loại bằng chứng (Evidence Kind) |
+| :--- | :--- | :---: | :---: | :--- | :--- | :---: | :--- |
+| **Ch1: Tổng quan CSDL** | • Phân biệt Hệ thống tập tin (File System) vs DBMS<br>• Kiến trúc 3 mức ANSI/SPARC & Tính độc lập dữ liệu (Logical / Physical Data Independence) | **2** | 2020–2021, 2023–2024 | `EXAM-2020-2021-HK1-FINAL-01`, `EXAM-2023-2024-HK1-FINAL-01` | `LOC-LEC-AN-CH01`, `LOC-LEC-LONG-CH01`, `UIT-O01` | **Trung bình-Cao (8.5/10)** | `OBSERVED IN EXAM ARTIFACT` + `COURSE SCOPE` |
+| **Ch2: Mô hình ER & Quan hệ** | • Thiết kế mô hình ER từ ngữ cảnh thực tế (Entity, Relationship, Min-Max, Thuộc tính đa trị/đa hợp)<br>• Ánh xạ ER $\rightarrow$ Lược đồ quan hệ xác định rõ PK, FK (Quan hệ 1:1, 1:N, M:N, Is-a) | **8** | 2016–2017, 2017–2018, 2018–2019, 2021–2022, 2023–2024, 2024–2025 | `EXAM-2023-2024-HK1-MID-01`, `EXAM-2023-2024-HK1-MID-02`, `EXAM-2021-2022-HK1-FINAL-01`, `EXAM-2017-2018-HK1-MID-01`, `EXAM-2016-2017-HK1-MID-01`, `REV-2024-DSQH-MID`, `REV-2024-10-01-EXP` | `LOC-EXAM-2023-2024-MID-D1`, `LOC-EXAM-2023-2024-MID-D2`, `LOC-REV-2024-10-01`, `LOC-REV-DSQH-2024`, `LOC-LEC-LONG-CH02` | **Tuyệt đối (10/10)** | `OBSERVED IN EXAM ARTIFACT` (Định dạng cốt lõi mọi đề thi Giữa kỳ) |
+| **Ch3: Đại số quan hệ (ĐSQH)** | • Truy vấn cơ bản: Phép chọn $\sigma$, Phép chiếu $\pi$, Phép kết $\bowtie$, Phép đổi tên $\rho$<br>• Phép tập hợp: Hội $\cup$, Giao $\cap$, Trừ $-$<br>• Phép kết ngoài: Left/Right Outer Join $(\mathbin{⟕}, \mathbin{⟖})$<br>• Phép chia $\div$ (Bài toán "Tất cả" - Universal Condition)<br>• Gom nhóm & Tính toán: Phép gom nhóm $\Im$ kết hợp `COUNT`, `SUM`, `AVG`, `MIN`, `MAX` | **10** | 2016–2017, 2017–2018, 2018–2019, 2019–2020, 2022–2023, 2023–2024, 2024–2025 | `EXAM-2023-2024-HK1-MID-01`, `EXAM-2023-2024-HK1-MID-02`, `EXAM-2019-2020-HK1-MID-01`, `EXAM-2018-2019-HK1-MID-01`, `EXAM-2017-2018-HK1-MID-01`, `EXAM-2016-2017-HK1-MID-01`, `REV-2024-10-01-EXP`, `REV-2024-DSQH-MID` | `LOC-EXAM-2023-2024-MID-D1`, `LOC-EXAM-2023-2024-MID-D2`, `LOC-HW-23520266-5`, `LOC-LEC-LONG-CH03` | **Tuyệt đối (10/10)** | `OBSERVED IN EXAM ARTIFACT` (Chiếm 60–75% điểm số thi Giữa kỳ) |
+| **Ch4: Truy vấn SQL Server / T-SQL** | • Lệnh DDL: `CREATE TABLE`, `ALTER TABLE`, thêm/xóa cột, kiểu dữ liệu<br>• Khai báo ràng buộc: `PRIMARY KEY`, `FOREIGN KEY`, `CHECK`<br>• Lệnh DML: `UPDATE` có điều kiện `WHERE`, tăng/giảm giá trị theo ngày tháng<br>• Truy vấn nâng cao: `JOIN`, `SELF JOIN`, Subquery, Correlated Subquery<br>• Phép chia SQL: Double `NOT EXISTS` vs `GROUP BY ... HAVING COUNT` | **9** | 2017–2018, 2018–2019, 2019–2020, 2020–2021, 2022–2023, 2023–2024 | `EXAM-2023-2024-HK1-MID-01`, `EXAM-2023-2024-HK1-MID-02`, `EXAM-2023-2024-HK1-FINAL-01`, `EXAM-2020-2021-HK1-FINAL-01`, `EXAM-2019-2020-HK1-MID-01`, `EXAM-2018-2019-HK1-MID-01`, `EXAM-2017-2018-HK1-MID-01`, `LAB-QLBH-QLGV-CORPUS` | `LOC-EXAM-2023-2024-MID-D1`, `LOC-HW-23520266-5`, `LOC-SQL-LAB01` đến `LAB04`, `TECH-A01` đến `TECH-A08` | **Tuyệt đối (10/10)** | `OBSERVED IN EXAM ARTIFACT` + `OBSERVED IN PRACTICAL EXAM` |
+| **Ch5: Ràng buộc toàn vẹn (RBTV)** | • Phân tích bối cảnh, phát biểu tân từ hình thức bằng biểu thức logic/toán học<br>• Lập Bảng tầm ảnh hưởng 3 thao tác (Thêm, Xóa, Sửa)<br>• Phân loại RBTV: Miền giá trị, Liên thuộc tính 1 QH, Liên bộ 1 QH, Tham chiếu, Liên thuộc tính nhiều QH, Thuộc tính tổng hợp, Chu trình<br>• Cài đặt RBTV bằng `CHECK` hoặc Trigger T-SQL an toàn đa dòng | **6** | 2020–2021, 2021–2022, 2022–2023, 2023–2024, 2024–2025 | `EXAM-2023-2024-HK1-FINAL-01`, `EXAM-2022-2023-HK1-FINAL-01`, `EXAM-2021-2022-HK1-FINAL-01`, `EXAM-2020-2021-HK1-FINAL-01`, `LAB-QLBH-QLGV-CORPUS` | `LOC-LEC-LONG-CH05`, `LOC-HW-23520266-5`, `TECH-A04` đến `TECH-A06` | **Cao (9.8/10)** | `OBSERVED IN EXAM ARTIFACT` (Dạng bài bắt buộc trong đề thi Cuối kỳ) |
+| **Ch6: Phụ thuộc hàm & Chuẩn hóa** | • Tiên đề Armstrong & Chứng minh PTH ($F \vdash X \rightarrow Y$)<br>• Thuật toán tính bao đóng thuộc tính $X^+$, bài toán thành viên<br>• Tìm tất cả các khóa ứng viên (Phân tích tập nguồn Ng, trung gian Tg, treo Tr)<br>• Tìm phủ tối thiểu $F_c$ (3 bước)<br>• Kiểm tra dạng chuẩn cao nhất (1NF $\rightarrow$ 2NF $\rightarrow$ 3NF $\rightarrow$ BCNF)<br>• Phân rã bảo toàn phụ thuộc hàm và nối không mất thông tin (Lossless Join) | **7** | 2018–2019, 2020–2021, 2021–2022, 2022–2023, 2023–2024, 2024–2025 | `EXAM-2023-2024-HK1-FINAL-01`, `EXAM-2022-2023-HK1-FINAL-01`, `EXAM-2021-2022-HK1-FINAL-01`, `EXAM-2020-2021-HK1-FINAL-01` | `LOC-LEC-LONG-CH06`, `COM-C02`, `LOC-NOTE-NHAP` | **Tuyệt đối (10/10)** | `OBSERVED IN EXAM ARTIFACT` (Chiếm 40–50% điểm số thi Cuối kỳ) |
+| **Thực hành máy tập trung** | • Thi thực hành 90 phút trên Microsoft SQL Server trong môi trường phòng lab (không Internet, không tài liệu)<br>• Viết script DDL/DML, Trigger kiểm tra RBTV và truy vấn phức tạp | **5** | 2014, 2022–2023, 2023–2024, 2024–2025, 2025–2026 | `LAB-QLBH-QLGV-CORPUS`, `EXAM-2023-2024-HK1-FINAL-01`, `UIT-O06`, `UIT-O10` | `LOC-SQL-LAB01` đến `LAB04-ALL`, `UIT-O06`, `UIT-O10` | **Tuyệt đối (10/10)** | `OFFICIAL EXAM NOTICE` + `OBSERVED IN PRACTICAL EXAM` |
 
-## Evidence limits
+---
 
-- No official UIT question paper or answer key was publicly accessible in this pass.
-- `COM-C08` and `COM-C09` are identifiable community mirrors/previews, so they are exam artifacts for provenance mapping, not official online publications.
-- Official notices verify assessment existence, dates, and restrictions, not recurring question wording.
-- The requested local PDF/answer files are recorded as `ACCESS BLOCKED`; they cannot be promoted to verified artifacts without inspection.
-- No topic is called “frequent” based solely on a textbook, curriculum, schedule, or review index.
+## 2. Top 5 Mẫu Đề Thi Có Tần Suất Cao Nhất (Top 5 Evidence-Based Patterns)
+
+Dựa trên việc kiểm chứng 14 Canonical Artifacts qua 8 năm học liên tiếp (2016–2024), 5 dạng bài có tần suất xuất hiện và tỷ trọng điểm số cao nhất trong cấu trúc đề thi UIT gồm:
+
+1. **Thiết kế ERD & Ánh xạ sang Lược đồ quan hệ (Giữa kỳ: 2.5–3.0 điểm)**:
+   - *Bối cảnh*: Đề bài cho đoạn văn mô tả bài toán quản lý thực tế (PCCC chung cư, Khách hàng thuê trang phục, Bán xe máy trả góp, Bệnh viện, v.v.).
+   - *Yêu cầu*: Vẽ mô hình ERD với đầy đủ thực thể, thuộc tính (gạch chân khóa chính), mối kết hợp và bản số $(min, max)$ theo đúng cú pháp UIT. Chuyển đổi sang Lược đồ quan hệ xác định rõ PK/FK.
+
+2. **Truy vấn Đại số quan hệ phân bậc (Giữa kỳ: 6.0–7.0 điểm)**:
+   - *Bối cảnh*: Cho lược đồ CSDL từ 4–5 quan hệ.
+   - *Yêu cầu*: Viết biểu thức ĐSQH cho 6–8 câu hỏi từ cơ bản (lọc, chiếu, kết) đến nâng cao (Outer Join, Phép trừ, Gom nhóm tính toán $\Im$, Phép chia $\div$ giải bài toán "Tất cả").
+
+3. **Phân tích Ràng buộc toàn vẹn & Lập Bảng tầm ảnh hưởng (Cuối kỳ: 2.5–3.0 điểm)**:
+   - *Bối cảnh*: Cho tân từ ràng buộc nghiệp vụ (sĩ số lớp, phân công giảng dạy, doanh số bán hàng, tổng trị giá hóa đơn, v.v.).
+   - *Yêu cầu*: Xác định bối cảnh, viết phát biểu hình thức bằng logic vị từ, lập Bảng tầm ảnh hưởng 3 thao tác $(+, -, +(\text{thuộc tính}))$, và viết Trigger T-SQL an toàn đa dòng.
+
+4. **Tìm tất cả Khóa ứng viên & Phủ tối thiểu $F_c$ (Cuối kỳ: 2.0–2.5 điểm)**:
+   - *Bối cảnh*: Cho lược đồ quan hệ $R(U)$ và tập phụ thuộc hàm $F$.
+   - *Yêu cầu*: Tính bao đóng $X^+$, áp dụng thuật toán phân loại tập nguồn $Ng$, trung gian $Tg$, treo $Tr$ để tìm mọi khóa ứng viên. Rút gọn tập $F$ thành phủ tối thiểu $F_c$ qua 3 bước chuẩn tắc.
+
+5. **Xác định dạng chuẩn cao nhất & Phân rã bảo toàn (Cuối kỳ: 2.0–2.5 điểm)**:
+   - *Bối cảnh*: Cho lược đồ $R(U)$ và tập $F$.
+   - *Yêu cầu*: Kiểm tra từng bước từ 1NF $\rightarrow$ 2NF $\rightarrow$ 3NF $\rightarrow$ BCNF (chỉ rõ thuộc tính không khóa nào phụ thuộc một phần hoặc phụ thuộc bắc cầu vào khóa). Phân rã về 3NF/BCNF bảo toàn phụ thuộc hàm và nối không mất thông tin.

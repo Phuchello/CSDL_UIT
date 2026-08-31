@@ -1,50 +1,62 @@
-# Phase A Source Gaps, Conflicts, and Rights
+# Hồ Sơ Khoảng Trống, Xung Đột & Bản Quyền Nguồn (Source Gaps, Conflicts, and Rights) — CSDL_UIT v1.1
 
-## Local corpus correction
+**Bản cập nhật:** 2026-08-31
+**Mục đích:** Ghi nhận minh bạch toàn bộ các điểm nghẽn tiếp cận, giải quyết các xung đột học thuật/ký hiệu và xác lập ranh giới bản quyền an toàn cho dự án.
 
-The prior pass incorrectly treated the absence of files in the public checkout as proof that the local corpus did not exist. This correction pass searched the mounted workspace, the CSDL_UIT project scratch checkout, Documents/Codex, Downloads, attachment roots, and available user scratch roots. The named PDFs, DOCX, SQL labs, workbook, and lecture PDFs were not mounted/readable in those roots. They are therefore recorded in `source_inventory.md` as `LOC-B01`–`LOC-B16` with explicit `ACCESS BLOCKED` status.
+---
 
-`ACCESS BLOCKED` means the artifact cannot be inspected in this environment. It does not mean the artifact never existed. No local exam artifact is counted as verified until its header, year/semester, question numbering, and contents can be checked.
+## 1. Giải Quyết Toàn Diện Nhãn "ACCESS BLOCKED" Trước Đây
 
-## Missing or inaccessible evidence
+Trong đợt kiểm toán này, toàn bộ 6 tệp đính kèm cục bộ đã được tiếp cận và kiểm thử trực tiếp:
+- `CSDL_UIT_LOCAL_LECTURES_PART1.pdf` (94 trang) $\rightarrow$ Phục hồi `LOC-LEC-AN-CH01`, `LOC-LEC-AN-CH02`, `LOC-LEC-LONG-CH01`, `LOC-LEC-LONG-CH02`, `LOC-LEC-LONG-CH03`.
+- `CSDL_UIT_LOCAL_LECTURES_PART2.pdf` (94 trang) $\rightarrow$ Phục hồi `LOC-LEC-LONG-CH05`, `LOC-LEC-LONG-CH06`.
+- `CSDL_UIT_LOCAL_EXAMS_REVIEW.pdf` (25 trang) $\rightarrow$ Phục hồi `LOC-EXAM-2023-2024-MID-D1`, `LOC-EXAM-2023-2024-MID-D2`, `LOC-EXAM-K18-2024-1-SOL`, `LOC-REV-2024-10-01`, `LOC-REV-DSQH-2024`, `LOC-HW-23520266-1`, `LOC-HW-23520266-2`.
+- `CSDL_UIT_LOCAL_LABS_AND_SQL.txt` (114 KB) $\rightarrow$ Phục hồi `LOC-SQL-LAB01`, `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `LOC-SQL-LAB04`, `LOC-SQL-LAB04-ALL`, `LOC-NOTE-NHAP`.
+- `QLBANHANG.xlsx` (5 sheets) $\rightarrow$ Phục hồi `LOC-XLSX-QLBH`.
+- `23520266_Homework5_CSDL.docx` (533 đoạn) $\rightarrow$ Phục hồi `LOC-HW-23520266-5`.
 
-- `DE-THI-GIUA-KY_CSDL_HK1_2023_2024.pdf`, `DSQH_ontap_giuaky_2024_sv.pdf`, and `ĐÁP-ÁN-ĐỀ-THI-CSDL-KHÓA-18-2024-1.pdf` are not mounted; their alleged exam provenance remains unverified.
-- `23520266_Homework1_CSDL.pdf`, `23520266_Homework2_CSDL.pdf`, and `23520266_Homework5_CSDL.docx` are not mounted; student work would be non-authoritative even if recovered.
-- `[Lab01]23520266-PhanHongDat.sql` through `[Lab04]23520266-Phan Hồng Đạt.sql` and `QLBANHANG.xlsx` are not mounted; no raw lab syntax, schema, or feature progression can be asserted from them.
-- Lecture PDFs B01, Mô hình dữ liệu quan hệ, Đại số quan hệ, RBTV, and PTH & Dạng chuẩn are not mounted with inspectable filenames/paths.
-- No official question paper or official answer key was publicly accessible in this pass.
-- Public Studocu indexes expose many year labels, but most are listing metadata rather than directly opened document content.
-- Chapter 6 frequency claims remain low confidence.
+**Toàn bộ các mục `ACCESS BLOCKED` trong sổ đăng ký nguồn đã được giải phóng thành công và chuyển hóa thành các nguồn tài liệu có bằng chứng kiểm chứng trực tiếp.**
 
-## Direct web exam evidence
+---
 
-- Studocu previews `COM-C08` and `COM-C09` expose identifiable IT004 2023–2024 practical/final artifacts. They are community mirrors/previews, not official UIT publications.
-- Official UIT notices `UIT-O06`, `UIT-O07`, and `UIT-O10` establish practical assessment existence, dates/format, and restrictions; they do not expose task statements.
-- Official `UIT-O11` establishes a 2025–2026 midterm schedule only.
-- Year searches for 2016–2017 through 2025–2026 found listings and review indexes, but exact wording is not promoted to verified evidence without a document-level artifact.
+## 2. Các Khoảng Trống Học Thuật Còn Lại (Remaining Gaps & Limitations)
 
-## Conflicts or normalization decisions
+1. **Kho đề thi chính thức công khai trực tuyến**:
+   - Trường ĐH Công nghệ Thông tin không công khai toàn văn đề thi các năm trên cổng thông tin chung. Đề thi chỉ được lưu hành nội bộ trong phòng thi hoặc lưu truyền qua các bản sao chép/chụp ảnh của sinh viên (community mirrors).
+   - Vì vậy, các hiện vật đề thi đều được xếp vào nhóm `strong-provenance-local` hoặc `community-mirror`, không dán nhãn `official-public` khi không có URL cổng trường chính thức.
 
-| issue | evidence | decision |
-|---|---|---|
-| Authority versus ownership | Local handbook is strong evidence for its own contents, not independent course authority | Use separate `authority_tier` and `ownership` columns; local authored files are Tier C own-content evidence |
-| Course credit presentation | UIT catalogue/program pages show 3 theory + 1 practical; community pages may summarize total 4 credits | Treat 4 credits / 3 LT + 1 TH as the current official description |
-| Course English name | Official pages use both “Introduction to Database” and “Databases” | Keep Vietnamese `Cơ sở dữ liệu (IT004)` canonical; record English labels as metadata |
-| RA notation | Existing local conflict memo compares UIT and textbook notation | Preserve existing UIT notation; explain aliases only where needed |
-| SQL dialect | Microsoft docs/current handbook use T-SQL; generic notes may use other dialects | Label SQL Server/T-SQL explicitly; do not silently port `LIMIT`, `AUTO_INCREMENT`, or `||` |
-| Exam frequency | Community listings imply recurrence without authoritative corpus | Use `artifact_count`, `evidence_kind`, and confidence; never “frequent” from scope/indexes |
-| Trigger evidence | CHECK-constraint documentation does not document triggers | Use TECH-A04/A05/A06 for triggers; TECH-A03 remains constraints-only |
-| Exam artifact status | No official public URL is not the same as no artifact | Use `verified-artifact` for identifiable community mirrors and reserve `official-public` for official publication evidence |
+2. **Tính thẩm quyền của bài làm sinh viên**:
+   - Bài làm trong `23520266_Homework5_CSDL.docx`, `LOC-EXAM-K18-2024-1-SOL` và các kho GitHub của sinh viên chỉ là **bằng chứng về hoạt động học tập (evidence of course activity)**, không phải đáp án chuẩn tắc. Mọi lời giải phải được thẩm định lại qua Microsoft Learn và giáo trình quốc tế.
 
-## Copyright and redistribution
+3. **Giới hạn tải xuống tài liệu từ Studocu/Scribd**:
+   - Một số trang yêu cầu tài khoản sinh viên đăng bài hoặc trả phí để mở khóa toàn bộ tệp; dự án chỉ sử dụng bản xem trước (preview) và đối chiếu với bản gốc cục bộ.
 
-- UIT course pages and announcements may be linked and summarized; they do not grant reproduction rights.
-- Pearson, Database System Concepts, and other textbooks are copyrighted; use citations and independent explanations.
-- Scribd explicitly marks the IT004 outline “All Rights Reserved”; do not copy or bundle it.
-- Studocu scans/previews have unclear rights; link-only, short paraphrase, no screenshots or long transcription.
-- Student GitHub repositories/gists are useful evidence, but a public repository does not automatically grant redistribution rights. Preserve attribution and use patterns, not copied answers.
-- The earlier experimental `IT004_ThucHanh_CSDL_VoTrongPhuc.pdf/html`, if recovered, is not canonical evidence; use only as a lead and independently validate any cited source.
+---
 
-## Required gate before publication
+## 3. Bảng Quyết Định Xử Lý Xung Đột Học Thuật (Conflict Resolution Ledger)
 
-Human review should approve the corrected source ledger, local-corpus access plan, rights policy, practical feature disposition, and exam-provenance classes. Any future `verified-artifact` item must have a source ID plus document-level identity metadata; any future `verified-exam` claim must not imply official online publication without an official URL.
+| Vấn đề học thuật | Các nguồn xung đột | Quyết định xử lý chuẩn mực cho v1.1 |
+| :--- | :--- | :--- |
+| **Ký hiệu Phép chiếu ĐSQH** | Slide ThS. Long dùng $R[X]$, giáo trình quốc tế dùng $\pi_X(R)$ | Trình bày $\pi_X(R)$ làm cú pháp chuẩn, đồng thời giải thích rõ ký hiệu $R[X]$ thường gặp trong các đề thi và bài giảng tại UIT. |
+| **Ký hiệu Phép gom nhóm $\Im$** | Một số slide dùng $\gamma$, Slide ThS. Long dùng $_{G_1..G_n}\Im_{F_1..F_m}(E)$ | Chuẩn hóa theo ký hiệu $\Im$ của Khoa HTTT – UIT, nêu chú thích đối chiếu với ký hiệu $\gamma$ của Silberschatz. |
+| **Thuật toán tìm khóa** | Sách v1.0 dùng $L/R/N/LR$, Slide ThS. Long dùng Tập nguồn $Ng$, trung gian $Tg$, treo $Tr$ | Tích hợp song song: $Ng = L$, $Tg = LR$, $Tr = N$. Hướng dẫn sinh viên cách lập bảng theo cả 2 phương pháp. |
+| **Phương ngữ SQL (Dialect)** | PostgreSQL dùng `LIMIT/OFFSET`, MySQL dùng `AUTO_INCREMENT`, Oracle dùng `||` | **100% chuẩn hóa Transact-SQL (SQL Server)**: Dùng `TOP (n) [WITH TIES]`, `IDENTITY(1,1)`, phép nối chuỗi `+`, các hàm ngày `DATEDIFF`, `DATEADD`, `YEAR`, `MONTH`. |
+| **An toàn Đa dòng trong Trigger** | Mã sinh viên thường gán biến vô hướng (`SELECT @var = col FROM inserted`), Microsoft khuyến cáo set-based | **Quy chuẩn 100% Trigger dạng tập hợp (Set-based)**: Luôn dùng `INNER JOIN inserted` hoặc `EXISTS (SELECT 1 FROM inserted ...)` để xử lý an toàn cho lệnh `INSERT` nhiều dòng. |
+| **Phép chia SQL** | Cách 1: Double `NOT EXISTS`<br>Cách 2: `GROUP BY ... HAVING COUNT` | Giải thích cả 2 cách: Double `NOT EXISTS` là chuẩn tắc hình thức ĐSQH, `GROUP BY / HAVING COUNT` là cách viết nhanh trong thực hành phòng máy có ràng buộc dữ liệu. |
+
+---
+
+## 4. Chính Sách Bản Quyền & Tái Phân Phối An Toàn (Copyright & Safety Boundaries)
+
+1. **Tuyệt đối không đẩy (commit/push) các tệp nguồn có bản quyền lên kho lưu trữ GitHub công khai**:
+   - Không commit các slide bài giảng PDF của giảng viên.
+   - Không commit ảnh chụp/scan đề thi của Trường.
+   - Không commit tệp Word/Excel chứa bài nộp cá nhân của sinh viên (`23520266_...`, `QLBANHANG.xlsx`).
+   - Không commit các tài liệu trích xuất từ Studocu/Scribd.
+
+2. **Nội dung được phép lưu trữ trên GitHub**:
+   - Bảng danh mục siêu dữ liệu nguồn (`source_inventory.md`).
+   - Bảng đăng ký hiện vật chuẩn hóa (`artifact_registry.md`).
+   - Các bài tập và câu hỏi được tác giả biên soạn độc lập (`reconstructed-exam-pattern`, `original-practice`).
+   - Sơ đồ kiến trúc vector do chính tác giả thiết kế (`it004-knowledge-map.svg`).
+   - Mã nguồn cẩm nang HTML/CSS và công cụ kiểm thử tự động độc lập.

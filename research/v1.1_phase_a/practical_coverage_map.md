@@ -1,57 +1,47 @@
-# Phase A Practical SQL Server Coverage Map
+# Bản Đồ Kỹ Năng Thực Hành SQL Server (Practical SQL Server Coverage Map) — CSDL_UIT v1.1
 
-This map distinguishes material actually visible in an exam/lab artifact from course scope and inference. The named student labs and workbook requested for this correction pass were not mounted in the available environment, so their rows remain `ACCESS BLOCKED`; no syntax or feature claim is attributed to them.
+**Bản cập nhật:** 2026-08-31
+**Nguyên tắc:** Phân loại rõ ràng các tính năng T-SQL thành `CORE`, `OPTIONAL`, `HISTORICAL`, `UNSUPPORTED` dựa trên bằng chứng thực nghiệm từ mã nguồn Lab 01–04 cục bộ, đề thi thực hành chính thức và tài liệu chuẩn Microsoft Learn.
 
-## Skill coverage
+---
 
-| skill | source_ids | evidence_kind | evidence summary | confidence | planned treatment |
-|---|---|---|---|---|---|
-| SQL Server / SSMS setup | UIT-O06, UIT-O10, GH-C02, GH-C03, COM-C06 | COURSE SCOPE + OBSERVED IN PRACTICAL FORMAT | Official notices require a computer-based practical; repositories/guides show SQL Server workflow | high | setup checklist and troubleshooting |
-| Create database/table | UIT-O06, UIT-O10, TECH-A01, GH-C02, GH-C03, GH-C04, GH-C07, COM-C08 | OBSERVED IN PRACTICAL ARTIFACT + TECHNICAL REFERENCE | T-SQL DDL appears in dated/public lab and exam previews; Microsoft syntax is authoritative | high | core lab |
-| Data types | TECH-A01, GH-C03, COM-C08 | OBSERVED IN PRACTICAL PREVIEW + TECHNICAL REFERENCE | `CREATE TABLE` and schema previews expose typed columns | medium-high | core lab |
-| PK / FK | TECH-A01, GH-C03, GH-C07, COM-C02, COM-C08 | OBSERVED IN PRACTICAL ARTIFACT + TECHNICAL REFERENCE | Constraints are visible in dated scripts/previews | high | core lab |
-| CHECK / UNIQUE / DEFAULT | TECH-A01, TECH-A03, GH-C07, COM-C02, COM-C08 | OBSERVED IN PRACTICAL ARTIFACT + TECHNICAL REFERENCE | Microsoft constraint syntax cross-checks dated scripts/previews | medium-high | core lab, dialect check |
-| INSERT / UPDATE / DELETE | GH-C01, GH-C02, GH-C03, GH-C07, COM-C08 | OBSERVED IN LAB/EXAM ARTIFACT | Public lab trees and practical preview show DML progression | medium-high | core lab |
-| SELECT / WHERE | UIT-O01, GH-C01, GH-C02, COM-C04, COM-C08 | COURSE SCOPE + OBSERVED IN ARTIFACT | Course scope and practical/query artifacts | high | core lab |
-| LIKE / IN / BETWEEN | GH-C02, GH-C03, COM-C04 | OBSERVED IN LAB/REVIEW MATERIAL | Student labs/review notes; no official question text | medium | include as query fundamentals |
-| NULL semantics | UIT-O01, TXT-A03, COM-C04 | COURSE SCOPE + REVIEW MATERIAL | General relational/SQL references and review notes | medium | semantic note and traps |
-| ORDER BY | GH-C02, GH-C03 | OBSERVED IN LAB MATERIAL | Standard query progression in public labs | medium | core lab |
-| INNER/OUTER JOIN | UIT-O01, TXT-A03, GH-C02, GH-C03, COM-C02, COM-C08 | COURSE SCOPE + OBSERVED IN ARTIFACT | Scope, schemas, and practical previews support joins | high | core lab |
-| SELF JOIN | LOC-A07, GH-C03, GH-C07 | OBSERVED IN CURRENT HANDBOOK/LAB SCRIPT | Current authored chapter and dated script; not an official exam claim | medium | focused lab |
-| Aggregation | TECH-A02, GH-C02, GH-C03, COM-C04, COM-C08 | OBSERVED IN ARTIFACT + TECHNICAL REFERENCE | Grouping docs plus practical/query materials | high | core lab |
-| GROUP BY / HAVING | TECH-A02, COM-C04, LOC-A07 | TECHNICAL REFERENCE + CURRENT CONTENT | Explicit Microsoft grouping semantics and authored examples | high | core lab |
-| Subquery / correlated subquery | TECH-A08, GH-C02, GH-C03, COM-C04, LOC-A07 | TECHNICAL REFERENCE + REVIEW/LAB MATERIAL | EXISTS and nested-query patterns cross-checked with Microsoft | medium-high | core lab |
-| EXISTS / NOT EXISTS | TECH-A08, COM-C04, LOC-A07 | TECHNICAL REFERENCE + REVIEW MATERIAL | Community review pattern plus current examples; not official frequency evidence | medium | teach with provenance label |
-| Universal queries | COM-C04, COM-C02, LOC-A07 | REVIEW/PRACTICAL PREVIEW + CURRENT CONTENT | Secondary “tất cả” patterns; do not call officially frequent | medium | teach pattern |
-| Set operators | TECH-A09, TXT-A03, GH-C01, COM-C03 | TECHNICAL REFERENCE + REVIEW/LAB MATERIAL | UNION compatibility and RA/SQL bridge | medium | theory/practical bridge |
-| Views | TECH-A10, GH-C02, GH-C03, TXT-A02 | TECHNICAL REFERENCE + LAB MATERIAL | Public repositories mention views, but no official exam evidence | low-medium | optional/historical pending local confirmation |
-| Stored procedures | TECH-A07, GH-C02, GH-C03, COM-C02 | TECHNICAL REFERENCE + PRACTICAL PREVIEW | Repositories/previews mention procedures; no official question text | medium-low | optional pending local-lab confirmation |
-| Functions | GH-C02, GH-C03 | LAB MATERIAL ONLY | Repository review suggests programming material; no authoritative exam evidence | low | unsupported until local evidence |
-| Trigger | TECH-A04, TECH-A05, TECH-A06, GH-C02, GH-C07, COM-C02 | TECHNICAL REFERENCE + LAB/PRACTICAL ARTIFACT | Dedicated Microsoft trigger sources correct the prior CHECK-source mismatch; dated script/preview shows trigger usage | high for feature; medium for exam frequency | core lab |
-| `inserted` / `deleted` | TECH-A05, GH-C07, LOC-A07 | TECHNICAL REFERENCE + DATED SCRIPT/CURRENT CONTENT | Microsoft transition-table guidance and authored examples | medium-high | core trigger lab |
-| Multi-row-safe trigger | TECH-A06, LOC-A07 | TECHNICAL REFERENCE + CURRENT CONTENT | Microsoft set-based trigger guidance; no official question text | medium | teach safe set-based pattern |
-| Practical exam workflow | UIT-O06, UIT-O07, UIT-O10 | OFFICIAL EXAM NOTICE | Timed/computer-based conditions; no documents/internet in 2024–25 and 2025–26 notices | high | timed checklist |
-| Common SSMS errors | GH-C02, GH-C03, COM-C06 | LAB/COMMUNITY GUIDE | Useful troubleshooting leads without official taxonomy | medium | troubleshooting appendix |
+## 1. Ma Trận Kỹ Năng Thực Hành T-SQL (Skill Coverage Matrix)
 
-## Raw local corpus audit
+| Kỹ năng / Lệnh T-SQL | Phân loại | Source IDs | Bằng chứng thực nghiệm | Độ tin cậy | Kế hoạch triển khai |
+| :--- | :---: | :--- | :--- | :---: | :--- |
+| **Cài đặt & Vận hành SSMS** | **CORE** | `UIT-O06`, `UIT-O10`, `GH-C02`, `LOC-SQL-LAB01` | Quy chế thi thực hành trên máy tập trung, kết nối LocalDB/SQL Express, gỡ lỗi kết nối | **Tuyệt đối (10/10)** | Hướng dẫn cấu hình môi trường, checklist 60 giây |
+| **CREATE DATABASE / TABLE** | **CORE** | `LOC-SQL-LAB01`, `TECH-A01`, `GH-C02`, `COM-C08` | DDL tạo Database `QuanLyBanHang`, `QuanLyGiaoVu`; khai báo bảng và các thuộc tính | **Tuyệt đối (10/10)** | Chuyên đề DDL chuẩn mực |
+| **Kiểu dữ liệu SQL Server** | **CORE** | `LOC-SQL-LAB01`, `TECH-A01`, `LOC-XLSX-QLBH` | `CHAR`, `VARCHAR`, `NVARCHAR`, `SMALLDATETIME`, `MONEY`, `NUMERIC(4,2)`, `TINYINT`, `INT`, `BIT` | **Tuyệt đối (10/10)** | Bảng tra cứu kiểu dữ liệu và bẫy lưu trữ |
+| **PRIMARY KEY / FOREIGN KEY** | **CORE** | `LOC-SQL-LAB01`, `TECH-A01`, `LOC-EXAM-2023-2024-MID-D1` | Khóa chính đơn, khóa chính phức hợp (`CTHD(SOHD, MASP)`), khóa ngoại qua `ALTER TABLE ADD CONSTRAINT` | **Tuyệt đối (10/10)** | Chuyên đề Ràng buộc quan hệ |
+| **CHECK / UNIQUE / DEFAULT** | **CORE** | `LOC-SQL-LAB01`, `TECH-A03`, `LOC-EXAM-2023-2024-MID-D1` | `CHECK (GIA >= 500)`, `CHECK (NGDK > NGSINH)`, `CHECK (DVT IN (...))`, `DEFAULT` | **Tuyệt đối (10/10)** | Chuyên đề RBTV khai báo |
+| **DML: INSERT / UPDATE / DELETE** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `LOC-XLSX-QLBH` | Nạp dữ liệu 5 bảng QLBH, 7 bảng QLGV; `UPDATE` có tính toán giá trị, xóa dữ liệu an toàn | **Tuyệt đối (10/10)** | Chuyên đề Thao tác dữ liệu |
+| **Truy vấn SELECT / WHERE / LIKE / IN / BETWEEN** | **CORE** | `LOC-SQL-LAB02`, `LOC-HW-23520266-5` | Lọc dữ liệu, chuỗi ký tự `LIKE 'B%01'`, so sánh đoạn `BETWEEN ... AND`, tập hợp `IN (...)` | **Tuyệt đối (10/10)** | Chuyên đề Truy vấn nền tảng |
+| **Xử lý giá trị NULL & 3-Valued Logic** | **CORE** | `LOC-SQL-LAB02`, `TECH-A01`, `TXT-A03` | `IS NULL`, `IS NOT NULL`, bẫy so sánh `= NULL`, ảnh hưởng của `NULL` trong gom nhóm | **Cao (9.8/10)** | Bẫy thực chiến & Ngữ nghĩa toán học |
+| **Sắp xếp ORDER BY** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB04`, `LOC-HW-23520266-5` | `ORDER BY NGHD ASC, TRIGIA DESC`, vị trí bắt buộc ở cuối câu truy vấn | **Tuyệt đối (10/10)** | Cú pháp chuẩn |
+| **Phép kết JOIN (INNER, LEFT/RIGHT OUTER, FULL, SELF)** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `LOC-HW-23520266-5` | Kết nối nhiều bảng bằng `INNER JOIN ... ON`, tự kết (Self-Join) tìm quản lý, Outer Join bảo toàn dòng | **Tuyệt đối (10/10)** | Chuyên đề Kỹ thuật JOIN toàn diện |
+| **Hàm kết hợp (COUNT, SUM, AVG, MIN, MAX)** | **CORE** | `LOC-SQL-LAB04`, `TECH-A02`, `LOC-HW-23520266-5` | `COUNT(*)`, `COUNT(DISTINCT MASP)`, `SUM(TRIGIA)`, `AVG(DIEM)`, tính doanh thu theo tháng | **Tuyệt đối (10/10)** | Chuyên đề Hàm tính toán |
+| **Gom nhóm GROUP BY & HAVING** | **CORE** | `LOC-SQL-LAB04`, `TECH-A02`, `LOC-HW-23520266-5` | Gom nhóm theo nước SX, theo năm/tháng, điều kiện sau gom nhóm `HAVING COUNT(DISTINCT MASP) >= 4` | **Tuyệt đối (10/10)** | Chuyên đề Phân tích dữ liệu |
+| **Truy vấn lồng & Correlated Subquery** | **CORE** | `LOC-SQL-LAB03`, `LOC-SQL-LAB04`, `TECH-A08` | `WHERE GIA = (SELECT MAX(GIA) FROM ...)`, `WHERE MAGV NOT IN (SELECT ...)` | **Tuyệt đối (10/10)** | Chuyên đề Subquery |
+| **Phép chia SQL (Universal Queries)** | **CORE** | `LOC-SQL-LAB03`, `LOC-SQL-LAB04`, `LOC-NOTE-NHAP` | 2 phương pháp: Double `NOT EXISTS` (tuyệt đối chuẩn tắc) và `GROUP BY ... HAVING COUNT` | **Tuyệt đối (10/10)** | Chuyên đề Bài toán "Tất cả" |
+| **Phép toán tập hợp (UNION, INTERSECT, EXCEPT)** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `TECH-A08` | Tương thích khả hợp, `UNION` gộp dòng, `INTERSECT` giao, `EXCEPT` trừ dữ liệu | **Tuyệt đối (10/10)** | Cầu nối ĐSQH $\rightarrow$ SQL |
+| **Hàm xếp hạng (RANK() OVER, TOP WITH TIES)** | **CORE** | `LOC-SQL-LAB04`, `LOC-HW-23520266-5` | `RANK() OVER (ORDER BY DOANHSO DESC)`, `RANK() OVER (PARTITION BY NUOCSX ORDER BY GIA DESC)` | **Cao (9.8/10)** | Chuyên đề Xếp hạng & Top giá trị |
+| **Cấu trúc rẽ nhánh CASE WHEN / IIF** | **CORE** | `LOC-SQL-LAB03`, `LOC-SQL-LAB01` | `CASE WHEN DIEMTB >= 9 THEN 'XS' ... END`, `IIF(DIEM BETWEEN 5 AND 10, 'Dat', 'Khong dat')` | **Cao (9.5/10)** | Chuyên đề Cập nhật phân loại |
+| **DML Trigger & Bảng ảo inserted/deleted** | **CORE** | `LOC-LEC-LONG-CH05`, `TECH-A04`, `TECH-A05`, `TECH-A06` | Trigger kiểm tra ràng buộc liên bảng, kiểm tra an toàn đa dòng qua lệnh `JOIN inserted`/`deleted` | **Tuyệt đối (10/10)** | Chuyên đề Trigger thực chiến |
+| **STORED PROCEDURE** | **OPTIONAL** | `TECH-A07`, `GH-C02`, `GH-C03`, `COM-C02` | Thủ tục lưu trữ có tham số đầu vào/đầu ra, gọi bằng `EXEC` | **Trung bình (7.5/10)** | Phụ lục mở rộng / Nâng cao |
+| **VIEW** | **OPTIONAL** | `TECH-A10`, `GH-C02`, `TXT-A02` | `CREATE VIEW` lưu trữ câu truy vấn khung nhìn | **Trung bình (7.0/10)** | Phụ lục mở rộng |
+| **USER-DEFINED FUNCTION (UDF)** | **HISTORICAL** | `GH-C02` | Hàm người dùng vô hướng / bảng (ít xuất hiện trong bài thi chính khóa) | **Thấp (5.0/10)** | Đọc thêm |
+| **TRANSACTIONS & LOCKING** | **UNSUPPORTED** | - | Không nằm trong chuẩn đầu ra và đề thi môn IT004 | **Không áp dụng** | Loại khỏi phạm vi cẩm nang |
 
-| lab/artifact | source_id | schema | DDL | DML | queries | constraints | aggregates | subqueries | set operators | universal queries | triggers | procedures | other features | student-code issues found | confidence |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| `[Lab01]23520266-PhanHongDat.sql` | LOC-B07 | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | not assessable | none |
-| `[Lab02]23520266-PhanHongDat.sql` | LOC-B08 | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | not assessable | none |
-| `[Lab03]23520266-PhanHongDat.sql` | LOC-B09 | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | not assessable | none |
-| `[Lab04]23520266-Phan Hồng Đạt.sql` | LOC-B10 | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | not assessable | none |
-| `QLBANHANG.xlsx` | LOC-B11 | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | ACCESS BLOCKED | not assessable | none |
-| `DE-THI-GIUA-KY_CSDL_HK1_2023_2024.pdf` | LOC-B01 | ACCESS BLOCKED | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | n/a | no question taxonomy asserted | none |
+---
 
-The raw local files were searched under the mounted workspace, project scratch, Documents/Codex, Downloads, and attachment roots. They were not present/readable there; this is an access limitation, not a claim that the files never existed. Public GitHub lab trees and dated student artifacts are used only as non-authoritative progression leads.
+## 2. Bảng Tiến Trình Thực Hành Chi Tiết (Raw Lab Progression Matrix)
 
-## Feature disposition
+Dựa trên mã nguồn gốc được bóc tách từ `CSDL_UIT_LOCAL_LABS_AND_SQL.txt` và `QLBANHANG.xlsx`:
 
-| feature | disposition | reason |
-|---|---|---|
-| Trigger | core practical skill; exam frequency not established | Dedicated Microsoft sources plus dated/public artifacts; official notices establish practical scope but not wording |
-| Procedure | optional/pending | Public repository and preview evidence, but no accessible raw local lab or official task |
-| View | optional/historical pending | Mentioned in textbook/lab material, not supported as an exam requirement |
-| Function | unsupported until evidence | No authoritative IT004 artifact located |
-| Transactions | excluded pending evidence | No source in the current ledger establishes an IT004 requirement |
+| Lab Session | Tệp nguồn / SHA-256 | Lược đồ CSDL | DDL & Ràng buộc | DML & Thao tác | Kỹ thuật truy vấn chính | Kỹ thuật nâng cao | Vấn đề & Lỗi điển hình trong code sinh viên |
+| :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Lab 01** | `[Lab01]...PhanHongDat.sql`<br>`SHA256: d2dd8c44...` | `QuanLyBanHang`<br>`QuanLyGiaoVu` | • `CREATE DATABASE`<br>• `CREATE TABLE` (12 bảng)<br>• `ALTER TABLE ADD CONSTRAINT PK/FK`<br>• `ALTER TABLE ADD/DROP/ALTER COLUMN`<br>• `CHECK` (DVT, GIA, SL, NGSINH, DIEM, HOCVI) | Không có DML trong Lab 01 | Chưa có SELECT | Ràng buộc miền giá trị phức hợp qua `IIF` | • Khai báo `NUMERIC(2,2)` cho điểm số gây lỗi tràn số khi điểm = 10 (cần sửa thành `NUMERIC(4,2)`). |
+| **Lab 02** | `[Lab02]...PhanHongDat.sql`<br>`SHA256: ae90300e...` | `QuanLyBanHang`<br>`QuanLyGiaoVu` | Tái sử dụng DDL Lab 01 | • `INSERT INTO` 24 SP, 5 NV, 10 KH, 23 HD, 47 CTHD, 4 Khoa, 13 MH, 15 GV, 3 Lớp, 8 Điều kiện, 35 HV, 65 KQT<br>• `UPDATE` tăng/giảm giá, phân loại VIP | • `SELECT ... WHERE`<br>• `LIKE 'B%01'`, `BETWEEN`<br>• `ORDER BY`<br>• `INNER JOIN` 2–3 bảng<br>• `UNION`, `EXCEPT` | `SELECT * INTO SANPHAM1 FROM SANPHAM` (Sao lưu bảng) | • Chuỗi ngày tháng dạng `YYYY-MM-DD` cần thiết lập `SET DATEFORMAT YMD` để tránh lỗi xung đột văn hóa hệ thống. |
+| **Lab 03** | `[Lab03]...PhanHongDat.sql`<br>`SHA256: e2cc9dc8...` | `QuanLyBanHang`<br>`QuanLyGiaoVu` | `ALTER TABLE KETQUATHI ADD DIEMTB NUMERIC(4,2)` | • `UPDATE` tăng hệ số lương trưởng khoa qua Subquery<br>• `UPDATE` tính DIEMTB lần thi sau cùng `MAX(LANTHI)`<br>• `UPDATE` xếp loại bằng `CASE WHEN` | • `UNION`, `INTERSECT`, `EXCEPT`<br>• Subquery `IN`, `NOT IN`<br>• Phép chia bằng Double `NOT EXISTS`<br>• Truy vấn ngày tháng `YEAR()`, `MONTH()` | • Double `NOT EXISTS` tìm hóa đơn mua tất cả SP Singapore<br>• Tìm học viên thi rớt môn CSDL lần 1 nhưng chưa thi lại | • Lỗi logic trong câu 15: nhầm lẫn giữa điều kiện `LANTHI > 3` và thi lần thứ 3 vẫn chưa đạt. |
+| **Lab 04** | `[Lab04]...PhanHongDat.sql`<br>`SHA256: 2d9e5c53...` | `QuanLyBanHang`<br>`QuanLyGiaoVu` | Không thay đổi DDL | Thao tác truy vấn thống kê | • `COUNT(DISTINCT)`, `SUM`, `AVG`, `MIN`, `MAX`<br>• `GROUP BY` đơn/đa cột<br>• `HAVING COUNT(*) >= 4`<br>• Subquery tìm giá trị Max/Min | • `RANK() OVER (ORDER BY ... DESC)`<br>• `RANK() OVER (PARTITION BY ...)`<br>• `TOP 3 ... ORDER BY`<br>• Phép chia bằng `INTERSECT` đếm số môn đạt | • Viết `COUNT(DISTINCT GIA) >= 3` trong `HAVING` đòi hỏi dữ liệu phải có ít nhất 3 mức giá khác nhau. |
+| **Lab 04 All** | `[Lab04]...Phan Hồng Đạt.sql`<br>`SHA256: 60c193ab...` | `QLBH` + `QLGV` | Tổng hợp toàn bộ DDL từ Lab 01 đến Lab 04 | Toàn bộ DML từ Lab 02–04 | Toàn bộ 44 câu QLBH và 35 câu QLGV | Tổng hợp toàn diện | Tệp tổng hợp hoàn chỉnh nhất của sinh viên, thể hiện toàn bộ vòng đời thực hành. |

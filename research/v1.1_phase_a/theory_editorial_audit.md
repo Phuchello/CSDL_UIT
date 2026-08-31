@@ -1,41 +1,53 @@
-# Phase A Theory Handbook Editorial Audit
+# Kiểm Toán Biên Tập & Đối Chiếu Học Thuật (Theory Handbook Editorial Audit) — CSDL_UIT v1.1
 
-## Scope inspected
+**Bản cập nhật:** 2026-08-31
+**Phạm vi:** Đối chiếu bản thảo lý thuyết hiện tại (`book/index.html`) với tập Slide bài giảng chính thức của Giảng viên UIT (`LOC-LEC-AN-*`, `LOC-LEC-LONG-*`) và giáo trình chuẩn mực để định hướng hoàn thiện ấn bản v1.1.
 
-The assembled handbook (`book/index.html`) and chapter map were inspected without changing them. The handbook remains an 88-page publication and the source of truth for its own previously verified academic fixes. This audit proposes a future editorial direction only; it does not redesign or regenerate the PDF.
+---
 
-## Concrete current observations
+## 1. Kết Quả Đối Chiếu Thuật Ngữ & Ký Hiệu Học Thuật (Terminology & Notation Alignment)
 
-1. **Front matter is information-heavy.** The cover, author/editorial information, references, table of contents, learning method, roadmap, dataset descriptions, and disclaimers all occur before Chapter 1. A future edition could separate a compact cover/front matter from a clearly labelled “How to use this book” page.
-2. **The title uses a promotional register.** “Cẩm nang từ nền tảng đến Exam Mastery”, “Mental Model”, “Fast Patterns”, “Common Traps”, and “Exam Signals” are useful internal labels, but their density can read like marketing copy. Keep pedagogical labels selectively and state the academic purpose plainly.
-3. **Visual language is somewhat template-like.** Repeated emoji callouts and many boxed sections create scanability but can make the book feel generic. Preserve the information hierarchy while reducing decorative repetition in a future rewrite.
-4. **Administrative and rights material should be separated.** Author attribution, rights, source policy, and the colophon belong in a compact front/back-matter treatment; they should not compete with the learning roadmap.
-5. **The current cover lacks one dominant visual metaphor.** A restrained relational/schema graphic can unify the academic identity without adding marketing text.
+| Khái niệm học thuật | Thuật ngữ trong Slide UIT (`LOC-LEC-LONG-*`) | Thuật ngữ trong Sách hiện tại | Đánh giá & Khuyến nghị điều chỉnh v1.1 |
+| :--- | :--- | :--- | :--- |
+| **Mô hình Dữ liệu** | Mô hình quan hệ (Relational Model), E.F. Codd 1970 | Mô hình dữ liệu quan hệ | **Khớp hoàn hảo**. Giữ vững cấu trúc hình thức. |
+| **Tân từ** | Tân từ của quan hệ $\|\|R\|\|$: Quy tắc ngữ nghĩa xác định quan hệ | Tân từ $\|\|R\|\|$ / Predicate | **Khớp hoàn hảo**. Nêu bật ký hiệu $\|\|R\|\|$ chuẩn UIT. |
+| **Thể hiện của quan hệ** | Thể hiện của quan hệ $T_R$ tại một thời điểm | Instance / Thể hiện quan hệ $r$ | **Bổ sung ký hiệu $T_R$** bên cạnh ký hiệu $r$ quốc tế. |
+| **Phép chiếu ĐSQH** | Phép chiếu lên tập thuộc tính $X$: $R[X]$ hoặc $\pi_X(R)$ | $\pi_{A_1, A_2}(R)$ | **Bổ sung ký hiệu $R[X]$** vì các slide và bài thi viết tay UIT dùng phổ biến $R[X]$. |
+| **Phép gom nhóm ĐSQH** | $_{G_1,..,G_n}\Im_{F_1(A_1),..,F_m(A_m)}(E)$ | $\Im$ (Group by) | **Chuẩn hóa cú pháp $\Im$** với chỉ số trước (thuộc tính gom nhóm) và chỉ số sau (hàm tính toán). |
+| **Thuật toán tìm khóa** | Tập nguồn $Ng$, Tập trung gian $Tg$, Tập treo $Tr$, Tập bắt buộc $N = Ng \cup Tr$ | Phân tích tập $L, R, N, LR$ | **Khuyến nghị sử dụng song song**: Giải thích cách gọi $Ng/Tg/Tr$ của Slide UIT và $L/R/N/LR$ của sách để sinh viên đối chiếu dễ dàng. |
+| **Phân loại RBTV** | 7 loại: Miền giá trị, Liên thuộc tính 1 QH, Liên bộ 1 QH, Tham chiếu, Liên thuộc tính nhiều QH, Thuộc tính tổng hợp, Chu trình | RBTV 1 bảng, RBTV liên bảng, RBTV ngữ nghĩa | **Khuyến nghị cấu trúc lại Chương 5** theo đúng 7 phân loại chuẩn mực của Khoa HTTT – UIT. |
 
-## Corrected cover brief
+---
 
-### Recommended direction — relational schema / graph editorial cover
+## 2. Nhận Xét Biên Tập & Giọng Văn Học Thuật (Tone & Register Review)
 
-- Composition: warm white or light neutral field with a restrained node-edge schema diagram occupying the lower two-thirds.
-- Typography: clear Vietnamese-capable display face for the course title and a humanist sans for the author line.
-- Database metaphor: relations, attributes, PK/FK lines, and a small ER-to-relation transition; no cylinder icon.
-- Density: medium-high, editorial, diagram-led; complexity comes from composition, typography, and relational graphics.
-- **Cover text only:**
-  - `IT004`
-  - `CƠ SỞ DỮ LIỆU`
-  - `BIÊN SOẠN: VÕ TRỌNG PHÚC`
-- Subtitle: none recommended at this stage; propose one only if a later visual test shows a material gain.
+1. **Giảm bớt từ ngữ mang sắc thái tiếp thị / quảng bá (De-marketization)**:
+   - Thay thế các cụm từ như *"Exam Mastery"*, *"Tuyệt kỹ phòng thi"*, *"Bí kíp 100%"* bằng các thuật ngữ học thuật trung tính và chuyên nghiệp: *"Chiến thuật phòng thi"*, *"Mô hình phân tích"*, *"Quy trình giải toán"*.
+   - Giữ lại các khung sư phạm hữu ích (`Mental Model`, `Fast Pattern`, `Common Trap`, `Dry Run`) nhưng trình bày tinh gọn, giảm mật độ icon/emoji trang trí lặp lại.
 
-Do not place edition year, academic-use note, version, GitHub, Exam Mastery, Theory • Practice • Exam, copyright, publication status, school-affiliation block, or badges on the cover. Those details belong in front/back matter or repository metadata.
+2. **Tách biệt phần Hành chính / Bản quyền khỏi Mạch học tập**:
+   - Chuyển thông tin bản quyền, giấy phép, công cụ biên dịch và lịch sử phiên bản về phần Bìa lót / Lời mở đầu hoặc phụ lục Colophon cuối sách; không để cạnh tranh không gian với Bản đồ tư duy và Lộ trình học tập.
 
-## Alternative visual directions for human review
+---
 
-### Direction B — query pipeline / layered architecture
+## 3. Định Hướng Mỹ Thuật Bìa Sách v1.1 (Cover Design Direction)
 
-Three quiet horizontal bands represent model → query → integrity, with one thin flow line. Keep all explanatory text off the cover; use the bands as the visual structure.
+### Định Hướng Được Khuyến Nghị: Bìa Đồ Họa Lược Đồ Quan Hệ (Relational Schema / Graph Editorial Cover)
 
-### Direction C — annotated relation / FD study sheet
+- **Nguyên tắc cốt lõi**: Bìa sách chỉ chứa đúng **3 dòng văn bản học thuật**, hoàn toàn không có phụ đề tiếp thị, không có huy hiệu, không có hình ảnh AI hay nhân vật minh họa:
+  1. `IT004`
+  2. `CƠ SỞ DỮ LIỆU`
+  3. `BIÊN SOẠN: VÕ TRỌNG PHÚC`
+- **Ngôn ngữ thị giác**:
+  - Nền màu sáng nhã nhặn (warm white / neutral gray / light blueprint).
+  - Điểm nhấn thị giác là một sơ đồ mạng lưới quan hệ (Schema Graph) tinh xảo: các thực thể hình chữ nhật, các thuộc tính hình oval, đường liên kết khóa chính/khóa ngoại $PK \rightarrow FK$, và sự chuyển dịch từ ERD sang Lược đồ quan hệ chuẩn.
+  - Vẻ đẹp và tính trang trọng của bìa sách đến từ nghệ thuật sắp đặt chữ (Typography), tỷ lệ hình học và tính thẩm mỹ của cấu trúc dữ liệu quan hệ.
 
-A carefully edited relation fragment and one FD/normalization annotation form a high-density but calm composition. Keep the cover text limited to the three required lines.
+---
 
-These alternatives are briefs only. No implementation, image generation, or PDF change is in scope for Phase A.
+## 4. Các Phương Án Mỹ Thuật Thay Thế Để Hội Đồng Thẩm Định (Mentor) Cân Nhắc
+
+- **Phương án B (Query Pipeline Architecture)**:
+  - Bố cục 3 dải màu ngang tượng trưng cho 3 tầng: Tầng Mô hình (ER/Schema) $\rightarrow$ Tầng Truy vấn (ĐSQH/SQL) $\rightarrow$ Tầng Toàn vẹn & Tối ưu (RBTV/Chuẩn hóa).
+- **Phương án C (Annotated Relation Fragment)**:
+  - Bố cục trang nhã lấy cảm hứng từ trang viết tay học thuật: bảng dữ liệu quan hệ thu nhỏ kèm các ký hiệu bao đóng $X^+$, mũi tên phụ thuộc hàm $X \rightarrow Y$ và dạng chuẩn BCNF.

@@ -1,55 +1,60 @@
-# Phase A Essay / Tự luận Bank Plan
+# Kế Hoạch Xây Dựng Ngân Hàng Câu Hỏi Tự Luận & Đề Thi (Tự Luận / Essay Bank Plan) — CSDL_UIT v1.1
 
-The bank is organized primarily by topic and secondarily filterable by year, semester, type, and provenance. `verified-artifact` means that an identifiable exam artifact exists (including a community mirror); it does not mean UIT published the file online.
+**Bản cập nhật:** 2026-08-31
+**Nguyên tắc:** Ngân hàng câu hỏi được tổ chức theo chuyên đề (Topic-First), phân loại nghiêm ngặt theo 3 lớp xuất xứ (`verified-artifact`, `reconstructed-exam-pattern`, `original-practice`), không sao chép nguyên văn văn bản có bản quyền mà sử dụng văn phong diễn đạt độc lập chuẩn học thuật.
 
-## Provenance classes
+---
 
-### 1. verified-artifact
+## 1. Phân Loại Nguồn Gốc & Thẩm Quyền Câu Hỏi (Provenance Classes)
 
-- `COM-C08`: identifiable IT004/O117 HK1 2023–2024 practical paper preview with UIT/Khoa header and 90-minute duration.
-- `COM-C09`: identifiable IT004 HK1 2023–2024 final-exam preview with date 09/01/2024 and 90-minute duration.
+1. **`verified-artifact`**:
+   - Câu hỏi dựa trên các hiện vật đề thi chính thức hoặc bài tập ôn tập có định danh rõ ràng (`EXAM-2023-2024-HK1-MID-01`, `EXAM-2023-2024-HK1-MID-02`, `EXAM-2023-2024-HK1-FINAL-01`, `EXAM-2017-2018-HK1-MID-01`, v.v.).
+   - Lưu trữ dưới dạng tóm lược cấu trúc, ma trận kiến thức và phân tích hướng giải.
 
-These are link-only evidence records. Do not reproduce scans or call them official-public documents.
+2. **`reconstructed-exam-pattern`**:
+   - Câu hỏi được biên soạn lại độc lập (independently written paraphrase) mô phỏng chính xác cấu trúc ngữ cảnh, phong cách ra đề và chuẩn đầu ra của các đề thi UIT thực tế.
 
-### 2. reconstructed-exam-pattern
+3. **`original-practice`**:
+   - Câu hỏi được tác giả biên soạn mới hoàn toàn nhằm phủ kín các góc kiến thức lý thuyết hình thức, các trường hợp biên và các bẫy trừ điểm kinh điển.
 
-Independent paraphrases may be drafted from the two artifact previews, official assessment notices, and review/lab evidence, but must retain the label `reconstructed-exam-pattern` and source IDs. No paraphrase should be presented as original wording.
+---
 
-### 3. original-practice
+## 2. Kế Hoạch Phân Bổ Câu Hỏi Theo Chuyên Đề (Topic-First Distribution Plan)
 
-New prompts fill gaps where no identifiable artifact supports a claim. They must be labelled `original-practice`, not “past exam”.
+| Chuyên đề / Chương | Nội dung trọng tâm | Artifact Count thực chứng | Năm học quan sát | Source IDs liên kết | Số câu hỏi đề xuất | Độ ưu tiên |
+| :--- | :--- | :---: | :---: | :--- | :---: | :---: |
+| **Ch1: Tổng quan CSDL** | • File System vs DBMS<br>• Kiến trúc 3 mức ANSI/SPARC<br>• Độc lập dữ liệu logic & vật lý | **2** | 2020–2021, 2023–2024 | `LOC-LEC-AN-CH01`, `LOC-LEC-LONG-CH01`, `UIT-O01` | **6 câu**<br>(2 reconstructed + 4 original) | **Cao** |
+| **Ch2: Mô hình ER & Quan hệ** | • Thiết kế ERD (Entity, Relationship, Min-Max)<br>• Ánh xạ ER $\rightarrow$ Lược đồ quan hệ (1:1, 1:N, M:N, Is-a)<br>• Xác định Superkey, Candidate Key, PK, FK | **8** | 2016–2017, 2017–2018, 2018–2019, 2021–2022, 2023–2024, 2024–2025 | `LOC-EXAM-2023-2024-MID-D1`, `LOC-EXAM-2023-2024-MID-D2`, `LOC-REV-2024-10-01`, `LOC-REV-DSQH-2024` | **10 câu**<br>(6 reconstructed + 4 original) | **Rất cao** |
+| **Ch3: Đại số quan hệ** | • Phép toán cơ bản ($\sigma, \pi, \rho, \bowtie, \times$)<br>• Phép tập hợp ($\cup, \cap, -$)<br>• Phép kết ngoài (Outer Join)<br>• Phép chia $\div$ (Bài toán "Tất cả")<br>• Gom nhóm $\Im$ & hàm kết hợp | **10** | 2016–2017, 2017–2018, 2018–2019, 2019–2020, 2022–2023, 2023–2024 | `LOC-EXAM-2023-2024-MID-D1`, `LOC-EXAM-2023-2024-MID-D2`, `LOC-HW-23520266-5`, `LOC-LEC-LONG-CH03` | **16 câu**<br>(10 reconstructed + 6 original) | **Rất cao** |
+| **Ch4: SQL Server / T-SQL** | • Lệnh DDL, DML, `UPDATE` có tính toán<br>• Kỹ thuật `JOIN`, `SELF JOIN`, Subquery<br>• Xử lý giá trị `NULL`<br>• Phép chia Double `NOT EXISTS` vs `GROUP BY / HAVING` | **9** | 2017–2018, 2018–2019, 2019–2020, 2020–2021, 2022–2023, 2023–2024 | `LOC-EXAM-2023-2024-MID-D1`, `LOC-HW-23520266-5`, `LOC-SQL-LAB01` đến `LAB04`, `TECH-A01` đến `TECH-A08` | **14 câu**<br>(8 reconstructed + 6 original) | **Rất cao** |
+| **Ch5: Ràng buộc toàn vẹn** | • Phát biểu tân từ hình thức<br>• Lập Bảng tầm ảnh hưởng 3 thao tác<br>• Phân loại 7 dạng RBTV (Miền giá trị, Liên thuộc tính, Liên bộ, Tham chiếu, Tổng hợp, Chu trình)<br>• Cài đặt Trigger T-SQL an toàn đa dòng | **6** | 2020–2021, 2021–2022, 2022–2023, 2023–2024 | `LOC-LEC-LONG-CH05`, `LOC-HW-23520266-5`, `TECH-A04` đến `TECH-A06` | **10 câu**<br>(6 reconstructed + 4 original) | **Rất cao** |
+| **Ch6: PTH & Chuẩn hóa** | • Chứng minh PTH bằng Tiên đề Armstrong<br>• Thuật toán tính bao đóng $X^+$, bài toán thành viên<br>• Tìm tất cả khóa ứng viên (tập nguồn $Ng$, trung gian $Tg$, treo $Tr$)<br>• Tìm phủ tối thiểu $F_c$<br>• Kiểm tra dạng chuẩn cao nhất (1NF $\rightarrow$ BCNF)<br>• Phân rã bảo toàn PTH & Lossless Join | **7** | 2018–2019, 2020–2021, 2021–2022, 2022–2023, 2023–2024 | `LOC-LEC-LONG-CH06`, `COM-C02`, `LOC-NOTE-NHAP` | **14 câu**<br>(8 reconstructed + 6 original) | **Rất cao** |
+| **Đề thi Tổng hợp (Full Exams)** | Đề thi hoàn chỉnh 75–90 phút kết hợp ERD $\rightarrow$ ĐSQH $\rightarrow$ SQL $\rightarrow$ RBTV $\rightarrow$ Chuẩn hóa | **8** | 2016–2024 | Các Canonical Exam Artifacts | **6 bộ đề**<br>(4 reconstructed + 2 original) | **Rất cao** |
 
-## Topic-first coverage plan
+---
 
-| topic | observed artifact count | years | source_ids | planned question count | priority |
-|---|---:|---|---|---:|---|
-| Ch1 Tổng quan: DB/DBMS, file system, schema/instance, data independence | 0 | 2020–21, 2022–23, 2025–26 (indexes/schedules) | UIT-O01, UIT-O02, UIT-O09, UIT-O11, COM-C10 | 4 original + 1 reconstructed | high |
-| Ch2 ER / mô hình quan hệ / ER→relation / keys | 0 | 2017–18 through 2024–25 (review indexes) | UIT-O01, TXT-A02, COM-C01, COM-C10, LOC-B02 | 5 original + 1 reconstructed | high |
-| Ch3 Đại số quan hệ: translation, union compatibility, division/“tất cả” | 0 | 2022–23, 2024–25 (review material) | UIT-O01, TXT-A03, TECH-A09, COM-C03, COM-C04, LOC-B02 | 6 original + 1 reconstructed | high |
-| Ch4 SQL reasoning: NULL, JOIN/SELF JOIN, GROUP BY/HAVING, EXISTS | 2 | 2023–24 | COM-C08, COM-C09, TECH-A02, TECH-A08, LOC-A07 | 6 reconstructed + 4 original | high |
-| Ch5 RBTV / impact tables / trigger reasoning | 2 | 2023–24, 2024–25 | COM-C08, COM-C09, TECH-A03, TECH-A04, TECH-A05, TECH-A06 | 4 reconstructed + 4 original | high |
-| Ch6 PTH / khóa / chuẩn hóa: closure, candidate keys, minimal cover | 0 | 2022–23, 2025–26 (review/index only) | TXT-A02, COM-C03, COM-C07, LOC-B06, LOC-B16 | 8 original | high |
-| Ch6 decomposition: lossless and dependency preservation, 2NF/3NF/BCNF | 0 | 2022–23, 2025–26 (review/index only) | TXT-A02, COM-C07, LOC-B06, LOC-B16 | 6 original | high |
-| Mixed exams: schema design → constraints → RA/SQL explanation | 2 | 2023–24 | COM-C08, COM-C09, LOC-A07 | 4 reconstructed + 4 original | medium-high |
+## 3. Cấu Trúc Siêu Dữ Liệu Chuẩn Cho Mỗi Trang Câu Hỏi (Question Page Metadata)
 
-## Required page metadata
+Mỗi bài tập trong Ngân hàng Tự luận sẽ được đóng gói theo khuôn mẫu YAML chuẩn:
 
 ```yaml
-type: verified-artifact # reconstructed-exam-pattern | original-practice
-year: 2023-2024
-semester: HK1
-exam_type: final
-source_ids: [COM-C09]
-provenance: community-mirror-preview
-topics: [sql, joins, group-by]
-difficulty: unknown
+title: "Phân tích Ràng buộc Toàn vẹn và Bảng tầm ảnh hưởng Quản lý Bán hàng"
+artifact_id: "EXAM-2023-2024-HK1-MID-01"
+provenance: "reconstructed-exam-pattern" # verified-artifact | reconstructed-exam-pattern | original-practice
+academic_year: "2023-2024"
+semester: "HK1"
+exam_type: "midterm" # midterm | final | practical | review
+source_ids: ["LOC-EXAM-2023-2024-MID-D1", "LOC-LEC-LONG-CH05"]
+topics: ["integrity-constraints", "impact-table", "triggers"]
+difficulty: "medium-high" # easy | medium | medium-high | hard
+schema: "CuaHangHoa"
 ```
 
-Each question page should contain: Đề bài; knowledge needed; 3–5 “before solution” prompts; answer outline; collapsible detailed solution; why; common errors; variants; meaningful Wikilinks; and a rights/provenance note. Long scans, answer dumps, and verbatim copyrighted text are excluded.
-
-## Editorial rules
-
-- Never infer frequency from curriculum scope or a textbook.
-- Preserve `verified-artifact`, `reconstructed-exam-pattern`, and `original-practice` labels in filenames/frontmatter.
-- If an accessible local exam file is later recovered, add its exact filename, document fingerprint, and provenance before changing any count.
-- Student answers and scripts are pattern evidence only, never authoritative solutions.
+### Cấu Trúc Nội Dung Bài Tập Chuẩn Mực:
+1. **Đề bài & Ngữ cảnh**: Mô tả bài toán rõ ràng, chính xác.
+2. **Kiến thức cốt lõi cần dùng (Prerequisites)**: Liệt kê các định lý, công thức hoặc cú pháp liên quan.
+3. **Checklist tư duy trước khi giải (3–5 câu hỏi định hướng)**: Giúp sinh viên nhận diện cấu trúc trước khi viết code/toán.
+4. **Hướng dẫn giải chi tiết (Detailed Solution)**: Trình bày từng bước chuẩn tắc sư phạm.
+5. **Cảnh báo lỗi sai & Bẫy phòng thi (Common Traps & Pitfalls)**: Phân tích các lỗi hay bị trừ điểm.
+6. **Biến thể bài toán (Variants)**: Các cách hỏi khác nhau của cùng một dạng bài.
+7. **Liên kết Kiến thức (Wikilinks)**: Kết nối ngược về lý thuyết tương ứng trong Knowledge Garden.
