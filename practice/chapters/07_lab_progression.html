@@ -86,7 +86,7 @@
   <p>Dựa trên khảo sát thực nghiệm Phase A (nguồn <code>LOC-SQL-LAB03</code>, <code>LOC-SQL-LAB04</code>), các buổi Lab nâng cao tập trung vào truy vấn thống kê gom nhóm phức tạp, xếp hạng phân vùng và bài toán phép chia.</p>
 
   <h3>8.2.1 Bài toán 1: Tìm môn học có điểm trung bình cao nhất theo từng khoa</h3>
-  <p><strong>Kỹ thuật:</strong> Sử dụng <code>RANK() OVER (PARTITION BY ... ORDER BY ...)</code> (căn cứ <code>TECH-A02</code>):</p>
+  <p><strong>Kỹ thuật:</strong> Sử dụng <code>RANK() OVER (PARTITION BY ... ORDER BY ...)</code> (khảo sát từ nguồn thực nghiệm <code>LOC-SQL-LAB04</code>):</p>
 
   <pre class="sql-block"><span class="kw">WITH</span> BangXepHang <span class="kw">AS</span> (
     <span class="kw">SELECT</span> mh.MAKHOA, mh.MAMH, mh.TENMH, <span class="fn">AVG</span>(kq.DIEM) <span class="kw">AS</span> DiemTB,
@@ -101,7 +101,7 @@
 <span class="kw">WHERE</span> Hang = <span class="num">1</span>;</pre>
 
   <h3>8.2.2 Bài toán 2: Tìm học viên thi đạt tất cả các môn thuộc khoa CNTT phụ trách</h3>
-  <p><strong>Kỹ thuật:</strong> Double <code>NOT EXISTS</code> kết hợp điều kiện điểm đạt $\ge 5.0$ (căn cứ <code>TECH-A07</code>):</p>
+  <p><strong>Kỹ thuật:</strong> Double <code>NOT EXISTS</code> kết hợp điều kiện điểm đạt $\ge 5.0$ (chuẩn hóa toán tử <code>EXISTS</code> theo <code>TECH-A07</code>):</p>
 
   <pre class="sql-block"><span class="kw">SELECT</span> hv.MAHV, hv.HO, hv.TEN
 <span class="kw">FROM</span> HOCVIEN hv

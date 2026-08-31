@@ -60,37 +60,42 @@
     <span>THỰC HÀNH T-SQL</span>
   </div>
 
-  <h2>4. Phép kết (JOIN) & Dòng thực thi (Execution Trace)</h2>
-  <p>Phép kết kết nối các hàng từ hai hay nhiều bảng dựa trên cột chung. Hiểu rõ dòng thực thi bên trong Database Engine giúp lập trình viên viết truy vấn tối ưu và dự đoán chính xác kết quả đầu ra.</p>
+  <h2>4. Phép kết (JOIN) & Dòng Xử lý Truy vấn Mức Logic</h2>
+  <p>Phép kết kết nối các hàng từ hai hay nhiều bảng dựa trên cột chung. Hiểu rõ thứ tự xử lý logic giúp lập trình viên suy luận chính xác tập kết quả đầu ra trước khi công cụ tối ưu hóa (Query Optimizer) lập kế hoạch thực thi vật lý.</p>
 
-  <h3>4.1 Worked Example: Truy vấn kết nối nhiều bảng</h3>
+  <h3>4.1 Worked Example: Truy vấn kết nối & Lọc khoảng ngày an toàn</h3>
   <p><strong>Yêu cầu:</strong> In ra danh sách các hóa đơn mua hàng trong ngày <code>2024-10-15</code> gồm: Tên khách hàng, Số hóa đơn và Trị giá, sắp xếp theo Trị giá giảm dần.</p>
 
   <pre class="sql-block"><span class="kw">SELECT</span> KH.HOTEN, HD.SOHD, HD.TRIGIA
 <span class="kw">FROM</span> HOADON HD
 <span class="kw">INNER JOIN</span> KHACHHANG KH <span class="kw">ON</span> HD.MAKH = KH.MAKH
-<span class="kw">WHERE</span> HD.NGHD = <span class="str">'2024-10-15'</span>
+<span class="kw">WHERE</span> HD.NGHD &gt;= <span class="str">'20241015'</span> <span class="kw">AND</span> HD.NGHD &lt; <span class="str">'20241016'</span>
 <span class="kw">ORDER BY</span> HD.TRIGIA <span class="kw">DESC</span>;</pre>
 
-  <h3>4.2 Dòng thực thi chi tiết (Execution Trace)</h3>
+  <div class="callout callout-why" style="margin: 1.5mm 0 2mm;">
+    <div class="callout-title">Kỹ thuật lọc ngày nửa mở (Half-Open Interval)</div>
+    <p style="margin-bottom: 0;">Viết <code>NGHD &gt;= '20241015' AND NGHD &lt; '20241016'</code> đảm bảo bao trọn toàn bộ các mốc thời gian từ <code>00:00:00</code> đến <code>23:59:59</code> khi cột có kiểu <code>SMALLDATETIME</code>/<code>DATETIME</code>, đồng thời duy trì khả năng tìm kiếm theo chỉ mục (SARGable).</p>
+  </div>
+
+  <h3>4.2 Dòng xử lý truy vấn mức logic (Logical Processing Trace)</h3>
   <div class="trace-box">
-    <div class="trace-header">EXECUTION TRACE — QUÁ TRÌNH XỬ LÝ TRUY VẤN</div>
+    <div class="trace-header">LOGICAL QUERY PROCESSING TRACE (THỨ TỰ LOGIC)</div>
     <div class="trace-steps">
       <div class="trace-step">
         <span class="step-badge">1. FROM &amp; JOIN</span>
-        <div class="step-desc">Đọc bảng <code>HOADON</code> và kết nối với <code>KHACHHANG</code> trên điều kiện <code>HD.MAKH = KH.MAKH</code>. Tạo tập dòng trung gian chứa đầy đủ cột của cả 2 bảng.</div>
+        <div class="step-desc">Ràng buộc bảng <code>HOADON</code> và kết nối với <code>KHACHHANG</code> trên điều kiện <code>HD.MAKH = KH.MAKH</code> để tạo tập dòng trung gian logic.</div>
       </div>
       <div class="trace-step">
         <span class="step-badge">2. WHERE</span>
-        <div class="step-desc">Quét từng dòng trong tập trung gian, áp dụng vị từ lọc <code>HD.NGHD = '2024-10-15'</code>. Các dòng khác ngày lập tức bị loại bỏ khỏi luồng xử lý.</div>
+        <div class="step-desc">Áp dụng vị từ lọc ngày <code>HD.NGHD &gt;= '20241015' AND HD.NGHD &lt; '20241016'</code> để loại bỏ các dòng ngoài khoảng.</div>
       </div>
       <div class="trace-step">
         <span class="step-badge">3. SELECT</span>
-        <div class="step-desc">Chiếu (Project) 3 cột cần hiển thị: <code>KH.HOTEN</code>, <code>HD.SOHD</code>, <code>HD.TRIGIA</code>.</div>
+        <div class="step-desc">Chiếu danh sách cột cần hiển thị: <code>KH.HOTEN</code>, <code>HD.SOHD</code>, <code>HD.TRIGIA</code>.</div>
       </div>
       <div class="trace-step">
         <span class="step-badge">4. ORDER BY</span>
-        <div class="step-desc">Sắp xếp tập kết quả cuối cùng theo cột <code>HD.TRIGIA</code> theo thứ tự giảm dần.</div>
+        <div class="step-desc">Sắp xếp tập kết quả cuối cùng theo cột <code>HD.TRIGIA</code> giảm dần. <em>(Lưu ý: Optimizer có thể chọn kế hoạch thực thi vật lý khác như Index Seek / Hash Match để tối ưu hiệu năng).</em></div>
       </div>
     </div>
   </div>
@@ -101,16 +106,11 @@
       <tr><th>HOTEN</th><th>SOHD</th><th>TRIGIA</th><th>Ghi chú đối chiếu</th></tr>
     </thead>
     <tbody>
-      <tr><td>Nguyen Van A</td><td>1002</td><td class="cell-hl">1,250,000</td><td>Khớp MAKH = 'KH01', ngày 2024-10-15</td></tr>
-      <tr><td>Le Van C</td><td>1005</td><td class="cell-hl">890,000</td><td>Khớp MAKH = 'KH07', ngày 2024-10-15</td></tr>
-      <tr><td>Tran Thi B</td><td>1001</td><td class="cell-hl">320,000</td><td>Khớp MAKH = 'KH03', ngày 2024-10-15</td></tr>
+      <tr><td>Nguyen Van A</td><td>1002</td><td class="cell-hl">1,250,000</td><td>Khớp MAKH = 'KH01', trong ngày 2024-10-15</td></tr>
+      <tr><td>Le Van C</td><td>1005</td><td class="cell-hl">890,000</td><td>Khớp MAKH = 'KH07', trong ngày 2024-10-15</td></tr>
+      <tr><td>Tran Thi B</td><td>1001</td><td class="cell-hl">320,000</td><td>Khớp MAKH = 'KH03', trong ngày 2024-10-15</td></tr>
     </tbody>
   </table>
-
-  <div class="callout callout-why">
-    <div class="callout-title">INNER JOIN vs LEFT JOIN</div>
-    <p style="margin-bottom: 0;"><code>INNER JOIN</code> chỉ giữ lại các dòng có khóa khớp ở cả hai bảng. Nếu khách hàng chưa từng có hóa đơn, họ sẽ bị loại. Dùng <code>LEFT OUTER JOIN</code> nếu muốn giữ lại toàn bộ khách hàng và hiển thị <code>NULL</code> ở các cột hóa đơn.</p>
-  </div>
 
   <div class="page-footer">
     <span>IT004 — Thực hành Cơ sở dữ liệu</span>
@@ -126,13 +126,14 @@
   </div>
 
   <h2>4.4 Kỹ thuật Tự kết (Self-Join) & Gom nhóm (GROUP BY)</h2>
-  <p>Tự kết (Self-Join) là phép kết một bảng với chính nó để giải quyết các mối quan hệ đệ quy (như nhân viên - quản lý). Gom nhóm (<code>GROUP BY</code>) phân chia tập dữ liệu thành các nhóm độc lập để tính toán thống kê (căn cứ <code>TECH-A02</code>).</p>
+  <p>Tự kết (Self-Join) là phép kết một bảng với chính nó để giải quyết các mối quan hệ đệ quy (như nhân viên - người quản lý). Gom nhóm (<code>GROUP BY</code>) phân chia tập dữ liệu thành các nhóm độc lập để tính toán thống kê (căn cứ <code>TECH-A02</code>).</p>
 
-  <h3>4.4.1 Self-Join: Tìm Trưởng bộ môn / Người quản lý</h3>
-  <pre class="sql-block"><span class="cmt">-- Lấy tên Giáo viên và Tên Giáo viên quản lý trực tiếp</span>
-<span class="kw">SELECT</span> GV.MAGV, GV.HOTEN <span class="kw">AS</span> TenGiaoVien, QL.HOTEN <span class="kw">AS</span> TenNguoiQuanLy
-<span class="kw">FROM</span> GIAOVIEN GV
-<span class="kw">LEFT JOIN</span> GIAOVIEN QL <span class="kw">ON</span> GV.MAGVQL = QL.MAGV;</pre>
+  <h3>4.4.1 Self-Join: Quan hệ Nhân viên — Người quản lý</h3>
+  <p><em>(Ví dụ tự biên soạn với lược đồ <code>NHANVIEN(MANV, HOTEN, MAQL)</code> để minh họa Self-Join rõ ràng):</em></p>
+  <pre class="sql-block"><span class="cmt">-- Lấy mã nhân viên, tên nhân viên và tên người quản lý trực tiếp</span>
+<span class="kw">SELECT</span> NV.MANV, NV.HOTEN <span class="kw">AS</span> TenNhanVien, QL.HOTEN <span class="kw">AS</span> TenNguoiQuanLy
+<span class="kw">FROM</span> NHANVIEN NV
+<span class="kw">LEFT JOIN</span> NHANVIEN QL <span class="kw">ON</span> NV.MAQL = QL.MANV;</pre>
 
   <h3>4.4.2 Cơ chế gom nhóm với <code>GROUP BY</code></h3>
   <p>Mọi thuộc tính xuất hiện trong danh sách <code>SELECT</code> mà không nằm bên trong một hàm kết hợp (như <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code>) đều <strong>bắt buộc phải được khai báo trong mệnh đề <code>GROUP BY</code></strong>.</p>

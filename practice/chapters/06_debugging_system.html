@@ -6,55 +6,71 @@
   </div>
 
   <h2>7. Hệ thống Chẩn đoán & Gỡ lỗi Transact-SQL</h2>
-  <p>Khi gặp thông báo lỗi từ SQL Server, áp dụng quy trình chẩn đoán 5 bước chuẩn hóa giúp xác định nguyên nhân gốc rễ và xử lý triệt để trong vòng 60 giây.</p>
+  <p>Khi gặp thông báo lỗi từ SQL Server, áp dụng quy trình chẩn đoán 5 bước chuẩn hóa (<code>TRIỆU CHỨNG</code> $\rightarrow$ <code>NGUYÊN NHÂN</code> $\rightarrow$ <code>KIỂM TRA</code> $\rightarrow$ <code>SỬA CHỮA</code> $\rightarrow$ <code>PHÒNG TRÁNH</code>) để xử lý triệt để nguyên nhân gốc rễ.</p>
 
   <div class="debug-grid">
     <!-- Error 1: Msg 208 -->
     <div class="debug-card">
       <div class="error-code">Msg 208: Invalid object name '...'</div>
-      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Câu lệnh không thể tìm thấy bảng hoặc khung nhìn.</div>
-      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> 1) Sai Database (đang ở <code>master</code>); 2) Bảng chưa được tạo; 3) Viết sai chính tả tên bảng.</div>
-      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Chạy lệnh <code>USE TenDatabase; GO</code> và kiểm tra lại danh sách bảng trong Object Explorer.</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Máy chủ không tìm thấy bảng hoặc khung nhìn.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> 1) Đang kết nối sai CSDL (ở <code>master</code>); 2) Bảng chưa chạy lệnh tạo; 3) Sai chính tả tên bảng.</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Chạy <code>USE TenDatabase; GO</code> và đối chiếu danh sách bảng trong Object Explorer.</div>
     </div>
 
     <!-- Error 2: Msg 547 -->
     <div class="debug-card">
       <div class="error-code">Msg 547: Conflict with FK / CHECK constraint</div>
-      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Bị từ chối khi chèn/sửa dữ liệu vi phạm ràng buộc.</div>
-      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> 1) FK trỏ tới giá trị PK không tồn tại ở bảng cha; 2) Giá trị không thỏa mãn biểu thức CHECK.</div>
-      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Kiểm tra bảng cha xem đã có khóa chính đó chưa; kiểm tra lại giá trị cột so với điều kiện CHECK.</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Thao tác DML bị chặn do vi phạm toàn vẹn dữ liệu.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> 1) FK trỏ tới giá trị PK không tồn tại ở bảng cha; 2) Dữ liệu vi phạm biểu thức logic <code>CHECK</code>.</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Bổ sung dòng ở bảng cha trước; kiểm tra lại giá trị cột so với biểu thức <code>CHECK</code>.</div>
     </div>
 
-    <!-- Error 3: Msg 8152 / 8115 -->
+    <!-- Error 3: Msg 8152 / 2628 -->
     <div class="debug-card">
-      <div class="error-code">Msg 8152 / 8115: Truncation / Arithmetic overflow</div>
-      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Chuỗi bị cắt ngắn hoặc tràn số học.</div>
-      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Độ dài chuỗi vượt quá <code>VARCHAR(N)</code> hoặc giá trị vượt quá miền <code>NUMERIC(p,s)</code> (ví dụ: điểm 10 vào <code>NUMERIC(2,2)</code>).</div>
-      <div class="debug-row"><span class="debug-label">Cách sửa:</span> <code>ALTER TABLE Bang ALTER COLUMN Cot NUMERIC(4,2);</code></div>
+      <div class="error-code">Msg 8152 / 2628: String/binary truncation</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Chuỗi ký tự vượt quá kích thước cột khai báo.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Độ dài chuỗi nguồn <code>LEN(str)</code> lớn hơn độ dài <code>VARCHAR(N)</code>/<code>NVARCHAR(N)</code> của cột đích.</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Nới rộng cột đích: <code>ALTER TABLE B ALTER COLUMN C NVARCHAR(100);</code> hoặc chuẩn hóa chuỗi đầu vào.</div>
     </div>
 
-    <!-- Error 4: Msg 8120 -->
+    <!-- Error 4: Msg 8115 -->
+    <div class="debug-card">
+      <div class="error-code">Msg 8115: Arithmetic overflow error</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Lỗi tràn số học khi lưu trữ hoặc tính toán số.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Giá trị số vượt miền kiểu dữ liệu (ví dụ: chèn điểm <code>10.00</code> vào cột <code>NUMERIC(2,2)</code> có max là <code>0.99</code>).</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Sửa định nghĩa cột thành <code>NUMERIC(4,2)</code> hoặc chuyển sang <code>INT</code>/<code>BIGINT</code>.</div>
+    </div>
+
+    <!-- Error 5: Msg 8120 -->
     <div class="debug-card">
       <div class="error-code">Msg 8120: Column invalid in SELECT / GROUP BY</div>
-      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Không thể thực thi câu lệnh gom nhóm.</div>
-      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Có cột trong <code>SELECT</code> không nằm trong <code>GROUP BY</code> và cũng không được bọc trong hàm kết hợp.</div>
-      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Thêm cột đó vào danh sách <code>GROUP BY</code> hoặc bọc bằng <code>MAX()</code>, <code>MIN()</code>, <code>COUNT()</code>.</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Truy vấn gom nhóm bị từ chối thực thi.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Cột trong <code>SELECT</code> không có trong <code>GROUP BY</code> và không nằm trong hàm gộp.</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Bổ sung cột vào <code>GROUP BY</code> hoặc bọc bằng hàm tổng hợp (<code>MAX</code>, <code>MIN</code>, <code>COUNT</code>).</div>
     </div>
 
-    <!-- Error 5: Msg 512 -->
+    <!-- Error 6: Msg 512 -->
     <div class="debug-card">
-      <div class="error-code">Msg 512: Subquery returned more than 1 value</div>
-      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Truy vấn con trả về nhiều hơn 1 dòng khi dùng toán tử vô hướng.</div>
-      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Dùng toán tử <code>=</code>, <code>&gt;</code>, <code>&lt;</code> với subquery trả về tập nhiều dòng thay vì 1 giá trị duy nhất.</div>
-      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Thay <code>=</code> bằng toán tử tập hợp <code>IN</code>, hoặc thêm <code>TOP 1</code> / hàm gộp <code>MAX()</code> vào câu con.</div>
+      <div class="error-code">Msg 512: Subquery returned &gt; 1 value</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Subquery trả về nhiều dòng cho toán tử vô hướng.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Dùng toán tử <code>=</code>, <code>&gt;</code> với subquery trả về tập nhiều dòng thay vì 1 giá trị.</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Dùng toán tử tập hợp <code>IN</code>/<code>EXISTS</code>, hoặc hàm gộp <code>MAX()</code>; chỉ dùng <code>TOP 1</code> khi đề bài yêu cầu cụ thể kèm <code>ORDER BY</code> xác định.</div>
     </div>
 
-    <!-- Error 6: Msg 245 -->
+    <!-- Error 7: Msg 245 -->
     <div class="debug-card">
-      <div class="error-code">Msg 245: Conversion failed when converting varchar</div>
-      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Lỗi ép kiểu dữ liệu chuỗi sang kiểu số hoặc ngày tháng.</div>
-      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Chuỗi chứa ký tự chữ cái hoặc sai định dạng ngày tháng hệ thống.</div>
-      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Dùng hàm <code>TRY_CAST(cot AS INT)</code> hoặc thiết lập <code>SET DATEFORMAT YMD;</code>.</div>
+      <div class="error-code">Msg 245: Conversion failed for varchar to int</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Không thể ép kiểu chuỗi sang kiểu số nguyên.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Chuỗi chứa ký tự chữ cái, khoảng trắng hoặc ký hiệu không phải số khi thực hiện so sánh số.</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Làm sạch dữ liệu chuỗi hoặc dùng hàm <code>TRY_CAST(cot AS INT)</code> để trả về NULL thay vì lỗi.</div>
+    </div>
+
+    <!-- Error 8: Msg 241 / 242 -->
+    <div class="debug-card">
+      <div class="error-code">Msg 241 / 242: Conversion failed for date/time</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Lỗi chuyển đổi chuỗi sang kiểu ngày tháng.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Định dạng chuỗi ngày tháng không khớp với phiên làm việc (ví dụ: ngày 15/10/2024 khi định dạng là MDY).</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Khai báo <code>SET DATEFORMAT YMD;</code> ở đầu script hoặc dùng định dạng chuẩn ISO <code>'YYYYMMDD'</code>.</div>
     </div>
   </div>
 

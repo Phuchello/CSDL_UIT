@@ -81,23 +81,28 @@
 <span class="kw">DELETE FROM</span> SANPHAM
 <span class="kw">WHERE</span> GIA &lt; <span class="num">6000</span> <span class="kw">AND</span> NUOCSX = N<span class="str">'Viet Nam'</span>;</pre>
 
-  <h3>2.2 Quy trình kiểm chứng 3 bước (Verify Before & After)</h3>
-  <p>Khi làm bài thực hành hoặc bài thi, tuyệt đối không chạy lệnh DML "mù". Hãy luôn kiểm tra tập dòng mục tiêu trước và sau khi thực thi:</p>
+  <h3>2.2 Quy trình kiểm chứng DML an toàn (Verify Workflow)</h3>
+  <p><em>(Kỹ thuật an toàn vận hành trong thực nghiệm — Nằm ngoài phạm vi kỹ năng cốt lõi IT004 theo chuẩn Phase A)</em></p>
+  <p>Khi làm bài thực hành, tuyệt đối không chạy lệnh DML "mù". Hãy phân biệt rõ giữa Chế độ kiểm thử và Chế độ ghi nhận vĩnh viễn:</p>
 
   <div class="trace-box">
-    <div class="trace-header">QUY TRÌNH KIỂM CHỨNG DML</div>
+    <div class="trace-header">QUY TRÌNH KIỂM THỬ AN TOÀN (TEST SANDBOX)</div>
     <div class="trace-steps">
       <div class="trace-step">
         <span class="step-badge">BƯỚC 1</span>
-        <div class="step-desc"><strong>Kiểm tra dòng sẽ bị tác động:</strong> Viết câu lệnh <code>SELECT * FROM Bang WHERE &lt;DieuKien&gt;</code> để đếm chính xác số lượng dòng và giá trị cột hiện tại.</div>
+        <div class="step-desc"><strong>Kiểm tra ban đầu:</strong> Chạy <code>SELECT * FROM Bang WHERE &lt;DieuKien&gt;</code> để đếm số dòng và xem giá trị trước khi sửa đổi.</div>
       </div>
       <div class="trace-step">
         <span class="step-badge">BƯỚC 2</span>
-        <div class="step-desc"><strong>Thực thi DML trong Transaction:</strong> Bọc trong <code>BEGIN TRAN ... ROLLBACK TRAN</code> để xem thông báo hệ thống <code>(N row(s) affected)</code> có khớp với Bước 1 hay không.</div>
+        <div class="step-desc"><strong>Mở giao dịch &amp; Chạy DML:</strong> <code>BEGIN TRAN;</code> rồi thực thi lệnh DML. Kiểm tra số dòng bị tác động <code>(N row(s) affected)</code>.</div>
       </div>
       <div class="trace-step">
         <span class="step-badge">BƯỚC 3</span>
-        <div class="step-desc"><strong>Đối chiếu kết quả sau thực thi:</strong> Chạy lại câu lệnh <code>SELECT</code> để xác nhận giá trị cột đã được cập nhật chính xác theo đúng yêu cầu đề bài.</div>
+        <div class="step-desc"><strong>Đối chiếu BÊN TRONG giao dịch:</strong> Chạy lại lệnh <code>SELECT</code> để xác nhận giá trị mới đã được tính toán chính xác.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">BƯỚC 4</span>
+        <div class="step-desc"><strong>Hoàn tác an toàn:</strong> Chạy <code>ROLLBACK TRAN;</code> để hủy thay đổi; hoặc chạy <code>COMMIT TRAN;</code> nếu ở chế độ ghi vĩnh viễn (Persist Mode).</div>
       </div>
     </div>
   </div>

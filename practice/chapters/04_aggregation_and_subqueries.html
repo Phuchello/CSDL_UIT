@@ -17,7 +17,7 @@
 <span class="kw">HAVING</span> <span class="fn">COUNT</span>(*) &gt;= <span class="num">3</span> <span class="kw">AND</span> <span class="fn">MAX</span>(GIA) &gt; <span class="num">50000</span>;</pre>
 
   <h3>4.5.2 Xếp hạng với <code>RANK() OVER</code> &amp; <code>TOP WITH TIES</code></h3>
-  <p>Khi cần tìm các đối tượng dẫn đầu bảng xếp hạng (ví dụ: Top 3 khách hàng có doanh số cao nhất), hàm <code>RANK()</code> xử lý triệt để trường hợp các đối tượng đồng hạng (cùng giá trị điểm/doanh số).</p>
+  <p><em>(Kỹ thuật phân tích xếp hạng khảo sát từ nguồn thực nghiệm <code>LOC-SQL-LAB04</code>, <code>LOC-HW-23520266-5</code>):</em></p>
 
   <div class="col-2">
     <div>
@@ -42,10 +42,15 @@
       <tr><td>KH01</td><td>Nguyen Van A</td><td>15,000,000</td><td>1</td><td class="cell-hl">Được chọn</td><td>Hạng 1 duy nhất</td></tr>
       <tr><td>KH04</td><td>Pham Van D</td><td>12,000,000</td><td>2</td><td class="cell-hl">Được chọn</td><td>Hạng 2 đồng hạng (a)</td></tr>
       <tr><td>KH09</td><td>Hoang Thi E</td><td>12,000,000</td><td>2</td><td class="cell-hl">Được chọn</td><td>Hạng 2 đồng hạng (b)</td></tr>
-      <tr><td>KH02</td><td>Tran Thi B</td><td>9,500,000</td><td>4</td><td class="cell-hl">Được chọn</td><td>Hạng 4 (Do đồng hạng trước đó, chiếm vị trí thứ 4 tổng cộng)</td></tr>
+      <tr><td>KH02</td><td>Tran Thi B</td><td>9,500,000</td><td>4</td><td class="cell-null">Bị loại</td><td>Không bằng giá trị của dòng thứ 3 nằm trong TOP 3 (12,000,000)</td></tr>
       <tr><td>KH07</td><td>Le Van C</td><td>8,000,000</td><td>5</td><td class="cell-null">Bị loại</td><td>Vượt quá ngưỡng Top 3</td></tr>
     </tbody>
   </table>
+
+  <div class="callout callout-why" style="margin-top: 2mm;">
+    <div class="callout-title">Nguyên tắc hoạt động của WITH TIES</div>
+    <p style="margin-bottom: 0;">Mệnh đề <code>WITH TIES</code> chỉ bổ sung thêm các dòng có giá trị <code>ORDER BY</code> bằng với giá trị của dòng cuối cùng nằm trong ngưỡng <code>TOP N</code> (ở đây dòng thứ 3 có doanh số <code>12,000,000</code>). Vì dòng thứ 4 có doanh số <code>9,500,000</code> nên không được chọn.</p>
+  </div>
 
   <div class="page-footer">
     <span>IT004 — Thực hành Cơ sở dữ liệu</span>
@@ -79,7 +84,7 @@
     <div>
       <div class="callout callout-why" style="margin-top: 0;">
         <div class="callout-title">Tương quan (Correlated)</div>
-        <p style="margin-bottom: 0;">Chạy lặp lại cho <em>từng dòng</em> của câu cha vì tham chiếu trực tiếp đến cột ở bảng ngoài cùng (như biến lặp hai vòng <code>for</code>).</p>
+        <p style="margin-bottom: 0;">Phụ thuộc mức logic vào giá trị từng dòng ngoài cùng; Optimizer có thể biến đổi thành Semi-Join/Apply thay vì lặp vật lý.</p>
       </div>
       <pre class="sql-block"><span class="kw">SELECT</span> SP1.MASP, SP1.TENSP, SP1.GIA
 <span class="kw">FROM</span> SANPHAM SP1
@@ -130,7 +135,7 @@
   </div>
 
   <h2>5.3 Bài toán "Tất Cả" & Phép chia trong T-SQL</h2>
-  <p>Bài toán phổ quát yêu cầu tìm các đối tượng bao trọn toàn bộ một tập con dữ liệu (ví dụ: <em>"Tìm khách hàng đã mua TẤT CẢ các sản phẩm do Singapore sản xuất"</em>). Đây là dạng bài trọng tâm xuất hiện liên tục trong các đề thi (căn cứ <code>TECH-A07</code>).</p>
+  <p>Điều kiện "tất cả" xuất hiện lặp lại trong corpus bài tập và đề thi đã khảo sát ở Phase A (nguồn <code>LOC-SQL-LAB03</code>, <code>LOC-SQL-LAB04</code>, <code>PRAC-2024-2025-HK1-01</code>); tài liệu <code>TECH-A07</code> được dùng để chuẩn hóa cú pháp và ngữ nghĩa toán tử <code>EXISTS</code>.</p>
 
   <h3>5.3.1 Phương pháp chuẩn tắc: Double NOT EXISTS</h3>
   <p>Biến đổi logic: <em>"Tìm khách hàng sao cho <strong>KHÔNG TỒN TẠI</strong> sản phẩm Singapore nào mà khách hàng đó <strong>CHƯA MUA</strong>."</em></p>

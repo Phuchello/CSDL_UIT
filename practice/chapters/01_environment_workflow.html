@@ -58,19 +58,23 @@
   </table>
 
   <h3>0.3 Kỹ thuật cô lập giao dịch kiểm thử (Safe Sandbox)</h3>
-  <p>Khi viết các câu lệnh sửa đổi dữ liệu (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) hoặc câu lệnh tạo Trigger phức tạp, hãy luôn bao bọc mã trong khối giao dịch có lệnh <code>ROLLBACK</code> để thử nghiệm kết quả mà không làm biến đổi trạng thái bảng gốc:</p>
+  <p><em>(Kỹ thuật an toàn vận hành trong thực nghiệm — Nằm ngoài phạm vi kỹ năng cốt lõi IT004 theo chuẩn Phase A)</em></p>
+  <p>Khi kiểm thử câu lệnh sửa đổi dữ liệu (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>), việc bao bọc mã trong khối giao dịch có <code>ROLLBACK</code> cho phép xem kết quả biến đổi mà không làm thay đổi dữ liệu gốc:</p>
 
-  <pre class="sql-block"><span class="kw">BEGIN TRANSACTION</span>;
-    <span class="cmt">-- 1. Xem dữ liệu trước khi thay đổi</span>
-    <span class="kw">SELECT</span> MANV, HOTEN, MUCLUONG <span class="kw">FROM</span> GIAOVIEN <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;
+  <pre class="sql-block"><span class="cmt">-- 1. Xem dữ liệu ban đầu trước khi thay đổi</span>
+<span class="kw">SELECT</span> MAGV, HOTEN, MUCLUONG <span class="kw">FROM</span> GIAOVIEN <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;
 
+<span class="kw">BEGIN TRANSACTION</span>;
     <span class="cmt">-- 2. Thực hiện câu lệnh DML cần kiểm thử</span>
     <span class="kw">UPDATE</span> GIAOVIEN <span class="kw">SET</span> MUCLUONG = MUCLUONG * <span class="num">1.1</span> <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;
 
-    <span class="cmt">-- 3. Xem kết quả đã thay đổi trong giao dịch</span>
-    <span class="kw">SELECT</span> MANV, HOTEN, MUCLUONG <span class="kw">FROM</span> GIAOVIEN <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;
+    <span class="cmt">-- 3. Xem kết quả đã thay đổi ngay BÊN TRONG giao dịch</span>
+    <span class="kw">SELECT</span> MAGV, HOTEN, MUCLUONG <span class="kw">FROM</span> GIAOVIEN <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;
 
-<span class="kw">ROLLBACK TRANSACTION</span>; <span class="cmt">-- Hoàn tác toàn bộ, dữ liệu trở về nguyên trạng an toàn</span></pre>
+<span class="kw">ROLLBACK TRANSACTION</span>; <span class="cmt">-- Hoàn tác toàn bộ, hủy thay đổi</span>
+
+<span class="cmt">-- 4. Xác nhận dữ liệu gốc đã được khôi phục nguyên vẹn</span>
+<span class="kw">SELECT</span> MAGV, HOTEN, MUCLUONG <span class="kw">FROM</span> GIAOVIEN <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;</pre>
 
   <div class="page-footer">
     <span>IT004 — Thực hành Cơ sở dữ liệu</span>
