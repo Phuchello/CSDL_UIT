@@ -1,7 +1,7 @@
 USE IT004_Training;
 GO
 
-/* A01 — scalar subquery; two products tie at the maximum price. */
+/* A01 — scalar subquery; P001 is the unique maximum-price product. */
 SELECT ProductId, ProductName, Price
 FROM dbo.tr_products
 WHERE Price = (SELECT MAX(Price) FROM dbo.tr_products)
@@ -48,14 +48,14 @@ FROM dbo.tr_results AS r
 GROUP BY r.StudentId
 HAVING COUNT(DISTINCT r.CourseId) = (SELECT COUNT(*) FROM dbo.tr_courses);
 
-/* A06 — set operators return distinct values unless ALL is requested. */
-SELECT CustomerId FROM dbo.tr_orders WHERE Status = 'PAID'
-UNION
-SELECT CustomerId FROM dbo.tr_customers WHERE Segment = 'A';
+/* A06 — SQL Server set operators: INTERSECT and EXCEPT remove duplicate rows. */
+SELECT CustomerId AS Id FROM dbo.tr_customers
+INTERSECT
+SELECT StudentId FROM dbo.tr_students;
 
-SELECT ProductId FROM dbo.tr_order_items WHERE OrderId = 1001
+SELECT ProductId FROM dbo.tr_products
 EXCEPT
-SELECT ProductId FROM dbo.tr_order_items WHERE OrderId = 1005;
+SELECT ProductId FROM dbo.tr_order_items;
 
 /* A07 — CASE is a projection; it does not change stored rows. */
 SELECT ProductId, ProductName,

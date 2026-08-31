@@ -1,7 +1,7 @@
 USE IT004_Training;
 GO
 
-/* B01 — projection + WHERE: expected CustomerId C001, C003, C004. */
+/* B01 — projection + WHERE: expected keys C001, C002, C003 (3 rows). */
 SELECT CustomerId, FullName, City
 FROM dbo.tr_customers
 WHERE Segment IN ('A', 'B')

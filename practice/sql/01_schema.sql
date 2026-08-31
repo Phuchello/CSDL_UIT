@@ -1,9 +1,18 @@
 USE IT004_Training;
 GO
 
+/* Remove the circular edge before dropping either circular table. */
+IF OBJECT_ID(N'dbo.tr_departments', N'U') IS NOT NULL
+AND EXISTS (
+    SELECT 1 FROM sys.foreign_keys
+    WHERE name = N'FK_tr_departments_head'
+      AND parent_object_id = OBJECT_ID(N'dbo.tr_departments')
+)
+    ALTER TABLE dbo.tr_departments DROP CONSTRAINT FK_tr_departments_head;
+GO
+
 /* Child objects first make this script repeatable without dropping the database. */
 IF OBJECT_ID(N'dbo.tr_results', N'U') IS NOT NULL DROP TABLE dbo.tr_results;
-IF OBJECT_ID(N'dbo.tr_enrollments', N'U') IS NOT NULL DROP TABLE dbo.tr_enrollments;
 IF OBJECT_ID(N'dbo.tr_courses', N'U') IS NOT NULL DROP TABLE dbo.tr_courses;
 IF OBJECT_ID(N'dbo.tr_students', N'U') IS NOT NULL DROP TABLE dbo.tr_students;
 IF OBJECT_ID(N'dbo.tr_order_items', N'U') IS NOT NULL DROP TABLE dbo.tr_order_items;

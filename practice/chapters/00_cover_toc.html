@@ -100,7 +100,7 @@
   
   <p>Tài liệu xây dựng phương pháp tiếp cận dựa trên 3 trụ cột kỹ thuật:</p>
   <ul>
-    <li><strong>Thực nghiệm kiểm chứng (Empirical Verification):</strong> Mỗi câu lệnh đều đi kèm lược đồ đầu vào, phân tích dòng thực thi (Execution Trace) và bảng kết quả tương ứng.</li>
+    <li><strong>Kiểm tra có thể tái lập:</strong> Mỗi câu lệnh gắn với lược đồ đầu vào, TRACE SUY LUẬN LOGIC và bảng kết quả có nhãn STATIC, RUNTIME hoặc ILLUSTRATIVE.</li>
     <li><strong>Tư duy dạng tập hợp (Set-Based Reasoning):</strong> Triệt để giải thích và loại bỏ các thói quen lập trình duyệt con trỏ/vô hướng không tối ưu trên SQL Server.</li>
     <li><strong>Kỹ thuật Trigger an toàn đa dòng (Multi-Row Safety):</strong> Thiết kế các giải pháp ràng buộc dữ liệu đảm bảo toàn vẹn ngay cả khi thực hiện thao tác DML hàng loạt.</li>
   </ul>
@@ -109,7 +109,7 @@
   <p>Nội dung cẩm nang được xây dựng và đối chiếu chuẩn xác với:</p>
   <ul>
     <li>Tài liệu kỹ thuật chính thức <strong>Microsoft Learn T-SQL Reference</strong> (các mã nguồn định danh <code>TECH-A01</code> đến <code>TECH-A11</code>).</li>
-    <li>Bộ bằng chứng khảo sát thực nghiệm <strong>Phase A</strong>: gồm 17 đề thi tự luận/trắc nghiệm, 10 đề thi thực hành máy chính thức và tiến trình 4 bài thực hành Lab 01–04.</li>
+    <li>Bộ bằng chứng khảo sát <strong>Phase A</strong>: gồm 17 đề thi tự luận/trắc nghiệm, 10 canonical practical-exam artifacts trong snapshot đóng băng và tiến trình 4 bài thực hành Lab 01–04.</li>
   </ul>
 
   <div class="callout callout-exam" style="margin-top: 5mm;">
@@ -131,7 +131,7 @@
   </div>
 
   <h1>Kiến trúc Cẩm nang Thực hành</h1>
-  <p style="margin-top: 1.5mm; font-size: 8.5pt; color: var(--muted);">Toàn bộ 8 phần chuyên đề và phụ lục tra cứu chuẩn hóa cho thực hành SQL Server và phòng thi.</p>
+  <p style="margin-top: 1.5mm; font-size: 8.5pt; color: var(--muted);">Kiến trúc sản xuất gồm Phần 0–6, Labs 01–04, debugging, quy trình thi và phụ lục. Số trang không in để tránh stale pagination.</p>
 
   <div class="toc-grid">
     <div class="toc-part">
@@ -168,7 +168,7 @@
     <div class="toc-part">
       <div class="toc-part-title">Phần 4: Truy vấn Kết nối & Gom nhóm</div>
       <div class="toc-item"><span>4.1 Phép kết INNER & OUTER JOIN</span><span class="page-num">Tr. 8</span></div>
-      <div class="toc-item"><span>4.2 Dòng thực thi (Execution Trace)</span><span class="page-num">Tr. 8</span></div>
+      <div class="toc-item"><span>4.2 Xử lý truy vấn logic (Logical Query Processing)</span><span class="page-num">Tr. 8</span></div>
       <div class="toc-item"><span>4.3 Self-Join & GROUP BY</span><span class="page-num">Tr. 9</span></div>
       <div class="toc-item"><span>4.4 HAVING & Xếp hạng RANK()</span><span class="page-num">Tr. 10</span></div>
     </div>
@@ -190,23 +190,24 @@
     </div>
 
     <div class="toc-part">
-      <div class="toc-part-title">Phần 7: Hệ thống Chẩn đoán & Gỡ lỗi</div>
-      <div class="toc-item"><span>7.1 Khung chẩn đoán 5 bước</span><span class="page-num">Tr. 17</span></div>
-      <div class="toc-item"><span>7.2 Tra cứu 6 nhóm mã lỗi chính</span><span class="page-num">Tr. 17</span></div>
+      <div class="toc-part-title">Lab 01: Xây dựng CSDL (DDL &amp; RBTV)</div>
+      <div class="toc-item"><span>Kiểu dữ liệu, NULL, PK/FK, CHECK/DEFAULT</span><span class="page-num"></span></div>
+      <div class="toc-item"><span>ALTER TABLE và circular-FK lifecycle</span><span class="page-num"></span></div>
     </div>
 
     <div class="toc-part">
-      <div class="toc-part-title">Phần 8: Tiến trình Lab & Phòng thi</div>
-      <div class="toc-item"><span>8.1 Tiến trình Lab 01 (DDL & RBTV)</span><span class="page-num">Tr. 18</span></div>
-      <div class="toc-item"><span>8.2 Tiến trình Lab 03–04 (Nâng cao)</span><span class="page-num">Tr. 19</span></div>
-      <div class="toc-item"><span>8.3 Chiến lược phòng thi thực hành</span><span class="page-num">Tr. 20</span></div>
-      <div class="toc-item"><span>8.4 Checklist nộp bài & Barem điểm</span><span class="page-num">Tr. 20</span></div>
+      <div class="toc-part-title">Labs 02–04: DML, nâng cao và phân tích</div>
+      <div class="toc-item"><span>Lab 02 — DML, JOIN, NULL/date</span><span class="page-num"></span></div>
+      <div class="toc-item"><span>Lab 03 — Subquery, EXISTS, universal, set</span><span class="page-num"></span></div>
+      <div class="toc-item"><span>Lab 04 — GROUP, HAVING, RANK, TOP WITH TIES</span><span class="page-num"></span></div>
+      <div class="toc-item"><span>Fixture và expected-result contract</span><span class="page-num"></span></div>
     </div>
 
     <div class="toc-part" style="background: var(--soft-teal);">
-      <div class="toc-part-title">Phụ lục: Bản đồ Nguồn Microsoft</div>
-      <div class="toc-item"><span>Đối chiếu mã nguồn TECH-A01–A11</span><span class="page-num">Tr. 21</span></div>
-      <div class="toc-item"><span>Bảng tra cứu thuật ngữ chuẩn T-SQL</span><span class="page-num">Tr. 21</span></div>
+      <div class="toc-part-title">Part 11–12 &amp; Phụ lục</div>
+      <div class="toc-item"><span>Debugging dictionary và trigger test</span><span class="page-num"></span></div>
+      <div class="toc-item"><span>Practical exam workflow (snapshot)</span><span class="page-num"></span></div>
+      <div class="toc-item"><span>Quick reference, provenance, expected results, checklist</span><span class="page-num"></span></div>
     </div>
   </div>
 

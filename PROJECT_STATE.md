@@ -2,7 +2,7 @@
 
 ## Checkpoint
 
-v1.1 Phase C2 — Full Practical Handbook Complete
+v1.1 Phase C2 — Production Consistency Patch Complete
 
 ## Date
 
@@ -14,7 +14,7 @@ v1.1 Phase C2 — Full Practical Handbook Complete
 
 ## Status
 
-PHASE A and THEORY v1.1 remain FROZEN and UNTOUCHED. PHASE C2 is complete on `v1.1-practice-handbook`: the full practical handbook, deterministic fixture/scripts, final PDF, contact sheets and QA report are present. SQL Server client probing could not establish a trusted local connection, so runtime is reported NOT AVAILABLE; static semantic validation passes. Theory v1.1 (`61eb5c8`), Phase A (`6aef91e`), `main` (`6ccf5a4`) and `phuchello/phuchello` remain untouched. Ready for Human Mentor full-practice review.
+PHASE A and THEORY v1.1 remain FROZEN and UNTOUCHED. PHASE C2 is complete on `v1.1-practice-handbook`: the production-only chapter manifest, deterministic fixture/scripts, example registry, normalized final PDF, contact sheets and QA report are present. The circular-FK reset succeeds on first and second SQLCMD runs; static consistency validation passes. Theory v1.1 (`61eb5c8`), Phase A (`6aef91e`), `main` (`6ccf5a4`) and `phuchello/phuchello` remain untouched. Ready for Human Mentor full-practice review.
 
 ## Scope completed in this checkpoint
 
@@ -41,7 +41,14 @@ Do not build Quartz, merge to `main`, tag, or release from this branch.
 - `dist/review/v1.1_practice/`
 - `reports/v1.1_practice_c1_qa.md`
 - `practice/sql/` deterministic training fixture and test scripts
-- `dist/IT004_CSDL_UIT_ThucHanh_VoTrongPhuc.pdf` (76 pages, normalized metadata)
+- `dist/IT004_CSDL_UIT_ThucHanh_VoTrongPhuc.pdf` (71 pages, normalized metadata)
 - `dist/review/v1.1_practice_full/` contact sheets
 - `reports/v1.1_practice_full_qa.md`
 - `scripts/validate_practice_static.py`
+
+## C2 correction-pass evidence
+
+- Explicit circular-FK drop/null lifecycle and idempotent reset validated twice with SQLCMD.
+- B01/B02/A01/A02/A03/A04/A05/A06/A07 printed and runnable expectations aligned to `practice/EXAMPLE_REGISTRY.md`.
+- Production compilation excludes superseded C1 proof chapters 06–08; PDF normalized to 71 pages.
+- Static validator checks frozen provenance IDs, registry conflicts, stale dates, intentional INSERT NOT NULL fields, set-operator variants and trigger-E schema boundary.

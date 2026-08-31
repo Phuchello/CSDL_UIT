@@ -202,7 +202,7 @@
   </div>
 
   <h2>5.4 Các Phép toán Tập hợp (Set Operators)</h2>
-  <p>SQL Server hỗ trợ ba phép toán tập hợp chuẩn tắc: <code>UNION</code> (Hợp), <code>EXCEPT</code> (Trừ) và <code>INTERSECT</code> (Giao). Để thực hiện các phép toán này, hai tập truy vấn phải thỏa mãn <strong>điều kiện khả hợp (Union-Compatibility)</strong> (căn cứ <code>TECH-A08</code>).</p>
+  <p>SQL Server hỗ trợ ba phép toán tập hợp chuẩn tắc: <code>UNION</code> (Hợp), <code>EXCEPT</code> (Trừ) và <code>INTERSECT</code> (Giao). <code>UNION</code> loại dòng trùng, còn <code>UNION ALL</code> giữ dòng trùng; trong handbook, <code>INTERSECT</code> và <code>EXCEPT</code> dùng dạng mặc định, không có biến thể <code>ALL</code>. Để thực hiện các phép toán này, hai tập truy vấn phải thỏa mãn <strong>điều kiện khả hợp (Union-Compatibility)</strong> (căn cứ <code>TECH-A08</code>).</p>
 
   <h3>5.4.1 Điều kiện khả hợp trong T-SQL</h3>
   <ul>
@@ -214,13 +214,13 @@
   <h3>5.4.2 Phân biệt UNION vs UNION ALL</h3>
   <div class="col-2">
     <div>
-      <pre class="sql-block"><span class="cmt">-- UNION: Tự động loại bỏ dòng trùng (Chậm hơn)</span>
+      <pre class="sql-block"><span class="cmt">-- UNION: SQL Server loại bỏ dòng trùng theo mặc định</span>
 <span class="kw">SELECT</span> MAKH <span class="kw">FROM</span> HOADON <span class="kw">WHERE</span> <span class="fn">YEAR</span>(NGHD) = <span class="num">2024</span>
 <span class="kw">UNION</span>
 <span class="kw">SELECT</span> MAKH <span class="kw">FROM</span> KHACHHANG <span class="kw">WHERE</span> DOANHSO &gt; <span class="num">10000000</span>;</pre>
     </div>
     <div>
-      <pre class="sql-block"><span class="cmt">-- UNION ALL: Giữ nguyên toàn bộ dòng (Nhanh hơn)</span>
+      <pre class="sql-block"><span class="cmt">-- UNION ALL: SQL Server giữ nguyên dòng trùng</span>
 <span class="kw">SELECT</span> MASP <span class="kw">FROM</span> CTHD <span class="kw">WHERE</span> SOHD = <span class="num">1001</span>
 <span class="kw">UNION ALL</span>
 <span class="kw">SELECT</span> MASP <span class="kw">FROM</span> CTHD <span class="kw">WHERE</span> SOHD = <span class="num">1002</span>;</pre>

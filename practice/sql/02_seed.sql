@@ -4,6 +4,7 @@ GO
 DELETE FROM dbo.tr_results;
 DELETE FROM dbo.tr_order_items;
 DELETE FROM dbo.tr_orders;
+UPDATE dbo.tr_departments SET HeadEmployeeId = NULL;
 DELETE FROM dbo.tr_employees;
 DELETE FROM dbo.tr_departments;
 DELETE FROM dbo.tr_students;

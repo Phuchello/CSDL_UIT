@@ -61,7 +61,9 @@
 - [x] Author Parts 0–12 plus appendices and Labs 01–04 against the deterministic tr_* fixture.
 - [x] Add practice/sql scripts, static semantic validator, final PDF build and normalization.
 - [x] Render all pages and publish contact sheets and reports/v1.1_practice_full_qa.md.
-- [x] Record SQL runtime as NOT AVAILABLE when the local client cannot connect; static validation passes.
+- [x] Repair circular-FK reset lifecycle, align printed/runnable examples and add practice/EXAMPLE_REGISTRY.md.
+- [x] Exclude superseded C1 proof chapters 06–08 from production compilation and normalize the 71-page PDF.
+- [x] Run first and second SQLCMD reset successfully; static consistency validation passes.
 
 ## Phase C2 & Beyond — Held by scope
 

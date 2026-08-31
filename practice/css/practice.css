@@ -297,6 +297,7 @@ table.result-table tbody tr:nth-child(even) { background: #fdfdfd; }
 .lab-index { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 4mm; margin: 2mm 0; }
 .lab-index div { padding: 1.8mm 2.5mm; background: var(--white); border: 1px solid var(--line); }
 .small-table { font-size: 8pt !important; }
+.toc-page .page-num { display: none; }
 
 /* Print safety */
 @media print {

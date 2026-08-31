@@ -33,7 +33,16 @@ async function main() {
       required: ['LAB 01', 'LAB 02', 'LAB 03', 'LAB 04', 'RANK', 'WITH TIES', 'Double NOT EXISTS', 'Msg 8120', 'A–H'].filter(x => !text.includes(x)),
     };
   });
-  const chapters = fs.readdirSync(path.join(repoRoot, 'practice', 'chapters')).filter(x => /^\d+_/.test(x)).sort();
+  // Audit only the production manifest. Historical C1 proof chapters 06–08
+  // remain in the source tree for provenance but are intentionally excluded
+  // from the C2 production build.
+  const chapters = [
+    '00_cover_toc.html', '01_environment_workflow.html', '02_ddl_dml_foundations.html',
+    '03_basic_queries_and_joins.html', '04_aggregation_and_subqueries.html',
+    '05_integrity_and_triggers.html', '09_lab01_ddl.html', '10_lab02_dml.html',
+    '11_lab03_advanced.html', '12_lab04_analytics.html', '13_debugging_expanded.html',
+    '14_appendices_exam.html'
+  ];
   const banned = ['🤔','🎯','🏃','✅','🔥','⭐','💡','🚨','☢','⚠','tuyệt kỹ','kỹ năng sống còn','thần chú','trọng điểm thi','exam mastery','mental model','fast pattern'];
   const sourceViolations = [];
   for (const ch of chapters) {
