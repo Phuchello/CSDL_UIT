@@ -63,7 +63,17 @@ async function main() {
     'cheat_sheet.html',
     'references.html',
   ];
-  const forbiddenLabels = ['Exam Mastery', 'Mental Model', 'Fast Pattern', '☢', '⚠ BẪY'];
+  const forbiddenEmojis = ['🤔', '🎯', '🏃', '✅', '🔥', '⭐', '💡', '🚨', '☢', '⚠'];
+  const forbiddenHypePhrases = [
+    'tuyệt kỹ',
+    'kỹ năng sống còn',
+    'thần chú',
+    'trọng điểm thi',
+    'giảng viên thường khuyến khích',
+    'exam mastery',
+    'mental model',
+    'fast pattern',
+  ];
   const forbiddenColors = [
     '#dbeafe', '#2563eb', '#dcfce7', '#059669', '#fef9c3', '#d97706',
     '#fee2e2', '#991b1b', '#f3e8ff', '#6b21a8', '#fdf4ff', '#a855f7'
@@ -76,9 +86,14 @@ async function main() {
       continue;
     }
     const content = fs.readFileSync(filePath, 'utf-8');
-    for (const label of forbiddenLabels) {
-      if (content.toLowerCase().includes(label.toLowerCase()) || content.includes(label)) {
-        legacyViolations.push(`Forbidden label "${label}" in ${ch}`);
+    for (const emoji of forbiddenEmojis) {
+      if (content.includes(emoji)) {
+        legacyViolations.push(`Forbidden emoji "${emoji}" in ${ch}`);
+      }
+    }
+    for (const phrase of forbiddenHypePhrases) {
+      if (content.toLowerCase().includes(phrase.toLowerCase())) {
+        legacyViolations.push(`Forbidden hype phrase "${phrase}" in ${ch}`);
       }
     }
     for (const color of forbiddenColors) {

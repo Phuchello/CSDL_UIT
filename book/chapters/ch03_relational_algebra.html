@@ -209,7 +209,7 @@
 </div>
 
 <h4>B.5 Phép kết (Join - ⋈)</h4>
-<p>Đây là nhóm phép toán sống còn nhất trong CSDL quan hệ.</p>
+<p>Phép kết là một trong những phép toán trung tâm của mô hình quan hệ.</p>
 <ul>
   <li><strong>Kết Theta (Theta-join):</strong> Nối 2 bảng dựa trên một điều kiện bất kỳ (>, <, =).<br><span class="math-block">R ⋈_{R.A < S.B} S</span></li>
   <li><strong>Kết bằng (Equi-join):</strong> Trường hợp riêng của kết Theta, điều kiện chỉ dùng dấu bằng (=).</li>
@@ -242,7 +242,7 @@
   </div>
 </div>
 <div class="callout-why">
-  <strong>🤔 Tại sao dòng chứa 'NM' và 'CTDL' biến mất?</strong> Vì chúng là những mảnh ghép lẻ loi không tìm được đối tác ở bảng bên kia. Đây là đặc tính của Inner Join.
+  <strong>Vì sao dòng chứa 'NM' và 'CTDL' biến mất?</strong> Vì chúng là những mảnh ghép lẻ loi không tìm được đối tác ở bảng bên kia. Đây là đặc tính của Inner Join.
 </div>
 
 <h4>B.6 Phép hợp (Union - ∪)</h4>
@@ -280,8 +280,8 @@
 
 <hr>
 
-<h3 id="sec-c">C. Phép chia (Division ÷) - Bậc thầy truy vấn "Tất cả"</h3>
-<p>Đây là phần khó và tinh túy nhất của Đại số quan hệ.</p>
+<h3 id="sec-c">C. Phép chia (Division ÷) — Biểu diễn điều kiện “tất cả”</h3>
+<p>Phép chia trong đại số quan hệ dùng để trả lời các câu hỏi chứa điều kiện phổ quát ("tất cả", "toàn bộ").</p>
 
 <h4>C.1 Trực giác: "X nào bao xài TẤT CẢ Y?"</h4>
 <p>Hãy tưởng tượng bạn (X) vào một siêu thị và có một danh sách mua sắm (Y) gồm: Sữa, Bánh, Kẹo. Nếu giỏ hàng của bạn <strong>chứa toàn bộ</strong> 3 món trên (có thể mua thêm thứ khác không quan tâm, miễn là đủ 3 món này), thì bạn là người vượt qua bài kiểm tra "Phép chia".</p>
@@ -799,13 +799,13 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
     <tr>
       <td>Phép chia</td>
       <td>÷</td>
-      <td>Thần chú "R ÷ S". R là bảng hai cột (Chủ thể, Đối tượng). S là bảng Đối tượng cần "bao trọn".</td>
+      <td>Cách đọc R ÷ S: R là bảng hai cột (Chủ thể, Đối tượng); S là bảng Đối tượng cần bao trọn.</td>
     </tr>
   </table>
   <div class="callout-dryrun">
-    <strong>🏃 Kỹ năng sống còn phòng thi:</strong><br>
-    1. Đọc đề, tô màu từ khóa (Tất cả, Lớn nhất, Chưa từng, Mỗi).<br>
-    2. Xác định các bảng cần đụng tới.<br>
+    <strong>Khi làm bài:</strong><br>
+    1. Đọc đề, xác định từ khóa (Tất cả, Lớn nhất, Chưa từng, Mỗi).<br>
+    2. Xác định các bảng cần sử dụng.<br>
     3. Luôn luôn viết phép chiếu (π) nhỏ nhất có thể trước khi Trừ/Giao/Chia để tránh sai schema.<br>
     4. Gặp "Lớn nhất": Dùng Self-join theo điều kiện bé hơn để ra tập loại.
   </div>

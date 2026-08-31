@@ -363,7 +363,7 @@
 <h3>d) Correlated Subquery (Truy vấn con tương quan)</h3>
 <p>Subquery chứa tham chiếu đến cột của truy vấn cha bên ngoài. Với mỗi dòng của câu cha, subquery sẽ được chạy lại một lần (Giống như 2 vòng lặp lồng nhau). Thường dùng với EXISTS.</p>
 
-<h2 id="4-8">4.8 Tuyệt kỹ "Tất Cả" Pattern (TRỌNG ĐIỂM THI) 🎯</h2>
+<h2 id="4-8">4.8 Truy vấn với điều kiện “tất cả”</h2>
 <p>Dạng toán kinh điển: <em>"Tìm sinh viên đã học <strong>TẤT CẢ</strong> các môn", "Tìm khách hàng mua <strong>TẤT CẢ</strong> sản phẩm do Việt Nam sản xuất".</em></p>
 <p>Có 3 cách giải chính:</p>
 
@@ -400,7 +400,7 @@
 </pre>
 
 <div class="callout-why">
-  <strong>🤔 Góc nhìn chuyên sâu: Khi tập chia bị rỗng (Không có sản phẩm VN nào)</strong><br>
+  <strong>Trường hợp đặc biệt: Khi tập chia bị rỗng (Không có sản phẩm VN nào)</strong><br>
   Theo toán học (đại số quan hệ), mệnh đề "Khách hàng mua MỌI sản phẩm VN" sẽ đúng một cách hiển nhiên (vacuously true) với TẤT CẢ khách hàng nếu không có sản phẩm VN nào.
   <ul>
     <li><strong>Cách Double NOT EXISTS:</strong> Bắt đầu bằng <code>FROM KHACHHANG</code>. Vòng lặp kiểm tra thấy không có SP VN nào, nên điều kiện <code>NOT EXISTS</code> bên trong lập tức đúng cho mọi khách hàng. Kết quả: <strong>Trả về toàn bộ khách hàng.</strong> (Đúng với lý thuyết chuẩn).</li>
@@ -428,8 +428,8 @@
 </table>
 
 <div class="callout-exam">
-  <strong>🎯 Lời khuyên thi cử:</strong><br>
-  Giảng viên thường <strong>khuyến khích</strong> làm theo cách <code>NOT EXISTS</code>. Hãy hiểu mẫu suy luận này:<br>
+  <strong>Khi làm bài:</strong><br>
+  Double <code>NOT EXISTS</code> là một cách biểu đạt trực tiếp điều kiện “không tồn tại yêu cầu bị thiếu” và là mẫu quan trọng cần hiểu:<br>
   <code>SELECT x FROM B1 WHERE NOT EXISTS (SELECT y FROM B2 WHERE &lt;Điều kiện B2&gt; AND NOT EXISTS (SELECT z FROM B3 WHERE B3.x = B1.x AND B3.y = B2.y))</code>
 </div>
 

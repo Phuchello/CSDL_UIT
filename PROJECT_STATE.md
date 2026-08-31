@@ -2,7 +2,7 @@
 
 ## Checkpoint
 
-v1.1 Phase B2 — Theory Handbook Final Editorial Polish Complete
+v1.1 Phase B2 — Theory Handbook Final Microcopy Freeze Complete
 
 ## Date
 
@@ -14,7 +14,7 @@ v1.1 Phase B2 — Theory Handbook Final Editorial Polish Complete
 
 ## Status
 
-PHASE A remains frozen. PHASE B2 final editorial polish is 100% COMPLETE on `v1.1-theory-redesign`: PDF metadata normalized to v1.1 standards (Title: `IT004 – Cơ sở dữ liệu`, Subject: `IT004 – Cơ sở dữ liệu — Sổ tay lý thuyết`), legacy multicolor diagrams redesigned to restrained B1 vector SVGs (Bản đồ toàn môn & ANSI/SPARC 3-level), legacy warning/bẫy icon language replaced with natural editorial phrasing across printed theory sources, and automated legacy artifact linter integrated. All QA and visual checks PASS. Sách v1.0.0, PDF chính thức, nhánh `main`, `v1.1-editorial-practice` và kho `phuchello/phuchello` hoàn toàn không bị ảnh hưởng.
+PHASE A remains frozen. PHASE B2 final microcopy freeze is 100% COMPLETE on `v1.1-theory-redesign`: all study-guide/decorative emojis removed, promotional/hype phrasing replaced with restrained academic prose, unsupported lecturer-preference claims neutralized to evidence-safe statements, heading 5.3 reframed, and expanded automated QA linter integrated. All QA, visual, and safety checks PASS. Theory v1.1 is ready to freeze. Sách v1.0.0, PDF chính thức, nhánh `main`, `v1.1-editorial-practice` và kho `phuchello/phuchello` hoàn toàn không bị ảnh hưởng.
 
 ## Scope completed in this checkpoint
 

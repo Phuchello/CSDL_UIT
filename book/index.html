@@ -655,13 +655,13 @@
       <td><strong>ER Model</strong><br>(Thực thể–Kết hợp)</td>
       <td>Conceptual</td>
       <td>Entity, Relationship, Attribute</td>
-      <td>✅ Chương 2</td>
+      <td>Chương 2</td>
     </tr>
     <tr>
       <td><strong>Relational Model</strong><br>(Mô hình quan hệ)</td>
       <td>Logical</td>
       <td>Bảng (relation), hàng (tuple), cột (attribute)</td>
-      <td>✅ Chương 2–6</td>
+      <td>Chương 2–6</td>
     </tr>
     <tr>
       <td>Hierarchical</td>
@@ -1282,7 +1282,7 @@ Relation: KHACHHANG
 </div>
 
 <h4>B.5 Phép kết (Join - ⋈)</h4>
-<p>Đây là nhóm phép toán sống còn nhất trong CSDL quan hệ.</p>
+<p>Phép kết là một trong những phép toán trung tâm của mô hình quan hệ.</p>
 <ul>
   <li><strong>Kết Theta (Theta-join):</strong> Nối 2 bảng dựa trên một điều kiện bất kỳ (>, <, =).<br><span class="math-block">R ⋈_{R.A < S.B} S</span></li>
   <li><strong>Kết bằng (Equi-join):</strong> Trường hợp riêng của kết Theta, điều kiện chỉ dùng dấu bằng (=).</li>
@@ -1315,7 +1315,7 @@ Relation: KHACHHANG
   </div>
 </div>
 <div class="callout-why">
-  <strong>🤔 Tại sao dòng chứa 'NM' và 'CTDL' biến mất?</strong> Vì chúng là những mảnh ghép lẻ loi không tìm được đối tác ở bảng bên kia. Đây là đặc tính của Inner Join.
+  <strong>Vì sao dòng chứa 'NM' và 'CTDL' biến mất?</strong> Vì chúng là những mảnh ghép lẻ loi không tìm được đối tác ở bảng bên kia. Đây là đặc tính của Inner Join.
 </div>
 
 <h4>B.6 Phép hợp (Union - ∪)</h4>
@@ -1353,8 +1353,8 @@ Relation: KHACHHANG
 
 <hr>
 
-<h3 id="sec-c">C. Phép chia (Division ÷) - Bậc thầy truy vấn "Tất cả"</h3>
-<p>Đây là phần khó và tinh túy nhất của Đại số quan hệ.</p>
+<h3 id="sec-c">C. Phép chia (Division ÷) — Biểu diễn điều kiện “tất cả”</h3>
+<p>Phép chia trong đại số quan hệ dùng để trả lời các câu hỏi chứa điều kiện phổ quát ("tất cả", "toàn bộ").</p>
 
 <h4>C.1 Trực giác: "X nào bao xài TẤT CẢ Y?"</h4>
 <p>Hãy tưởng tượng bạn (X) vào một siêu thị và có một danh sách mua sắm (Y) gồm: Sữa, Bánh, Kẹo. Nếu giỏ hàng của bạn <strong>chứa toàn bộ</strong> 3 món trên (có thể mua thêm thứ khác không quan tâm, miễn là đủ 3 món này), thì bạn là người vượt qua bài kiểm tra "Phép chia".</p>
@@ -1872,13 +1872,13 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
     <tr>
       <td>Phép chia</td>
       <td>÷</td>
-      <td>Thần chú "R ÷ S". R là bảng hai cột (Chủ thể, Đối tượng). S là bảng Đối tượng cần "bao trọn".</td>
+      <td>Cách đọc R ÷ S: R là bảng hai cột (Chủ thể, Đối tượng); S là bảng Đối tượng cần bao trọn.</td>
     </tr>
   </table>
   <div class="callout-dryrun">
-    <strong>🏃 Kỹ năng sống còn phòng thi:</strong><br>
-    1. Đọc đề, tô màu từ khóa (Tất cả, Lớn nhất, Chưa từng, Mỗi).<br>
-    2. Xác định các bảng cần đụng tới.<br>
+    <strong>Khi làm bài:</strong><br>
+    1. Đọc đề, xác định từ khóa (Tất cả, Lớn nhất, Chưa từng, Mỗi).<br>
+    2. Xác định các bảng cần sử dụng.<br>
     3. Luôn luôn viết phép chiếu (π) nhỏ nhất có thể trước khi Trừ/Giao/Chia để tránh sai schema.<br>
     4. Gặp "Lớn nhất": Dùng Self-join theo điều kiện bé hơn để ra tập loại.
   </div>
@@ -2252,7 +2252,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 <h3>d) Correlated Subquery (Truy vấn con tương quan)</h3>
 <p>Subquery chứa tham chiếu đến cột của truy vấn cha bên ngoài. Với mỗi dòng của câu cha, subquery sẽ được chạy lại một lần (Giống như 2 vòng lặp lồng nhau). Thường dùng với EXISTS.</p>
 
-<h2 id="4-8">4.8 Tuyệt kỹ "Tất Cả" Pattern (TRỌNG ĐIỂM THI) 🎯</h2>
+<h2 id="4-8">4.8 Truy vấn với điều kiện “tất cả”</h2>
 <p>Dạng toán kinh điển: <em>"Tìm sinh viên đã học <strong>TẤT CẢ</strong> các môn", "Tìm khách hàng mua <strong>TẤT CẢ</strong> sản phẩm do Việt Nam sản xuất".</em></p>
 <p>Có 3 cách giải chính:</p>
 
@@ -2289,7 +2289,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 </pre>
 
 <div class="callout-why">
-  <strong>🤔 Góc nhìn chuyên sâu: Khi tập chia bị rỗng (Không có sản phẩm VN nào)</strong><br>
+  <strong>Trường hợp đặc biệt: Khi tập chia bị rỗng (Không có sản phẩm VN nào)</strong><br>
   Theo toán học (đại số quan hệ), mệnh đề "Khách hàng mua MỌI sản phẩm VN" sẽ đúng một cách hiển nhiên (vacuously true) với TẤT CẢ khách hàng nếu không có sản phẩm VN nào.
   <ul>
     <li><strong>Cách Double NOT EXISTS:</strong> Bắt đầu bằng <code>FROM KHACHHANG</code>. Vòng lặp kiểm tra thấy không có SP VN nào, nên điều kiện <code>NOT EXISTS</code> bên trong lập tức đúng cho mọi khách hàng. Kết quả: <strong>Trả về toàn bộ khách hàng.</strong> (Đúng với lý thuyết chuẩn).</li>
@@ -2317,8 +2317,8 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 </table>
 
 <div class="callout-exam">
-  <strong>🎯 Lời khuyên thi cử:</strong><br>
-  Giảng viên thường <strong>khuyến khích</strong> làm theo cách <code>NOT EXISTS</code>. Hãy hiểu mẫu suy luận này:<br>
+  <strong>Khi làm bài:</strong><br>
+  Double <code>NOT EXISTS</code> là một cách biểu đạt trực tiếp điều kiện “không tồn tại yêu cầu bị thiếu” và là mẫu quan trọng cần hiểu:<br>
   <code>SELECT x FROM B1 WHERE NOT EXISTS (SELECT y FROM B2 WHERE &lt;Điều kiện B2&gt; AND NOT EXISTS (SELECT z FROM B3 WHERE B3.x = B1.x AND B3.y = B2.y))</code>
 </div>
 
@@ -2487,7 +2487,7 @@ WHERE NOT EXISTS (
 </div>
 
 <div class="callout callout-why">
-    <h4>🤔 Trực giác: Tại sao cần Ràng Buộc Toàn Vẹn?</h4>
+    <h4>Trực giác: Vì sao cần Ràng buộc toàn vẹn?</h4>
     <p>Hãy tưởng tượng bạn đang quản lý một trường đại học. Chuyện gì sẽ xảy ra nếu:</p>
     <ul>
         <li>Điểm thi của sinh viên là <code>-5</code> hoặc <code>15</code> (trong khi thang điểm là 0-10)?</li>
@@ -2573,11 +2573,12 @@ WHERE NOT EXISTS (
 
 <hr>
 
-<h2>5.3 BẢNG TẦM ẢNH HƯỞNG (TRỌNG ĐIỂM THI UIT)</h2>
+<h2>5.3 Bảng tầm ảnh hưởng</h2>
+<p>Dạng bài này xuất hiện lặp lại trong nhiều hiện vật đề thi được khảo sát ở Phase A.</p>
 
 <div class="callout callout-connection">
-    <h4>Liên hệ: Bảng Tầm Ảnh Hưởng là gì?</h4>
-    <p>Trong dạng bài RBTV của UIT, đề thường yêu cầu lập <strong>Bảng Tầm Ảnh Hưởng</strong> sau khi phát biểu nội dung và bối cảnh. Bảng liệt kê các thao tác Thêm (Insert), Xóa (Delete), Sửa (Update) trên các quan hệ có thể làm <strong>vi phạm</strong> ràng buộc đang xét.</p>
+    <h4>Liên hệ: Bảng tầm ảnh hưởng</h4>
+    <p>Bảng tầm ảnh hưởng liệt kê các thao tác Thêm (Insert), Xóa (Delete), Sửa (Update) trên các quan hệ có thể làm <strong>vi phạm</strong> ràng buộc đang xét, nhằm xác định thời điểm hệ thống cần kiểm tra tính hợp lệ của dữ liệu.</p>
 </div>
 
 <h3>Ký hiệu trong bảng tầm ảnh hưởng UIT:</h3>
@@ -2915,7 +2916,7 @@ WHERE NOT EXISTS (
     <p><strong>Definition:</strong> Cho lược đồ quan hệ R, tập thuộc tính X, Y ⊆ R. X → Y (X xác định Y, hay Y phụ thuộc hàm vào X) nghĩa là: với mọi bộ t1, t2 trong R, nếu <code>t1[X] = t2[X]</code> thì <code>t1[Y] = t2[Y]</code>.</p>
     
     <div class="callout-why">
-        <strong>🤔 Trivial vs Non-trivial</strong>
+        <strong>Phụ thuộc hàm hiển nhiên và không hiển nhiên</strong>
         <ul>
             <li><strong>Trivial (Hiển nhiên):</strong> X → Y với Y ⊆ X (ví dụ: AB → A). Không có ý nghĩa thực tế.</li>
             <li><strong>Non-trivial (Không hiển nhiên):</strong> X → Y với Y không là tập con của X. Đây là cái chúng ta quan tâm.</li>
@@ -3369,7 +3370,7 @@ WHERE NOT EXISTS (
 
     <h2>Chương 2: ER & Ánh xạ</h2>
     <div class="callout-exam">
-        <strong>🎯 Nguyên tắc ánh xạ:</strong>
+        <strong>Nguyên tắc ánh xạ:</strong>
         <p>1-1: Nhét FK vào bên nào cũng được (nên bên tham gia toàn phần).</p>
         <p>1-N: Bốc PK bên 1 thảy sang bên N làm FK.</p>
         <p>M-N: Tách thành 1 bảng mới, PK là (PK bên A, PK bên B).</p>

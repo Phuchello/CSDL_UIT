@@ -23,13 +23,16 @@
 - [ ] Mentor approval of theory cover brief (Minimal Relational Schema Graph).
 - [ ] Mentor approval of Quartz Knowledge Garden static architecture.
 
-## Phase B2: Theory Handbook Redesign & Final Polish — Complete on `v1.1-theory-redesign`
+## Phase B2: Theory Handbook Redesign & Final Microcopy Freeze — Complete on `v1.1-theory-redesign`
 
 - [x] Apply the approved B1 design system to the theory source HTML without changing the public v1.0 artifact.
 - [x] Produce and normalize `dist/IT004_CSDL_UIT_LyThuyet_VoTrongPhuc.pdf` with deterministic build and metadata validation (Title: `IT004 – Cơ sở dữ liệu`, Subject: `IT004 – Cơ sở dữ liệu — Sổ tay lý thuyết`).
 - [x] Redesign legacy multicolor visuals (Part 0 Bản đồ toàn môn and Ch1 ANSI/SPARC architecture) into restrained B1 vector SVGs.
-- [x] Remove legacy warning/bẫy icon language from printed theory sources.
-- [x] Integrate automated legacy artifact linter (palette + label) in build/QA pipeline.
+- [x] Remove study-guide decorative emojis (`🤔`, `🎯`, `🏃`, `✅`, `🔥`, `⭐`, `💡`, `🚨`, `☢`, `⚠`) from instructional/editorial prose.
+- [x] Neutralize promotional/hype wording ("Tuyệt kỹ", "Kỹ năng sống còn", "Thần chú", "TRỌNG ĐIỂM THI", "nhóm phép toán sống còn nhất", "Bậc thầy truy vấn") into restrained academic phrasing.
+- [x] Replace unsupported lecturer-preference claims with evidence-safe phrasing for Double NOT EXISTS.
+- [x] Reframe heading 5.3 to "5.3 Bảng tầm ảnh hưởng" with restrained evidence-backed introduction.
+- [x] Integrate expanded automated QA linter in `scripts/build_theory_pdf.js`.
 - [x] Run chapter/content checks, rendered-page review, overflow checks, and record evidence in `reports/v1.1_theory_qa.md`.
 - [x] Keep practical handbook authoring and Quartz implementation out of this branch.
 
