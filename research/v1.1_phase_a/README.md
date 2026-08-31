@@ -22,13 +22,13 @@
 | **Kho lưu trữ GitHub cộng đồng sinh viên** | **4** | `UIT-DS/IT004.L19-Database`, `SeaW1nd/IT004-CSDL`, `HiImKing1509`, `phanxuanquang` (Tier C) |
 | **Kho lưu trữ tài liệu cộng đồng (Studocu/Scribd)** | **4** | Studocu Course 131131, Course 545041, Studocu O117 Preview, Studocu Final 2023-2024 Preview (Tier C) |
 | **Tổng số nguồn trong Sổ đăng ký nguồn (`source_inventory.md`)** | **51** | Đầy đủ mã `source_id`, URL / vị trí trang, Authority Tier và Ownership |
-| **Số đợt tìm kiếm web hệ thống (Search Batches)** | **12** | Đạt ngưỡng bão hòa tìm kiếm với 4 đợt liên tiếp BATCH-09 đến BATCH-12 không phát sinh chứng cứ mới |
-| **Hiện vật Đề thi Lý thuyết / Tự luận (`exam`)** | **11** | 11 đề thi chuẩn hóa độc lập (Giữa kỳ & Cuối kỳ từ 2017 đến 2024) |
-| **Hiện vật Đề thi Thực hành phòng máy (`practical-exam`)** | **2** | `PRAC-2023-2024-HK1-O117` và `PRAC-2024-2025-HK1-302` |
+| **Số đợt tìm kiếm web hệ thống (Search Batches)** | **16** | Đạt ngưỡng bão hòa tìm kiếm với chuỗi 3 đợt liên tiếp BATCH-14, BATCH-15, BATCH-16 không phát sinh chứng cứ mới sau đợt BATCH-13 |
+| **Hiện vật Đề thi Lý thuyết / Tự luận (`exam`)** | **17** | 17 đề thi chuẩn hóa độc lập (Giữa kỳ & Cuối kỳ từ 2017 đến 2025) |
+| **Hiện vật Đề thi Thực hành phòng máy (`practical-exam`)** | **6** | `PRAC-2024-2025-HK1-302`, `PRAC-2023-2024-HK1-O117`, `PRAC-2023-2024-HK1-D04`, `PRAC-2022-2023-HK1-D04`, `PRAC-2020-2021-HK1-M18`, `PRAC-2013-2014-HK1-E181` |
 | **Hiện vật Tài liệu Ôn tập & Bài tập lớn (`review`)** | **3** | `REV-2024-10-01-EXP`, `REV-2024-DSQH-MID`, `REV-2024-K18-SOL` |
 | **Hiện vật Hệ thống Thực hành Chuẩn (`lab-corpus`)** | **1** | `LAB-QLBH-QLGV-CORPUS` (Lab 01–04 QLBH & QLGV) |
-| **TỔNG SỐ HIỆN VẬT CHUẨN HÓA (TOTAL CANONICAL ARTIFACTS)** | **17** | Toàn bộ được lập chỉ mục tại `artifact_registry.md` |
-| **Các năm học có hiện vật kiểm chứng trực tiếp** | **8 năm** | 2017–2018, 2018–2019, 2019–2020, 2020–2021, 2021–2022, 2022–2023, 2023–2024, 2024–2025 |
+| **TỔNG SỐ HIỆN VẬT CHUẨN HÓA (TOTAL CANONICAL ARTIFACTS)** | **27** | Toàn bộ được lập chỉ mục tại `artifact_registry.md` |
+| **Các năm học có hiện vật kiểm chứng trực tiếp** | **9 năm** | 2013–2014, 2017–2018, 2018–2019, 2019–2020, 2020–2021, 2021–2022, 2022–2023, 2023–2024, 2024–2025 |
 
 ---
 
@@ -46,7 +46,7 @@
 - **Loại bỏ tính năng ngoài phạm vi**: Không đưa Transactions/Locking và User-Defined Functions phức tạp vào nội dung bắt buộc.
 
 ### C. Khuyến Nghị Xây Dựng Ngân Hàng Câu Hỏi Tự Luận (Tự Luận / Essay Bank)
-- Phân bổ 76 câu hỏi có giải thích chi tiết theo 7 nhóm chuyên đề (Ch1 đến Ch6 + Đề thi tổng hợp).
+- Phân bổ 80+ câu hỏi có giải thích chi tiết theo 7 nhóm chuyên đề (Ch1 đến Ch6 + Đề thi tổng hợp).
 - 100% câu hỏi gắn nhãn xuất xứ minh bạch (`verified-artifact`, `reconstructed-exam-pattern`, `original-practice`).
 
 ### D. Khuyến Nghị Kiến Trúc Vườn Tri Thức (Knowledge Garden)
@@ -57,8 +57,8 @@
 ## 3. Danh Mục Các Hồ Sơ Nghiên Cứu Trong Thư Mục Này
 
 1. [`local_corpus_audit.md`](local_corpus_audit.md): Báo cáo bóc tách chi tiết 6 tệp đính kèm cục bộ và 17 tài liệu nguồn gốc.
-2. [`web_search_log.md`](web_search_log.md): Nhật ký 12 đợt tìm kiếm web và chứng nhận đạt ngưỡng bão hòa tìm kiếm.
-3. [`artifact_registry.md`](artifact_registry.md): Bảng đăng ký 17 hiện vật chuẩn hóa (11 exam, 2 practical-exam, 3 review, 1 lab-corpus).
+2. [`web_search_log.md`](web_search_log.md): Nhật ký 16 đợt tìm kiếm web và chứng nhận đạt ngưỡng bão hòa tìm kiếm.
+3. [`artifact_registry.md`](artifact_registry.md): Bảng đăng ký 27 hiện vật chuẩn hóa (17 exam, 6 practical-exam, 3 review, 1 lab-corpus).
 4. [`source_inventory.md`](source_inventory.md): Bảng kê toàn bộ 51 nguồn tài liệu học thuật với phân loại Authority Tier và Ownership.
 5. [`exam_pattern_map.md`](exam_pattern_map.md): Ma trận mẫu câu hỏi thi thực chứng với số lượng hiện vật khớp 100% và Top 5 dạng bài có tần suất cao nhất.
 6. [`practical_coverage_map.md`](practical_coverage_map.md): Bản đồ kỹ năng T-SQL và ma trận tiến trình Lab 01–04.
