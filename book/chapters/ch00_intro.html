@@ -128,24 +128,60 @@
 
 <p>Dưới đây là pipeline xuyên suốt IT004. Mọi kiến thức đều kết nối với nhau:</p>
 
-<!-- ASCII Pipeline Diagram -->
-<div style="background: var(--c-bg-alt); border: 2px solid var(--c-primary); border-radius: 8px; padding: 20px; margin: 1.5em 0; text-align: center; font-family: var(--f-mono); font-size: 9pt; line-height: 2.2; page-break-inside: avoid;">
-  <div style="display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px;">
-    <div style="background: var(--c-primary); color: white; padding: 6px 14px; border-radius: 4px; font-weight: 600;">Bài toán thực tế</div>
-    <span style="font-size: 14pt; color: var(--c-primary);">→</span>
-    <div style="background: #dbeafe; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #1e40af;">ER Diagram<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 2</span></div>
-    <span style="font-size: 14pt; color: var(--c-primary);">→</span>
-    <div style="background: #dcfce7; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #166534;">Relational Schema<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 2</span></div>
-    <span style="font-size: 14pt; color: var(--c-primary);">→</span>
-    <div style="background: #fef9c3; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #854d0e;">Đại số QH<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 3</span></div>
-    <span style="font-size: 14pt; color: var(--c-primary);">→</span>
-    <div style="background: #fee2e2; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #991b1b;">SQL / T-SQL<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 4</span></div>
-  </div>
-  <div style="margin-top: 12px; display: flex; justify-content: center; gap: 12px;">
-    <div style="background: #f3e8ff; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #6b21a8;">RBTV<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 5</span></div>
-    <span style="font-size: 14pt; color: var(--c-text-muted);">↔</span>
-    <div style="background: #fdf4ff; padding: 6px 14px; border-radius: 4px; font-weight: 600; color: #a855f7;">Chuẩn hóa<br><span style="font-size: 7.5pt; font-weight: 400;">Chương 6</span></div>
-  </div>
+<div class="schema-diagram" style="background: var(--c-bg-alt); border: 1px solid var(--c-border); border-radius: 4px; padding: 14px; margin: 1.2em 0; page-break-inside: avoid;">
+  <svg viewBox="0 0 680 150" width="100%" style="display: block; margin: 0 auto; max-width: 680px;" role="img" aria-label="Bản đồ tiến trình môn học IT004">
+    <defs>
+      <marker id="mapArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="#1e7881"/>
+      </marker>
+      <marker id="mapArrowDown" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+        <path d="M0,0 L7,3 L0,6 Z" fill="#b57b36"/>
+      </marker>
+    </defs>
+    <path d="M122 39 H138 M252 39 H268 M402 39 H418 M537 39 H553" fill="none" stroke="#1e7881" stroke-width="2" marker-end="url(#mapArrow)"/>
+    <path d="M335 63 V75 H267 V86" fill="none" stroke="#b57b36" stroke-width="1.5" marker-end="url(#mapArrowDown)"/>
+    <path d="M335 75 H437 V86" fill="none" stroke="#b57b36" stroke-width="1.5" marker-end="url(#mapArrowDown)"/>
+    <path d="M332 112 H358" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3"/>
+
+    <g font-family="Arial, Segoe UI, sans-serif">
+      <g transform="translate(10 15)">
+        <rect width="112" height="48" rx="3" fill="#203047"/>
+        <text x="56" y="24" fill="#ffffff" text-anchor="middle" font-size="11" font-weight="700">Bài toán thực tế</text>
+        <text x="56" y="39" fill="#c6dddd" text-anchor="middle" font-size="9">Yêu cầu nghiệp vụ</text>
+      </g>
+      <g transform="translate(140 15)">
+        <rect width="112" height="48" rx="3" fill="#e7f1f1" stroke="#1e7881" stroke-width="1.5"/>
+        <text x="56" y="24" fill="#203047" text-anchor="middle" font-size="11" font-weight="700">Mô hình ER</text>
+        <text x="56" y="39" fill="#1e7881" text-anchor="middle" font-size="9">Chương 2</text>
+      </g>
+      <g transform="translate(270 15)">
+        <rect width="130" height="48" rx="3" fill="#f6efe5" stroke="#b57b36" stroke-width="1.5"/>
+        <text x="65" y="24" fill="#203047" text-anchor="middle" font-size="11" font-weight="700">Lược đồ Quan hệ</text>
+        <text x="65" y="39" fill="#8c5b20" text-anchor="middle" font-size="9">Chương 2 • Cấu trúc</text>
+      </g>
+      <g transform="translate(420 15)">
+        <rect width="115" height="48" rx="3" fill="#e7f1f1" stroke="#1e7881" stroke-width="1.5"/>
+        <text x="57" y="24" fill="#203047" text-anchor="middle" font-size="11" font-weight="700">Đại số Quan hệ</text>
+        <text x="57" y="39" fill="#1e7881" text-anchor="middle" font-size="9">Chương 3 • Hình thức</text>
+      </g>
+      <g transform="translate(555 15)">
+        <rect width="115" height="48" rx="3" fill="#203047"/>
+        <text x="57" y="24" fill="#ffffff" text-anchor="middle" font-size="11" font-weight="700">SQL / T-SQL</text>
+        <text x="57" y="39" fill="#c6dddd" text-anchor="middle" font-size="9">Chương 4 • Thực thi</text>
+      </g>
+
+      <g transform="translate(205 88)">
+        <rect width="125" height="48" rx="3" fill="#f6efe5" stroke="#b57b36" stroke-width="1.5"/>
+        <text x="62" y="23" fill="#203047" text-anchor="middle" font-size="10.5" font-weight="700">Ràng buộc toàn vẹn</text>
+        <text x="62" y="38" fill="#8c5b20" text-anchor="middle" font-size="9">Chương 5 • Bảo toàn dữ liệu</text>
+      </g>
+      <g transform="translate(360 88)">
+        <rect width="155" height="48" rx="3" fill="#f6efe5" stroke="#b57b36" stroke-width="1.5"/>
+        <text x="77" y="23" fill="#203047" text-anchor="middle" font-size="10.5" font-weight="700">Chuẩn hóa &amp; Phụ thuộc hàm</text>
+        <text x="77" y="38" fill="#8c5b20" text-anchor="middle" font-size="9">Chương 6 • Tối ưu lược đồ</text>
+      </g>
+    </g>
+  </svg>
 </div>
 
 <h2>Quan hệ phụ thuộc giữa các chương</h2>

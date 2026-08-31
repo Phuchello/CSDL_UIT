@@ -51,6 +51,44 @@ async function main() {
     };
   });
 
+  const printedChapters = [
+    'ch00_intro.html',
+    'ch01_overview.html',
+    'ch02_er_relational.html',
+    'ch03_relational_algebra.html',
+    'ch04_sql.html',
+    'ch05_constraints.html',
+    'ch06_fd_normalization.html',
+    'exam_playbook.html',
+    'cheat_sheet.html',
+    'references.html',
+  ];
+  const forbiddenLabels = ['Exam Mastery', 'Mental Model', 'Fast Pattern', '☢', '⚠ BẪY'];
+  const forbiddenColors = [
+    '#dbeafe', '#2563eb', '#dcfce7', '#059669', '#fef9c3', '#d97706',
+    '#fee2e2', '#991b1b', '#f3e8ff', '#6b21a8', '#fdf4ff', '#a855f7'
+  ];
+  const legacyViolations = [];
+  for (const ch of printedChapters) {
+    const filePath = path.join(repoRoot, 'book', 'chapters', ch);
+    if (!fs.existsSync(filePath)) {
+      legacyViolations.push(`Missing chapter: ${ch}`);
+      continue;
+    }
+    const content = fs.readFileSync(filePath, 'utf-8');
+    for (const label of forbiddenLabels) {
+      if (content.toLowerCase().includes(label.toLowerCase()) || content.includes(label)) {
+        legacyViolations.push(`Forbidden label "${label}" in ${ch}`);
+      }
+    }
+    for (const color of forbiddenColors) {
+      if (content.toLowerCase().includes(color.toLowerCase())) {
+        legacyViolations.push(`Forbidden color "${color}" in ${ch}`);
+      }
+    }
+  }
+  audit.legacyViolations = legacyViolations;
+
   await page.pdf({
     path: pdfPath,
     format: 'A4',
@@ -67,7 +105,7 @@ async function main() {
     consoleErrors.length || pageErrors.length || audit.duplicateIds.length || audit.horizontalOverflow.length ||
     audit.tofu || !audit.hasVietnamese || Object.values(audit.symbols).some(v => !v) ||
     !/Georgia|Cambria/.test(audit.bodyFont) || audit.bodyFontResolved === 'fallback' ||
-    !audit.practicalHidden || audit.exerciseCount < 30
+    !audit.practicalHidden || audit.exerciseCount < 30 || legacyViolations.length
   ) process.exitCode = 2;
 }
 

@@ -47,8 +47,6 @@ def extract_fragment(path: Path) -> str:
         text = body.group(1).strip()
     # Ensure details elements remain expanded for print and complete online reading
     text = re.sub(r"<details(?![^>]*\bopen\b)", "<details open", text)
-    if path.name == "ch05_constraints.html":
-        text = f'<section id="ch05">\n{text}\n</section>'
     return text
 
 

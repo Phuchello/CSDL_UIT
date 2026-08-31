@@ -17,9 +17,9 @@ def main() -> None:
         writer.add_page(page)
     writer.add_metadata(
         {
-            "/Title": "IT004 – Cơ sở dữ liệu: Cẩm nang từ nền tảng đến Exam Mastery",
+            "/Title": "IT004 – Cơ sở dữ liệu",
             "/Author": "Võ Trọng Phúc",
-            "/Subject": "IT004 – Cơ sở dữ liệu",
+            "/Subject": "IT004 – Cơ sở dữ liệu — Sổ tay lý thuyết",
         }
     )
     with TEMP_PATH.open("wb") as stream:

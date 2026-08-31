@@ -2,7 +2,7 @@
 
 ## Checkpoint
 
-v1.1 Phase B2 — Theory Handbook Redesign Complete
+v1.1 Phase B2 — Theory Handbook Final Editorial Polish Complete
 
 ## Date
 
@@ -14,7 +14,7 @@ v1.1 Phase B2 — Theory Handbook Redesign Complete
 
 ## Status
 
-PHASE A remains frozen. PHASE B2 is complete on the isolated theory-redesign branch: the approved B1 design system was applied in place to the six-chapter theory handbook, deterministic theory PDF output was generated and structurally rewritten, and visual/technical QA passed. The practical chapter source remains present but is excluded from the theory PDF. Sách v1.0.0, PDF chính thức, nhánh `main` và kho `phuchello/phuchello` hoàn toàn không bị ảnh hưởng.
+PHASE A remains frozen. PHASE B2 final editorial polish is 100% COMPLETE on `v1.1-theory-redesign`: PDF metadata normalized to v1.1 standards (Title: `IT004 – Cơ sở dữ liệu`, Subject: `IT004 – Cơ sở dữ liệu — Sổ tay lý thuyết`), legacy multicolor diagrams redesigned to restrained B1 vector SVGs (Bản đồ toàn môn & ANSI/SPARC 3-level), legacy warning/bẫy icon language replaced with natural editorial phrasing across printed theory sources, and automated legacy artifact linter integrated. All QA and visual checks PASS. Sách v1.0.0, PDF chính thức, nhánh `main`, `v1.1-editorial-practice` và kho `phuchello/phuchello` hoàn toàn không bị ảnh hưởng.
 
 ## Scope completed in this checkpoint
 
