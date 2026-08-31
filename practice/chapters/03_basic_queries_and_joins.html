@@ -1,0 +1,165 @@
+<!-- Page 7: Truy vấn nền tảng & Giá trị NULL -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 3: TRUY VẤN NỀN TẢNG & GIÁ TRỊ NULL</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>3. Kỹ thuật Truy vấn Nền tảng & Logic 3 Giá trị</h2>
+  <p>Truy vấn lọc dữ liệu cơ bản trong SQL Server sử dụng mệnh đề <code>SELECT ... FROM ... WHERE</code>. Hiểu rõ logic 3 giá trị (True, False, Unknown) là điều kiện tiên quyết để tránh bẫy dữ liệu khi xử lý giá trị <code>NULL</code>.</p>
+
+  <h3>3.1 Cú pháp lọc chuỗi, đoạn & tập hợp</h3>
+  <pre class="sql-block"><span class="cmt">-- 1. LIKE: Tìm sản phẩm mã bắt đầu bằng 'B' và tận cùng bằng '01'</span>
+<span class="kw">SELECT</span> MASP, TENSP, GIA <span class="kw">FROM</span> SANPHAM <span class="kw">WHERE</span> MASP <span class="kw">LIKE</span> <span class="str">'B%01'</span>;
+
+<span class="cmt">-- 2. BETWEEN: Lọc trong đoạn đóng [5000, 35000]</span>
+<span class="kw">SELECT</span> MASP, TENSP, GIA <span class="kw">FROM</span> SANPHAM <span class="kw">WHERE</span> GIA <span class="kw">BETWEEN</span> <span class="num">5000</span> <span class="kw">AND</span> <span class="num">35000</span>;
+
+<span class="cmt">-- 3. IN: Thuộc tập giá trị rời rạc</span>
+<span class="kw">SELECT</span> MASP, TENSP, NUOCSX <span class="kw">FROM</span> SANPHAM <span class="kw">WHERE</span> NUOCSX <span class="kw">IN</span> (N<span class="str">'Viet Nam'</span>, N<span class="str">'Nhat Ban'</span>);</pre>
+
+  <h3>3.2 Logic 3 giá trị (3-Valued Logic) & Bẫy <code>NULL</code></h3>
+  <p><code>NULL</code> thể hiện thông tin chưa biết hoặc không tồn tại, không phải là số <code>0</code> hay chuỗi rỗng <code>''</code>. Mọi phép so sánh bằng toán tử thông thường với <code>NULL</code> (như <code>= NULL</code> hoặc <code>!= NULL</code>) đều trả về <strong><code>UNKNOWN</code></strong>, và mệnh đề <code>WHERE</code> sẽ loại bỏ tất cả các dòng có kết quả <code>UNKNOWN</code>.</p>
+
+  <div class="col-2">
+    <div>
+      <table class="compact-table">
+        <thead><tr><th>Toán hạng A</th><th>Toán hạng B</th><th>A AND B</th><th>A OR B</th></tr></thead>
+        <tbody>
+          <tr><td>TRUE</td><td>UNKNOWN</td><td class="cell-null">UNKNOWN</td><td>TRUE</td></tr>
+          <tr><td>FALSE</td><td>UNKNOWN</td><td>FALSE</td><td class="cell-null">UNKNOWN</td></tr>
+          <tr><td>UNKNOWN</td><td>UNKNOWN</td><td class="cell-null">UNKNOWN</td><td class="cell-null">UNKNOWN</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="callout callout-danger" style="margin-top: 0;">
+        <div class="callout-title">Bắt buộc dùng IS NULL</div>
+        <pre class="sql-block" style="margin: 0;"><span class="cmt">-- SAI: Luôn trả về 0 dòng!</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> KHACHHANG <span class="kw">WHERE</span> SODT = <span class="kw">NULL</span>;
+
+<span class="cmt">-- ĐÚNG: Cú pháp chuẩn SQL Server</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> KHACHHANG <span class="kw">WHERE</span> SODT <span class="kw">IS NULL</span>;</pre>
+      </div>
+    </div>
+  </div>
+
+  <h3>3.3 Sắp xếp kết quả với <code>ORDER BY</code></h3>
+  <p><code>ORDER BY</code> luôn nằm ở <strong>cuối cùng</strong> của câu truy vấn. Khi sắp xếp theo thứ tự tăng dần (<code>ASC</code>), SQL Server coi <code>NULL</code> là giá trị nhỏ nhất và đặt ở đầu kết quả.</p>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 7</span>
+  </div>
+</div>
+
+<!-- Page 8: Kỹ thuật JOIN & Dòng thực thi -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 4: TRUY VẤN KẾT NỐI & PHÂN TÍCH TỔNG HỢP</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>4. Phép kết (JOIN) & Dòng thực thi (Execution Trace)</h2>
+  <p>Phép kết kết nối các hàng từ hai hay nhiều bảng dựa trên cột chung. Hiểu rõ dòng thực thi bên trong Database Engine giúp lập trình viên viết truy vấn tối ưu và dự đoán chính xác kết quả đầu ra.</p>
+
+  <h3>4.1 Worked Example: Truy vấn kết nối nhiều bảng</h3>
+  <p><strong>Yêu cầu:</strong> In ra danh sách các hóa đơn mua hàng trong ngày <code>2024-10-15</code> gồm: Tên khách hàng, Số hóa đơn và Trị giá, sắp xếp theo Trị giá giảm dần.</p>
+
+  <pre class="sql-block"><span class="kw">SELECT</span> KH.HOTEN, HD.SOHD, HD.TRIGIA
+<span class="kw">FROM</span> HOADON HD
+<span class="kw">INNER JOIN</span> KHACHHANG KH <span class="kw">ON</span> HD.MAKH = KH.MAKH
+<span class="kw">WHERE</span> HD.NGHD = <span class="str">'2024-10-15'</span>
+<span class="kw">ORDER BY</span> HD.TRIGIA <span class="kw">DESC</span>;</pre>
+
+  <h3>4.2 Dòng thực thi chi tiết (Execution Trace)</h3>
+  <div class="trace-box">
+    <div class="trace-header">EXECUTION TRACE — QUÁ TRÌNH XỬ LÝ TRUY VẤN</div>
+    <div class="trace-steps">
+      <div class="trace-step">
+        <span class="step-badge">1. FROM &amp; JOIN</span>
+        <div class="step-desc">Đọc bảng <code>HOADON</code> và kết nối với <code>KHACHHANG</code> trên điều kiện <code>HD.MAKH = KH.MAKH</code>. Tạo tập dòng trung gian chứa đầy đủ cột của cả 2 bảng.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">2. WHERE</span>
+        <div class="step-desc">Quét từng dòng trong tập trung gian, áp dụng vị từ lọc <code>HD.NGHD = '2024-10-15'</code>. Các dòng khác ngày lập tức bị loại bỏ khỏi luồng xử lý.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">3. SELECT</span>
+        <div class="step-desc">Chiếu (Project) 3 cột cần hiển thị: <code>KH.HOTEN</code>, <code>HD.SOHD</code>, <code>HD.TRIGIA</code>.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">4. ORDER BY</span>
+        <div class="step-desc">Sắp xếp tập kết quả cuối cùng theo cột <code>HD.TRIGIA</code> theo thứ tự giảm dần.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>4.3 Bảng kết quả mong đợi (Expected Output)</h3>
+  <table class="result-table">
+    <thead>
+      <tr><th>HOTEN</th><th>SOHD</th><th>TRIGIA</th><th>Ghi chú đối chiếu</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Nguyen Van A</td><td>1002</td><td class="cell-hl">1,250,000</td><td>Khớp MAKH = 'KH01', ngày 2024-10-15</td></tr>
+      <tr><td>Le Van C</td><td>1005</td><td class="cell-hl">890,000</td><td>Khớp MAKH = 'KH07', ngày 2024-10-15</td></tr>
+      <tr><td>Tran Thi B</td><td>1001</td><td class="cell-hl">320,000</td><td>Khớp MAKH = 'KH03', ngày 2024-10-15</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-why">
+    <div class="callout-title">INNER JOIN vs LEFT JOIN</div>
+    <p style="margin-bottom: 0;"><code>INNER JOIN</code> chỉ giữ lại các dòng có khóa khớp ở cả hai bảng. Nếu khách hàng chưa từng có hóa đơn, họ sẽ bị loại. Dùng <code>LEFT OUTER JOIN</code> nếu muốn giữ lại toàn bộ khách hàng và hiển thị <code>NULL</code> ở các cột hóa đơn.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 8</span>
+  </div>
+</div>
+
+<!-- Page 9: Self-Join & GROUP BY -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 4: TRUY VẤN KẾT NỐI & PHÂN TÍCH TỔNG HỢP</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>4.4 Kỹ thuật Tự kết (Self-Join) & Gom nhóm (GROUP BY)</h2>
+  <p>Tự kết (Self-Join) là phép kết một bảng với chính nó để giải quyết các mối quan hệ đệ quy (như nhân viên - quản lý). Gom nhóm (<code>GROUP BY</code>) phân chia tập dữ liệu thành các nhóm độc lập để tính toán thống kê (căn cứ <code>TECH-A02</code>).</p>
+
+  <h3>4.4.1 Self-Join: Tìm Trưởng bộ môn / Người quản lý</h3>
+  <pre class="sql-block"><span class="cmt">-- Lấy tên Giáo viên và Tên Giáo viên quản lý trực tiếp</span>
+<span class="kw">SELECT</span> GV.MAGV, GV.HOTEN <span class="kw">AS</span> TenGiaoVien, QL.HOTEN <span class="kw">AS</span> TenNguoiQuanLy
+<span class="kw">FROM</span> GIAOVIEN GV
+<span class="kw">LEFT JOIN</span> GIAOVIEN QL <span class="kw">ON</span> GV.MAGVQL = QL.MAGV;</pre>
+
+  <h3>4.4.2 Cơ chế gom nhóm với <code>GROUP BY</code></h3>
+  <p>Mọi thuộc tính xuất hiện trong danh sách <code>SELECT</code> mà không nằm bên trong một hàm kết hợp (như <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code>) đều <strong>bắt buộc phải được khai báo trong mệnh đề <code>GROUP BY</code></strong>.</p>
+
+  <pre class="sql-block"><span class="cmt">-- Thống kê số lượng sản phẩm và giá trung bình theo từng nước sản xuất</span>
+<span class="kw">SELECT</span> NUOCSX, <span class="fn">COUNT</span>(*) <span class="kw">AS</span> SoLuongSP, <span class="fn">AVG</span>(GIA) <span class="kw">AS</span> GiaTrungBinh
+<span class="kw">FROM</span> SANPHAM
+<span class="kw">GROUP BY</span> NUOCSX;</pre>
+
+  <table class="result-table">
+    <thead>
+      <tr><th>NUOCSX</th><th>SoLuongSP</th><th>GiaTrungBinh</th><th>Cơ chế xử lý</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Viet Nam</td><td>12</td><td>24,500</td><td>Gom toàn bộ 12 dòng có NUOCSX = 'Viet Nam', tính SUM/12</td></tr>
+      <tr><td>Nhat Ban</td><td>6</td><td>85,000</td><td>Gom toàn bộ 6 dòng có NUOCSX = 'Nhat Ban', tính SUM/6</td></tr>
+      <tr><td>Singapore</td><td>4</td><td>110,000</td><td>Gom toàn bộ 4 dòng có NUOCSX = 'Singapore', tính SUM/4</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-danger">
+    <div class="callout-title">Sai lầm kinh điển: Lỗi Msg 8120</div>
+    <p style="margin-bottom: 0;">Nếu viết <code>SELECT NUOCSX, TENSP, COUNT(*) FROM SANPHAM GROUP BY NUOCSX;</code>, SQL Server sẽ báo lỗi <code>Msg 8120</code> vì trong mỗi nhóm <code>NUOCSX</code> có nhiều <code>TENSP</code> khác nhau, máy chủ không thể biết lấy tên nào để hiển thị vào 1 ô kết quả duy nhất.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 9</span>
+  </div>
+</div>

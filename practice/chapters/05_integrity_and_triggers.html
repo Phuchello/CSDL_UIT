@@ -1,0 +1,200 @@
+<!-- Page 14: Ràng buộc nâng cao & Cơ chế DML Trigger -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 6: RÀNG BUỘC TOÀN VẸN & TRIGGER TRONG T-SQL</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>6. Ràng buộc Khai báo & Cơ chế DML Trigger</h2>
+  <p>Khi ràng buộc toàn vẹn liên quan đến nhiều bảng hoặc đòi hỏi phép kiểm tra điều kiện phức tạp mà mệnh đề <code>CHECK</code> khai báo không thể đảm nhiệm, lập trình viên bắt buộc phải sử dụng <strong>DML Trigger</strong> (căn cứ <code>TECH-A04</code>, <code>TECH-A05</code>).</p>
+
+  <h3>6.1 Bảng so sánh phương án hiện thực RBTV</h3>
+  <table class="compact-table">
+    <thead>
+      <tr><th style="width: 25%;">Phương án</th><th style="width: 35%;">Phạm vi áp dụng</th><th style="width: 40%;">Ưu / Nhược điểm</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Khai báo (Declarative: CHECK, FK)</strong></td>
+        <td>Ràng buộc miền giá trị trên 1 bảng; quan hệ khóa chính – khóa ngoại giữa 2 bảng.</td>
+        <td>Thực thi ở tầng nhân, tốc độ cao nhất; không thể chứa subquery hoặc tham chiếu bảng ngoài.</td>
+      </tr>
+      <tr>
+        <td><strong>Thủ tục (Procedural: AFTER Trigger)</strong></td>
+        <td>Ràng buộc liên bảng, kiểm tra logic nghiệp vụ phức tạp, ràng buộc so sánh ngày tháng giữa các bảng.</td>
+        <td>Linh hoạt tối đa; yêu cầu thiết kế chuẩn dạng tập hợp để tránh quá tải và lỗi đa dòng.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6.2 Hai bảng ảo chuyển tiếp: <code>inserted</code> &amp; <code>deleted</code></h3>
+  <p>Khi sự kiện DML xảy ra, SQL Server tự động tạo hai bảng tạm trong bộ nhớ có cấu trúc cột y hệt bảng gốc (căn cứ <code>TECH-A05</code>):</p>
+
+  <table class="result-table">
+    <thead>
+      <tr><th>Thao tác DML</th><th>Bảng <code>inserted</code> chứa gì?</th><th>Bảng <code>deleted</code> chứa gì?</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>INSERT</strong></td><td class="cell-hl">Các dòng mới vừa được thêm vào</td><td class="cell-null">Rỗng (Không có dòng nào)</td></tr>
+      <tr><td><strong>DELETE</strong></td><td class="cell-null">Rỗng (Không có dòng nào)</td><td class="cell-err">Các dòng cũ vừa bị xóa đi</td></tr>
+      <tr><td><strong>UPDATE</strong></td><td class="cell-hl">Các dòng mới sau khi sửa</td><td class="cell-err">Các dòng cũ trước khi sửa</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-why">
+    <div class="callout-title">Bản chất của lệnh UPDATE trong SQL Server</div>
+    <p style="margin-bottom: 0;">SQL Server thực hiện <code>UPDATE</code> bằng cách xóa giá trị cũ (đưa vào <code>deleted</code>) và chèn giá trị mới (đưa vào <code>inserted</code>). Vì vậy, trong Trigger của <code>UPDATE</code>, cả hai bảng ảo đều chứa dữ liệu.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 14</span>
+  </div>
+</div>
+
+<!-- Page 15: Thiết kế Trigger an toàn đa dòng -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 6: RÀNG BUỘC TOÀN VẸN & TRIGGER TRONG T-SQL</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>6.2 Thiết kế Trigger An toàn Đa dòng (Multi-Row Safety)</h2>
+  <p>SQL Server là hệ quản trị xử lý theo tập hợp. Một câu lệnh <code>INSERT</code>, <code>UPDATE</code> hay <code>DELETE</code> có thể tác động cùng lúc lên hàng nghìn dòng. Trigger phải luôn được thiết kế để xử lý chính xác tình huống đa dòng này (căn cứ <code>TECH-A06</code>).</p>
+
+  <h3>6.2.1 Phân tích sai lầm kinh điển: Biến vô hướng (Scalar Trigger)</h3>
+  <div class="col-2">
+    <div>
+      <div class="callout callout-danger" style="margin-top: 0;">
+        <div class="callout-title">CÁCH VIẾT SAI (Dễ sập logic)</div>
+        <pre class="sql-block" style="margin: 0;"><span class="cmt">-- SAI LẦM: Dùng biến vô hướng</span>
+<span class="kw">DECLARE</span> @NgayHD <span class="dt">SMALLDATETIME</span>;
+<span class="kw">SELECT</span> @NgayHD = NGHD <span class="kw">FROM</span> <span class="kw">inserted</span>;
+<span class="cmt">-- Nếu inserted có 100 dòng,</span>
+<span class="cmt">-- biến @NgayHD chỉ nhận giá trị</span>
+<span class="cmt">-- của 1 dòng ngẫu nhiên duy nhất!</span>
+<span class="cmt">-- 99 dòng vi phạm khác bị bỏ lọt!</span></pre>
+      </div>
+    </div>
+    <div>
+      <div class="callout callout-why" style="margin-top: 0;">
+        <div class="callout-title">CÁCH VIẾT ĐÚNG (Dạng tập hợp)</div>
+        <pre class="sql-block" style="margin: 0;"><span class="cmt">-- CHUẨN MỰC: Kết nối tập hợp</span>
+<span class="kw">IF EXISTS</span> (
+    <span class="kw">SELECT</span> <span class="num">1</span>
+    <span class="kw">FROM</span> <span class="kw">inserted</span> i
+    <span class="kw">INNER JOIN</span> KHACHHANG kh
+        <span class="kw">ON</span> i.MAKH = kh.MAKH
+    <span class="kw">WHERE</span> i.NGHD &lt; kh.NGDK
+)
+<span class="cmt">-- Bắt trọn vẹn mọi dòng vi phạm!</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <h3>6.2.2 Mẫu Trigger chuẩn tắc dạng tập hợp</h3>
+  <p><strong>Yêu cầu:</strong> Ngày mua hàng (<code>NGHD</code>) của một hóa đơn phải lớn hơn hoặc bằng Ngày đăng ký (<code>NGDK</code>) của khách hàng đó.</p>
+
+  <pre class="sql-block"><span class="kw">CREATE TRIGGER</span> trg_Check_HoaDon_NgayMua
+<span class="kw">ON</span> HOADON
+<span class="kw">AFTER INSERT</span>, <span class="kw">UPDATE</span>
+<span class="kw">AS</span>
+<span class="kw">BEGIN</span>
+    <span class="kw">SET NOCOUNT ON</span>;
+    
+    <span class="cmt">-- Kiểm tra xem có BẤT KỲ dòng nào trong inserted vi phạm quy tắc hay không</span>
+    <span class="kw">IF EXISTS</span> (
+        <span class="kw">SELECT</span> <span class="num">1</span>
+        <span class="kw">FROM</span> <span class="kw">inserted</span> i
+        <span class="kw">INNER JOIN</span> KHACHHANG kh <span class="kw">ON</span> i.MAKH = kh.MAKH
+        <span class="kw">WHERE</span> i.NGHD &lt; kh.NGDK
+    )
+    <span class="kw">BEGIN</span>
+        <span class="kw">RAISERROR</span> (N<span class="str">'Lỗi: Ngày mua hàng (NGHD) không thể trước Ngày đăng ký thành viên (NGDK)!'</span>, <span class="num">16</span>, <span class="num">1</span>);
+        <span class="kw">ROLLBACK TRANSACTION</span>; <span class="cmt">-- Hủy bỏ toàn bộ thao tác DML vi phạm</span>
+        <span class="kw">RETURN</span>;
+    <span class="kw">END</span>
+<span class="kw">END</span>;
+<span class="kw">GO</span></pre>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 15</span>
+  </div>
+</div>
+
+<!-- Page 16: Hiện thực Bảng tầm ảnh hưởng -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 6: RÀNG BUỘC TOÀN VẸN & TRIGGER TRONG T-SQL</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>6.3 Hiện thực Bảng tầm ảnh hưởng trong T-SQL</h2>
+  <p>Bảng tầm ảnh hưởng trong lý thuyết xác định chính xác các sự kiện DML trên từng quan hệ có nguy cơ gây vi phạm. Trong thực hành T-SQL, mỗi quan hệ có dấu <code>+</code> sẽ được cài đặt một Trigger tương ứng.</p>
+
+  <h3>6.3.1 Phân tích bối cảnh & Bảng tầm ảnh hưởng</h3>
+  <p><strong>Ràng buộc:</strong> <em>"Trưởng khoa của một khoa phải là giáo viên thuộc chính khoa đó."</em></p>
+
+  <table class="compact-table" style="margin-bottom: 3mm;">
+    <thead>
+      <tr><th style="width: 25%;">Quan hệ</th><th style="width: 25%;">Thêm (INSERT)</th><th style="width: 25%;">Xóa (DELETE)</th><th style="width: 25%;">Sửa (UPDATE)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>KHOA</strong></td>
+        <td class="cell-hl">+ (Cần kiểm tra TRUONGKHOA)</td>
+        <td>-</td>
+        <td class="cell-hl">+(TRUONGKHOA)</td>
+      </tr>
+      <tr>
+        <td><strong>GIAOVIEN</strong></td>
+        <td>-</td>
+        <td class="cell-err">+ (Nếu xóa đúng GV là Trưởng khoa)</td>
+        <td class="cell-hl">+(MAKHOA)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6.3.2 Cài đặt Trigger hai chiều</h3>
+
+  <pre class="sql-block"><span class="cmt">-- 1. Trigger trên bảng KHOA (Kiểm tra khi bổ nhiệm/sửa Trưởng khoa)</span>
+<span class="kw">CREATE TRIGGER</span> trg_Khoa_CheckTruongKhoa
+<span class="kw">ON</span> KHOA <span class="kw">AFTER INSERT</span>, <span class="kw">UPDATE</span>
+<span class="kw">AS</span>
+<span class="kw">BEGIN</span>
+    <span class="kw">SET NOCOUNT ON</span>;
+    <span class="kw">IF EXISTS</span> (
+        <span class="kw">SELECT</span> <span class="num">1</span> <span class="kw">FROM</span> <span class="kw">inserted</span> k
+        <span class="kw">LEFT JOIN</span> GIAOVIEN gv <span class="kw">ON</span> k.TRUONGKHOA = gv.MAGV <span class="kw">AND</span> k.MAKHOA = gv.MAKHOA
+        <span class="kw">WHERE</span> k.TRUONGKHOA <span class="kw">IS NOT NULL AND</span> gv.MAGV <span class="kw">IS NULL</span>
+    )
+    <span class="kw">BEGIN</span>
+        <span class="kw">RAISERROR</span> (N<span class="str">'Lỗi: Trưởng khoa phải là giáo viên thuộc chính khoa đó!'</span>, <span class="num">16</span>, <span class="num">1</span>);
+        <span class="kw">ROLLBACK TRAN</span>;
+    <span class="kw">END</span>
+<span class="kw">END</span>;
+<span class="kw">GO</span>
+
+<span class="cmt">-- 2. Trigger trên bảng GIAOVIEN (Ngăn chuyển khoa/xóa GV đang làm Trưởng khoa)</span>
+<span class="kw">CREATE TRIGGER</span> trg_GiaoVien_CheckKhoa
+<span class="kw">ON</span> GIAOVIEN <span class="kw">AFTER DELETE</span>, <span class="kw">UPDATE</span>
+<span class="kw">AS</span>
+<span class="kw">BEGIN</span>
+    <span class="kw">SET NOCOUNT ON</span>;
+    <span class="kw">IF EXISTS</span> (
+        <span class="kw">SELECT</span> <span class="num">1</span> <span class="kw">FROM</span> <span class="kw">deleted</span> d
+        <span class="kw">INNER JOIN</span> KHOA k <span class="kw">ON</span> d.MAGV = k.TRUONGKHOA <span class="kw">AND</span> d.MAKHOA = k.MAKHOA
+    )
+    <span class="kw">BEGIN</span>
+        <span class="kw">RAISERROR</span> (N<span class="str">'Lỗi: Không thể xóa hoặc đổi khoa của giáo viên đang giữ chức vụ Trưởng khoa!'</span>, <span class="num">16</span>, <span class="num">1</span>);
+        <span class="kw">ROLLBACK TRAN</span>;
+    <span class="kw">END</span>
+<span class="kw">END</span>;
+<span class="kw">GO</span></pre>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 16</span>
+  </div>
+</div>

@@ -1,0 +1,79 @@
+<!-- Page 4: Môi trường & Quy trình vận hành SSMS -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 0: MÔI TRƯỜNG & QUY TRÌNH VẬN HÀNH</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>0. Môi trường làm việc & Quy trình chạy Script SSMS</h2>
+  <p>SQL Server Management Studio (SSMS) là công cụ giao diện đồ họa chính thức kết nối và gửi lệnh T-SQL tới SQL Server Database Engine. Hiểu rõ quy trình phân tích cú pháp, phân tách khối lệnh và quản lý giao dịch giúp loại bỏ hoàn toàn các lỗi vận hành thường gặp trong phòng thực hành và phòng thi.</p>
+
+  <h3>0.1 Phân tách khối lệnh với <code>GO</code></h3>
+  <p><code>GO</code> không phải là một câu lệnh T-SQL, mà là một <strong>từ khóa điều khiển lệnh (command separator)</strong> của SSMS để báo hiệu kết thúc một đợt lệnh (batch) và gửi toàn bộ đợt đó về máy chủ để thực thi.</p>
+
+  <div class="col-2">
+    <div>
+      <div class="callout-why" style="margin-top: 0;">
+        <div class="callout-title">Phạm vi của biến cục bộ</div>
+        <p style="margin-bottom: 0;">Mọi biến cục bộ khai báo bằng <code>DECLARE @x ...</code> chỉ tồn tại trong phạm vi của <strong>duy nhất đợt lệnh đó</strong>. Khi gặp lệnh <code>GO</code>, toàn bộ biến cục bộ trước đó sẽ bị hủy khỏi bộ nhớ.</p>
+      </div>
+    </div>
+    <div>
+      <pre class="sql-block"><span class="kw">DECLARE</span> @MaKhoa <span class="dt">VARCHAR</span>(<span class="num">5</span>) = <span class="str">'CNTT'</span>;
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> GIAOVIEN <span class="kw">WHERE</span> MAKHOA = @MaKhoa;
+<span class="kw">GO</span> <span class="cmt">-- Kết thúc Batch 1, @MaKhoa bị hủy</span>
+
+<span class="cmt">-- Lỗi Msg 137: Phải khai báo lại biến!</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> KHOA <span class="kw">WHERE</span> MAKHOA = @MaKhoa;</pre>
+    </div>
+  </div>
+
+  <h3>0.2 Checklist 60 giây trước khi bấm Execute (F5)</h3>
+  <table class="compact-table">
+    <thead>
+      <tr><th style="width: 25%;">Hạng mục</th><th style="width: 40%;">Nguy cơ tiềm ẩn</th><th style="width: 35%;">Thao tác chuẩn mực</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Ngữ cảnh CSDL</strong></td>
+        <td>Vô tình tạo bảng/chèn dữ liệu vào CSDL hệ thống <code>master</code>.</td>
+        <td>Luôn đặt lệnh <code>USE TenDatabase; GO</code> ở đầu script.</td>
+      </tr>
+      <tr>
+        <td><strong>2. Định dạng ngày tháng</strong></td>
+        <td>Lỗi chuyển đổi kiểu dữ liệu ngày khi hệ thống dùng định dạng Mỹ hoặc Anh.</td>
+        <td>Thiết lập <code>SET DATEFORMAT YMD;</code> để chuỗi <code>'YYYY-MM-DD'</code> luôn hợp lệ.</td>
+      </tr>
+      <tr>
+        <td><strong>3. Vùng chọn thực thi</strong></td>
+        <td>Bôi đen thiếu câu lệnh khiến SSMS chỉ chạy một đoạn cụt gây lỗi cú pháp.</td>
+        <td>Bấm chuột ra ngoài hoặc nhấn <code>Ctrl+A</code> trước khi nhấn <code>F5</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>4. Kiểm tra cú pháp</strong></td>
+        <td>Chạy trực tiếp câu lệnh lỗi có thể làm sai lệch dữ liệu thử nghiệm.</td>
+        <td>Nhấn <code>Ctrl+F5</code> (Parse) để kiểm tra cú pháp trước khi chạy.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>0.3 Kỹ thuật cô lập giao dịch kiểm thử (Safe Sandbox)</h3>
+  <p>Khi viết các câu lệnh sửa đổi dữ liệu (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) hoặc câu lệnh tạo Trigger phức tạp, hãy luôn bao bọc mã trong khối giao dịch có lệnh <code>ROLLBACK</code> để thử nghiệm kết quả mà không làm biến đổi trạng thái bảng gốc:</p>
+
+  <pre class="sql-block"><span class="kw">BEGIN TRANSACTION</span>;
+    <span class="cmt">-- 1. Xem dữ liệu trước khi thay đổi</span>
+    <span class="kw">SELECT</span> MANV, HOTEN, MUCLUONG <span class="kw">FROM</span> GIAOVIEN <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;
+
+    <span class="cmt">-- 2. Thực hiện câu lệnh DML cần kiểm thử</span>
+    <span class="kw">UPDATE</span> GIAOVIEN <span class="kw">SET</span> MUCLUONG = MUCLUONG * <span class="num">1.1</span> <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;
+
+    <span class="cmt">-- 3. Xem kết quả đã thay đổi trong giao dịch</span>
+    <span class="kw">SELECT</span> MANV, HOTEN, MUCLUONG <span class="kw">FROM</span> GIAOVIEN <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;
+
+<span class="kw">ROLLBACK TRANSACTION</span>; <span class="cmt">-- Hoàn tác toàn bộ, dữ liệu trở về nguyên trạng an toàn</span></pre>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 4</span>
+  </div>
+</div>

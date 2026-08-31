@@ -1,0 +1,120 @@
+<!-- Page 5: Xây dựng CSDL với DDL -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 1: XÂY DỰNG CSDL VỚI DDL</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>1. Xây dựng CSDL & Ràng buộc Khai báo (DDL)</h2>
+  <p>Ngôn ngữ định nghĩa dữ liệu (Data Definition Language - DDL) dùng để khởi tạo cấu trúc lưu trữ và các ràng buộc dữ liệu. Thiết kế DDL đúng ngay từ đầu giúp hệ thống tự động ngăn chặn dữ liệu rác ở tầng máy chủ.</p>
+
+  <h3>1.1 Mini-Lab: Thiết kế bảng chuẩn mực</h3>
+  <p>Xét hai quan hệ <code>KHACHHANG</code> và <code>SANPHAM</code> trong lược đồ Quản lý bán hàng chuẩn (căn cứ <code>TECH-A01</code>, <code>TECH-A03</code>):</p>
+
+  <pre class="sql-block"><span class="kw">CREATE DATABASE</span> QuanLyBanHang;
+<span class="kw">GO</span>
+<span class="kw">USE</span> QuanLyBanHang;
+<span class="kw">GO</span>
+
+<span class="kw">CREATE TABLE</span> KHACHHANG (
+    MAKH     <span class="dt">CHAR</span>(<span class="num">4</span>)         <span class="kw">NOT NULL</span>,
+    HOTEN    <span class="dt">NVARCHAR</span>(<span class="num">40</span>)    <span class="kw">NOT NULL</span>,
+    DCHI     <span class="dt">NVARCHAR</span>(<span class="num">50</span>),
+    SODT     <span class="dt">VARCHAR</span>(<span class="num">20</span>),
+    NGSINH   <span class="dt">SMALLDATETIME</span>,
+    NGDK     <span class="dt">SMALLDATETIME</span>,
+    DOANHSO  <span class="dt">MONEY</span>           <span class="kw">DEFAULT</span> <span class="num">0</span>,
+    <span class="kw">CONSTRAINT</span> PK_KHACHHANG <span class="kw">PRIMARY KEY</span> (MAKH),
+    <span class="kw">CONSTRAINT</span> CK_KHACHHANG_NGAY <span class="kw">CHECK</span> (NGDK &gt; NGSINH)
+);
+
+<span class="kw">CREATE TABLE</span> SANPHAM (
+    MASP     <span class="dt">CHAR</span>(<span class="num">4</span>)         <span class="kw">NOT NULL</span>,
+    TENSP    <span class="dt">NVARCHAR</span>(<span class="num">40</span>)    <span class="kw">NOT NULL</span>,
+    DVT      <span class="dt">NVARCHAR</span>(<span class="num">20</span>),
+    NUOCSX   <span class="dt">NVARCHAR</span>(<span class="num">40</span>)    <span class="kw">DEFAULT</span> N<span class="str">'Viet Nam'</span>,
+    GIA      <span class="dt">MONEY</span>           <span class="kw">CONSTRAINT</span> CK_SANPHAM_GIA <span class="kw">CHECK</span> (GIA &gt;= <span class="num">500</span>),
+    <span class="kw">CONSTRAINT</span> PK_SANPHAM <span class="kw">PRIMARY KEY</span> (MASP)
+);</pre>
+
+  <div class="col-2">
+    <div class="callout callout-danger" style="margin-top: 0;">
+      <div class="callout-title">Bẫy kiểu dữ liệu: NUMERIC(4,2)</div>
+      <p style="margin-bottom: 0;">Khi lưu trữ điểm số (thang 10), khai báo <code>NUMERIC(2,2)</code> chỉ cho phép giá trị tối đa là <code>0.99</code>. Để lưu được điểm <code>10.00</code>, bắt buộc phải khai báo <strong><code>NUMERIC(4,2)</code></strong> (tổng 4 chữ số, trong đó 2 chữ số phần thập phân).</p>
+    </div>
+    <div class="callout callout-why" style="margin-top: 0;">
+      <div class="callout-title">Thứ tự thực thi DDL</div>
+      <p style="margin-bottom: 0;"><strong>Tạo bảng:</strong> Bảng cha (chứa PK) phải tạo trước bảng con (chứa FK).<br><strong>Xóa bảng:</strong> Bảng con (chứa FK) phải xóa trước bảng cha; hoặc xóa FK constraint trước bằng <code>ALTER TABLE DROP CONSTRAINT</code>.</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 5</span>
+  </div>
+</div>
+
+<!-- Page 6: Thao tác dữ liệu với DML -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 2: THAO TÁC DỮ LIỆU VỚI DML</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>2. Thao tác Dữ liệu & Quy trình Kiểm chứng (DML)</h2>
+  <p>Ngôn ngữ thao tác dữ liệu (Data Manipulation Language - DML) bao gồm <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>. Để đảm bảo tính chính xác, mọi thao tác DML cần được thực hiện qua quy trình kiểm chứng 3 bước.</p>
+
+  <h3>2.1 Mini-Lab: Thao tác dữ liệu mẫu chuẩn</h3>
+
+  <pre class="sql-block"><span class="cmt">-- 1. INSERT đa dòng (Multi-row Value List)</span>
+<span class="kw">INSERT INTO</span> SANPHAM (MASP, TENSP, DVT, NUOCSX, GIA) <span class="kw">VALUES</span>
+(<span class="str">'BC01'</span>, N<span class="str">'But chi 2B'</span>, N<span class="str">'Cay'</span>, N<span class="str">'Viet Nam'</span>, <span class="num">5000</span>),
+(<span class="str">'BC02'</span>, N<span class="str">'But chi 4B'</span>, N<span class="str">'Cay'</span>, N<span class="str">'Nhat Ban'</span>, <span class="num">12000</span>),
+(<span class="str">'ST01'</span>, N<span class="str">'So tay A5'</span>,  N<span class="str">'Quyen'</span>, N<span class="str">'Viet Nam'</span>, <span class="num">35000</span>);
+
+<span class="cmt">-- 2. UPDATE có tính toán và điều kiện lọc</span>
+<span class="kw">UPDATE</span> SANPHAM
+<span class="kw">SET</span> GIA = GIA * <span class="num">1.05</span>
+<span class="kw">WHERE</span> NUOCSX = N<span class="str">'Viet Nam'</span> <span class="kw">AND</span> DVT = N<span class="str">'Cay'</span>;
+
+<span class="cmt">-- 3. DELETE có điều kiện</span>
+<span class="kw">DELETE FROM</span> SANPHAM
+<span class="kw">WHERE</span> GIA &lt; <span class="num">6000</span> <span class="kw">AND</span> NUOCSX = N<span class="str">'Viet Nam'</span>;</pre>
+
+  <h3>2.2 Quy trình kiểm chứng 3 bước (Verify Before & After)</h3>
+  <p>Khi làm bài thực hành hoặc bài thi, tuyệt đối không chạy lệnh DML "mù". Hãy luôn kiểm tra tập dòng mục tiêu trước và sau khi thực thi:</p>
+
+  <div class="trace-box">
+    <div class="trace-header">QUY TRÌNH KIỂM CHỨNG DML</div>
+    <div class="trace-steps">
+      <div class="trace-step">
+        <span class="step-badge">BƯỚC 1</span>
+        <div class="step-desc"><strong>Kiểm tra dòng sẽ bị tác động:</strong> Viết câu lệnh <code>SELECT * FROM Bang WHERE &lt;DieuKien&gt;</code> để đếm chính xác số lượng dòng và giá trị cột hiện tại.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">BƯỚC 2</span>
+        <div class="step-desc"><strong>Thực thi DML trong Transaction:</strong> Bọc trong <code>BEGIN TRAN ... ROLLBACK TRAN</code> để xem thông báo hệ thống <code>(N row(s) affected)</code> có khớp với Bước 1 hay không.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">BƯỚC 3</span>
+        <div class="step-desc"><strong>Đối chiếu kết quả sau thực thi:</strong> Chạy lại câu lệnh <code>SELECT</code> để xác nhận giá trị cột đã được cập nhật chính xác theo đúng yêu cầu đề bài.</div>
+      </div>
+    </div>
+  </div>
+
+  <table class="result-table">
+    <thead>
+      <tr><th>MASP</th><th>TENSP</th><th>DVT</th><th>NUOCSX</th><th>GIA (Trước)</th><th>GIA (Sau UPDATE)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>BC01</td><td>But chi 2B</td><td>Cay</td><td>Viet Nam</td><td>5,000</td><td class="cell-hl">5,250 (+5%)</td></tr>
+      <tr><td>BC02</td><td>But chi 4B</td><td>Cay</td><td>Nhat Ban</td><td>12,000</td><td>12,000 (Không đổi)</td></tr>
+      <tr><td>ST01</td><td>So tay A5</td><td>Quyen</td><td>Viet Nam</td><td>35,000</td><td>35,000 (Khác DVT)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 6</span>
+  </div>
+</div>

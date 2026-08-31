@@ -2,7 +2,7 @@
 
 ## Checkpoint
 
-v1.1 Phase B2 — Theory Handbook Final Microcopy Freeze Complete
+v1.1 Phase C1 — Practical Handbook Architecture & Representative Proof Complete
 
 ## Date
 
@@ -10,29 +10,33 @@ v1.1 Phase B2 — Theory Handbook Final Microcopy Freeze Complete
 
 ## Active branch
 
-`v1.1-theory-redesign`
+`v1.1-practice-handbook`
 
 ## Status
 
-PHASE A remains frozen. PHASE B2 final microcopy freeze is 100% COMPLETE on `v1.1-theory-redesign`: all study-guide/decorative emojis removed, promotional/hype phrasing replaced with restrained academic prose, unsupported lecturer-preference claims neutralized to evidence-safe statements, heading 5.3 reframed, and expanded automated QA linter integrated. All QA, visual, and safety checks PASS. Theory v1.1 is ready to freeze. Sách v1.0.0, PDF chính thức, nhánh `main`, `v1.1-editorial-practice` và kho `phuchello/phuchello` hoàn toàn không bị ảnh hưởng.
+PHASE A and THEORY v1.1 remain FROZEN and UNTOUCHED. PHASE C1 is 100% COMPLETE on `v1.1-practice-handbook`: created the separate practical handbook architecture, authored the 21-page representative proof PDF (`dist/proofs/IT004_CSDL_UIT_v1.1_Practice_DesignProof.pdf`), established the set-based multi-row safe trigger standard, constructed the 5-step debugging system, and generated review contact sheets and design notes. Theory v1.1 (`61eb5c8`), Phase A (`6aef91e`), `main` (`6ccf5a4`) and `phuchello/phuchello` remain completely untouched. Ready for Human Mentor C1 Review.
 
 ## Scope completed in this checkpoint
 
-- Bóc tách toàn diện 6 tệp đính kèm cục bộ thành 17 tài liệu gốc với số trang chuẩn xác (`local_corpus_audit.md`);
-- Sổ đăng ký nguồn đầy đủ 60 nguồn (`source_inventory.md`);
-- Danh bộ 31 hiện vật chuẩn hóa với URL trực tiếp cho nguồn web hoặc đường dẫn cục bộ thực tế cho bản tái dựng, bằng chứng khử trùng lặp mirror và quyết định promote/unpromote (`artifact_registry.md`);
-- Nhật ký 17 đợt tìm kiếm/cross-check với trạng thái snapshot đóng băng cho triển khai (`web_search_log.md`);
-- Bản đồ mẫu đề thi thực chứng với `artifact_count` khớp 100% về mặt cơ học (`exam_pattern_map.md`);
-- Bản đồ kỹ năng T-SQL với mã nguồn Microsoft `TECH-A01`–`TECH-A11` chuẩn xác và phân loại Trigger (`practical_coverage_map.md`);
-- Kế hoạch ngân hàng câu hỏi tự luận theo chuyên đề với 3 lớp xuất xứ minh bạch (`essay_bank_plan.md`);
-- Báo cáo kiểm thử snapshot, URL, source/artifact IDs, counts, copyright và repository safety (`validation_report.md`).
-- Bộ nguồn lý thuyết đã áp dụng design system B1, cùng PDF lý thuyết 64 trang và các contact sheet QA (`dist/IT004_CSDL_UIT_LyThuyet_VoTrongPhuc.pdf`, `dist/review/v1.1_theory/`).
-- Báo cáo QA B2 và các trình dựng/chuẩn hóa PDF xác định (`reports/v1.1_theory_qa.md`, `scripts/build_theory_pdf.js`, `scripts/normalize_theory_pdf.py`).
+- Thiết kế kiến trúc tổng thể 8 phần chuyên đề cho cẩm nang thực hành `IT004 — THỰC HÀNH CƠ SỞ DỮ LIỆU`;
+- Xây dựng hệ thống thiết kế `practice/css/practice.css` đồng bộ cùng họ B1 với sách lý thuyết;
+- Biên soạn 9 tệp chương mẫu trong `practice/chapters/` bao quát 10 phương diện sư phạm và kỹ thuật cốt lõi;
+- Xây dựng bản mẫu đại diện 21 trang A4 không có lỗi tràn lề hay ký tự vỡ (`IT004_CSDL_UIT_v1.1_Practice_DesignProof.pdf`);
+- Chuẩn hóa mẫu Trigger dạng tập hợp an toàn đa dòng (`Multi-Row Safety`), loại bỏ biến vô hướng;
+- Xây dựng khung chẩn đoán lỗi 5 bước cho 6 nhóm lỗi T-SQL phổ biến;
+- Tái dựng tiến trình Lab 01 và Lab 03–04 cùng chiến lược phòng thi thực hành từ bằng chứng thực nghiệm Phase A;
+- Lập bảng đối chiếu mã nguồn kỹ thuật Microsoft Learn `TECH-A01`–`TECH-A11`;
+- Xuất bản tài liệu ghi chú thiết kế và hướng dẫn đánh giá 10 tiêu chí (`DESIGN_NOTES.md`, `REVIEW_GUIDE.md`);
+- Xuất bản báo cáo QA toàn diện và contact sheets (`reports/v1.1_practice_c1_qa.md`, `dist/review/v1.1_practice/`).
 
 ## Explicit hold
 
-Further source discovery is non-blocking for the theory-redesign review. This branch does not build Quartz, author the practical book, merge to `main`, tag, or release.
+Do not author the full Phase C2 practical book, build Quartz, merge to `main`, tag, or release until the mentor approves the Phase C1 design proof.
 
 ## Deliverables
 
-`research/v1.1_phase_a/`
+- `practice/`
+- `design/v1.1_practice/`
+- `dist/proofs/IT004_CSDL_UIT_v1.1_Practice_DesignProof.pdf`
+- `dist/review/v1.1_practice/`
+- `reports/v1.1_practice_c1_qa.md`

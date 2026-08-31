@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IT004 – Cơ sở dữ liệu — Sổ tay thực hành</title>
+  <link rel="stylesheet" href="css/practice.css">
+</head>
+<body>
+<!-- Cover Page -->
+<div class="cover-page">
+  <div class="cover-lockup">
+    <div class="book-code">IT004</div>
+    <div class="book-title">THỰC HÀNH<br>CƠ SỞ DỮ LIỆU</div>
+    <div class="author-name">BIÊN SOẠN: VÕ TRỌNG PHÚC</div>
+  </div>
+
+  <div class="cover-diagram">
+    <svg viewBox="0 0 540 180" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="pracArrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#1e7881"/>
+        </marker>
+        <marker id="pracArrowOchre" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+          <path d="M0,0 L6,3 L0,6 Z" fill="#b57b36"/>
+        </marker>
+      </defs>
+
+      <!-- Stage 1: Base Tables -->
+      <g transform="translate(10, 20)">
+        <rect width="110" height="60" rx="3" fill="#ffffff" stroke="#203047" stroke-width="1.5"/>
+        <rect width="110" height="18" rx="2" fill="#203047"/>
+        <text x="55" y="13" font-family="'Segoe UI', Arial, sans-serif" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">R1: KHACHHANG</text>
+        <text x="12" y="32" font-family="'Segoe UI', Arial, sans-serif" font-size="8" font-weight="600" fill="#1e7881">PK  MAKH</text>
+        <text x="12" y="46" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#5f6d78">·   HOTEN</text>
+        <text x="12" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#5f6d78">·   DOANHSO</text>
+      </g>
+
+      <g transform="translate(10, 95)">
+        <rect width="110" height="60" rx="3" fill="#ffffff" stroke="#203047" stroke-width="1.5"/>
+        <rect width="110" height="18" rx="2" fill="#203047"/>
+        <text x="55" y="13" font-family="'Segoe UI', Arial, sans-serif" font-size="9" font-weight="700" fill="#ffffff" text-anchor="middle">R2: HOADON</text>
+        <text x="12" y="32" font-family="'Segoe UI', Arial, sans-serif" font-size="8" font-weight="600" fill="#1e7881">PK  SOHD</text>
+        <text x="12" y="46" font-family="'Segoe UI', Arial, sans-serif" font-size="8" font-weight="600" fill="#b57b36">FK  MAKH</text>
+        <text x="12" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="8" fill="#5f6d78">·   TRIGIA</text>
+      </g>
+
+      <!-- Connectors from Stage 1 to Stage 2 -->
+      <path d="M120 50 H155 V75 H175" fill="none" stroke="#1e7881" stroke-width="1.5" marker-end="url(#pracArrow)"/>
+      <path d="M120 125 H155 V95 H175" fill="none" stroke="#1e7881" stroke-width="1.5" marker-end="url(#pracArrow)"/>
+
+      <!-- Stage 2: SQL Processing Engine -->
+      <g transform="translate(180, 45)">
+        <rect width="160" height="85" rx="4" fill="#e7f1f1" stroke="#1e7881" stroke-width="1.5"/>
+        <text x="80" y="20" font-family="'Segoe UI', Arial, sans-serif" font-size="10" font-weight="700" fill="#203047" text-anchor="middle">SQL SERVER ENGINE</text>
+        <line x1="15" y1="28" x2="145" y2="28" stroke="#cad4d4" stroke-width="1"/>
+        <text x="20" y="44" font-family="Consolas, monospace" font-size="8.5" font-weight="600" fill="#1e7881">JOIN R1, R2 ON MAKH</text>
+        <text x="20" y="58" font-family="Consolas, monospace" font-size="8.5" font-weight="600" fill="#a94a32">WHERE TRIGIA &gt; 1000</text>
+        <text x="20" y="72" font-family="Consolas, monospace" font-size="8.5" font-weight="600" fill="#b57b36">GROUP BY MAKH, HOTEN</text>
+      </g>
+
+      <!-- Connectors from Stage 2 to Stage 3 -->
+      <path d="M340 87 H385" fill="none" stroke="#b57b36" stroke-width="1.5" marker-end="url(#pracArrowOchre)"/>
+
+      <!-- Stage 3: Result Relation -->
+      <g transform="translate(390, 30)">
+        <rect width="140" height="115" rx="3" fill="#ffffff" stroke="#b57b36" stroke-width="1.5"/>
+        <rect width="140" height="20" rx="2" fill="#b57b36"/>
+        <text x="70" y="14" font-family="'Segoe UI', Arial, sans-serif" font-size="9.5" font-weight="700" fill="#ffffff" text-anchor="middle">RESULT RELATION (R3)</text>
+        
+        <line x1="0" y1="36" x2="140" y2="36" stroke="#cad4d4" stroke-width="1"/>
+        <text x="8" y="31" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700" fill="#203047">MAKH</text>
+        <text x="45" y="31" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700" fill="#203047">HOTEN</text>
+        <text x="95" y="31" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-weight="700" fill="#203047">TONG_TIEN</text>
+
+        <text x="8" y="50" font-family="Consolas, monospace" font-size="7.5" fill="#1e7881">KH01</text>
+        <text x="45" y="50" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" fill="#203047">Nguyen Van A</text>
+        <text x="95" y="50" font-family="Consolas, monospace" font-size="7.5" fill="#8c5b20">3,450,000</text>
+
+        <text x="8" y="66" font-family="Consolas, monospace" font-size="7.5" fill="#1e7881">KH03</text>
+        <text x="45" y="66" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" fill="#203047">Tran Thi B</text>
+        <text x="95" y="66" font-family="Consolas, monospace" font-size="7.5" fill="#8c5b20">1,820,000</text>
+
+        <text x="8" y="82" font-family="Consolas, monospace" font-size="7.5" fill="#1e7881">KH07</text>
+        <text x="45" y="82" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" fill="#203047">Le Van C</text>
+        <text x="95" y="82" font-family="Consolas, monospace" font-size="7.5" fill="#8c5b20">5,100,000</text>
+
+        <line x1="0" y1="92" x2="140" y2="92" stroke="#eef2f2" stroke-width="1"/>
+        <text x="70" y="106" font-family="'Segoe UI', Arial, sans-serif" font-size="7.5" font-style="italic" fill="#5f6d78" text-anchor="middle">3 rows in set (0.02 sec)</text>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<!-- Info Page -->
+<div class="info-page">
+  <div class="page-header">
+    <span>IT004 — THỰC HÀNH CƠ SỞ DỮ LIỆU</span>
+    <span>THÔNG TIN XUẤT BẢN</span>
+  </div>
+
+  <h2>Thông tin biên soạn</h2>
+  <p><strong>Biên soạn và hệ thống hóa:</strong> Võ Trọng Phúc</p>
+  <p><strong>Môn học:</strong> IT004 — Cơ sở dữ liệu (Phần Thực hành T-SQL & SQL Server)</p>
+  <p><strong>Đối tượng phục vụ:</strong> Sinh viên theo học chương trình Cử nhân Công nghệ Thông tin, Hệ thống Thông tin, Kỹ thuật Phần mềm và các ngành kỹ thuật liên quan.</p>
+
+  <h2>Mục đích & Phương pháp tiếp cận</h2>
+  <p>Cẩm nang Thực hành là ấn phẩm đồng hành cùng <em>Sổ tay lý thuyết IT004</em>, tập trung chuyển hóa các mô hình toán học (Đại số quan hệ, Ràng buộc toàn vẹn, Phụ thuộc hàm) thành mã thực thi Transact-SQL (T-SQL) trên hệ quản trị cơ sở dữ liệu Microsoft SQL Server.</p>
+  
+  <p>Tài liệu xây dựng phương pháp tiếp cận dựa trên 3 trụ cột kỹ thuật:</p>
+  <ul>
+    <li><strong>Thực nghiệm kiểm chứng (Empirical Verification):</strong> Mỗi câu lệnh đều đi kèm lược đồ đầu vào, phân tích dòng thực thi (Execution Trace) và bảng kết quả tương ứng.</li>
+    <li><strong>Tư duy dạng tập hợp (Set-Based Reasoning):</strong> Triệt để giải thích và loại bỏ các thói quen lập trình duyệt con trỏ/vô hướng không tối ưu trên SQL Server.</li>
+    <li><strong>Kỹ thuật Trigger an toàn đa dòng (Multi-Row Safety):</strong> Thiết kế các giải pháp ràng buộc dữ liệu đảm bảo toàn vẹn ngay cả khi thực hiện thao tác DML hàng loạt.</li>
+  </ul>
+
+  <h2>Căn cứ học thuật & Tiêu chuẩn</h2>
+  <p>Nội dung cẩm nang được xây dựng và đối chiếu chuẩn xác với:</p>
+  <ul>
+    <li>Tài liệu kỹ thuật chính thức <strong>Microsoft Learn T-SQL Reference</strong> (các mã nguồn định danh <code>TECH-A01</code> đến <code>TECH-A11</code>).</li>
+    <li>Bộ bằng chứng khảo sát thực nghiệm <strong>Phase A</strong>: gồm 17 đề thi tự luận/trắc nghiệm, 10 đề thi thực hành máy chính thức và tiến trình 4 bài thực hành Lab 01–04.</li>
+  </ul>
+
+  <div class="callout callout-exam" style="margin-top: 5mm;">
+    <div class="callout-title">Lưu ý về phạm vi và bản quyền</div>
+    <p style="margin-bottom: 0;">Mọi ví dụ, câu hỏi và lời giải trong tài liệu được biên soạn độc lập, chuẩn hóa cú pháp và bổ sung phân tích cơ chế thực thi chi tiết. Tài liệu không sao chép nguyên văn các bản giải thô của sinh viên.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 2</span>
+  </div>
+</div>
+
+<!-- Table of Contents Page -->
+<div class="toc-page">
+  <div class="page-header">
+    <span>IT004 — THỰC HÀNH CƠ SỞ DỮ LIỆU</span>
+    <span>MỤC LỤC TỔNG THỂ</span>
+  </div>
+
+  <h1>Kiến trúc Cẩm nang Thực hành</h1>
+  <p style="margin-top: 1.5mm; font-size: 8.5pt; color: var(--muted);">Toàn bộ 8 phần chuyên đề và phụ lục tra cứu chuẩn hóa cho thực hành SQL Server và phòng thi.</p>
+
+  <div class="toc-grid">
+    <div class="toc-part">
+      <div class="toc-part-title">Phần 0: Môi trường & Quy trình SSMS</div>
+      <div class="toc-item"><span>0.1 Cấu trúc SQL Server & SSMS</span><span class="page-num">Tr. 4</span></div>
+      <div class="toc-item"><span>0.2 Khối lệnh GO & Phạm vi biến</span><span class="page-num">Tr. 4</span></div>
+      <div class="toc-item"><span>0.3 Checklist 60 giây trước Execute</span><span class="page-num">Tr. 4</span></div>
+      <div class="toc-item"><span>0.4 Cô lập giao dịch kiểm thử</span><span class="page-num">Tr. 4</span></div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-title">Phần 1: Xây dựng CSDL với DDL</div>
+      <div class="toc-item"><span>1.1 CREATE TABLE, PK, FK</span><span class="page-num">Tr. 5</span></div>
+      <div class="toc-item"><span>1.2 CHECK, DEFAULT, Kiểu dữ liệu</span><span class="page-num">Tr. 5</span></div>
+      <div class="toc-item"><span>1.3 Tràn số & Bẫy Unicode</span><span class="page-num">Tr. 5</span></div>
+      <div class="toc-item"><span>1.4 Thứ tự chạy Script DDL</span><span class="page-num">Tr. 5</span></div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-title">Phần 2: Thao tác Dữ liệu với DML</div>
+      <div class="toc-item"><span>2.1 INSERT đơn & đa dòng</span><span class="page-num">Tr. 6</span></div>
+      <div class="toc-item"><span>2.2 UPDATE có tính toán & Subquery</span><span class="page-num">Tr. 6</span></div>
+      <div class="toc-item"><span>2.3 DELETE an toàn & Khóa ngoại</span><span class="page-num">Tr. 6</span></div>
+      <div class="toc-item"><span>2.4 Quy trình kiểm chứng 3 bước</span><span class="page-num">Tr. 6</span></div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-title">Phần 3: Truy vấn Nền tảng & NULL</div>
+      <div class="toc-item"><span>3.1 SELECT, WHERE, LIKE, BETWEEN</span><span class="page-num">Tr. 7</span></div>
+      <div class="toc-item"><span>3.2 Logic 3 giá trị & Bẫy IS NULL</span><span class="page-num">Tr. 7</span></div>
+      <div class="toc-item"><span>3.3 Sắp xếp kết quả ORDER BY</span><span class="page-num">Tr. 7</span></div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-title">Phần 4: Truy vấn Kết nối & Gom nhóm</div>
+      <div class="toc-item"><span>4.1 Phép kết INNER & OUTER JOIN</span><span class="page-num">Tr. 8</span></div>
+      <div class="toc-item"><span>4.2 Dòng thực thi (Execution Trace)</span><span class="page-num">Tr. 8</span></div>
+      <div class="toc-item"><span>4.3 Self-Join & GROUP BY</span><span class="page-num">Tr. 9</span></div>
+      <div class="toc-item"><span>4.4 HAVING & Xếp hạng RANK()</span><span class="page-num">Tr. 10</span></div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-title">Phần 5: Truy vấn Nâng cao & Tập hợp</div>
+      <div class="toc-item"><span>5.1 Subquery & Toán tử EXISTS</span><span class="page-num">Tr. 11</span></div>
+      <div class="toc-item"><span>5.2 Bài toán "Tất cả" (NOT EXISTS)</span><span class="page-num">Tr. 12</span></div>
+      <div class="toc-item"><span>5.3 COUNT(DISTINCT) & Tập chia rỗng</span><span class="page-num">Tr. 12</span></div>
+      <div class="toc-item"><span>5.4 Phép toán tập hợp (Set Operators)</span><span class="page-num">Tr. 13</span></div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-title">Phần 6: Ràng buộc & Trigger T-SQL</div>
+      <div class="toc-item"><span>6.1 Bảng ảo inserted & deleted</span><span class="page-num">Tr. 14</span></div>
+      <div class="toc-item"><span>6.2 Trigger an toàn đa dòng</span><span class="page-num">Tr. 15</span></div>
+      <div class="toc-item"><span>6.3 Phân tích sập logic biến vô hướng</span><span class="page-num">Tr. 15</span></div>
+      <div class="toc-item"><span>6.4 Hiện thực Bảng tầm ảnh hưởng</span><span class="page-num">Tr. 16</span></div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-title">Phần 7: Hệ thống Chẩn đoán & Gỡ lỗi</div>
+      <div class="toc-item"><span>7.1 Khung chẩn đoán 5 bước</span><span class="page-num">Tr. 17</span></div>
+      <div class="toc-item"><span>7.2 Tra cứu 6 nhóm mã lỗi chính</span><span class="page-num">Tr. 17</span></div>
+    </div>
+
+    <div class="toc-part">
+      <div class="toc-part-title">Phần 8: Tiến trình Lab & Phòng thi</div>
+      <div class="toc-item"><span>8.1 Tiến trình Lab 01 (DDL & RBTV)</span><span class="page-num">Tr. 18</span></div>
+      <div class="toc-item"><span>8.2 Tiến trình Lab 03–04 (Nâng cao)</span><span class="page-num">Tr. 19</span></div>
+      <div class="toc-item"><span>8.3 Chiến lược phòng thi thực hành</span><span class="page-num">Tr. 20</span></div>
+      <div class="toc-item"><span>8.4 Checklist nộp bài & Barem điểm</span><span class="page-num">Tr. 20</span></div>
+    </div>
+
+    <div class="toc-part" style="background: var(--soft-teal);">
+      <div class="toc-part-title">Phụ lục: Bản đồ Nguồn Microsoft</div>
+      <div class="toc-item"><span>Đối chiếu mã nguồn TECH-A01–A11</span><span class="page-num">Tr. 21</span></div>
+      <div class="toc-item"><span>Bảng tra cứu thuật ngữ chuẩn T-SQL</span><span class="page-num">Tr. 21</span></div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 3</span>
+  </div>
+</div>
+
+
+<!-- Page 4: Môi trường & Quy trình vận hành SSMS -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 0: MÔI TRƯỜNG & QUY TRÌNH VẬN HÀNH</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>0. Môi trường làm việc & Quy trình chạy Script SSMS</h2>
+  <p>SQL Server Management Studio (SSMS) là công cụ giao diện đồ họa chính thức kết nối và gửi lệnh T-SQL tới SQL Server Database Engine. Hiểu rõ quy trình phân tích cú pháp, phân tách khối lệnh và quản lý giao dịch giúp loại bỏ hoàn toàn các lỗi vận hành thường gặp trong phòng thực hành và phòng thi.</p>
+
+  <h3>0.1 Phân tách khối lệnh với <code>GO</code></h3>
+  <p><code>GO</code> không phải là một câu lệnh T-SQL, mà là một <strong>từ khóa điều khiển lệnh (command separator)</strong> của SSMS để báo hiệu kết thúc một đợt lệnh (batch) và gửi toàn bộ đợt đó về máy chủ để thực thi.</p>
+
+  <div class="col-2">
+    <div>
+      <div class="callout-why" style="margin-top: 0;">
+        <div class="callout-title">Phạm vi của biến cục bộ</div>
+        <p style="margin-bottom: 0;">Mọi biến cục bộ khai báo bằng <code>DECLARE @x ...</code> chỉ tồn tại trong phạm vi của <strong>duy nhất đợt lệnh đó</strong>. Khi gặp lệnh <code>GO</code>, toàn bộ biến cục bộ trước đó sẽ bị hủy khỏi bộ nhớ.</p>
+      </div>
+    </div>
+    <div>
+      <pre class="sql-block"><span class="kw">DECLARE</span> @MaKhoa <span class="dt">VARCHAR</span>(<span class="num">5</span>) = <span class="str">'CNTT'</span>;
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> GIAOVIEN <span class="kw">WHERE</span> MAKHOA = @MaKhoa;
+<span class="kw">GO</span> <span class="cmt">-- Kết thúc Batch 1, @MaKhoa bị hủy</span>
+
+<span class="cmt">-- Lỗi Msg 137: Phải khai báo lại biến!</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> KHOA <span class="kw">WHERE</span> MAKHOA = @MaKhoa;</pre>
+    </div>
+  </div>
+
+  <h3>0.2 Checklist 60 giây trước khi bấm Execute (F5)</h3>
+  <table class="compact-table">
+    <thead>
+      <tr><th style="width: 25%;">Hạng mục</th><th style="width: 40%;">Nguy cơ tiềm ẩn</th><th style="width: 35%;">Thao tác chuẩn mực</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Ngữ cảnh CSDL</strong></td>
+        <td>Vô tình tạo bảng/chèn dữ liệu vào CSDL hệ thống <code>master</code>.</td>
+        <td>Luôn đặt lệnh <code>USE TenDatabase; GO</code> ở đầu script.</td>
+      </tr>
+      <tr>
+        <td><strong>2. Định dạng ngày tháng</strong></td>
+        <td>Lỗi chuyển đổi kiểu dữ liệu ngày khi hệ thống dùng định dạng Mỹ hoặc Anh.</td>
+        <td>Thiết lập <code>SET DATEFORMAT YMD;</code> để chuỗi <code>'YYYY-MM-DD'</code> luôn hợp lệ.</td>
+      </tr>
+      <tr>
+        <td><strong>3. Vùng chọn thực thi</strong></td>
+        <td>Bôi đen thiếu câu lệnh khiến SSMS chỉ chạy một đoạn cụt gây lỗi cú pháp.</td>
+        <td>Bấm chuột ra ngoài hoặc nhấn <code>Ctrl+A</code> trước khi nhấn <code>F5</code>.</td>
+      </tr>
+      <tr>
+        <td><strong>4. Kiểm tra cú pháp</strong></td>
+        <td>Chạy trực tiếp câu lệnh lỗi có thể làm sai lệch dữ liệu thử nghiệm.</td>
+        <td>Nhấn <code>Ctrl+F5</code> (Parse) để kiểm tra cú pháp trước khi chạy.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>0.3 Kỹ thuật cô lập giao dịch kiểm thử (Safe Sandbox)</h3>
+  <p>Khi viết các câu lệnh sửa đổi dữ liệu (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>) hoặc câu lệnh tạo Trigger phức tạp, hãy luôn bao bọc mã trong khối giao dịch có lệnh <code>ROLLBACK</code> để thử nghiệm kết quả mà không làm biến đổi trạng thái bảng gốc:</p>
+
+  <pre class="sql-block"><span class="kw">BEGIN TRANSACTION</span>;
+    <span class="cmt">-- 1. Xem dữ liệu trước khi thay đổi</span>
+    <span class="kw">SELECT</span> MANV, HOTEN, MUCLUONG <span class="kw">FROM</span> GIAOVIEN <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;
+
+    <span class="cmt">-- 2. Thực hiện câu lệnh DML cần kiểm thử</span>
+    <span class="kw">UPDATE</span> GIAOVIEN <span class="kw">SET</span> MUCLUONG = MUCLUONG * <span class="num">1.1</span> <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;
+
+    <span class="cmt">-- 3. Xem kết quả đã thay đổi trong giao dịch</span>
+    <span class="kw">SELECT</span> MANV, HOTEN, MUCLUONG <span class="kw">FROM</span> GIAOVIEN <span class="kw">WHERE</span> MAKHOA = <span class="str">'CNTT'</span>;
+
+<span class="kw">ROLLBACK TRANSACTION</span>; <span class="cmt">-- Hoàn tác toàn bộ, dữ liệu trở về nguyên trạng an toàn</span></pre>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 4</span>
+  </div>
+</div>
+
+
+<!-- Page 5: Xây dựng CSDL với DDL -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 1: XÂY DỰNG CSDL VỚI DDL</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>1. Xây dựng CSDL & Ràng buộc Khai báo (DDL)</h2>
+  <p>Ngôn ngữ định nghĩa dữ liệu (Data Definition Language - DDL) dùng để khởi tạo cấu trúc lưu trữ và các ràng buộc dữ liệu. Thiết kế DDL đúng ngay từ đầu giúp hệ thống tự động ngăn chặn dữ liệu rác ở tầng máy chủ.</p>
+
+  <h3>1.1 Mini-Lab: Thiết kế bảng chuẩn mực</h3>
+  <p>Xét hai quan hệ <code>KHACHHANG</code> và <code>SANPHAM</code> trong lược đồ Quản lý bán hàng chuẩn (căn cứ <code>TECH-A01</code>, <code>TECH-A03</code>):</p>
+
+  <pre class="sql-block"><span class="kw">CREATE DATABASE</span> QuanLyBanHang;
+<span class="kw">GO</span>
+<span class="kw">USE</span> QuanLyBanHang;
+<span class="kw">GO</span>
+
+<span class="kw">CREATE TABLE</span> KHACHHANG (
+    MAKH     <span class="dt">CHAR</span>(<span class="num">4</span>)         <span class="kw">NOT NULL</span>,
+    HOTEN    <span class="dt">NVARCHAR</span>(<span class="num">40</span>)    <span class="kw">NOT NULL</span>,
+    DCHI     <span class="dt">NVARCHAR</span>(<span class="num">50</span>),
+    SODT     <span class="dt">VARCHAR</span>(<span class="num">20</span>),
+    NGSINH   <span class="dt">SMALLDATETIME</span>,
+    NGDK     <span class="dt">SMALLDATETIME</span>,
+    DOANHSO  <span class="dt">MONEY</span>           <span class="kw">DEFAULT</span> <span class="num">0</span>,
+    <span class="kw">CONSTRAINT</span> PK_KHACHHANG <span class="kw">PRIMARY KEY</span> (MAKH),
+    <span class="kw">CONSTRAINT</span> CK_KHACHHANG_NGAY <span class="kw">CHECK</span> (NGDK &gt; NGSINH)
+);
+
+<span class="kw">CREATE TABLE</span> SANPHAM (
+    MASP     <span class="dt">CHAR</span>(<span class="num">4</span>)         <span class="kw">NOT NULL</span>,
+    TENSP    <span class="dt">NVARCHAR</span>(<span class="num">40</span>)    <span class="kw">NOT NULL</span>,
+    DVT      <span class="dt">NVARCHAR</span>(<span class="num">20</span>),
+    NUOCSX   <span class="dt">NVARCHAR</span>(<span class="num">40</span>)    <span class="kw">DEFAULT</span> N<span class="str">'Viet Nam'</span>,
+    GIA      <span class="dt">MONEY</span>           <span class="kw">CONSTRAINT</span> CK_SANPHAM_GIA <span class="kw">CHECK</span> (GIA &gt;= <span class="num">500</span>),
+    <span class="kw">CONSTRAINT</span> PK_SANPHAM <span class="kw">PRIMARY KEY</span> (MASP)
+);</pre>
+
+  <div class="col-2">
+    <div class="callout callout-danger" style="margin-top: 0;">
+      <div class="callout-title">Bẫy kiểu dữ liệu: NUMERIC(4,2)</div>
+      <p style="margin-bottom: 0;">Khi lưu trữ điểm số (thang 10), khai báo <code>NUMERIC(2,2)</code> chỉ cho phép giá trị tối đa là <code>0.99</code>. Để lưu được điểm <code>10.00</code>, bắt buộc phải khai báo <strong><code>NUMERIC(4,2)</code></strong> (tổng 4 chữ số, trong đó 2 chữ số phần thập phân).</p>
+    </div>
+    <div class="callout callout-why" style="margin-top: 0;">
+      <div class="callout-title">Thứ tự thực thi DDL</div>
+      <p style="margin-bottom: 0;"><strong>Tạo bảng:</strong> Bảng cha (chứa PK) phải tạo trước bảng con (chứa FK).<br><strong>Xóa bảng:</strong> Bảng con (chứa FK) phải xóa trước bảng cha; hoặc xóa FK constraint trước bằng <code>ALTER TABLE DROP CONSTRAINT</code>.</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 5</span>
+  </div>
+</div>
+
+<!-- Page 6: Thao tác dữ liệu với DML -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 2: THAO TÁC DỮ LIỆU VỚI DML</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>2. Thao tác Dữ liệu & Quy trình Kiểm chứng (DML)</h2>
+  <p>Ngôn ngữ thao tác dữ liệu (Data Manipulation Language - DML) bao gồm <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>. Để đảm bảo tính chính xác, mọi thao tác DML cần được thực hiện qua quy trình kiểm chứng 3 bước.</p>
+
+  <h3>2.1 Mini-Lab: Thao tác dữ liệu mẫu chuẩn</h3>
+
+  <pre class="sql-block"><span class="cmt">-- 1. INSERT đa dòng (Multi-row Value List)</span>
+<span class="kw">INSERT INTO</span> SANPHAM (MASP, TENSP, DVT, NUOCSX, GIA) <span class="kw">VALUES</span>
+(<span class="str">'BC01'</span>, N<span class="str">'But chi 2B'</span>, N<span class="str">'Cay'</span>, N<span class="str">'Viet Nam'</span>, <span class="num">5000</span>),
+(<span class="str">'BC02'</span>, N<span class="str">'But chi 4B'</span>, N<span class="str">'Cay'</span>, N<span class="str">'Nhat Ban'</span>, <span class="num">12000</span>),
+(<span class="str">'ST01'</span>, N<span class="str">'So tay A5'</span>,  N<span class="str">'Quyen'</span>, N<span class="str">'Viet Nam'</span>, <span class="num">35000</span>);
+
+<span class="cmt">-- 2. UPDATE có tính toán và điều kiện lọc</span>
+<span class="kw">UPDATE</span> SANPHAM
+<span class="kw">SET</span> GIA = GIA * <span class="num">1.05</span>
+<span class="kw">WHERE</span> NUOCSX = N<span class="str">'Viet Nam'</span> <span class="kw">AND</span> DVT = N<span class="str">'Cay'</span>;
+
+<span class="cmt">-- 3. DELETE có điều kiện</span>
+<span class="kw">DELETE FROM</span> SANPHAM
+<span class="kw">WHERE</span> GIA &lt; <span class="num">6000</span> <span class="kw">AND</span> NUOCSX = N<span class="str">'Viet Nam'</span>;</pre>
+
+  <h3>2.2 Quy trình kiểm chứng 3 bước (Verify Before & After)</h3>
+  <p>Khi làm bài thực hành hoặc bài thi, tuyệt đối không chạy lệnh DML "mù". Hãy luôn kiểm tra tập dòng mục tiêu trước và sau khi thực thi:</p>
+
+  <div class="trace-box">
+    <div class="trace-header">QUY TRÌNH KIỂM CHỨNG DML</div>
+    <div class="trace-steps">
+      <div class="trace-step">
+        <span class="step-badge">BƯỚC 1</span>
+        <div class="step-desc"><strong>Kiểm tra dòng sẽ bị tác động:</strong> Viết câu lệnh <code>SELECT * FROM Bang WHERE &lt;DieuKien&gt;</code> để đếm chính xác số lượng dòng và giá trị cột hiện tại.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">BƯỚC 2</span>
+        <div class="step-desc"><strong>Thực thi DML trong Transaction:</strong> Bọc trong <code>BEGIN TRAN ... ROLLBACK TRAN</code> để xem thông báo hệ thống <code>(N row(s) affected)</code> có khớp với Bước 1 hay không.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">BƯỚC 3</span>
+        <div class="step-desc"><strong>Đối chiếu kết quả sau thực thi:</strong> Chạy lại câu lệnh <code>SELECT</code> để xác nhận giá trị cột đã được cập nhật chính xác theo đúng yêu cầu đề bài.</div>
+      </div>
+    </div>
+  </div>
+
+  <table class="result-table">
+    <thead>
+      <tr><th>MASP</th><th>TENSP</th><th>DVT</th><th>NUOCSX</th><th>GIA (Trước)</th><th>GIA (Sau UPDATE)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>BC01</td><td>But chi 2B</td><td>Cay</td><td>Viet Nam</td><td>5,000</td><td class="cell-hl">5,250 (+5%)</td></tr>
+      <tr><td>BC02</td><td>But chi 4B</td><td>Cay</td><td>Nhat Ban</td><td>12,000</td><td>12,000 (Không đổi)</td></tr>
+      <tr><td>ST01</td><td>So tay A5</td><td>Quyen</td><td>Viet Nam</td><td>35,000</td><td>35,000 (Khác DVT)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 6</span>
+  </div>
+</div>
+
+
+<!-- Page 7: Truy vấn nền tảng & Giá trị NULL -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 3: TRUY VẤN NỀN TẢNG & GIÁ TRỊ NULL</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>3. Kỹ thuật Truy vấn Nền tảng & Logic 3 Giá trị</h2>
+  <p>Truy vấn lọc dữ liệu cơ bản trong SQL Server sử dụng mệnh đề <code>SELECT ... FROM ... WHERE</code>. Hiểu rõ logic 3 giá trị (True, False, Unknown) là điều kiện tiên quyết để tránh bẫy dữ liệu khi xử lý giá trị <code>NULL</code>.</p>
+
+  <h3>3.1 Cú pháp lọc chuỗi, đoạn & tập hợp</h3>
+  <pre class="sql-block"><span class="cmt">-- 1. LIKE: Tìm sản phẩm mã bắt đầu bằng 'B' và tận cùng bằng '01'</span>
+<span class="kw">SELECT</span> MASP, TENSP, GIA <span class="kw">FROM</span> SANPHAM <span class="kw">WHERE</span> MASP <span class="kw">LIKE</span> <span class="str">'B%01'</span>;
+
+<span class="cmt">-- 2. BETWEEN: Lọc trong đoạn đóng [5000, 35000]</span>
+<span class="kw">SELECT</span> MASP, TENSP, GIA <span class="kw">FROM</span> SANPHAM <span class="kw">WHERE</span> GIA <span class="kw">BETWEEN</span> <span class="num">5000</span> <span class="kw">AND</span> <span class="num">35000</span>;
+
+<span class="cmt">-- 3. IN: Thuộc tập giá trị rời rạc</span>
+<span class="kw">SELECT</span> MASP, TENSP, NUOCSX <span class="kw">FROM</span> SANPHAM <span class="kw">WHERE</span> NUOCSX <span class="kw">IN</span> (N<span class="str">'Viet Nam'</span>, N<span class="str">'Nhat Ban'</span>);</pre>
+
+  <h3>3.2 Logic 3 giá trị (3-Valued Logic) & Bẫy <code>NULL</code></h3>
+  <p><code>NULL</code> thể hiện thông tin chưa biết hoặc không tồn tại, không phải là số <code>0</code> hay chuỗi rỗng <code>''</code>. Mọi phép so sánh bằng toán tử thông thường với <code>NULL</code> (như <code>= NULL</code> hoặc <code>!= NULL</code>) đều trả về <strong><code>UNKNOWN</code></strong>, và mệnh đề <code>WHERE</code> sẽ loại bỏ tất cả các dòng có kết quả <code>UNKNOWN</code>.</p>
+
+  <div class="col-2">
+    <div>
+      <table class="compact-table">
+        <thead><tr><th>Toán hạng A</th><th>Toán hạng B</th><th>A AND B</th><th>A OR B</th></tr></thead>
+        <tbody>
+          <tr><td>TRUE</td><td>UNKNOWN</td><td class="cell-null">UNKNOWN</td><td>TRUE</td></tr>
+          <tr><td>FALSE</td><td>UNKNOWN</td><td>FALSE</td><td class="cell-null">UNKNOWN</td></tr>
+          <tr><td>UNKNOWN</td><td>UNKNOWN</td><td class="cell-null">UNKNOWN</td><td class="cell-null">UNKNOWN</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <div class="callout callout-danger" style="margin-top: 0;">
+        <div class="callout-title">Bắt buộc dùng IS NULL</div>
+        <pre class="sql-block" style="margin: 0;"><span class="cmt">-- SAI: Luôn trả về 0 dòng!</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> KHACHHANG <span class="kw">WHERE</span> SODT = <span class="kw">NULL</span>;
+
+<span class="cmt">-- ĐÚNG: Cú pháp chuẩn SQL Server</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> KHACHHANG <span class="kw">WHERE</span> SODT <span class="kw">IS NULL</span>;</pre>
+      </div>
+    </div>
+  </div>
+
+  <h3>3.3 Sắp xếp kết quả với <code>ORDER BY</code></h3>
+  <p><code>ORDER BY</code> luôn nằm ở <strong>cuối cùng</strong> của câu truy vấn. Khi sắp xếp theo thứ tự tăng dần (<code>ASC</code>), SQL Server coi <code>NULL</code> là giá trị nhỏ nhất và đặt ở đầu kết quả.</p>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 7</span>
+  </div>
+</div>
+
+<!-- Page 8: Kỹ thuật JOIN & Dòng thực thi -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 4: TRUY VẤN KẾT NỐI & PHÂN TÍCH TỔNG HỢP</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>4. Phép kết (JOIN) & Dòng thực thi (Execution Trace)</h2>
+  <p>Phép kết kết nối các hàng từ hai hay nhiều bảng dựa trên cột chung. Hiểu rõ dòng thực thi bên trong Database Engine giúp lập trình viên viết truy vấn tối ưu và dự đoán chính xác kết quả đầu ra.</p>
+
+  <h3>4.1 Worked Example: Truy vấn kết nối nhiều bảng</h3>
+  <p><strong>Yêu cầu:</strong> In ra danh sách các hóa đơn mua hàng trong ngày <code>2024-10-15</code> gồm: Tên khách hàng, Số hóa đơn và Trị giá, sắp xếp theo Trị giá giảm dần.</p>
+
+  <pre class="sql-block"><span class="kw">SELECT</span> KH.HOTEN, HD.SOHD, HD.TRIGIA
+<span class="kw">FROM</span> HOADON HD
+<span class="kw">INNER JOIN</span> KHACHHANG KH <span class="kw">ON</span> HD.MAKH = KH.MAKH
+<span class="kw">WHERE</span> HD.NGHD = <span class="str">'2024-10-15'</span>
+<span class="kw">ORDER BY</span> HD.TRIGIA <span class="kw">DESC</span>;</pre>
+
+  <h3>4.2 Dòng thực thi chi tiết (Execution Trace)</h3>
+  <div class="trace-box">
+    <div class="trace-header">EXECUTION TRACE — QUÁ TRÌNH XỬ LÝ TRUY VẤN</div>
+    <div class="trace-steps">
+      <div class="trace-step">
+        <span class="step-badge">1. FROM &amp; JOIN</span>
+        <div class="step-desc">Đọc bảng <code>HOADON</code> và kết nối với <code>KHACHHANG</code> trên điều kiện <code>HD.MAKH = KH.MAKH</code>. Tạo tập dòng trung gian chứa đầy đủ cột của cả 2 bảng.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">2. WHERE</span>
+        <div class="step-desc">Quét từng dòng trong tập trung gian, áp dụng vị từ lọc <code>HD.NGHD = '2024-10-15'</code>. Các dòng khác ngày lập tức bị loại bỏ khỏi luồng xử lý.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">3. SELECT</span>
+        <div class="step-desc">Chiếu (Project) 3 cột cần hiển thị: <code>KH.HOTEN</code>, <code>HD.SOHD</code>, <code>HD.TRIGIA</code>.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">4. ORDER BY</span>
+        <div class="step-desc">Sắp xếp tập kết quả cuối cùng theo cột <code>HD.TRIGIA</code> theo thứ tự giảm dần.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>4.3 Bảng kết quả mong đợi (Expected Output)</h3>
+  <table class="result-table">
+    <thead>
+      <tr><th>HOTEN</th><th>SOHD</th><th>TRIGIA</th><th>Ghi chú đối chiếu</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Nguyen Van A</td><td>1002</td><td class="cell-hl">1,250,000</td><td>Khớp MAKH = 'KH01', ngày 2024-10-15</td></tr>
+      <tr><td>Le Van C</td><td>1005</td><td class="cell-hl">890,000</td><td>Khớp MAKH = 'KH07', ngày 2024-10-15</td></tr>
+      <tr><td>Tran Thi B</td><td>1001</td><td class="cell-hl">320,000</td><td>Khớp MAKH = 'KH03', ngày 2024-10-15</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-why">
+    <div class="callout-title">INNER JOIN vs LEFT JOIN</div>
+    <p style="margin-bottom: 0;"><code>INNER JOIN</code> chỉ giữ lại các dòng có khóa khớp ở cả hai bảng. Nếu khách hàng chưa từng có hóa đơn, họ sẽ bị loại. Dùng <code>LEFT OUTER JOIN</code> nếu muốn giữ lại toàn bộ khách hàng và hiển thị <code>NULL</code> ở các cột hóa đơn.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 8</span>
+  </div>
+</div>
+
+<!-- Page 9: Self-Join & GROUP BY -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 4: TRUY VẤN KẾT NỐI & PHÂN TÍCH TỔNG HỢP</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>4.4 Kỹ thuật Tự kết (Self-Join) & Gom nhóm (GROUP BY)</h2>
+  <p>Tự kết (Self-Join) là phép kết một bảng với chính nó để giải quyết các mối quan hệ đệ quy (như nhân viên - quản lý). Gom nhóm (<code>GROUP BY</code>) phân chia tập dữ liệu thành các nhóm độc lập để tính toán thống kê (căn cứ <code>TECH-A02</code>).</p>
+
+  <h3>4.4.1 Self-Join: Tìm Trưởng bộ môn / Người quản lý</h3>
+  <pre class="sql-block"><span class="cmt">-- Lấy tên Giáo viên và Tên Giáo viên quản lý trực tiếp</span>
+<span class="kw">SELECT</span> GV.MAGV, GV.HOTEN <span class="kw">AS</span> TenGiaoVien, QL.HOTEN <span class="kw">AS</span> TenNguoiQuanLy
+<span class="kw">FROM</span> GIAOVIEN GV
+<span class="kw">LEFT JOIN</span> GIAOVIEN QL <span class="kw">ON</span> GV.MAGVQL = QL.MAGV;</pre>
+
+  <h3>4.4.2 Cơ chế gom nhóm với <code>GROUP BY</code></h3>
+  <p>Mọi thuộc tính xuất hiện trong danh sách <code>SELECT</code> mà không nằm bên trong một hàm kết hợp (như <code>COUNT</code>, <code>SUM</code>, <code>AVG</code>, <code>MIN</code>, <code>MAX</code>) đều <strong>bắt buộc phải được khai báo trong mệnh đề <code>GROUP BY</code></strong>.</p>
+
+  <pre class="sql-block"><span class="cmt">-- Thống kê số lượng sản phẩm và giá trung bình theo từng nước sản xuất</span>
+<span class="kw">SELECT</span> NUOCSX, <span class="fn">COUNT</span>(*) <span class="kw">AS</span> SoLuongSP, <span class="fn">AVG</span>(GIA) <span class="kw">AS</span> GiaTrungBinh
+<span class="kw">FROM</span> SANPHAM
+<span class="kw">GROUP BY</span> NUOCSX;</pre>
+
+  <table class="result-table">
+    <thead>
+      <tr><th>NUOCSX</th><th>SoLuongSP</th><th>GiaTrungBinh</th><th>Cơ chế xử lý</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Viet Nam</td><td>12</td><td>24,500</td><td>Gom toàn bộ 12 dòng có NUOCSX = 'Viet Nam', tính SUM/12</td></tr>
+      <tr><td>Nhat Ban</td><td>6</td><td>85,000</td><td>Gom toàn bộ 6 dòng có NUOCSX = 'Nhat Ban', tính SUM/6</td></tr>
+      <tr><td>Singapore</td><td>4</td><td>110,000</td><td>Gom toàn bộ 4 dòng có NUOCSX = 'Singapore', tính SUM/4</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-danger">
+    <div class="callout-title">Sai lầm kinh điển: Lỗi Msg 8120</div>
+    <p style="margin-bottom: 0;">Nếu viết <code>SELECT NUOCSX, TENSP, COUNT(*) FROM SANPHAM GROUP BY NUOCSX;</code>, SQL Server sẽ báo lỗi <code>Msg 8120</code> vì trong mỗi nhóm <code>NUOCSX</code> có nhiều <code>TENSP</code> khác nhau, máy chủ không thể biết lấy tên nào để hiển thị vào 1 ô kết quả duy nhất.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 9</span>
+  </div>
+</div>
+
+
+<!-- Page 10: HAVING & Xếp hạng RANK() -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 4: TRUY VẤN KẾT NỐI & PHÂN TÍCH TỔNG HỢP</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>4.5 Lọc sau gom nhóm (HAVING) & Xếp hạng (RANK)</h2>
+  <p>Sự khác biệt cốt lõi giữa <code>WHERE</code> và <code>HAVING</code> nằm ở thời điểm bộ lọc được áp dụng trong vòng đời truy vấn: <code>WHERE</code> lọc trên từng dòng dữ liệu thô, trong khi <code>HAVING</code> lọc trên các nhóm sau khi đã tính toán hàm kết hợp.</p>
+
+  <h3>4.5.1 Lọc nhóm với <code>HAVING</code></h3>
+  <p><strong>Yêu cầu:</strong> Tìm các nước sản xuất có từ 3 sản phẩm trở lên với giá bán tối đa lớn hơn 50,000.</p>
+
+  <pre class="sql-block"><span class="kw">SELECT</span> NUOCSX, <span class="fn">COUNT</span>(*) <span class="kw">AS</span> SoLuongSP, <span class="fn">MAX</span>(GIA) <span class="kw">AS</span> GiaCaoNhat
+<span class="kw">FROM</span> SANPHAM
+<span class="kw">GROUP BY</span> NUOCSX
+<span class="kw">HAVING</span> <span class="fn">COUNT</span>(*) &gt;= <span class="num">3</span> <span class="kw">AND</span> <span class="fn">MAX</span>(GIA) &gt; <span class="num">50000</span>;</pre>
+
+  <h3>4.5.2 Xếp hạng với <code>RANK() OVER</code> &amp; <code>TOP WITH TIES</code></h3>
+  <p>Khi cần tìm các đối tượng dẫn đầu bảng xếp hạng (ví dụ: Top 3 khách hàng có doanh số cao nhất), hàm <code>RANK()</code> xử lý triệt để trường hợp các đối tượng đồng hạng (cùng giá trị điểm/doanh số).</p>
+
+  <div class="col-2">
+    <div>
+      <pre class="sql-block"><span class="cmt">-- 1. Xếp hạng toàn cục bằng RANK()</span>
+<span class="kw">SELECT</span> MAKH, HOTEN, DOANHSO,
+       <span class="fn">RANK</span>() <span class="kw">OVER</span> (<span class="kw">ORDER BY</span> DOANHSO <span class="kw">DESC</span>) <span class="kw">AS</span> Hang
+<span class="kw">FROM</span> KHACHHANG;</pre>
+    </div>
+    <div>
+      <pre class="sql-block"><span class="cmt">-- 2. Lấy Top 3 tính cả đồng hạng</span>
+<span class="kw">SELECT TOP</span> <span class="num">3</span> <span class="kw">WITH TIES</span> MAKH, HOTEN, DOANHSO
+<span class="kw">FROM</span> KHACHHANG
+<span class="kw">ORDER BY</span> DOANHSO <span class="kw">DESC</span>;</pre>
+    </div>
+  </div>
+
+  <table class="result-table">
+    <thead>
+      <tr><th>MAKH</th><th>HOTEN</th><th>DOANHSO</th><th>RANK()</th><th>TOP 3 WITH TIES</th><th>Giải thích cơ chế</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>KH01</td><td>Nguyen Van A</td><td>15,000,000</td><td>1</td><td class="cell-hl">Được chọn</td><td>Hạng 1 duy nhất</td></tr>
+      <tr><td>KH04</td><td>Pham Van D</td><td>12,000,000</td><td>2</td><td class="cell-hl">Được chọn</td><td>Hạng 2 đồng hạng (a)</td></tr>
+      <tr><td>KH09</td><td>Hoang Thi E</td><td>12,000,000</td><td>2</td><td class="cell-hl">Được chọn</td><td>Hạng 2 đồng hạng (b)</td></tr>
+      <tr><td>KH02</td><td>Tran Thi B</td><td>9,500,000</td><td>4</td><td class="cell-hl">Được chọn</td><td>Hạng 4 (Do đồng hạng trước đó, chiếm vị trí thứ 4 tổng cộng)</td></tr>
+      <tr><td>KH07</td><td>Le Van C</td><td>8,000,000</td><td>5</td><td class="cell-null">Bị loại</td><td>Vượt quá ngưỡng Top 3</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 10</span>
+  </div>
+</div>
+
+<!-- Page 11: Subqueries & EXISTS -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 5: TRUY VẤN NÂNG CAO & TẬP HỢP</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>5. Truy vấn Lồng (Subquery) & Toán tử EXISTS</h2>
+  <p>Truy vấn lồng là câu truy vấn <code>SELECT</code> được đặt bên trong một câu lệnh SQL khác. Phân biệt rõ truy vấn con độc lập và truy vấn con tương quan (Correlated Subquery) là chìa khóa để giải quyết các bài toán lọc phức tạp (căn cứ <code>TECH-A07</code>).</p>
+
+  <h3>5.1 Truy vấn con độc lập vs Truy vấn con tương quan</h3>
+  <div class="col-2">
+    <div>
+      <div class="callout" style="margin-top: 0;">
+        <div class="callout-title">Độc lập (Self-Contained)</div>
+        <p style="margin-bottom: 0;">Chạy duy nhất 1 lần độc lập, trả về giá trị hoặc tập giá trị cho câu cha sử dụng (ví dụ: tìm sản phẩm có giá bằng giá cao nhất).</p>
+      </div>
+      <pre class="sql-block"><span class="kw">SELECT</span> MASP, TENSP, GIA
+<span class="kw">FROM</span> SANPHAM
+<span class="kw">WHERE</span> GIA = (
+    <span class="kw">SELECT</span> <span class="fn">MAX</span>(GIA) <span class="kw">FROM</span> SANPHAM
+);</pre>
+    </div>
+    <div>
+      <div class="callout callout-why" style="margin-top: 0;">
+        <div class="callout-title">Tương quan (Correlated)</div>
+        <p style="margin-bottom: 0;">Chạy lặp lại cho <em>từng dòng</em> của câu cha vì tham chiếu trực tiếp đến cột ở bảng ngoài cùng (như biến lặp hai vòng <code>for</code>).</p>
+      </div>
+      <pre class="sql-block"><span class="kw">SELECT</span> SP1.MASP, SP1.TENSP, SP1.GIA
+<span class="kw">FROM</span> SANPHAM SP1
+<span class="kw">WHERE</span> SP1.GIA = (
+    <span class="kw">SELECT</span> <span class="fn">MAX</span>(SP2.GIA) <span class="kw">FROM</span> SANPHAM SP2
+    <span class="kw">WHERE</span> SP2.NUOCSX = SP1.NUOCSX
+);</pre>
+    </div>
+  </div>
+
+  <h3>5.2 Toán tử <code>EXISTS</code> / <code>NOT EXISTS</code> (Kiểm tra sự tồn tại)</h3>
+  <p>Toán tử <code>EXISTS</code> trả về <code>TRUE</code> ngay khi truy vấn con tìm thấy <strong>ít nhất một dòng</strong> thỏa mãn (cơ chế Short-Circuit Evaluation), không quan tâm danh sách cột trong <code>SELECT</code> của câu con (thường viết chuẩn là <code>SELECT 1</code>).</p>
+
+  <pre class="sql-block"><span class="cmt">-- Tìm các sản phẩm chưa từng được bán trong bất kỳ hóa đơn nào</span>
+<span class="kw">SELECT</span> SP.MASP, SP.TENSP
+<span class="kw">FROM</span> SANPHAM SP
+<span class="kw">WHERE NOT EXISTS</span> (
+    <span class="kw">SELECT</span> <span class="num">1</span>
+    <span class="kw">FROM</span> CTHD CT
+    <span class="kw">WHERE</span> CT.MASP = SP.MASP <span class="cmt">-- Tham chiếu tương quan với SP.MASP ở ngoài</span>
+);</pre>
+
+  <div class="trace-box">
+    <div class="trace-header">CƠ CHẾ ĐÁNH GIÁ CỦA NOT EXISTS</div>
+    <div class="trace-steps">
+      <div class="trace-step">
+        <span class="step-badge">DÒNG 1</span>
+        <div class="step-desc">Xét sản phẩm <code>BC01</code>: Câu con quét bảng <code>CTHD</code> thấy có dòng <code>(SOHD: 1001, MASP: BC01)</code> $\rightarrow$ <code>EXISTS</code> là <code>TRUE</code> $\rightarrow$ <code>NOT EXISTS</code> là <code>FALSE</code> $\rightarrow$ <strong>Loại <code>BC01</code></strong>.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">DÒNG 2</span>
+        <div class="step-desc">Xét sản phẩm <code>BC05</code>: Câu con quét toàn bộ <code>CTHD</code> không có dòng nào chứa <code>BC05</code> $\rightarrow$ <code>EXISTS</code> là <code>FALSE</code> $\rightarrow$ <code>NOT EXISTS</code> là <code>TRUE</code> $\rightarrow$ <strong>Giữ lại <code>BC05</code></strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 11</span>
+  </div>
+</div>
+
+<!-- Page 12: Bài toán "Tất cả" & Phép chia -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 5: TRUY VẤN NÂNG CAO & TẬP HỢP</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>5.3 Bài toán "Tất Cả" & Phép chia trong T-SQL</h2>
+  <p>Bài toán phổ quát yêu cầu tìm các đối tượng bao trọn toàn bộ một tập con dữ liệu (ví dụ: <em>"Tìm khách hàng đã mua TẤT CẢ các sản phẩm do Singapore sản xuất"</em>). Đây là dạng bài trọng tâm xuất hiện liên tục trong các đề thi (căn cứ <code>TECH-A07</code>).</p>
+
+  <h3>5.3.1 Phương pháp chuẩn tắc: Double NOT EXISTS</h3>
+  <p>Biến đổi logic: <em>"Tìm khách hàng sao cho <strong>KHÔNG TỒN TẠI</strong> sản phẩm Singapore nào mà khách hàng đó <strong>CHƯA MUA</strong>."</em></p>
+
+  <pre class="sql-block"><span class="kw">SELECT</span> KH.MAKH, KH.HOTEN
+<span class="kw">FROM</span> KHACHHANG KH
+<span class="kw">WHERE NOT EXISTS</span> (
+    <span class="cmt">-- Tập chia: Quét toàn bộ sản phẩm do Singapore sản xuất</span>
+    <span class="kw">SELECT</span> * <span class="kw">FROM</span> SANPHAM SP
+    <span class="kw">WHERE</span> SP.NUOCSX = <span class="str">'Singapore'</span>
+    <span class="kw">AND NOT EXISTS</span> (
+        <span class="cmt">-- Kiểm tra: Khách hàng KH đang xét có mua sản phẩm SP này không?</span>
+        <span class="kw">SELECT</span> * <span class="kw">FROM</span> CTHD CT
+        <span class="kw">INNER JOIN</span> HOADON HD <span class="kw">ON</span> CT.SOHD = HD.SOHD
+        <span class="kw">WHERE</span> HD.MAKH = KH.MAKH <span class="kw">AND</span> CT.MASP = SP.MASP
+    )
+);</pre>
+
+  <div class="trace-box">
+    <div class="trace-header">DÒNG THỰC THI (CORRELATED TRACE)</div>
+    <div class="trace-steps">
+      <div class="trace-step">
+        <span class="step-badge">1. CÂU NGOÀI</span>
+        <div class="step-desc">Duyệt từng ứng viên khách hàng $x \in \text{KHACHHANG}$.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">2. CÂU GIỮA</span>
+        <div class="step-desc">Quét tập các sản phẩm yêu cầu $y \in \text{SANPHAM}$ (có <code>NUOCSX = 'Singapore'</code>).</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">3. CÂU TRONG</span>
+        <div class="step-desc">Kiểm tra xem cặp $(x, y)$ có xuất hiện trong lịch sử mua hàng không. Nếu có ít nhất một $y$ mà $x$ <strong>chưa mua</strong>, câu giữa có kết quả $\rightarrow$ câu ngoài bị loại.</div>
+      </div>
+    </div>
+  </div>
+
+  <h3>5.3.2 Phương pháp so sánh số lượng: COUNT DISTINCT</h3>
+  <pre class="sql-block"><span class="kw">SELECT</span> HD.MAKH
+<span class="kw">FROM</span> HOADON HD
+<span class="kw">INNER JOIN</span> CTHD CT <span class="kw">ON</span> HD.SOHD = CT.SOHD
+<span class="kw">INNER JOIN</span> SANPHAM SP <span class="kw">ON</span> CT.MASP = SP.MASP
+<span class="kw">WHERE</span> SP.NUOCSX = <span class="str">'Singapore'</span>
+<span class="kw">GROUP BY</span> HD.MAKH
+<span class="kw">HAVING</span> <span class="fn">COUNT</span>(<span class="kw">DISTINCT</span> CT.MASP) = (
+    <span class="kw">SELECT</span> <span class="fn">COUNT</span>(*) <span class="kw">FROM</span> SANPHAM <span class="kw">WHERE</span> NUOCSX = <span class="str">'Singapore'</span>
+);</pre>
+
+  <div class="callout callout-why">
+    <div class="callout-title">Xử lý trường hợp tập chia rỗng</div>
+    <p style="margin-bottom: 0;">Nếu CSDL không có sản phẩm Singapore nào: <code>Double NOT EXISTS</code> trả về <strong>toàn bộ khách hàng</strong> (đúng theo ngữ nghĩa toán học logic mệnh đề chân lý rỗng); trong khi phương pháp <code>COUNT DISTINCT</code> ở trên trả về 0 dòng do bảng kết nối bị rỗng trước khi gom nhóm.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 12</span>
+  </div>
+</div>
+
+<!-- Page 13: Các phép toán tập hợp -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 5: TRUY VẤN NÂNG CAO & TẬP HỢP</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>5.4 Các Phép toán Tập hợp (Set Operators)</h2>
+  <p>SQL Server hỗ trợ ba phép toán tập hợp chuẩn tắc: <code>UNION</code> (Hợp), <code>EXCEPT</code> (Trừ) và <code>INTERSECT</code> (Giao). Để thực hiện các phép toán này, hai tập truy vấn phải thỏa mãn <strong>điều kiện khả hợp (Union-Compatibility)</strong> (căn cứ <code>TECH-A08</code>).</p>
+
+  <h3>5.4.1 Điều kiện khả hợp trong T-SQL</h3>
+  <ul>
+    <li>Hai câu lệnh <code>SELECT</code> phải có <strong>cùng số lượng cột</strong>.</li>
+    <li>Các cột tương ứng ở cùng vị trí phải có <strong>kiểu dữ liệu tương thích</strong> (hoặc chuyển đổi ngầm định được).</li>
+    <li>Tên cột của tập kết quả cuối cùng được lấy theo <strong>tên cột của câu <code>SELECT</code> đầu tiên</strong>.</li>
+  </ul>
+
+  <h3>5.4.2 Phân biệt UNION vs UNION ALL</h3>
+  <div class="col-2">
+    <div>
+      <pre class="sql-block"><span class="cmt">-- UNION: Tự động loại bỏ dòng trùng (Chậm hơn)</span>
+<span class="kw">SELECT</span> MAKH <span class="kw">FROM</span> HOADON <span class="kw">WHERE</span> <span class="fn">YEAR</span>(NGHD) = <span class="num">2024</span>
+<span class="kw">UNION</span>
+<span class="kw">SELECT</span> MAKH <span class="kw">FROM</span> KHACHHANG <span class="kw">WHERE</span> DOANHSO &gt; <span class="num">10000000</span>;</pre>
+    </div>
+    <div>
+      <pre class="sql-block"><span class="cmt">-- UNION ALL: Giữ nguyên toàn bộ dòng (Nhanh hơn)</span>
+<span class="kw">SELECT</span> MASP <span class="kw">FROM</span> CTHD <span class="kw">WHERE</span> SOHD = <span class="num">1001</span>
+<span class="kw">UNION ALL</span>
+<span class="kw">SELECT</span> MASP <span class="kw">FROM</span> CTHD <span class="kw">WHERE</span> SOHD = <span class="num">1002</span>;</pre>
+    </div>
+  </div>
+
+  <h3>5.4.3 Phép trừ (EXCEPT) & Phép giao (INTERSECT)</h3>
+  <p><strong>Yêu cầu:</strong> In ra mã các sản phẩm có hóa đơn mua trong năm <code>2023</code> nhưng chưa từng được mua trong năm <code>2024</code>.</p>
+
+  <pre class="sql-block"><span class="kw">SELECT</span> CT.MASP
+<span class="kw">FROM</span> CTHD CT <span class="kw">INNER JOIN</span> HOADON HD <span class="kw">ON</span> CT.SOHD = HD.SOHD
+<span class="kw">WHERE</span> <span class="fn">YEAR</span>(HD.NGHD) = <span class="num">2023</span>
+
+<span class="kw">EXCEPT</span>
+
+<span class="kw">SELECT</span> CT.MASP
+<span class="kw">FROM</span> CTHD CT <span class="kw">INNER JOIN</span> HOADON HD <span class="kw">ON</span> CT.SOHD = HD.SOHD
+<span class="kw">WHERE</span> <span class="fn">YEAR</span>(HD.NGHD) = <span class="num">2024</span>;</pre>
+
+  <table class="result-table">
+    <thead>
+      <tr><th>Tập truy vấn 1 (Năm 2023)</th><th>Tập truy vấn 2 (Năm 2024)</th><th>Toán tử</th><th>Kết quả trả về</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>{ BC01, BC02, ST01, ST02 }</td><td>{ BC01, ST01, BB01 }</td><td class="cell-hl">EXCEPT</td><td><strong>{ BC02, ST02 }</strong> (Chỉ có trong 2023)</td></tr>
+      <tr><td>{ BC01, BC02, ST01, ST02 }</td><td>{ BC01, ST01, BB01 }</td><td class="cell-hl">INTERSECT</td><td><strong>{ BC01, ST01 }</strong> (Có ở cả 2 năm)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 13</span>
+  </div>
+</div>
+
+
+<!-- Page 14: Ràng buộc nâng cao & Cơ chế DML Trigger -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 6: RÀNG BUỘC TOÀN VẸN & TRIGGER TRONG T-SQL</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>6. Ràng buộc Khai báo & Cơ chế DML Trigger</h2>
+  <p>Khi ràng buộc toàn vẹn liên quan đến nhiều bảng hoặc đòi hỏi phép kiểm tra điều kiện phức tạp mà mệnh đề <code>CHECK</code> khai báo không thể đảm nhiệm, lập trình viên bắt buộc phải sử dụng <strong>DML Trigger</strong> (căn cứ <code>TECH-A04</code>, <code>TECH-A05</code>).</p>
+
+  <h3>6.1 Bảng so sánh phương án hiện thực RBTV</h3>
+  <table class="compact-table">
+    <thead>
+      <tr><th style="width: 25%;">Phương án</th><th style="width: 35%;">Phạm vi áp dụng</th><th style="width: 40%;">Ưu / Nhược điểm</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Khai báo (Declarative: CHECK, FK)</strong></td>
+        <td>Ràng buộc miền giá trị trên 1 bảng; quan hệ khóa chính – khóa ngoại giữa 2 bảng.</td>
+        <td>Thực thi ở tầng nhân, tốc độ cao nhất; không thể chứa subquery hoặc tham chiếu bảng ngoài.</td>
+      </tr>
+      <tr>
+        <td><strong>Thủ tục (Procedural: AFTER Trigger)</strong></td>
+        <td>Ràng buộc liên bảng, kiểm tra logic nghiệp vụ phức tạp, ràng buộc so sánh ngày tháng giữa các bảng.</td>
+        <td>Linh hoạt tối đa; yêu cầu thiết kế chuẩn dạng tập hợp để tránh quá tải và lỗi đa dòng.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6.2 Hai bảng ảo chuyển tiếp: <code>inserted</code> &amp; <code>deleted</code></h3>
+  <p>Khi sự kiện DML xảy ra, SQL Server tự động tạo hai bảng tạm trong bộ nhớ có cấu trúc cột y hệt bảng gốc (căn cứ <code>TECH-A05</code>):</p>
+
+  <table class="result-table">
+    <thead>
+      <tr><th>Thao tác DML</th><th>Bảng <code>inserted</code> chứa gì?</th><th>Bảng <code>deleted</code> chứa gì?</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>INSERT</strong></td><td class="cell-hl">Các dòng mới vừa được thêm vào</td><td class="cell-null">Rỗng (Không có dòng nào)</td></tr>
+      <tr><td><strong>DELETE</strong></td><td class="cell-null">Rỗng (Không có dòng nào)</td><td class="cell-err">Các dòng cũ vừa bị xóa đi</td></tr>
+      <tr><td><strong>UPDATE</strong></td><td class="cell-hl">Các dòng mới sau khi sửa</td><td class="cell-err">Các dòng cũ trước khi sửa</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-why">
+    <div class="callout-title">Bản chất của lệnh UPDATE trong SQL Server</div>
+    <p style="margin-bottom: 0;">SQL Server thực hiện <code>UPDATE</code> bằng cách xóa giá trị cũ (đưa vào <code>deleted</code>) và chèn giá trị mới (đưa vào <code>inserted</code>). Vì vậy, trong Trigger của <code>UPDATE</code>, cả hai bảng ảo đều chứa dữ liệu.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 14</span>
+  </div>
+</div>
+
+<!-- Page 15: Thiết kế Trigger an toàn đa dòng -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 6: RÀNG BUỘC TOÀN VẸN & TRIGGER TRONG T-SQL</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>6.2 Thiết kế Trigger An toàn Đa dòng (Multi-Row Safety)</h2>
+  <p>SQL Server là hệ quản trị xử lý theo tập hợp. Một câu lệnh <code>INSERT</code>, <code>UPDATE</code> hay <code>DELETE</code> có thể tác động cùng lúc lên hàng nghìn dòng. Trigger phải luôn được thiết kế để xử lý chính xác tình huống đa dòng này (căn cứ <code>TECH-A06</code>).</p>
+
+  <h3>6.2.1 Phân tích sai lầm kinh điển: Biến vô hướng (Scalar Trigger)</h3>
+  <div class="col-2">
+    <div>
+      <div class="callout callout-danger" style="margin-top: 0;">
+        <div class="callout-title">CÁCH VIẾT SAI (Dễ sập logic)</div>
+        <pre class="sql-block" style="margin: 0;"><span class="cmt">-- SAI LẦM: Dùng biến vô hướng</span>
+<span class="kw">DECLARE</span> @NgayHD <span class="dt">SMALLDATETIME</span>;
+<span class="kw">SELECT</span> @NgayHD = NGHD <span class="kw">FROM</span> <span class="kw">inserted</span>;
+<span class="cmt">-- Nếu inserted có 100 dòng,</span>
+<span class="cmt">-- biến @NgayHD chỉ nhận giá trị</span>
+<span class="cmt">-- của 1 dòng ngẫu nhiên duy nhất!</span>
+<span class="cmt">-- 99 dòng vi phạm khác bị bỏ lọt!</span></pre>
+      </div>
+    </div>
+    <div>
+      <div class="callout callout-why" style="margin-top: 0;">
+        <div class="callout-title">CÁCH VIẾT ĐÚNG (Dạng tập hợp)</div>
+        <pre class="sql-block" style="margin: 0;"><span class="cmt">-- CHUẨN MỰC: Kết nối tập hợp</span>
+<span class="kw">IF EXISTS</span> (
+    <span class="kw">SELECT</span> <span class="num">1</span>
+    <span class="kw">FROM</span> <span class="kw">inserted</span> i
+    <span class="kw">INNER JOIN</span> KHACHHANG kh
+        <span class="kw">ON</span> i.MAKH = kh.MAKH
+    <span class="kw">WHERE</span> i.NGHD &lt; kh.NGDK
+)
+<span class="cmt">-- Bắt trọn vẹn mọi dòng vi phạm!</span></pre>
+      </div>
+    </div>
+  </div>
+
+  <h3>6.2.2 Mẫu Trigger chuẩn tắc dạng tập hợp</h3>
+  <p><strong>Yêu cầu:</strong> Ngày mua hàng (<code>NGHD</code>) của một hóa đơn phải lớn hơn hoặc bằng Ngày đăng ký (<code>NGDK</code>) của khách hàng đó.</p>
+
+  <pre class="sql-block"><span class="kw">CREATE TRIGGER</span> trg_Check_HoaDon_NgayMua
+<span class="kw">ON</span> HOADON
+<span class="kw">AFTER INSERT</span>, <span class="kw">UPDATE</span>
+<span class="kw">AS</span>
+<span class="kw">BEGIN</span>
+    <span class="kw">SET NOCOUNT ON</span>;
+    
+    <span class="cmt">-- Kiểm tra xem có BẤT KỲ dòng nào trong inserted vi phạm quy tắc hay không</span>
+    <span class="kw">IF EXISTS</span> (
+        <span class="kw">SELECT</span> <span class="num">1</span>
+        <span class="kw">FROM</span> <span class="kw">inserted</span> i
+        <span class="kw">INNER JOIN</span> KHACHHANG kh <span class="kw">ON</span> i.MAKH = kh.MAKH
+        <span class="kw">WHERE</span> i.NGHD &lt; kh.NGDK
+    )
+    <span class="kw">BEGIN</span>
+        <span class="kw">RAISERROR</span> (N<span class="str">'Lỗi: Ngày mua hàng (NGHD) không thể trước Ngày đăng ký thành viên (NGDK)!'</span>, <span class="num">16</span>, <span class="num">1</span>);
+        <span class="kw">ROLLBACK TRANSACTION</span>; <span class="cmt">-- Hủy bỏ toàn bộ thao tác DML vi phạm</span>
+        <span class="kw">RETURN</span>;
+    <span class="kw">END</span>
+<span class="kw">END</span>;
+<span class="kw">GO</span></pre>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 15</span>
+  </div>
+</div>
+
+<!-- Page 16: Hiện thực Bảng tầm ảnh hưởng -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 6: RÀNG BUỘC TOÀN VẸN & TRIGGER TRONG T-SQL</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>6.3 Hiện thực Bảng tầm ảnh hưởng trong T-SQL</h2>
+  <p>Bảng tầm ảnh hưởng trong lý thuyết xác định chính xác các sự kiện DML trên từng quan hệ có nguy cơ gây vi phạm. Trong thực hành T-SQL, mỗi quan hệ có dấu <code>+</code> sẽ được cài đặt một Trigger tương ứng.</p>
+
+  <h3>6.3.1 Phân tích bối cảnh & Bảng tầm ảnh hưởng</h3>
+  <p><strong>Ràng buộc:</strong> <em>"Trưởng khoa của một khoa phải là giáo viên thuộc chính khoa đó."</em></p>
+
+  <table class="compact-table" style="margin-bottom: 3mm;">
+    <thead>
+      <tr><th style="width: 25%;">Quan hệ</th><th style="width: 25%;">Thêm (INSERT)</th><th style="width: 25%;">Xóa (DELETE)</th><th style="width: 25%;">Sửa (UPDATE)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>KHOA</strong></td>
+        <td class="cell-hl">+ (Cần kiểm tra TRUONGKHOA)</td>
+        <td>-</td>
+        <td class="cell-hl">+(TRUONGKHOA)</td>
+      </tr>
+      <tr>
+        <td><strong>GIAOVIEN</strong></td>
+        <td>-</td>
+        <td class="cell-err">+ (Nếu xóa đúng GV là Trưởng khoa)</td>
+        <td class="cell-hl">+(MAKHOA)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>6.3.2 Cài đặt Trigger hai chiều</h3>
+
+  <pre class="sql-block"><span class="cmt">-- 1. Trigger trên bảng KHOA (Kiểm tra khi bổ nhiệm/sửa Trưởng khoa)</span>
+<span class="kw">CREATE TRIGGER</span> trg_Khoa_CheckTruongKhoa
+<span class="kw">ON</span> KHOA <span class="kw">AFTER INSERT</span>, <span class="kw">UPDATE</span>
+<span class="kw">AS</span>
+<span class="kw">BEGIN</span>
+    <span class="kw">SET NOCOUNT ON</span>;
+    <span class="kw">IF EXISTS</span> (
+        <span class="kw">SELECT</span> <span class="num">1</span> <span class="kw">FROM</span> <span class="kw">inserted</span> k
+        <span class="kw">LEFT JOIN</span> GIAOVIEN gv <span class="kw">ON</span> k.TRUONGKHOA = gv.MAGV <span class="kw">AND</span> k.MAKHOA = gv.MAKHOA
+        <span class="kw">WHERE</span> k.TRUONGKHOA <span class="kw">IS NOT NULL AND</span> gv.MAGV <span class="kw">IS NULL</span>
+    )
+    <span class="kw">BEGIN</span>
+        <span class="kw">RAISERROR</span> (N<span class="str">'Lỗi: Trưởng khoa phải là giáo viên thuộc chính khoa đó!'</span>, <span class="num">16</span>, <span class="num">1</span>);
+        <span class="kw">ROLLBACK TRAN</span>;
+    <span class="kw">END</span>
+<span class="kw">END</span>;
+<span class="kw">GO</span>
+
+<span class="cmt">-- 2. Trigger trên bảng GIAOVIEN (Ngăn chuyển khoa/xóa GV đang làm Trưởng khoa)</span>
+<span class="kw">CREATE TRIGGER</span> trg_GiaoVien_CheckKhoa
+<span class="kw">ON</span> GIAOVIEN <span class="kw">AFTER DELETE</span>, <span class="kw">UPDATE</span>
+<span class="kw">AS</span>
+<span class="kw">BEGIN</span>
+    <span class="kw">SET NOCOUNT ON</span>;
+    <span class="kw">IF EXISTS</span> (
+        <span class="kw">SELECT</span> <span class="num">1</span> <span class="kw">FROM</span> <span class="kw">deleted</span> d
+        <span class="kw">INNER JOIN</span> KHOA k <span class="kw">ON</span> d.MAGV = k.TRUONGKHOA <span class="kw">AND</span> d.MAKHOA = k.MAKHOA
+    )
+    <span class="kw">BEGIN</span>
+        <span class="kw">RAISERROR</span> (N<span class="str">'Lỗi: Không thể xóa hoặc đổi khoa của giáo viên đang giữ chức vụ Trưởng khoa!'</span>, <span class="num">16</span>, <span class="num">1</span>);
+        <span class="kw">ROLLBACK TRAN</span>;
+    <span class="kw">END</span>
+<span class="kw">END</span>;
+<span class="kw">GO</span></pre>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 16</span>
+  </div>
+</div>
+
+
+<!-- Page 17: Hệ thống chẩn đoán & Gỡ lỗi T-SQL -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 7: HỆ THỐNG CHẨN ĐOÁN & GỠ LỖI</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>7. Hệ thống Chẩn đoán & Gỡ lỗi Transact-SQL</h2>
+  <p>Khi gặp thông báo lỗi từ SQL Server, áp dụng quy trình chẩn đoán 5 bước chuẩn hóa giúp xác định nguyên nhân gốc rễ và xử lý triệt để trong vòng 60 giây.</p>
+
+  <div class="debug-grid">
+    <!-- Error 1: Msg 208 -->
+    <div class="debug-card">
+      <div class="error-code">Msg 208: Invalid object name '...'</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Câu lệnh không thể tìm thấy bảng hoặc khung nhìn.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> 1) Sai Database (đang ở <code>master</code>); 2) Bảng chưa được tạo; 3) Viết sai chính tả tên bảng.</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Chạy lệnh <code>USE TenDatabase; GO</code> và kiểm tra lại danh sách bảng trong Object Explorer.</div>
+    </div>
+
+    <!-- Error 2: Msg 547 -->
+    <div class="debug-card">
+      <div class="error-code">Msg 547: Conflict with FK / CHECK constraint</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Bị từ chối khi chèn/sửa dữ liệu vi phạm ràng buộc.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> 1) FK trỏ tới giá trị PK không tồn tại ở bảng cha; 2) Giá trị không thỏa mãn biểu thức CHECK.</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Kiểm tra bảng cha xem đã có khóa chính đó chưa; kiểm tra lại giá trị cột so với điều kiện CHECK.</div>
+    </div>
+
+    <!-- Error 3: Msg 8152 / 8115 -->
+    <div class="debug-card">
+      <div class="error-code">Msg 8152 / 8115: Truncation / Arithmetic overflow</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Chuỗi bị cắt ngắn hoặc tràn số học.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Độ dài chuỗi vượt quá <code>VARCHAR(N)</code> hoặc giá trị vượt quá miền <code>NUMERIC(p,s)</code> (ví dụ: điểm 10 vào <code>NUMERIC(2,2)</code>).</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> <code>ALTER TABLE Bang ALTER COLUMN Cot NUMERIC(4,2);</code></div>
+    </div>
+
+    <!-- Error 4: Msg 8120 -->
+    <div class="debug-card">
+      <div class="error-code">Msg 8120: Column invalid in SELECT / GROUP BY</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Không thể thực thi câu lệnh gom nhóm.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Có cột trong <code>SELECT</code> không nằm trong <code>GROUP BY</code> và cũng không được bọc trong hàm kết hợp.</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Thêm cột đó vào danh sách <code>GROUP BY</code> hoặc bọc bằng <code>MAX()</code>, <code>MIN()</code>, <code>COUNT()</code>.</div>
+    </div>
+
+    <!-- Error 5: Msg 512 -->
+    <div class="debug-card">
+      <div class="error-code">Msg 512: Subquery returned more than 1 value</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Truy vấn con trả về nhiều hơn 1 dòng khi dùng toán tử vô hướng.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Dùng toán tử <code>=</code>, <code>&gt;</code>, <code>&lt;</code> với subquery trả về tập nhiều dòng thay vì 1 giá trị duy nhất.</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Thay <code>=</code> bằng toán tử tập hợp <code>IN</code>, hoặc thêm <code>TOP 1</code> / hàm gộp <code>MAX()</code> vào câu con.</div>
+    </div>
+
+    <!-- Error 6: Msg 245 -->
+    <div class="debug-card">
+      <div class="error-code">Msg 245: Conversion failed when converting varchar</div>
+      <div class="debug-row"><span class="debug-label">Triệu chứng:</span> Lỗi ép kiểu dữ liệu chuỗi sang kiểu số hoặc ngày tháng.</div>
+      <div class="debug-row"><span class="debug-label">Nguyên nhân:</span> Chuỗi chứa ký tự chữ cái hoặc sai định dạng ngày tháng hệ thống.</div>
+      <div class="debug-row"><span class="debug-label">Cách sửa:</span> Dùng hàm <code>TRY_CAST(cot AS INT)</code> hoặc thiết lập <code>SET DATEFORMAT YMD;</code>.</div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 17</span>
+  </div>
+</div>
+
+
+<!-- Page 18: Tiến trình Lab 01 (DDL & RBTV) -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 8: TIẾN TRÌNH LAB THỰC HÀNH & PHÒNG THI</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>8.1 Tiến trình Thực hành Mẫu — Tái dựng Lab 01 (DDL & RBTV)</h2>
+  <p>Dựa trên khảo sát thực nghiệm mã nguồn thực hành Phase A (nguồn <code>LOC-SQL-LAB01</code>, <code>LAB-QLBH-QLGV-CORPUS</code>), buổi Lab 01 tập trung xây dựng toàn bộ cấu trúc bảng và ràng buộc cho hai cơ sở dữ liệu nền tảng <code>QuanLyBanHang</code> và <code>QuanLyGiaoVu</code>.</p>
+
+  <h3>8.1.1 Cấu trúc lược đồ Quản lý Giáo vụ (QLGV)</h3>
+  <table class="compact-table">
+    <thead>
+      <tr><th style="width: 20%;">Quan hệ</th><th style="width: 45%;">Danh sách thuộc tính (PK gạch chân, FK in nghiêng)</th><th style="width: 35%;">Ràng buộc toàn vẹn cốt lõi</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>KHOA</strong></td>
+        <td><u>MAKHOA</u>, TENKHOA, NGTLAP, <em>TRUONGKHOA</em></td>
+        <td>FK <code>TRUONGKHOA</code> $\rightarrow$ <code>GIAOVIEN(MAGV)</code></td>
+      </tr>
+      <tr>
+        <td><strong>MONHOC</strong></td>
+        <td><u>MAMH</u>, TENMH, TCLT, TCTH, <em>MAKHOA</em></td>
+        <td><code>CHECK (TCLT &gt;= 1 AND TCTH &gt;= 0)</code></td>
+      </tr>
+      <tr>
+        <td><strong>DIEUKIEN</strong></td>
+        <td><u><em>MAMH</em>, <em>MAMH_TRUOC</em></u></td>
+        <td>Composite PK; <code>CHECK (MAMH != MAMH_TRUOC)</code></td>
+      </tr>
+      <tr>
+        <td><strong>GIAOVIEN</strong></td>
+        <td><u>MAGV</u>, HOTEN, HOCVI, HOCHAM, GIOITINH, NGSINH, NGVL, HESO, MUCLUONG, <em>MAKHOA</em></td>
+        <td><code>CHECK (HOCVI IN ('CN', 'KS', 'ThS', 'TS', 'PTS'))</code><br><code>CHECK (HESO &gt; 0 AND MUCLUONG &gt; 0)</code></td>
+      </tr>
+      <tr>
+        <td><strong>LOP</strong></td>
+        <td><u>MALOP</u>, TENLOP, <em>TRGLOP</em>, SISO, <em>MAGVCN</em></td>
+        <td><code>CHECK (SISO &gt; 0)</code></td>
+      </tr>
+      <tr>
+        <td><strong>HOCVIEN</strong></td>
+        <td><u>MAHV</u>, HO, TEN, NGSINH, GIOITINH, NOISINH, <em>MALOP</em></td>
+        <td><code>CHECK (GIOITINH IN ('Nam', 'Nu'))</code></td>
+      </tr>
+      <tr>
+        <td><strong>GIANGDAY</strong></td>
+        <td><u><em>MALOP</em>, <em>MAMH</em></u>, <em>MAGV</em>, HOCKY, NAM, TUNGAY, DENNGAY</td>
+        <td><code>CHECK (HOCKY IN (1, 2, 3))</code><br><code>CHECK (TUNGAY &lt; DENNGAY)</code></td>
+      </tr>
+      <tr>
+        <td><strong>KETQUATHI</strong></td>
+        <td><u><em>MAHV</em>, <em>MAMH</em>, LANTHI</u>, NGTHI, DIEM, KQUA</td>
+        <td><code>DIEM NUMERIC(4,2) CHECK (DIEM BETWEEN 0 AND 10)</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>8.1.2 Script DDL giải quyết quan hệ vòng (Circular FK Dependency)</h3>
+  <p>Giữa <code>KHOA</code> và <code>GIAOVIEN</code> tồn tại quan hệ tham chiếu vòng: <code>KHOA.TRUONGKHOA</code> trỏ tới <code>GIAOVIEN.MAGV</code>, trong khi <code>GIAOVIEN.MAKHOA</code> trỏ tới <code>KHOA.MAKHOA</code>. Cách giải quyết chuẩn tắc:</p>
+
+  <pre class="sql-block"><span class="cmt">-- 1. Tạo bảng KHOA không có Foreign Key TRUONGKHOA</span>
+<span class="kw">CREATE TABLE</span> KHOA (MAKHOA <span class="dt">VARCHAR</span>(<span class="num">4</span>) <span class="kw">PRIMARY KEY</span>, TENKHOA <span class="dt">NVARCHAR</span>(<span class="num">40</span>), TRUONGKHOA <span class="dt">CHAR</span>(<span class="num">4</span>));
+
+<span class="cmt">-- 2. Tạo bảng GIAOVIEN với Foreign Key trỏ về KHOA</span>
+<span class="kw">CREATE TABLE</span> GIAOVIEN (MAGV <span class="dt">CHAR</span>(<span class="num">4</span>) <span class="kw">PRIMARY KEY</span>, HOTEN <span class="dt">NVARCHAR</span>(<span class="num">40</span>), MAKHOA <span class="dt">VARCHAR</span>(<span class="num">4</span>) <span class="kw">FOREIGN KEY REFERENCES</span> KHOA(MAKHOA));
+
+<span class="cmt">-- 3. Bổ sung Foreign Key TRUONGKHOA sau khi cả 2 bảng đã tồn tại</span>
+<span class="kw">ALTER TABLE</span> KHOA <span class="kw">ADD CONSTRAINT</span> FK_KHOA_TRUONGKHOA <span class="kw">FOREIGN KEY</span> (TRUONGKHOA) <span class="kw">REFERENCES</span> GIAOVIEN(MAGV);</pre>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 18</span>
+  </div>
+</div>
+
+<!-- Page 19: Tiến trình Lab 03 & Lab 04 (Nâng cao) -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 8: TIẾN TRÌNH LAB THỰC HÀNH & PHÒNG THI</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>8.2 Tiến trình Thực hành Mẫu — Tái dựng Lab 03 &amp; Lab 04 (Nâng cao)</h2>
+  <p>Dựa trên khảo sát thực nghiệm Phase A (nguồn <code>LOC-SQL-LAB03</code>, <code>LOC-SQL-LAB04</code>), các buổi Lab nâng cao tập trung vào truy vấn thống kê gom nhóm phức tạp, xếp hạng phân vùng và bài toán phép chia.</p>
+
+  <h3>8.2.1 Bài toán 1: Tìm môn học có điểm trung bình cao nhất theo từng khoa</h3>
+  <p><strong>Kỹ thuật:</strong> Sử dụng <code>RANK() OVER (PARTITION BY ... ORDER BY ...)</code> (căn cứ <code>TECH-A02</code>):</p>
+
+  <pre class="sql-block"><span class="kw">WITH</span> BangXepHang <span class="kw">AS</span> (
+    <span class="kw">SELECT</span> mh.MAKHOA, mh.MAMH, mh.TENMH, <span class="fn">AVG</span>(kq.DIEM) <span class="kw">AS</span> DiemTB,
+           <span class="fn">RANK</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION BY</span> mh.MAKHOA <span class="kw">ORDER BY</span> <span class="fn">AVG</span>(kq.DIEM) <span class="kw">DESC</span>) <span class="kw">AS</span> Hang
+    <span class="kw">FROM</span> MONHOC mh
+    <span class="kw">INNER JOIN</span> KETQUATHI kq <span class="kw">ON</span> mh.MAMH = kq.MAMH
+    <span class="kw">WHERE</span> kq.LANTHI = <span class="num">1</span>
+    <span class="kw">GROUP BY</span> mh.MAKHOA, mh.MAMH, mh.TENMH
+)
+<span class="kw">SELECT</span> MAKHOA, MAMH, TENMH, DiemTB
+<span class="kw">FROM</span> BangXepHang
+<span class="kw">WHERE</span> Hang = <span class="num">1</span>;</pre>
+
+  <h3>8.2.2 Bài toán 2: Tìm học viên thi đạt tất cả các môn thuộc khoa CNTT phụ trách</h3>
+  <p><strong>Kỹ thuật:</strong> Double <code>NOT EXISTS</code> kết hợp điều kiện điểm đạt $\ge 5.0$ (căn cứ <code>TECH-A07</code>):</p>
+
+  <pre class="sql-block"><span class="kw">SELECT</span> hv.MAHV, hv.HO, hv.TEN
+<span class="kw">FROM</span> HOCVIEN hv
+<span class="kw">WHERE NOT EXISTS</span> (
+    <span class="cmt">-- 1. Quét tất cả môn học do khoa CNTT phụ trách</span>
+    <span class="kw">SELECT</span> * <span class="kw">FROM</span> MONHOC mh
+    <span class="kw">WHERE</span> mh.MAKHOA = <span class="str">'CNTT'</span>
+    <span class="kw">AND NOT EXISTS</span> (
+        <span class="cmt">-- 2. Kiểm tra học viên hv đã thi đạt môn mh này chưa?</span>
+        <span class="kw">SELECT</span> * <span class="kw">FROM</span> KETQUATHI kq
+        <span class="kw">WHERE</span> kq.MAHV = hv.MAHV <span class="kw">AND</span> kq.MAMH = mh.MAMH <span class="kw">AND</span> kq.DIEM &gt;= <span class="num">5.0</span>
+    )
+);</pre>
+
+  <div class="callout callout-exam">
+    <div class="callout-title">Điểm mấu chốt khi làm bài Lab 04</div>
+    <p style="margin-bottom: 0;">Khi đề bài yêu cầu <em>"lần thi sau cùng"</em>, ta phải dùng Subquery lọc <code>LANTHI = (SELECT MAX(LANTHI) FROM KETQUATHI kq2 WHERE kq2.MAHV = kq1.MAHV AND kq2.MAMH = kq1.MAMH)</code> thay vì chỉ lọc cứng <code>LANTHI = 1</code>.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 19</span>
+  </div>
+</div>
+
+
+<!-- Page 20: Chiến lược & Quy trình phòng thi thực hành -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 8: TIẾN TRÌNH LAB THỰC HÀNH & PHÒNG THI</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>8.3 Chiến lược & Quy trình Phòng thi Thực hành</h2>
+  <p>Khảo sát từ 10 hiện vật đề thi thực hành chính thức (nguồn <code>PRAC-2024-2025-HK1-01</code>, <code>PRAC-2023-2024-HK1-FINAL-01</code>, <code>PRAC-2022-2023-HK1-D03</code>, <code>UIT-O06</code>), các bài thi thực hành máy có thời lượng 60–90 phút với cấu trúc điểm phân bổ đều cho 3 phần: Tạo bảng/RBTV (2–3đ), Truy vấn SQL (4–5đ) và Trigger (2–3đ).</p>
+
+  <h3>8.3.1 Bảng phân bổ thời gian chuẩn (Chiến thuật 75 phút)</h3>
+  <table class="compact-table">
+    <thead>
+      <tr><th style="width: 20%;">Giai đoạn</th><th style="width: 20%;">Thời lượng</th><th style="width: 60%;">Nhiệm vụ trọng tâm</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Setup & Đọc đề</strong></td>
+        <td>10 phút</td>
+        <td>Tạo file <code>MSSV_HoTen.sql</code>, tạo Database, xác định toàn bộ PK/FK và vẽ nháp mối quan hệ giữa các bảng.</td>
+      </tr>
+      <tr>
+        <td><strong>2. DDL & Ràng buộc</strong></td>
+        <td>15 phút</td>
+        <td>Viết <code>CREATE TABLE</code>, khai báo đúng kiểu dữ liệu, PK, FK và các ràng buộc <code>CHECK</code> đơn giản.</td>
+      </tr>
+      <tr>
+        <td><strong>3. Nạp dữ liệu mẫu</strong></td>
+        <td>10 phút</td>
+        <td>Chèn ít nhất 3–4 dòng mẫu cho mỗi bảng để có dữ liệu thực nghiệm kiểm chứng truy vấn.</td>
+      </tr>
+      <tr>
+        <td><strong>4. Viết Truy vấn SQL</strong></td>
+        <td>25 phút</td>
+        <td>Giải quyết lần lượt từ câu cơ bản (WHERE, JOIN) đến câu nâng cao (GROUP BY, Subquery, NOT EXISTS).</td>
+      </tr>
+      <tr>
+        <td><strong>5. Viết Trigger & Nộp</strong></td>
+        <td>15 phút</td>
+        <td>Viết Trigger an toàn đa dòng, chạy thử nghiệm với 1 lệnh <code>INSERT</code> vi phạm, kiểm tra toàn bộ file trước khi nộp.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>8.3.2 Checklist 5 điểm trước khi nộp bài</h3>
+  <div class="trace-box">
+    <div class="trace-header">CHECKLIST NỘP BÀI THI THỰC HÀNH</div>
+    <div class="trace-steps">
+      <div class="trace-step">
+        <span class="step-badge">1. TOÀN CỤC</span>
+        <div class="step-desc">Nhấn <code>Ctrl+A</code> rồi <code>Ctrl+F5</code> (Parse) để đảm bảo không có bất kỳ dòng lệnh nào bị lỗi cú pháp làm đứt đoạn quá trình chấm thi.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">2. TÁCH BATCH</span>
+        <div class="step-desc">Đảm bảo có từ khóa <code>GO</code> sau mỗi khối lệnh <code>CREATE TRIGGER</code> hoặc <code>CREATE PROCEDURE</code>.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">3. XÓA TẠM</span>
+        <div class="step-desc">Xóa bỏ các câu lệnh <code>DROP TABLE</code> hoặc <code>DELETE</code> tạm thời dùng trong lúc thử nghiệm.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">4. ĐẶT TÊN FILE</span>
+        <div class="step-desc">Lưu tệp script <code>.sql</code> đúng cấu trúc quy định của hội đồng thi (ví dụ: <code>23520xxx_De01.sql</code>).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 20</span>
+  </div>
+</div>
+
+<!-- Page 21: Phụ lục tra cứu nguồn Microsoft Learn -->
+<div class="page">
+  <div class="page-header">
+    <span>PHỤ LỤC: BẢN ĐỒ THAM CHIẾU NGUỒN CHUẨN</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>Phụ lục: Bản đồ Tham chiếu Microsoft Learn (TECH-A)</h2>
+  <p>Toàn bộ cơ chế kỹ thuật và cú pháp trong cẩm nang được đối chiếu trực tiếp với tài liệu kỹ thuật chính thức Microsoft Learn (nguồn chuẩn Tier A, căn cứ <code>research/v1.1_phase_a/source_inventory.md</code>):</p>
+
+  <table class="compact-table">
+    <thead>
+      <tr><th style="width: 15%;">Mã định danh</th><th style="width: 35%;">Chủ đề kỹ thuật Microsoft Learn</th><th style="width: 25%;">Từ khóa T-SQL cốt lõi</th><th style="width: 25%;">Chuyên đề cẩm nang</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>TECH-A01</strong></td>
+        <td><code>CREATE TABLE (Transact-SQL)</code></td>
+        <td><code>TABLE, PK, FK, NOT NULL</code></td>
+        <td>Phần 1: DDL Khai báo</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A02</strong></td>
+        <td><code>SELECT - GROUP BY (Transact-SQL)</code></td>
+        <td><code>GROUP BY, HAVING, COUNT</code></td>
+        <td>Phần 4: Phân tích tổng hợp</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A03</strong></td>
+        <td><code>CREATE CHECK Constraints</code></td>
+        <td><code>CONSTRAINT ... CHECK</code></td>
+        <td>Phần 1: Ràng buộc miền</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A04</strong></td>
+        <td><code>CREATE TRIGGER (Transact-SQL)</code></td>
+        <td><code>AFTER INSERT, UPDATE</code></td>
+        <td>Phần 6: Trigger nâng cao</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A05</strong></td>
+        <td><code>Use inserted &amp; deleted tables</code></td>
+        <td><code>inserted, deleted</code></td>
+        <td>Phần 6: Bảng ảo chuyển tiếp</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A06</strong></td>
+        <td><code>Handle multiple rows in DML triggers</code></td>
+        <td><code>JOIN inserted, Set-based</code></td>
+        <td>Phần 6: An toàn đa dòng</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A07</strong></td>
+        <td><code>EXISTS (Transact-SQL)</code></td>
+        <td><code>EXISTS, NOT EXISTS</code></td>
+        <td>Phần 5: Bài toán "Tất cả"</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A08</strong></td>
+        <td><code>SET Operators - UNION</code></td>
+        <td><code>UNION, EXCEPT, INTERSECT</code></td>
+        <td>Phần 5: Phép toán tập hợp</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A09</strong></td>
+        <td><code>CREATE PROCEDURE (Transact-SQL)</code></td>
+        <td><code>PROCEDURE, EXEC, PARAM</code></td>
+        <td>Phụ lục: Stored Procedure</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A10</strong></td>
+        <td><code>CREATE VIEW (Transact-SQL)</code></td>
+        <td><code>CREATE VIEW ... AS SELECT</code></td>
+        <td>Phụ lục: Khung nhìn View</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A11</strong></td>
+        <td><code>CREATE FUNCTION (Transact-SQL)</code></td>
+        <td><code>FUNCTION, RETURNS TABLE</code></td>
+        <td>Phụ lục: UDF đọc thêm</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-why" style="margin-top: 4mm;">
+    <div class="callout-title">Chuẩn mực tra cứu kỹ thuật</div>
+    <p style="margin-bottom: 0;">Khi phát triển các giải pháp cơ sở dữ liệu quy mô doanh nghiệp hoặc triển khai thực tế trên Azure SQL / SQL Server 2022, sinh viên và kỹ sư nên đối chiếu trực tiếp các mã nguồn <code>TECH-A01</code>–<code>TECH-A11</code> trên cổng tài liệu <code>learn.microsoft.com</code> để nắm bắt các tính năng tối ưu hóa mới nhất.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 21</span>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!-- Page 18: Tiến trình Lab 01 (DDL & RBTV) -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 8: TIẾN TRÌNH LAB THỰC HÀNH & PHÒNG THI</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>8.1 Tiến trình Thực hành Mẫu — Tái dựng Lab 01 (DDL & RBTV)</h2>
+  <p>Dựa trên khảo sát thực nghiệm mã nguồn thực hành Phase A (nguồn <code>LOC-SQL-LAB01</code>, <code>LAB-QLBH-QLGV-CORPUS</code>), buổi Lab 01 tập trung xây dựng toàn bộ cấu trúc bảng và ràng buộc cho hai cơ sở dữ liệu nền tảng <code>QuanLyBanHang</code> và <code>QuanLyGiaoVu</code>.</p>
+
+  <h3>8.1.1 Cấu trúc lược đồ Quản lý Giáo vụ (QLGV)</h3>
+  <table class="compact-table">
+    <thead>
+      <tr><th style="width: 20%;">Quan hệ</th><th style="width: 45%;">Danh sách thuộc tính (PK gạch chân, FK in nghiêng)</th><th style="width: 35%;">Ràng buộc toàn vẹn cốt lõi</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>KHOA</strong></td>
+        <td><u>MAKHOA</u>, TENKHOA, NGTLAP, <em>TRUONGKHOA</em></td>
+        <td>FK <code>TRUONGKHOA</code> $\rightarrow$ <code>GIAOVIEN(MAGV)</code></td>
+      </tr>
+      <tr>
+        <td><strong>MONHOC</strong></td>
+        <td><u>MAMH</u>, TENMH, TCLT, TCTH, <em>MAKHOA</em></td>
+        <td><code>CHECK (TCLT &gt;= 1 AND TCTH &gt;= 0)</code></td>
+      </tr>
+      <tr>
+        <td><strong>DIEUKIEN</strong></td>
+        <td><u><em>MAMH</em>, <em>MAMH_TRUOC</em></u></td>
+        <td>Composite PK; <code>CHECK (MAMH != MAMH_TRUOC)</code></td>
+      </tr>
+      <tr>
+        <td><strong>GIAOVIEN</strong></td>
+        <td><u>MAGV</u>, HOTEN, HOCVI, HOCHAM, GIOITINH, NGSINH, NGVL, HESO, MUCLUONG, <em>MAKHOA</em></td>
+        <td><code>CHECK (HOCVI IN ('CN', 'KS', 'ThS', 'TS', 'PTS'))</code><br><code>CHECK (HESO &gt; 0 AND MUCLUONG &gt; 0)</code></td>
+      </tr>
+      <tr>
+        <td><strong>LOP</strong></td>
+        <td><u>MALOP</u>, TENLOP, <em>TRGLOP</em>, SISO, <em>MAGVCN</em></td>
+        <td><code>CHECK (SISO &gt; 0)</code></td>
+      </tr>
+      <tr>
+        <td><strong>HOCVIEN</strong></td>
+        <td><u>MAHV</u>, HO, TEN, NGSINH, GIOITINH, NOISINH, <em>MALOP</em></td>
+        <td><code>CHECK (GIOITINH IN ('Nam', 'Nu'))</code></td>
+      </tr>
+      <tr>
+        <td><strong>GIANGDAY</strong></td>
+        <td><u><em>MALOP</em>, <em>MAMH</em></u>, <em>MAGV</em>, HOCKY, NAM, TUNGAY, DENNGAY</td>
+        <td><code>CHECK (HOCKY IN (1, 2, 3))</code><br><code>CHECK (TUNGAY &lt; DENNGAY)</code></td>
+      </tr>
+      <tr>
+        <td><strong>KETQUATHI</strong></td>
+        <td><u><em>MAHV</em>, <em>MAMH</em>, LANTHI</u>, NGTHI, DIEM, KQUA</td>
+        <td><code>DIEM NUMERIC(4,2) CHECK (DIEM BETWEEN 0 AND 10)</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>8.1.2 Script DDL giải quyết quan hệ vòng (Circular FK Dependency)</h3>
+  <p>Giữa <code>KHOA</code> và <code>GIAOVIEN</code> tồn tại quan hệ tham chiếu vòng: <code>KHOA.TRUONGKHOA</code> trỏ tới <code>GIAOVIEN.MAGV</code>, trong khi <code>GIAOVIEN.MAKHOA</code> trỏ tới <code>KHOA.MAKHOA</code>. Cách giải quyết chuẩn tắc:</p>
+
+  <pre class="sql-block"><span class="cmt">-- 1. Tạo bảng KHOA không có Foreign Key TRUONGKHOA</span>
+<span class="kw">CREATE TABLE</span> KHOA (MAKHOA <span class="dt">VARCHAR</span>(<span class="num">4</span>) <span class="kw">PRIMARY KEY</span>, TENKHOA <span class="dt">NVARCHAR</span>(<span class="num">40</span>), TRUONGKHOA <span class="dt">CHAR</span>(<span class="num">4</span>));
+
+<span class="cmt">-- 2. Tạo bảng GIAOVIEN với Foreign Key trỏ về KHOA</span>
+<span class="kw">CREATE TABLE</span> GIAOVIEN (MAGV <span class="dt">CHAR</span>(<span class="num">4</span>) <span class="kw">PRIMARY KEY</span>, HOTEN <span class="dt">NVARCHAR</span>(<span class="num">40</span>), MAKHOA <span class="dt">VARCHAR</span>(<span class="num">4</span>) <span class="kw">FOREIGN KEY REFERENCES</span> KHOA(MAKHOA));
+
+<span class="cmt">-- 3. Bổ sung Foreign Key TRUONGKHOA sau khi cả 2 bảng đã tồn tại</span>
+<span class="kw">ALTER TABLE</span> KHOA <span class="kw">ADD CONSTRAINT</span> FK_KHOA_TRUONGKHOA <span class="kw">FOREIGN KEY</span> (TRUONGKHOA) <span class="kw">REFERENCES</span> GIAOVIEN(MAGV);</pre>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 18</span>
+  </div>
+</div>
+
+<!-- Page 19: Tiến trình Lab 03 & Lab 04 (Nâng cao) -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 8: TIẾN TRÌNH LAB THỰC HÀNH & PHÒNG THI</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>8.2 Tiến trình Thực hành Mẫu — Tái dựng Lab 03 &amp; Lab 04 (Nâng cao)</h2>
+  <p>Dựa trên khảo sát thực nghiệm Phase A (nguồn <code>LOC-SQL-LAB03</code>, <code>LOC-SQL-LAB04</code>), các buổi Lab nâng cao tập trung vào truy vấn thống kê gom nhóm phức tạp, xếp hạng phân vùng và bài toán phép chia.</p>
+
+  <h3>8.2.1 Bài toán 1: Tìm môn học có điểm trung bình cao nhất theo từng khoa</h3>
+  <p><strong>Kỹ thuật:</strong> Sử dụng <code>RANK() OVER (PARTITION BY ... ORDER BY ...)</code> (căn cứ <code>TECH-A02</code>):</p>
+
+  <pre class="sql-block"><span class="kw">WITH</span> BangXepHang <span class="kw">AS</span> (
+    <span class="kw">SELECT</span> mh.MAKHOA, mh.MAMH, mh.TENMH, <span class="fn">AVG</span>(kq.DIEM) <span class="kw">AS</span> DiemTB,
+           <span class="fn">RANK</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION BY</span> mh.MAKHOA <span class="kw">ORDER BY</span> <span class="fn">AVG</span>(kq.DIEM) <span class="kw">DESC</span>) <span class="kw">AS</span> Hang
+    <span class="kw">FROM</span> MONHOC mh
+    <span class="kw">INNER JOIN</span> KETQUATHI kq <span class="kw">ON</span> mh.MAMH = kq.MAMH
+    <span class="kw">WHERE</span> kq.LANTHI = <span class="num">1</span>
+    <span class="kw">GROUP BY</span> mh.MAKHOA, mh.MAMH, mh.TENMH
+)
+<span class="kw">SELECT</span> MAKHOA, MAMH, TENMH, DiemTB
+<span class="kw">FROM</span> BangXepHang
+<span class="kw">WHERE</span> Hang = <span class="num">1</span>;</pre>
+
+  <h3>8.2.2 Bài toán 2: Tìm học viên thi đạt tất cả các môn thuộc khoa CNTT phụ trách</h3>
+  <p><strong>Kỹ thuật:</strong> Double <code>NOT EXISTS</code> kết hợp điều kiện điểm đạt $\ge 5.0$ (căn cứ <code>TECH-A07</code>):</p>
+
+  <pre class="sql-block"><span class="kw">SELECT</span> hv.MAHV, hv.HO, hv.TEN
+<span class="kw">FROM</span> HOCVIEN hv
+<span class="kw">WHERE NOT EXISTS</span> (
+    <span class="cmt">-- 1. Quét tất cả môn học do khoa CNTT phụ trách</span>
+    <span class="kw">SELECT</span> * <span class="kw">FROM</span> MONHOC mh
+    <span class="kw">WHERE</span> mh.MAKHOA = <span class="str">'CNTT'</span>
+    <span class="kw">AND NOT EXISTS</span> (
+        <span class="cmt">-- 2. Kiểm tra học viên hv đã thi đạt môn mh này chưa?</span>
+        <span class="kw">SELECT</span> * <span class="kw">FROM</span> KETQUATHI kq
+        <span class="kw">WHERE</span> kq.MAHV = hv.MAHV <span class="kw">AND</span> kq.MAMH = mh.MAMH <span class="kw">AND</span> kq.DIEM &gt;= <span class="num">5.0</span>
+    )
+);</pre>
+
+  <div class="callout callout-exam">
+    <div class="callout-title">Điểm mấu chốt khi làm bài Lab 04</div>
+    <p style="margin-bottom: 0;">Khi đề bài yêu cầu <em>"lần thi sau cùng"</em>, ta phải dùng Subquery lọc <code>LANTHI = (SELECT MAX(LANTHI) FROM KETQUATHI kq2 WHERE kq2.MAHV = kq1.MAHV AND kq2.MAMH = kq1.MAMH)</code> thay vì chỉ lọc cứng <code>LANTHI = 1</code>.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 19</span>
+  </div>
+</div>

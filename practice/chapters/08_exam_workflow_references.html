@@ -1,0 +1,167 @@
+<!-- Page 20: Chiến lược & Quy trình phòng thi thực hành -->
+<div class="page">
+  <div class="page-header">
+    <span>PHẦN 8: TIẾN TRÌNH LAB THỰC HÀNH & PHÒNG THI</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>8.3 Chiến lược & Quy trình Phòng thi Thực hành</h2>
+  <p>Khảo sát từ 10 hiện vật đề thi thực hành chính thức (nguồn <code>PRAC-2024-2025-HK1-01</code>, <code>PRAC-2023-2024-HK1-FINAL-01</code>, <code>PRAC-2022-2023-HK1-D03</code>, <code>UIT-O06</code>), các bài thi thực hành máy có thời lượng 60–90 phút với cấu trúc điểm phân bổ đều cho 3 phần: Tạo bảng/RBTV (2–3đ), Truy vấn SQL (4–5đ) và Trigger (2–3đ).</p>
+
+  <h3>8.3.1 Bảng phân bổ thời gian chuẩn (Chiến thuật 75 phút)</h3>
+  <table class="compact-table">
+    <thead>
+      <tr><th style="width: 20%;">Giai đoạn</th><th style="width: 20%;">Thời lượng</th><th style="width: 60%;">Nhiệm vụ trọng tâm</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. Setup & Đọc đề</strong></td>
+        <td>10 phút</td>
+        <td>Tạo file <code>MSSV_HoTen.sql</code>, tạo Database, xác định toàn bộ PK/FK và vẽ nháp mối quan hệ giữa các bảng.</td>
+      </tr>
+      <tr>
+        <td><strong>2. DDL & Ràng buộc</strong></td>
+        <td>15 phút</td>
+        <td>Viết <code>CREATE TABLE</code>, khai báo đúng kiểu dữ liệu, PK, FK và các ràng buộc <code>CHECK</code> đơn giản.</td>
+      </tr>
+      <tr>
+        <td><strong>3. Nạp dữ liệu mẫu</strong></td>
+        <td>10 phút</td>
+        <td>Chèn ít nhất 3–4 dòng mẫu cho mỗi bảng để có dữ liệu thực nghiệm kiểm chứng truy vấn.</td>
+      </tr>
+      <tr>
+        <td><strong>4. Viết Truy vấn SQL</strong></td>
+        <td>25 phút</td>
+        <td>Giải quyết lần lượt từ câu cơ bản (WHERE, JOIN) đến câu nâng cao (GROUP BY, Subquery, NOT EXISTS).</td>
+      </tr>
+      <tr>
+        <td><strong>5. Viết Trigger & Nộp</strong></td>
+        <td>15 phút</td>
+        <td>Viết Trigger an toàn đa dòng, chạy thử nghiệm với 1 lệnh <code>INSERT</code> vi phạm, kiểm tra toàn bộ file trước khi nộp.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>8.3.2 Checklist 5 điểm trước khi nộp bài</h3>
+  <div class="trace-box">
+    <div class="trace-header">CHECKLIST NỘP BÀI THI THỰC HÀNH</div>
+    <div class="trace-steps">
+      <div class="trace-step">
+        <span class="step-badge">1. TOÀN CỤC</span>
+        <div class="step-desc">Nhấn <code>Ctrl+A</code> rồi <code>Ctrl+F5</code> (Parse) để đảm bảo không có bất kỳ dòng lệnh nào bị lỗi cú pháp làm đứt đoạn quá trình chấm thi.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">2. TÁCH BATCH</span>
+        <div class="step-desc">Đảm bảo có từ khóa <code>GO</code> sau mỗi khối lệnh <code>CREATE TRIGGER</code> hoặc <code>CREATE PROCEDURE</code>.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">3. XÓA TẠM</span>
+        <div class="step-desc">Xóa bỏ các câu lệnh <code>DROP TABLE</code> hoặc <code>DELETE</code> tạm thời dùng trong lúc thử nghiệm.</div>
+      </div>
+      <div class="trace-step">
+        <span class="step-badge">4. ĐẶT TÊN FILE</span>
+        <div class="step-desc">Lưu tệp script <code>.sql</code> đúng cấu trúc quy định của hội đồng thi (ví dụ: <code>23520xxx_De01.sql</code>).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 20</span>
+  </div>
+</div>
+
+<!-- Page 21: Phụ lục tra cứu nguồn Microsoft Learn -->
+<div class="page">
+  <div class="page-header">
+    <span>PHỤ LỤC: BẢN ĐỒ THAM CHIẾU NGUỒN CHUẨN</span>
+    <span>THỰC HÀNH T-SQL</span>
+  </div>
+
+  <h2>Phụ lục: Bản đồ Tham chiếu Microsoft Learn (TECH-A)</h2>
+  <p>Toàn bộ cơ chế kỹ thuật và cú pháp trong cẩm nang được đối chiếu trực tiếp với tài liệu kỹ thuật chính thức Microsoft Learn (nguồn chuẩn Tier A, căn cứ <code>research/v1.1_phase_a/source_inventory.md</code>):</p>
+
+  <table class="compact-table">
+    <thead>
+      <tr><th style="width: 15%;">Mã định danh</th><th style="width: 35%;">Chủ đề kỹ thuật Microsoft Learn</th><th style="width: 25%;">Từ khóa T-SQL cốt lõi</th><th style="width: 25%;">Chuyên đề cẩm nang</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>TECH-A01</strong></td>
+        <td><code>CREATE TABLE (Transact-SQL)</code></td>
+        <td><code>TABLE, PK, FK, NOT NULL</code></td>
+        <td>Phần 1: DDL Khai báo</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A02</strong></td>
+        <td><code>SELECT - GROUP BY (Transact-SQL)</code></td>
+        <td><code>GROUP BY, HAVING, COUNT</code></td>
+        <td>Phần 4: Phân tích tổng hợp</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A03</strong></td>
+        <td><code>CREATE CHECK Constraints</code></td>
+        <td><code>CONSTRAINT ... CHECK</code></td>
+        <td>Phần 1: Ràng buộc miền</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A04</strong></td>
+        <td><code>CREATE TRIGGER (Transact-SQL)</code></td>
+        <td><code>AFTER INSERT, UPDATE</code></td>
+        <td>Phần 6: Trigger nâng cao</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A05</strong></td>
+        <td><code>Use inserted &amp; deleted tables</code></td>
+        <td><code>inserted, deleted</code></td>
+        <td>Phần 6: Bảng ảo chuyển tiếp</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A06</strong></td>
+        <td><code>Handle multiple rows in DML triggers</code></td>
+        <td><code>JOIN inserted, Set-based</code></td>
+        <td>Phần 6: An toàn đa dòng</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A07</strong></td>
+        <td><code>EXISTS (Transact-SQL)</code></td>
+        <td><code>EXISTS, NOT EXISTS</code></td>
+        <td>Phần 5: Bài toán "Tất cả"</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A08</strong></td>
+        <td><code>SET Operators - UNION</code></td>
+        <td><code>UNION, EXCEPT, INTERSECT</code></td>
+        <td>Phần 5: Phép toán tập hợp</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A09</strong></td>
+        <td><code>CREATE PROCEDURE (Transact-SQL)</code></td>
+        <td><code>PROCEDURE, EXEC, PARAM</code></td>
+        <td>Phụ lục: Stored Procedure</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A10</strong></td>
+        <td><code>CREATE VIEW (Transact-SQL)</code></td>
+        <td><code>CREATE VIEW ... AS SELECT</code></td>
+        <td>Phụ lục: Khung nhìn View</td>
+      </tr>
+      <tr>
+        <td><strong>TECH-A11</strong></td>
+        <td><code>CREATE FUNCTION (Transact-SQL)</code></td>
+        <td><code>FUNCTION, RETURNS TABLE</code></td>
+        <td>Phụ lục: UDF đọc thêm</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-why" style="margin-top: 4mm;">
+    <div class="callout-title">Chuẩn mực tra cứu kỹ thuật</div>
+    <p style="margin-bottom: 0;">Khi phát triển các giải pháp cơ sở dữ liệu quy mô doanh nghiệp hoặc triển khai thực tế trên Azure SQL / SQL Server 2022, sinh viên và kỹ sư nên đối chiếu trực tiếp các mã nguồn <code>TECH-A01</code>–<code>TECH-A11</code> trên cổng tài liệu <code>learn.microsoft.com</code> để nắm bắt các tính năng tối ưu hóa mới nhất.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>IT004 — Thực hành Cơ sở dữ liệu</span>
+    <span>Trang 21</span>
+  </div>
+</div>

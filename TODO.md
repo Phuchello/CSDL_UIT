@@ -36,9 +36,29 @@
 - [x] Run chapter/content checks, rendered-page review, overflow checks, and record evidence in `reports/v1.1_theory_qa.md`.
 - [x] Keep practical handbook authoring and Quartz implementation out of this branch.
 
-## Phase B3/C — Strictly Blocked Until Mentor Approval
+## Phase C1: Practical Handbook Architecture & Proof — Complete on `v1.1-practice-handbook`
 
+- [x] Design full 8-part practical architecture and Table of Contents (`practice/chapters/00_cover_toc.html`).
+- [x] Create companion design system `practice/css/practice.css` (B1 color family, code blocks, trace boxes, debug cards).
+- [x] Author 9 representative proof chapter files covering 10 core pedagogical and technical areas.
+- [x] Compile and generate 21-page proof PDF `dist/proofs/IT004_CSDL_UIT_v1.1_Practice_DesignProof.pdf`.
+- [x] Enforce strict multi-row safety on triggers (`IF EXISTS (SELECT 1 FROM inserted i JOIN ...)`), rejecting scalar variables.
+- [x] Author systematic 5-step debugging guide for 6 common T-SQL error codes.
+- [x] Reconstruct Lab 01 and Lab 03–04 progression from Phase A empirical evidence.
+- [x] Map all T-SQL topics to Microsoft Learn `TECH-A01`–`TECH-A11` citations.
+- [x] Publish `DESIGN_NOTES.md` and 10-point `REVIEW_GUIDE.md` in `design/v1.1_practice/`.
+- [x] Generate cover and contact sheet review images in `dist/review/v1.1_practice/`.
+- [x] Complete QA validation report `reports/v1.1_practice_c1_qa.md`.
+
+## Human Mentor Review Gate (Phase C1 $\rightarrow$ Phase C2)
+
+- [ ] Mentor review of 21-page design proof PDF (`IT004_CSDL_UIT_v1.1_Practice_DesignProof.pdf`).
+- [ ] Mentor review of 10-point rubric in `design/v1.1_practice/REVIEW_GUIDE.md`.
+- [ ] Mentor approval to begin full Phase C2 authoring of the practical handbook.
+
+## Phase C2 & Beyond — Strictly Blocked Until Mentor Approval
+
+- [ ] Author the complete practical SQL Server handbook chapters.
 - [ ] Build or scaffold Quartz site.
-- [ ] Rewrite theory handbook chapters.
-- [ ] Author practical SQL Server handbook.
-- [ ] Generate new PDFs or publish releases.
+- [ ] Merge to `main`.
+- [ ] Tag and release v1.1.
