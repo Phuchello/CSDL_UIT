@@ -30,9 +30,9 @@ HEAD = """<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IT004 – Cơ sở dữ liệu: Cẩm nang từ nền tảng đến Exam Mastery</title>
+  <title>IT004 – Cơ sở dữ liệu — Sổ tay lý thuyết</title>
   <meta name="author" content="Võ Trọng Phúc">
-  <meta name="description" content="IT004 – Cơ sở dữ liệu – Cẩm nang từ nền tảng đến Exam Mastery – UIT">
+  <meta name="description" content="IT004 – Cơ sở dữ liệu — Sổ tay lý thuyết">
   <meta name="keywords" content="IT004, Cơ sở dữ liệu, Database, UIT, SQL Server, Đại số quan hệ, Võ Trọng Phúc">
   <link rel="stylesheet" href="css/book.css">
 </head>

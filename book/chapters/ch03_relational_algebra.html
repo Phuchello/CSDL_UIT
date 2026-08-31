@@ -6,7 +6,7 @@
 </div>
 
 <div class="callout-mental">
-  <strong>🧠 Mental Model: Data Pipeline</strong><br>
+  <strong>Cách hiểu: Pipeline dữ liệu</strong><br>
   Đại số quan hệ (ĐSQH) là ngôn ngữ truy vấn có tính thủ tục (procedural). Bạn có thể hình dung mỗi phép toán là một trạm xử lý dữ liệu. Một trạm nhận vào một (hoặc hai) bảng dữ liệu thô (quan hệ), thực hiện biến đổi, và luôn luôn trả ra một bảng dữ liệu mới (quan hệ mới). Kết quả này lại có thể làm đầu vào cho trạm xử lý tiếp theo, tạo thành một <em>pipeline</em> truyền dữ liệu liên tục.
 </div>
 
@@ -51,7 +51,7 @@
     <tr>
       <th>Từ khóa trong đề</th>
       <th>Phép toán thường cân nhắc</th>
-      <th>Giải thích & Mental Model</th>
+  <th>Giải thích và cách hiểu</th>
     </tr>
   </thead>
   <tbody>
@@ -139,7 +139,7 @@
 <p><strong>2. Ký hiệu:</strong> <span class="math-block">σ_{&lt;điều kiện&gt;}(R)</span></p>
 <p><strong>3. Input/Output:</strong> Đầu vào: 1 bảng R. Đầu ra: 1 bảng cùng số cột với R, chỉ chứa các dòng thỏa điều kiện.</p>
 <p><strong>4. Điều kiện:</strong> Điều kiện bao gồm các phép so sánh (=, &gt;, &lt;, &gt;=, &lt;=, &lt;&gt;) nối với nhau bởi các phép logic AND (∧), OR (∨), NOT (¬).</p>
-<p><strong>5. Dry Run:</strong></p>
+<p><strong>5. Theo dõi trạng thái:</strong></p>
 <div class="before-after">
   <div class="before">
     <span class="label">Bảng MONHOC (trước)</span>
@@ -169,7 +169,7 @@
 <p><strong>2. Ký hiệu:</strong> <span class="math-block">π_{A_1, A_2, ..., A_k}(R)</span></p>
 <p><strong>3. Input/Output:</strong> Đầu vào: 1 bảng R. Đầu ra: 1 bảng chỉ chứa các cột A_1, A_2..., số dòng có thể giảm nếu có trùng lặp.</p>
 <p><strong>4. Điều kiện:</strong> Danh sách cột chiếu phải nằm trong schema của bảng R.</p>
-<p><strong>5. Dry Run:</strong></p>
+<p><strong>5. Theo dõi trạng thái:</strong></p>
 <div class="before-after">
   <div class="before">
     <span class="label">GIAOVIEN</span>
@@ -196,7 +196,7 @@
 <p><strong>2. Ký hiệu:</strong> <span class="math-block">ρ_{S}(R)</span> (Đổi tên bảng R thành S) hoặc <span class="math-block">ρ_{S(A, B, C)}(R)</span> (Đổi tên bảng và tên cột tương ứng).</p>
 <p><strong>3. Input/Output:</strong> Bảng mới y hệt bảng cũ về dữ liệu, chỉ đổi tên ở phần header.</p>
 <div class="callout-fast">
-  <strong>⚡ Fast Pattern:</strong> Dạng câu hỏi "Tìm X <em>có cùng</em> Y với Z" (Tìm nhân viên làm cùng phòng với 'Nguyen Van A') thường cần phép đổi tên và self-join.
+  <strong>Mẫu suy luận:</strong> Dạng câu hỏi "Tìm X <em>có cùng</em> Y với Z" (Tìm nhân viên làm cùng phòng với 'Nguyen Van A') thường cần phép đổi tên và self-join.
 </div>
 
 <h4>B.4 Tích Đề-các (Cartesian Product - ×)</h4>
@@ -218,7 +218,7 @@
 <p><strong>1. Trực giác (Natural Join):</strong> Tìm mảnh ghép phù hợp. Bảng Sinh viên có cột Mã lớp. Bảng Lớp cũng có cột Mã lớp. Hai bảng sẽ "hút" nhau và nối lại thành một dòng dài nếu Mã lớp khớp nhau.</p>
 <p><strong>2. Ký hiệu:</strong> <span class="math-block">R ⋈ S</span></p>
 <p><strong>3. Input/Output:</strong> Đầu vào: 2 bảng. Đầu ra: Bảng lớn chứa thông tin ghép của cả 2.</p>
-<p><strong>5. Dry Run:</strong></p>
+<p><strong>5. Theo dõi trạng thái:</strong></p>
 <div class="before-after">
   <div class="before">
     <span class="label">MON (MAMH, TENMH) và KQ(MAMH, MAHV, DIEM)</span>
@@ -249,6 +249,7 @@
 <p><strong>1. Trực giác:</strong> Gom chung kết quả của 2 tập hợp lại. Ai có trong tập 1 HOẶC tập 2 đều lấy. Trùng nhau thì chỉ lấy 1 lần.</p>
 <p><strong>2. Ký hiệu:</strong> <span class="math-block">R ∪ S</span></p>
 <p><strong>4. Điều kiện Khả hợp (Union-compatible):</strong> 2 bảng phải có <em>cùng số lượng cột</em> và các cột tương ứng phải <em>cùng kiểu dữ liệu</em>.</p>
+<div class="callout-note"><strong>Liên hệ với SQL:</strong> ĐSQH làm việc trên tập nên phần tử trùng chỉ xuất hiện một lần; SQL thường dùng bag semantics. Khi cần kết quả tương đương phép chiếu theo ngữ nghĩa tập, ghi rõ <code>DISTINCT</code> để loại bản lặp.</div>
 <p><strong>6. Ví dụ tổng quát (không thuộc lược đồ QLGV chuẩn):</strong> Giả sử có quan hệ phụ trợ NHANVIEN(MANV, ...). Để hợp mã giáo viên và mã nhân viên, đổi tên hai thuộc tính kết quả về cùng tên rồi áp dụng phép hợp:<br>
 <span class="math-block">ρ_{MA_NGUOI←MAGV}(π_{MAGV}(GIAOVIEN)) ∪ ρ_{MA_NGUOI←MANV}(π_{MANV}(NHANVIEN))</span></p>
 
@@ -284,7 +285,7 @@
 
 <h4>C.1 Trực giác: "X nào bao xài TẤT CẢ Y?"</h4>
 <p>Hãy tưởng tượng bạn (X) vào một siêu thị và có một danh sách mua sắm (Y) gồm: Sữa, Bánh, Kẹo. Nếu giỏ hàng của bạn <strong>chứa toàn bộ</strong> 3 món trên (có thể mua thêm thứ khác không quan tâm, miễn là đủ 3 món này), thì bạn là người vượt qua bài kiểm tra "Phép chia".</p>
-<p><strong>Dấu hiệu nhận biết (Exam Pattern):</strong> Đề bài chứa các từ khóa <em>"tất cả", "toàn bộ", "mọi"</em>.</p>
+<p><strong>Dấu hiệu nhận biết:</strong> Đề bài chứa các từ khóa <em>"tất cả", "toàn bộ", "mọi"</em>.</p>
 
 <h4>C.2 Định nghĩa Formal</h4>
 <p>Cho quan hệ R(X, Y) và quan hệ S(Y). Phép chia R ÷ S sẽ trả về các giá trị x ∈ X sao cho với <strong>mọi</strong> giá trị y ∈ S, tổ hợp (x, y) đều xuất hiện trong R.</p>
@@ -304,7 +305,7 @@ R ÷ S = π_X(R) − π_X( (π_X(R) × S) − R )
   </ol>
 </div>
 
-<h4>C.3 Dry Run: Phép chia hoạt động ra sao?</h4>
+<h4>C.3 Theo dõi trạng thái: Phép chia hoạt động ra sao?</h4>
 <div class="before-after" style="grid-template-columns: 1fr 1fr 1fr;">
   <div class="before">
     <span class="label">R (MAHV, MAMH) - Đã học</span>
@@ -391,7 +392,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 </table>
 
 <div class="callout-trap">
-  <strong>☢ BẪY CHẾT NGƯỜI (Common Errors):</strong><br>
+  <strong>Sai lầm thường gặp:</strong><br>
   - <strong>Nhầm Divisor:</strong> Chọn sai tập chia S.<br>
   - <strong>Không Project ở R:</strong> Tập R trước khi chia bắt buộc phải chỉ có đúng 2 thuộc tính (X, Y). Nếu R có chứa cả điểm số, ngày thi... thì phép chia sẽ hiểu là "Tìm những người thi đủ môn vào <em>cùng 1 ngày và cùng 1 số điểm</em>". Do đó bước <span class="math">π_{MAHV, MAMH}(KETQUATHI)</span> ở trên là BẮT BUỘC.
 </div>
@@ -400,7 +401,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 
 <h3 id="sec-d">D. Bài tập (30 bài phân cấp độ)</h3>
 
-<h4>D.1 Nhóm 1: Phép chọn, Chiếu đơn (Level 1)</h4>
+<h4>D.1 Nhóm 1: Phép chọn, chiếu đơn</h4>
 <div class="exercise-block level-1">
   <p><strong>Câu 1:</strong> (QLGV) In ra danh sách các giáo viên khoa 'HTTT'.</p>
   <details><summary>Lời giải chi tiết</summary>
@@ -447,7 +448,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.2 Nhóm 2: Phép Kết (Level 2)</h4>
+<h4>D.2 Nhóm 2: Phép kết</h4>
 <div class="exercise-block level-2">
   <p><strong>Câu 6:</strong> (QLBH) In ra mã và tên khách hàng đã từng mua hàng.</p>
   <details><summary>Lời giải chi tiết</summary>
@@ -494,7 +495,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.3 Nhóm 3: Phép Tập Hợp (Level 2)</h4>
+<h4>D.3 Nhóm 3: Phép tập hợp</h4>
 <div class="exercise-block level-2">
   <p><strong>Câu 11:</strong> (QLGV) Tìm học viên vừa thi Toán, vừa thi Lý.</p>
   <details><summary>Lời giải chi tiết</summary>
@@ -528,7 +529,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.4 Nhóm 4: "Có nhưng không có" (Level 3)</h4>
+<h4>D.4 Nhóm 4: "Có nhưng không có"</h4>
 <div class="exercise-block level-3">
   <p><strong>Câu 14:</strong> (QLGV) Tìm học viên thi Toán nhưng chưa từng thi Lý.</p>
   <details><summary>Lời giải chi tiết</summary>
@@ -575,7 +576,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.5 Nhóm 5: Aggregation (Level 3)</h4>
+<h4>D.5 Nhóm 5: Gom nhóm</h4>
 <div class="exercise-block level-3">
   <p><strong>Câu 18:</strong> (QLBH) Tính tổng trị giá của mỗi hóa đơn.</p>
   <details><summary>Lời giải chi tiết</summary>
@@ -610,10 +611,10 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.6 Nhóm 6: Maximum / Cực trị không hàm Max (Level 4)</h4>
+<h4>D.6 Nhóm 6: Cực trị không dùng hàm Max</h4>
 <div class="exercise-block level-4">
   <p><strong>Câu 21:</strong> (QLGV) <span class="badge-advanced">Thi Hóa học</span> Tìm giáo viên có mức lương cao nhất.</p>
-  <div class="callout-exam">🎯 Exam Signal: Dấu hiệu Cực trị trong ĐSQH thuần. Cấm dùng <code>MUCLUONG = MAX(MUCLUONG)</code>.</div>
+  <div class="callout-exam">Khi làm bài: Dấu hiệu cực trị trong ĐSQH thuần. Không dùng <code>MUCLUONG = MAX(MUCLUONG)</code>.</div>
   <details><summary>Lời giải chi tiết</summary>
     <div class="solution">
       <p><em>Phân tích:</em> Tìm người cao nhất = Toàn bộ giáo viên TRỪ ĐI những giáo viên có lương THẤP HƠN một ai đó. Ai còn sống sót sau phép trừ chính là nhà vua (Cao nhất).</p>
@@ -660,7 +661,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.7 Nhóm 7: Phép chia (Level 5)</h4>
+<h4>D.7 Nhóm 7: Phép chia</h4>
 <div class="exercise-block level-5">
   <p><strong>Câu 24:</strong> (QLBH) Tìm mã KH đã mua TẤT CẢ sản phẩm do 'Singapore' sản xuất.</p>
   <details><summary>Lời giải chi tiết</summary>
@@ -714,7 +715,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.8 Nhóm 8: Tổng hợp hầm bà lằng (Level 5)</h4>
+<h4>D.8 Nhóm 8: Tổng hợp nhiều bước</h4>
 <div class="exercise-block level-5">
   <p><strong>Câu 28:</strong> (QLGV) Tìm lớp (MALOP) đã học tất cả các môn của khoa 'KTPM' và có giáo viên chủ nhiệm là 'Nguyen Hoai An'.</p>
   <details><summary>Lời giải chi tiết</summary>
@@ -763,7 +764,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 <hr>
 
 <div class="recall-sheet">
-  <h2 id="sec-e">E. Recall Sheet - Ôn tập nhanh 1 trang</h2>
+  <h2 id="sec-e">E. Tờ ghi nhớ - Ôn tập nhanh 1 trang</h2>
   <table class="data-table">
     <tr>
       <th>Phép toán</th>

@@ -100,7 +100,7 @@
 </ol>
 
 <div class="callout callout-mental">
-    <h4>🧠 Mental Model: Người gác cổng</h4>
+    <h4>Cách hiểu: Người gác cổng của dữ liệu</h4>
     <p>Hãy xem RBTV như những người gác cổng tại một câu lạc bộ đêm. Trước khi cho phép bất kỳ ai (dữ liệu mới) vào, hoặc cho phép người đang ở trong thay đổi trang phục (cập nhật), hoặc rời đi (xóa), người gác cổng sẽ kiểm tra xem hành động đó có vi phạm "quy định của quán" hay không. Nếu vi phạm, hành động bị từ chối thẳng thừng.</p>
 </div>
 
@@ -135,7 +135,7 @@
 </ul>
 
 <div class="callout callout-exam">
-    <h4>🎯 Exam Signal: Xử lý khi vi phạm khóa ngoại (Cascade Actions)</h4>
+    <h4>Khi làm bài: Xử lý khi vi phạm khóa ngoại (Cascade Actions)</h4>
     <p>Đề thi thường hỏi: "Khi xóa một dòng ở bảng cha thì chuyện gì xảy ra với các dòng ở bảng con?". SQL hỗ trợ 4 hành động:</p>
     <ul>
         <li><strong>NO ACTION (Mặc định):</strong> Báo lỗi và ngăn chặn việc xóa/sửa bảng cha.</li>
@@ -168,7 +168,7 @@
 <h2>5.3 BẢNG TẦM ẢNH HƯỞNG (TRỌNG ĐIỂM THI UIT)</h2>
 
 <div class="callout callout-connection">
-    <h4>🔗 Connection: Bảng Tầm Ảnh Hưởng là gì?</h4>
+    <h4>Liên hệ: Bảng Tầm Ảnh Hưởng là gì?</h4>
     <p>Trong dạng bài RBTV của UIT, đề thường yêu cầu lập <strong>Bảng Tầm Ảnh Hưởng</strong> sau khi phát biểu nội dung và bối cảnh. Bảng liệt kê các thao tác Thêm (Insert), Xóa (Delete), Sửa (Update) trên các quan hệ có thể làm <strong>vi phạm</strong> ràng buộc đang xét.</p>
 </div>
 
@@ -187,7 +187,7 @@
 </ol>
 
 <div class="callout callout-trap">
-    <h4>⚠ BẪY: Xóa dữ liệu có làm vi phạm RBTV không?</h4>
+    <h4>Sai lầm thường gặp: Xóa dữ liệu có làm vi phạm RBTV không?</h4>
     <p>Sinh viên thường đánh dấu <code>+</code> cho thao tác XÓA mà không suy nghĩ. Thực tế:</p>
     <ul>
         <li>Xóa một khóa ngoại (bảng con): Càng xóa càng an toàn, <strong>KHÔNG</strong> vi phạm (-).</li>
@@ -230,7 +230,7 @@
     </tbody>
 </table>
 <div class="callout callout-dryrun">
-    <h4>Bước chạy khô (Dry run) phân tích:</h4>
+    <h4>Theo dõi trạng thái:</h4>
     <ul>
         <li><strong>Bảng GIAOVIEN:</strong>
             <ul>
@@ -344,7 +344,7 @@
 <p>SQL Server sử dụng hai bảng ảo (virtual tables) trong quá trình thực thi Trigger: <code>inserted</code> (chứa dữ liệu mới vừa thêm/sửa) và <code>deleted</code> (chứa dữ liệu cũ vừa xóa/trước khi sửa).</p>
 
 <div class="callout callout-exam">
-    <h4>🎯 Code Template Trigger Kiểm tra RBTV:</h4>
+    <h4>Mẫu trigger kiểm tra RBTV:</h4>
     <p>RBTV: "Trưởng khoa của một khoa phải là giáo viên thuộc khoa đó"</p>
     <pre class="sql-block">
 <span class="sql-comment">-- Giả định đã có FK KHOA(TRUONGKHOA) -&gt; GIAOVIEN(MAGV).</span>
@@ -459,7 +459,7 @@
 <hr>
 
 <div class="recall-sheet">
-    <h2>ONE-PAGE RECALL: Ràng Buộc Toàn Vẹn</h2>
+    <h2>Tờ ghi nhớ: Ràng buộc toàn vẹn</h2>
     <div class="recall-grid">
         <div class="recall-card">
             <h3>1. Các loại RBTV chính</h3>

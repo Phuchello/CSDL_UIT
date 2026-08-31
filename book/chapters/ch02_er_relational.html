@@ -3,7 +3,7 @@
   <p class="author-attribution" style="font-style: italic; text-align: right;">Biên soạn bởi Võ Trọng Phúc</p>
 
   <div class="callout-mental">
-    <strong>🧠 Mental Model: Hành trình từ Hiện thực đến Máy tính</strong><br/>
+    <strong>Cách hiểu: Từ hiện thực đến máy tính</strong><br/>
     Để máy tính quản lý được dữ liệu của một trường đại học hay công ty, ta không thể "nhét" nguyên xi ngoài đời thật vào máy. Ta cần qua 2 bước chuyển đổi:
     <br/>1. <strong>Thế giới thực</strong> → <strong>Mô hình ER</strong> (Bản vẽ phác thảo khái niệm để con người hiểu).
     <br/>2. <strong>Mô hình ER</strong> → <strong>Mô hình Quan hệ (Relational Model)</strong> (Bản vẽ kỹ thuật dưới dạng các bảng để cài đặt vào máy tính - RDBMS).
@@ -34,7 +34,7 @@
       </ul>
     </div>
     <div class="step">
-      <h4>③ Visual</h4>
+      <h4>③ Minh họa</h4>
       <pre class="data-table">
 Relation: KHACHHANG
 +-------+----------------+-------------+ (Lược đồ - Schema)
@@ -48,7 +48,7 @@ Relation: KHACHHANG
   </div>
 
   <div class="callout-trap">
-    <strong>⚠ BẪY: Relation vs Relationship</strong><br/>
+    <strong>Sai lầm thường gặp: Relation và Relationship</strong><br/>
     Rất nhiều sinh viên dịch "Relation" là "mối quan hệ". Trong môn này:
     - <strong>Relation</strong>: BẢNG (Table) - Mô hình quan hệ.
     - <strong>Relationship</strong>: MỐI KẾT HỢP - Mô hình ER.
@@ -60,7 +60,7 @@ Relation: KHACHHANG
     <li><strong>Lực lượng (Cardinality)</strong>: Số lượng bộ (dòng) hiện có trong quan hệ.</li>
   </ul>
   <div class="callout-exam">
-    <strong>🎯 Exam Pattern:</strong> Đề thi trắc nghiệm hay hỏi: "Thêm 1 dòng vào bảng thì Bậc hay Lực lượng thay đổi?" → Lực lượng (Cardinality) tăng 1, Bậc (Degree) không đổi (trừ khi alter table thêm cột).
+    <strong>Khi làm bài:</strong> Câu hỏi "Thêm 1 dòng vào bảng thì Bậc hay Lực lượng thay đổi?" → Lực lượng (Cardinality) tăng 1, Bậc (Degree) không đổi (trừ khi alter table thêm cột).
   </div>
 
   <h3>3. NULL và Tân từ (Predicate)</h3>
@@ -87,7 +87,7 @@ Relation: KHACHHANG
   </div>
 
   <div class="callout-dryrun">
-    <strong>⑤ Dry run: Khóa trên bảng NHANVIEN(MANV, CCCD, HOTEN, DIACHI)</strong><br/>
+    <strong>Theo dõi trạng thái: Khóa trên bảng NHANVIEN(MANV, CCCD, HOTEN, DIACHI)</strong><br/>
     - Superkey: {MANV}, {CCCD}, {MANV, HOTEN}, {CCCD, DIACHI}...<br/>
     - Candidate Key: {MANV}, {CCCD}. (Lưu ý: {MANV, HOTEN} bị loại vì dư HOTEN).<br/>
     - Primary Key: Chức năng chọn một, giả sử là <u>MANV</u>.
@@ -128,14 +128,14 @@ Relation: KHACHHANG
 
   <h3>3. Ràng buộc tham gia (Participation Constraint) và Min-max Notation</h3>
   <div class="callout-fast">
-    <strong>⚡ Fast Pattern: Min-Max Notation (min, max)</strong><br/>
+    <strong>Cách làm: Min-Max Notation (min, max)</strong><br/>
     Ký hiệu (min, max) đặt trên đường nối giữa Entity và Relationship:<br/>
     - <strong>min</strong>: Bắt buộc (1) hay Tùy chọn (0)? (Participation: Total/Partial).<br/>
     - <strong>max</strong>: Tối đa là 1 (1) hay nhiều (n)? (Cardinality).
   </div>
   
   <div class="callout-exam">
-    <strong>🎯 Phân tích kỹ ví dụ tiếng Việt: "Nhân viên thuộc về một Phòng ban"</strong><br/>
+    <strong>Ví dụ: "Nhân viên thuộc về một Phòng ban"</strong><br/>
     Hãy xét NHANVIEN - [THUOC_VE] - PHONGBAN:<br/>
     - Hỏi chiều 1: "1 NHANVIEN thuộc về tối thiểu mấy PHONGBAN? Tối đa mấy?" -> Tối thiểu 1 (bắt buộc phải có phòng), Tối đa 1. Cạnh bên NHANVIEN ghi <strong>(1,1)</strong>.<br/>
     - Hỏi chiều 2: "1 PHONGBAN có tối thiểu mấy NHANVIEN? Tối đa mấy?" -> Tối thiểu 0 (phòng mới lập chưa có ai), Tối đa n (nhiều người). Cạnh bên PHONGBAN ghi <strong>(0,n)</strong>.<br/>
@@ -187,6 +187,36 @@ Relation: KHACHHANG
   </div>
 
   <h3>2. Ánh xạ Mối kết hợp (Relationship Mapping)</h3>
+
+  <figure class="mapping-figure">
+    <svg viewBox="0 0 760 220" role="img" aria-label="Cardinality mapping comparison for one-to-one one-to-many and many-to-many">
+      <g font-family="Arial,Segoe UI,sans-serif" fill="#203047">
+        <g transform="translate(10 15)">
+          <text x="115" y="18" text-anchor="middle" font-size="14" font-weight="700">1 : 1</text>
+          <rect x="10" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="46" y="75" text-anchor="middle" font-size="15" font-weight="700">A</text>
+          <polygon points="115,48 137,70 115,92 93,70" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="115" y="74" text-anchor="middle" font-size="11">R</text>
+          <rect x="148" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="184" y="75" text-anchor="middle" font-size="15" font-weight="700">B</text>
+          <path d="M82 70 H93 M137 70 H148" stroke="#1e7881" stroke-width="2"/><text x="86" y="61" text-anchor="end" fill="#8c5b20" font-size="11">1</text><text x="144" y="61" fill="#8c5b20" font-size="11">1</text>
+        </g>
+        <g transform="translate(260 15)">
+          <text x="115" y="18" text-anchor="middle" font-size="14" font-weight="700">1 : N</text>
+          <rect x="10" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="46" y="75" text-anchor="middle" font-size="15" font-weight="700">A</text>
+          <polygon points="115,48 137,70 115,92 93,70" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="115" y="74" text-anchor="middle" font-size="11">R</text>
+          <rect x="148" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="184" y="75" text-anchor="middle" font-size="15" font-weight="700">B</text>
+          <path d="M82 70 H93 M137 70 H148" stroke="#1e7881" stroke-width="2"/><text x="86" y="61" text-anchor="end" fill="#8c5b20" font-size="11">1</text><text x="144" y="61" fill="#8c5b20" font-size="11">N</text>
+        </g>
+        <g transform="translate(510 15)">
+          <text x="115" y="18" text-anchor="middle" font-size="14" font-weight="700">M : N</text>
+          <rect x="10" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="46" y="75" text-anchor="middle" font-size="15" font-weight="700">A</text>
+          <polygon points="115,48 137,70 115,92 93,70" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="115" y="74" text-anchor="middle" font-size="11">R</text>
+          <rect x="148" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="184" y="75" text-anchor="middle" font-size="15" font-weight="700">B</text>
+          <path d="M82 70 H93 M137 70 H148" stroke="#1e7881" stroke-width="2"/><text x="86" y="61" text-anchor="end" fill="#8c5b20" font-size="11">M</text><text x="144" y="61" fill="#8c5b20" font-size="11">N</text>
+        </g>
+        <text x="380" y="170" text-anchor="middle" fill="#5f6d78" font-size="12">Bản số quyết định vị trí khóa và có cần relation trung gian hay không.</text>
+      </g>
+    </svg>
+    <figcaption>Hình 2.1 — Cùng một ký hiệu quan hệ nhưng ba bản số dẫn đến ba quy tắc ánh xạ khác nhau.</figcaption>
+  </figure>
   
   <h4>a) Mối kết hợp 1:N (One-to-Many)</h4>
   <p><strong>Quy tắc:</strong> Khóa chính của bảng bên 1 chạy sang làm <strong>Khóa ngoại (FK)</strong> ở bảng bên N.</p>
@@ -199,7 +229,7 @@ Relation: KHACHHANG
 
   <h4>b) Mối kết hợp M:N (Many-to-Many)</h4>
   <div class="callout-trap">
-    <strong>⚠ BẪY CHẾT NGƯỜI:</strong> Không bao giờ được đem PK của bảng này bỏ vào bảng kia làm FK đối với quan hệ M:N! Phải tạo bảng thứ 3.
+    <strong>Sai lầm thường gặp:</strong> Không đem PK của bảng này bỏ vào bảng kia làm FK đối với quan hệ M:N; phải tạo bảng thứ ba.
   </div>
   <p><strong>Quy tắc:</strong> Tạo một <strong>Bảng trung gian</strong> (Junction Table). Khóa chính của 2 bảng ban đầu bay vào bảng trung gian, cùng nhau tạo thành <strong>Composite PK</strong> (Khóa chính kết hợp), đồng thời là 2 Khóa ngoại (FK).</p>
   <div class="before-after">
@@ -256,7 +286,7 @@ Relation: KHACHHANG
 
   <hr>
 
-  <h2>F. One-Page Recall (Bản đồ ôn thi)</h2>
+  <h2>F. Tờ ghi nhớ (Bản đồ ôn tập)</h2>
   
   <div class="callout-connection">
     <strong>TỔNG KẾT CHƯƠNG 2:</strong>

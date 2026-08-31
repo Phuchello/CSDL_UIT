@@ -3,11 +3,11 @@
 <div class="chapter-title">
   <span class="chapter-number">Chương 4</span>
   <span class="chapter-name">SQL Server / T-SQL</span>
-  <span class="chapter-subtitle">DDL • DML • SELECT • JOIN • Subquery • "Tất cả" Pattern</span>
+  <span class="chapter-subtitle">DDL • DML • SELECT • JOIN • Truy vấn con • Điều kiện “tất cả”</span>
 </div>
 
 <div class="callout-mental">
-  <strong>🧠 Mental Model: SQL không phải là lập trình thông thường</strong><br>
+  <strong>Cách hiểu: SQL là ngôn ngữ khai báo</strong><br>
   Trong C/C++ hay Python, bạn viết <i>cách (HOW)</i> để máy tính lấy dữ liệu (vòng lặp, if-else). 
   Trong SQL, bạn chỉ mô tả <i>cái bạn muốn (WHAT)</i>, và Hệ Quản Trị CSDL (DBMS) sẽ tự tìm đường đi tối ưu nhất để trả về kết quả. SQL là ngôn ngữ khai báo (Declarative).
 </div>
@@ -47,7 +47,7 @@
 </ul>
 
 <div class="callout-fast">
-  <strong>⚡ Fast Pattern: Inline vs Named Constraints</strong><br>
+  <strong>Cách làm: Inline và named constraints</strong><br>
   - <b>Inline:</b> Viết ngay sau khai báo cột. (Nhanh, nhưng SQL Server tự đặt tên ngẫu nhiên).<br>
   - <b>Named:</b> Khai báo riêng ở dưới cùng hoặc ALTER TABLE với <code>CONSTRAINT &lt;tên&gt;</code> (Khuyên dùng trong thi để dễ DROP/ALTER sau này).
 </div>
@@ -111,7 +111,7 @@
 <span class="kw">DROP TABLE</span> CTHD;
 </pre>
 <div class="callout-trap">
-  <strong>⚠ BẪY: Thứ tự DROP TABLE</strong><br>
+  <strong>Sai lầm thường gặp: Thứ tự DROP TABLE</strong><br>
   Bạn không thể <code>DROP TABLE KHACHHANG</code> nếu bảng <code>HOADON</code> vẫn đang <code>REFERENCES</code> tới nó. Quy tắc: <strong>Xóa bảng con trước (CTHD, HOADON), bảng cha sau (KHACHHANG, SANPHAM).</strong>
 </div>
 
@@ -119,7 +119,7 @@
 <p>DML là các lệnh thay đổi dữ liệu bên trong các bảng: INSERT, UPDATE, DELETE.</p>
 
 <div class="callout-exam">
-  <strong>🎯 Exam Signal: SET DATEFORMAT DMY</strong><br>
+  <strong>Khi làm bài: SET DATEFORMAT DMY</strong><br>
   Trong phòng máy thực hành UIT, hoặc khi chấm bài thi máy, định dạng ngày tháng mặc định thường là mdy. Nếu đề bài cho chuỗi '31/12/2006', máy sẽ báo lỗi <em>"The conversion of a varchar data type to a datetime data type resulted in an out-of-range value"</em>. Luôn luôn bắt đầu file script của bạn bằng lệnh:<br>
   <code><span class="kw">SET DATEFORMAT</span> DMY;</code>
 </div>
@@ -153,7 +153,7 @@
 </pre>
 
 <div class="callout-trap">
-  <strong>⚠ BẪY CHẾT NGƯỜI: Quên mệnh đề WHERE</strong><br>
+  <strong>Sai lầm thường gặp: Quên mệnh đề WHERE</strong><br>
   <code>UPDATE SANPHAM SET GIA = 0;</code> → Thay đổi giá của TẤT CẢ sản phẩm trong bảng về 0!<br>
   <code>DELETE FROM KHACHHANG;</code> → Xóa sạch TẤT CẢ khách hàng!<br>
   Luôn luôn bôi đen và chạy câu lệnh <code>SELECT * FROM ... WHERE ...</code> trước khi chuyển thành <code>UPDATE / DELETE</code> để đảm bảo bạn sửa/xóa đúng dòng.
@@ -192,7 +192,7 @@
 </ul>
 
 <div class="callout-trap">
-  <strong>⚠ BẪY: So sánh với NULL</strong><br>
+  <strong>Sai lầm thường gặp: So sánh với NULL</strong><br>
   Trong SQL, <code>NULL</code> nghĩa là "không xác định" (unknown). Bạn <strong>không thể</strong> dùng dấu bằng <code>= NULL</code> hoặc khác <code>&lt;&gt; NULL</code>.<br>
   Sai: <code>WHERE DCHI = NULL</code><br>
   Đúng: <code>WHERE DCHI IS NULL</code> hoặc <code>IS NOT NULL</code>.
@@ -202,7 +202,7 @@
 <p>JOIN dùng để ghép dữ liệu từ 2 hay nhiều bảng dựa trên cột chung (thường là Khóa chính - Khóa ngoại).</p>
 
 <div class="callout-mental">
-  <strong>🧠 Mental Model: JOIN là phép chiếu ánh sáng qua các lớp kính</strong><br>
+  <strong>Cách hiểu: JOIN ghép các mảnh quan hệ</strong><br>
   Hãy tưởng tượng mỗi bảng là một tờ giấy trong suốt có ghi thông tin. JOIN là việc dán các tờ giấy lại với nhau sao cho "mã" khớp nhau, tạo thành một tờ giấy lớn chứa toàn bộ thông tin.
 </div>
 
@@ -256,7 +256,7 @@
 </table>
 
 <div class="callout-trap">
-  <strong>⚠ BẪY: LEFT JOIN bị biến thành INNER JOIN!</strong><br>
+  <strong>Sai lầm thường gặp: LEFT JOIN bị biến thành INNER JOIN</strong><br>
   Nếu bạn dùng <code>LEFT JOIN</code>, nhưng sau đó lại thêm điều kiện <code>WHERE</code> lên cột của bảng bên Phải, bạn vô tình lọc mất các dòng NULL.<br>
   Vd: <code>LEFT JOIN HOADON HD ON ... WHERE HD.TRIGIA > 0</code>. Các dòng NULL (do KH chưa mua) sẽ bị loại bỏ vì NULL không thể > 0. LEFT JOIN trở thành INNER JOIN.<br>
   <strong>Cách sửa:</strong> Đưa điều kiện lên mệnh đề <code>ON</code>: <code>LEFT JOIN HOADON HD ON KH.MAKH = HD.MAKH AND HD.TRIGIA > 0</code>, HOẶC thêm <code>OR HD.SOHD IS NULL</code> vào WHERE.
@@ -293,18 +293,18 @@
 <p><code>GROUP BY</code> chia bảng thành các nhóm dựa trên các giá trị giống nhau của một hoặc nhiều cột. Sau đó hàm aggregate sẽ tính toán TRÊN TỪNG NHÓM đó.</p>
 
 <div class="callout-fast">
-  <strong>⚡ Fast Pattern: Quy tắc GROUP BY</strong><br>
+  <strong>Cách kiểm tra: Quy tắc GROUP BY</strong><br>
   BẤT CỨ cột nào nằm trong mệnh đề <code>SELECT</code> mà <strong>KHÔNG</strong> bị bọc bởi hàm aggregate (SUM, COUNT...) thì <strong>BẮT BUỘC</strong> phải xuất hiện trong mệnh đề <code>GROUP BY</code>.
 </div>
 
 <div class="callout-mental">
-  <strong>🧠 Mental Model: PIPELINE THỰC THI CỦA SQL</strong><br>
+  <strong>Cách hiểu: Thứ tự logic của SQL</strong><br>
   Khi bạn viết một câu truy vấn, máy tính sẽ xử lý theo thứ tự sau chứ KHÔNG PHẢI thứ tự đọc từ trên xuống:<br>
   <strong>FROM</strong> (Lấy bảng) → <strong>WHERE</strong> (Lọc dòng) → <strong>GROUP BY</strong> (Chia nhóm) → <strong>HAVING</strong> (Lọc nhóm) → <strong>SELECT</strong> (Chiếu cột/Tính toán) → <strong>ORDER BY</strong> (Sắp xếp).
 </div>
 
 <div class="callout-trap">
-  <strong>⚠ BẪY: WHERE vs HAVING</strong><br>
+  <strong>Sai lầm thường gặp: WHERE và HAVING</strong><br>
   - <code>WHERE</code> lọc dữ liệu <strong>TRƯỚC KHI</strong> gom nhóm. KHÔNG ĐƯỢC chứa hàm aggregate. (Sai: <code>WHERE SUM(GIA) > 100</code>).<br>
   - <code>HAVING</code> lọc dữ liệu <strong>SAU KHI</strong> đã gom nhóm. Nơi duy nhất để đặt điều kiện lên hàm aggregate. (Đúng: <code>HAVING SUM(GIA) > 100</code>).
 </div>
@@ -352,7 +352,7 @@
 );
 </pre>
 <div class="callout-trap">
-  <strong>⚠ BẪY: NOT IN và NULL</strong><br>
+  <strong>Sai lầm thường gặp: NOT IN và NULL</strong><br>
   Nếu danh sách trả về của subquery IN có chứa 1 giá trị <code>NULL</code>, phép toán <code>NOT IN</code> sẽ luốn trả về <strong>rỗng (không dòng nào)</strong>. (Vì X NOT IN (A, B, NULL) tương đương X &lt;&gt; A AND X &lt;&gt; B AND X &lt;&gt; NULL. Mà X &lt;&gt; NULL luôn là UNKNOWN, làm sập toàn bộ chuỗi AND).<br>
   Khắc phục: Dùng <code>NOT EXISTS</code> hoặc thêm <code>WHERE cột IS NOT NULL</code> trong subquery.
 </div>
@@ -429,7 +429,7 @@
 
 <div class="callout-exam">
   <strong>🎯 Lời khuyên thi cử:</strong><br>
-  Giảng viên thường <strong>khuyến khích</strong> làm theo cách <code>NOT EXISTS</code>. Hãy học thuộc pattern này (Template):<br>
+  Giảng viên thường <strong>khuyến khích</strong> làm theo cách <code>NOT EXISTS</code>. Hãy hiểu mẫu suy luận này:<br>
   <code>SELECT x FROM B1 WHERE NOT EXISTS (SELECT y FROM B2 WHERE &lt;Điều kiện B2&gt; AND NOT EXISTS (SELECT z FROM B3 WHERE B3.x = B1.x AND B3.y = B2.y))</code>
 </div>
 
@@ -477,7 +477,7 @@
   <li>Khoảng cách 2 ngày: <code>DATEDIFF(year, NGSINH, GETDATE())</code> (Tính khoảng cách năm, <strong>không phải tuổi chính xác</strong> vì nó chỉ đếm số lần qua Tết Tây. Tuổi chính xác cần so sánh thêm ngày tháng sinh).</li>
 </ul>
 
-<h2 id="4-11">4.11 Common Traps - Các lỗi ngớ ngẩn làm mất điểm</h2>
+<h2 id="4-11">4.11 Sai lầm thường gặp</h2>
 <div class="callout-trap">
   <ol>
     <li><strong>Viết WHERE sau GROUP BY hoặc ORDER BY:</strong> Sai cú pháp. (Pipeline: FROM > WHERE > GROUP > HAVING > ORDER).</li>
@@ -496,7 +496,7 @@
 <p>Sử dụng cơ sở dữ liệu QLBH (Khách hàng, Nhân viên, Sản phẩm, Hóa đơn, CTHD).</p>
 
 <div class="exercise-block level-1">
-  <strong>Level 1: SELECT Cơ Bản</strong><br>
+  <strong>Mức 1: SELECT cơ bản</strong><br>
   1. In ra danh sách các sản phẩm (MASP, TENSP) do "Viet Nam" sản xuất.<br>
   2. In ra danh sách các khách hàng (MAKH, HOTEN) có địa chỉ ở "TpHCM".<br>
   3. In ra danh sách các sản phẩm (MASP, TENSP) có giá từ 20.000 đến 50.000.<br>
@@ -519,7 +519,7 @@ SELECT MAKH, HOTEN FROM KHACHHANG WHERE YEAR(NGSINH) = 1990;
 </div>
 
 <div class="exercise-block level-2">
-  <strong>Level 2: JOIN & GROUP BY</strong><br>
+  <strong>Mức 2: JOIN và GROUP BY</strong><br>
   1. In ra chi tiết hóa đơn SOHD = 1001 (TENSP, SL, GIA, THANHTIEN).<br>
   2. In ra doanh thu tổng cộng của từng tháng trong năm 2006.<br>
   3. Liệt kê tổng số lượng mua của từng khách hàng (MAKH, HOTEN, TONGSL).<br>
@@ -543,7 +543,7 @@ SELECT SOHD FROM CTHD GROUP BY SOHD HAVING COUNT(MASP) >= 3;
 </div>
 
 <div class="exercise-block level-3">
-  <strong>Level 3: Subquery & Max/Min</strong><br>
+  <strong>Mức 3: Truy vấn con và cực trị</strong><br>
   1. Tìm khách hàng mua nhiều tiền nhất.<br>
   2. Tìm sản phẩm đắt nhất do Việt Nam sản xuất.<br>
   3. Tìm khách hàng mua nhiều lần nhất (đếm số SOHD).<br>
@@ -552,7 +552,7 @@ SELECT SOHD FROM CTHD GROUP BY SOHD HAVING COUNT(MASP) >= 3;
 </div>
 
 <div class="exercise-block level-4">
-  <strong>Level 4: Tuyệt kỹ "Tất Cả"</strong><br>
+  <strong>Mức 4: Điều kiện "tất cả"</strong><br>
   1. Tìm khách hàng đã mua tất cả các sản phẩm do Singapore sản xuất.<br>
   2. Tìm khách hàng (MAKH, HOTEN) đã mua tất cả các sản phẩm (của tất cả các nước).<br>
   3. Tìm hóa đơn có chứa tất cả các sản phẩm do Việt Nam sản xuất.
@@ -576,14 +576,14 @@ WHERE NOT EXISTS (
   </details>
 </div>
 
-<h2 id="4-13">=== ONE-PAGE RECALL ===</h2>
+<h2 id="4-13">Tờ ghi nhớ — Chương 4</h2>
 <div class="recall-sheet">
   <ul>
     <li><strong>Pipeline:</strong> <code>FROM &gt; WHERE &gt; GROUP BY &gt; HAVING &gt; SELECT &gt; ORDER BY</code>.</li>
     <li><strong>WHERE:</strong> lọc dòng trước gom nhóm; <strong>HAVING:</strong> lọc nhóm sau khi có hàm toán học (SUM, COUNT).</li>
     <li><code>COUNT(*)</code> đếm cả dòng NULL; <code>COUNT(col)</code> đếm giá trị không NULL; <code>COUNT(DISTINCT col)</code> đếm số loại.</li>
     <li>So sánh rỗng: Dùng <code>IS NULL</code> hoặc <code>IS NOT NULL</code>, không dùng dấu <code>=</code>.</li>
-    <li><strong>Double NOT EXISTS Template:</strong> <code>SELECT ... FROM T1 WHERE NOT EXISTS (SELECT * FROM T2 WHERE ... AND NOT EXISTS (SELECT * FROM T3 WHERE T3.T1_ID=T1.ID AND T3.T2_ID=T2.ID))</code></li>
+    <li><strong>Mẫu hai lớp NOT EXISTS:</strong> <code>SELECT ... FROM T1 WHERE NOT EXISTS (SELECT * FROM T2 WHERE ... AND NOT EXISTS (SELECT * FROM T3 WHERE T3.T1_ID=T1.ID AND T3.T2_ID=T2.ID))</code></li>
     <li>Nếu bài dùng chuỗi ngày theo dạng ngày/tháng/năm, nên đặt <code>SET DATEFORMAT DMY;</code>; trong mã thực tế, ưu tiên literal ngày không nhập nhằng như <code>YYYYMMDD</code> hoặc tham số kiểu ngày.</li>
   </ul>
 </div>

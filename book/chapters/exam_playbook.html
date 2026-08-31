@@ -1,5 +1,5 @@
 <section id="exam-playbook">
-    <h1 class="chapter-title">Exam Playbook - Kỹ Năng Giải Đề Tốc Độ</h1>
+    <h1 class="chapter-title">Hướng dẫn giải đề</h1>
 
     <h2>1. ER Diagram: Checklist 60 giây</h2>
     <ul>
@@ -27,14 +27,14 @@
     </table>
 
     <div class="callout-fast">
-        <strong>⚡ Fast Pattern: Truy vấn "Tất cả" (Division)</strong>
+        <strong>Cách làm: Truy vấn "tất cả" (Division)</strong>
         <p>1. Phép chia: <code>R1 &divide; R2</code> (ít hỗ trợ trong SQL Server)</p>
         <p>2. Dùng <code>NOT EXISTS</code> lồng nhau: Không tồn tại x mà không tồn tại y để chúng kết nối.</p>
         <p>3. Dùng <code>COUNT(DISTINCT ...) = (SELECT COUNT...)</code>: Đếm số lượng, nếu bằng đúng tổng số thì thỏa mãn.</p>
     </div>
 
     <div class="callout-trap">
-        <strong>⚠ BẪY: "NẾU CÓ"</strong>
+        <strong>Sai lầm thường gặp: "NẾU CÓ"</strong>
         <p>Đề yêu cầu in ra sinh viên và điểm số, "nếu không có điểm thì để NULL". Đây là ngữ nghĩa ngoại kết: thường viết <code>LEFT JOIN</code> từ tập sinh viên cần giữ sang bảng điểm. <code>INNER JOIN</code> sẽ làm mất sinh viên chưa có điểm.</p>
     </div>
 

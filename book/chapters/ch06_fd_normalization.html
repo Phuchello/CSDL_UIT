@@ -2,7 +2,7 @@
     <h1 class="chapter-title">Chương 6: Phụ Thuộc Hàm & Chuẩn Hóa Dữ Liệu</h1>
 
     <div class="callout-mental">
-        <strong>🧠 Mental Model</strong>
+        <strong>Cách hiểu</strong>
         <p>Chuẩn hóa (Normalization) là quá trình "làm sạch" dữ liệu để tránh dư thừa và dị thường (anomaly). Phụ thuộc hàm (Functional Dependency) là công cụ toán học để tìm ra những "mảnh ghép" dữ liệu đang bị dính chặt vào nhau một cách không hợp lý.</p>
     </div>
 
@@ -38,7 +38,7 @@
     </ul>
 
     <h2>6.3 Chứng minh PTH</h2>
-    <p><strong>Template:</strong> Cho tập F, chứng minh X → Y.</p>
+    <p><strong>Mẫu chứng minh:</strong> Cho tập F, chứng minh X → Y.</p>
     <div class="steps">
         <div class="step">Ví dụ: F = {A → B, B → C}. Chứng minh A → C.
             <ol>
@@ -53,7 +53,7 @@
     <p><strong>Thuật toán:</strong> Bắt đầu với X⁺ = X. Duyệt các PTH, nếu vế trái nằm trong X⁺, thêm vế phải vào X⁺. Lặp tới khi X⁺ không đổi.</p>
     
     <div class="callout-dryrun">
-        <strong>🏃 Dry run:</strong>
+        <strong>Theo dõi trạng thái:</strong>
         <p>R(A, B, C, D, E), F = {A → BC, CD → E, B → D, E → A}. Tính B⁺</p>
         <ul>
             <li>Vòng 0: B⁺ = {B}</li>
@@ -70,7 +70,7 @@
     </div>
 
     <div class="callout-fast">
-        <strong>⚡ Fast Pattern: Ứng dụng của X⁺</strong>
+        <strong>Cách dùng X⁺</strong>
         <ul>
             <li>Kiểm tra X → Y: Xem Y có thuộc X⁺ không.</li>
             <li>Tìm khóa: X⁺ = R thì X là siêu khóa (superkey).</li>
@@ -85,7 +85,7 @@
     </div>
 
     <div class="callout-dryrun">
-        <strong>🏃 Dry Run đầy đủ</strong>
+        <strong>Theo dõi đầy đủ</strong>
         <p>Cho <code>F = {A → BC, AB → C, C → D, A → D}</code>. Tìm một phủ tối thiểu.</p>
         <ol>
             <li><strong>Tách vế phải:</strong> <code>F1 = {A → B, A → C, AB → C, C → D, A → D}</code>.</li>
@@ -99,7 +99,7 @@
     <h2>6.6 Candidate Key (Khóa ứng viên)</h2>
     <p><strong>Siêu khóa</strong> là tập X có <code>X⁺ = R</code>. <strong>Khóa ứng viên</strong> là siêu khóa tối thiểu theo phép bao hàm: bỏ bất kỳ thuộc tính nào khỏi X thì không còn là siêu khóa.</p>
     <div class="callout-exam">
-        <strong>🎯 Exam Signal: Phân tích trái phải</strong>
+        <strong>Khi làm bài: Phân tích trái phải</strong>
         <ul>
             <li>Thuộc tính <strong>không xuất hiện ở bất kỳ vế phải nào</strong> không thể được suy ra từ thuộc tính khác, nên phải có trong mọi khóa ứng viên.</li>
             <li>Phân nhóm L/R/LR/N là mẹo sàng lọc để giảm số nhánh, không thay thế phép tính bao đóng và kiểm tra tối thiểu.</li>
@@ -108,7 +108,7 @@
     </div>
 
     <div class="callout-dryrun">
-        <strong>🏃 Dry Run: tìm TẤT CẢ khóa ứng viên</strong>
+        <strong>Theo dõi: tìm tất cả khóa ứng viên</strong>
         <p>Cho <code>R(A,B,C,D,E,F)</code> và tập PTH <code>G = {A → B, B → A, C → D, D → C, AC → E}</code>.</p>
         <ol>
             <li><strong>Thuộc tính bắt buộc:</strong> F không xuất hiện ở vế phải của PTH nào, nên F thuộc mọi khóa. <code>F⁺ = {F}</code>, chưa là siêu khóa.</li>
@@ -155,10 +155,10 @@
     </ol>
 
     <div class="badge-advanced">
-        <h2>6.9 Decomposition (Phân rã) - Nâng cao</h2>
+        <h2>6.9 Decomposition (Phân rã)</h2>
         <p>Phân rã R thành R1, R2... cần đảm bảo: Không mất dữ liệu (Lossless-join) và Bảo toàn phụ thuộc hàm (Dependency preservation).</p>
     </div>
 
-    <h2>One-Page Recall & Bài tập</h2>
+    <h2>Tờ ghi nhớ và bài tập</h2>
     <p>1. Tìm X⁺. 2. Tìm tất cả khóa ứng viên. 3. Tìm phủ tối thiểu. 4. Xác định dạng chuẩn bằng tiêu chuẩn chính thức. Đây là bốn dạng bài rất quan trọng và thường gặp.</p>
 </section>

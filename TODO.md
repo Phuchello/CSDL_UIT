@@ -23,7 +23,14 @@
 - [ ] Mentor approval of theory cover brief (Minimal Relational Schema Graph).
 - [ ] Mentor approval of Quartz Knowledge Garden static architecture.
 
-## Phase B/C — Strictly Blocked Until Mentor Approval
+## Phase B2: Theory Handbook Redesign — Complete on `v1.1-theory-redesign`
+
+- [x] Apply the approved B1 design system to the theory source HTML without changing the public v1.0 artifact.
+- [x] Produce and normalize `dist/IT004_CSDL_UIT_LyThuyet_VoTrongPhuc.pdf` with deterministic build and metadata validation.
+- [x] Run chapter/content checks, rendered-page review, overflow checks, and record evidence in `reports/v1.1_theory_qa.md`.
+- [x] Keep practical handbook authoring and Quartz implementation out of this branch.
+
+## Phase B3/C — Strictly Blocked Until Mentor Approval
 
 - [ ] Build or scaffold Quartz site.
 - [ ] Rewrite theory handbook chapters.

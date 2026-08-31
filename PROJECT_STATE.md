@@ -2,7 +2,7 @@
 
 ## Checkpoint
 
-v1.1 Phase A — Evidence Snapshot Frozen for Implementation
+v1.1 Phase B2 — Theory Handbook Redesign Complete
 
 ## Date
 
@@ -10,11 +10,11 @@ v1.1 Phase A — Evidence Snapshot Frozen for Implementation
 
 ## Active branch
 
-`v1.1-editorial-practice`
+`v1.1-theory-redesign`
 
 ## Status
 
-PHASE A: FROZEN / APPROVED FOR IMPLEMENTATION. The evidence snapshot is mechanically validated and contains 31 canonical artifacts (17 exam, 10 practical-exam, 3 review, 1 lab-corpus) with exact URLs for web-sourced artifacts, actual local paths for reconstructions, and mirror/variant decisions. Four additional practical variants were promoted after visible-header review; four other direct leads remain explicitly unpromoted because access was blocked. This is a high-coverage research snapshot, not a claim of exhaustive Internet coverage. Sách v1.0.0, PDF chính thức, nhánh `main` và kho `phuchello/phuchello` hoàn toàn không bị ảnh hưởng.
+PHASE A remains frozen. PHASE B2 is complete on the isolated theory-redesign branch: the approved B1 design system was applied in place to the six-chapter theory handbook, deterministic theory PDF output was generated and structurally rewritten, and visual/technical QA passed. The practical chapter source remains present but is excluded from the theory PDF. Sách v1.0.0, PDF chính thức, nhánh `main` và kho `phuchello/phuchello` hoàn toàn không bị ảnh hưởng.
 
 ## Scope completed in this checkpoint
 
@@ -26,10 +26,12 @@ PHASE A: FROZEN / APPROVED FOR IMPLEMENTATION. The evidence snapshot is mechanic
 - Bản đồ kỹ năng T-SQL với mã nguồn Microsoft `TECH-A01`–`TECH-A11` chuẩn xác và phân loại Trigger (`practical_coverage_map.md`);
 - Kế hoạch ngân hàng câu hỏi tự luận theo chuyên đề với 3 lớp xuất xứ minh bạch (`essay_bank_plan.md`);
 - Báo cáo kiểm thử snapshot, URL, source/artifact IDs, counts, copyright và repository safety (`validation_report.md`).
+- Bộ nguồn lý thuyết đã áp dụng design system B1, cùng PDF lý thuyết 64 trang và các contact sheet QA (`dist/IT004_CSDL_UIT_LyThuyet_VoTrongPhuc.pdf`, `dist/review/v1.1_theory/`).
+- Báo cáo QA B2 và các trình dựng/chuẩn hóa PDF xác định (`reports/v1.1_theory_qa.md`, `scripts/build_theory_pdf.js`, `scripts/normalize_theory_pdf.py`).
 
 ## Explicit hold
 
-Further source discovery is non-blocking for Phase B, but this micro-patch does not start Phase B, build Quartz, rewrite theory, author the practical book, merge to `main`, tag, or release.
+Further source discovery is non-blocking for the theory-redesign review. This branch does not build Quartz, author the practical book, merge to `main`, tag, or release.
 
 ## Deliverables
 

@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IT004 – Cơ sở dữ liệu: Cẩm nang từ nền tảng đến Exam Mastery</title>
+  <title>IT004 – Cơ sở dữ liệu — Sổ tay lý thuyết</title>
   <meta name="author" content="Võ Trọng Phúc">
-  <meta name="description" content="IT004 – Cơ sở dữ liệu – Cẩm nang từ nền tảng đến Exam Mastery – UIT">
+  <meta name="description" content="IT004 – Cơ sở dữ liệu — Sổ tay lý thuyết">
   <meta name="keywords" content="IT004, Cơ sở dữ liệu, Database, UIT, SQL Server, Đại số quan hệ, Võ Trọng Phúc">
   <link rel="stylesheet" href="css/book.css">
 </head>
@@ -14,37 +14,39 @@
 <!-- === ch00_intro.html === -->
 <!-- ============================================================
      PHẦN 0: BÌA + THÔNG TIN BIÊN SOẠN + MỤC LỤC + CÁCH HỌC IT004
-     IT004 – CƠ SỞ DỮ LIỆU: Cẩm nang từ nền tảng đến Exam Mastery
+     IT004 – CƠ SỞ DỮ LIỆU: Sổ tay lý thuyết
      Biên soạn bởi Võ Trọng Phúc
      ============================================================ -->
 
 <!-- ========== BÌA ========== -->
 <div class="cover-page">
-  <div class="school-name">Trường Đại học Công nghệ Thông tin – ĐHQG-HCM</div>
-  <div class="book-code">IT004</div>
-  <div class="book-title">CƠ SỞ DỮ LIỆU</div>
-  <div class="book-subtitle">Cẩm nang từ nền tảng đến Exam Mastery</div>
-  <hr class="cover-divider">
-  <div class="author-label">Biên soạn bởi</div>
-  <div class="author-name">VÕ TRỌNG PHÚC</div>
-  <div class="edition-info">Personal Study Edition • IT004 • 2026</div>
+  <div class="cover-lockup">
+    <div class="book-code">IT004</div>
+    <div class="book-title">CƠ SỞ<br>DỮ LIỆU</div>
+    <div class="author-name">BIÊN SOẠN: VÕ TRỌNG PHÚC</div>
+  </div>
+  <div class="cover-diagram" aria-hidden="true">
+    <svg viewBox="0 0 700 260" role="img" aria-label="Editorial relational key chain">
+      <defs><marker id="coverArrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1e7881"/></marker></defs>
+      <path d="M132 126 H202 M317 126 H387 M502 126 H572" fill="none" stroke="#1e7881" stroke-width="2.5" marker-end="url(#coverArrow)"/>
+      <g font-family="Arial,Segoe UI,sans-serif">
+        <g transform="translate(20 90)"><rect width="112" height="72" fill="#203047"/><text x="56" y="29" fill="#fff" text-anchor="middle" font-size="18" font-weight="700">R1</text><text x="56" y="52" fill="#c6dddd" text-anchor="middle" font-size="12">PK</text><text x="56" y="64" fill="#c6dddd" text-anchor="middle" font-size="9">· ·</text></g>
+        <g transform="translate(205 90)"><rect width="112" height="72" fill="#e7f1f1" stroke="#1e7881" stroke-width="2.5"/><text x="56" y="29" fill="#203047" text-anchor="middle" font-size="18" font-weight="700">R2</text><text x="56" y="52" fill="#1e7881" text-anchor="middle" font-size="12">PK · FK</text><text x="56" y="64" fill="#1e7881" text-anchor="middle" font-size="9">· ·</text></g>
+        <g transform="translate(390 90)"><rect width="112" height="72" fill="#f6efe5" stroke="#b57b36" stroke-width="2.5"/><text x="56" y="29" fill="#203047" text-anchor="middle" font-size="18" font-weight="700">R3</text><text x="56" y="52" fill="#8c5b20" text-anchor="middle" font-size="12">PK · FK</text><text x="56" y="64" fill="#8c5b20" text-anchor="middle" font-size="9">· ·</text></g>
+        <g transform="translate(575 90)"><rect width="112" height="72" fill="#203047"/><text x="56" y="29" fill="#fff" text-anchor="middle" font-size="18" font-weight="700">R4</text><text x="56" y="52" fill="#f1d6aa" text-anchor="middle" font-size="12">PK</text><text x="56" y="64" fill="#f1d6aa" text-anchor="middle" font-size="9">· ·</text></g>
+      </g>
+    </svg>
+  </div>
 </div>
 
 <!-- ========== THÔNG TIN BIÊN SOẠN ========== -->
 <div class="info-page">
   <h2>THÔNG TIN BIÊN SOẠN</h2>
   <p><strong>Biên soạn và hệ thống hóa:</strong> Võ Trọng Phúc</p>
-  <p><strong>Phiên bản:</strong> 1.0</p>
-  <p><strong>Năm biên soạn:</strong> 2026</p>
-  <br>
-  <h3 style="margin-top: 1.5em;">Quyền đối với bản biên soạn</h3>
-  <p>© 2026 Võ Trọng Phúc.</p>
-  <p>Bản quyền đối với <strong>cấu trúc biên soạn, hệ thống hóa kiến thức, phần diễn giải nguyên bản, ví dụ tự xây dựng, bài tập tự biên soạn, sơ đồ được vẽ lại, hệ thống Exam Playbook, bố cục, thiết kế và các nội dung nguyên bản được tạo riêng cho cuốn cẩm nang này</strong> thuộc về người biên soạn, trong phạm vi pháp luật cho phép.</p>
-  <p>Tài liệu được xây dựng phục vụ mục đích học tập cá nhân.</p>
-  <p>Các kiến thức, tài liệu bài giảng, đề thi, tài liệu tham khảo, tiêu chuẩn, hình ảnh hoặc nội dung có nguồn gốc từ bên thứ ba vẫn thuộc quyền của tác giả hoặc chủ sở hữu tương ứng.</p>
-  <p style="margin-top: 1em; color: var(--c-text-secondary); font-style: italic;">Việc ghi "Biên soạn bởi Võ Trọng Phúc" không được hiểu là tuyên bố quyền tác giả đối với các tài liệu nguồn của UIT, giảng viên, Microsoft, tác giả giáo trình hoặc các nguồn tham khảo khác.</p>
-  <br>
-  <h3 style="margin-top: 1.5em;">Giáo trình & Tài liệu tham khảo chính</h3>
+  <h3>Phạm vi và quyền</h3>
+  <p>Bản thảo là một biên soạn độc lập phục vụ học tập. Phần diễn giải, ví dụ, bài tập và sơ đồ được viết hoặc vẽ lại cho tài liệu này; nguồn bên thứ ba vẫn thuộc chủ sở hữu tương ứng.</p>
+  <p class="muted"><em>Đây không phải tài liệu chính thức của Trường Đại học Công nghệ Thông tin – ĐHQG-HCM.</em></p>
+  <h3>Giáo trình và tài liệu đối chiếu</h3>
   <ul>
     <li><em>Giáo trình Cơ sở dữ liệu</em> — Đồng Thị Bích Thủy, Phạm Thị Bạch Huệ, Nguyễn Trần Minh Thư (NXB KH&KT)</li>
     <li><em>Database System Concepts</em> — Silberschatz, Korth, Sudarshan</li>
@@ -52,7 +54,6 @@
     <li>Slide bài giảng IT004 – Khoa HTTT, UIT</li>
     <li>Microsoft SQL Server Documentation (Microsoft Learn)</li>
   </ul>
-  <p style="margin-top: 1.5em; font-size: 9pt; color: var(--c-text-muted);">Đây không phải tài liệu chính thức của Trường Đại học Công nghệ Thông tin – ĐHQG-HCM.</p>
 </div>
 
 <!-- ========== MỤC LỤC ========== -->
@@ -86,7 +87,7 @@
   <div class="toc-section"><span>DDL, DML, SELECT</span></div>
   <div class="toc-section"><span>JOIN, Aggregation, Set operators</span></div>
   <div class="toc-section"><span>Subquery, NOT EXISTS, "Tất cả" pattern</span></div>
-  <div class="toc-section"><span>Max/min patterns, Common traps</span></div>
+  <div class="toc-section"><span>Cực trị và lỗi thường gặp</span></div>
 
   <div class="toc-chapter"><span>Chương 5 — Ràng buộc toàn vẹn</span></div>
   <div class="toc-section"><span>Các loại RBTV</span></div>
@@ -98,13 +99,9 @@
   <div class="toc-section"><span>Candidate Key Search</span></div>
   <div class="toc-section"><span>1NF → 2NF → 3NF → BCNF</span></div>
 
-  <div class="toc-chapter"><span>Chương 7 — Thực hành SQL Server</span></div>
-  <div class="toc-section"><span>Cài đặt & Hướng dẫn SSMS</span></div>
-  <div class="toc-section"><span>Workflow làm bài Lab</span></div>
-
-  <div class="toc-chapter"><span>IT004 Exam Playbook</span></div>
-  <div class="toc-chapter"><span>IT004 Last-Minute Cheat Sheet</span></div>
-  <div class="toc-chapter"><span>Nguồn tham khảo</span></div>
+  <div class="toc-chapter"><span>Hướng dẫn giải đề</span></div>
+  <div class="toc-chapter"><span>Tờ ghi nhớ cuối môn</span></div>
+  <div class="toc-chapter"><span>Nguồn tham khảo và lời kết</span></div>
 </div>
 
 <!-- ========== PHẦN 0: CÁCH HỌC IT004 ========== -->
@@ -127,7 +124,7 @@
 </ol>
 
 <div class="callout callout-mental">
-  <div class="callout-title">🧠 Mental Model — IT004 = Kiến trúc sư dữ liệu</div>
+  <div class="callout-title">Cách hiểu — IT004 như một hệ thống dữ liệu</div>
   <div class="callout-body">
     <p>Hãy nghĩ về cơ sở dữ liệu như việc thiết kế một <strong>tòa nhà dữ liệu</strong>:</p>
     <ul>
@@ -225,7 +222,7 @@
 <h2>Roadmap Giữa kỳ</h2>
 
 <div class="callout callout-exam">
-  <div class="callout-title">🎯 Exam Signal — Cấu trúc thi giữa kỳ IT004</div>
+  <div class="callout-title">Khi làm bài — Cấu trúc giữa kỳ đã khảo sát</div>
   <div class="callout-body">
     <p>Thi tự luận, 60–90 phút. Các dạng bài thường gặp:</p>
     <ol>
@@ -253,7 +250,7 @@
 <h2>Roadmap Cuối kỳ</h2>
 
 <div class="callout callout-exam">
-  <div class="callout-title">🎯 Exam Signal — Cấu trúc thi cuối kỳ IT004</div>
+  <div class="callout-title">Khi làm bài — Cấu trúc cuối kỳ đã khảo sát</div>
   <div class="callout-body">
     <p><strong>Lý thuyết</strong> (tự luận, 90 phút):</p>
     <ol>
@@ -275,7 +272,7 @@
 <h2>Lỗi người mới thường mắc</h2>
 
 <div class="callout callout-trap">
-  <div class="callout-title">⚠ BẪY — Top 10 lỗi sinh viên IT004 hay mắc</div>
+  <div class="callout-title">Sai lầm thường gặp — Top 10 lỗi cần tránh</div>
   <div class="callout-body">
     <ol>
       <li><strong>Nhầm entity và attribute:</strong> "Địa chỉ" là entity hay attribute? → Phụ thuộc ngữ cảnh!</li>
@@ -314,7 +311,7 @@
 <div class="schema">CTHD(<span class="pk"><span class="fk">SOHD</span>, <span class="fk">MASP</span></span>, SL)</div>
 
 <div class="callout callout-connection">
-  <div class="callout-title">🔗 Connection — Dataset xuyên suốt</div>
+  <div class="callout-title">Liên hệ — Dataset xuyên suốt</div>
   <div class="callout-body">
     <p>Hai database này sẽ được dùng để minh họa <strong>tất cả các chương</strong>: ER (Ch.2), ĐSQH (Ch.3), SQL (Ch.4), RBTV (Ch.5), PTH/Chuẩn hóa (Ch.6). Hãy làm quen với schema ngay từ bây giờ — bạn sẽ gặp lại chúng rất nhiều lần.</p>
   </div>
@@ -347,7 +344,7 @@
 </ul>
 
 <div class="callout callout-fast">
-  <div class="callout-title">⚡ Fast Pattern</div>
+  <div class="callout-title">Mẫu suy luận</div>
   <div class="callout-body"><strong>Data + Ngữ cảnh + Xử lý = Information</strong></div>
 </div>
 
@@ -362,7 +359,7 @@
 </table>
 
 <div class="quick-check">
-  <h4>✓ Quick Check</h4>
+  <h4>✓ Cách kiểm tra</h4>
   <ol>
     <li>Con số "9.5" một mình có phải thông tin không? Tại sao?</li>
     <li>Cho ví dụ một dữ liệu trở thành thông tin khi đặt vào ngữ cảnh.</li>
@@ -413,7 +410,7 @@
 </table>
 
 <div class="callout callout-mental">
-  <div class="callout-title">🧠 Mental Model — File System = Phòng trọ riêng lẻ</div>
+  <div class="callout-title">Cách hiểu — File system như các tệp rời</div>
   <div class="callout-body">
     <p>Mỗi ứng dụng giống một phòng trọ riêng — có tủ sách riêng, bản sao tài liệu riêng. Khi cần cập nhật, phải đi từng phòng sửa. CSDL giống <strong>thư viện chung</strong>: một bản chính, ai cũng truy cập được (đúng quyền).</p>
   </div>
@@ -443,7 +440,7 @@
 </table>
 
 <div class="callout callout-trap">
-  <div class="callout-title">⚠ BẪY — DBMS ≠ Database</div>
+  <div class="callout-title">Sai lầm thường gặp — DBMS ≠ Database</div>
   <div class="callout-body">
     <p>SQL Server là <strong>DBMS</strong> (phần mềm quản lý). Database QLGV hay QLBH mà bạn tạo bên trong SQL Server mới là <strong>DB</strong> (cơ sở dữ liệu). Đừng nhầm lẫn hai khái niệm này khi thi.</p>
   </div>
@@ -534,7 +531,7 @@
 </div>
 
 <div class="callout callout-trap">
-  <div class="callout-title">⚠ BẪY — Schema ≠ Instance</div>
+  <div class="callout-title">Sai lầm thường gặp — Schema ≠ Instance</div>
   <div class="callout-body">
     <p>Khi đề hỏi "cho lược đồ quan hệ R(A, B, C)" — họ hỏi về <strong>cấu trúc</strong>, không phải dữ liệu cụ thể. Khi đề cho bảng có dòng dữ liệu — đó là <strong>instance</strong>.</p>
   </div>
@@ -564,7 +561,7 @@
 </table>
 
 <div class="callout callout-exam">
-  <div class="callout-title">🎯 Exam Signal</div>
+  <div class="callout-title">Khi làm bài</div>
   <div class="callout-body">
     <p>Đề có thể hỏi: "Giải thích tính độc lập dữ liệu logic và vật lý. Cho ví dụ." Hãy đảm bảo bạn phân biệt được hai loại và cho ví dụ cụ thể.</p>
   </div>
@@ -627,7 +624,7 @@
 </table>
 
 <div class="callout callout-mental">
-  <div class="callout-title">🧠 Mental Model — Tại sao Relational Model thắng?</div>
+  <div class="callout-title">Cách hiểu — Vì sao mô hình quan hệ hữu ích?</div>
   <div class="callout-body">
     <p>Relational Model (E.F. Codd, 1970) thắng vì <strong>đơn giản và mạnh mẽ</strong>: dữ liệu biểu diễn bằng bảng 2 chiều — ai cũng hiểu bảng. Thêm vào đó, nền tảng toán học vững chắc (lý thuyết tập hợp, đại số quan hệ) cho phép truy vấn chính xác và tối ưu hóa tự động.</p>
   </div>
@@ -669,7 +666,7 @@
 <p class="text-small text-muted text-center" style="margin-top: -0.5em;">Bảng HOADON (trích) — MAKH là khóa ngoại tham chiếu KHACHHANG</p>
 
 <div class="callout callout-connection">
-  <div class="callout-title">🔗 Connection</div>
+  <div class="callout-title">Liên hệ</div>
   <div class="callout-body">
     <p>Khái niệm "relation" ở Chương 1 sẽ được phát triển đầy đủ ở <strong>Chương 2</strong> (relation schema, degree, cardinality, key). Khả năng truy vấn dữ liệu từ nhiều bảng sẽ được dạy ở <strong>Chương 3</strong> (ĐSQH) và <strong>Chương 4</strong> (SQL JOIN).</p>
   </div>
@@ -677,7 +674,7 @@
 
 <!-- ===== ONE-PAGE RECALL ===== -->
 <div class="recall-sheet">
-  <h2>ONE-PAGE RECALL — Chương 1</h2>
+  <h2>Tờ ghi nhớ — Chương 1</h2>
 
   <h4>Công thức & Khái niệm cốt lõi</h4>
   <table>
@@ -693,7 +690,7 @@
     </tbody>
   </table>
 
-  <h4>⚠ Common Traps</h4>
+  <h4>Sai lầm thường gặp</h4>
   <ul>
     <li><strong>DBMS ≠ DB:</strong> SQL Server là DBMS, QLGV là DB</li>
     <li><strong>Schema ≠ Instance:</strong> Đừng nhầm cấu trúc với dữ liệu</li>
@@ -709,7 +706,7 @@
   <p class="author-attribution" style="font-style: italic; text-align: right;">Biên soạn bởi Võ Trọng Phúc</p>
 
   <div class="callout-mental">
-    <strong>🧠 Mental Model: Hành trình từ Hiện thực đến Máy tính</strong><br/>
+    <strong>Cách hiểu: Từ hiện thực đến máy tính</strong><br/>
     Để máy tính quản lý được dữ liệu của một trường đại học hay công ty, ta không thể "nhét" nguyên xi ngoài đời thật vào máy. Ta cần qua 2 bước chuyển đổi:
     <br/>1. <strong>Thế giới thực</strong> → <strong>Mô hình ER</strong> (Bản vẽ phác thảo khái niệm để con người hiểu).
     <br/>2. <strong>Mô hình ER</strong> → <strong>Mô hình Quan hệ (Relational Model)</strong> (Bản vẽ kỹ thuật dưới dạng các bảng để cài đặt vào máy tính - RDBMS).
@@ -740,7 +737,7 @@
       </ul>
     </div>
     <div class="step">
-      <h4>③ Visual</h4>
+      <h4>③ Minh họa</h4>
       <pre class="data-table">
 Relation: KHACHHANG
 +-------+----------------+-------------+ (Lược đồ - Schema)
@@ -754,7 +751,7 @@ Relation: KHACHHANG
   </div>
 
   <div class="callout-trap">
-    <strong>⚠ BẪY: Relation vs Relationship</strong><br/>
+    <strong>Sai lầm thường gặp: Relation và Relationship</strong><br/>
     Rất nhiều sinh viên dịch "Relation" là "mối quan hệ". Trong môn này:
     - <strong>Relation</strong>: BẢNG (Table) - Mô hình quan hệ.
     - <strong>Relationship</strong>: MỐI KẾT HỢP - Mô hình ER.
@@ -766,7 +763,7 @@ Relation: KHACHHANG
     <li><strong>Lực lượng (Cardinality)</strong>: Số lượng bộ (dòng) hiện có trong quan hệ.</li>
   </ul>
   <div class="callout-exam">
-    <strong>🎯 Exam Pattern:</strong> Đề thi trắc nghiệm hay hỏi: "Thêm 1 dòng vào bảng thì Bậc hay Lực lượng thay đổi?" → Lực lượng (Cardinality) tăng 1, Bậc (Degree) không đổi (trừ khi alter table thêm cột).
+    <strong>Khi làm bài:</strong> Câu hỏi "Thêm 1 dòng vào bảng thì Bậc hay Lực lượng thay đổi?" → Lực lượng (Cardinality) tăng 1, Bậc (Degree) không đổi (trừ khi alter table thêm cột).
   </div>
 
   <h3>3. NULL và Tân từ (Predicate)</h3>
@@ -793,7 +790,7 @@ Relation: KHACHHANG
   </div>
 
   <div class="callout-dryrun">
-    <strong>⑤ Dry run: Khóa trên bảng NHANVIEN(MANV, CCCD, HOTEN, DIACHI)</strong><br/>
+    <strong>Theo dõi trạng thái: Khóa trên bảng NHANVIEN(MANV, CCCD, HOTEN, DIACHI)</strong><br/>
     - Superkey: {MANV}, {CCCD}, {MANV, HOTEN}, {CCCD, DIACHI}...<br/>
     - Candidate Key: {MANV}, {CCCD}. (Lưu ý: {MANV, HOTEN} bị loại vì dư HOTEN).<br/>
     - Primary Key: Chức năng chọn một, giả sử là <u>MANV</u>.
@@ -834,14 +831,14 @@ Relation: KHACHHANG
 
   <h3>3. Ràng buộc tham gia (Participation Constraint) và Min-max Notation</h3>
   <div class="callout-fast">
-    <strong>⚡ Fast Pattern: Min-Max Notation (min, max)</strong><br/>
+    <strong>Cách làm: Min-Max Notation (min, max)</strong><br/>
     Ký hiệu (min, max) đặt trên đường nối giữa Entity và Relationship:<br/>
     - <strong>min</strong>: Bắt buộc (1) hay Tùy chọn (0)? (Participation: Total/Partial).<br/>
     - <strong>max</strong>: Tối đa là 1 (1) hay nhiều (n)? (Cardinality).
   </div>
   
   <div class="callout-exam">
-    <strong>🎯 Phân tích kỹ ví dụ tiếng Việt: "Nhân viên thuộc về một Phòng ban"</strong><br/>
+    <strong>Ví dụ: "Nhân viên thuộc về một Phòng ban"</strong><br/>
     Hãy xét NHANVIEN - [THUOC_VE] - PHONGBAN:<br/>
     - Hỏi chiều 1: "1 NHANVIEN thuộc về tối thiểu mấy PHONGBAN? Tối đa mấy?" -> Tối thiểu 1 (bắt buộc phải có phòng), Tối đa 1. Cạnh bên NHANVIEN ghi <strong>(1,1)</strong>.<br/>
     - Hỏi chiều 2: "1 PHONGBAN có tối thiểu mấy NHANVIEN? Tối đa mấy?" -> Tối thiểu 0 (phòng mới lập chưa có ai), Tối đa n (nhiều người). Cạnh bên PHONGBAN ghi <strong>(0,n)</strong>.<br/>
@@ -893,6 +890,36 @@ Relation: KHACHHANG
   </div>
 
   <h3>2. Ánh xạ Mối kết hợp (Relationship Mapping)</h3>
+
+  <figure class="mapping-figure">
+    <svg viewBox="0 0 760 220" role="img" aria-label="Cardinality mapping comparison for one-to-one one-to-many and many-to-many">
+      <g font-family="Arial,Segoe UI,sans-serif" fill="#203047">
+        <g transform="translate(10 15)">
+          <text x="115" y="18" text-anchor="middle" font-size="14" font-weight="700">1 : 1</text>
+          <rect x="10" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="46" y="75" text-anchor="middle" font-size="15" font-weight="700">A</text>
+          <polygon points="115,48 137,70 115,92 93,70" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="115" y="74" text-anchor="middle" font-size="11">R</text>
+          <rect x="148" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="184" y="75" text-anchor="middle" font-size="15" font-weight="700">B</text>
+          <path d="M82 70 H93 M137 70 H148" stroke="#1e7881" stroke-width="2"/><text x="86" y="61" text-anchor="end" fill="#8c5b20" font-size="11">1</text><text x="144" y="61" fill="#8c5b20" font-size="11">1</text>
+        </g>
+        <g transform="translate(260 15)">
+          <text x="115" y="18" text-anchor="middle" font-size="14" font-weight="700">1 : N</text>
+          <rect x="10" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="46" y="75" text-anchor="middle" font-size="15" font-weight="700">A</text>
+          <polygon points="115,48 137,70 115,92 93,70" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="115" y="74" text-anchor="middle" font-size="11">R</text>
+          <rect x="148" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="184" y="75" text-anchor="middle" font-size="15" font-weight="700">B</text>
+          <path d="M82 70 H93 M137 70 H148" stroke="#1e7881" stroke-width="2"/><text x="86" y="61" text-anchor="end" fill="#8c5b20" font-size="11">1</text><text x="144" y="61" fill="#8c5b20" font-size="11">N</text>
+        </g>
+        <g transform="translate(510 15)">
+          <text x="115" y="18" text-anchor="middle" font-size="14" font-weight="700">M : N</text>
+          <rect x="10" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="46" y="75" text-anchor="middle" font-size="15" font-weight="700">A</text>
+          <polygon points="115,48 137,70 115,92 93,70" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="115" y="74" text-anchor="middle" font-size="11">R</text>
+          <rect x="148" y="48" width="72" height="44" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="184" y="75" text-anchor="middle" font-size="15" font-weight="700">B</text>
+          <path d="M82 70 H93 M137 70 H148" stroke="#1e7881" stroke-width="2"/><text x="86" y="61" text-anchor="end" fill="#8c5b20" font-size="11">M</text><text x="144" y="61" fill="#8c5b20" font-size="11">N</text>
+        </g>
+        <text x="380" y="170" text-anchor="middle" fill="#5f6d78" font-size="12">Bản số quyết định vị trí khóa và có cần relation trung gian hay không.</text>
+      </g>
+    </svg>
+    <figcaption>Hình 2.1 — Cùng một ký hiệu quan hệ nhưng ba bản số dẫn đến ba quy tắc ánh xạ khác nhau.</figcaption>
+  </figure>
   
   <h4>a) Mối kết hợp 1:N (One-to-Many)</h4>
   <p><strong>Quy tắc:</strong> Khóa chính của bảng bên 1 chạy sang làm <strong>Khóa ngoại (FK)</strong> ở bảng bên N.</p>
@@ -905,7 +932,7 @@ Relation: KHACHHANG
 
   <h4>b) Mối kết hợp M:N (Many-to-Many)</h4>
   <div class="callout-trap">
-    <strong>⚠ BẪY CHẾT NGƯỜI:</strong> Không bao giờ được đem PK của bảng này bỏ vào bảng kia làm FK đối với quan hệ M:N! Phải tạo bảng thứ 3.
+    <strong>Sai lầm thường gặp:</strong> Không đem PK của bảng này bỏ vào bảng kia làm FK đối với quan hệ M:N; phải tạo bảng thứ ba.
   </div>
   <p><strong>Quy tắc:</strong> Tạo một <strong>Bảng trung gian</strong> (Junction Table). Khóa chính của 2 bảng ban đầu bay vào bảng trung gian, cùng nhau tạo thành <strong>Composite PK</strong> (Khóa chính kết hợp), đồng thời là 2 Khóa ngoại (FK).</p>
   <div class="before-after">
@@ -962,7 +989,7 @@ Relation: KHACHHANG
 
   <hr>
 
-  <h2>F. One-Page Recall (Bản đồ ôn thi)</h2>
+  <h2>F. Tờ ghi nhớ (Bản đồ ôn tập)</h2>
   
   <div class="callout-connection">
     <strong>TỔNG KẾT CHƯƠNG 2:</strong>
@@ -991,7 +1018,7 @@ Relation: KHACHHANG
 </div>
 
 <div class="callout-mental">
-  <strong>🧠 Mental Model: Data Pipeline</strong><br>
+  <strong>Cách hiểu: Pipeline dữ liệu</strong><br>
   Đại số quan hệ (ĐSQH) là ngôn ngữ truy vấn có tính thủ tục (procedural). Bạn có thể hình dung mỗi phép toán là một trạm xử lý dữ liệu. Một trạm nhận vào một (hoặc hai) bảng dữ liệu thô (quan hệ), thực hiện biến đổi, và luôn luôn trả ra một bảng dữ liệu mới (quan hệ mới). Kết quả này lại có thể làm đầu vào cho trạm xử lý tiếp theo, tạo thành một <em>pipeline</em> truyền dữ liệu liên tục.
 </div>
 
@@ -1036,7 +1063,7 @@ Relation: KHACHHANG
     <tr>
       <th>Từ khóa trong đề</th>
       <th>Phép toán thường cân nhắc</th>
-      <th>Giải thích & Mental Model</th>
+  <th>Giải thích và cách hiểu</th>
     </tr>
   </thead>
   <tbody>
@@ -1124,7 +1151,7 @@ Relation: KHACHHANG
 <p><strong>2. Ký hiệu:</strong> <span class="math-block">σ_{&lt;điều kiện&gt;}(R)</span></p>
 <p><strong>3. Input/Output:</strong> Đầu vào: 1 bảng R. Đầu ra: 1 bảng cùng số cột với R, chỉ chứa các dòng thỏa điều kiện.</p>
 <p><strong>4. Điều kiện:</strong> Điều kiện bao gồm các phép so sánh (=, &gt;, &lt;, &gt;=, &lt;=, &lt;&gt;) nối với nhau bởi các phép logic AND (∧), OR (∨), NOT (¬).</p>
-<p><strong>5. Dry Run:</strong></p>
+<p><strong>5. Theo dõi trạng thái:</strong></p>
 <div class="before-after">
   <div class="before">
     <span class="label">Bảng MONHOC (trước)</span>
@@ -1154,7 +1181,7 @@ Relation: KHACHHANG
 <p><strong>2. Ký hiệu:</strong> <span class="math-block">π_{A_1, A_2, ..., A_k}(R)</span></p>
 <p><strong>3. Input/Output:</strong> Đầu vào: 1 bảng R. Đầu ra: 1 bảng chỉ chứa các cột A_1, A_2..., số dòng có thể giảm nếu có trùng lặp.</p>
 <p><strong>4. Điều kiện:</strong> Danh sách cột chiếu phải nằm trong schema của bảng R.</p>
-<p><strong>5. Dry Run:</strong></p>
+<p><strong>5. Theo dõi trạng thái:</strong></p>
 <div class="before-after">
   <div class="before">
     <span class="label">GIAOVIEN</span>
@@ -1181,7 +1208,7 @@ Relation: KHACHHANG
 <p><strong>2. Ký hiệu:</strong> <span class="math-block">ρ_{S}(R)</span> (Đổi tên bảng R thành S) hoặc <span class="math-block">ρ_{S(A, B, C)}(R)</span> (Đổi tên bảng và tên cột tương ứng).</p>
 <p><strong>3. Input/Output:</strong> Bảng mới y hệt bảng cũ về dữ liệu, chỉ đổi tên ở phần header.</p>
 <div class="callout-fast">
-  <strong>⚡ Fast Pattern:</strong> Dạng câu hỏi "Tìm X <em>có cùng</em> Y với Z" (Tìm nhân viên làm cùng phòng với 'Nguyen Van A') thường cần phép đổi tên và self-join.
+  <strong>Mẫu suy luận:</strong> Dạng câu hỏi "Tìm X <em>có cùng</em> Y với Z" (Tìm nhân viên làm cùng phòng với 'Nguyen Van A') thường cần phép đổi tên và self-join.
 </div>
 
 <h4>B.4 Tích Đề-các (Cartesian Product - ×)</h4>
@@ -1203,7 +1230,7 @@ Relation: KHACHHANG
 <p><strong>1. Trực giác (Natural Join):</strong> Tìm mảnh ghép phù hợp. Bảng Sinh viên có cột Mã lớp. Bảng Lớp cũng có cột Mã lớp. Hai bảng sẽ "hút" nhau và nối lại thành một dòng dài nếu Mã lớp khớp nhau.</p>
 <p><strong>2. Ký hiệu:</strong> <span class="math-block">R ⋈ S</span></p>
 <p><strong>3. Input/Output:</strong> Đầu vào: 2 bảng. Đầu ra: Bảng lớn chứa thông tin ghép của cả 2.</p>
-<p><strong>5. Dry Run:</strong></p>
+<p><strong>5. Theo dõi trạng thái:</strong></p>
 <div class="before-after">
   <div class="before">
     <span class="label">MON (MAMH, TENMH) và KQ(MAMH, MAHV, DIEM)</span>
@@ -1234,6 +1261,7 @@ Relation: KHACHHANG
 <p><strong>1. Trực giác:</strong> Gom chung kết quả của 2 tập hợp lại. Ai có trong tập 1 HOẶC tập 2 đều lấy. Trùng nhau thì chỉ lấy 1 lần.</p>
 <p><strong>2. Ký hiệu:</strong> <span class="math-block">R ∪ S</span></p>
 <p><strong>4. Điều kiện Khả hợp (Union-compatible):</strong> 2 bảng phải có <em>cùng số lượng cột</em> và các cột tương ứng phải <em>cùng kiểu dữ liệu</em>.</p>
+<div class="callout-note"><strong>Liên hệ với SQL:</strong> ĐSQH làm việc trên tập nên phần tử trùng chỉ xuất hiện một lần; SQL thường dùng bag semantics. Khi cần kết quả tương đương phép chiếu theo ngữ nghĩa tập, ghi rõ <code>DISTINCT</code> để loại bản lặp.</div>
 <p><strong>6. Ví dụ tổng quát (không thuộc lược đồ QLGV chuẩn):</strong> Giả sử có quan hệ phụ trợ NHANVIEN(MANV, ...). Để hợp mã giáo viên và mã nhân viên, đổi tên hai thuộc tính kết quả về cùng tên rồi áp dụng phép hợp:<br>
 <span class="math-block">ρ_{MA_NGUOI←MAGV}(π_{MAGV}(GIAOVIEN)) ∪ ρ_{MA_NGUOI←MANV}(π_{MANV}(NHANVIEN))</span></p>
 
@@ -1269,7 +1297,7 @@ Relation: KHACHHANG
 
 <h4>C.1 Trực giác: "X nào bao xài TẤT CẢ Y?"</h4>
 <p>Hãy tưởng tượng bạn (X) vào một siêu thị và có một danh sách mua sắm (Y) gồm: Sữa, Bánh, Kẹo. Nếu giỏ hàng của bạn <strong>chứa toàn bộ</strong> 3 món trên (có thể mua thêm thứ khác không quan tâm, miễn là đủ 3 món này), thì bạn là người vượt qua bài kiểm tra "Phép chia".</p>
-<p><strong>Dấu hiệu nhận biết (Exam Pattern):</strong> Đề bài chứa các từ khóa <em>"tất cả", "toàn bộ", "mọi"</em>.</p>
+<p><strong>Dấu hiệu nhận biết:</strong> Đề bài chứa các từ khóa <em>"tất cả", "toàn bộ", "mọi"</em>.</p>
 
 <h4>C.2 Định nghĩa Formal</h4>
 <p>Cho quan hệ R(X, Y) và quan hệ S(Y). Phép chia R ÷ S sẽ trả về các giá trị x ∈ X sao cho với <strong>mọi</strong> giá trị y ∈ S, tổ hợp (x, y) đều xuất hiện trong R.</p>
@@ -1289,7 +1317,7 @@ R ÷ S = π_X(R) − π_X( (π_X(R) × S) − R )
   </ol>
 </div>
 
-<h4>C.3 Dry Run: Phép chia hoạt động ra sao?</h4>
+<h4>C.3 Theo dõi trạng thái: Phép chia hoạt động ra sao?</h4>
 <div class="before-after" style="grid-template-columns: 1fr 1fr 1fr;">
   <div class="before">
     <span class="label">R (MAHV, MAMH) - Đã học</span>
@@ -1376,7 +1404,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 </table>
 
 <div class="callout-trap">
-  <strong>☢ BẪY CHẾT NGƯỜI (Common Errors):</strong><br>
+  <strong>Sai lầm thường gặp:</strong><br>
   - <strong>Nhầm Divisor:</strong> Chọn sai tập chia S.<br>
   - <strong>Không Project ở R:</strong> Tập R trước khi chia bắt buộc phải chỉ có đúng 2 thuộc tính (X, Y). Nếu R có chứa cả điểm số, ngày thi... thì phép chia sẽ hiểu là "Tìm những người thi đủ môn vào <em>cùng 1 ngày và cùng 1 số điểm</em>". Do đó bước <span class="math">π_{MAHV, MAMH}(KETQUATHI)</span> ở trên là BẮT BUỘC.
 </div>
@@ -1385,7 +1413,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 
 <h3 id="sec-d">D. Bài tập (30 bài phân cấp độ)</h3>
 
-<h4>D.1 Nhóm 1: Phép chọn, Chiếu đơn (Level 1)</h4>
+<h4>D.1 Nhóm 1: Phép chọn, chiếu đơn</h4>
 <div class="exercise-block level-1">
   <p><strong>Câu 1:</strong> (QLGV) In ra danh sách các giáo viên khoa 'HTTT'.</p>
   <details open><summary>Lời giải chi tiết</summary>
@@ -1432,7 +1460,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.2 Nhóm 2: Phép Kết (Level 2)</h4>
+<h4>D.2 Nhóm 2: Phép kết</h4>
 <div class="exercise-block level-2">
   <p><strong>Câu 6:</strong> (QLBH) In ra mã và tên khách hàng đã từng mua hàng.</p>
   <details open><summary>Lời giải chi tiết</summary>
@@ -1479,7 +1507,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.3 Nhóm 3: Phép Tập Hợp (Level 2)</h4>
+<h4>D.3 Nhóm 3: Phép tập hợp</h4>
 <div class="exercise-block level-2">
   <p><strong>Câu 11:</strong> (QLGV) Tìm học viên vừa thi Toán, vừa thi Lý.</p>
   <details open><summary>Lời giải chi tiết</summary>
@@ -1513,7 +1541,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.4 Nhóm 4: "Có nhưng không có" (Level 3)</h4>
+<h4>D.4 Nhóm 4: "Có nhưng không có"</h4>
 <div class="exercise-block level-3">
   <p><strong>Câu 14:</strong> (QLGV) Tìm học viên thi Toán nhưng chưa từng thi Lý.</p>
   <details open><summary>Lời giải chi tiết</summary>
@@ -1560,7 +1588,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.5 Nhóm 5: Aggregation (Level 3)</h4>
+<h4>D.5 Nhóm 5: Gom nhóm</h4>
 <div class="exercise-block level-3">
   <p><strong>Câu 18:</strong> (QLBH) Tính tổng trị giá của mỗi hóa đơn.</p>
   <details open><summary>Lời giải chi tiết</summary>
@@ -1595,10 +1623,10 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.6 Nhóm 6: Maximum / Cực trị không hàm Max (Level 4)</h4>
+<h4>D.6 Nhóm 6: Cực trị không dùng hàm Max</h4>
 <div class="exercise-block level-4">
   <p><strong>Câu 21:</strong> (QLGV) <span class="badge-advanced">Thi Hóa học</span> Tìm giáo viên có mức lương cao nhất.</p>
-  <div class="callout-exam">🎯 Exam Signal: Dấu hiệu Cực trị trong ĐSQH thuần. Cấm dùng <code>MUCLUONG = MAX(MUCLUONG)</code>.</div>
+  <div class="callout-exam">Khi làm bài: Dấu hiệu cực trị trong ĐSQH thuần. Không dùng <code>MUCLUONG = MAX(MUCLUONG)</code>.</div>
   <details open><summary>Lời giải chi tiết</summary>
     <div class="solution">
       <p><em>Phân tích:</em> Tìm người cao nhất = Toàn bộ giáo viên TRỪ ĐI những giáo viên có lương THẤP HƠN một ai đó. Ai còn sống sót sau phép trừ chính là nhà vua (Cao nhất).</p>
@@ -1645,7 +1673,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.7 Nhóm 7: Phép chia (Level 5)</h4>
+<h4>D.7 Nhóm 7: Phép chia</h4>
 <div class="exercise-block level-5">
   <p><strong>Câu 24:</strong> (QLBH) Tìm mã KH đã mua TẤT CẢ sản phẩm do 'Singapore' sản xuất.</p>
   <details open><summary>Lời giải chi tiết</summary>
@@ -1699,7 +1727,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   </details>
 </div>
 
-<h4>D.8 Nhóm 8: Tổng hợp hầm bà lằng (Level 5)</h4>
+<h4>D.8 Nhóm 8: Tổng hợp nhiều bước</h4>
 <div class="exercise-block level-5">
   <p><strong>Câu 28:</strong> (QLGV) Tìm lớp (MALOP) đã học tất cả các môn của khoa 'KTPM' và có giáo viên chủ nhiệm là 'Nguyen Hoai An'.</p>
   <details open><summary>Lời giải chi tiết</summary>
@@ -1748,7 +1776,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 <hr>
 
 <div class="recall-sheet">
-  <h2 id="sec-e">E. Recall Sheet - Ôn tập nhanh 1 trang</h2>
+  <h2 id="sec-e">E. Tờ ghi nhớ - Ôn tập nhanh 1 trang</h2>
   <table class="data-table">
     <tr>
       <th>Phép toán</th>
@@ -1803,11 +1831,11 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 <div class="chapter-title">
   <span class="chapter-number">Chương 4</span>
   <span class="chapter-name">SQL Server / T-SQL</span>
-  <span class="chapter-subtitle">DDL • DML • SELECT • JOIN • Subquery • "Tất cả" Pattern</span>
+  <span class="chapter-subtitle">DDL • DML • SELECT • JOIN • Truy vấn con • Điều kiện “tất cả”</span>
 </div>
 
 <div class="callout-mental">
-  <strong>🧠 Mental Model: SQL không phải là lập trình thông thường</strong><br>
+  <strong>Cách hiểu: SQL là ngôn ngữ khai báo</strong><br>
   Trong C/C++ hay Python, bạn viết <i>cách (HOW)</i> để máy tính lấy dữ liệu (vòng lặp, if-else). 
   Trong SQL, bạn chỉ mô tả <i>cái bạn muốn (WHAT)</i>, và Hệ Quản Trị CSDL (DBMS) sẽ tự tìm đường đi tối ưu nhất để trả về kết quả. SQL là ngôn ngữ khai báo (Declarative).
 </div>
@@ -1847,7 +1875,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 </ul>
 
 <div class="callout-fast">
-  <strong>⚡ Fast Pattern: Inline vs Named Constraints</strong><br>
+  <strong>Cách làm: Inline và named constraints</strong><br>
   - <b>Inline:</b> Viết ngay sau khai báo cột. (Nhanh, nhưng SQL Server tự đặt tên ngẫu nhiên).<br>
   - <b>Named:</b> Khai báo riêng ở dưới cùng hoặc ALTER TABLE với <code>CONSTRAINT &lt;tên&gt;</code> (Khuyên dùng trong thi để dễ DROP/ALTER sau này).
 </div>
@@ -1911,7 +1939,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 <span class="kw">DROP TABLE</span> CTHD;
 </pre>
 <div class="callout-trap">
-  <strong>⚠ BẪY: Thứ tự DROP TABLE</strong><br>
+  <strong>Sai lầm thường gặp: Thứ tự DROP TABLE</strong><br>
   Bạn không thể <code>DROP TABLE KHACHHANG</code> nếu bảng <code>HOADON</code> vẫn đang <code>REFERENCES</code> tới nó. Quy tắc: <strong>Xóa bảng con trước (CTHD, HOADON), bảng cha sau (KHACHHANG, SANPHAM).</strong>
 </div>
 
@@ -1919,7 +1947,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 <p>DML là các lệnh thay đổi dữ liệu bên trong các bảng: INSERT, UPDATE, DELETE.</p>
 
 <div class="callout-exam">
-  <strong>🎯 Exam Signal: SET DATEFORMAT DMY</strong><br>
+  <strong>Khi làm bài: SET DATEFORMAT DMY</strong><br>
   Trong phòng máy thực hành UIT, hoặc khi chấm bài thi máy, định dạng ngày tháng mặc định thường là mdy. Nếu đề bài cho chuỗi '31/12/2006', máy sẽ báo lỗi <em>"The conversion of a varchar data type to a datetime data type resulted in an out-of-range value"</em>. Luôn luôn bắt đầu file script của bạn bằng lệnh:<br>
   <code><span class="kw">SET DATEFORMAT</span> DMY;</code>
 </div>
@@ -1953,7 +1981,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 </pre>
 
 <div class="callout-trap">
-  <strong>⚠ BẪY CHẾT NGƯỜI: Quên mệnh đề WHERE</strong><br>
+  <strong>Sai lầm thường gặp: Quên mệnh đề WHERE</strong><br>
   <code>UPDATE SANPHAM SET GIA = 0;</code> → Thay đổi giá của TẤT CẢ sản phẩm trong bảng về 0!<br>
   <code>DELETE FROM KHACHHANG;</code> → Xóa sạch TẤT CẢ khách hàng!<br>
   Luôn luôn bôi đen và chạy câu lệnh <code>SELECT * FROM ... WHERE ...</code> trước khi chuyển thành <code>UPDATE / DELETE</code> để đảm bảo bạn sửa/xóa đúng dòng.
@@ -1992,7 +2020,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 </ul>
 
 <div class="callout-trap">
-  <strong>⚠ BẪY: So sánh với NULL</strong><br>
+  <strong>Sai lầm thường gặp: So sánh với NULL</strong><br>
   Trong SQL, <code>NULL</code> nghĩa là "không xác định" (unknown). Bạn <strong>không thể</strong> dùng dấu bằng <code>= NULL</code> hoặc khác <code>&lt;&gt; NULL</code>.<br>
   Sai: <code>WHERE DCHI = NULL</code><br>
   Đúng: <code>WHERE DCHI IS NULL</code> hoặc <code>IS NOT NULL</code>.
@@ -2002,7 +2030,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 <p>JOIN dùng để ghép dữ liệu từ 2 hay nhiều bảng dựa trên cột chung (thường là Khóa chính - Khóa ngoại).</p>
 
 <div class="callout-mental">
-  <strong>🧠 Mental Model: JOIN là phép chiếu ánh sáng qua các lớp kính</strong><br>
+  <strong>Cách hiểu: JOIN ghép các mảnh quan hệ</strong><br>
   Hãy tưởng tượng mỗi bảng là một tờ giấy trong suốt có ghi thông tin. JOIN là việc dán các tờ giấy lại với nhau sao cho "mã" khớp nhau, tạo thành một tờ giấy lớn chứa toàn bộ thông tin.
 </div>
 
@@ -2056,7 +2084,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 </table>
 
 <div class="callout-trap">
-  <strong>⚠ BẪY: LEFT JOIN bị biến thành INNER JOIN!</strong><br>
+  <strong>Sai lầm thường gặp: LEFT JOIN bị biến thành INNER JOIN</strong><br>
   Nếu bạn dùng <code>LEFT JOIN</code>, nhưng sau đó lại thêm điều kiện <code>WHERE</code> lên cột của bảng bên Phải, bạn vô tình lọc mất các dòng NULL.<br>
   Vd: <code>LEFT JOIN HOADON HD ON ... WHERE HD.TRIGIA > 0</code>. Các dòng NULL (do KH chưa mua) sẽ bị loại bỏ vì NULL không thể > 0. LEFT JOIN trở thành INNER JOIN.<br>
   <strong>Cách sửa:</strong> Đưa điều kiện lên mệnh đề <code>ON</code>: <code>LEFT JOIN HOADON HD ON KH.MAKH = HD.MAKH AND HD.TRIGIA > 0</code>, HOẶC thêm <code>OR HD.SOHD IS NULL</code> vào WHERE.
@@ -2093,18 +2121,18 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 <p><code>GROUP BY</code> chia bảng thành các nhóm dựa trên các giá trị giống nhau của một hoặc nhiều cột. Sau đó hàm aggregate sẽ tính toán TRÊN TỪNG NHÓM đó.</p>
 
 <div class="callout-fast">
-  <strong>⚡ Fast Pattern: Quy tắc GROUP BY</strong><br>
+  <strong>Cách kiểm tra: Quy tắc GROUP BY</strong><br>
   BẤT CỨ cột nào nằm trong mệnh đề <code>SELECT</code> mà <strong>KHÔNG</strong> bị bọc bởi hàm aggregate (SUM, COUNT...) thì <strong>BẮT BUỘC</strong> phải xuất hiện trong mệnh đề <code>GROUP BY</code>.
 </div>
 
 <div class="callout-mental">
-  <strong>🧠 Mental Model: PIPELINE THỰC THI CỦA SQL</strong><br>
+  <strong>Cách hiểu: Thứ tự logic của SQL</strong><br>
   Khi bạn viết một câu truy vấn, máy tính sẽ xử lý theo thứ tự sau chứ KHÔNG PHẢI thứ tự đọc từ trên xuống:<br>
   <strong>FROM</strong> (Lấy bảng) → <strong>WHERE</strong> (Lọc dòng) → <strong>GROUP BY</strong> (Chia nhóm) → <strong>HAVING</strong> (Lọc nhóm) → <strong>SELECT</strong> (Chiếu cột/Tính toán) → <strong>ORDER BY</strong> (Sắp xếp).
 </div>
 
 <div class="callout-trap">
-  <strong>⚠ BẪY: WHERE vs HAVING</strong><br>
+  <strong>Sai lầm thường gặp: WHERE và HAVING</strong><br>
   - <code>WHERE</code> lọc dữ liệu <strong>TRƯỚC KHI</strong> gom nhóm. KHÔNG ĐƯỢC chứa hàm aggregate. (Sai: <code>WHERE SUM(GIA) > 100</code>).<br>
   - <code>HAVING</code> lọc dữ liệu <strong>SAU KHI</strong> đã gom nhóm. Nơi duy nhất để đặt điều kiện lên hàm aggregate. (Đúng: <code>HAVING SUM(GIA) > 100</code>).
 </div>
@@ -2152,7 +2180,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 );
 </pre>
 <div class="callout-trap">
-  <strong>⚠ BẪY: NOT IN và NULL</strong><br>
+  <strong>Sai lầm thường gặp: NOT IN và NULL</strong><br>
   Nếu danh sách trả về của subquery IN có chứa 1 giá trị <code>NULL</code>, phép toán <code>NOT IN</code> sẽ luốn trả về <strong>rỗng (không dòng nào)</strong>. (Vì X NOT IN (A, B, NULL) tương đương X &lt;&gt; A AND X &lt;&gt; B AND X &lt;&gt; NULL. Mà X &lt;&gt; NULL luôn là UNKNOWN, làm sập toàn bộ chuỗi AND).<br>
   Khắc phục: Dùng <code>NOT EXISTS</code> hoặc thêm <code>WHERE cột IS NOT NULL</code> trong subquery.
 </div>
@@ -2229,7 +2257,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 
 <div class="callout-exam">
   <strong>🎯 Lời khuyên thi cử:</strong><br>
-  Giảng viên thường <strong>khuyến khích</strong> làm theo cách <code>NOT EXISTS</code>. Hãy học thuộc pattern này (Template):<br>
+  Giảng viên thường <strong>khuyến khích</strong> làm theo cách <code>NOT EXISTS</code>. Hãy hiểu mẫu suy luận này:<br>
   <code>SELECT x FROM B1 WHERE NOT EXISTS (SELECT y FROM B2 WHERE &lt;Điều kiện B2&gt; AND NOT EXISTS (SELECT z FROM B3 WHERE B3.x = B1.x AND B3.y = B2.y))</code>
 </div>
 
@@ -2277,7 +2305,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
   <li>Khoảng cách 2 ngày: <code>DATEDIFF(year, NGSINH, GETDATE())</code> (Tính khoảng cách năm, <strong>không phải tuổi chính xác</strong> vì nó chỉ đếm số lần qua Tết Tây. Tuổi chính xác cần so sánh thêm ngày tháng sinh).</li>
 </ul>
 
-<h2 id="4-11">4.11 Common Traps - Các lỗi ngớ ngẩn làm mất điểm</h2>
+<h2 id="4-11">4.11 Sai lầm thường gặp</h2>
 <div class="callout-trap">
   <ol>
     <li><strong>Viết WHERE sau GROUP BY hoặc ORDER BY:</strong> Sai cú pháp. (Pipeline: FROM > WHERE > GROUP > HAVING > ORDER).</li>
@@ -2296,7 +2324,7 @@ HAVING COUNT(DISTINCT KQ.MAMH) = (
 <p>Sử dụng cơ sở dữ liệu QLBH (Khách hàng, Nhân viên, Sản phẩm, Hóa đơn, CTHD).</p>
 
 <div class="exercise-block level-1">
-  <strong>Level 1: SELECT Cơ Bản</strong><br>
+  <strong>Mức 1: SELECT cơ bản</strong><br>
   1. In ra danh sách các sản phẩm (MASP, TENSP) do "Viet Nam" sản xuất.<br>
   2. In ra danh sách các khách hàng (MAKH, HOTEN) có địa chỉ ở "TpHCM".<br>
   3. In ra danh sách các sản phẩm (MASP, TENSP) có giá từ 20.000 đến 50.000.<br>
@@ -2319,7 +2347,7 @@ SELECT MAKH, HOTEN FROM KHACHHANG WHERE YEAR(NGSINH) = 1990;
 </div>
 
 <div class="exercise-block level-2">
-  <strong>Level 2: JOIN & GROUP BY</strong><br>
+  <strong>Mức 2: JOIN và GROUP BY</strong><br>
   1. In ra chi tiết hóa đơn SOHD = 1001 (TENSP, SL, GIA, THANHTIEN).<br>
   2. In ra doanh thu tổng cộng của từng tháng trong năm 2006.<br>
   3. Liệt kê tổng số lượng mua của từng khách hàng (MAKH, HOTEN, TONGSL).<br>
@@ -2343,7 +2371,7 @@ SELECT SOHD FROM CTHD GROUP BY SOHD HAVING COUNT(MASP) >= 3;
 </div>
 
 <div class="exercise-block level-3">
-  <strong>Level 3: Subquery & Max/Min</strong><br>
+  <strong>Mức 3: Truy vấn con và cực trị</strong><br>
   1. Tìm khách hàng mua nhiều tiền nhất.<br>
   2. Tìm sản phẩm đắt nhất do Việt Nam sản xuất.<br>
   3. Tìm khách hàng mua nhiều lần nhất (đếm số SOHD).<br>
@@ -2352,7 +2380,7 @@ SELECT SOHD FROM CTHD GROUP BY SOHD HAVING COUNT(MASP) >= 3;
 </div>
 
 <div class="exercise-block level-4">
-  <strong>Level 4: Tuyệt kỹ "Tất Cả"</strong><br>
+  <strong>Mức 4: Điều kiện "tất cả"</strong><br>
   1. Tìm khách hàng đã mua tất cả các sản phẩm do Singapore sản xuất.<br>
   2. Tìm khách hàng (MAKH, HOTEN) đã mua tất cả các sản phẩm (của tất cả các nước).<br>
   3. Tìm hóa đơn có chứa tất cả các sản phẩm do Việt Nam sản xuất.
@@ -2376,14 +2404,14 @@ WHERE NOT EXISTS (
   </details>
 </div>
 
-<h2 id="4-13">=== ONE-PAGE RECALL ===</h2>
+<h2 id="4-13">Tờ ghi nhớ — Chương 4</h2>
 <div class="recall-sheet">
   <ul>
     <li><strong>Pipeline:</strong> <code>FROM &gt; WHERE &gt; GROUP BY &gt; HAVING &gt; SELECT &gt; ORDER BY</code>.</li>
     <li><strong>WHERE:</strong> lọc dòng trước gom nhóm; <strong>HAVING:</strong> lọc nhóm sau khi có hàm toán học (SUM, COUNT).</li>
     <li><code>COUNT(*)</code> đếm cả dòng NULL; <code>COUNT(col)</code> đếm giá trị không NULL; <code>COUNT(DISTINCT col)</code> đếm số loại.</li>
     <li>So sánh rỗng: Dùng <code>IS NULL</code> hoặc <code>IS NOT NULL</code>, không dùng dấu <code>=</code>.</li>
-    <li><strong>Double NOT EXISTS Template:</strong> <code>SELECT ... FROM T1 WHERE NOT EXISTS (SELECT * FROM T2 WHERE ... AND NOT EXISTS (SELECT * FROM T3 WHERE T3.T1_ID=T1.ID AND T3.T2_ID=T2.ID))</code></li>
+    <li><strong>Mẫu hai lớp NOT EXISTS:</strong> <code>SELECT ... FROM T1 WHERE NOT EXISTS (SELECT * FROM T2 WHERE ... AND NOT EXISTS (SELECT * FROM T3 WHERE T3.T1_ID=T1.ID AND T3.T2_ID=T2.ID))</code></li>
     <li>Nếu bài dùng chuỗi ngày theo dạng ngày/tháng/năm, nên đặt <code>SET DATEFORMAT DMY;</code>; trong mã thực tế, ưu tiên literal ngày không nhập nhằng như <code>YYYYMMDD</code> hoặc tham số kiểu ngày.</li>
   </ul>
 </div>
@@ -2415,7 +2443,7 @@ WHERE NOT EXISTS (
 </ol>
 
 <div class="callout callout-mental">
-    <h4>🧠 Mental Model: Người gác cổng</h4>
+    <h4>Cách hiểu: Người gác cổng của dữ liệu</h4>
     <p>Hãy xem RBTV như những người gác cổng tại một câu lạc bộ đêm. Trước khi cho phép bất kỳ ai (dữ liệu mới) vào, hoặc cho phép người đang ở trong thay đổi trang phục (cập nhật), hoặc rời đi (xóa), người gác cổng sẽ kiểm tra xem hành động đó có vi phạm "quy định của quán" hay không. Nếu vi phạm, hành động bị từ chối thẳng thừng.</p>
 </div>
 
@@ -2450,7 +2478,7 @@ WHERE NOT EXISTS (
 </ul>
 
 <div class="callout callout-exam">
-    <h4>🎯 Exam Signal: Xử lý khi vi phạm khóa ngoại (Cascade Actions)</h4>
+    <h4>Khi làm bài: Xử lý khi vi phạm khóa ngoại (Cascade Actions)</h4>
     <p>Đề thi thường hỏi: "Khi xóa một dòng ở bảng cha thì chuyện gì xảy ra với các dòng ở bảng con?". SQL hỗ trợ 4 hành động:</p>
     <ul>
         <li><strong>NO ACTION (Mặc định):</strong> Báo lỗi và ngăn chặn việc xóa/sửa bảng cha.</li>
@@ -2483,7 +2511,7 @@ WHERE NOT EXISTS (
 <h2>5.3 BẢNG TẦM ẢNH HƯỞNG (TRỌNG ĐIỂM THI UIT)</h2>
 
 <div class="callout callout-connection">
-    <h4>🔗 Connection: Bảng Tầm Ảnh Hưởng là gì?</h4>
+    <h4>Liên hệ: Bảng Tầm Ảnh Hưởng là gì?</h4>
     <p>Trong dạng bài RBTV của UIT, đề thường yêu cầu lập <strong>Bảng Tầm Ảnh Hưởng</strong> sau khi phát biểu nội dung và bối cảnh. Bảng liệt kê các thao tác Thêm (Insert), Xóa (Delete), Sửa (Update) trên các quan hệ có thể làm <strong>vi phạm</strong> ràng buộc đang xét.</p>
 </div>
 
@@ -2502,7 +2530,7 @@ WHERE NOT EXISTS (
 </ol>
 
 <div class="callout callout-trap">
-    <h4>⚠ BẪY: Xóa dữ liệu có làm vi phạm RBTV không?</h4>
+    <h4>Sai lầm thường gặp: Xóa dữ liệu có làm vi phạm RBTV không?</h4>
     <p>Sinh viên thường đánh dấu <code>+</code> cho thao tác XÓA mà không suy nghĩ. Thực tế:</p>
     <ul>
         <li>Xóa một khóa ngoại (bảng con): Càng xóa càng an toàn, <strong>KHÔNG</strong> vi phạm (-).</li>
@@ -2545,7 +2573,7 @@ WHERE NOT EXISTS (
     </tbody>
 </table>
 <div class="callout callout-dryrun">
-    <h4>Bước chạy khô (Dry run) phân tích:</h4>
+    <h4>Theo dõi trạng thái:</h4>
     <ul>
         <li><strong>Bảng GIAOVIEN:</strong>
             <ul>
@@ -2659,7 +2687,7 @@ WHERE NOT EXISTS (
 <p>SQL Server sử dụng hai bảng ảo (virtual tables) trong quá trình thực thi Trigger: <code>inserted</code> (chứa dữ liệu mới vừa thêm/sửa) và <code>deleted</code> (chứa dữ liệu cũ vừa xóa/trước khi sửa).</p>
 
 <div class="callout callout-exam">
-    <h4>🎯 Code Template Trigger Kiểm tra RBTV:</h4>
+    <h4>Mẫu trigger kiểm tra RBTV:</h4>
     <p>RBTV: "Trưởng khoa của một khoa phải là giáo viên thuộc khoa đó"</p>
     <pre class="sql-block">
 <span class="sql-comment">-- Giả định đã có FK KHOA(TRUONGKHOA) -&gt; GIAOVIEN(MAGV).</span>
@@ -2774,7 +2802,7 @@ WHERE NOT EXISTS (
 <hr>
 
 <div class="recall-sheet">
-    <h2>ONE-PAGE RECALL: Ràng Buộc Toàn Vẹn</h2>
+    <h2>Tờ ghi nhớ: Ràng buộc toàn vẹn</h2>
     <div class="recall-grid">
         <div class="recall-card">
             <h3>1. Các loại RBTV chính</h3>
@@ -2812,7 +2840,7 @@ WHERE NOT EXISTS (
     <h1 class="chapter-title">Chương 6: Phụ Thuộc Hàm & Chuẩn Hóa Dữ Liệu</h1>
 
     <div class="callout-mental">
-        <strong>🧠 Mental Model</strong>
+        <strong>Cách hiểu</strong>
         <p>Chuẩn hóa (Normalization) là quá trình "làm sạch" dữ liệu để tránh dư thừa và dị thường (anomaly). Phụ thuộc hàm (Functional Dependency) là công cụ toán học để tìm ra những "mảnh ghép" dữ liệu đang bị dính chặt vào nhau một cách không hợp lý.</p>
     </div>
 
@@ -2848,7 +2876,7 @@ WHERE NOT EXISTS (
     </ul>
 
     <h2>6.3 Chứng minh PTH</h2>
-    <p><strong>Template:</strong> Cho tập F, chứng minh X → Y.</p>
+    <p><strong>Mẫu chứng minh:</strong> Cho tập F, chứng minh X → Y.</p>
     <div class="steps">
         <div class="step">Ví dụ: F = {A → B, B → C}. Chứng minh A → C.
             <ol>
@@ -2863,7 +2891,7 @@ WHERE NOT EXISTS (
     <p><strong>Thuật toán:</strong> Bắt đầu với X⁺ = X. Duyệt các PTH, nếu vế trái nằm trong X⁺, thêm vế phải vào X⁺. Lặp tới khi X⁺ không đổi.</p>
     
     <div class="callout-dryrun">
-        <strong>🏃 Dry run:</strong>
+        <strong>Theo dõi trạng thái:</strong>
         <p>R(A, B, C, D, E), F = {A → BC, CD → E, B → D, E → A}. Tính B⁺</p>
         <ul>
             <li>Vòng 0: B⁺ = {B}</li>
@@ -2880,7 +2908,7 @@ WHERE NOT EXISTS (
     </div>
 
     <div class="callout-fast">
-        <strong>⚡ Fast Pattern: Ứng dụng của X⁺</strong>
+        <strong>Cách dùng X⁺</strong>
         <ul>
             <li>Kiểm tra X → Y: Xem Y có thuộc X⁺ không.</li>
             <li>Tìm khóa: X⁺ = R thì X là siêu khóa (superkey).</li>
@@ -2895,7 +2923,7 @@ WHERE NOT EXISTS (
     </div>
 
     <div class="callout-dryrun">
-        <strong>🏃 Dry Run đầy đủ</strong>
+        <strong>Theo dõi đầy đủ</strong>
         <p>Cho <code>F = {A → BC, AB → C, C → D, A → D}</code>. Tìm một phủ tối thiểu.</p>
         <ol>
             <li><strong>Tách vế phải:</strong> <code>F1 = {A → B, A → C, AB → C, C → D, A → D}</code>.</li>
@@ -2909,7 +2937,7 @@ WHERE NOT EXISTS (
     <h2>6.6 Candidate Key (Khóa ứng viên)</h2>
     <p><strong>Siêu khóa</strong> là tập X có <code>X⁺ = R</code>. <strong>Khóa ứng viên</strong> là siêu khóa tối thiểu theo phép bao hàm: bỏ bất kỳ thuộc tính nào khỏi X thì không còn là siêu khóa.</p>
     <div class="callout-exam">
-        <strong>🎯 Exam Signal: Phân tích trái phải</strong>
+        <strong>Khi làm bài: Phân tích trái phải</strong>
         <ul>
             <li>Thuộc tính <strong>không xuất hiện ở bất kỳ vế phải nào</strong> không thể được suy ra từ thuộc tính khác, nên phải có trong mọi khóa ứng viên.</li>
             <li>Phân nhóm L/R/LR/N là mẹo sàng lọc để giảm số nhánh, không thay thế phép tính bao đóng và kiểm tra tối thiểu.</li>
@@ -2918,7 +2946,7 @@ WHERE NOT EXISTS (
     </div>
 
     <div class="callout-dryrun">
-        <strong>🏃 Dry Run: tìm TẤT CẢ khóa ứng viên</strong>
+        <strong>Theo dõi: tìm tất cả khóa ứng viên</strong>
         <p>Cho <code>R(A,B,C,D,E,F)</code> và tập PTH <code>G = {A → B, B → A, C → D, D → C, AC → E}</code>.</p>
         <ol>
             <li><strong>Thuộc tính bắt buộc:</strong> F không xuất hiện ở vế phải của PTH nào, nên F thuộc mọi khóa. <code>F⁺ = {F}</code>, chưa là siêu khóa.</li>
@@ -2965,11 +2993,11 @@ WHERE NOT EXISTS (
     </ol>
 
     <div class="badge-advanced">
-        <h2>6.9 Decomposition (Phân rã) - Nâng cao</h2>
+        <h2>6.9 Decomposition (Phân rã)</h2>
         <p>Phân rã R thành R1, R2... cần đảm bảo: Không mất dữ liệu (Lossless-join) và Bảo toàn phụ thuộc hàm (Dependency preservation).</p>
     </div>
 
-    <h2>One-Page Recall & Bài tập</h2>
+    <h2>Tờ ghi nhớ và bài tập</h2>
     <p>1. Tìm X⁺. 2. Tìm tất cả khóa ứng viên. 3. Tìm phủ tối thiểu. 4. Xác định dạng chuẩn bằng tiêu chuẩn chính thức. Đây là bốn dạng bài rất quan trọng và thường gặp.</p>
 </section>
 
@@ -2978,7 +3006,7 @@ WHERE NOT EXISTS (
      CHƯƠNG 7: THỰC HÀNH SQL SERVER
      IT004 – Cẩm nang CSDL • Võ Trọng Phúc
      ============================================================ -->
-<section id="ch07">
+<section id="ch07" class="theory-exclude">
 <div class="chapter-title">
   <span class="chapter-number">Chương 7</span>
   <span class="chapter-name">Thực hành SQL Server</span>
@@ -3202,7 +3230,7 @@ WHERE NOT EXISTS (
 
 <!-- === exam_playbook.html === -->
 <section id="exam-playbook">
-    <h1 class="chapter-title">Exam Playbook - Kỹ Năng Giải Đề Tốc Độ</h1>
+    <h1 class="chapter-title">Hướng dẫn giải đề</h1>
 
     <h2>1. ER Diagram: Checklist 60 giây</h2>
     <ul>
@@ -3230,14 +3258,14 @@ WHERE NOT EXISTS (
     </table>
 
     <div class="callout-fast">
-        <strong>⚡ Fast Pattern: Truy vấn "Tất cả" (Division)</strong>
+        <strong>Cách làm: Truy vấn "tất cả" (Division)</strong>
         <p>1. Phép chia: <code>R1 &divide; R2</code> (ít hỗ trợ trong SQL Server)</p>
         <p>2. Dùng <code>NOT EXISTS</code> lồng nhau: Không tồn tại x mà không tồn tại y để chúng kết nối.</p>
         <p>3. Dùng <code>COUNT(DISTINCT ...) = (SELECT COUNT...)</code>: Đếm số lượng, nếu bằng đúng tổng số thì thỏa mãn.</p>
     </div>
 
     <div class="callout-trap">
-        <strong>⚠ BẪY: "NẾU CÓ"</strong>
+        <strong>Sai lầm thường gặp: "NẾU CÓ"</strong>
         <p>Đề yêu cầu in ra sinh viên và điểm số, "nếu không có điểm thì để NULL". Đây là ngữ nghĩa ngoại kết: thường viết <code>LEFT JOIN</code> từ tập sinh viên cần giữ sang bảng điểm. <code>INNER JOIN</code> sẽ làm mất sinh viên chưa có điểm.</p>
     </div>
 
@@ -3262,7 +3290,7 @@ WHERE NOT EXISTS (
 
 <!-- === cheat_sheet.html === -->
 <section id="cheat-sheet" class="recall-sheet">
-    <h1 class="chapter-title">Cheat Sheet 6 Chương - Cứu Cánh Trước Giờ G</h1>
+    <h1 class="chapter-title">Tờ ghi nhớ sáu chương</h1>
 
     <h2>Chương 1: 5 Khái Niệm Lõi</h2>
     <ul>
@@ -3295,7 +3323,7 @@ HAVING điều kiện nhóm
 ORDER BY cột sắp xếp [ASC|DESC]
     </pre>
     <div class="callout-trap">
-        <strong>⚠ BẪY (Top 3):</strong>
+        <strong>Sai lầm thường gặp (Top 3):</strong>
         <ol>
             <li>Trong <code>SELECT</code> có cột không dùng hàm tập hợp (Sum, Count) mà quên bỏ vào <code>GROUP BY</code>.</li>
             <li>Dùng <code>WHERE</code> cho hàm tập hợp (Phải dùng <code>HAVING</code>).</li>
@@ -3303,7 +3331,7 @@ ORDER BY cột sắp xếp [ASC|DESC]
         </ol>
     </div>
 
-    <h2>Chương 5: Bảng Tầm Ảnh Hưởng Template</h2>
+    <h2>Chương 5: Bảng tầm ảnh hưởng</h2>
     <p>Liệt kê Thêm (Insert), Xóa (Delete), Sửa (Update) trên các bảng liên quan đến ràng buộc toàn vẹn. Nhớ ghi: "+" (kiểm tra), "-" (không kiểm tra).</p>
 
     <h2>Chương 6: PTH & Chuẩn Hóa</h2>
@@ -3350,12 +3378,12 @@ ORDER BY cột sắp xếp [ASC|DESC]
 <div class="colophon">
   <hr>
   <p style="font-size: 14pt; font-weight: 700; color: var(--c-primary-dark);">IT004 – CƠ SỞ DỮ LIỆU</p>
-  <p style="font-size: 11pt; font-style: italic; color: var(--c-text-secondary);">Cẩm nang từ nền tảng đến Exam Mastery</p>
+  <p style="font-size: 11pt; font-style: italic; color: var(--c-text-secondary);">Sổ tay lý thuyết IT004</p>
   <hr>
   <p style="font-size: 12pt; font-weight: 600; margin-top: 20px;">Biên soạn bởi Võ Trọng Phúc</p>
-  <p style="font-size: 9pt; color: var(--c-text-muted); margin-top: 12px;">Phiên bản 1.0 • 2026</p>
+  <p style="font-size: 9pt; color: var(--c-text-muted); margin-top: 12px;">Biên soạn độc lập cho mục đích học tập</p>
   <hr>
-  <p style="font-size: 8pt; color: var(--c-text-muted); margin-top: 20px;">IT004 Cẩm nang CSDL • Compiled by Võ Trọng Phúc</p>
+  <p style="font-size: 8pt; color: var(--c-text-muted); margin-top: 20px;">IT004 Cơ sở dữ liệu • Võ Trọng Phúc</p>
 </div>
 </body>
 </html>
