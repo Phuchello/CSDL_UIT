@@ -704,7 +704,7 @@
   </div>
 
   <h3>5.2 Toán tử <code>EXISTS</code> / <code>NOT EXISTS</code> (Kiểm tra sự tồn tại)</h3>
-  <p>Toán tử <code>EXISTS</code> trả về <code>TRUE</code> ngay khi truy vấn con tìm thấy <strong>ít nhất một dòng</strong> thỏa mãn (cơ chế Short-Circuit Evaluation), không quan tâm danh sách cột trong <code>SELECT</code> của câu con (thường viết chuẩn là <code>SELECT 1</code>).</p>
+  <p>Toán tử <code>EXISTS</code> trả về <code>TRUE</code> khi kết quả của truy vấn con không rỗng; danh sách cột trong mệnh đề <code>SELECT</code> của truy vấn con không quyết định giá trị trả về (chuẩn mực viết là <code>SELECT 1</code>). Về mặt logic, vị từ được thỏa mãn ngay khi tìm thấy dòng đầu tiên; kế hoạch thực thi vật lý cụ thể do Query Optimizer quyết định.</p>
 
   <pre class="sql-block"><span class="cmt">-- Tìm các sản phẩm chưa từng được bán trong bất kỳ hóa đơn nào</span>
 <span class="kw">SELECT</span> SP.MASP, SP.TENSP
@@ -763,7 +763,7 @@
 );</pre>
 
   <div class="trace-box">
-    <div class="trace-header">DÒNG THỰC THI (CORRELATED TRACE)</div>
+    <div class="trace-header">TRACE SUY LUẬN LOGIC (LOGICAL CORRELATED TRACE)</div>
     <div class="trace-steps">
       <div class="trace-step">
         <span class="step-badge">1. CÂU NGOÀI</span>
@@ -873,23 +873,23 @@
   </div>
 
   <h2>6. Ràng buộc Khai báo & Cơ chế DML Trigger</h2>
-  <p>Khi ràng buộc toàn vẹn liên quan đến nhiều bảng hoặc đòi hỏi phép kiểm tra điều kiện phức tạp mà mệnh đề <code>CHECK</code> khai báo không thể đảm nhiệm, lập trình viên bắt buộc phải sử dụng <strong>DML Trigger</strong> (căn cứ <code>TECH-A04</code>, <code>TECH-A05</code>).</p>
+  <p>Trong phạm vi các ràng buộc toàn vẹn liên bảng của IT004, <strong>DML Trigger</strong> là một cách hiện thực phù hợp khi các ràng buộc khai báo (<code>CHECK</code>, <code>FOREIGN KEY</code>) không biểu đạt được điều kiện (căn cứ <code>TECH-A04</code>, <code>TECH-A05</code>).</p>
 
   <h3>6.1 Bảng so sánh phương án hiện thực RBTV</h3>
   <table class="compact-table">
     <thead>
-      <tr><th style="width: 25%;">Phương án</th><th style="width: 35%;">Phạm vi áp dụng</th><th style="width: 40%;">Ưu / Nhược điểm</th></tr>
+      <tr><th style="width: 25%;">Phương án</th><th style="width: 35%;">Phạm vi áp dụng</th><th style="width: 40%;">Đặc điểm kỹ thuật</th></tr>
     </thead>
     <tbody>
       <tr>
         <td><strong>Khai báo (Declarative: CHECK, FK)</strong></td>
         <td>Ràng buộc miền giá trị trên 1 bảng; quan hệ khóa chính – khóa ngoại giữa 2 bảng.</td>
-        <td>Thực thi ở tầng nhân, tốc độ cao nhất; không thể chứa subquery hoặc tham chiếu bảng ngoài.</td>
+        <td>Thực thi trực tiếp ở tầng máy chủ; không thể chứa subquery hoặc tham chiếu bảng ngoài.</td>
       </tr>
       <tr>
         <td><strong>Thủ tục (Procedural: AFTER Trigger)</strong></td>
         <td>Ràng buộc liên bảng, kiểm tra logic nghiệp vụ phức tạp, ràng buộc so sánh ngày tháng giữa các bảng.</td>
-        <td>Linh hoạt tối đa; yêu cầu thiết kế chuẩn dạng tập hợp để tránh quá tải và lỗi đa dòng.</td>
+        <td>Biểu đạt được logic phức tạp; yêu cầu thiết kế chuẩn dạng tập hợp để tránh quá tải và lỗi đa dòng.</td>
       </tr>
     </tbody>
   </table>
@@ -1003,7 +1003,7 @@
   <h3>6.3.1 Phân tích bối cảnh & Bảng tầm ảnh hưởng</h3>
   <p><strong>Ràng buộc:</strong> <em>"Trưởng khoa của một khoa phải là giáo viên thuộc chính khoa đó."</em></p>
 
-  <table class="compact-table" style="margin-bottom: 3mm;">
+  <table class="compact-table" style="margin-bottom: 2mm;">
     <thead>
       <tr><th style="width: 25%;">Quan hệ</th><th style="width: 25%;">Thêm (INSERT)</th><th style="width: 25%;">Xóa (DELETE)</th><th style="width: 25%;">Sửa (UPDATE)</th></tr>
     </thead>
@@ -1023,9 +1023,9 @@
     </tbody>
   </table>
 
-  <h3>6.3.2 Cài đặt Trigger hai chiều &amp; Kịch bản kiểm thử</h3>
+  <h3>6.3.2 Cài đặt Trigger &amp; Đánh giá ngữ nghĩa tĩnh (Static Semantic Validation)</h3>
 
-  <pre class="sql-block"><span class="cmt">-- 1. Trigger trên KHOA: Kiểm tra khi bổ nhiệm hoặc thay đổi Trưởng khoa</span>
+  <pre class="sql-block"><span class="cmt">-- 1. Trigger trên KHOA: Kiểm tra khi chỉ định/thay đổi Trưởng khoa</span>
 <span class="kw">CREATE TRIGGER</span> trg_Khoa_CheckTruongKhoa <span class="kw">ON</span> KHOA <span class="kw">AFTER INSERT</span>, <span class="kw">UPDATE</span>
 <span class="kw">AS</span>
 <span class="kw">BEGIN</span>
@@ -1042,39 +1042,49 @@
 <span class="kw">END</span>;
 <span class="kw">GO</span>
 
-<span class="cmt">-- 2. Trigger trên GIAOVIEN: Ngăn xóa hoặc đổi MAKHOA của Trưởng khoa</span>
+<span class="cmt">-- 2. Trigger trên GIAOVIEN: Phân biệt chính xác xóa thực sự và sửa MAKHOA</span>
 <span class="kw">CREATE TRIGGER</span> trg_GiaoVien_CheckKhoa <span class="kw">ON</span> GIAOVIEN <span class="kw">AFTER DELETE</span>, <span class="kw">UPDATE</span>
 <span class="kw">AS</span>
 <span class="kw">BEGIN</span>
     <span class="kw">SET NOCOUNT ON</span>;
-    <span class="cmt">-- Nhánh DELETE: Không cho phép xóa giáo viên đang giữ chức Trưởng khoa</span>
-    <span class="kw">IF EXISTS</span> (<span class="kw">SELECT</span> <span class="num">1</span> <span class="kw">FROM</span> <span class="kw">deleted</span> d <span class="kw">INNER JOIN</span> KHOA k <span class="kw">ON</span> d.MAGV = k.TRUONGKHOA)
+    <span class="cmt">-- Nhánh DELETE thực sự: Có trong deleted nhưng KHÔNG có trong inserted</span>
+    <span class="kw">IF EXISTS</span> (
+        <span class="kw">SELECT</span> <span class="num">1</span> <span class="kw">FROM</span> <span class="kw">deleted</span> d
+        <span class="kw">INNER JOIN</span> KHOA k <span class="kw">ON</span> d.MAGV = k.TRUONGKHOA
+        <span class="kw">LEFT JOIN</span> <span class="kw">inserted</span> i <span class="kw">ON</span> d.MAGV = i.MAGV
+        <span class="kw">WHERE</span> i.MAGV <span class="kw">IS NULL</span>
+    )
     <span class="kw">BEGIN</span>
         <span class="kw">RAISERROR</span> (N<span class="str">'Lỗi: Không thể xóa giáo viên đang giữ chức vụ Trưởng khoa!'</span>, <span class="num">16</span>, <span class="num">1</span>);
         <span class="kw">ROLLBACK TRAN</span>; <span class="kw">RETURN</span>;
     <span class="kw">END</span>;
 
-    <span class="cmt">-- Nhánh UPDATE: Chỉ chặn khi đổi MAKHOA của Trưởng khoa sang khoa khác</span>
+    <span class="cmt">-- Nhánh UPDATE MAKHOA: Kiểm tra khi MAKHOA của Trưởng khoa bị sửa đổi</span>
     <span class="kw">IF UPDATE</span>(MAKHOA) <span class="kw">AND EXISTS</span> (
-        <span class="kw">SELECT</span> <span class="num">1</span> <span class="kw">FROM</span> <span class="kw">inserted</span> i <span class="kw">INNER JOIN</span> KHOA k <span class="kw">ON</span> i.MAGV = k.TRUONGKHOA <span class="kw">WHERE</span> i.MAKHOA != k.MAKHOA
+        <span class="kw">SELECT</span> <span class="num">1</span> <span class="kw">FROM</span> <span class="kw">inserted</span> i
+        <span class="kw">INNER JOIN</span> KHOA k <span class="kw">ON</span> i.MAGV = k.TRUONGKHOA
+        <span class="kw">WHERE</span> i.MAKHOA <span class="kw">IS NULL OR</span> i.MAKHOA &lt;&gt; k.MAKHOA
     )
     <span class="kw">BEGIN</span>
-        <span class="kw">RAISERROR</span> (N<span class="str">'Lỗi: Không thể chuyển khoa của giáo viên đang làm Trưởng khoa!'</span>, <span class="num">16</span>, <span class="num">1</span>);
+        <span class="kw">RAISERROR</span> (N<span class="str">'Lỗi: Trưởng khoa phải thuộc chính khoa đó (không được để NULL hoặc chuyển khoa khác)!'</span>, <span class="num">16</span>, <span class="num">1</span>);
         <span class="kw">ROLLBACK TRAN</span>; <span class="kw">RETURN</span>;
     <span class="kw">END</span>;
 <span class="kw">END</span>;
 <span class="kw">GO</span></pre>
 
-  <table class="compact-table" style="margin-top: 1.5mm;">
+  <table class="compact-table" style="margin-top: 1mm;">
     <thead>
-      <tr><th>Kịch bản kiểm thử</th><th>Thao tác DML</th><th>Kết quả mong đợi</th></tr>
+      <tr><th>Kịch bản kiểm thử tĩnh</th><th>Thao tác DML</th><th>Kết quả thẩm định</th></tr>
     </thead>
     <tbody>
-      <tr><td>A. Sửa HOTEN Trưởng khoa</td><td><code>UPDATE GIAOVIEN SET HOTEN = N'...' WHERE MAGV = 'GV01'</code></td><td class="cell-hl">PASS (Không đổi MAKHOA)</td></tr>
-      <tr><td>B. Sửa MUCLUONG Trưởng khoa</td><td><code>UPDATE GIAOVIEN SET MUCLUONG = MUCLUONG*1.1 WHERE MAGV = 'GV01'</code></td><td class="cell-hl">PASS (Không đổi MAKHOA)</td></tr>
-      <tr><td>C. Đổi MAKHOA Trưởng khoa</td><td><code>UPDATE GIAOVIEN SET MAKHOA = 'KHMT' WHERE MAGV = 'GV01'</code></td><td class="cell-err">REJECT (Vi phạm predicate)</td></tr>
-      <tr><td>D. Xóa Trưởng khoa</td><td><code>DELETE FROM GIAOVIEN WHERE MAGV = 'GV01'</code></td><td class="cell-err">REJECT (Bị bắt ở nhánh DELETE)</td></tr>
-      <tr><td>E. UPDATE đa dòng có 1 lỗi</td><td><code>UPDATE GIAOVIEN SET MAKHOA = 'KHMT' WHERE MAKHOA = 'CNTT'</code></td><td class="cell-err">REJECT toàn bộ câu lệnh (Rollback)</td></tr>
+      <tr><td>A. Sửa HOTEN Trưởng khoa</td><td><code>UPDATE GIAOVIEN SET HOTEN = N'...' WHERE MAGV = 'GV01'</code></td><td class="cell-hl">PASS (Không xóa, không đổi MAKHOA)</td></tr>
+      <tr><td>B. Sửa MUCLUONG/HESO</td><td><code>UPDATE GIAOVIEN SET MUCLUONG = MUCLUONG*1.1 WHERE MAGV = 'GV01'</code></td><td class="cell-hl">PASS (Không rơi vào nhánh kiểm tra)</td></tr>
+      <tr><td>C. Đổi MAKHOA về CÙNG khoa</td><td><code>UPDATE GIAOVIEN SET MAKHOA = 'CNTT' WHERE MAGV = 'GV01'</code></td><td class="cell-hl">PASS (Thỏa i.MAKHOA = k.MAKHOA)</td></tr>
+      <tr><td>D. Đổi MAKHOA sang KHOA KHÁC</td><td><code>UPDATE GIAOVIEN SET MAKHOA = 'KHMT' WHERE MAGV = 'GV01'</code></td><td class="cell-err">REJECT (Bị bắt do i.MAKHOA &lt;&gt; k.MAKHOA)</td></tr>
+      <tr><td>E. Đổi MAKHOA thành NULL</td><td><code>UPDATE GIAOVIEN SET MAKHOA = NULL WHERE MAGV = 'GV01'</code></td><td class="cell-err">REJECT (Bị bắt do i.MAKHOA IS NULL)</td></tr>
+      <tr><td>F. XÓA Trưởng khoa</td><td><code>DELETE FROM GIAOVIEN WHERE MAGV = 'GV01'</code></td><td class="cell-err">REJECT (Bị bắt ở nhánh DELETE thực sự)</td></tr>
+      <tr><td>G. UPDATE đa dòng không đổi MAKHOA</td><td><code>UPDATE GIAOVIEN SET MUCLUONG = MUCLUONG*1.05</code></td><td class="cell-hl">PASS toàn bộ (An toàn đa dòng)</td></tr>
+      <tr><td>H. UPDATE đa dòng có 1 lỗi</td><td><code>UPDATE GIAOVIEN SET MAKHOA = 'KHMT' WHERE MAKHOA = 'CNTT'</code></td><td class="cell-err">REJECT toàn bộ câu lệnh (Rollback)</td></tr>
     </tbody>
   </table>
 

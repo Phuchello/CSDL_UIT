@@ -96,7 +96,7 @@
   </div>
 
   <h3>5.2 Toán tử <code>EXISTS</code> / <code>NOT EXISTS</code> (Kiểm tra sự tồn tại)</h3>
-  <p>Toán tử <code>EXISTS</code> trả về <code>TRUE</code> ngay khi truy vấn con tìm thấy <strong>ít nhất một dòng</strong> thỏa mãn (cơ chế Short-Circuit Evaluation), không quan tâm danh sách cột trong <code>SELECT</code> của câu con (thường viết chuẩn là <code>SELECT 1</code>).</p>
+  <p>Toán tử <code>EXISTS</code> trả về <code>TRUE</code> khi kết quả của truy vấn con không rỗng; danh sách cột trong mệnh đề <code>SELECT</code> của truy vấn con không quyết định giá trị trả về (chuẩn mực viết là <code>SELECT 1</code>). Về mặt logic, vị từ được thỏa mãn ngay khi tìm thấy dòng đầu tiên; kế hoạch thực thi vật lý cụ thể do Query Optimizer quyết định.</p>
 
   <pre class="sql-block"><span class="cmt">-- Tìm các sản phẩm chưa từng được bán trong bất kỳ hóa đơn nào</span>
 <span class="kw">SELECT</span> SP.MASP, SP.TENSP
@@ -155,7 +155,7 @@
 );</pre>
 
   <div class="trace-box">
-    <div class="trace-header">DÒNG THỰC THI (CORRELATED TRACE)</div>
+    <div class="trace-header">TRACE SUY LUẬN LOGIC (LOGICAL CORRELATED TRACE)</div>
     <div class="trace-steps">
       <div class="trace-step">
         <span class="step-badge">1. CÂU NGOÀI</span>
