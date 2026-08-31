@@ -2,7 +2,7 @@
 
 ## Checkpoint
 
-v1.1 Phase A — Final Local & Web Source Ingest + Saturation Pass Complete
+v1.1 Phase A — Final Validation & Evidence Verification Complete
 
 ## Date
 
@@ -14,21 +14,18 @@ v1.1 Phase A — Final Local & Web Source Ingest + Saturation Pass Complete
 
 ## Status
 
-Phase A Source Ingestion is 100% COMPLETE and prepared for Mentor Final Phase A Review. All local transport attachments have been bóc tách, verified, and mapped to 14 canonical artifacts across 8 academic years (2016–2024). Web search saturation has been achieved across all 7 major source families. The v1.0.0 handbook, canonical PDF (`dist/IT004_CSDL_UIT_CamNang_VoTrongPhuc.pdf`), and `main` remain completely untouched.
+Phase A Validation & Source Ingestion is 100% COMPLETE, mathematically validated, and ready for Mentor Final Approval. All local transport attachments have been verified and page counts cross-checked. Sổ đăng ký nguồn gồm 51 nguồn học thuật chuẩn mực (`source_inventory.md`), 17 hiện vật chuẩn hóa (11 exam, 2 practical-exam, 3 review, 1 lab-corpus) được lập chỉ mục tại `artifact_registry.md`. Ngưỡng bão hòa tìm kiếm đã được kiểm chứng qua 12 đợt tìm kiếm web (`web_search_log.md`). Báo cáo kiểm thử cơ học (`validation_report.md`) đạt 100% PASS trên tất cả các tiêu chí. Sách v1.0.0, PDF chính thức, nhánh `main` và kho `phuchello/phuchello` hoàn toàn không bị ảnh hưởng.
 
 ## Scope completed in this checkpoint
 
-- Bóc tách toàn diện 6 tệp đính kèm cục bộ (`LECTURES_PART1.pdf`, `PART2.pdf`, `EXAMS_REVIEW.pdf`, `LABS_AND_SQL.txt`, `QLBANHANG.xlsx`, `Homework5.docx`) thành 17 tài liệu gốc;
-- Giải phóng toàn bộ nhãn `ACCESS BLOCKED` trước đây;
-- Bảng kê tài liệu nguồn đầy đủ 35 nguồn học thuật (`source_inventory.md`);
-- Thiết lập Danh bộ hiện vật đề thi chuẩn hóa gồm 14 Canonical Artifacts (`artifact_registry.md`);
-- Nhật ký 8 đợt tìm kiếm web đa nền tảng và kiểm chứng đạt ngưỡng bão hòa (`web_search_log.md`);
-- Bản đồ mẫu đề thi thực chứng với Top 5 dạng bài có tần suất cao nhất (`exam_pattern_map.md`);
-- Bản đồ kỹ năng T-SQL và ma trận tiến trình Lab 01–04 (`practical_coverage_map.md`);
-- Kế hoạch ngân hàng câu hỏi tự luận phân bổ theo 7 chuyên đề (`essay_bank_plan.md`);
-- Kiểm toán biên tập lý thuyết và định hướng thiết kế bìa sách tối giản (`theory_editorial_audit.md`);
-- Hồ sơ xử lý xung đột học thuật và chính sách bản quyền an toàn (`source_gaps_and_conflicts.md`);
-- Thiết kế kiến trúc Static-First Quartz Knowledge Garden (`knowledge_garden_architecture.md`).
+- Bóc tách toàn diện 6 tệp đính kèm cục bộ thành 17 tài liệu gốc với số trang chuẩn xác (`local_corpus_audit.md`);
+- Sổ đăng ký nguồn đầy đủ 51 nguồn (`source_inventory.md`) với phân định độc lập giữa `authority_tier` và `ownership`;
+- Danh bộ 17 hiện vật chuẩn hóa với URL trực tiếp và bằng chứng khử trùng lặp mirror cơ học (`artifact_registry.md`);
+- Nhật ký 12 đợt tìm kiếm web và kiểm chứng bão hòa 4 đợt liên tiếp (`web_search_log.md`);
+- Bản đồ mẫu đề thi thực chứng với `artifact_count` khớp 100% về mặt toán học (`exam_pattern_map.md`);
+- Bản đồ kỹ năng T-SQL với mã nguồn Microsoft `TECH-A01`–`TECH-A11` chuẩn xác và phân loại Trigger (`practical_coverage_map.md`);
+- Kế hoạch ngân hàng câu hỏi tự luận theo chuyên đề với 3 lớp xuất xứ minh bạch (`essay_bank_plan.md`);
+- Báo cáo kiểm thử xác thực 100% tính toàn vẹn của hồ sơ Giai đoạn A (`validation_report.md`).
 
 ## Explicit hold
 

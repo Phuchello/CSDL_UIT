@@ -1,42 +1,40 @@
 # Bản Đồ Kỹ Năng Thực Hành SQL Server (Practical SQL Server Coverage Map) — CSDL_UIT v1.1
 
 **Bản cập nhật:** 2026-08-31
-**Nguyên tắc:** Phân loại rõ ràng các tính năng T-SQL thành `CORE`, `OPTIONAL`, `HISTORICAL`, `UNSUPPORTED` dựa trên bằng chứng thực nghiệm từ mã nguồn Lab 01–04 cục bộ, đề thi thực hành chính thức và tài liệu chuẩn Microsoft Learn.
+**Nguyên tắc:** Phân loại rõ ràng các tính năng T-SQL thành `CORE`, `OPTIONAL`, `HISTORICAL`, `UNSUPPORTED` dựa trên bằng chứng thực nghiệm từ mã nguồn Lab 01–04 cục bộ, đề thi thực hành chính thức và tài liệu chuẩn Microsoft Learn. Mọi mã nguồn tham chiếu Microsoft `TECH-Axx` đều được đối chiếu chính xác theo chức năng.
 
 ---
 
 ## 1. Ma Trận Kỹ Năng Thực Hành T-SQL (Skill Coverage Matrix)
 
-| Kỹ năng / Lệnh T-SQL | Phân loại | Source IDs | Bằng chứng thực nghiệm | Độ tin cậy | Kế hoạch triển khai |
+| Kỹ năng / Lệnh T-SQL | Phân loại | Source IDs liên kết | Bằng chứng thực nghiệm | Mức độ tin cậy | Kế hoạch triển khai |
 | :--- | :---: | :--- | :--- | :---: | :--- |
-| **Cài đặt & Vận hành SSMS** | **CORE** | `UIT-O06`, `UIT-O10`, `GH-C02`, `LOC-SQL-LAB01` | Quy chế thi thực hành trên máy tập trung, kết nối LocalDB/SQL Express, gỡ lỗi kết nối | **Tuyệt đối (10/10)** | Hướng dẫn cấu hình môi trường, checklist 60 giây |
-| **CREATE DATABASE / TABLE** | **CORE** | `LOC-SQL-LAB01`, `TECH-A01`, `GH-C02`, `COM-C08` | DDL tạo Database `QuanLyBanHang`, `QuanLyGiaoVu`; khai báo bảng và các thuộc tính | **Tuyệt đối (10/10)** | Chuyên đề DDL chuẩn mực |
-| **Kiểu dữ liệu SQL Server** | **CORE** | `LOC-SQL-LAB01`, `TECH-A01`, `LOC-XLSX-QLBH` | `CHAR`, `VARCHAR`, `NVARCHAR`, `SMALLDATETIME`, `MONEY`, `NUMERIC(4,2)`, `TINYINT`, `INT`, `BIT` | **Tuyệt đối (10/10)** | Bảng tra cứu kiểu dữ liệu và bẫy lưu trữ |
-| **PRIMARY KEY / FOREIGN KEY** | **CORE** | `LOC-SQL-LAB01`, `TECH-A01`, `LOC-EXAM-2023-2024-MID-D1` | Khóa chính đơn, khóa chính phức hợp (`CTHD(SOHD, MASP)`), khóa ngoại qua `ALTER TABLE ADD CONSTRAINT` | **Tuyệt đối (10/10)** | Chuyên đề Ràng buộc quan hệ |
-| **CHECK / UNIQUE / DEFAULT** | **CORE** | `LOC-SQL-LAB01`, `TECH-A03`, `LOC-EXAM-2023-2024-MID-D1` | `CHECK (GIA >= 500)`, `CHECK (NGDK > NGSINH)`, `CHECK (DVT IN (...))`, `DEFAULT` | **Tuyệt đối (10/10)** | Chuyên đề RBTV khai báo |
-| **DML: INSERT / UPDATE / DELETE** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `LOC-XLSX-QLBH` | Nạp dữ liệu 5 bảng QLBH, 7 bảng QLGV; `UPDATE` có tính toán giá trị, xóa dữ liệu an toàn | **Tuyệt đối (10/10)** | Chuyên đề Thao tác dữ liệu |
-| **Truy vấn SELECT / WHERE / LIKE / IN / BETWEEN** | **CORE** | `LOC-SQL-LAB02`, `LOC-HW-23520266-5` | Lọc dữ liệu, chuỗi ký tự `LIKE 'B%01'`, so sánh đoạn `BETWEEN ... AND`, tập hợp `IN (...)` | **Tuyệt đối (10/10)** | Chuyên đề Truy vấn nền tảng |
-| **Xử lý giá trị NULL & 3-Valued Logic** | **CORE** | `LOC-SQL-LAB02`, `TECH-A01`, `TXT-A03` | `IS NULL`, `IS NOT NULL`, bẫy so sánh `= NULL`, ảnh hưởng của `NULL` trong gom nhóm | **Cao (9.8/10)** | Bẫy thực chiến & Ngữ nghĩa toán học |
-| **Sắp xếp ORDER BY** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB04`, `LOC-HW-23520266-5` | `ORDER BY NGHD ASC, TRIGIA DESC`, vị trí bắt buộc ở cuối câu truy vấn | **Tuyệt đối (10/10)** | Cú pháp chuẩn |
-| **Phép kết JOIN (INNER, LEFT/RIGHT OUTER, FULL, SELF)** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `LOC-HW-23520266-5` | Kết nối nhiều bảng bằng `INNER JOIN ... ON`, tự kết (Self-Join) tìm quản lý, Outer Join bảo toàn dòng | **Tuyệt đối (10/10)** | Chuyên đề Kỹ thuật JOIN toàn diện |
-| **Hàm kết hợp (COUNT, SUM, AVG, MIN, MAX)** | **CORE** | `LOC-SQL-LAB04`, `TECH-A02`, `LOC-HW-23520266-5` | `COUNT(*)`, `COUNT(DISTINCT MASP)`, `SUM(TRIGIA)`, `AVG(DIEM)`, tính doanh thu theo tháng | **Tuyệt đối (10/10)** | Chuyên đề Hàm tính toán |
-| **Gom nhóm GROUP BY & HAVING** | **CORE** | `LOC-SQL-LAB04`, `TECH-A02`, `LOC-HW-23520266-5` | Gom nhóm theo nước SX, theo năm/tháng, điều kiện sau gom nhóm `HAVING COUNT(DISTINCT MASP) >= 4` | **Tuyệt đối (10/10)** | Chuyên đề Phân tích dữ liệu |
-| **Truy vấn lồng & Correlated Subquery** | **CORE** | `LOC-SQL-LAB03`, `LOC-SQL-LAB04`, `TECH-A08` | `WHERE GIA = (SELECT MAX(GIA) FROM ...)`, `WHERE MAGV NOT IN (SELECT ...)` | **Tuyệt đối (10/10)** | Chuyên đề Subquery |
-| **Phép chia SQL (Universal Queries)** | **CORE** | `LOC-SQL-LAB03`, `LOC-SQL-LAB04`, `LOC-NOTE-NHAP` | 2 phương pháp: Double `NOT EXISTS` (tuyệt đối chuẩn tắc) và `GROUP BY ... HAVING COUNT` | **Tuyệt đối (10/10)** | Chuyên đề Bài toán "Tất cả" |
-| **Phép toán tập hợp (UNION, INTERSECT, EXCEPT)** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `TECH-A08` | Tương thích khả hợp, `UNION` gộp dòng, `INTERSECT` giao, `EXCEPT` trừ dữ liệu | **Tuyệt đối (10/10)** | Cầu nối ĐSQH $\rightarrow$ SQL |
-| **Hàm xếp hạng (RANK() OVER, TOP WITH TIES)** | **CORE** | `LOC-SQL-LAB04`, `LOC-HW-23520266-5` | `RANK() OVER (ORDER BY DOANHSO DESC)`, `RANK() OVER (PARTITION BY NUOCSX ORDER BY GIA DESC)` | **Cao (9.8/10)** | Chuyên đề Xếp hạng & Top giá trị |
-| **Cấu trúc rẽ nhánh CASE WHEN / IIF** | **CORE** | `LOC-SQL-LAB03`, `LOC-SQL-LAB01` | `CASE WHEN DIEMTB >= 9 THEN 'XS' ... END`, `IIF(DIEM BETWEEN 5 AND 10, 'Dat', 'Khong dat')` | **Cao (9.5/10)** | Chuyên đề Cập nhật phân loại |
-| **DML Trigger & Bảng ảo inserted/deleted** | **CORE** | `LOC-LEC-LONG-CH05`, `TECH-A04`, `TECH-A05`, `TECH-A06` | Trigger kiểm tra ràng buộc liên bảng, kiểm tra an toàn đa dòng qua lệnh `JOIN inserted`/`deleted` | **Tuyệt đối (10/10)** | Chuyên đề Trigger thực chiến |
-| **STORED PROCEDURE** | **OPTIONAL** | `TECH-A07`, `GH-C02`, `GH-C03`, `COM-C02` | Thủ tục lưu trữ có tham số đầu vào/đầu ra, gọi bằng `EXEC` | **Trung bình (7.5/10)** | Phụ lục mở rộng / Nâng cao |
-| **VIEW** | **OPTIONAL** | `TECH-A10`, `GH-C02`, `TXT-A02` | `CREATE VIEW` lưu trữ câu truy vấn khung nhìn | **Trung bình (7.0/10)** | Phụ lục mở rộng |
-| **USER-DEFINED FUNCTION (UDF)** | **HISTORICAL** | `GH-C02` | Hàm người dùng vô hướng / bảng (ít xuất hiện trong bài thi chính khóa) | **Thấp (5.0/10)** | Đọc thêm |
-| **TRANSACTIONS & LOCKING** | **UNSUPPORTED** | - | Không nằm trong chuẩn đầu ra và đề thi môn IT004 | **Không áp dụng** | Loại khỏi phạm vi cẩm nang |
+| **Cài đặt & Vận hành SSMS** | **CORE** | `UIT-O06`, `UIT-O10`, `GH-C02`, `LOC-SQL-LAB01` | Quy chế thi thực hành trên máy tập trung, kết nối LocalDB/SQL Express, gỡ lỗi kết nối | `HIGH` | Hướng dẫn cấu hình môi trường, checklist 60 giây |
+| **CREATE DATABASE / TABLE** | **CORE** | `LOC-SQL-LAB01`, `TECH-A01`, `GH-C02`, `PRAC-2023-2024-HK1-O117` | DDL tạo Database `QuanLyBanHang`, `QuanLyGiaoVu`; khai báo bảng và các thuộc tính | `HIGH` | Chuyên đề DDL chuẩn mực |
+| **Kiểu dữ liệu SQL Server** | **CORE** | `LOC-SQL-LAB01`, `TECH-A01`, `LOC-XLSX-QLBH` | `CHAR`, `VARCHAR`, `NVARCHAR`, `SMALLDATETIME`, `MONEY`, `NUMERIC(4,2)`, `TINYINT`, `INT`, `BIT` | `HIGH` | Bảng tra cứu kiểu dữ liệu và bẫy lưu trữ |
+| **PRIMARY KEY / FOREIGN KEY** | **CORE** | `LOC-SQL-LAB01`, `TECH-A01`, `EXAM-2023-2024-HK1-MID-D1` | Khóa chính đơn, khóa chính phức hợp (`CTHD(SOHD, MASP)`), khóa ngoại qua `ALTER TABLE ADD CONSTRAINT` | `HIGH` | Chuyên đề Ràng buộc quan hệ |
+| **CHECK / UNIQUE / DEFAULT** | **CORE** | `LOC-SQL-LAB01`, `TECH-A03`, `EXAM-2023-2024-HK1-MID-D1` | `CHECK (GIA >= 500)`, `CHECK (NGDK > NGSINH)`, `CHECK (DVT IN (...))`, `DEFAULT` | `HIGH` | Chuyên đề RBTV khai báo |
+| **DML: INSERT / UPDATE / DELETE** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `LOC-XLSX-QLBH` | Nạp dữ liệu 5 bảng QLBH, 7 bảng QLGV; `UPDATE` có tính toán giá trị, xóa dữ liệu an toàn | `HIGH` | Chuyên đề Thao tác dữ liệu |
+| **Truy vấn SELECT / WHERE / LIKE / IN / BETWEEN** | **CORE** | `LOC-SQL-LAB02`, `LOC-HW-23520266-5` | Lọc dữ liệu, chuỗi ký tự `LIKE 'B%01'`, so sánh đoạn `BETWEEN ... AND`, tập hợp `IN (...)` | `HIGH` | Chuyên đề Truy vấn nền tảng |
+| **Xử lý giá trị NULL & 3-Valued Logic** | **CORE** | `LOC-SQL-LAB02`, `TECH-A01`, `TXT-A03` | `IS NULL`, `IS NOT NULL`, bẫy so sánh `= NULL`, ảnh hưởng của `NULL` trong gom nhóm | `HIGH` | Bẫy thực chiến & Ngữ nghĩa toán học |
+| **Sắp xếp ORDER BY** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB04`, `LOC-HW-23520266-5` | `ORDER BY NGHD ASC, TRIGIA DESC`, vị trí bắt buộc ở cuối câu truy vấn | `HIGH` | Cú pháp chuẩn |
+| **Phép kết JOIN (INNER, OUTER, SELF)** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `LOC-HW-23520266-5` | Kết nối nhiều bảng bằng `INNER JOIN ... ON`, tự kết (Self-Join) tìm quản lý, Outer Join bảo toàn dòng | `HIGH` | Chuyên đề Kỹ thuật JOIN toàn diện |
+| **Hàm kết hợp (COUNT, SUM, AVG, MIN, MAX)** | **CORE** | `LOC-SQL-LAB04`, `TECH-A02`, `LOC-HW-23520266-5` | `COUNT(*)`, `COUNT(DISTINCT MASP)`, `SUM(TRIGIA)`, `AVG(DIEM)`, tính doanh thu theo tháng | `HIGH` | Chuyên đề Hàm tính toán |
+| **Gom nhóm GROUP BY & HAVING** | **CORE** | `LOC-SQL-LAB04`, `TECH-A02`, `LOC-HW-23520266-5` | Gom nhóm theo nước SX, theo năm/tháng, điều kiện sau gom nhóm `HAVING COUNT(DISTINCT MASP) >= 4` | `HIGH` | Chuyên đề Phân tích dữ liệu |
+| **Truy vấn lồng & Correlated Subquery** | **CORE** | `LOC-SQL-LAB03`, `LOC-SQL-LAB04`, `TECH-A07` | `WHERE GIA = (SELECT MAX(GIA) FROM ...)`, `WHERE MAGV NOT IN (SELECT ...)` | `HIGH` | Chuyên đề Subquery (Căn cứ `TECH-A07` EXISTS) |
+| **Phép chia SQL (Universal Queries)** | **CORE** | `LOC-SQL-LAB03`, `LOC-SQL-LAB04`, `TECH-A07`, `LOC-NOTE-NHAP` | 2 phương pháp: Double `NOT EXISTS` (chuẩn tắc hình thức) và `GROUP BY ... HAVING COUNT` | `HIGH` | Chuyên đề Bài toán "Tất cả" (Căn cứ `TECH-A07` EXISTS) |
+| **Phép toán tập hợp (UNION, INTERSECT, EXCEPT)** | **CORE** | `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `TECH-A08` | Tương thích khả hợp, `UNION` gộp dòng, `INTERSECT` giao, `EXCEPT` trừ dữ liệu | `HIGH` | Cầu nối ĐSQH $\rightarrow$ SQL (Căn cứ `TECH-A08` UNION) |
+| **Hàm xếp hạng (RANK() OVER, TOP WITH TIES)** | **CORE** | `LOC-SQL-LAB04`, `LOC-HW-23520266-5` | `RANK() OVER (ORDER BY DOANHSO DESC)`, `RANK() OVER (PARTITION BY NUOCSX ORDER BY GIA DESC)` | `MEDIUM-HIGH` | Chuyên đề Xếp hạng & Top giá trị |
+| **Cấu trúc rẽ nhánh CASE WHEN / IIF** | **CORE** | `LOC-SQL-LAB03`, `LOC-SQL-LAB01` | `CASE WHEN DIEMTB >= 9 THEN 'XS' ... END`, `IIF(DIEM BETWEEN 5 AND 10, 'Dat', 'Khong dat')` | `MEDIUM-HIGH` | Chuyên đề Cập nhật phân loại |
+| **DML Trigger (An toàn đa dòng)** | **CORE THEORY & EXAM / ADVANCED PRACTICAL** | `LOC-LEC-LONG-CH05`, `TECH-A04`, `TECH-A05`, `TECH-A06`, `PRAC-2023-2024-HK1-O117`, `PRAC-2024-2025-HK1-302` | Trọng tâm lý thuyết RBTV Chương 5 và đề thi thực hành/cuối kỳ; yêu cầu thiết kế dạng tập hợp an toàn đa dòng qua `JOIN inserted/deleted` | `HIGH` | Chuyên đề Trigger thực chiến chuyên sâu |
+| **STORED PROCEDURE** | **OPTIONAL / ADVANCED LAB** | `TECH-A09`, `GH-C02`, `GH-C03`, `PRAC-2024-2025-HK1-302` | Thủ tục lưu trữ có tham số đầu vào/đầu ra, gọi bằng `EXEC` | `MEDIUM` | Phụ lục mở rộng (Căn cứ `TECH-A09` PROCEDURE) |
+| **VIEW** | **OPTIONAL** | `TECH-A10`, `GH-C02`, `TXT-A02` | `CREATE VIEW` lưu trữ câu truy vấn khung nhìn | `MEDIUM` | Phụ lục mở rộng (Căn cứ `TECH-A10` VIEW) |
+| **USER-DEFINED FUNCTION (UDF)** | **HISTORICAL / UNSUPPORTED** | `TECH-A11`, `GH-C02` | Hàm người dùng vô hướng/bảng (ít xuất hiện trong bài thi chính khóa) | `LOW` | Đọc thêm (Căn cứ `TECH-A11` FUNCTION) |
+| **TRANSACTIONS & LOCKING** | **UNSUPPORTED** | - | Không nằm trong chuẩn đầu ra và đề thi môn IT004 | **N/A** | Loại khỏi phạm vi cẩm nang |
 
 ---
 
 ## 2. Bảng Tiến Trình Thực Hành Chi Tiết (Raw Lab Progression Matrix)
-
-Dựa trên mã nguồn gốc được bóc tách từ `CSDL_UIT_LOCAL_LABS_AND_SQL.txt` và `QLBANHANG.xlsx`:
 
 | Lab Session | Tệp nguồn / SHA-256 | Lược đồ CSDL | DDL & Ràng buộc | DML & Thao tác | Kỹ thuật truy vấn chính | Kỹ thuật nâng cao | Vấn đề & Lỗi điển hình trong code sinh viên |
 | :---: | :--- | :--- | :--- | :--- | :--- | :--- | :--- |

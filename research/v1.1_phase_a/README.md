@@ -11,20 +11,24 @@
 
 | Hạng mục nguồn | Số lượng | Diễn giải & Phân loại thẩm quyền |
 | :--- | :---: | :--- |
-| **Tệp đính kèm cục bộ (Local Attachments)** | **6** | `CSDL_UIT_LOCAL_LECTURES_PART1.pdf`, `PART2.pdf`, `EXAMS_REVIEW.pdf`, `LABS_AND_SQL.txt`, `QLBANHANG.xlsx`, `Homework5.docx` |
+| **Tệp đính kèm cục bộ (Local Attachments)** | **6** | `CSDL_UIT_LOCAL_LECTURES_PART1.pdf` (262 tr), `PART2.pdf` (94 tr), `EXAMS_REVIEW.pdf` (25 tr), `LABS_AND_SQL.txt` (114 KB), `QLBANHANG.xlsx` (25 KB), `Homework5.docx` (28 KB) |
 | **Tài liệu gốc cục bộ được bóc tách (Recovered Docs)** | **17** | 7 slide bài giảng, 5 đề thi/ôn tập, 5 tệp script/workbook dữ liệu mẫu |
 | **Slide bài giảng chính thức của Giảng viên UIT** | **7** | Slide GV Phan Nguyễn Thụy An (Ch1, Ch2) và ThS. Dương Phi Long (Ch1, Ch2, Ch3, Ch5, Ch6) (Tier A) |
-| **Hiện vật đề thi & bài tập cục bộ (Local Exam/Review)** | **7** | Đề thi Giữa kỳ HK1 2023–2024 (Đề 1 & 2), Đáp án K18, 2 bộ bài tập ôn tập, 2 bài tập Homework (Tier B/C) |
-| **Tệp mã nguồn thực hành Lab T-SQL** | **5** | 4 buổi Lab 01–04, 1 mega-script tổng hợp và 1 tệp ghi chú phòng thi sinh viên (Tier C) |
-| **Nguồn Cổng thông tin & Khoa HTTT chính thức (UIT)** | **7** | Chương trình đào tạo, danh mục môn học, thông báo thi thực hành, lịch thi giữa kỳ (Tier A) |
-| **Tài liệu kỹ thuật Microsoft Learn (Transact-SQL)** | **8** | DDL/DML, Trigger, `inserted`/`deleted`, Multi-row safety, `GROUP BY`, `EXISTS`, `UNION`, `VIEW` (Tier A) |
-| **Giáo trình học thuật quốc tế & chuẩn mực** | **3** | *Database System Concepts* (Silberschatz), *Fundamentals of DB Systems* (Elmasri), Giáo trình CSDL UIT (Tier A) |
+| **Hiện vật đề thi & bài tập cục bộ (Local Exam/Review)** | **8** | Đề thi Giữa kỳ HK1 2023–2024 (Đề 1 & 2), Đáp án K18, 2 bộ bài tập ôn tập, 3 bài tập Homework 1, 2, 5 (Tier B/C) |
+| **Tệp mã nguồn thực hành Lab T-SQL & Dataset** | **7** | 4 buổi Lab 01–04, 1 mega-script tổng hợp, 1 tệp ghi chú phòng thi sinh viên, 1 workbook Excel QLBH (Tier B/C) |
+| **Nguồn Cổng thông tin & Khoa HTTT chính thức (UIT)** | **7** | Chương trình đào tạo, danh mục môn học, thư viện, thông báo thi thực hành, lịch thi giữa kỳ (Tier A) |
+| **Tài liệu kỹ thuật Microsoft Learn (Transact-SQL)** | **11** | DDL, GROUP BY, CHECK, Trigger, inserted/deleted, Multi-row safety, EXISTS, UNION, PROCEDURE, VIEW, FUNCTION (Tier A) |
+| **Giáo trình học thuật quốc tế & chuẩn mực** | **3** | *Database System Concepts* (Silberschatz), *Fundamentals of DB Systems* (Elmasri), OpenStax RDBMS (Tier A) |
 | **Kho lưu trữ GitHub cộng đồng sinh viên** | **4** | `UIT-DS/IT004.L19-Database`, `SeaW1nd/IT004-CSDL`, `HiImKing1509`, `phanxuanquang` (Tier C) |
-| **Kho lưu trữ tài liệu cộng đồng (Studocu/Scribd)** | **4** | Studocu Course 131131, Course 545041, Scribd outlines (Tier C) |
-| **Số đợt tìm kiếm web hệ thống (Search Batches)** | **8** | Đạt ngưỡng bão hòa tìm kiếm (Search Saturation Reached) |
-| **Hiện vật Đề thi Chuẩn hóa (Canonical Artifacts)** | **14** | Hợp nhất và loại bỏ trùng lặp từ hơn 30 bản sao mirror trên mạng |
-| **Các năm học có hiện vật kiểm chứng trực tiếp** | **8 năm** | 2016–2017, 2017–2018, 2018–2019, 2019–2020, 2020–2021, 2021–2022, 2022–2023, 2023–2024 |
-| **Số lượng bản sao mirror trùng lặp đã gộp (Collapsed)** | **> 30** | Đã định danh và đối chiếu về các Canonical Artifact ID duy nhất |
+| **Kho lưu trữ tài liệu cộng đồng (Studocu/Scribd)** | **4** | Studocu Course 131131, Course 545041, Studocu O117 Preview, Studocu Final 2023-2024 Preview (Tier C) |
+| **Tổng số nguồn trong Sổ đăng ký nguồn (`source_inventory.md`)** | **51** | Đầy đủ mã `source_id`, URL / vị trí trang, Authority Tier và Ownership |
+| **Số đợt tìm kiếm web hệ thống (Search Batches)** | **12** | Đạt ngưỡng bão hòa tìm kiếm với 4 đợt liên tiếp BATCH-09 đến BATCH-12 không phát sinh chứng cứ mới |
+| **Hiện vật Đề thi Lý thuyết / Tự luận (`exam`)** | **11** | 11 đề thi chuẩn hóa độc lập (Giữa kỳ & Cuối kỳ từ 2017 đến 2024) |
+| **Hiện vật Đề thi Thực hành phòng máy (`practical-exam`)** | **2** | `PRAC-2023-2024-HK1-O117` và `PRAC-2024-2025-HK1-302` |
+| **Hiện vật Tài liệu Ôn tập & Bài tập lớn (`review`)** | **3** | `REV-2024-10-01-EXP`, `REV-2024-DSQH-MID`, `REV-2024-K18-SOL` |
+| **Hiện vật Hệ thống Thực hành Chuẩn (`lab-corpus`)** | **1** | `LAB-QLBH-QLGV-CORPUS` (Lab 01–04 QLBH & QLGV) |
+| **TỔNG SỐ HIỆN VẬT CHUẨN HÓA (TOTAL CANONICAL ARTIFACTS)** | **17** | Toàn bộ được lập chỉ mục tại `artifact_registry.md` |
+| **Các năm học có hiện vật kiểm chứng trực tiếp** | **8 năm** | 2017–2018, 2018–2019, 2019–2020, 2020–2021, 2021–2022, 2022–2023, 2023–2024, 2024–2025 |
 
 ---
 
@@ -53,12 +57,13 @@
 ## 3. Danh Mục Các Hồ Sơ Nghiên Cứu Trong Thư Mục Này
 
 1. [`local_corpus_audit.md`](local_corpus_audit.md): Báo cáo bóc tách chi tiết 6 tệp đính kèm cục bộ và 17 tài liệu nguồn gốc.
-2. [`web_search_log.md`](web_search_log.md): Nhật ký 8 đợt tìm kiếm web và chứng nhận đạt ngưỡng bão hòa tìm kiếm.
-3. [`artifact_registry.md`](artifact_registry.md): Bảng đăng ký 14 hiện vật đề thi chuẩn hóa từ năm 2016 đến 2024.
-4. [`source_inventory.md`](source_inventory.md): Bảng kê toàn bộ 35 nguồn tài liệu học thuật với phân loại Authority Tier và Ownership.
-5. [`exam_pattern_map.md`](exam_pattern_map.md): Ma trận mẫu câu hỏi thi thực chứng và Top 5 dạng bài có tần suất cao nhất.
+2. [`web_search_log.md`](web_search_log.md): Nhật ký 12 đợt tìm kiếm web và chứng nhận đạt ngưỡng bão hòa tìm kiếm.
+3. [`artifact_registry.md`](artifact_registry.md): Bảng đăng ký 17 hiện vật chuẩn hóa (11 exam, 2 practical-exam, 3 review, 1 lab-corpus).
+4. [`source_inventory.md`](source_inventory.md): Bảng kê toàn bộ 51 nguồn tài liệu học thuật với phân loại Authority Tier và Ownership.
+5. [`exam_pattern_map.md`](exam_pattern_map.md): Ma trận mẫu câu hỏi thi thực chứng với số lượng hiện vật khớp 100% và Top 5 dạng bài có tần suất cao nhất.
 6. [`practical_coverage_map.md`](practical_coverage_map.md): Bản đồ kỹ năng T-SQL và ma trận tiến trình Lab 01–04.
 7. [`essay_bank_plan.md`](essay_bank_plan.md): Kế hoạch ngân hàng câu hỏi tự luận theo chuyên đề.
 8. [`theory_editorial_audit.md`](theory_editorial_audit.md): Kiểm toán biên tập lý thuyết và định hướng thiết kế bìa sách.
 9. [`source_gaps_and_conflicts.md`](source_gaps_and_conflicts.md): Hồ sơ xử lý xung đột học thuật và chính sách bản quyền.
 10. [`knowledge_garden_architecture.md`](knowledge_garden_architecture.md): Thiết kế kiến trúc và cấu trúc cây thư mục Quartz.
+11. [`validation_report.md`](validation_report.md): Báo cáo kiểm thử xác thực 100% tính toàn vẹn của hồ sơ Giai đoạn A.

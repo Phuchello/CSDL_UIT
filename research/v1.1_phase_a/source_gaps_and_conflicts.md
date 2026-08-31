@@ -8,12 +8,12 @@
 ## 1. Giải Quyết Toàn Diện Nhãn "ACCESS BLOCKED" Trước Đây
 
 Trong đợt kiểm toán này, toàn bộ 6 tệp đính kèm cục bộ đã được tiếp cận và kiểm thử trực tiếp:
-- `CSDL_UIT_LOCAL_LECTURES_PART1.pdf` (94 trang) $\rightarrow$ Phục hồi `LOC-LEC-AN-CH01`, `LOC-LEC-AN-CH02`, `LOC-LEC-LONG-CH01`, `LOC-LEC-LONG-CH02`, `LOC-LEC-LONG-CH03`.
-- `CSDL_UIT_LOCAL_LECTURES_PART2.pdf` (94 trang) $\rightarrow$ Phục hồi `LOC-LEC-LONG-CH05`, `LOC-LEC-LONG-CH06`.
-- `CSDL_UIT_LOCAL_EXAMS_REVIEW.pdf` (25 trang) $\rightarrow$ Phục hồi `LOC-EXAM-2023-2024-MID-D1`, `LOC-EXAM-2023-2024-MID-D2`, `LOC-EXAM-K18-2024-1-SOL`, `LOC-REV-2024-10-01`, `LOC-REV-DSQH-2024`, `LOC-HW-23520266-1`, `LOC-HW-23520266-2`.
-- `CSDL_UIT_LOCAL_LABS_AND_SQL.txt` (114 KB) $\rightarrow$ Phục hồi `LOC-SQL-LAB01`, `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `LOC-SQL-LAB04`, `LOC-SQL-LAB04-ALL`, `LOC-NOTE-NHAP`.
-- `QLBANHANG.xlsx` (5 sheets) $\rightarrow$ Phục hồi `LOC-XLSX-QLBH`.
-- `23520266_Homework5_CSDL.docx` (533 đoạn) $\rightarrow$ Phục hồi `LOC-HW-23520266-5`.
+- `CSDL_UIT_LOCAL_LECTURES_PART1.pdf` (**262 trang PDF**) $\rightarrow$ Phục hồi `LOC-LEC-AN-CH01`, `LOC-LEC-AN-CH02`, `LOC-LEC-LONG-CH01`, `LOC-LEC-LONG-CH02`, `LOC-LEC-LONG-CH03`.
+- `CSDL_UIT_LOCAL_LECTURES_PART2.pdf` (**94 trang PDF**) $\rightarrow$ Phục hồi `LOC-LEC-LONG-CH05`, `LOC-LEC-LONG-CH06`.
+- `CSDL_UIT_LOCAL_EXAMS_REVIEW.pdf` (**25 trang PDF**) $\rightarrow$ Phục hồi `LOC-EXAM-2023-2024-MID-D1`, `LOC-EXAM-2023-2024-MID-D2`, `LOC-EXAM-K18-2024-1-SOL`, `LOC-REV-2024-10-01`, `LOC-REV-DSQH-2024`, `LOC-HW-23520266-1`, `LOC-HW-23520266-2`.
+- `CSDL_UIT_LOCAL_LABS_AND_SQL.txt` (**114 KB / 7 khối mã nguồn**) $\rightarrow$ Phục hồi `LOC-SQL-LAB01`, `LOC-SQL-LAB02`, `LOC-SQL-LAB03`, `LOC-SQL-LAB04`, `LOC-SQL-LAB04-ALL`, `LOC-NOTE-NHAP`.
+- `QLBANHANG.xlsx` (**25 KB / 5 trang tính**) $\rightarrow$ Phục hồi `LOC-XLSX-QLBH`.
+- `23520266_Homework5_CSDL.docx` (**28 KB / 533 đoạn văn**) $\rightarrow$ Phục hồi `LOC-HW-23520266-5`.
 
 **Toàn bộ các mục `ACCESS BLOCKED` trong sổ đăng ký nguồn đã được giải phóng thành công và chuyển hóa thành các nguồn tài liệu có bằng chứng kiểm chứng trực tiếp.**
 
@@ -23,7 +23,7 @@ Trong đợt kiểm toán này, toàn bộ 6 tệp đính kèm cục bộ đã �
 
 1. **Kho đề thi chính thức công khai trực tuyến**:
    - Trường ĐH Công nghệ Thông tin không công khai toàn văn đề thi các năm trên cổng thông tin chung. Đề thi chỉ được lưu hành nội bộ trong phòng thi hoặc lưu truyền qua các bản sao chép/chụp ảnh của sinh viên (community mirrors).
-   - Vì vậy, các hiện vật đề thi đều được xếp vào nhóm `strong-provenance-local` hoặc `community-mirror`, không dán nhãn `official-public` khi không có URL cổng trường chính thức.
+   - Vì vậy, các hiện vật đề thi đều được xếp vào nhóm `strong-provenance-local` hoặc `community-mirror` / `student-reconstruction`, không dán nhãn `official-public` khi không có URL cổng trường chính thức.
 
 2. **Tính thẩm quyền của bài làm sinh viên**:
    - Bài làm trong `23520266_Homework5_CSDL.docx`, `LOC-EXAM-K18-2024-1-SOL` và các kho GitHub của sinh viên chỉ là **bằng chứng về hoạt động học tập (evidence of course activity)**, không phải đáp án chuẩn tắc. Mọi lời giải phải được thẩm định lại qua Microsoft Learn và giáo trình quốc tế.

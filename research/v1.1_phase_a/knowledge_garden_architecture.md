@@ -60,11 +60,11 @@ Do not create parallel `By Year`, `By Semester`, and `By Type` copies. A canonic
 
 | node | purpose | source material | connects to |
 |---|---|---|---|
-| Start Here | Orient a learner and show prerequisites | `LOC-A01`, UIT-O01/O02 | Theory, Practice, Exam Patterns |
-| Theory | Canonical concepts and formal definitions | handbook chapters, Tier A references | Exercises, Essays, Sources |
-| Essay Questions | Deliberate-response practice with provenance labels | `exam_pattern_map.md`, verified/reconstructed/original prompts | Theory, Exams, Common Errors |
-| Exercises | Short feedback loops by skill and difficulty | current handbook exercises, future original problems | Theory, Essay Questions |
-| Practice | SQL Server execution workflow | `LOC-A07`, GH-C02/C03/C04/C07, Microsoft docs | Theory/SQL, Exams, Errors |
+| Start Here | Orient a learner and show prerequisites | `UIT-O01`, `UIT-O02`, `LOC-LEC-AN-CH01` | Theory, Practice, Exam Patterns |
+| Theory | Canonical concepts and formal definitions | `LOC-LEC-AN-*`, `LOC-LEC-LONG-*`, `TXT-A01`, `TXT-A02` | Exercises, Essays, Sources |
+| Essay Questions | Deliberate-response practice with provenance labels | `exam_pattern_map.md`, `essay_bank_plan.md` | Theory, Exams, Common Errors |
+| Exercises | Short feedback loops by skill and difficulty | `LOC-REV-2024-10-01`, `LOC-REV-DSQH-2024` | Theory, Essay Questions |
+| Practice | SQL Server execution workflow | `LAB-QLBH-QLGV-CORPUS`, `TECH-A01`–`TECH-A11` | Theory/SQL, Exams, Errors |
 | Exams | One note per identifiable artifact with metadata-generated views | UIT-O06/O07/O10 and COM-C08/C09 | Essay Questions, Practice |
 | Common Errors | Explain misconceptions and failure modes | handbook plus validated examples | Theory, Exercises, Practice |
 | Flashcards/Cheat Sheets | Retrieval aids and rapid review | handbook concepts | Theory and Exams |
