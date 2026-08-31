@@ -1,7 +1,14 @@
 # Báo Cáo Tổng Hợp Nghiên Cứu Giai Đoạn A (Phase A Final Summary) — CSDL_UIT v1.1
 
 **Bản cập nhật:** 2026-08-31
-**Mục đích:** Tổng kết toàn bộ kết quả thu thập, kiểm toán và đối chiếu nguồn tài liệu cục bộ, nguồn web công khai, và xác lập cơ sở chứng cứ vững chắc trước khi tiến hành Giai đoạn B (Triển khai).
+**Mục đích:** Tổng kết snapshot chứng cứ đã thu thập, kiểm toán và đối chiếu từ nguồn tài liệu cục bộ và web công khai, đủ để định hướng triển khai Giai đoạn B.
+
+> **RESEARCH SNAPSHOT STATUS: FROZEN FOR IMPLEMENTATION**
+> **SNAPSHOT DATE: 2026-08-31**
+
+Snapshot này xác nhận official UIT sources đã được rà soát; local corpus đã được ingest đầy đủ; Microsoft technical references đã được validate; nhiều GitHub/community repositories đã được review; các hiện vật đề thi/thực hành trực tiếp qua nhiều năm đã được lập chỉ mục; provenance và copyright boundaries đã được thiết lập. Cơ sở chứng cứ đủ để định hướng triển khai v1.1. `artifact_registry.md` vẫn có thể mở rộng khi xuất hiện evidence mới.
+
+> “The registry is a high-coverage research snapshot, not a claim of exhaustive coverage of all materials on the Internet.”
 
 > **QUAN TRỌNG**: KHÔNG BẮT ĐẦU TRIỂN KHAI GIAI ĐOẠN B (VIẾT SÁCH THỰC HÀNH, SỬA HANDBOOK LÝ THUYẾT, DỰNG QUARTZ) CHO ĐẾN KHI CÓ ĐÁNH GIÁ VÀ PHÊ DUYỆT CỦA HỘI ĐỒNG THẨM ĐỊNH (HUMAN MENTOR REVIEW).
 
@@ -20,14 +27,14 @@
 | **Tài liệu kỹ thuật Microsoft Learn (Transact-SQL)** | **11** | DDL, GROUP BY, CHECK, Trigger, inserted/deleted, Multi-row safety, EXISTS, UNION, PROCEDURE, VIEW, FUNCTION (Tier A) |
 | **Giáo trình học thuật quốc tế & chuẩn mực** | **3** | *Database System Concepts* (Silberschatz), *Fundamentals of DB Systems* (Elmasri), OpenStax RDBMS (Tier A) |
 | **Kho lưu trữ GitHub cộng đồng sinh viên** | **4** | `UIT-DS/IT004.L19-Database`, `SeaW1nd/IT004-CSDL`, `HiImKing1509`, `phanxuanquang` (Tier C) |
-| **Kho lưu trữ tài liệu cộng đồng (Studocu/Scribd)** | **4** | Studocu Course 131131, Course 545041, Studocu O117 Preview, Studocu Final 2023-2024 Preview (Tier C) |
-| **Tổng số nguồn trong Sổ đăng ký nguồn (`source_inventory.md`)** | **51** | Đầy đủ mã `source_id`, URL / vị trí trang, Authority Tier và Ownership |
-| **Số đợt tìm kiếm web hệ thống (Search Batches)** | **16** | Đạt ngưỡng bão hòa tìm kiếm với chuỗi 3 đợt liên tiếp BATCH-14, BATCH-15, BATCH-16 không phát sinh chứng cứ mới sau đợt BATCH-13 |
+| **Kho lưu trữ tài liệu cộng đồng (Studocu/Scribd)** | **13** | 4 nguồn cũ + 9 direct leads mới; chỉ 4 lead có đủ header để promote thành canonical artifact |
+| **Tổng số nguồn trong Sổ đăng ký nguồn (`source_inventory.md`)** | **60** | Đầy đủ mã `source_id`, URL / vị trí trang, Authority Tier và Ownership |
+| **Số đợt tìm kiếm web hệ thống (Search Batches)** | **17** | Nhật ký giữ nguyên 16 batch trước và bổ sung batch tiếp nhận/cross-check direct leads; không tuyên bố exhaustive Internet coverage |
 | **Hiện vật Đề thi Lý thuyết / Tự luận (`exam`)** | **17** | 17 đề thi chuẩn hóa độc lập (Giữa kỳ & Cuối kỳ từ 2017 đến 2025) |
-| **Hiện vật Đề thi Thực hành phòng máy (`practical-exam`)** | **6** | `PRAC-2024-2025-HK1-302`, `PRAC-2023-2024-HK1-O117`, `PRAC-2023-2024-HK1-D04`, `PRAC-2022-2023-HK1-D04`, `PRAC-2020-2021-HK1-M18`, `PRAC-2013-2014-HK1-E181` |
+| **Hiện vật Đề thi Thực hành phòng máy (`practical-exam`)** | **10** | 6 hiện vật cũ + `PRAC-2024-2025-HK1-01`, `PRAC-2024-2025-HK1-02`, `PRAC-2023-2024-HK1-FINAL-01`, `PRAC-2022-2023-HK1-D03` |
 | **Hiện vật Tài liệu Ôn tập & Bài tập lớn (`review`)** | **3** | `REV-2024-10-01-EXP`, `REV-2024-DSQH-MID`, `REV-2024-K18-SOL` |
 | **Hiện vật Hệ thống Thực hành Chuẩn (`lab-corpus`)** | **1** | `LAB-QLBH-QLGV-CORPUS` (Lab 01–04 QLBH & QLGV) |
-| **TỔNG SỐ HIỆN VẬT CHUẨN HÓA (TOTAL CANONICAL ARTIFACTS)** | **27** | Toàn bộ được lập chỉ mục tại `artifact_registry.md` |
+| **TỔNG SỐ HIỆN VẬT CHUẨN HÓA (TOTAL CANONICAL ARTIFACTS)** | **31** | 17 exam + 10 practical-exam + 3 review + 1 lab-corpus; toàn bộ được lập chỉ mục tại `artifact_registry.md` |
 | **Các năm học có hiện vật kiểm chứng trực tiếp** | **9 năm** | 2013–2014, 2017–2018, 2018–2019, 2019–2020, 2020–2021, 2021–2022, 2022–2023, 2023–2024, 2024–2025 |
 
 ---
@@ -57,13 +64,13 @@
 ## 3. Danh Mục Các Hồ Sơ Nghiên Cứu Trong Thư Mục Này
 
 1. [`local_corpus_audit.md`](local_corpus_audit.md): Báo cáo bóc tách chi tiết 6 tệp đính kèm cục bộ và 17 tài liệu nguồn gốc.
-2. [`web_search_log.md`](web_search_log.md): Nhật ký 16 đợt tìm kiếm web và chứng nhận đạt ngưỡng bão hòa tìm kiếm.
-3. [`artifact_registry.md`](artifact_registry.md): Bảng đăng ký 27 hiện vật chuẩn hóa (17 exam, 6 practical-exam, 3 review, 1 lab-corpus).
-4. [`source_inventory.md`](source_inventory.md): Bảng kê toàn bộ 51 nguồn tài liệu học thuật với phân loại Authority Tier và Ownership.
-5. [`exam_pattern_map.md`](exam_pattern_map.md): Ma trận mẫu câu hỏi thi thực chứng với số lượng hiện vật khớp 100% và Top 5 dạng bài có tần suất cao nhất.
+2. [`web_search_log.md`](web_search_log.md): Nhật ký 17 đợt tìm kiếm/cross-check và trạng thái snapshot đóng băng cho triển khai.
+3. [`artifact_registry.md`](artifact_registry.md): Bảng đăng ký 31 hiện vật chuẩn hóa (17 exam, 10 practical-exam, 3 review, 1 lab-corpus) cùng các lead chưa promote.
+4. [`source_inventory.md`](source_inventory.md): Bảng kê toàn bộ 60 nguồn tài liệu học thuật/cộng đồng với phân loại Authority Tier và Ownership.
+5. [`exam_pattern_map.md`](exam_pattern_map.md): Ma trận mẫu câu hỏi thi thực chứng với `artifact_count` đồng bộ cơ học.
 6. [`practical_coverage_map.md`](practical_coverage_map.md): Bản đồ kỹ năng T-SQL và ma trận tiến trình Lab 01–04.
 7. [`essay_bank_plan.md`](essay_bank_plan.md): Kế hoạch ngân hàng câu hỏi tự luận theo chuyên đề.
 8. [`theory_editorial_audit.md`](theory_editorial_audit.md): Kiểm toán biên tập lý thuyết và định hướng thiết kế bìa sách.
 9. [`source_gaps_and_conflicts.md`](source_gaps_and_conflicts.md): Hồ sơ xử lý xung đột học thuật và chính sách bản quyền.
 10. [`knowledge_garden_architecture.md`](knowledge_garden_architecture.md): Thiết kế kiến trúc và cấu trúc cây thư mục Quartz.
-11. [`validation_report.md`](validation_report.md): Báo cáo kiểm thử xác thực 100% tính toàn vẹn của hồ sơ Giai đoạn A.
+11. [`validation_report.md`](validation_report.md): Báo cáo kiểm thử snapshot, URL, source/artifact IDs, counts, copyright và repository safety.

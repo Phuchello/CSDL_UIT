@@ -1,11 +1,11 @@
-# Nhật Ký Tìm Kiếm Web & Thẩm Định Độ Bão Hòa (Web Search Log) — CSDL_UIT v1.1
+# Nhật Ký Tìm Kiếm Web & Research Snapshot — CSDL_UIT v1.1
 
 **Bản cập nhật:** 2026-08-31
-**Mục đích:** Ghi nhận minh bạch toàn bộ 16 đợt tìm kiếm web, tài liệu đối chiếu và chứng minh đạt ngưỡng bão hòa tìm kiếm (Search Saturation) sau khi đã tiếp nhận, kiểm toán và lập chỉ mục toàn bộ các hiện vật đề thi mới phát hiện.
+**Mục đích:** Ghi nhận minh bạch các đợt tìm kiếm web, tài liệu đối chiếu và quyết định đóng băng snapshot sau khi tiếp nhận, kiểm toán và lập chỉ mục các hiện vật đề thi/thực hành đã đủ bằng chứng.
 
 ---
 
-## 1. Nhật Ký 16 Đợt Tìm Kiếm Hệ Thống (Systematic Search Batches)
+## 1. Nhật Ký 17 Đợt Tìm Kiếm Hệ Thống (Systematic Search Batches)
 
 | Batch ID | Truy vấn chính (Search Queries) | Nền tảng / Miền mục tiêu | Nguồn tài liệu phát hiện | Canonical Artifacts mới | Năm học ghi nhận | Chủ đề & Kỹ thuật mới | Trạng thái phát sinh chứng cứ |
 | :---: | :--- | :--- | :--- | :---: | :---: | :--- | :---: |
@@ -22,23 +22,32 @@
 | **BATCH-11** | `site:studocu.vn "IT004" "Đề thi giữa kỳ" "Khoa Hệ thống Thông tin"` | `studocu.vn` | Đối chiếu URL trực tiếp Midterm 2022–2023 | `EXAM-2022-2023-HK1-MID-D2` | 2022–2023 | Mua xe trả góp | Phát sinh URL trực tiếp |
 | **BATCH-12** | `site:thuvien.uit.edu.vn "Cơ sở dữ liệu" "Đồng Thị Bích Thủy"` | `thuvien.uit.edu.vn` | Thư mục giáo trình chuẩn | - | - | Giáo trình chuẩn | Không phát sinh hiện vật mới |
 | **BATCH-13** | **Kiểm toán & Tiếp nhận Trực tiếp Các Liên Kết Đề Thi Của Mentor & Leads** | `studocu.vn`, `studocu.com` | **Tiếp nhận 10 hiện vật đề thi chuẩn hóa có URL tài liệu trực tiếp**: Cuối kỳ 2018–2019, Cuối kỳ 2019–2020, Cuối kỳ 2022–2023, Giữa kỳ 2024–2025, Cuối kỳ 2024–2025, Thực hành 2013, Cuối kỳ 2021–2022, Thực hành 2020–2021, Thực hành 2022–2023, Thực hành 2023–2024 Đề 04 | `EXAM-2018-2019-HK1-FINAL-01`<br>`EXAM-2019-2020-HK1-FINAL-01`<br>`EXAM-2022-2023-HK1-FINAL-01`<br>`EXAM-2024-2025-HK1-MID-01`<br>`EXAM-2024-2025-HK1-FINAL-01`<br>`EXAM-2021-2022-HK1-FINAL-01`<br>`PRAC-2013-2014-HK1-E181`<br>`PRAC-2020-2021-HK1-M18`<br>`PRAC-2022-2023-HK1-D04`<br>`PRAC-2023-2024-HK1-D04` | 2013–2014, 2018–2019, 2019–2020, 2020–2021, 2021–2022, 2022–2023, 2023–2024, 2024–2025 | Quyên góp bão lũ, Tiêm chủng vắc-xin, Rạp chiếu phim, Dự án xây dựng, Tác giả/NXB, Khách sạn, HTX chăn nuôi, Cây cảnh, Guitar | **CÓ CHỨNG CỨ MỚI (Tiếp nhận toàn diện)** |
-| **BATCH-14** | `site:scribd.com "IT004" "Cơ sở dữ liệu" "Đề thi" "UIT"` | `scribd.com` | Rà soát toàn bộ các bản lưu trữ trên Scribd: xác nhận toàn bộ là bản sao trùng lặp của các đề thi đã lập chỉ mục | - | Không phát sinh năm mới | Không phát sinh chủ đề mới ngoài phạm vi | **KHÔNG PHÁT SINH (Đạt chuẩn 1/3 hậu phát hiện)** |
-| **BATCH-15** | `site:github.com "IT004" "Đề thi" "2014" OR "2015" OR "2016"` | `github.com` | Rà soát các repo sinh viên giai đoạn 2014–2016: chỉ có đề cương lý thuyết và bài tập thực hành mẫu | - | Không phát sinh năm mới | Không phát sinh chủ đề mới | **KHÔNG PHÁT SINH (Đạt chuẩn 2/3 hậu phát hiện)** |
-| **BATCH-16** | `site:httt.uit.edu.vn "Cơ sở dữ liệu" "đề thi" OR "thực hành" OR "lịch thi"` | `httt.uit.edu.vn` | Rà soát cổng khoa HTTT: các thông báo học vụ định kỳ, quy chế phòng thi | - | Không phát sinh năm mới | Không phát sinh chủ đề mới | **KHÔNG PHÁT SINH (Đạt chuẩn 3/3 hậu phát hiện)** |
+| **BATCH-14** | `site:scribd.com "IT004" "Cơ sở dữ liệu" "Đề thi" "UIT"` | `scribd.com` | Rà soát các bản lưu trữ trên Scribd: xác nhận các bản sao trùng lặp của các đề thi đã lập chỉ mục | - | Không phát sinh năm mới | Không phát sinh chủ đề mới ngoài phạm vi | **KHÔNG PHÁT SINH TRONG BATCH** |
+| **BATCH-15** | `site:github.com "IT004" "Đề thi" "2014" OR "2015" OR "2016"` | `github.com` | Rà soát các repo sinh viên giai đoạn 2014–2016: chỉ có đề cương lý thuyết và bài tập thực hành mẫu | - | Không phát sinh năm mới | Không phát sinh chủ đề mới | **KHÔNG PHÁT SINH TRONG BATCH** |
+| **BATCH-16** | `site:httt.uit.edu.vn "Cơ sở dữ liệu" "đề thi" OR "thực hành" OR "lịch thi"` | `httt.uit.edu.vn` | Rà soát cổng khoa HTTT: các thông báo học vụ định kỳ, quy chế phòng thi | - | Không phát sinh năm mới | Không phát sinh chủ đề mới | **KHÔNG PHÁT SINH TRONG BATCH** |
+| **BATCH-17** | **Cross-check 9 direct leads do mentor cung cấp + sửa URL Midterm 2023–2024** | `studocu.vn` | 4 trang có header/nội dung hiển thị đủ để promote (`PRAC-2024-2025-HK1-01`, `PRAC-2024-2025-HK1-02`, `PRAC-2023-2024-HK1-FINAL-01`, `PRAC-2022-2023-HK1-D03`); 4 lead còn lại bị human-verification/403 nên giữ ở trạng thái unpromoted | 4 canonical mới | 2022–2025; 4 lead chưa xác nhận năm | Practical variants, midterm/final leads | **Đã ingest có điều kiện; không tuyên bố exhaustive** |
 
 ---
 
-## 2. Chứng Nhận Ngưỡng Bão Hòa Tìm Kiếm (Search Saturation Certification)
+## 2. Research snapshot status
 
-- **Trạng thái thiết lập lại (Reset Status)**: Do BATCH-13 tiếp nhận và lập chỉ mục 10 hiện vật đề thi chuẩn hóa mới, bộ đếm bão hòa được thiết lập lại từ điểm mốc này.
-- **Chuỗi đợt tìm kiếm đủ điều kiện liên tiếp (Consecutive Qualifying Batches)**: **BATCH-14, BATCH-15, BATCH-16** (3 đợt liên tiếp không phát sinh họ nguồn mới, không phát sinh hiện vật đề thi mới, không phát sinh năm học mới và không phát sinh chủ đề thực hành mới).
-- **Độ bao phủ toàn diện của 7 họ nguồn**:
-  - ✅ **Official UIT**: `uit.edu.vn`, `httt.uit.edu.vn`, `student.uit.edu.vn`, `thuvien.uit.edu.vn` (Batches 01, 02, 09, 12, 16).
-  - ✅ **Microsoft Learn**: Toàn bộ hệ thống kỹ thuật T-SQL (`TECH-A01` đến `TECH-A11`) (Batch 06).
-  - ✅ **Academic Textbooks**: Silberschatz, Elmasri, OpenStax, Đồng Thị Bích Thủy (Batches 02, 12).
-  - ✅ **GitHub Community Repos**: `UIT-DS`, `SeaW1nd`, `HiImKing1509`, `phanxuanquang` (Batches 03, 04, 10, 15).
-  - ✅ **Studocu Document-Level Mirrors**: 17 đề thi tự luận & 6 đề thi thực hành có URL trực tiếp (Batches 03, 05, 07, 08, 11, 13).
-  - ✅ **Scribd Archives**: Đối chiếu bản sao lưu trữ (Batches 05, 08, 14).
-  - ✅ **SVUIT / Video Tutorials**: Khảo sát bối cảnh và kinh nghiệm phòng thi (Batches 03, 05, 10).
+**RESEARCH SNAPSHOT STATUS:**
+**FROZEN FOR IMPLEMENTATION**
 
-**KẾT LUẬN CUỐI CÙNG: ĐẠT NGƯỠNG BÃO HÒA TÌM KIẾM CHÍNH THỨC (SEARCH SATURATION = PASS)**
+**SNAPSHOT DATE:**
+**2026-08-31**
+
+Snapshot này xác nhận:
+
+- official UIT sources đã được reviewed;
+- local corpus đã được fully ingested;
+- Microsoft technical references đã được validated;
+- multiple GitHub/community repositories đã được reviewed;
+- multi-year direct exam/practical artifacts đã được indexed;
+- source provenance và copyright boundaries đã được established;
+- evidence base đủ để guide v1.1 implementation;
+- `artifact_registry.md` vẫn extensible khi có evidence mới.
+
+> “The registry is a high-coverage research snapshot, not a claim of exhaustive coverage of all materials on the Internet.”
+
+BATCH-17 là bước cross-check cuối của snapshot này, không phải tuyên bố search saturation. Các lead bị chặn quyền đọc vẫn được ghi rõ và không làm tăng canonical counts.

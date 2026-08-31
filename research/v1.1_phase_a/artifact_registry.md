@@ -1,17 +1,17 @@
 # Danh Bộ Hiện Vật Đề Thi & Bài Tập Chuẩn Hóa (Canonical Artifact Registry) — CSDL_UIT v1.1
 
 **Bản cập nhật:** 2026-08-31
-**Nguyên tắc:** Phân tách rạch ròi giữa 4 loại hiện vật (`exam`, `practical-exam`, `review`, `lab-corpus`). Mọi hiện vật được xác minh qua web đều có liên kết tài liệu trực tiếp (Document-Level URL). Các bản sao mirror được liệt kê chi tiết và gộp về đúng hiện vật chuẩn hóa.
+**Nguyên tắc:** Phân tách rạch ròi giữa 4 loại hiện vật (`exam`, `practical-exam`, `review`, `lab-corpus`). Mọi hiện vật được xác minh qua web đều có liên kết tài liệu trực tiếp (Document-Level URL). Các bản sao mirror được liệt kê chi tiết và gộp về đúng hiện vật chuẩn hóa. Registry này là snapshot nghiên cứu có độ bao phủ cao, không phải tuyên bố đã bao quát mọi tài liệu trên Internet; các lead mới vẫn có thể được bổ sung.
 
 ---
 
 ## 1. Thống Kê Hiện Vật Chuẩn Hóa Theo Loại Hình (Artifact Summary Counts)
 
 - **Đề thi Lý thuyết / Tự luận (Canonical Exam Artifacts)**: **17**
-- **Đề thi Thực hành phòng máy (Canonical Practical Exam Artifacts)**: **6**
+- **Đề thi Thực hành phòng máy (Canonical Practical Exam Artifacts)**: **10**
 - **Tài liệu Ôn tập & Bài tập lớn (Review Artifacts)**: **3**
 - **Hệ thống Mã nguồn Thực hành Chuẩn (Lab Corpus)**: **1**
-- **TỔNG SỐ HIỆN VẬT CHUẨN HÓA (TOTAL CANONICAL ARTIFACTS)**: **27**
+- **TỔNG SỐ HIỆN VẬT CHUẨN HÓA (TOTAL CANONICAL ARTIFACTS)**: **31**
 
 ---
 
@@ -47,7 +47,8 @@
 - **Môn học / Thời gian**: IT004 – Cơ sở dữ liệu (CQ + CLC) / 75 phút
 - **Provenance Class**: `strong-provenance-local`
 - **Bản sao cục bộ (Local Copy)**: `LOC-EXAM-2023-2024-MID-D1` (`CSDL_UIT_LOCAL_EXAMS_REVIEW.pdf`, Tr. 1–2 / 25)
-- **Direct Document URL**: [Studocu Đề thi giữa kỳ CSDL Khoa HTTT](https://www.studocu.vn/vn/document/truong-dai-hoc-cong-nghe-thong-tin-dai-hoc-quoc-gia-thanh-pho-ho-chi-minh/co-so-du-lieu/de-thi-giua-ky-mon-co-so-du-lieu-khoa-he-thong-thong-tin/81121063)
+- **Direct Document URL**: [Studocu Đề thi giữa kỳ CSDL HK1 2023–2024 — Đề 1](https://www.studocu.vn/vn/document/truong-dai-hoc-cong-nghe-thong-tin-dai-hoc-quoc-gia-thanh-pho-ho-chi-minh/co-so-du-lieu/de-thi-giua-ky-csdl-hk1-2023-2024/106151823)
+- **Bằng chứng hiển thị**: UIT; Khoa Hệ thống Thông tin; IT004 / Cơ sở dữ liệu; HK1 2023–2024; CQ + CLC; 75 phút; Đề 1.
 - **Lược đồ CSDL**: PCCC Chung cư (ERD) + Cửa hàng hoa (`NHAVUON`, `SANPHAM`, `DONHANG`, `CTDH`, `GIAOHANG`)
 - **Nội dung kiểm tra**: Câu 1 (2.5đ): ERD và ánh xạ; Câu 2 (7.5đ): DDL/UPDATE + 6 câu ĐSQH (Outer Join, Phép chia, Gom nhóm).
 - **Mức độ tin cậy**: `HIGH`.
@@ -203,7 +204,7 @@
 
 ---
 
-### B. Nhóm Đề Thi Thực Hành Phòng Máy (`practical-exam`) — 6 Hiện Vật
+### B. Nhóm Đề Thi Thực Hành Phòng Máy (`practical-exam`) — 10 Hiện Vật
 
 #### 18. `PRAC-2024-2025-HK1-302`
 - **Năm học / Học kỳ**: 2024–2025 / HK1
@@ -263,11 +264,51 @@
 - **Nội dung kiểm tra**: DDL tạo bảng, PK/FK, INSERT dữ liệu mẫu, Trigger kiểm tra số dư và truy vấn cước.
 - **Mức độ tin cậy**: `HIGH`.
 
+#### 24. `PRAC-2024-2025-HK1-01`
+- **Năm học / Học kỳ**: 2024–2025 / HK1
+- **Loại hiện vật**: `practical-exam` (Đề thi Thực hành - Mã đề 01)
+- **Môn học / Thời gian**: IT004 – Cơ sở dữ liệu / 75 phút
+- **Provenance Class**: `community-mirror`
+- **Source record**: `COM-C11`
+- **Direct Document URL**: [Studocu THCK CSDL 2024–2025 — Đề 01](https://www.studocu.vn/vn/document/truong-dai-hoc-cong-nghe-thong-tin-dai-hoc-quoc-gia-thanh-pho-ho-chi-minh/co-so-du-lieu/de-thck-csdl-2024-2025-de01/113887409)
+- **Bằng chứng hiển thị**: UIT; Khoa Hệ thống Thông tin; Đề thi thực hành HK I; Cơ sở dữ liệu; 75 phút; không tài liệu; Mã đề 01. Lược đồ bắt đầu bằng `CSCHANNUOI`, `GIONGVN`, `DIEUKIENCN`.
+- **Mức độ tin cậy**: `HIGH` cho identity và nội dung hiển thị.
+
+#### 25. `PRAC-2024-2025-HK1-02`
+- **Năm học / Học kỳ**: 2024–2025 / HK1
+- **Loại hiện vật**: `practical-exam` (Đề thi Thực hành - Mã đề 02)
+- **Môn học / Thời gian**: IT004 – Cơ sở dữ liệu / 75 phút
+- **Provenance Class**: `community-mirror`
+- **Source record**: `COM-C12`
+- **Direct Document URL**: [Studocu THCK CSDL 2024–2025 — Đề 02](https://www.studocu.vn/vn/document/truong-dai-hoc-cong-nghe-thong-tin-dai-hoc-quoc-gia-thanh-pho-ho-chi-minh/co-so-du-lieu/de-thck-csdl-2024-2025-de02/114158491)
+- **Bằng chứng hiển thị**: UIT; Khoa Hệ thống Thông tin; Đề thi thực hành HK I; Cơ sở dữ liệu; 75 phút; không tài liệu; Mã đề 02. Nội dung hiển thị cùng họ lược đồ `CSCHANNUOI` với Đề 01 nhưng là biến thể mã đề riêng.
+- **Mức độ tin cậy**: `MEDIUM-HIGH` (header và mã đề rõ; trường năm học uploader mâu thuẫn nên không dùng làm chứng cứ duy nhất).
+
+#### 26. `PRAC-2023-2024-HK1-FINAL-01`
+- **Năm học / Học kỳ**: 2023–2024 / HK1
+- **Loại hiện vật**: `practical-exam` (Đề thi Thực hành cuối kỳ - Đề 1)
+- **Môn học / Thời gian**: IT004 – Cơ sở dữ liệu / 60 phút
+- **Provenance Class**: `community-mirror`
+- **Source record**: `COM-C17`
+- **Direct Document URL**: [Studocu Đề thi Thực hành CSDL UIT Cuối kỳ 2023–2024](https://www.studocu.vn/vn/document/truong-dai-hoc-cong-nghe-thong-tin-dai-hoc-quoc-gia-thanh-pho-ho-chi-minh/co-so-du-lieu/de-thi-thuc-hanh-csdl-uit-2023-2024/81195672)
+- **Bằng chứng hiển thị**: Course IT004; UIT; tiêu đề thực hành cuối kỳ; Đề 1; 60 phút; không tài liệu; bài truy vấn và trigger trên CSDL quản lý địa ốc.
+- **Mức độ tin cậy**: `HIGH` cho identity và nội dung hiển thị.
+
+#### 27. `PRAC-2022-2023-HK1-D03`
+- **Năm học / Học kỳ**: 2022–2023 / HK1
+- **Loại hiện vật**: `practical-exam` (Đề thi Thực hành - Mã đề 03)
+- **Môn học / Thời gian**: IT004 – Cơ sở dữ liệu / 60 phút
+- **Provenance Class**: `community-mirror`
+- **Source record**: `COM-C18`
+- **Direct Document URL**: [Studocu Đề thi thực hành CSDL 2023 — Mã đề 03](https://www.studocu.vn/vn/document/truong-dai-hoc-cong-nghe-thong-tin-dai-hoc-quoc-gia-thanh-pho-ho-chi-minh/co-so-du-lieu/03-dethicsdl-2023-de-thi-database/80946010)
+- **Bằng chứng hiển thị**: UIT; Khoa Hệ thống Thông tin; thực hành HK I; Cơ sở dữ liệu; 60 phút; Mã đề 03. Nội dung nêu bài toán PUBG và ngày dữ liệu tháng 10/2022, phù hợp với HK1 2022–2023.
+- **Mức độ tin cậy**: `HIGH` cho identity và nội dung hiển thị.
+
 ---
 
 ### C. Nhóm Tài Liệu Ôn Tập & Bài Tập Lớn (`review`) — 3 Hiện Vật
 
-#### 24. `REV-2024-10-01-EXP`
+#### 28. `REV-2024-10-01-EXP`
 - **Năm học / Học kỳ**: 2024–2025 / HK1
 - **Loại hiện vật**: `review` (Bài tập ôn luyện chuyên sâu ngày 01/10/2024)
 - **Provenance Class**: `strong-provenance-local`
@@ -275,7 +316,7 @@
 - **Lược đồ CSDL**: Quản lý bán xe máy trả góp (12 câu ĐSQH + 4 câu SQL DDL/UPDATE) + Nhà hàng White Palace (`NHANVIEN`, `SANH`, `LOAITIEC`, `TIEC`, `PHUCVU` - 12 câu ĐSQH).
 - **Mức độ tin cậy**: `HIGH`.
 
-#### 25. `REV-2024-DSQH-MID`
+#### 29. `REV-2024-DSQH-MID`
 - **Năm học / Học kỳ**: 2024–2025 / HK1
 - **Loại hiện vật**: `review` (Đề cương ôn thi giữa kỳ ĐSQH 2024 SV)
 - **Provenance Class**: `strong-provenance-local`
@@ -283,7 +324,7 @@
 - **Lược đồ CSDL**: Phần 1: Quản lý Xăng dầu (ERD); Phần 2: Quản lý Vé xe khách (`XE`, `TUYEN`, `KHACH`, `VEXE` - 3 câu SQL DDL/DML + 11 câu ĐSQH).
 - **Mức độ tin cậy**: `HIGH`.
 
-#### 26. `REV-2024-K18-SOL`
+#### 30. `REV-2024-K18-SOL`
 - **Năm học / Học kỳ**: 2024 / K18 (Đợt 1)
 - **Loại hiện vật**: `review` (Bản giải đáp án đề thi CSDL Khóa 18)
 - **Provenance Class**: `review-material`
@@ -296,7 +337,7 @@
 
 ### D. Nhóm Hệ Thống Mã Nguồn Thực Hành Chuẩn (`lab-corpus`) — 1 Hiện Vật
 
-#### 27. `LAB-QLBH-QLGV-CORPUS`
+#### 31. `LAB-QLBH-QLGV-CORPUS`
 - **Loại hiện vật**: `lab-corpus` (Hệ thống thực hành SQL Server 4 buổi chuẩn hóa)
 - **Provenance Class**: `strong-provenance-local`
 - **Bản sao cục bộ (Local Copies)**:
@@ -313,3 +354,18 @@
   - Mirror 3: [GitHub UIT-DS/IT004.L19-Database](https://github.com/UIT-DS/IT004.L19-Database)
 - **Nội dung**: Toàn bộ hệ thống 44 câu truy vấn QLBH và 35 câu truy vấn QLGV cùng 14 ràng buộc CHECK/Trigger.
 - **Mức độ tin cậy**: `HIGH`.
+
+---
+
+## 3. Direct leads chưa nâng thành canonical artifact
+
+Các URL dưới đây đã được tiếp nhận và ghi vào source inventory nhưng chưa làm tăng số hiện vật chuẩn hóa vì không thể kiểm tra header/nội dung hiển thị một cách độc lập trong snapshot này (Studocu trả thử thách human-verification/403). Chúng là lead mở rộng, không phải bằng chứng về năm học hay câu hỏi.
+
+| source_id | direct URL | lead | xử lý |
+|---|---|---|---|
+| `COM-C13` | [Studocu midterm CSDL HK1 2025–2026](https://www.studocu.vn/vn/document/truong-dai-hoc-cong-nghe-thong-tin-dai-hoc-quoc-gia-thanh-pho-ho-chi-minh/co-so-du-lieu/de-thi-giua-ky-csdl-2025-2026-hk1-co-so-du-lieu/149604841) | C | Chưa promote; cần header trực tiếp để xác nhận IT004 và năm học |
+| `COM-C14` | [Studocu final CSDL 2016–2017](https://www.studocu.vn/vn/document/truong-dai-hoc-cong-nghe-thong-tin-dai-hoc-quoc-gia-thanh-pho-ho-chi-minh/co-so-du-lieu/decuoiky-2016-2017-1234/97839617) | D | Chưa promote; chưa đủ bằng chứng hiển thị |
+| `COM-C15` | [Studocu CSDL HK1 2021–2022 — lead 106151828](https://www.studocu.vn/vn/document/truong-dai-hoc-cong-nghe-thong-tin-dai-hoc-quoc-gia-thanh-pho-ho-chi-minh/co-so-du-lieu/hk1-2021-2022-csdl-it004/106151828) | E1 | Chưa promote; chưa phân biệt được với mirror/variant |
+| `COM-C16` | [Studocu CSDL HK1 2021–2022 — lead 74581029](https://www.studocu.vn/vn/document/truong-dai-hoc-cong-nghe-thong-tin-dai-hoc-quoc-gia-thanh-pho-ho-chi-minh/co-so-du-lieu/hk1-2021-2022-csdl-it004/74581029) | E2 | Chưa promote; giữ như lead có khả năng là mirror của E1 |
+
+Khi có quyền truy cập lại, cần đối chiếu tiêu đề, khoa, môn, học kỳ, thời lượng, mã đề và nội dung trước khi tạo artifact ID mới hoặc gộp mirror.
