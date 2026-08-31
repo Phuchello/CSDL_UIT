@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IT004 — Cơ sở dữ liệu — Theory Design Proof</title>
+  <link rel="stylesheet" href="proof.css">
+</head>
+<body>
+
+  <!-- COVER A: Editorial Schema -->
+  <section class="page cover cover-a">
+    <div class="cover-lockup">
+      <div class="cover-code">IT004</div>
+      <div class="cover-title">CƠ SỞ<br>DỮ LIỆU</div>
+      <div class="cover-author">BIÊN SOẠN: VÕ TRỌNG PHÚC</div>
+    </div>
+    <div class="cover-diagram">
+      <svg viewBox="0 0 760 300" role="img" aria-label="Semantic relational schema chain">
+        <defs>
+          <marker id="arrowA" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1e7881"/></marker>
+        </defs>
+        <path d="M150 134 H255 M330 134 H425 M500 134 H610" fill="none" stroke="#1e7881" stroke-width="3" marker-end="url(#arrowA)"/>
+        <g font-family="Arial,Segoe UI,sans-serif">
+          <g transform="translate(35 90)"><rect width="120" height="90" fill="#203047"/><text x="60" y="31" fill="#fff" text-anchor="middle" font-size="16" font-weight="700">CUSTOMER</text><text x="60" y="57" fill="#b8d9d8" text-anchor="middle" font-size="12">PK customer_id</text><text x="60" y="76" fill="#b8d9d8" text-anchor="middle" font-size="11">name · email</text></g>
+          <g transform="translate(255 90)"><rect width="120" height="90" fill="#e7f1f1" stroke="#1e7881" stroke-width="3"/><text x="60" y="31" fill="#203047" text-anchor="middle" font-size="16" font-weight="700">ORDER</text><text x="60" y="57" fill="#1e7881" text-anchor="middle" font-size="12">PK order_id</text><text x="60" y="76" fill="#1e7881" text-anchor="middle" font-size="11">FK customer_id</text></g>
+          <g transform="translate(425 90)"><rect width="120" height="90" fill="#f6efe5" stroke="#b57b36" stroke-width="3"/><text x="60" y="26" fill="#203047" text-anchor="middle" font-size="14" font-weight="700">ORDER_DETAIL</text><text x="60" y="53" fill="#8c5b20" text-anchor="middle" font-size="12">PK order_id</text><text x="60" y="71" fill="#8c5b20" text-anchor="middle" font-size="11">FK product_id</text></g>
+          <g transform="translate(610 90)"><rect width="120" height="90" fill="#203047"/><text x="60" y="31" fill="#fff" text-anchor="middle" font-size="16" font-weight="700">PRODUCT</text><text x="60" y="57" fill="#f1d6aa" text-anchor="middle" font-size="12">PK product_id</text><text x="60" y="76" fill="#f1d6aa" text-anchor="middle" font-size="11">price · stock</text></g>
+          <text x="380" y="226" fill="#5f6d78" text-anchor="middle" font-size="12" letter-spacing="2">RELATIONAL SCHEMA / KEY PATH</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- COVER B: Formal Relational -->
+  <section class="page cover cover-b">
+    <div class="cover-lockup">
+      <div class="cover-code">IT004</div>
+      <div class="cover-title">CƠ SỞ<br>DỮ LIỆU</div>
+      <div class="cover-author">BIÊN SOẠN: VÕ TRỌNG PHÚC</div>
+    </div>
+    <div class="cover-diagram">
+      <svg viewBox="0 0 760 330" role="img" aria-label="Formal relational algebra composition">
+        <g font-family="Cambria Math,Segoe UI Symbol,Arial,sans-serif" fill="#203047">
+          <text x="32" y="58" font-size="35" font-weight="700">R</text><text x="63" y="58" font-size="18">(A, B, C, D)</text>
+          <text x="225" y="58" font-size="33" fill="#1e7881">→</text><text x="278" y="58" font-size="28">σ</text><text x="310" y="58" font-size="15">B = 1</text>
+          <text x="445" y="58" font-size="33" fill="#b57b36">→</text><text x="500" y="58" font-size="28">π</text><text x="535" y="58" font-size="15">A,C</text>
+          <text x="650" y="58" font-size="33" fill="#1e7881">→</text>
+          <rect x="32" y="95" width="180" height="112" fill="#fff" stroke="#203047" stroke-width="2"/><text x="48" y="123" font-size="16" font-weight="700">R</text><text x="48" y="151" font-size="13">A̲ · B · C · D</text><text x="48" y="179" font-size="12" fill="#5f6d78">relation instance</text>
+          <rect x="288" y="95" width="180" height="112" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="304" y="123" font-size="16" font-weight="700">σ<tspan baseline-shift="sub" font-size="11">B=1</tspan>(R)</text><text x="304" y="151" font-size="13">A̲ · B · C · D</text><text x="304" y="179" font-size="12" fill="#1e7881">select tuples</text>
+          <rect x="544" y="95" width="180" height="112" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="560" y="123" font-size="16" font-weight="700">π<tspan baseline-shift="sub" font-size="11">A,C</tspan>(…)</text><text x="560" y="151" font-size="13">A̲ · C</text><text x="560" y="179" font-size="12" fill="#8c5b20">project attributes</text>
+          <path d="M212 151 H286 M468 151 H542" stroke="#1e7881" stroke-width="2"/>
+          <text x="32" y="266" font-size="30" fill="#203047">R ⋈ S</text><text x="185" y="266" font-size="30" fill="#1e7881">→</text><text x="240" y="266" font-size="30" fill="#203047">R ÷ S</text><text x="405" y="266" font-size="30" fill="#b57b36">→</text><text x="460" y="266" font-size="21" fill="#5f6d78">X⁺ = X ∪ {A,B}</text>
+          <text x="380" y="310" font-size="12" text-anchor="middle" letter-spacing="2" fill="#5f6d78">OPERATIONS / CLOSURE / UNIVERSAL CONDITION</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- COVER C: Minimal Structural -->
+  <section class="page cover cover-c">
+    <div class="cover-lockup">
+      <div class="cover-code">IT004</div>
+      <div class="cover-title">CƠ SỞ<br>DỮ LIỆU</div>
+      <div class="cover-author">BIÊN SOẠN: VÕ TRỌNG PHÚC</div>
+    </div>
+    <div class="cover-diagram">
+      <svg viewBox="0 0 170 700" role="img" aria-label="Minimal structural relation spine">
+        <g font-family="Arial,Segoe UI,sans-serif">
+          <path d="M84 25 V665" stroke="#1e7881" stroke-width="2"/>
+          <circle cx="84" cy="105" r="12" fill="#203047"/><circle cx="84" cy="290" r="12" fill="#1e7881"/><circle cx="84" cy="480" r="12" fill="#b57b36"/>
+          <g transform="translate(2 55)"><rect width="164" height="96" fill="#fff" stroke="#203047" stroke-width="2"/><text x="82" y="32" text-anchor="middle" fill="#203047" font-size="15" font-weight="700">RELATION</text><text x="82" y="58" text-anchor="middle" fill="#5f6d78" font-size="12">tuples · attributes</text><text x="82" y="78" text-anchor="middle" fill="#1e7881" font-size="11">R(A, B, C)</text></g>
+          <g transform="translate(2 240)"><rect width="164" height="96" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="82" y="32" text-anchor="middle" fill="#203047" font-size="15" font-weight="700">KEY</text><text x="82" y="58" text-anchor="middle" fill="#1e7881" font-size="12">PK → FK</text><text x="82" y="78" text-anchor="middle" fill="#5f6d78" font-size="11">identity · reference</text></g>
+          <g transform="translate(2 430)"><rect width="164" height="96" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="82" y="32" text-anchor="middle" fill="#203047" font-size="15" font-weight="700">FORM</text><text x="82" y="58" text-anchor="middle" fill="#8c5b20" font-size="12">X → Y</text><text x="82" y="78" text-anchor="middle" fill="#5f6d78" font-size="11">structure · meaning</text></g>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Publication note -->
+  <section class="page">
+    <div class="page-header"><span>IT004 — CƠ SỞ DỮ LIỆU</span><span>Design proof</span></div>
+    <div class="kicker">Thông tin xuất bản</div>
+    <h1 class="page-title">Một trang về bản thảo</h1>
+    <p class="lead">Bản proof này thử nghiệm một ngôn ngữ chế bản cho cẩm nang lý thuyết IT004: trang giấy sáng, lưới A4 ổn định, chữ dễ đọc và hình minh họa giải thích được cơ chế.</p>
+    <div class="rule"></div>
+    <div class="grid-2">
+      <div class="card"><div class="label">Phạm vi</div><h3>Nội dung được giữ nguyên tinh thần</h3><p>Khái niệm, ký hiệu và ví dụ đại diện được chọn từ handbook hiện tại và thuật ngữ UIT đã kiểm tra trong Phase A. Đây là proof nội bộ, chưa phải bản phát hành v1.1.</p></div>
+      <div class="card"><div class="label">Quyền</div><h3>Ghi nguồn ở nơi phù hợp</h3><p>Đề thi, slide, giáo trình và tài liệu Microsoft vẫn thuộc chủ sở hữu tương ứng. Bản proof chỉ dùng diễn giải độc lập, hình tự vẽ và đường dẫn nguồn; không phân phối bản scan.</p></div>
+    </div>
+    <h2>Ghi nhớ</h2>
+    <div class="note"><strong>Đây không phải tài liệu chính thức của UIT.</strong><br>Bản thảo được biên soạn độc lập cho mục đích học tập; quyết định chuyển đổi toàn bộ handbook chỉ thực hiện sau khi human review của proof này.</div>
+    <p class="small muted">Baseline nội dung: Phase A frozen commit 6aef91eb2cb4a0b41827573bc03ec55640d19786.</p>
+    <div class="page-footer"><span>Thông tin xuất bản</span><span>04</span></div>
+  </section>
+
+  <!-- TOC -->
+  <section class="page">
+    <div class="page-header"><span>IT004 — CƠ SỞ DỮ LIỆU</span><span>Nội dung thử nghiệm</span></div>
+    <div class="kicker">Mục lục mẫu</div>
+    <h1 class="page-title">Bản đồ đọc</h1>
+    <p class="lead">Mỗi chương bắt đầu bằng một câu hỏi, đi qua hình hoặc bảng giải thích, rồi mới đặt công thức và bài tập vào đúng ngữ cảnh.</p>
+    <div class="toc-list">
+      <div class="toc-row"><strong>Chương 1 — Vì sao cần DBMS?</strong><span>06–07</span></div>
+      <div class="toc-sub">File system và DBMS · ba mức kiến trúc · độc lập dữ liệu</div>
+      <div class="toc-row"><strong>Chương 2 — Từ thế giới thực đến quan hệ</strong><span>08–09</span></div>
+      <div class="toc-sub">Relation, tuple, attribute · khóa · ER → relational schema</div>
+      <div class="toc-row"><strong>Chương 3 — Đại số quan hệ</strong><span>10–11</span></div>
+      <div class="toc-sub">Selection · projection · join · division và điều kiện “tất cả”</div>
+      <div class="toc-row"><strong>Chương 5 — Giữ dữ liệu đúng</strong><span>12</span></div>
+      <div class="toc-sub">Ràng buộc toàn vẹn · bảng tầm ảnh hưởng</div>
+      <div class="toc-row"><strong>Chương 6 — PTH và chuẩn hóa</strong><span>13–14</span></div>
+      <div class="toc-sub">Bao đóng · khóa ứng viên · 3NF/BCNF · phân rã</div>
+      <div class="toc-row"><strong>Bài tập và chẩn đoán</strong><span>15–17</span></div>
+      <div class="toc-sub">Bài tập · lời giải mẫu · sai lầm thường gặp</div>
+    </div>
+    <div class="note"><strong>Cách đọc:</strong> Hình cho trực giác, bảng cho đối chiếu, công thức cho độ chính xác, bài tập cho kiểm chứng.</div>
+    <div class="page-footer"><span>Mục lục mẫu</span><span>05</span></div>
+  </section>
+
+  <!-- Chapter 1 page 1 -->
+  <section class="page">
+    <div class="page-header"><span>Chương 1</span><span>Tổng quan CSDL</span></div>
+    <div class="kicker">Cách hiểu</div>
+    <h1 class="page-title">File system và DBMS</h1>
+    <p class="lead">Cùng một dữ liệu có thể được lưu trong các tệp rời hoặc được quản lý bởi một hệ quản trị. Khác biệt nằm ở việc ai chịu trách nhiệm giữ cho dữ liệu dùng được khi nhiều người cùng làm việc.</p>
+    <table>
+      <caption>Bảng 1. Hai cách tổ chức dữ liệu trong cùng một bài toán</caption>
+      <thead><tr><th>Khía cạnh</th><th>File system</th><th>DBMS</th></tr></thead>
+      <tbody>
+        <tr><td>Trùng lặp</td><td>Mỗi ứng dụng có thể giữ một bản riêng.</td><td>Lược đồ chung giảm dư thừa có kiểm soát.</td></tr>
+        <tr><td>Toàn vẹn</td><td>Quy tắc rải trong nhiều chương trình.</td><td>PK, FK, CHECK và transaction bảo vệ trạng thái.</td></tr>
+        <tr><td>Truy cập đồng thời</td><td>Dễ ghi đè hoặc đọc trạng thái dở dang.</td><td>Điều phối khóa, transaction và phục hồi.</td></tr>
+        <tr><td>Thay đổi cấu trúc</td><td>Đổi định dạng thường kéo theo sửa ứng dụng.</td><td>DBMS cung cấp mức nhìn và data independence.</td></tr>
+      </tbody>
+    </table>
+    <div class="grid-2">
+      <div class="note"><strong>Ý chính</strong><br>DBMS không chỉ là nơi chứa bảng; nó quản lý ngữ nghĩa, quyền truy cập, đồng thời và phục hồi.</div>
+      <div class="note warning"><strong>Nhận xét</strong><br>Nếu chỉ nhìn vào vài tệp dữ liệu, ta chưa thấy được các quy tắc mà hệ thống phải giữ.</div>
+    </div>
+    <h2>Một phép so sánh ngắn</h2>
+    <p>Danh sách điểm của một lớp có thể là CSV. Nhưng khi cần cập nhật điểm, tra cứu học viên, bảo đảm mỗi mã là duy nhất và phục hồi sau lỗi, ta cần lớp quản trị của DBMS.</p>
+    <div class="page-footer"><span>Chương 1 · File system / DBMS</span><span>06</span></div>
+  </section>
+
+  <!-- Chapter 1 page 2 -->
+  <section class="page">
+    <div class="page-header"><span>Chương 1</span><span>Kiến trúc ba mức</span></div>
+    <div class="kicker">Sơ đồ cơ chế</div>
+    <h1 class="page-title">Ba mức nhìn dữ liệu</h1>
+    <p class="lead">Một thay đổi ở nơi lưu trữ không nhất thiết phải làm thay đổi cách người dùng nhìn dữ liệu. Ba mức mô tả giúp tách giao diện, lược đồ logic và cách cất giữ.</p>
+    <figure class="diagram-frame">
+      <svg viewBox="0 0 760 350" role="img" aria-label="Three-level database architecture">
+        <defs><marker id="arrowArch" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1e7881"/></marker></defs>
+        <g font-family="Arial,Segoe UI,sans-serif">
+          <rect x="120" y="25" width="520" height="70" rx="8" fill="#203047"/><text x="380" y="56" text-anchor="middle" fill="#fff" font-size="18" font-weight="700">Mức ngoài · External schema</text><text x="380" y="78" text-anchor="middle" fill="#c6dddd" font-size="12">mỗi vai trò thấy một phần phù hợp</text>
+          <rect x="120" y="140" width="520" height="70" rx="8" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="380" y="171" text-anchor="middle" fill="#203047" font-size="18" font-weight="700">Mức quan niệm · Conceptual schema</text><text x="380" y="193" text-anchor="middle" fill="#1e7881" font-size="12">entity, relation, constraint và ngữ nghĩa chung</text>
+          <rect x="120" y="255" width="520" height="70" rx="8" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="380" y="286" text-anchor="middle" fill="#203047" font-size="18" font-weight="700">Mức trong · Internal schema</text><text x="380" y="308" text-anchor="middle" fill="#8c5b20" font-size="12">file, index, page và cách lưu trữ</text>
+          <path d="M380 95 V138 M380 210 V253" stroke="#1e7881" stroke-width="3" marker-end="url(#arrowArch)"/>
+          <path d="M660 174 H720 V60 H644 M660 290 H720 V174 H644" fill="none" stroke="#b57b36" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#arrowArch)"/>
+          <text x="730" y="114" text-anchor="middle" fill="#8c5b20" font-size="11" transform="rotate(90 730 114)">ánh xạ</text>
+        </g>
+      </svg>
+      <figcaption>Hình 1.1 — Các mức mô tả nối với nhau bằng ánh xạ; người dùng không cần biết chi tiết page/index để hỏi một relation.</figcaption>
+    </figure>
+    <div class="trace">
+      <div class="trace-step"><div class="trace-num">1</div><div class="trace-body"><strong>Yêu cầu đổi index:</strong> thay đổi ở mức trong.</div></div>
+      <div class="trace-step"><div class="trace-num">2</div><div class="trace-body"><strong>Lược đồ quan niệm giữ nguyên:</strong> relation và constraint không đổi.</div></div>
+      <div class="trace-step"><div class="trace-num">3</div><div class="trace-body"><strong>Ứng dụng tiếp tục chạy:</strong> đây là trực giác của độc lập dữ liệu vật lý.</div></div>
+    </div>
+    <div class="page-footer"><span>Chương 1 · Kiến trúc ba mức</span><span>07</span></div>
+  </section>
+
+  <!-- Chapter 2 page 1 -->
+  <section class="page">
+    <div class="page-header"><span>Chương 2</span><span>Mô hình quan hệ</span></div>
+    <div class="kicker">Thuật ngữ</div>
+    <h1 class="page-title">Relation, tuple, attribute và khóa</h1>
+    <p class="lead">Một relation là một tập các tuple có cùng schema. Đọc đúng từng lớp giúp ta không nhầm “cột” với “giá trị trong một dòng”, và không nhầm khóa với một thuộc tính bất kỳ.</p>
+    <div class="grid-2">
+      <div class="card"><div class="label">Schema</div><h3>HOCVIEN</h3><p class="math">HOCVIEN(MAHV, HO, TEN, MALOP)</p><p class="small muted">Schema nói relation có những thuộc tính nào.</p></div>
+      <div class="card"><div class="label">Instance</div><h3>Một thể hiện</h3><p>Hai tuple khác nhau có thể cùng schema; instance thay đổi theo thời điểm và dữ liệu.</p></div>
+    </div>
+    <table>
+      <caption>Bảng 2. Đọc một relation mẫu</caption>
+      <thead><tr><th>MAHV</th><th>HO</th><th>TEN</th><th>MALOP</th></tr></thead>
+      <tbody><tr><td><strong>HV01</strong></td><td>Nguyễn</td><td>An</td><td>L01</td></tr><tr><td><strong>HV02</strong></td><td>Trần</td><td>Bình</td><td>L01</td></tr><tr><td><strong>HV03</strong></td><td>Lê</td><td>Chi</td><td>L02</td></tr></tbody>
+    </table>
+    <div class="note"><strong>Ghi nhớ</strong><br>Tuple = một dòng; attribute = một cột; domain = miền giá trị của cột; khóa = thuộc tính hoặc tập thuộc tính định danh duy nhất tuple.</div>
+    <h2>Khóa không chỉ để “đánh số”</h2>
+    <p><strong>Superkey</strong> xác định duy nhất tuple. <strong>Candidate key</strong> là superkey tối thiểu. Một relation có thể có nhiều candidate key; ta chọn một làm primary key, các liên kết sang relation khác thường dùng foreign key.</p>
+    <div class="page-footer"><span>Chương 2 · Relation và khóa</span><span>08</span></div>
+  </section>
+
+  <!-- Chapter 2 page 2 -->
+  <section class="page">
+    <div class="page-header"><span>Chương 2</span><span>ER → relational schema</span></div>
+    <div class="kicker">Ví dụ</div>
+    <h1 class="page-title">Đặt khóa vào đúng quan hệ</h1>
+    <p class="lead">Khi ánh xạ, câu hỏi quan trọng là: một thực thể được nhận diện bằng gì, và mối kết hợp cần giữ những khóa nào để không mất ngữ nghĩa?</p>
+    <figure class="diagram-frame">
+      <svg viewBox="0 0 760 360" role="img" aria-label="ER to relational schema mapping">
+        <defs><marker id="arrowMap" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1e7881"/></marker></defs>
+        <g font-family="Arial,Segoe UI,sans-serif">
+          <rect x="24" y="50" width="180" height="78" fill="#203047"/><text x="114" y="85" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">CUSTOMER</text><text x="114" y="107" text-anchor="middle" fill="#c6dddd" font-size="12">customer_id · name</text>
+          <rect x="24" y="226" width="180" height="78" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="114" y="261" text-anchor="middle" fill="#203047" font-size="17" font-weight="700">ORDER</text><text x="114" y="283" text-anchor="middle" fill="#8c5b20" font-size="12">order_id · date</text>
+          <polygon points="330,140 390,178 330,216 270,178" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="330" y="183" text-anchor="middle" fill="#203047" font-size="13" font-weight="700">PLACES</text>
+          <path d="M204 89 H260 M204 265 H260" stroke="#1e7881" stroke-width="2" marker-end="url(#arrowMap)"/><path d="M390 178 H468" stroke="#1e7881" stroke-width="2" marker-end="url(#arrowMap)"/>
+          <rect x="470" y="40" width="260" height="95" fill="#fff" stroke="#203047" stroke-width="2"/><text x="600" y="68" text-anchor="middle" fill="#203047" font-size="16" font-weight="700">CUSTOMER</text><text x="492" y="96" fill="#1e7881" font-size="13">customer_id (PK)</text><text x="492" y="117" fill="#5f6d78" font-size="12">name</text>
+          <rect x="470" y="172" width="260" height="116" fill="#fff" stroke="#1e7881" stroke-width="2"/><text x="600" y="200" text-anchor="middle" fill="#203047" font-size="16" font-weight="700">ORDER</text><text x="492" y="228" fill="#1e7881" font-size="13">order_id (PK)</text><text x="492" y="249" fill="#1e7881" font-size="13">customer_id (FK)</text><text x="492" y="270" fill="#5f6d78" font-size="12">order_date</text>
+          <text x="380" y="338" text-anchor="middle" fill="#5f6d78" font-size="12" letter-spacing="1.5">1 CUSTOMER — N ORDER · FK đặt ở phía N</text>
+        </g>
+      </svg>
+      <figcaption>Hình 2.1 — Với liên kết 1:N, khóa của phía 1 xuất hiện như FK ở quan hệ phía N.</figcaption>
+    </figure>
+    <div class="trace">
+      <div class="trace-step"><div class="trace-num">1</div><div class="trace-body">Tạo relation cho mỗi entity và giữ PK của entity đó.</div></div>
+      <div class="trace-step"><div class="trace-num">2</div><div class="trace-body">Đọc lực lượng: CUSTOMER 1 — N ORDER.</div></div>
+      <div class="trace-step"><div class="trace-num">3</div><div class="trace-body">Đặt <code>customer_id</code> vào ORDER làm FK; không tạo cột “PLACES” thừa.</div></div>
+    </div>
+    <div class="page-footer"><span>Chương 2 · ER → Schema</span><span>09</span></div>
+  </section>
+
+  <!-- Chapter 3 page 1 -->
+  <section class="page">
+    <div class="page-header"><span>Chương 3</span><span>Đại số quan hệ</span></div>
+    <div class="kicker">Theo dõi trạng thái</div>
+    <h1 class="page-title">Selection, projection và join</h1>
+    <p class="lead">Đừng nhảy thẳng tới biểu thức cuối. Theo dõi relation trung gian giúp kiểm tra điều kiện, tên thuộc tính và bội số dòng ở từng bước.</p>
+    <div class="trace">
+      <div class="trace-step"><div class="trace-num">1</div><div class="trace-body"><strong>Input:</strong> CUSTOMER(<span class="math">customer_id, name</span>) và ORDER(<span class="math">order_id, customer_id, total</span>).</div></div>
+      <div class="trace-step"><div class="trace-num">2</div><div class="trace-body"><strong>Selection:</strong> <span class="math">σ<sub>total &gt; 1000</sub>(ORDER)</span> giữ các tuple thỏa điều kiện.</div></div>
+      <div class="trace-step"><div class="trace-num">3</div><div class="trace-body"><strong>Join:</strong> nối qua <code>customer_id</code> để lấy tên khách.</div></div>
+      <div class="trace-step"><div class="trace-num">4</div><div class="trace-body"><strong>Projection:</strong> chỉ giữ <span class="math">name, total</span> sau khi đã có đủ thuộc tính cần dùng.</div></div>
+    </div>
+    <pre><code>π name, total
+  (CUSTOMER ⋈ CUSTOMER.customer_id = ORDER.customer_id
+   σ total &gt; 1000 (ORDER))</code></pre>
+    <div class="code-caption">Công thức chỉ là bản tóm tắt; relation trung gian là cách kiểm tra nó.</div>
+    <div class="grid-2">
+      <div class="card"><div class="label">Selection σ</div><p>Lọc <em>tuple</em>; số cột giữ nguyên.</p></div>
+      <div class="card"><div class="label">Projection π</div><p>Lọc <em>attribute</em>; có thể loại bản trùng theo ngữ nghĩa relation.</p></div>
+    </div>
+    <div class="note warning"><strong>Sai lầm thường gặp</strong><br>Chiếu bỏ <code>customer_id</code> trước khi join sẽ làm mất cầu nối giữa hai relation.</div>
+    <div class="page-footer"><span>Chương 3 · Theo dõi relation trung gian</span><span>10</span></div>
+  </section>
+
+  <!-- Chapter 3 page 2 -->
+  <section class="page">
+    <div class="page-header"><span>Chương 3</span><span>Phép chia</span></div>
+    <div class="kicker">Cách hiểu</div>
+    <h1 class="page-title">“Tất cả” và phép chia</h1>
+    <p class="lead">Phép chia trả về những giá trị ở phía X ghép được với <em>mọi</em> giá trị trong divisor. Khi viết SQL, trực giác này thường xuất hiện dưới dạng hai lớp <code>NOT EXISTS</code>.</p>
+    <figure class="diagram-frame">
+      <svg viewBox="0 0 760 260" role="img" aria-label="Relational division universal condition">
+        <g font-family="Arial,Segoe UI,sans-serif">
+          <rect x="25" y="45" width="210" height="145" fill="#fff" stroke="#203047" stroke-width="2"/><text x="130" y="75" text-anchor="middle" fill="#203047" font-size="16" font-weight="700">ENROLL(X, Y)</text><text x="55" y="108" fill="#5f6d78" font-size="13">A — 1</text><text x="55" y="134" fill="#5f6d78" font-size="13">A — 2</text><text x="55" y="160" fill="#5f6d78" font-size="13">A — 3</text><text x="135" y="108" fill="#1e7881" font-size="13">B — 1</text><text x="135" y="134" fill="#1e7881" font-size="13">B — 2</text>
+          <text x="270" y="126" fill="#1e7881" font-size="34">÷</text>
+          <rect x="325" y="45" width="150" height="145" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="400" y="75" text-anchor="middle" fill="#203047" font-size="16" font-weight="700">REQUIRED(Y)</text><text x="380" y="113" fill="#8c5b20" font-size="13">1</text><text x="380" y="142" fill="#8c5b20" font-size="13">2</text><text x="380" y="171" fill="#8c5b20" font-size="13">3</text>
+          <text x="510" y="126" fill="#1e7881" font-size="34">=</text>
+          <rect x="565" y="45" width="170" height="145" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="650" y="75" text-anchor="middle" fill="#203047" font-size="16" font-weight="700">RESULT(X)</text><text x="650" y="121" text-anchor="middle" fill="#1e7881" font-size="20" font-weight="700">A</text><text x="650" y="155" text-anchor="middle" fill="#5f6d78" font-size="12">has 1, 2 and 3</text>
+          <text x="380" y="230" text-anchor="middle" fill="#5f6d78" font-size="12" letter-spacing="1.2">X is kept only when no required Y is missing</text>
+        </g>
+      </svg>
+      <figcaption>Hình 3.1 — Divisor định nghĩa “tất cả”. Đổi divisor là đổi câu hỏi.</figcaption>
+    </figure>
+    <pre><code>SELECT e.X
+FROM ENROLL AS e
+WHERE NOT EXISTS (
+  SELECT 1 FROM REQUIRED AS r
+  WHERE NOT EXISTS (
+    SELECT 1 FROM ENROLL AS e2
+    WHERE e2.X = e.X AND e2.Y = r.Y
+  )
+);</code></pre>
+    <div class="note"><strong>Khi làm bài</strong><br>Hãy nói thành lời: “Không tồn tại một yêu cầu nào mà X chưa đáp ứng”. Câu nói này giúp kiểm tra đúng hai lớp phủ định.</div>
+    <div class="page-footer"><span>Chương 3 · Division / universal condition</span><span>11</span></div>
+  </section>
+
+  <!-- Chapter 5 -->
+  <section class="page">
+    <div class="page-header"><span>Chương 5</span><span>Ràng buộc toàn vẹn</span></div>
+    <div class="kicker">Ví dụ + bảng tầm ảnh hưởng</div>
+    <h1 class="page-title">Một quy tắc, ba thao tác</h1>
+    <p class="lead">Phát biểu RBTV trước, xác định quan hệ và thuộc tính chịu ảnh hưởng sau. Bảng tầm ảnh hưởng là bản đồ kiểm tra, không phải danh sách trigger viết theo cảm tính.</p>
+    <div class="note"><strong>RBTV mẫu</strong><br>Với mọi dòng <code>HOCVIEN</code>, nếu có <code>MALOP</code> thì giá trị đó phải tồn tại trong <code>LOP(MALOP)</code>.</div>
+    <table>
+      <caption>Bảng 5.1 — RBTV tham chiếu HOCVIEN → LOP</caption>
+      <thead><tr><th>Quan hệ / thao tác</th><th>Thêm</th><th>Xóa</th><th>Sửa</th><th>Lý do</th></tr></thead>
+      <tbody>
+        <tr><td>HOCVIEN</td><td>+</td><td>−</td><td>+(MALOP)</td><td>Thêm/sửa FK có thể tạo tham chiếu mồ côi.</td></tr>
+        <tr><td>LOP</td><td>−</td><td>+</td><td>+(MALOP)</td><td>Xóa/sửa PK có thể làm HOCVIEN mất cha.</td></tr>
+      </tbody>
+    </table>
+    <div class="grid-2">
+      <div class="card"><div class="label">Điều kiện</div><p><span class="math">∀ h ∈ HOCVIEN: h.MALOP = NULL ∨ h.MALOP ∈ π<sub>MALOP</sub>(LOP)</span></p></div>
+      <div class="card"><div class="label">Cách kiểm tra</div><p>Kiểm tra tập giá trị bị tác động sau thao tác; khi có nhiều dòng, dùng logic tập hợp.</p></div>
+    </div>
+    <div class="note warning"><strong>Nhận xét</strong><br>Dấu <strong>+</strong> chỉ nói “có khả năng vi phạm”. Nó không tự quyết định hành động CASCADE hay NO ACTION.</div>
+    <div class="page-footer"><span>Chương 5 · Bảng tầm ảnh hưởng</span><span>12</span></div>
+  </section>
+
+  <!-- Chapter 6 page 1 -->
+  <section class="page">
+    <div class="page-header"><span>Chương 6</span><span>Phụ thuộc hàm</span></div>
+    <div class="kicker">Chạy bao đóng</div>
+    <h1 class="page-title">Từ X đến X⁺</h1>
+    <p class="lead">Bao đóng là một quy trình lặp: bắt đầu bằng X, áp dụng PTH có vế trái đã biết, rồi dừng ở điểm cố định. Đây là cách kiểm tra siêu khóa và thành viên của PTH.</p>
+    <div class="card">
+      <div class="label">Ví dụ</div>
+      <p class="math">R(A, B, C, D, E), F = {A → BC, B → D, CD → E}</p>
+      <div class="trace">
+        <div class="trace-step"><div class="trace-num">0</div><div class="trace-body"><strong>Bắt đầu:</strong> <span class="math">A⁺ = {A}</span>.</div></div>
+        <div class="trace-step"><div class="trace-num">1</div><div class="trace-body"><strong>A → BC:</strong> <span class="math">A⁺ = {A, B, C}</span>.</div></div>
+        <div class="trace-step"><div class="trace-num">2</div><div class="trace-body"><strong>B → D:</strong> <span class="math">A⁺ = {A, B, C, D}</span>.</div></div>
+        <div class="trace-step"><div class="trace-num">3</div><div class="trace-body"><strong>CD → E:</strong> <span class="math">A⁺ = {A, B, C, D, E} = R</span>.</div></div>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="note"><strong>Kết luận</strong><br>Vì <span class="math">A⁺ = R</span>, A là superkey. Muốn biết A có là candidate key, còn phải kiểm tra tính tối thiểu.</div>
+      <div class="note warning"><strong>Cách kiểm tra kết quả</strong><br>Thử bỏ từng thuộc tính khỏi X. Nếu bao đóng không còn là R, thuộc tính đó là cần thiết.</div>
+    </div>
+    <div class="page-footer"><span>Chương 6 · Functional dependency</span><span>13</span></div>
+  </section>
+
+  <!-- Chapter 6 page 2 -->
+  <section class="page">
+    <div class="page-header"><span>Chương 6</span><span>Chuẩn hóa</span></div>
+    <div class="kicker">Nhận xét</div>
+    <h1 class="page-title">3NF, BCNF và phân rã</h1>
+    <p class="lead">Chuẩn hóa không phải là tách bảng càng nhiều càng tốt. Ta tìm khóa, đọc PTH và chọn phân rã vừa loại dị thường vừa giữ được thông tin cần thiết.</p>
+    <table>
+      <caption>Bảng 6.1 — Tiêu chuẩn chính thức</caption>
+      <thead><tr><th>Dạng chuẩn</th><th>Điều kiện cốt lõi</th><th>Câu hỏi kiểm tra</th></tr></thead>
+      <tbody>
+        <tr><td>2NF</td><td>1NF và không có phụ thuộc bộ phận của thuộc tính non-prime vào khóa ghép.</td><td>Khóa ứng viên có nhiều thuộc tính không?</td></tr>
+        <tr><td>3NF</td><td>Với X → A không hiển nhiên: X là superkey hoặc A là prime.</td><td>Vế trái chưa là superkey thì A có prime không?</td></tr>
+        <tr><td>BCNF</td><td>Với mọi X → A không hiển nhiên, X phải là superkey.</td><td>Có PTH nào có determinant không là superkey?</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Ghi nhớ</strong><br>BCNF chặt hơn 3NF: ngoại lệ “vế phải là prime” chỉ cứu được 3NF, không cứu được BCNF.</div>
+    <figure class="diagram-frame">
+      <svg viewBox="0 0 760 230" role="img" aria-label="Lossless decomposition map">
+        <defs><marker id="arrowDec" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#1e7881"/></marker></defs>
+        <g font-family="Arial,Segoe UI,sans-serif">
+          <rect x="28" y="65" width="175" height="82" fill="#203047"/><text x="115" y="99" text-anchor="middle" fill="#fff" font-size="17" font-weight="700">R(A,B,C)</text><text x="115" y="125" text-anchor="middle" fill="#c6dddd" font-size="12">PTH: C → B</text>
+          <path d="M203 106 H275" stroke="#1e7881" stroke-width="3" marker-end="url(#arrowDec)"/><text x="240" y="91" text-anchor="middle" fill="#1e7881" font-size="12">decompose</text>
+          <rect x="290" y="28" width="190" height="72" fill="#e7f1f1" stroke="#1e7881" stroke-width="2"/><text x="385" y="59" text-anchor="middle" fill="#203047" font-size="16" font-weight="700">R₁(C,B)</text><text x="385" y="81" text-anchor="middle" fill="#1e7881" font-size="12">C is key</text>
+          <rect x="290" y="132" width="190" height="72" fill="#f6efe5" stroke="#b57b36" stroke-width="2"/><text x="385" y="163" text-anchor="middle" fill="#203047" font-size="16" font-weight="700">R₂(A,C)</text><text x="385" y="185" text-anchor="middle" fill="#8c5b20" font-size="12">shared C</text>
+          <path d="M480 64 H565 V106 H645" fill="none" stroke="#1e7881" stroke-width="2" marker-end="url(#arrowDec)"/><path d="M480 168 H565 V106" fill="none" stroke="#b57b36" stroke-width="2"/>
+          <text x="690" y="112" text-anchor="middle" fill="#203047" font-size="14" font-weight="700">lossless</text><text x="690" y="132" text-anchor="middle" fill="#5f6d78" font-size="12">join at C</text>
+        </g>
+      </svg>
+      <figcaption>Hình 6.1 — Phân rã cần được kiểm tra lossless join và dependency preservation, không chỉ nhìn số lượng bảng.</figcaption>
+    </figure>
+    <div class="page-footer"><span>Chương 6 · 3NF / BCNF</span><span>14</span></div>
+  </section>
+
+  <!-- Exercise -->
+  <section class="page">
+    <div class="page-header"><span>Bài tập</span><span>Tự kiểm tra</span></div>
+    <div class="kicker">Bài tập</div>
+    <h1 class="page-title">Một bài, bốn điểm kiểm tra</h1>
+    <div class="exercise">
+      <div class="exercise-title"><span>Câu hỏi</span><span>12 phút</span></div>
+      <p>Cho hai relation:</p>
+      <p class="math">ENROLL(MAHV, MAMH) và REQUIRED(MAMH)</p>
+      <p>Viết biểu thức đại số quan hệ trả về các <code>MAHV</code> đã đăng ký <strong>tất cả</strong> môn trong REQUIRED. Sau đó nêu một cách viết SQL tương đương bằng hai lớp <code>NOT EXISTS</code>.</p>
+    </div>
+    <h2>Checklist trước khi nộp</h2>
+    <ol>
+      <li>Divisor có đúng là tập môn bắt buộc không?</li>
+      <li>Kết quả cuối cùng chỉ còn thuộc tính <code>MAHV</code>?</li>
+      <li>Hai lớp phủ định trong SQL có diễn đạt “không có môn bắt buộc bị thiếu” không?</li>
+      <li>Nếu REQUIRED rỗng, bạn đã hiểu ngữ nghĩa “tất cả” chưa?</li>
+    </ol>
+    <div class="note"><strong>Ghi nhớ</strong><br>Hãy giải bằng relation trung gian trên giấy nhỏ trước khi rút gọn thành một dòng công thức.</div>
+    <div class="card"><div class="label">Mở rộng</div><p>Thay REQUIRED bằng một relation có thêm học kỳ. Bạn phải quyết định divisor và điều kiện join có cần thêm thuộc tính hay không.</p></div>
+    <div class="page-footer"><span>Bài tập · Division</span><span>15</span></div>
+  </section>
+
+  <!-- Worked solution -->
+  <section class="page">
+    <div class="page-header"><span>Lời giải mẫu</span><span>Cách kiểm tra</span></div>
+    <div class="kicker">Cách giải</div>
+    <h1 class="page-title">Theo dõi “không bị thiếu”</h1>
+    <div class="solution">
+      <p><strong>Đại số quan hệ:</strong></p>
+      <p class="math">π<sub>MAHV</sub>(ENROLL) − π<sub>MAHV</sub>((π<sub>MAHV</sub>(ENROLL) × REQUIRED) − ENROLL)</p>
+      <p>Phần trong ngoặc tạo mọi cặp học viên–môn bắt buộc, rồi trừ những cặp đã có. Lấy <code>MAHV</code> của các cặp còn thiếu và trừ khỏi toàn bộ học viên.</p>
+    </div>
+    <pre><code>SELECT e.MAHV
+FROM ENROLL AS e
+WHERE NOT EXISTS (
+  SELECT 1
+  FROM REQUIRED AS r
+  WHERE NOT EXISTS (
+    SELECT 1
+    FROM ENROLL AS e2
+    WHERE e2.MAHV = e.MAHV
+      AND e2.MAMH = r.MAMH
+  )
+);</code></pre>
+    <div class="code-caption">Hai lớp NOT EXISTS: lớp ngoài chọn học viên; lớp trong tìm một môn bắt buộc chưa có.</div>
+    <div class="note"><strong>Cách kiểm tra kết quả</strong><br>Với MAHV = HV01 và REQUIRED = {CSDL, HĐH}, nếu HV01 chỉ có CSDL thì lớp trong tìm thấy HĐH bị thiếu và HV01 bị loại.</div>
+    <div class="grid-2">
+      <div class="card"><div class="label">Đúng</div><p>Divisor được giữ nguyên là REQUIRED.</p></div>
+      <div class="card"><div class="label">Cần tránh</div><p>Đếm số môn mà không kiểm tra trùng hoặc môn ngoài divisor.</p></div>
+    </div>
+    <div class="page-footer"><span>Lời giải mẫu · Universal condition</span><span>16</span></div>
+  </section>
+
+  <!-- Diagnostic -->
+  <section class="page">
+    <div class="page-header"><span>Chẩn đoán</span><span>Cách sửa sai</span></div>
+    <div class="kicker">Sai lầm thường gặp</div>
+    <h1 class="page-title">Đọc lỗi như đọc dữ liệu</h1>
+    <p class="lead">Một đáp án sai thường để lại dấu vết cụ thể. Gọi đúng tên lỗi giúp sửa cấu trúc, không chỉ sửa một ký tự.</p>
+    <table>
+      <caption>Bảng 7.1 — Triệu chứng và nguyên nhân</caption>
+      <thead><tr><th>Triệu chứng</th><th>Nguyên nhân có thể</th><th>Cách kiểm tra</th></tr></thead>
+      <tbody>
+        <tr><td>Kết quả division rỗng</td><td>Divisor nhầm relation hoặc lớp NOT EXISTS bị đảo.</td><td>Viết câu “không có yêu cầu bị thiếu” bằng tiếng Việt.</td></tr>
+        <tr><td>Join nhân đôi dòng</td><td>Điều kiện join không dùng đủ khóa hoặc cần DISTINCT.</td><td>Đếm bội số trước và sau join trên bảng nhỏ.</td></tr>
+        <tr><td>3NF đúng nhưng BCNF sai</td><td>Determinant chưa là superkey nhưng vế phải là prime.</td><td>Tính closure của vế trái; không dùng ngoại lệ 3NF cho BCNF.</td></tr>
+        <tr><td>FK bị mồ côi</td><td>Thêm/sửa bảng con hoặc xóa/sửa bảng cha không kiểm tra.</td><td>Đọc bảng tầm ảnh hưởng theo từng thao tác.</td></tr>
+      </tbody>
+    </table>
+    <div class="note error"><strong>Chẩn đoán</strong><br>Nếu một công thức không thể giải thích bằng câu nói và relation trung gian, hãy quay lại mô hình trước khi rút gọn.</div>
+    <h2>Ba câu hỏi kết thúc</h2>
+    <ol>
+      <li>Quan hệ đầu vào và đầu ra có đúng schema không?</li>
+      <li>Điều kiện logic có giữ đúng “tất cả”, “không có”, hoặc “ít nhất” không?</li>
+      <li>Một người khác có thể lần theo các bước để tái tạo kết quả không?</li>
+    </ol>
+    <div class="page-footer"><span>Chẩn đoán · Kết thúc proof</span><span>17</span></div>
+  </section>
+
+</body>
+</html>
