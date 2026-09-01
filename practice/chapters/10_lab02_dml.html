@@ -111,27 +111,32 @@
 <span class="kw">JOIN</span> dbo.tr_order_items <span class="kw">AS</span> i <span class="kw">ON</span> i.OrderId = o.OrderId
 <span class="kw">JOIN</span> dbo.tr_products <span class="kw">AS</span> p <span class="kw">ON</span> p.ProductId = i.ProductId
 <span class="kw">ORDER BY</span> o.OrderId, i.ProductId;</pre>
-  <pre class="sql-block"><span class="kw">SELECT</span> c.CustomerId, c.FullName, o.OrderId
+  <pre class="sql-block"><span class="kw">SELECT</span> c.CustomerId, c.FullName,
+       <span class="kw">COUNT</span>(o.OrderId) <span class="kw">AS</span> OrderCount
 <span class="kw">FROM</span> dbo.tr_customers <span class="kw">AS</span> c
-<span class="kw">LEFT JOIN</span> dbo.tr_orders <span class="kw">AS</span> o <span class="kw">ON</span> o.CustomerId = c.CustomerId
-<span class="kw">ORDER BY</span> c.CustomerId, o.OrderId;</pre>
+<span class="kw">LEFT JOIN</span> dbo.tr_orders <span class="kw">AS</span> o
+  <span class="kw">ON</span> o.CustomerId = c.CustomerId
+<span class="kw">GROUP BY</span> c.CustomerId, c.FullName
+<span class="kw">ORDER BY</span> c.CustomerId;</pre>
   <table class="result-table"><thead><tr><th>Join</th><th>Dòng giữ lại</th><th>Điểm kiểm tra</th></tr></thead><tbody>
     <tr><td>INNER JOIN B03</td><td>Chỉ cặp có đơn, chi tiết, sản phẩm.</td><td>Không xuất hiện sản phẩm chưa bán.</td></tr>
-    <tr><td>LEFT JOIN B04</td><td>Tất cả khách hàng.</td><td>C005 vẫn có dòng với OrderId NULL.</td></tr>
+    <tr><td>LEFT JOIN + COUNT B04</td><td>Tất cả khách hàng.</td><td>C005 có OrderCount = 0.</td></tr>
   </tbody></table>
-  <div class="callout callout-why"><div class="callout-title">NULL ở phía phải</div><p style="margin-bottom:0">NULL của cột o.OrderId ở B04 là dấu hiệu “không có dòng khớp”, không phải đơn hàng có mã rỗng.</p></div>
+  <div class="callout callout-why"><div class="callout-title">Đếm đúng với LEFT JOIN</div><p style="margin-bottom:0">COUNT(o.OrderId) chỉ đếm OrderId không NULL; vì vậy khách không có đơn vẫn xuất hiện với OrderCount = 0.</p></div>
   <div class="page-footer"><span>IT004 — Thực hành Cơ sở dữ liệu</span><span>Lab 02</span></div>
 </div>
 
 <div class="page">
-  <div class="page-header"><span>LAB 02 — UNION</span><span>B05</span></div>
+  <div class="page-header"><span>LAB 02 — SELF JOIN &amp; UNION</span><span>B05</span></div>
   <h2>6. Self join và UNION tương thích</h2>
+  <h3>B05 — Self-Join nhân viên → quản lý</h3>
   <pre class="sql-block"><span class="kw">SELECT</span> e.EmployeeId, e.FullName,
        m.FullName <span class="kw">AS</span> ManagerName
 <span class="kw">FROM</span> dbo.tr_employees <span class="kw">AS</span> e
 <span class="kw">LEFT JOIN</span> dbo.tr_employees <span class="kw">AS</span> m
   <span class="kw">ON</span> m.EmployeeId = e.ManagerId
 <span class="kw">ORDER BY</span> e.EmployeeId;</pre>
+  <h3>Minh họa bổ sung — UNION (không mang mã B05)</h3>
   <pre class="sql-block"><span class="kw">SELECT</span> CustomerId <span class="kw">AS</span> EntityId
 <span class="kw">FROM</span> dbo.tr_customers
 <span class="kw">UNION</span>

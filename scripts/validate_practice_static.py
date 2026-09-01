@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Static semantic checks for the self-contained IT004 practice fixture."""
 from pathlib import Path
+import html
 import json
 import re
 import shutil
@@ -190,13 +191,40 @@ def enhanced_main():
               "registry expected values mismatch for " + example_id)
     check("B01 canonical query", all(fragment in production_text for fragment in ["Segment", "C001", "C002", "C003"]),
           "B01 printed projection is not the canonical A/B query")
+    lab02 = read(CHAPTERS / "10_lab02_dml.html")
+    lab02_plain = html.unescape(re.sub(r"<[^>]+>", " ", lab02))
+    lab03_plain = html.unescape(re.sub(r"<[^>]+>", " ", read(CHAPTERS / "11_lab03_advanced.html")))
+    check("B04 printed/runnable sync",
+          bool(re.search(r"COUNT\s*\(\s*o\.OrderId\s*\)", lab02_plain))
+          and bool(re.search(r"GROUP\s+BY\s+c\.CustomerId,\s*c\.FullName", lab02_plain))
+          and all(fragment in lab02_plain for fragment in ["OrderCount", "C005", "OrderCount = 0"]),
+          "B04 printed query must be LEFT JOIN + COUNT with C005 OrderCount = 0")
+    check("A07 printed/runnable sync",
+          bool(re.search(r"Stock\s*=\s*0", lab03_plain))
+          and bool(re.search(r"Stock\s*<\s*10", lab03_plain))
+          and all(fragment in lab03_plain for fragment in ["StockBand", "P001/P004/P007 = LOW"]),
+          "A07 printed query must be the canonical StockBand projection")
+    check("B05 ID clarity",
+          all(fragment in lab02_plain for fragment in [
+              "B05", "Self-Join", "Minh họa bổ sung", "UNION", "không mang mã B05"
+          ]),
+          "B05 must label the Self-Join as canonical and UNION as supplemental")
+    check("A03 ID clarity",
+          all(fragment in lab03_plain for fragment in [
+              "Minh họa EXISTS", "không mang mã A03",
+              "A03", "NOT EXISTS", "tr_order_items"
+          ]),
+          "A03 must label the unsold-product NOT EXISTS query separately")
     check("B02 half-open date", "2024-10-15" in production_text and "2024-10-18" in production_text
           and not re.search(r"2025-\d{2}-\d{2}", production_text),
           "B02 contains stale dates or is not [2024-10-15, 2024-10-18)")
+    toc = read(CHAPTERS / "00_cover_toc.html")
+    stale_toc_numbers = re.findall(r"\bTr\.\s*\d+\b", toc)
+    check("TOC stale page numbers", not stale_toc_numbers,
+          "TOC source retains stale page numbers: " + ", ".join(stale_toc_numbers))
     check("no unsupported set variants", not re.search(r"\b(?:INTERSECT|EXCEPT)\s+ALL\b", production_text, re.I),
           "INTERSECT ALL/EXCEPT ALL is not supported by this handbook")
 
-    lab02 = read(CHAPTERS / "10_lab02_dml.html")
     product_inserts = re.findall(r"INSERT INTO</span>\s+dbo\.tr_products\((.*?)\).*?VALUES</span>\s*(.*?)</pre>",
                                  lab02, re.I | re.S)
     product_error_ok = bool(product_inserts) and all("Country" in cols and "Stock" in cols for cols, _ in product_inserts)
