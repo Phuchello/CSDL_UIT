@@ -67,6 +67,7 @@
 
 ## Phase C2 & Beyond — Held by scope
 
-- [ ] Build or scaffold Quartz site.
+- [x] D1 — add a representative static Knowledge Garden architecture proof on `v1.1-knowledge-garden` without mutating frozen book/practice/research sources.
+- [ ] D2 — human review and decision on whether to port the proven slugs/content model to Quartz.
 - [ ] Merge to `main`.
 - [ ] Tag and release v1.1.

@@ -2,19 +2,19 @@
 
 ## Checkpoint
 
-v1.1 Phase C2 — Production Consistency Patch Complete
+v1.1 Phase D1 — Knowledge Garden Architecture Proof Complete
 
 ## Date
 
-2026-08-31
+2026-09-01
 
 ## Active branch
 
-`v1.1-practice-handbook`
+`v1.1-knowledge-garden`
 
 ## Status
 
-PHASE A and THEORY v1.1 remain FROZEN and UNTOUCHED. PHASE C2 is complete on `v1.1-practice-handbook`: the production-only chapter manifest, deterministic fixture/scripts, example registry, normalized final PDF, contact sheets and QA report are present. The circular-FK reset succeeds on first and second SQLCMD runs; static consistency validation passes. Theory v1.1 (`61eb5c8`), Phase A (`6aef91e`), `main` (`6ccf5a4`) and `phuchello/phuchello` remain untouched. Ready for Human Mentor full-practice review.
+PHASE A, THEORY v1.1, and PRACTICE v1.1 remain FROZEN and UNTOUCHED. D1 adds only a static architecture proof under `site/`, `design/v1.1_site/`, and `dist/review/v1.1_site/`; it summarizes and links the frozen sources without copying whole chapters. The proof includes representative Theory ↔ Practice notes, a local search index, provenance labels, responsive navigation, and a small semantic relationship graph. The frozen practice PDF remains 71 pages and the canonical theory/practice artifacts are unchanged. Theory v1.1 (`61eb5c8`), Phase A (`6aef91e`), Practice (`59c519b`), `main` (`6ccf5a4`) and `phuchello/phuchello` remain untouched.
 
 ## Scope completed in this checkpoint
 
@@ -31,7 +31,7 @@ PHASE A and THEORY v1.1 remain FROZEN and UNTOUCHED. PHASE C2 is complete on `v1
 
 ## Explicit hold
 
-Do not build Quartz, merge to `main`, tag, or release from this branch.
+Do not build the complete Quartz site, merge to `main`, tag, release, or publish GitHub Pages from this branch. D1 is a human-review proof only.
 
 ## Deliverables
 
@@ -45,6 +45,14 @@ Do not build Quartz, merge to `main`, tag, or release from this branch.
 - `dist/review/v1.1_practice_full/` contact sheets
 - `reports/v1.1_practice_full_qa.md`
 - `scripts/validate_practice_static.py`
+
+## D1 deliverables
+
+- `site/` static proof shell with representative concept, practice, error, exam-pattern, search, and provenance routes
+- `design/v1.1_site/DESIGN_SYSTEM.md`
+- `design/v1.1_site/INFORMATION_ARCHITECTURE.md`
+- `design/v1.1_site/REVIEW_GUIDE.md`
+- `dist/review/v1.1_site/` desktop/mobile review captures
 
 ## C2 correction-pass evidence
 
