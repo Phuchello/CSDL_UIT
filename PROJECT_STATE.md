@@ -6,7 +6,7 @@ v1.1 Phase D1 — Knowledge Garden Architecture Proof Complete
 
 ## Date
 
-2026-09-01
+2026-09-02
 
 ## Active branch
 
