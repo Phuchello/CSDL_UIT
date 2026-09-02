@@ -68,6 +68,7 @@
 ## Phase C2 & Beyond — Held by scope
 
 - [x] D1 — add and freeze the representative static Knowledge Garden proof on `v1.1-knowledge-garden`; canonical fixtures, provenance URLs, route contracts, and flat-color treatment are synchronized without mutating frozen book/practice/research sources.
-- [ ] D2 — human review and decision on whether to port the proven slugs/content model to Quartz.
+- [x] D2 — build the production-candidate Quartz garden on `v1.1-quartz-garden` from frozen D1, with pinned upstream, provenance-labelled notes, local search, semantic graph/backlinks, fixture/PDF contracts, responsive checks, and fresh visual captures (`reports/v1.1_quartz_d2_qa.md`).
+- [ ] D2 human mentor review and decision on whether to merge the candidate.
 - [ ] Merge to `main`.
 - [ ] Tag and release v1.1.

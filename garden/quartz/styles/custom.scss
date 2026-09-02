@@ -1,0 +1,115 @@
+@use "./variables.scss" as *;
+
+// IT004 editorial layer: quiet paper, navy ink, teal links, ochre accents.
+:root {
+  --it004-paper: #f7f4ed;
+  --it004-ink: #0f2d40;
+  --it004-teal: #0f766e;
+  --it004-ochre: #b45309;
+  --it004-rule: #d7d1c6;
+}
+
+.skip-link { position: fixed; inset-inline-start: 1rem; top: 0.75rem; z-index: 1000; padding: 0.5rem 0.75rem; background: var(--dark); color: var(--light); transform: translateY(-200%); }
+
+.skip-link:focus-visible { transform: translateY(0); }
+
+body {
+  background: var(--light);
+  color: var(--darkgray);
+}
+
+.page-title a,
+.article-title,
+h1,
+h2,
+h3,
+h4 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--dark);
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--secondary);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.16em;
+}
+
+a:hover {
+  color: var(--tertiary);
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: Arial, sans-serif;
+}
+
+:focus-visible {
+  outline: 3px solid var(--tertiary);
+  outline-offset: 3px;
+}
+
+blockquote,
+pre,
+table,
+.callout {
+  border-radius: 0.2rem;
+}
+
+blockquote {
+  border-inline-start: 3px solid var(--tertiary);
+  background: var(--highlight);
+}
+
+pre {
+  border: 1px solid var(--it004-rule);
+  box-shadow: none;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+code {
+  font-family: Consolas, "Liberation Mono", monospace;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--it004-rule);
+}
+
+article > h1:first-child {
+  border-bottom: 2px solid var(--it004-teal);
+  padding-bottom: 0.45rem;
+}
+
+// Keep the explorer useful without turning it into a dense dashboard.
+#explorer {
+  border-inline-end: 1px solid var(--it004-rule);
+}
+
+#toc {
+  border-inline-start: 1px solid var(--it004-rule);
+}
+
+@media (max-width: 800px) {
+  #explorer,
+  #toc {
+    border: 0;
+  }
+
+  article {
+    padding-inline: 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

@@ -2,7 +2,7 @@
 
 ## Checkpoint
 
-v1.1 Phase D1 — Knowledge Garden Architecture Proof Complete
+v1.1 Phase D2 — Quartz Knowledge Garden Production Candidate Complete
 
 ## Date
 
@@ -10,7 +10,7 @@ v1.1 Phase D1 — Knowledge Garden Architecture Proof Complete
 
 ## Active branch
 
-`v1.1-knowledge-garden`
+`v1.1-quartz-garden`
 
 ## Status
 
@@ -25,9 +25,13 @@ PHASE A, THEORY v1.1, and PRACTICE v1.1 remain FROZEN and UNTOUCHED. D1 adds onl
 - Six desktop/mobile review captures remain under `dist/review/v1.1_site/`; local browser regeneration is pending because this session blocks localhost navigation.
 - D1 correction gates for the canonical Lab 03 and trigger fixtures, source-ID/URL synchronization, route integrity, and flat-color visual treatment.
 
+## D2 production-candidate checkpoint
+
+The vendored Quartz v5 candidate is built under `garden/` from the frozen D1 base. It contains 57 provenance-labelled Markdown notes, normal static routes, local diacritic-aware search, graph/backlinks, responsive navigation, canonical fixture contracts, build-time PDF hash checks, and fresh captures under `dist/review/v1.1_quartz/`. The actual Quartz build, static crawl, Playwright responsive/search checks, and representative PDF rasterization pass. Frozen `book/`, `practice/`, `research/v1.1_phase_a/`, `site/`, and prior PDFs remain untouched. Full evidence is in `reports/v1.1_quartz_d2_qa.md`.
+
 ## Explicit hold
 
-Do not build the complete Quartz site, merge to `main`, tag, release, or publish GitHub Pages from this branch. D1 is a human-review proof only.
+Do not merge to `main`, tag, release, or publish GitHub Pages from this branch. D2 is a human mentor-review candidate only.
 
 ## Deliverables
 
