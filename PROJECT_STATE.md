@@ -18,16 +18,12 @@ PHASE A, THEORY v1.1, and PRACTICE v1.1 remain FROZEN and UNTOUCHED. D1 adds onl
 
 ## Scope completed in this checkpoint
 
-- Thiết kế kiến trúc tổng thể 8 phần chuyên đề cho cẩm nang thực hành `IT004 — THỰC HÀNH CƠ SỞ DỮ LIỆU`;
-- Xây dựng hệ thống thiết kế `practice/css/practice.css` đồng bộ cùng họ B1 với sách lý thuyết;
-- Biên soạn 9 tệp chương mẫu trong `practice/chapters/` bao quát 10 phương diện sư phạm và kỹ thuật cốt lõi;
-- Xây dựng bản mẫu đại diện 21 trang A4 không có lỗi tràn lề hay ký tự vỡ (`IT004_CSDL_UIT_v1.1_Practice_DesignProof.pdf`);
-- Chuẩn hóa mẫu Trigger dạng tập hợp an toàn đa dòng (`Multi-Row Safety`), cho phép cập nhật thông tin không liên quan và chặn chính xác vi phạm;
-- Xây dựng khung chẩn đoán lỗi 5 bước cho 8 mã lỗi T-SQL riêng biệt;
-- Tái dựng tiến trình Lab 01 và Lab 03–04 cùng chiến lược phòng thi thực hành từ bằng chứng thực nghiệm Phase A;
-- Lập bảng đối chiếu mã nguồn kỹ thuật Microsoft Learn `TECH-A01`–`TECH-A11` tách bạch với dữ liệu khảo sát môn học;
-- Xuất bản tài liệu ghi chú thiết kế và hướng dẫn đánh giá 10 tiêu chí (`DESIGN_NOTES.md`, `REVIEW_GUIDE.md`);
-- Xuất bản báo cáo QA toàn diện và contact sheets (`reports/v1.1_practice_c1_qa.md`, `dist/review/v1.1_practice/`).
+- Static Knowledge Garden shell under `site/` with representative Theory, Practice, Exercises, Errors, Exam patterns, Cheat sheets, Search, and Sources routes.
+- Semantic Theory ↔ Practice links for division, Double NOT EXISTS, RBTV/impact tables, closure, Lab 03, and multi-row trigger notes.
+- Local category-aware search with Vietnamese diacritic normalization, responsive mobile navigation, skip link, and visible keyboard focus.
+- Provenance view linking the canonical source register and exact technical/UIT URLs without copying source documents.
+- Six desktop/mobile review captures remain under `dist/review/v1.1_site/`; local browser regeneration is pending because this session blocks localhost navigation.
+- D1 correction gates for the canonical Lab 03 and trigger fixtures, source-ID/URL synchronization, route integrity, and flat-color visual treatment.
 
 ## Explicit hold
 

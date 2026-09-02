@@ -35,7 +35,7 @@ main { padding: 1.4rem clamp(1.1rem, 4vw, 4.5rem) 4rem; min-width: 0; }
 .breadcrumbs { max-width: 890px; margin: .1rem auto 1.3rem; color: var(--muted); font-size: .8rem; }
 .breadcrumbs a { color: var(--muted); }
 .page { max-width: 890px; margin: 0 auto; }
-.hero { padding: clamp(1.5rem, 4vw, 3.2rem); background: linear-gradient(110deg, #edf5f3 0%, #faf5e6 100%); border: 1px solid #d8e4dd; border-radius: 10px; margin-bottom: 1.6rem; }
+.hero { padding: clamp(1.5rem, 4vw, 3.2rem); background: #f1f6f2; border: 1px solid #d8e4dd; border-radius: 10px; margin-bottom: 1.6rem; }
 h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; color: var(--navy-950); line-height: 1.18; }
 h1 { margin: .3rem 0 1rem; font-size: clamp(2rem, 4.5vw, 3.6rem); letter-spacing: -.035em; }
 h2 { margin: 2rem 0 .75rem; font-size: clamp(1.35rem, 2.2vw, 2rem); }
