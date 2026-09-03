@@ -1,61 +1,36 @@
 {
-  "id": "v1.1-premerge-remediation",
-  "status": "passed",
+  "id": "v1.1.1-visual-maintenance",
+  "status": "in_progress",
   "acceptance": [
     {
-      "id": "readme_remediated",
-      "criterion": "Root README.md rewritten for v1.1 dual handbooks and Knowledge Garden, removing legacy CamNang active links",
-      "passes": true
+      "id": "latex_enabled",
+      "criterion": "Quartz LaTeX plugin is enabled with KaTeX on the maintenance branch",
+      "passes": false
     },
     {
-      "id": "pages_workflow_remediated",
-      "criterion": "pages.yml deploys Quartz from garden/ using Node 22 and copy_garden_assets",
-      "passes": true
+      "id": "math_render_smoke",
+      "criterion": "Post-build render smoke confirms representative math-heavy pages contain KaTeX output and no raw TeX control sequences in article content",
+      "passes": false
     },
     {
-      "id": "ci_workflow_remediated",
-      "criterion": "validate.yml tests both core repository and Garden D2/links",
-      "passes": true
+      "id": "ci_render_gate",
+      "criterion": "GitHub Actions validation runs the render smoke after the production Quartz build and passes on ubuntu-latest",
+      "passes": false
     },
     {
-      "id": "build_docs_remediated",
-      "criterion": "docs/BUILD.md distinguishes handbook builds from canonical Quartz Pages build",
-      "passes": true
+      "id": "academic_content_unchanged",
+      "criterion": "Theory, Practice, frozen source PDFs, and academic Garden prose are unchanged by this presentation maintenance task",
+      "passes": false
     },
     {
-      "id": "fk_trigger_precedence_corrected",
-      "criterion": "FK precedence over AFTER DELETE trigger corrected in canonical triggers, test cases, and Garden notes",
-      "passes": true
+      "id": "release_v1_1_0_preserved",
+      "criterion": "Published v1.1.0 tag/release remains immutable and historical v1.0.0 remains draft",
+      "passes": false
     },
     {
-      "id": "practice_source_pdf_consistent",
-      "criterion": "Practice sources, test matrix, and PDF (if regenerated) consistent with FK precedence",
-      "passes": true
-    },
-    {
-      "id": "garden_consistency_verified",
-      "criterion": "Garden notes and validators updated to match factual FK precedence",
-      "passes": true
-    },
-    {
-      "id": "full_build_verified",
-      "criterion": "Core validation, Quartz production build, and verification suite pass",
-      "passes": true
-    },
-    {
-      "id": "link_crawl_clean",
-      "criterion": "Zero broken internal links on rebuilt site",
-      "passes": true
-    },
-    {
-      "id": "deployment_gate",
-      "criterion": "Pages deployment configured as human-controlled workflow_dispatch only",
-      "passes": true
-    },
-    {
-      "id": "github_ci_gate",
-      "criterion": "GitHub Actions CI validation workflow passes on ubuntu-latest for release candidate PR",
-      "passes": true
+      "id": "live_visual_smoke",
+      "criterion": "After authorized deployment, live desktop/mobile smoke confirms formulas render and no release-blocking visual regression remains",
+      "passes": false
     }
   ]
 }
