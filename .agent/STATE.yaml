@@ -7,8 +7,8 @@ workflow:
 branch: v1.1-quartz-garden
 
 safe_repo_commit:
-  sha: b0545cf4ceb77a98e010da9532825fa2c88d8ef3
-  purpose: d2-mentor-remediation-pass-2
+  sha: f23ffd68fbdc11700b3b10b2277a52d14172f1cc
+  purpose: d2-final-mentor-remediation
 
 safe_product_commit:
   sha: 58b5474be54971b886c28508a9702bcc22d5ac15
@@ -41,6 +41,7 @@ verified:
   canonical_fixture_columns_verified: true
   rbtv_it004_alignment_verified: true
   division_count_distinct_restricted: true
+  division_empty_set_semantics_verified: true
   fresh_d2_review_captures_generated: true
   prior_frozen_branches_untouched: true
   zero_broken_internal_links: true
@@ -56,15 +57,16 @@ do_not_repeat:
   - copy redundant dual-cased PDFs instead of choosing one strict convention
   - invent non-canonical columns on tr_* fixture tables
   - use * notation or foreign 4-tier categories for IT004 RBTV
+  - conflate attribute set X with a candidate relation in division
+  - treat frozen Theory-book taxonomy as canonical over Phase A exam_pattern_map/LOC-LEC-LONG-CH05
 
 relevant_files:
-  - garden/content/errors/wrong-universal-candidate.md
   - garden/content/theory/rbtv-impact.md
   - garden/content/theory/division.md
   - scripts/validate_garden_d2.py
   - reports/v1.1_quartz_d2_qa.md
+  - research/v1.1_phase_a/exam_pattern_map.md
   - practice/sql/01_schema.sql
-  - book/chapters/ch05_constraints.html
 
 next_action: >
   Await human mentor review and authorization for D2 milestone completion on

@@ -4,8 +4,27 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 
 ---
 
+## 2026-09-03 — Milestone D2 final mentor blocker remediation (Phase A RBTV taxonomy, Division empty-set theorem, truthful column validation)
+- **Commit**: pending (`fix(garden): align phase-a rbtv taxonomy, division empty-set theorem, and truthful column validation`)
+- **Scope**:
+  - Aligned `theory/rbtv-impact.md` with frozen Phase A course taxonomy (`research/v1.1_phase_a/exam_pattern_map.md` and `LOC-LEC-LONG-CH05`): Miền giá trị; Liên thuộc tính 1 QH; Liên bộ 1 QH; Tham chiếu; Liên thuộc tính nhiều QH; Thuộc tính tổng hợp; Chu trình. Retained DBMS general constraint categories only as a separate cross-reference.
+  - Updated validator `scripts/validate_garden_d2.py` so the IT004 taxonomy contract is dynamically derived and verified against frozen Phase A `exam_pattern_map.md`.
+  - Fixed Division empty-set semantics in `theory/division.md`: stated classical theorem $R \div \emptyset = \pi_X(R)$, separated SQL universal query behavior with independent candidate table $C$, and avoided conflating attribute set $X$ with a candidate relation.
+  - Truthfully defined and implemented fixture column acceptance: extended deterministic validator to verify canonical `tr_*` tables, aliases, qualified columns, trigger `UPDATE(col)`, and unqualified canonical column references against `practice/sql/01_schema.sql`.
+  - Rebuilt Quartz production site (109 files emitted), checked 2,819 internal links (0 broken), and regenerated all 10 review captures in `dist/review/v1.1_quartz/`.
+- **Verification**:
+  - `scripts/agent/validate_state.py`: PASS (14 criteria synchronized).
+  - `scripts/validate.py`: PASS (6/6).
+  - `scripts/validate_garden_d2.py`: PASS (all 14 checks).
+  - `scripts/agent/check_links.py`: PASS (2,819 links checked, 0 broken).
+  - `scripts/agent/verify.ps1 -Mode Full`: PASS (all 6/6 checks).
+  - `git diff --check`: PASS (zero trailing whitespace).
+- **Next Checkpoint**: Human mentor review and authorization on branch `v1.1-quartz-garden`.
+
+---
+
 ## 2026-09-03 — Milestone D2 mentor blocker remediation (fixture columns, IT004 RBTV, division COUNT-DISTINCT)
-- **Commit**: pending (`fix(garden): remediate fixture columns, it004 rbtv alignment, and division count-distinct`)
+- **Commit**: `f23ffd68fbdc11700b3b10b2277a52d14172f1cc`
 - **Scope**:
   - Corrected `errors/wrong-universal-candidate.md` to use canonical `practice/sql/01_schema.sql` columns (`FullName`, `Credits`) instead of nonexistent fields (`StudentName`, `DeptId`).
   - Aligned `theory/rbtv-impact.md` with frozen IT004 terminology: preserved the 7 IT004 classifications, replaced `*` notation with canonical `+`, `-`, `+(Thuộc tính)`, and framed impact tables as the IT004 analysis method.
@@ -61,7 +80,7 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
   - `scripts/validate_garden_d2.py`: PASS.
   - `scripts/agent/check_links.py`: PASS (2684 links checked, 0 broken).
   - `scripts/agent/verify.ps1 -Mode Full`: PASS (all 6 checks).
-  - `Next Checkpoint`: Human mentor review and authorization on branch `v1.1-quartz-garden`.
+- **Next Checkpoint**: Human mentor review and authorization on branch `v1.1-quartz-garden`.
 
 ---
 

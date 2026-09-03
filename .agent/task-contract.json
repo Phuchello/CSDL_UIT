@@ -44,17 +44,17 @@
     },
     {
       "id": "fixture_schema_columns",
-      "criterion": "All canonical tr_* SQL references validate both table and column existence against 01_schema.sql across all notes",
+      "criterion": "Mechanically verified validation of all canonical tr_* fixture tables and their referenced SQL columns against 01_schema.sql across all notes",
       "passes": true
     },
     {
       "id": "rbtv_it004_alignment",
-      "criterion": "theory/rbtv-impact.md preserves the 7 IT004 classifications, uses +, -, +(Attribute) notation, and frames impact table as IT004 analysis method",
+      "criterion": "theory/rbtv-impact.md aligns with frozen Phase A exam_pattern_map.md/LOC-LEC-LONG-CH05 7-class taxonomy and +(Attribute) notation",
       "passes": true
     },
     {
       "id": "division_count_distinct",
-      "criterion": "Division COUNT-DISTINCT alternative explicitly restricts evidence to required set S and explains empty-set/candidate-domain conditions",
+      "criterion": "Division empty-set semantics correctly state R / 0 = pi_X(R) and separate outer candidate table SQL behavior from attribute set X",
       "passes": true
     },
     {

@@ -117,6 +117,8 @@ def parse_schema_tables(schema_sql: str) -> dict[str, set[str]]:
 
 
 def main() -> int:
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
     errors: list[str] = []
     notes = sorted(CONTENT.rglob("*.md"))
     records: dict[str, tuple[Path, dict[str, str], str]] = {}
@@ -227,9 +229,10 @@ def main() -> int:
             elif source_id not in known_ids:
                 errors.append(f"{path}: source id absent from ledgers: {source_id}")
 
-    # Canonical fixture schema validation across ALL notes (tables and referenced columns)
+    # Canonical fixture schema validation across ALL notes (tables, qualified & unqualified columns)
     schema_sql = (ROOT / "practice" / "sql" / "01_schema.sql").read_text(encoding="utf-8")
     schema_tables = parse_schema_tables(schema_sql)
+    all_canonical_cols = set.union(*schema_tables.values())
 
     for s, (path, meta, body) in records.items():
         for tbl in re.findall(r"\b(?:dbo\.)?(tr_[A-Za-z0-9_]+)\b", body, re.I):
@@ -239,19 +242,23 @@ def main() -> int:
         sql_blocks = re.findall(r"```sql(.*?)```", body, re.S)
         for block in sql_blocks:
             aliases: dict[str, str] = {}
+            block_tables: set[str] = set()
             for m in re.finditer(r"(?:FROM|JOIN)\s+(?:dbo\.)?(tr_[A-Za-z0-9_]+)(?:\s+(?:AS\s+)?([A-Za-z0-9_]+))?", block, re.I):
                 tbl = m.group(1).lower()
                 al = (m.group(2) or m.group(1)).lower()
                 aliases[al] = tbl
+                block_tables.add(tbl)
 
             trg_m = re.search(r"ON\s+(?:dbo\.)?(tr_[A-Za-z0-9_]+)", block, re.I)
             trg_table = trg_m.group(1).lower() if trg_m else None
             if trg_table:
+                block_tables.add(trg_table)
                 aliases["inserted"] = trg_table
                 aliases["deleted"] = trg_table
                 aliases["i"] = trg_table
                 aliases["d"] = trg_table
 
+            # 1. Qualified column references alias.col
             for col_ref in re.finditer(r"\b([A-Za-z0-9_]+)\.([A-Za-z0-9_]+)\b", block):
                 al, col = col_ref.group(1).lower(), col_ref.group(2).lower()
                 if al in aliases:
@@ -259,26 +266,40 @@ def main() -> int:
                     if target_table in schema_tables and col not in schema_tables[target_table]:
                         errors.append(f"{path}: column '{col}' does not exist on canonical table '{target_table}' (alias '{al}')")
 
+            # 2. Trigger UPDATE(col)
             if trg_table:
                 for upd in re.finditer(r"\bUPDATE\s*\(\s*([A-Za-z0-9_]+)\s*\)", block, re.I):
                     col = upd.group(1).lower()
                     if col not in schema_tables[trg_table]:
                         errors.append(f"{path}: UPDATE column '{col}' does not exist on trigger table '{trg_table}'")
 
-    # RBTV IT004 alignment validation
+            # 3. Unqualified canonical column references
+            if block_tables:
+                valid_block_cols = set.union(*(schema_tables[t] for t in block_tables if t in schema_tables))
+                scrubbed = re.sub(r"--.*", "", block)
+                scrubbed = re.sub(r"'[^']*'", "", scrubbed)
+                scrubbed = re.sub(r"\b[A-Za-z0-9_]+\.[A-Za-z0-9_]+\b", "", scrubbed)
+                for word in re.findall(r"\b[A-Za-z_][A-Za-z0-9_]*\b", scrubbed):
+                    w_lower = word.lower()
+                    if w_lower in all_canonical_cols and w_lower not in valid_block_cols:
+                        errors.append(
+                            f"{path}: unqualified canonical column '{word}' belongs to schema but not to tables {sorted(block_tables)} in this query"
+                        )
+
+    # RBTV IT004 alignment validation against frozen Phase A exam_pattern_map.md / LOC-LEC-LONG-CH05
+    exam_pattern_text = (ROOT / "research" / "v1.1_phase_a" / "exam_pattern_map.md").read_text(encoding="utf-8")
+    tax_match = re.search(r"Phân loại RBTV:\s*([^\n|<]+)", exam_pattern_text)
+    if not tax_match:
+        errors.append("Could not extract canonical RBTV taxonomy from research/v1.1_phase_a/exam_pattern_map.md")
+    else:
+        raw_str = re.sub(r"<[^>]+>", "", tax_match.group(1))
+        phase_a_classes = [c.strip().lower() for c in raw_str.split(",") if c.strip()]
+        rbtv_body = records.get("theory/rbtv-impact", (None, {}, ""))[2]
+        for rc in phase_a_classes:
+            if rc not in rbtv_body.lower():
+                errors.append(f"theory/rbtv-impact missing canonical Phase A IT004 classification: {rc}")
+
     rbtv_body = records.get("theory/rbtv-impact", (None, {}, ""))[2]
-    it004_rbtv_classes = [
-        "miền giá trị",
-        "khóa",
-        "thực thể",
-        "tham chiếu",
-        "liên thuộc tính",
-        "liên bộ",
-        "liên quan hệ",
-    ]
-    for rc in it004_rbtv_classes:
-        if rc not in rbtv_body.lower():
-            errors.append(f"theory/rbtv-impact missing canonical IT004 classification: {rc}")
     if "+(DeptId)" not in rbtv_body:
         errors.append("theory/rbtv-impact missing canonical +(Attribute) notation (e.g. +(DeptId))")
     if re.search(r"\*\([A-Za-z0-9_,\s]+\)", rbtv_body):
@@ -286,14 +307,14 @@ def main() -> int:
     if re.search(r"kỹ sư.*bắt buộc phải lập", rbtv_body, re.I):
         errors.append("theory/rbtv-impact overclaims impact table as mandatory for all engineers rather than IT004 method")
 
-    # Division COUNT-DISTINCT restriction validation
+    # Division empty-set & SQL candidate domain separation validation
     div_body = records.get("theory/division", (None, {}, ""))[2]
-    if not ("JOIN dbo.RequiredSet" in div_body or "JOIN RequiredSet" in div_body or "IN (SELECT" in div_body):
+    if "R \\div \\emptyset = \\pi_X(R)" not in div_body:
+        errors.append("theory/division missing classical empty-set theorem: R \\div \\emptyset = \\pi_X(R)")
+    if not ("bảng quan hệ độc lập" in div_body.lower() or "ứng viên độc lập" in div_body.lower() or "independent candidate table" in div_body.lower()):
+        errors.append("theory/division missing separation of outer candidate relation domain from attribute set X")
+    if not ("JOIN dbo.RequiredCourses" in div_body or "JOIN dbo.RequiredSet" in div_body or "JOIN RequiredCourses" in div_body or "JOIN RequiredSet" in div_body or "IN (SELECT" in div_body):
         errors.append("theory/division COUNT-DISTINCT query missing explicit restriction to required set S")
-    if not ("S = \\emptyset" in div_body or "rỗng" in div_body.lower()):
-        errors.append("theory/division missing explanation of empty required set S condition")
-    if not ("miền ứng viên" in div_body.lower() or "candidate domain" in div_body.lower()):
-        errors.append("theory/division missing explanation of candidate domain condition")
 
     # Multi-row Trigger checks
     trigger = records.get("practice/multi-row-trigger", (None, {}, ""))[2]
@@ -348,9 +369,9 @@ def main() -> int:
     print("MANDATORY GRAPH CHAIN: PASS" if not any("mandatory body wikilink" in e for e in errors) else "MANDATORY GRAPH CHAIN: FAIL")
     print("CORE NOTES DEPTH: PASS" if not any("standalone teaching depth" in e for e in errors) else "CORE NOTES DEPTH: FAIL")
     print("PROVENANCE OVERCLAIMS: PASS" if not any("overclaim" in e for e in errors) else "PROVENANCE OVERCLAIMS: FAIL")
-    print("SCHEMA TABLES & COLUMNS: PASS" if not any("absent from schema" in e or "does not exist on canonical table" in e for e in errors) else "SCHEMA TABLES & COLUMNS: FAIL")
-    print("RBTV IT004 ALIGNMENT: PASS" if not any("rbtv-impact" in e for e in errors) else "RBTV IT004 ALIGNMENT: FAIL")
-    print("DIVISION COUNT-DISTINCT: PASS" if not any("theory/division" in e for e in errors) else "DIVISION COUNT-DISTINCT: FAIL")
+    print("SCHEMA TABLES & COLUMNS: PASS" if not any("absent from schema" in e or "does not exist on canonical table" in e or "unqualified canonical column" in e for e in errors) else "SCHEMA TABLES & COLUMNS: FAIL")
+    print("RBTV IT004 ALIGNMENT (PHASE A): PASS" if not any("rbtv-impact" in e or "RBTV taxonomy" in e for e in errors) else "RBTV IT004 ALIGNMENT: FAIL")
+    print("DIVISION EMPTY-SET & SQL SEPARATION: PASS" if not any("theory/division" in e for e in errors) else "DIVISION EMPTY-SET & SQL SEPARATION: FAIL")
     print("SOURCE IDS: PASS" if not any("source ID" in e or "source id absent" in e for e in errors) else "SOURCE IDS: FAIL")
     print("TRIGGER CONTRACT: PASS" if not any("trigger contract" in e for e in errors) else "TRIGGER CONTRACT: FAIL")
     print("PDF CONTRACT: PASS" if not any("PDF" in e or "CamNang" in e for e in errors) else "PDF CONTRACT: FAIL")
