@@ -1,22 +1,22 @@
 project: CSDL_UIT
-status: review_pending
+status: in_progress
 
 workflow:
   version: 2
 
-branch: v1.1-release-candidate
+branch: v1.1.1-maintenance
 
 safe_repo_commit:
-  sha: b2bdaa680cad403418a8bc86d300237191a083b5
-  purpose: blind-integration-review-head
+  sha: ad0ef293d0b85ba59de8ffad8966bd0d40720580
+  purpose: released-v1.1.0-main-and-tag
 
 safe_product_commit:
   sha: be34ef3ef79956d9c1c2541782cabc82e66d0c6e
   purpose: final-d2-quartz-checkpoint
 
 milestone:
-  id: REL-PREP
-  name: Pre-merge Defect Remediation & Release Candidate Preparation
+  id: MAINT-1.1.1
+  name: Post-release Knowledge Garden Visual & Render Maintenance
 
 frozen:
   phase_a: 6aef91eb2cb4a0b41827573bc03ec55640d19786
@@ -26,43 +26,38 @@ frozen:
   main: 6ccf5a408934ab93760ac3242511beb43b05f24f
 
 current_task:
-  id: v1.1-premerge-remediation
-  status: review_pending
+  id: v1.1.1-visual-maintenance
+  status: in_progress
 
 verified:
-  readme_remediated: true
-  pages_workflow_remediated: true
-  ci_workflow_remediated: true
-  build_docs_remediated: true
-  fk_trigger_precedence_corrected: true
-  practice_source_pdf_consistent: true
-  garden_consistency_verified: true
-  full_build_verified: true
-  link_crawl_clean: true
-  deployment_gate: true
-  github_ci_gate: true
+  v1_1_0_release_complete: true
+  v1_1_0_tag_immutable: true
+  v1_1_0_pages_deployed: true
+  latex_plugin_enabled: false
+  math_render_smoke_passed: false
+  github_ci_gate: false
+  live_visual_smoke_passed: false
 
 blockers: []
 
 do_not_repeat:
-  - link to legacy 88p CamNang in v1.1 public badges
-  - deploy book/ to GitHub Pages instead of garden/public
-  - expect AFTER DELETE trigger 51002 when FK constraint fires first (Msg 547)
-  - delete historical CamNang PDF file
-  - alter frozen branch baselines
+  - modify or retag immutable v1.1.0 release
+  - modify frozen branch baselines
+  - alter Theory or Practice academic content for a presentation-only defect
   - deploy Pages automatically on push to main
-  - merge PR to main before mentor review
   - publish historical draft release v1.0.0
+  - accept a green Quartz build as proof that math rendered correctly
 
 relevant_files:
-  - .github/workflows/pages.yml
+  - garden/quartz.config.yaml
+  - garden/quartz/styles/custom.scss
+  - scripts/validate_garden_render.py
   - .github/workflows/validate.yml
-  - docs/BUILD.md
-  - scripts/validate.py
+  - .github/workflows/pages.yml
   - .agent/STATE.yaml
   - .agent/task-contract.json
 
 next_action: >
-  Await human mentor review and authorization of PR #2 and CI validation run
-  33743104644 before fast-forward merge to main, tagging v1.1.0, release creation,
-  and manual Pages workflow_dispatch.
+  Open a maintenance PR from v1.1.1-maintenance to main, run GitHub-hosted validation,
+  verify the new post-build KaTeX render smoke gate, then review remaining visual-only
+  findings (duplicate H1/sidebar polish) before any merge or Pages dispatch.
