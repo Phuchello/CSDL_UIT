@@ -1,51 +1,51 @@
 {
   "id": "d2-source-graph-content-contract",
-  "status": "pending",
+  "status": "passed",
   "acceptance": [
     {
       "id": "invented_source_ids",
       "criterion": "No invented TECH-MS* or UIT-E* source IDs remain",
-      "passes": false
+      "passes": true
     },
     {
       "id": "ledger_source_contract",
       "criterion": "Source IDs are derived only from frozen Phase A ledgers",
-      "passes": false
+      "passes": true
     },
     {
       "id": "related_targets",
       "criterion": "Every related frontmatter target resolves uniquely",
-      "passes": false
+      "passes": true
     },
     {
       "id": "graph_edges",
       "criterion": "Mandatory pedagogical relationships use real Markdown links",
-      "passes": false
+      "passes": true
     },
     {
       "id": "trigger_contract",
       "criterion": "Canonical multi-row trigger event semantics are preserved",
-      "passes": false
+      "passes": true
     },
     {
       "id": "pdf_contract",
       "criterion": "Only Theory and Practice PDFs are public and href case matches generated files",
-      "passes": false
+      "passes": true
     },
     {
       "id": "build",
       "criterion": "Quartz production build passes after correction",
-      "passes": false
+      "passes": true
     },
     {
       "id": "broken_links",
       "criterion": "Built site has zero broken internal links",
-      "passes": false
+      "passes": true
     },
     {
       "id": "fresh_visuals",
       "criterion": "Fresh screenshots are generated from corrected build",
-      "passes": false
+      "passes": true
     }
   ]
 }

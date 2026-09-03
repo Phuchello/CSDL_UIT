@@ -57,3 +57,8 @@ edge-final-gate/
 poppler-final/
 *.log
 *.tmp
+
+# Node & Quartz build artifacts
+node_modules/
+garden/public/
+.quartz-cache/

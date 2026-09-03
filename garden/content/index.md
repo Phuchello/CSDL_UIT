@@ -18,4 +18,4 @@ Một khu vườn ghi chú nhỏ, có nguồn và có liên kết. Bắt đầu 
 - [[exam-patterns]] — các dạng quan sát được trong corpus, không phải dự đoán đề.
 - [[cheat-sheets]] — bảng tra nhanh trước khi làm bài.
 - [[sources]] — sổ provenance và URL nguyên bản.
-- [Mở PDF cẩm nang](./static/pdfs/IT004_CSDL_UIT_CamNang_VoTrongPhuc.pdf) · [PDF lý thuyết](./static/pdfs/IT004_CSDL_UIT_LyThuyet_VoTrongPhuc.pdf) · [PDF thực hành](./static/pdfs/IT004_CSDL_UIT_ThucHanh_VoTrongPhuc.pdf)
+- [PDF Lý thuyết](./static/pdfs/it004_csdl_uit_lythuyet_votrongphuc.pdf) · [PDF Thực hành](./static/pdfs/it004_csdl_uit_thuchanh_votrongphuc.pdf)

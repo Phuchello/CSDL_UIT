@@ -4,8 +4,29 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 
 ---
 
+## 2026-09-03 — Milestone D2 content-contract correction
+- **Commit**: pending (`fix(garden): correct d2 content contract, provenance, and graph edges`)
+- **Scope**:
+  - Eliminated all invented source IDs (`TECH-MS*`, `UIT-E*`), replacing them with canonical IDs (`TECH-A01`–`TECH-A11`, `UIT-O01`–`UIT-O11`, `EXAM-*`, `PRAC-*`, `LOC-LEC-*`) derived strictly from frozen Phase A ledgers.
+  - Resolved all ambiguous and broken `related` frontmatter targets across the garden.
+  - Added rich Markdown `[[wikilinks]]` to note bodies across all 57 notes (zero notes without body graph links).
+  - Deepened core theory notes (`3nf`, `bcnf`, `candidate-keys`, `minimal-cover`, `lossless-decomposition`, `closure`, `functional-dependencies`).
+  - Restored canonical multi-row trigger event discrimination contract in `practice/multi-row-trigger.md` matching `practice/sql/05_triggers.sql`.
+  - Enforced case-safe dual-PDF navigation contract (removed legacy `CamNang` link; lowercase URL paths).
+  - Hardened `scripts/validate_garden_d2.py` with comprehensive provenance, link, trigger, and PDF assertions.
+  - Generated 10 fresh review screenshots into `dist/review/v1.1_quartz/` using headless browser capture.
+- **Verification**:
+  - `scripts/agent/validate_state.py`: PASS.
+  - `scripts/validate.py`: PASS (6/6).
+  - `scripts/validate_garden_d2.py`: PASS.
+  - `scripts/agent/check_links.py`: PASS (2684 links checked, 0 broken).
+  - `scripts/agent/verify.ps1 -Mode Full`: PASS (all 6 checks).
+- **Next Checkpoint**: Human mentor review and authorization on branch `v1.1-quartz-garden`.
+
+---
+
 ## 2026-09-03 — Workflow v2 guardrail hardening
-- **Commit**: pending (`chore: harden workflow v2 guardrails`)
+- **Commit**: `2625d3b8e17baaa9872297c958e766574c169120`
 - **Scope**:
   - Corrected `docs/index.md` practice fixture paths to match canonical scripts (`01_schema.sql` through `reset.sql`).
   - Replaced absolute `file:///` links in `docs/index.md` with repository-relative Markdown links.

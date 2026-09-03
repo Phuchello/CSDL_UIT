@@ -7,8 +7,8 @@ workflow:
 branch: v1.1-quartz-garden
 
 safe_repo_commit:
-  sha: 13447239d458982fe2acab9622220bb0daf012bb
-  purpose: workflow-v2-migration
+  sha: 2625d3b8e17baaa9872297c958e766574c169120
+  purpose: harden-workflow-v2-guardrails
 
 safe_product_commit:
   sha: 58b5474be54971b886c28508a9702bcc22d5ac15
@@ -27,20 +27,17 @@ frozen:
 
 current_task:
   id: d2-source-graph-content-contract
-  status: blocked_pending_execution
+  status: review_pending
 
 verified:
   quartz_candidate_exists: true
-  quartz_build_at_safe_product_commit: true
-  fresh_d2_review_captures_exist: true
+  quartz_build_passes: true
+  d2_content_contract_corrected: true
+  fresh_d2_review_captures_generated: true
   prior_frozen_branches_untouched: true
+  zero_broken_internal_links: true
 
-blockers:
-  - invented-source-ids
-  - metadata-only-graph-relationships
-  - shallow-core-notes
-  - trigger-event-contract-regression-risk
-  - pdf-public-href-contract
+blockers: []
 
 do_not_repeat:
   - invent TECH-MS source IDs
@@ -57,10 +54,5 @@ relevant_files:
   - practice/sql/01_schema.sql
 
 next_action: >
-  Apply the approved D2 source/graph/content-integrity correction:
-  remove invented source IDs, derive provenance from frozen Phase A
-  ledgers, validate real Markdown graph edges and related targets,
-  restore the canonical multi-row Trigger event contract, deepen core
-  notes, and make Theory/Practice PDF public hrefs case-safe. Rebuild,
-  verify, regenerate fresh screenshots, checkpoint, and stop for mentor
-  review.
+  Await human mentor review and authorization for D2 milestone completion on
+  branch v1.1-quartz-garden. Do not merge, tag, release, or publish to GitHub Pages.

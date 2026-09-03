@@ -124,7 +124,7 @@ def validate():
     forbidden = [user_pat, r"/Users/", r"sk-[a-zA-Z0-9]{20,}", r"OPENAI_" + r"API_KEY", r"GEMINI_" + r"API_KEY"]
     
     for root, _, files in os.walk(ROOT):
-        if ".git" in root or "dist" in root or "assets" in root:
+        if ".git" in root or "dist" in root or "assets" in root or "node_modules" in root:
             continue
         for f in files:
             path = Path(root) / f

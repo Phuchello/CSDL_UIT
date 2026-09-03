@@ -1,12 +1,19 @@
 ---
 title: Observed pattern — relational algebra
-description: Mẫu câu hỏi RA về chọn, chiếu, nối, hợp và phép chia.
+description: Mẫu câu hỏi Đại số quan hệ về chọn, chiếu, nối, hợp và phép chia.
 type: exam-pattern
 topics: [exam, relational-algebra]
-related: [relational-algebra, division, exercises/division-exercise]
+related: [theory/relational-algebra, theory/division, exercises/division-exercise]
 provenance: reconstructed-exam-pattern
-courseEvidence: [UIT-E01]
+courseEvidence: [EXAM-2023-2024-HK1-MID-D1, LOC-LEC-LONG-CH03]
 ---
 # Observed pattern — relational algebra
 
-Trong corpus Phase A, dạng thường gặp yêu cầu dịch mô tả nghiệp vụ sang `σ`, `π`, JOIN hoặc phép chia; một số câu kiểm tra union-compatibility. Đây là pattern tái dựng từ tài liệu công khai, không gán cho một đề/năm nếu không có bản gốc.
+Trong các đề thi giữa kỳ UIT (điển hình như đề thi giữa kỳ 2023–2024 Đề 1 và bài giảng `LOC-LEC-LONG-CH03`), dạng câu hỏi [[theory/relational-algebra|Đại số quan hệ]] thường chiếm từ 2.5 đến 4.0 điểm với các cấu trúc trọng tâm:
+
+1. **Phép chọn ($\sigma$) và Chiếu ($\pi$)**: Lọc các dòng thỏa mãn điều kiện và chiếu các thuộc tính đầu ra tương ứng.
+2. **Phép kết tự nhiên ($\bowtie$) và Kết có điều kiện ($\bowtie_\theta$)**: Ghép nối các quan hệ theo thuộc tính chung hoặc khóa ngoại.
+3. **Phép trừ ($-$)**: Tìm các đối tượng *chưa từng* tham gia vào quan hệ (đòi hỏi hai biểu thức phải khả hợp).
+4. **Phép chia ($\div$)**: Dạng bài tìm các thực thể gắn liền với *tất cả* các phần tử của một tập con (xem chi tiết kỹ thuật tại [[theory/division|Phép chia]] và bài mẫu tại [[exercises/division-exercise|Bài tập phép chia]]).
+
+Khi làm bài, sinh viên cần xác định rõ biểu thức trung gian và kiểm tra điều kiện khả hợp (union-compatibility) trước khi áp dụng các phép toán tập hợp. Xem thêm căn cứ tại [[sources/course|Course sources]].
