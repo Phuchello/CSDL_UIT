@@ -28,4 +28,4 @@ Trong snapshot khảo sát có 17 hiện vật đề thi tự luận và 10 hi�
 - Các hiện vật này phục vụ việc quan sát mẫu câu hỏi (`observed pattern`), tuyệt đối không được coi là đề thi công bố chính thức từ trường.
 - Mọi tài liệu sinh viên hoặc cộng đồng đều giữ nguyên phân lớp Tier C thứ cấp.
 
-Xem thêm các tiêu chuẩn kỹ thuật tại [[sources/technical|Tài liệu kỹ thuật (Technical Sources)]] và cấu trúc đề quan sát được tại [[exam-patterns/index|Exam patterns]].
+Xem thêm các tiêu chuẩn kỹ thuật tại [[sources/technical|Tài liệu kỹ thuật (Technical Sources)]] và cấu trúc đề quan sát được tại [[exam-patterns/index|Dạng đề thi (Exam Patterns)]].
