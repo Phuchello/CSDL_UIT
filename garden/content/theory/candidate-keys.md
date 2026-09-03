@@ -1,5 +1,5 @@
 ---
-title: Candidate keys
+title: Khóa ứng viên (Candidate Keys)
 description: Định nghĩa siêu khóa, khóa ứng viên tối thiểu, và thuật toán phân loại L/R/N/LR để tìm toàn bộ khóa quan hệ.
 type: theory
 topics: [candidate-keys, keys, closure]
@@ -7,7 +7,7 @@ related: [theory/functional-dependencies, theory/closure, theory/minimal-cover, 
 provenance: verified-artifact
 courseEvidence: [UIT-O05, LOC-LEC-LONG-CH06]
 ---
-# Candidate keys (Khóa ứng viên)
+# Khóa ứng viên & Thuật toán tìm khóa (Candidate Keys)
 
 Khóa ứng viên là khái niệm trung tâm trong lý thuyết thiết kế cơ sở dữ liệu quan hệ, làm cơ sở để xác định khóa chính (`PRIMARY KEY`), thuộc tính khóa và phân định các dạng chuẩn [[theory/3nf|3NF]] và [[theory/bcnf|BCNF]].
 
@@ -39,4 +39,4 @@ Xét quan hệ $R(U)$ và tập phụ thuộc hàm $F$. Phân chia tập thuộc
    - Nếu bằng $U$: ghi nhận là một khóa ứng viên mới.
    - **Quy tắc cắt tỉa:** Không xét các tổ hợp bậc cao hơn đã chứa một khóa đã tìm được (để đảm bảo tính tối thiểu).
 
-Xem thuật toán tính bao đóng tại [[theory/closure|Closure]] và mẫu bài thi điển hình tại [[exam-patterns/normalization|Observed pattern — normalization]].
+Xem thuật toán tính bao đóng tại [[theory/closure|Closure]] và mẫu bài thi điển hình tại [[exam-patterns/normalization|Dạng đề quan sát — Chuẩn hóa dữ liệu (Normalization)]].

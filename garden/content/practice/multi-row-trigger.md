@@ -1,5 +1,5 @@
 ---
-title: Multi-row trigger
+title: "Trigger xử lý tập hợp đa dòng (Multi-row Trigger)"
 description: Mẫu trigger an toàn đa dòng với cơ chế phân biệt sự kiện DELETE và UPDATE.
 type: practice
 topics: [trigger, multi-row, sql-server]
@@ -8,7 +8,7 @@ provenance: original-practice
 fixture: training-v1
 technicalSources: [TECH-A04, TECH-A05, TECH-A06]
 ---
-# Multi-row trigger
+# Trigger xử lý tập hợp đa dòng (Multi-row Trigger)
 
 Trong SQL Server, câu lệnh DML tác động trên tập hợp dòng. Mọi DML Trigger phải được thiết kế dạng tập hợp (set-based), xử lý đồng thời nhiều dòng trong các bảng ảo `inserted` và `deleted` mà không dùng biến vô hướng (scalar variable, xem [[errors/scalar-trigger|scalar-trigger]]).
 

@@ -1,25 +1,30 @@
 {
-  "id": "v1.1.1-visual-maintenance",
-  "status": "review_pending",
+  "id": "v1.1.1-vietnamese-localization",
+  "status": "in_progress",
   "acceptance": [
     {
-      "id": "latex_enabled",
-      "criterion": "Quartz LaTeX plugin is enabled with KaTeX on the maintenance branch",
+      "id": "vietnamese_first_titles",
+      "criterion": "All human-facing navigation, page titles, H1s, search titles, and wikilink aliases are Vietnamese-first while preserving technical English in parentheses",
       "passes": true
     },
     {
-      "id": "math_render_smoke",
-      "criterion": "Post-build render smoke confirms representative math-heavy pages contain KaTeX output and no raw TeX control sequences in article content",
+      "id": "file_slugs_unchanged",
+      "criterion": "Every existing file path and slug in garden/content/ remains identical",
       "passes": true
     },
     {
-      "id": "ci_render_gate",
-      "criterion": "GitHub Actions validation runs the render smoke after the production Quartz build and passes on ubuntu-latest",
+      "id": "regression_check_extended",
+      "criterion": "scripts/validate_garden_d2.py enforces Vietnamese-first title prefixes on major sections and representative core notes",
+      "passes": true
+    },
+    {
+      "id": "render_and_link_smoke",
+      "criterion": "Quartz builds successfully, zero broken links across internal link crawl, math renders via KaTeX, and representative pages inspect clean in desktop/mobile layout",
       "passes": true
     },
     {
       "id": "academic_content_unchanged",
-      "criterion": "Theory, Practice, frozen source PDFs, and academic Garden prose are unchanged by this presentation maintenance task",
+      "criterion": "Theory and Practice handbooks, PDFs, formulas, SQL code, and canonical provenance remain untouched",
       "passes": true
     },
     {
@@ -28,8 +33,8 @@
       "passes": true
     },
     {
-      "id": "live_visual_smoke",
-      "criterion": "After authorized deployment, live desktop/mobile smoke confirms formulas render and no release-blocking visual regression remains",
+      "id": "github_ci_gate",
+      "criterion": "GitHub Actions validation on PR passes on ubuntu-latest",
       "passes": false
     }
   ]

@@ -1,12 +1,12 @@
 ---
-title: Normalization cheat sheet
+title: Bảng tra chuẩn hóa dữ liệu (Normalization)
 description: Bảng tóm lược và quy trình kiểm tra tuần tự từ Phụ thuộc hàm đến dạng chuẩn BCNF.
 type: cheatsheet
 topics: [normalization, fd]
 related: [theory/closure, theory/candidate-keys, theory/minimal-cover, theory/3nf, theory/bcnf, theory/lossless-decomposition]
 provenance: original-practice
 ---
-# Normalization cheat sheet
+# Bảng tra chuẩn hóa dữ liệu (Normalization Cheat Sheet)
 
 Bảng tra nhanh quy trình chuẩn hóa quan hệ trong phòng thi và bài tập:
 

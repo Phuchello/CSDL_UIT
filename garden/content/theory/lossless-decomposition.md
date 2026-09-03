@@ -1,5 +1,5 @@
 ---
-title: Lossless-join decomposition
+title: "Phân rã bảo toàn thông tin nối (Lossless-Join Decomposition)"
 description: Phân rã không mất thông tin, phòng ngừa bộ giả, định lý giao siêu khóa và tính bảo toàn phụ thuộc hàm.
 type: theory
 topics: [normalization, decomposition, lossless-join, dependency-preservation]
@@ -7,7 +7,7 @@ related: [theory/3nf, theory/bcnf, theory/functional-dependencies, theory/candid
 provenance: verified-artifact
 courseEvidence: [UIT-O02, LOC-LEC-LONG-CH06]
 ---
-# Lossless-join decomposition (Phân rã không mất thông tin)
+# Phân rã bảo toàn thông tin nối (Lossless-Join Decomposition)
 
 Khi thực hiện chuẩn hóa cơ sở dữ liệu lên các dạng chuẩn cao hơn ([[theory/3nf|3NF]], [[theory/bcnf|BCNF]]), ta phải phân rã (decompose) một lược đồ quan hệ lớn thành nhiều lược đồ quan hệ nhỏ hơn. Phép phân rã chỉ có giá trị thực tiễn nếu nó thỏa mãn tính chất **kết nối không mất thông tin (Lossless-join)** và lý tưởng nhất là **bảo toàn phụ thuộc hàm (Dependency Preservation)**.
 

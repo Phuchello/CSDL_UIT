@@ -1,5 +1,5 @@
 ---
-title: SQL Server setup
+title: "Cài đặt & Thiết lập SQL Server (Setup)"
 description: Database context, SSMS workflow và cách ghi lại script có thể chạy lại.
 type: practice
 topics: [sql-server, ssms, setup]
@@ -7,7 +7,7 @@ related: [practice/lab-01, practice/debugging, cheat-sheets/sql-server]
 provenance: verified-artifact
 technicalSources: [TECH-A01]
 ---
-# SQL Server setup
+# Cài đặt & Thiết lập môi trường SQL Server (Setup)
 
 Mở SSMS, kết nối đúng instance máy chủ cục bộ hoặc phòng máy, khởi tạo ngữ cảnh database trước khi chạy script:
 

@@ -1,5 +1,5 @@
 ---
-title: Minimal cover
+title: Phủ tối thiểu (Minimal Cover)
 description: Phủ tối thiểu (Canonical Cover Fc), 3 bước chuẩn hóa vế phải, loại thuộc tính dư vế trái và loại phụ thuộc hàm dư thừa.
 type: theory
 topics: [minimal-cover, functional-dependencies]
@@ -7,7 +7,7 @@ related: [theory/closure, theory/candidate-keys, theory/3nf, theory/lossless-dec
 provenance: verified-artifact
 courseEvidence: [UIT-O05, LOC-LEC-LONG-CH06]
 ---
-# Minimal cover (Phủ tối thiểu $F_c$)
+# Phủ tối thiểu của tập phụ thuộc hàm (Minimal Cover $F_c$)
 
 Phủ tối thiểu (hay Phủ chính tắc - Canonical Cover $F_c$) là dạng rút gọn chuẩn tắc của tập phụ thuộc hàm $F$, loại bỏ hoàn toàn mọi dư thừa về cả thuộc tính lẫn phụ thuộc hàm mà vẫn bảo toàn trọn vẹn ngữ nghĩa bao đóng $F_c^+ = F^+$.
 

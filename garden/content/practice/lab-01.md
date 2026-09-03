@@ -1,5 +1,5 @@
 ---
-title: Lab 01 — DDL và ràng buộc
+title: Lab 01 — DDL và ràng buộc toàn vẹn
 description: Tạo bảng, khoá và ràng buộc trên SQL Server.
 type: practice
 topics: [ddl, constraints, sql-server]
@@ -8,7 +8,7 @@ provenance: verified-artifact
 fixture: training-v1
 technicalSources: [TECH-A01, TECH-A03]
 ---
-# Lab 01 — DDL và ràng buộc
+# Lab 01 — DDL và ràng buộc toàn vẹn
 
 Thực hành tạo lập bảng và ràng buộc toàn vẹn khai báo trên SQL Server trong môi trường [[practice/setup|Setup]]:
 

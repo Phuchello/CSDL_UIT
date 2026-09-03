@@ -363,6 +363,34 @@ def main() -> int:
         if built_pdfs != expected_pdfs:
             errors.append(f"Built PDF output contract failed: expected {expected_pdfs}, got {built_pdfs}")
 
+    # Vietnamese-first localization regression check for major sections and core notes
+    vn_title_rules = {
+        "index": ("Cơ sở dữ liệu", "Vườn tri thức"),
+        "theory/index": ("Lý thuyết",),
+        "practice/index": ("Thực hành",),
+        "exercises/index": ("Bài tập",),
+        "exam-patterns/index": ("Dạng đề",),
+        "errors/index": ("Lỗi",),
+        "cheat-sheets/index": ("Bảng tra",),
+        "sources/index": ("Tài liệu",),
+        "theory/candidate-keys": ("Khóa ứng viên",),
+        "theory/minimal-cover": ("Phủ tối thiểu",),
+        "theory/relational-algebra": ("Đại số quan hệ",),
+        "theory/double-not-exists": ("Hai tầng phủ định",),
+        "theory/functional-dependencies": ("Phụ thuộc hàm",),
+        "theory/lossless-decomposition": ("Phân rã",),
+        "theory/relational-model": ("Mô hình quan hệ",),
+        "exercises/normalization-exercise": ("Bài tập",),
+        "practice/debugging": ("Quy trình chẩn đoán",),
+        "practice/multi-row-trigger": ("Trigger xử lý",),
+    }
+    for slug_key, prefixes in vn_title_rules.items():
+        if slug_key in records:
+            meta = records[slug_key][1]
+            title = meta.get("title", "").strip("\"'")
+            if not any(title.startswith(p) for p in prefixes):
+                errors.append(f"{slug_key}: title must be Vietnamese-first (expected prefix in {prefixes}, got '{title}')")
+
     print(f"NOTES: {len(notes)}")
     counts = {}
     for _, meta, _ in records.values():
@@ -380,6 +408,7 @@ def main() -> int:
     print("SOURCE IDS: PASS" if not any("source ID" in e or "source id absent" in e for e in errors) else "SOURCE IDS: FAIL")
     print("TRIGGER CONTRACT: PASS" if not any("trigger contract" in e for e in errors) else "TRIGGER CONTRACT: FAIL")
     print("PDF CONTRACT: PASS" if not any("PDF" in e or "CamNang" in e for e in errors) else "PDF CONTRACT: FAIL")
+    print("VIETNAMESE LOCALIZATION: PASS" if not any("Vietnamese-first" in e for e in errors) else "VIETNAMESE LOCALIZATION: FAIL")
 
     if errors:
         print("VALIDATION: FAIL")

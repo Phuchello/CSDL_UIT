@@ -1,5 +1,5 @@
 ---
-title: Lab 02 — DML và JOIN
+title: Lab 02 — DML và kết nối bảng (JOIN)
 description: Chèn, cập nhật, xoá và nối bảng mà không mất miền dữ liệu.
 type: practice
 topics: [dml, join, aggregation]
@@ -8,7 +8,7 @@ provenance: verified-artifact
 fixture: training-v1
 technicalSources: [TECH-A01, TECH-A02]
 ---
-# Lab 02 — DML và JOIN
+# Lab 02 — DML và kết nối bảng (JOIN)
 
 Sau khi hoàn thành cấu trúc bảng ở [[practice/lab-01|Lab 01]], quy trình thao tác dữ liệu và kết nối bảng đòi hỏi kiểm soát chặt chẽ mức độ chi tiết (grain):
 

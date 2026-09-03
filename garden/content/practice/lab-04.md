@@ -1,5 +1,5 @@
 ---
-title: Lab 04 — trigger và toàn vẹn
+title: Lab 04 — Trigger và toàn vẹn dữ liệu
 description: Trigger, inserted/deleted và kiểm thử thao tác nhiều dòng.
 type: practice
 topics: [trigger, integrity, inserted, deleted]
@@ -8,7 +8,7 @@ provenance: verified-artifact
 fixture: training-v1
 technicalSources: [TECH-A04, TECH-A05, TECH-A06]
 ---
-# Lab 04 — trigger và toàn vẹn
+# Lab 04 — Trigger và toàn vẹn dữ liệu
 
 Lab 04 tập trung vào việc hiện thực hóa các quy tắc toàn vẹn nghiệp vụ phức tạp bằng DML Trigger trên SQL Server:
 

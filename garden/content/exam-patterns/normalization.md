@@ -1,5 +1,5 @@
 ---
-title: Observed pattern — normalization
+title: Dạng đề quan sát — Chuẩn hóa dữ liệu (Normalization)
 description: Mẫu bài tập Phụ thuộc hàm, bao đóng, khóa và chuẩn hóa dạng chuẩn trong đề thi UIT.
 type: exam-pattern
 topics: [exam, functional-dependencies, normalization]
@@ -7,7 +7,7 @@ related: [theory/closure, theory/candidate-keys, theory/minimal-cover, theory/3n
 provenance: reconstructed-exam-pattern
 courseEvidence: [EXAM-2023-2024-HK1-FINAL-01, LOC-LEC-LONG-CH06]
 ---
-# Observed pattern — normalization
+# Dạng đề quan sát — Chuẩn hóa dữ liệu (Normalization)
 
 Trong cấu trúc đề thi Cuối kỳ UIT chuẩn mực (minh chứng qua `EXAM-2023-2024-HK1-FINAL-01` và bài giảng `LOC-LEC-LONG-CH06`), bài toán Phụ thuộc hàm và Chuẩn hóa thường chiếm từ 2.0 đến 3.0 điểm với chuỗi các bước kinh điển:
 

@@ -185,6 +185,8 @@ plugins:
       group: toolbar
   - source: "@quartz-community/breadcrumbs"
     enabled: true
+    options:
+      rootName: "Trang chủ"
     layout:
       position: beforeBody
       priority: 5

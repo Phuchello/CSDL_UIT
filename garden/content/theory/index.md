@@ -1,11 +1,11 @@
 ---
-title: Theory
+title: Lý thuyết (Theory)
 description: Các nút lý thuyết cốt lõi của cơ sở dữ liệu quan hệ và chuẩn hóa.
 type: theory
 topics: [theory]
 related: [theory/relational-model, theory/relational-algebra, theory/functional-dependencies, theory/3nf, theory/bcnf]
 ---
-# Theory
+# Lý thuyết cơ sở dữ liệu (Theory)
 
 Hệ thống lý thuyết nền tảng IT004 được cấu trúc theo lộ trình học thuật chặt chẽ:
 

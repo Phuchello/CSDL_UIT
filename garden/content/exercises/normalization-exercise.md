@@ -1,12 +1,12 @@
 ---
-title: Exercise — normalization analysis
+title: "Bài tập rèn luyện — Phân tích & Chuẩn hóa lược đồ (Normalization)"
 description: Bài tập phân tích bao đóng, tìm khóa ứng viên, xác định dạng chuẩn 3NF/BCNF và phân rã.
 type: exercise
 topics: [closure, candidate-keys, 3nf, bcnf]
 related: [theory/closure, theory/candidate-keys, theory/minimal-cover, theory/3nf, theory/bcnf, theory/lossless-decomposition]
 provenance: original-practice
 ---
-# Exercise — normalization analysis
+# Bài tập rèn luyện — Phân tích & Chuẩn hóa lược đồ (Normalization)
 
 ## Đề bài mẫu chuẩn mực
 Cho lược đồ quan hệ $R(A, B, C, D, E)$ với tập phụ thuộc hàm $F = \{A \rightarrow BC, CD \rightarrow E, B \rightarrow D, E \rightarrow A\}$.
@@ -48,4 +48,4 @@ Dựa vào các FD:
 - Tương tự, $CD \rightarrow E$: $CD$ là khóa ứng viên $\rightarrow$ thỏa mãn.
 - **Kết luận:** Quan hệ $R$ đạt **3NF** nhưng **không đạt BCNF** (do $B \rightarrow D$ có vế trái không phải siêu khóa).
 
-Xem thêm phương pháp phân rã tại [[theory/lossless-decomposition|Phân rã không mất mát thông tin]] và bảng tra cứu tại [[cheat-sheets/normalization|Normalization cheat sheet]].
+Xem thêm phương pháp phân rã tại [[theory/lossless-decomposition|Phân rã không mất mát thông tin]] và bảng tra cứu tại [[cheat-sheets/normalization|Bảng tra chuẩn hóa dữ liệu]].

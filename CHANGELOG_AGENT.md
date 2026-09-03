@@ -4,6 +4,22 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 
 ---
 
+## 2026-09-03 — Full Vietnamese-first Localization QA Pass on v1.1.1-vietnamese-ui
+- **Scope**:
+  - Localized human-facing navigation, frontmatter titles, H1s, and explicit wikilink aliases across all 57 Markdown notes in `garden/content/**/*.md` to Vietnamese-first while preserving standard English technical terms in parentheses (e.g. `Khóa ứng viên (Candidate Keys)`, `Phủ tối thiểu (Minimal Cover)`, `Đại số quan hệ (Relational Algebra)`).
+  - Preserved natural product and operator names unchanged (`SQL Server`, `T-SQL`, `JOIN`, `GROUP BY`, `NULL`, `3NF`, `BCNF`, `Double NOT EXISTS`).
+  - Preserved all 57 existing file paths and slugs identical.
+  - Configured `@quartz-community/breadcrumbs` with `rootName: "Trang chủ"` in `garden/quartz.config.yaml`.
+  - Extended `scripts/validate_garden_d2.py` with deterministic regression checks asserting Vietnamese-first title prefixes on major section folders and core conceptual notes.
+  - Rebuilt Quartz, verified 0 broken links in 2,937-link crawl, confirmed render smoke and KaTeX math integrity, and audited representative rendered pages.
+- **Verification**:
+  - `scripts/validate_garden_d2.py`: ALL 15 CHECKS PASS.
+  - `scripts/validate_garden_render.py`: PASS.
+  - `scripts/agent/check_links.py`: PASS (0 broken links).
+  - `scripts/agent/verify.ps1 -Mode Full`: PASS.
+
+---
+
 ## 2026-09-03 — Release-gate hardening & CI validation on v1.1-release-candidate
 - **Commit**: `e1bd46a` (`fix: use resilient heading marker for Chapter 7 in PDF layout validator`), `c512b14` (`chore: harden release gates and decouple Pages deployment`)
 - **Scope**:

@@ -1,10 +1,10 @@
 project: CSDL_UIT
-status: review_pending
+status: in_progress
 
 workflow:
   version: 2
 
-branch: v1.1.1-maintenance
+branch: v1.1.1-vietnamese-ui
 
 safe_repo_commit:
   sha: ad0ef293d0b85ba59de8ffad8966bd0d40720580
@@ -16,18 +16,18 @@ safe_product_commit:
 
 milestone:
   id: MAINT-1.1.1
-  name: Post-release Knowledge Garden Visual & Render Maintenance
+  name: Knowledge Garden Vietnamese-first Localization QA Pass
 
 frozen:
   phase_a: 6aef91eb2cb4a0b41827573bc03ec55640d19786
   theory: 61eb5c8a60106be4251ce090a17c6c3482284332
   practice: 59c519b94ede86f07fbc1778b120d0c8c3188b80
   d1: 922afe07bea7f28abf30c49054159a09a31be743
-  main: 6ccf5a408934ab93760ac3242511beb43b05f24f
+  main: 5e4b0c17ec709aabe999a9d922c6679c3a3797ca
 
 current_task:
-  id: v1.1.1-visual-maintenance
-  status: review_pending
+  id: v1.1.1-vietnamese-localization
+  status: in_progress
 
 verified:
   v1_1_0_release_complete: true
@@ -35,18 +35,18 @@ verified:
   v1_1_0_pages_deployed: true
   latex_plugin_enabled: true
   math_render_smoke_passed: true
-  github_ci_gate: true
+  vietnamese_first_localization_applied: true
+  vietnamese_first_regression_gate_passed: true
+  link_crawl_passed: true
+  representative_render_inspected: true
+  github_ci_gate: false
   academic_content_unchanged: true
-  duplicate_heading_polish_applied: true
-  nested_sidebar_scroll_polish_applied: true
-  live_visual_smoke_passed: false
 
 verification_evidence:
-  pr: 3
-  functional_ci_run: 33763735969
-  current_head_ci_run: 33764039396
-  current_head_ci_conclusion: success
-  current_head_sha: 21bf44f58c1fc369634a183e56bdaa9f4175fa0f
+  pr: null
+  ci_run_id: null
+  ci_conclusion: null
+  head_sha: null
 
 blockers: []
 
@@ -56,18 +56,15 @@ do_not_repeat:
   - alter Theory or Practice academic content for a presentation-only defect
   - deploy Pages automatically on push to main
   - publish historical draft release v1.0.0
-  - accept a green Quartz build as proof that math rendered correctly
+  - alter markdown file paths or slugs in garden/content
 
 relevant_files:
+  - garden/content/**/*.md
   - garden/quartz.config.yaml
-  - garden/quartz/styles/custom.scss
-  - scripts/validate_garden_render.py
-  - .github/workflows/validate.yml
-  - .github/workflows/pages.yml
+  - scripts/validate_garden_d2.py
   - .agent/STATE.yaml
   - .agent/task-contract.json
 
 next_action: >
-  Merge PR #3 to main only after its current-head CI remains green. Then use the existing
-  human-controlled Pages workflow_dispatch and perform desktop/mobile live visual smoke.
-  Do not create or move a v1.1.1 tag until the live smoke passes.
+  Commit and push v1.1.1-vietnamese-ui to origin, open PR to main, and verify GitHub Actions CI passes.
+  Do NOT merge and do NOT dispatch Pages yet.

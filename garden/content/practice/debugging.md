@@ -1,5 +1,5 @@
 ---
-title: SQL debugging workflow
+title: "Quy trình chẩn đoán & Gỡ lỗi SQL (Debugging Workflow)"
 description: Quy trình tái hiện, khoanh vùng, kiểm tra và sửa lỗi SQL Server.
 type: practice
 topics: [debugging, sql-server, reproducibility]
@@ -7,7 +7,7 @@ related: [practice/setup, errors/invalid-object-column, errors/group-by-8120, er
 provenance: original-practice
 technicalSources: [TECH-A01, TECH-A03, TECH-A04, TECH-A05]
 ---
-# SQL debugging workflow
+# Quy trình chẩn đoán & Gỡ lỗi SQL (Debugging Workflow)
 
 Quy trình 4 bước chuẩn tắc để cô lập và xử lý triệt để các lỗi T-SQL trong môi trường thực hành:
 
