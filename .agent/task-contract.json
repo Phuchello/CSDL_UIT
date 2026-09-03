@@ -1,35 +1,35 @@
 {
-  "id": "v1.1.1-visual-maintenance",
+  "id": "v1.2-learning-system-design",
   "status": "review_pending",
   "acceptance": [
     {
-      "id": "latex_enabled",
-      "criterion": "Quartz LaTeX plugin is enabled with KaTeX on the maintenance branch",
+      "id": "learning_system_spec",
+      "criterion": "Design defines a static-first active learning loop, mastery state model, rule-based adaptation, review and mistake handling without requiring AI or a backend",
       "passes": true
     },
     {
-      "id": "math_render_smoke",
-      "criterion": "Post-build render smoke confirms representative math-heavy pages contain KaTeX output and no raw TeX control sequences in article content",
+      "id": "content_contract",
+      "criterion": "Design defines a deterministic Learning Unit content contract, exercise taxonomy, IT004 chapter coverage and QA expectations",
       "passes": true
     },
     {
-      "id": "ci_render_gate",
-      "criterion": "GitHub Actions validation runs the render smoke after the production Quartz build and passes on ubuntu-latest",
+      "id": "ux_wireframes",
+      "criterion": "Design includes Learning Mode and Reference Mode wireframes for dashboard, concept map, trace, recall, practice, diagnosis, review and exam flows",
       "passes": true
     },
     {
-      "id": "academic_content_unchanged",
-      "criterion": "Theory, Practice, frozen source PDFs, and academic Garden prose are unchanged by this presentation maintenance task",
+      "id": "implementation_plan",
+      "criterion": "Design uses vertical-slice milestones and explicit acceptance gates before broad implementation",
       "passes": true
     },
     {
-      "id": "release_v1_1_0_preserved",
-      "criterion": "Published v1.1.0 tag/release remains immutable and historical v1.0.0 remains draft",
+      "id": "existing_release_safety",
+      "criterion": "Design-only branch does not modify v1.1.x academic content, PDFs, release tags, Pages workflow or production main",
       "passes": true
     },
     {
-      "id": "live_visual_smoke",
-      "criterion": "After authorized deployment, live desktop/mobile smoke confirms formulas render and no release-blocking visual regression remains",
+      "id": "mentor_design_review",
+      "criterion": "Human mentor reviews and authorizes the v1.2 learning-system architecture before implementation begins",
       "passes": false
     }
   ]
