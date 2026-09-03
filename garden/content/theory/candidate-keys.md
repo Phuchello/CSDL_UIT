@@ -39,4 +39,4 @@ Xét quan hệ $R(U)$ và tập phụ thuộc hàm $F$. Phân chia tập thuộc
    - Nếu bằng $U$: ghi nhận là một khóa ứng viên mới.
    - **Quy tắc cắt tỉa:** Không xét các tổ hợp bậc cao hơn đã chứa một khóa đã tìm được (để đảm bảo tính tối thiểu).
 
-Xem thuật toán tính bao đóng tại [[theory/closure|Closure]] và mẫu bài thi điển hình tại [[exam-patterns/normalization|Dạng đề quan sát — Chuẩn hóa dữ liệu (Normalization)]].
+Xem thuật toán tính bao đóng tại [[theory/closure|Bao đóng]] và mẫu bài thi điển hình tại [[exam-patterns/normalization|Dạng đề quan sát — Chuẩn hóa dữ liệu (Normalization)]].
