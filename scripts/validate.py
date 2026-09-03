@@ -112,7 +112,7 @@ def validate():
     assert all(m in pages[48] for m in ("CREATE TABLE CTHD", "FK_CTHD_HD", "FK_CTHD_SP")), "CTHD incomplete on page 49"
     
     order = [
-        page_of("CHƯƠNG 7"),
+        page_of("7.1 Tổng quan môi trường"),
         page_of("Exam Playbook - Kỹ Năng Giải Đề Tốc Độ"),
         page_of("Cheat Sheet 6 Chương - Cứu Cánh Trước"),
         page_of("Nguồn tham khảo & Tài liệu đối chiếu"),
