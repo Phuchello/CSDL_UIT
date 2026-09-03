@@ -7,8 +7,8 @@ workflow:
 branch: v1.1-quartz-garden
 
 safe_repo_commit:
-  sha: 2625d3b8e17baaa9872297c958e766574c169120
-  purpose: harden-workflow-v2-guardrails
+  sha: 2685729d0712d9133ba3eeabd051bc4354b989da
+  purpose: d2-content-contract-reopened
 
 safe_product_commit:
   sha: 58b5474be54971b886c28508a9702bcc22d5ac15
@@ -33,6 +33,11 @@ verified:
   quartz_candidate_exists: true
   quartz_build_passes: true
   d2_content_contract_corrected: true
+  mandatory_graph_chains_verified: true
+  core_notes_depth_verified: true
+  provenance_overclaims_eliminated: true
+  trigger_null_schema_distinguished: true
+  single_pdf_convention_verified: true
   fresh_d2_review_captures_generated: true
   prior_frozen_branches_untouched: true
   zero_broken_internal_links: true
@@ -44,6 +49,8 @@ do_not_repeat:
   - invent UIT-E aggregate source IDs
   - treat related frontmatter as equivalent to real graph edges
   - use token presence alone to validate trigger semantics
+  - overclaim community artifacts as official exams
+  - copy redundant dual-cased PDFs instead of choosing one strict convention
 
 relevant_files:
   - garden/content/

@@ -1,40 +1,76 @@
 ---
 title: Functional dependencies
-description: Định nghĩa phụ thuộc hàm, phân loại tầm thường/không tầm thường và hệ tiên đề Armstrong.
+description: Định nghĩa hình thức của phụ thuộc hàm, hệ tiên đề Armstrong và các quy tắc dẫn xuất, ví dụ chứng minh hình thức.
 type: theory
-topics: [functional-dependencies, normalization]
+topics: [functional-dependency, armstrong, normalization]
 related: [theory/closure, theory/candidate-keys, theory/minimal-cover, theory/3nf, theory/bcnf]
 provenance: verified-artifact
-courseEvidence: [UIT-O05, LOC-LEC-LONG-CH06]
+courseEvidence: [UIT-O02, LOC-LEC-LONG-CH06]
 ---
-# Functional dependencies (Phụ thuộc hàm & Tiên đề Armstrong)
+# Functional dependencies (Phụ thuộc hàm)
 
-Phụ thuộc hàm (Functional Dependency - FD) là công cụ toán học nền tảng dùng để biểu diễn các quy tắc ngữ nghĩa nghiệp vụ và ràng buộc dữ liệu trong mô hình quan hệ, là cơ sở khoa học để loại bỏ dư thừa qua các dạng chuẩn.
+Phụ thuộc hàm (Functional Dependency - FD) là khái niệm trung tâm trong lý thuyết thiết kế cơ sở dữ liệu quan hệ, làm nền tảng toán học để xác định khóa, bao đóng và thực hiện chuẩn hóa dữ liệu (1NF đến BCNF).
 
-## 1. Định nghĩa hình thức
+## 1. Định nghĩa toán học hình thức
 
-Cho lược đồ quan hệ $R(U)$ với $X, Y \subseteq U$.
-Ta nói rằng **$X$ xác định hàm $Y$** (hoặc **$Y$ phụ thuộc hàm vào $X$**), ký hiệu là $X \rightarrow Y$, khi và chỉ khi trong mọi thể hiện quan hệ hợp lệ $r(R)$, với mọi cặp bộ dữ liệu $t_1, t_2 \in r$:
-$$t_1[X] = t_2[X] \implies t_1[Y] = t_2[Y]$$
+Cho lược đồ quan hệ $R(U)$ với tập thuộc tính $U$. Cho hai tập con thuộc tính $X, Y \subseteq U$.
+Ta nói **$X$ xác định hàm $Y$** (hoặc **$Y$ phụ thuộc hàm vào $X$**), ký hiệu là:
+$$X \rightarrow Y$$
+nếu và chỉ nếu với mọi quan hệ $r$ hợp lệ trên lược đồ $R$, bất kỳ hai bộ dữ liệu $t_1, t_2 \in r$ nào có cùng giá trị trên $X$ thì cũng bắt buộc phải có cùng giá trị trên $Y$:
 
-*Trực giác:* Nếu biết trước giá trị của tập thuộc tính $X$, ta luôn xác định duy nhất được giá trị của tập thuộc tính $Y$.
+$$\forall t_1, t_2 \in r: t_1[X] = t_2[X] \implies t_1[Y] = t_2[Y]$$
 
-### Phân loại phụ thuộc hàm:
-- **Tầm thường (Trivial):** Khi $Y \subseteq X$ (ví dụ: $AB \rightarrow A$). Phụ thuộc này luôn thỏa mãn trên mọi thể hiện dữ liệu mà không mang thông tin nghiệp vụ mới.
-- **Không tầm thường (Non-trivial):** Khi $Y \not\subseteq X$.
-- **Hoàn toàn không tầm thường (Completely non-trivial):** Khi $X \cap Y = \emptyset$.
+- **Ý nghĩa trực quan:** Nếu ta biết trước giá trị của tập thuộc tính $X$, ta có thể suy ra duy nhất một giá trị tương ứng của tập thuộc tính $Y$.
+- **Ví dụ kinh điển:** Trong quản lý sinh viên: $\text{MSSV} \rightarrow \text{HoTen}$ (mỗi mã sinh viên chỉ có một họ tên duy nhất). Nhưng $\text{HoTen} \rightarrow \text{MSSV}$ không đúng vì có thể có hai sinh viên trùng họ tên.
 
-## 2. Hệ tiên đề Armstrong (Armstrong's Axioms)
+## 2. Phân loại phụ thuộc hàm
 
-Năm 1974, William W. Armstrong chứng minh hệ 3 tiên đề suy diễn sau là **đúng đắn (sound)** và **đầy đủ (complete)** để suy ra mọi phụ thuộc hàm hợp lý từ một tập $F$:
+1. **Phụ thuộc hàm tầm thường (Trivial FD):**
+   - Định nghĩa: $X \rightarrow Y$ là tầm thường nếu $Y \subseteq X$.
+   - Ví dụ: $AB \rightarrow A$, $ABC \rightarrow BC$.
+   - Đặc điểm: Luôn đúng trên mọi quan hệ mà không cần kiểm tra dữ liệu thực tế.
+2. **Phụ thuộc hàm không tầm thường (Non-trivial FD):**
+   - Định nghĩa: $X \rightarrow Y$ là không tầm thường nếu $Y \nsubseteq X$.
+   - Đặc điểm: Mang thông tin ràng buộc nghiệp vụ thực tế.
+3. **Phụ thuộc hàm hoàn toàn không tầm thường (Completely Non-trivial FD):**
+   - Định nghĩa: $X \rightarrow Y$ nếu $X \cap Y = \emptyset$.
+   - Ví dụ: $A \rightarrow BC$.
 
-1. **Luật Phản xạ (Reflexivity):** Nếu $Y \subseteq X \subseteq U$ thì $X \rightarrow Y$.
-2. **Luật Tăng trưởng (Augmentation):** Nếu $X \rightarrow Y$ thì $XZ \rightarrow YZ$ với mọi $Z \subseteq U$.
-3. **Luật Bắc cầu (Transitivity):** Nếu $X \rightarrow Y$ và $Y \rightarrow Z$ thì $X \rightarrow Z$.
+## 3. Hệ tiên đề Armstrong (Armstrong's Axioms)
 
-### Ba hệ quả suy diễn thường dùng trong chứng minh:
-- **Luật Hợp (Union):** Nếu $X \rightarrow Y$ và $X \rightarrow Z$ thì $X \rightarrow YZ$.
-- **Luật Tách / Phân rã (Decomposition):** Nếu $X \rightarrow YZ$ thì $X \rightarrow Y$ và $X \rightarrow Z$.
-- **Luật Giả bắc cầu (Pseudotransitivity):** Nếu $X \rightarrow Y$ và $WY \rightarrow Z$ thì $WX \rightarrow Z$.
+W.W. Armstrong (1974) đã công bố 3 tiên đề nền tảng, chứng minh được tính đúng đắn (soundness - không sinh ra FD sai) và tính đầy đủ (completeness - sinh ra được mọi FD đúng):
 
-Dựa trên các tiên đề này, ta xây dựng [[theory/closure|thuật toán bao đóng thuộc tính $X^+$]], xác định [[theory/candidate-keys|khóa ứng viên]], và tìm [[theory/minimal-cover|phủ tối thiểu $F_c$]] làm tiền đề cho chuẩn hóa [[theory/3nf|3NF]] và [[theory/bcnf|BCNF]].
+1. **Luật phản xạ (Reflexivity):**
+   $$\text{Nếu } Y \subseteq X \subseteq U \implies X \rightarrow Y$$
+2. **Luật tăng trưởng (Augmentation):**
+   $$\text{Nếu } X \rightarrow Y \implies XZ \rightarrow YZ \quad (\forall Z \subseteq U)$$
+3. **Luật bắc cầu (Transitivity):**
+   $$\text{Nếu } X \rightarrow Y \text{ và } Y \rightarrow Z \implies X \rightarrow Z$$
+
+## 4. Ba quy tắc suy dẫn thứ cấp (Derived Rules)
+
+Từ 3 tiên đề Armstrong cơ bản, ta suy dẫn ra 3 quy tắc thuận tiện cho tính toán:
+
+1. **Quy tắc hợp (Union rule):**
+   $$\text{Nếu } X \rightarrow Y \text{ và } X \rightarrow Z \implies X \rightarrow YZ$$
+2. **Quy tắc phân rã (Decomposition rule):**
+   $$\text{Nếu } X \rightarrow YZ \implies X \rightarrow Y \text{ và } X \rightarrow Z$$
+3. **Quy tắc giả bắc cầu (Pseudotransitivity rule):**
+   $$\text{Nếu } X \rightarrow Y \text{ và } WY \rightarrow Z \implies WX \rightarrow Z$$
+
+## 5. Ví dụ chứng minh hình thức từng bước
+
+Cho lược đồ $R(A, B, C, D)$ và tập phụ thuộc hàm $F = \{A \rightarrow B, B \rightarrow C, CD \rightarrow E\}$.
+Chứng minh rằng: $AD \rightarrow E$.
+
+- **Lời giải chuẩn tắc:**
+  1. $A \rightarrow B$ (Giả thiết)
+  2. $B \rightarrow C$ (Giả thiết)
+  3. $A \rightarrow C$ (Bắc cầu từ 1 và 2)
+  4. $AD \rightarrow CD$ (Tăng trưởng hai vế của 3 với thuộc tính $D$)
+  5. $CD \rightarrow E$ (Giả thiết)
+  6. $AD \rightarrow E$ (Bắc cầu từ 4 và 5) $\implies$ Điều phải chứng minh ($\blacksquare$).
+
+Thay vì chứng minh bằng các phép biến đổi đại số dài dòng, ta có thể dùng thuật toán tính [[theory/closure|Bao đóng thuộc tính]] để kiểm tra $AD \rightarrow E$ trong thời gian đa thức.
+
+Xem tiếp kỹ thuật tính bao đóng tại [[theory/closure|Bao đóng thuộc tính]], thuật toán tìm [[theory/candidate-keys|Khóa ứng viên]], phương pháp rút gọn [[theory/minimal-cover|Phủ tối thiểu]], và các dạng chuẩn tại [[theory/3nf|3NF]] và [[theory/bcnf|BCNF]].

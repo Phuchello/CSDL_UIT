@@ -41,7 +41,9 @@ BEGIN
     END;
 
     -- 2. Nhánh UPDATE DeptId:
-    -- Chỉ kiểm tra khi cột DeptId bị tác động và nhân viên là trưởng bộ phận
+    -- Chỉ kiểm tra khi cột DeptId bị tác động và nhân viên là trưởng bộ phận.
+    -- Lưu ý: i.DeptId IS NULL là logic phòng vệ sâu (defensive programming);
+    -- trong fixture training-v1, cột DeptId đã có ràng buộc NOT NULL ở cấp schema.
     IF UPDATE(DeptId) AND EXISTS (
         SELECT 1
         FROM inserted AS i
@@ -63,8 +65,8 @@ Theo hợp đồng kiểm thử đã được chuẩn hóa trong [[theory/rbtv-i
 | :--- | :--- | :---: | :--- |
 | **A. Sửa thông tin ngoài** | `UPDATE tr_employees SET Salary = Salary * 1.1 WHERE EmployeeId = ...` | **PASS** | `i.EmployeeId` tồn tại $\rightarrow$ bỏ qua DELETE; `UPDATE(DeptId)` là FALSE $\rightarrow$ bỏ qua UPDATE. |
 | **B. Đổi DeptId về cùng phòng** | `UPDATE tr_employees SET DeptId = DeptId WHERE EmployeeId = ...` | **PASS** | Không vi phạm điều kiện `i.DeptId <> dep.DeptId`. |
-| **C. Đổi DeptId sang phòng khác** | `UPDATE tr_employees SET DeptId = 'D02' WHERE EmployeeId = 'E01'` | **REJECT** | Bị chặn bởi nhánh `UPDATE(DeptId)` $\rightarrow$ `THROW 51003`. |
-| **D. Đổi DeptId thành NULL** | `UPDATE tr_employees SET DeptId = NULL WHERE EmployeeId = 'E01'` | **REJECT** | Bị chặn bởi `i.DeptId IS NULL` $\rightarrow$ `THROW 51003`. |
+| **C. Đổi DeptId sang phòng khác** | `UPDATE tr_employees SET DeptId = 'D02' WHERE EmployeeId = 'E01'` | **REJECT** | Bị chặn bởi nhánh `UPDATE(DeptId)` của trigger $\rightarrow$ `THROW 51003`. |
+| **D. Đổi DeptId thành NULL** | `UPDATE tr_employees SET DeptId = NULL WHERE EmployeeId = 'E01'` | **REJECT** | **Cấp Schema:** Cột `DeptId` khai báo `NOT NULL` trong `01_schema.sql` chặn trực tiếp tại DDL engine; điều kiện `i.DeptId IS NULL` trong trigger là lớp phòng vệ sâu (defensive logic). |
 | **E. Xóa trưởng bộ phận** | `DELETE FROM tr_employees WHERE EmployeeId = 'E01'` | **REJECT** | Bị bắt bởi nhánh DELETE thực sự (`i.EmployeeId IS NULL`) $\rightarrow$ `THROW 51002`. |
 | **F. Thao tác đa dòng có 1 lỗi** | `UPDATE tr_employees SET DeptId = 'D02'` | **REJECT TOÀN BỘ** | `IF EXISTS` phát hiện ít nhất 1 dòng vi phạm $\rightarrow$ hủy toàn bộ batch (tính nguyên tố ACID). |
 

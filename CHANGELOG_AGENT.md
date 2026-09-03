@@ -4,8 +4,29 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 
 ---
 
+## 2026-09-03 — Milestone D2 contract hardening and mentor review remediation
+- **Commit**: pending (`fix(garden): harden d2 graph chain core depth trigger and pdf contract`)
+- **Scope**:
+  - Enforced deterministic mandatory graph-chain validation across `theory/division` ↔ `theory/double-not-exists` ↔ `practice/lab-03` ↔ `errors/wrong-universal-candidate` using verified in-body Markdown edges.
+  - Deepened all remaining skeletal core notes (`relational-algebra`, `division`, `double-not-exists`, `rbtv-impact`, `functional-dependencies`, `closure`, `3nf`, `bcnf`, `lossless-decomposition`) to full standalone teaching depth with formal definitions, algorithm steps, and dry-run tables.
+  - Clarified Trigger NULL case: explicitly distinguished schema-level `DeptId NOT NULL` DDL rejection from defensive trigger check `i.DeptId IS NULL`.
+  - Adopted strict single public PDF lowercase naming convention, copying exactly one file per handbook and adding built-output validation for exactly two PDFs.
+  - Eliminated provenance overclaims: distinguished community-mirror artifacts from official syllabus exams; replaced "luôn xuất hiện" and "bắt buộc phải dùng Trigger" with evidence-safe phrasing.
+  - Hardened `scripts/validate_garden_d2.py` with mandatory chain edges, core depth thresholds, trigger schema distinction, provenance overclaim scans, and built output PDF checks.
+  - Rebuilt Quartz (109 emitted files), checked 2,810 internal links (0 broken), and regenerated all 10 review captures in `dist/review/v1.1_quartz/`.
+- **Verification**:
+  - `scripts/agent/validate_state.py`: PASS (11 criteria synchronized).
+  - `scripts/validate.py`: PASS (6/6).
+  - `scripts/validate_garden_d2.py`: PASS (all checks).
+  - `scripts/agent/check_links.py`: PASS (2,810 links checked, 0 broken).
+  - `scripts/agent/verify.ps1 -Mode Full`: PASS (all 6 checks).
+  - `git diff --check`: PASS (zero trailing whitespace).
+- **Next Checkpoint**: Human mentor review and authorization on branch `v1.1-quartz-garden`.
+
+---
+
 ## 2026-09-03 — Milestone D2 content-contract correction
-- **Commit**: pending (`fix(garden): correct d2 content contract, provenance, and graph edges`)
+- **Commit**: `2685729d0712d9133ba3eeabd051bc4354b989da`
 - **Scope**:
   - Eliminated all invented source IDs (`TECH-MS*`, `UIT-E*`), replacing them with canonical IDs (`TECH-A01`–`TECH-A11`, `UIT-O01`–`UIT-O11`, `EXAM-*`, `PRAC-*`, `LOC-LEC-*`) derived strictly from frozen Phase A ledgers.
   - Resolved all ambiguous and broken `related` frontmatter targets across the garden.

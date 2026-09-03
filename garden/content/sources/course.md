@@ -9,7 +9,7 @@ courseEvidence: [UIT-O01, UIT-O02, UIT-O03, UIT-O05, UIT-O06, UIT-O10, UIT-O11]
 ---
 # Course and corpus sources
 
-Các tài liệu học phần IT004 và hiện vật khảo sát được dẫn chiếu trực tiếp từ Bảng kê nguồn tài liệu học thuật và Danh bộ hiện vật chuẩn hóa của kho lưu trữ:
+Các tài liệu học phần IT004 và hiện vật khảo sát được dẫn chiếu trực tiếp từ Bảng kê nguồn tài liệu học thuật và Danh bộ hiện vật chuẩn hóa của kho lưu trữ, phân định rõ theo các cấp độ thẩm quyền:
 
 ## 1. Nguồn học phần chính thức UIT (Authority Tier A)
 - **UIT-O01** — Chương trình Đào tạo Kỹ thuật HTMT liên kết Newcastle.
@@ -19,10 +19,13 @@ Các tài liệu học phần IT004 và hiện vật khảo sát được dẫn 
 - **UIT-O06 / UIT-O10** — Thông báo thi thực hành CSDL các năm học 2024–2025 và 2025–2026.
 - **UIT-O11** — Thông báo lịch thi Giữa kỳ tập trung 75–90 phút.
 
-## 2. Nhóm hiện vật đề thi và bài tập thực hành chuẩn hóa
-Các đề thi chính thức trong snapshot khảo sát (gồm 17 đề thi tự luận và 10 đề thực hành máy) được tham chiếu để nhận diện cấu trúc đề:
-- Đề thi giữa kỳ và cuối kỳ: các đề chính thức các năm học 2023–2024 và 2024–2025 (`EXAM-2024-2025-HK1-FINAL-01`).
-- Đề thi thực hành phòng máy: `PRAC-2023-2024-HK1-FINAL-01`, `PRAC-2024-2025-HK1-01`, `PRAC-2022-2023-HK1-D03`.
-- Bài giảng và bài tập gốc UIT: `LOC-LEC-LONG-CH03` (Đại số quan hệ), `LOC-LEC-LONG-CH05` (RBTV), `LOC-LEC-LONG-CH06` (Chuẩn hóa).
+## 2. Nguồn bài giảng và bản chụp đề thi cục bộ (Authority Tier A / B)
+- **Bài giảng lưu trữ UIT (Tier A):** `LOC-LEC-LONG-CH03` (Đại số quan hệ), `LOC-LEC-LONG-CH05` (RBTV), `LOC-LEC-LONG-CH06` (Chuẩn hóa).
+- **Bản chụp đề thi gốc (Tier B):** Các đề thi giữa kỳ có bản chụp đối chiếu trực tiếp từ tài liệu lưu trữ cục bộ.
 
-Tài liệu sinh viên/cộng đồng thuộc Tier C chỉ mang tính chất khảo sát thứ cấp, không bao giờ được coi là thẩm quyền chính thức. Xem thêm [[sources/technical|Technical sources]] và các dạng câu hỏi tại [[exam-patterns/index|Exam patterns]].
+## 3. Hiện vật đối chiếu từ cộng đồng (Authority Tier C)
+Trong snapshot khảo sát có 17 hiện vật đề thi tự luận và 10 hiện vật thực hành máy được thu thập qua các bản sao cộng đồng (community mirror) như `EXAM-2024-2025-HK1-FINAL-01`, `PRAC-2023-2024-HK1-FINAL-01`, `PRAC-2024-2025-HK1-01`, `PRAC-2022-2023-HK1-D03`.
+- Các hiện vật này phục vụ việc quan sát mẫu câu hỏi (`observed pattern`), tuyệt đối không được coi là đề thi công bố chính thức từ trường.
+- Mọi tài liệu sinh viên hoặc cộng đồng đều giữ nguyên phân lớp Tier C thứ cấp.
+
+Xem thêm các tiêu chuẩn kỹ thuật tại [[sources/technical|Technical sources]] và cấu trúc đề quan sát được tại [[exam-patterns/index|Exam patterns]].

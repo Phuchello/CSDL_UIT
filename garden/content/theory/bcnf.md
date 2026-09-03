@@ -1,41 +1,59 @@
 ---
-title: BCNF
-description: Điều kiện Dạng chuẩn Boyce-Codd (BCNF), thuật toán kiểm tra siêu khóa và bài toán đánh đổi bảo toàn phụ thuộc hàm.
+title: Dạng chuẩn Boyce-Codd (BCNF)
+description: Định nghĩa hình thức BCNF, so sánh với 3NF, thuật toán phân rã BCNF và hiện tượng mất phụ thuộc hàm.
 type: theory
-topics: [bcnf, normalization]
-related: [theory/3nf, theory/lossless-decomposition, theory/candidate-keys, theory/functional-dependencies]
+topics: [bcnf, 3nf, normalization, decomposition]
+related: [theory/3nf, theory/candidate-keys, theory/closure, theory/lossless-decomposition, exercises/normalization-exercise]
 provenance: verified-artifact
-courseEvidence: [UIT-O05, LOC-LEC-LONG-CH06]
+courseEvidence: [UIT-O02, LOC-LEC-LONG-CH06]
 ---
-# BCNF (Boyce-Codd Normal Form)
+# Dạng chuẩn Boyce-Codd (Boyce-Codd Normal Form - BCNF)
 
-Dạng chuẩn Boyce-Codd (BCNF) là phiên bản chuẩn hóa chặt chẽ hơn của [[theory/3nf|3NF]], loại bỏ hoàn toàn mọi dị thường cập nhật phát sinh từ việc các thuộc tính phụ thuộc vào các tập con không phải là siêu khóa.
+Dạng chuẩn Boyce-Codd (BCNF) do Raymond F. Boyce và Edgar F. Codd đề xuất năm 1974 là một phiên bản nghiêm ngặt hơn của Dạng chuẩn 3 ([[theory/3nf|3NF]]). Mục tiêu của BCNF là loại bỏ triệt để mọi dư thừa dữ liệu bắt nguồn từ các phụ thuộc hàm.
 
-## 1. Định nghĩa hình thức
+## 1. Định nghĩa toán học hình thức
 
-Lược đồ quan hệ $R$ với tập phụ thuộc hàm $F$ đạt **Dạng chuẩn Boyce-Codd (BCNF)** khi và chỉ khi:
-Với mọi phụ thuộc hàm không tầm thường $X \rightarrow A \in F^+$ ($A \notin X$), $X$ bắt buộc phải là một **siêu khóa (superkey)** của $R$.
+Cho lược đồ quan hệ $R(U)$ và tập phụ thuộc hàm $F$.
+Lược đồ $R$ đạt **Dạng chuẩn Boyce-Codd (BCNF)** nếu và chỉ nếu với mọi phụ thuộc hàm không tầm thường $X \rightarrow A \in F^+$ (với $A \notin X$):
 
-Nói cách khác: Vế trái của mọi phụ thuộc hàm không tầm thường bắt buộc phải chứa một [[theory/candidate-keys|khóa ứng viên]].
+$$X \text{ bắt buộc phải là một siêu khóa (superkey) của } R$$
 
-## 2. So sánh BCNF và 3NF: Sự đánh đổi lý thuyết
+- **Nói cách khác:** Trong BCNF, bất cứ tập thuộc tính nào làm vế trái của một phụ thuộc hàm không tầm thường đều phải xác định được toàn bộ lược đồ quan hệ.
+- BCNF **không chấp nhận** điều kiện cứu vãn *"hoặc $A$ là thuộc tính khóa"* của 3NF. Do đó, một quan hệ đạt BCNF thì chắc chắn đạt 3NF, nhưng một quan hệ đạt 3NF chưa chắc đã đạt BCNF.
 
-- **Tính bao hàm:** Mọi lược đồ đạt BCNF chắc chắn đạt 3NF. Ngược lại, một lược đồ đạt 3NF có thể vi phạm BCNF nếu tồn tại FD $X \rightarrow A$ trong đó $A$ là thuộc tính khóa nhưng $X$ không phải là siêu khóa.
-- **Sự đánh đổi cốt lõi (Trade-off):**
-  - Về 3NF: Luôn luôn tồn tại phép phân rã vừa **bảo toàn thông tin nối** vừa **bảo toàn phụ thuộc hàm**.
-  - Về BCNF: Luôn luôn tồn tại phép phân rã bảo toàn thông tin nối, nhưng **không thể đảm bảo luôn bảo toàn phụ thuộc hàm**. Đôi khi ta buộc phải chọn giữa việc chấp nhận dư thừa ở mức 3NF hoặc mất khả năng kiểm tra phụ thuộc hàm nội tại trong từng bảng ở mức BCNF.
+## 2. BCNF vs 3NF: Ví dụ kinh điển vi phạm BCNF nhưng đạt 3NF
 
-## 3. Ví dụ kiểm tra và thuật toán phân rã
+Xét lược đồ phân công giảng dạy: $R(\text{SinhVien}, \text{MonHoc}, \text{GiangVien})$ với tập phụ thuộc hàm $F$:
+1. $\{\text{SinhVien}, \text{MonHoc}\} \rightarrow \text{GiangVien}$ (Mỗi sinh viên học một môn chỉ do một giảng viên dạy).
+2. $\text{GiangVien} \rightarrow \text{MonHoc}$ (Mỗi giảng viên chỉ chuyên trách dạy duy nhất một môn).
 
-Xét lược đồ $R(A, B, C)$ với $F = \{AB \rightarrow C, C \rightarrow B\}$:
-1. **Tìm khóa:** Các khóa ứng viên là $AB$ và $AC$.
-2. **Kiểm tra BCNF:**
-   - $AB \rightarrow C$: $AB$ là khóa $\rightarrow$ Thỏa BCNF.
-   - $C \rightarrow B$: $C^+ = BC \neq ABC \rightarrow C$ không phải là siêu khóa $\rightarrow$ Vi phạm BCNF!
-3. **Phân rã về BCNF:**
-   - Tách quan hệ con $R_1(C, B)$ theo phụ thuộc hàm vi phạm $C \rightarrow B$ (với khóa $C$).
-   - Tạo quan hệ con còn lại $R_2(C, A) = R \setminus (\{B\})$.
-   - Kiểm tra tính bảo toàn thông tin: $R_1 \cap R_2 = C$, là khóa của $R_1 \rightarrow$ Phân rã là **nối không mất mát thông tin (lossless join)**.
-   - Kiểm tra phụ thuộc hàm: FD $AB \rightarrow C$ bị phân tán trên cả hai bảng $\rightarrow$ **Mất bảo toàn phụ thuộc hàm**.
+### Phân tích dạng chuẩn:
+- **Tìm khóa ứng viên:**
+  - $K_1 = \{\text{SinhVien}, \text{MonHoc}\}$ (do $\{\text{SinhVien}, \text{MonHoc}\}^+ = \text{SinhVien, MonHoc, GiangVien}$).
+  - $K_2 = \{\text{SinhVien}, \text{GiangVien}\}$ (do $\{\text{SinhVien}, \text{GiangVien}\}^+ = \text{SinhVien, GiangVien, MonHoc}$).
+  - Tập các thuộc tính khóa là: $\mathcal{P} = \{\text{SinhVien}, \text{MonHoc}, \text{GiangVien}\}$. Tất cả thuộc tính đều là thuộc tính khóa!
+- **Đánh giá 3NF:**
+  - Xét $\text{GiangVien} \rightarrow \text{MonHoc}$: Vế trái $\text{GiangVien}$ không là siêu khóa, nhưng vế phải $\text{MonHoc}$ là thuộc tính khóa (nằm trong $K_1$).
+  - $\implies$ Quan hệ đạt **Dạng chuẩn 3 (3NF)** nhờ điều kiện cứu vãn.
+- **Đánh giá BCNF:**
+  - Xét $\text{GiangVien} \rightarrow \text{MonHoc}$: $\text{GiangVien}$ không phải là siêu khóa ($\text{GiangVien}^+ \neq U$).
+  - BCNF không cho phép cứu vãn $\implies$ Quan hệ **vi phạm BCNF**.
 
-Xem hướng dẫn thuật toán chi tiết tại [[theory/lossless-decomposition|Phân rã bảo toàn thông tin]] và bài tập thực hành tại [[exercises/normalization-exercise|Bài tập chuẩn hóa]].
+## 3. Thuật toán phân rã BCNF (BCNF Decomposition Algorithm)
+
+Nếu lược đồ $R$ vi phạm BCNF do phụ thuộc hàm $X \rightarrow Y$ ($X$ không là siêu khóa):
+1. **Bước 1:** Tách $R$ thành hai lược đồ con:
+   $$R_1 = X \cup Y \quad \text{và} \quad R_2 = R - (Y - X)$$
+2. **Bước 2:** Xác định tập phụ thuộc hàm chiếu trên từng lược đồ con ($F_1$ và $F_2$).
+3. **Bước 3:** Tiếp tục kiểm tra BCNF trên $R_1$ và $R_2$. Nếu còn quan hệ con nào vi phạm thì đệ quy lặp lại thuật toán cho đến khi mọi quan hệ con đều đạt BCNF.
+4. **Đặc tính:** Phép phân rã BCNF luôn đảm bảo tính kết nối không mất thông tin ([[theory/lossless-decomposition|Lossless Join Decomposition]]).
+
+## 4. Cái giá phải trả: Mất tính bảo toàn phụ thuộc hàm
+
+Khi phân rã lược đồ ví dụ trên để đạt BCNF:
+- Tách thành: $R_1(\text{GiangVien}, \text{MonHoc})$ với $FD_1 = \{\text{GiangVien} \rightarrow \text{MonHoc}\}$ và $R_2(\text{SinhVien}, \text{GiangVien})$.
+- Cả $R_1$ và $R_2$ đều đạt BCNF.
+- **Tuy nhiên:** Phụ thuộc hàm $\{\text{SinhVien}, \text{MonHoc}\} \rightarrow \text{GiangVien}$ đã bị phân tán trên hai bảng khác nhau. Để kiểm tra ràng buộc này, hệ quản trị bắt buộc phải thực hiện phép nối (JOIN) tốn kém giữa $R_1$ và $R_2$.
+- $\implies$ **Phép phân rã BCNF không đảm bảo bảo toàn phụ thuộc hàm (Dependency Preservation).** Trong thực tế công nghiệp, các kiến trúc sư CSDL thường chấp nhận dừng lại ở 3NF để bảo toàn toàn vẹn dữ liệu khai báo.
+
+Xem lý thuyết chuẩn hóa nền tảng tại [[theory/3nf|Dạng chuẩn 3 (3NF)]], nguyên lý bảo toàn tại [[theory/lossless-decomposition|Phân rã kết nối không mất thông tin]], và bài tập worked example tại [[exercises/normalization-exercise|Bài tập chuẩn hóa]].

@@ -19,17 +19,27 @@
     },
     {
       "id": "graph_edges",
-      "criterion": "Mandatory pedagogical relationships use real Markdown links",
+      "criterion": "Mandatory pedagogical relationships use real Markdown links with verified bidirectional graph chains",
       "passes": true
     },
     {
       "id": "trigger_contract",
-      "criterion": "Canonical multi-row trigger event semantics are preserved",
+      "criterion": "Canonical multi-row trigger event semantics are preserved with accurate DeptId NOT NULL schema distinction",
       "passes": true
     },
     {
       "id": "pdf_contract",
-      "criterion": "Only Theory and Practice PDFs are public and href case matches generated files",
+      "criterion": "Exactly one public PDF naming convention is used, copying one file per handbook and validating built output",
+      "passes": true
+    },
+    {
+      "id": "core_content_depth",
+      "criterion": "Remaining skeletal core notes (relational algebra, division, Double NOT EXISTS) are deepened to standalone teaching depth",
+      "passes": true
+    },
+    {
+      "id": "provenance_wording",
+      "criterion": "No provenance overclaims remain (community-mirror distinct from official, no 'luôn xuất hiện' or 'bắt buộc')",
       "passes": true
     },
     {

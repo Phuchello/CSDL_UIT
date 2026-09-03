@@ -1,39 +1,52 @@
 ---
-title: Lossless decomposition
-description: Phân rã không mất mát thông tin nối (Lossless-Join Decomposition) và bảo toàn phụ thuộc hàm (Dependency Preservation).
+title: Lossless-join decomposition
+description: Phân rã không mất thông tin, phòng ngừa bộ giả, định lý giao siêu khóa và tính bảo toàn phụ thuộc hàm.
 type: theory
-topics: [lossless, dependency-preservation, normalization]
-related: [theory/3nf, theory/bcnf, theory/minimal-cover, theory/functional-dependencies]
+topics: [normalization, decomposition, lossless-join, dependency-preservation]
+related: [theory/3nf, theory/bcnf, theory/functional-dependencies, theory/candidate-keys, exercises/normalization-exercise]
 provenance: verified-artifact
-courseEvidence: [UIT-O05, LOC-LEC-LONG-CH06]
+courseEvidence: [UIT-O02, LOC-LEC-LONG-CH06]
 ---
-# Lossless decomposition (Phân rã bảo toàn thông tin nối)
+# Lossless-join decomposition (Phân rã không mất thông tin)
 
-Khi chuẩn hóa lược đồ quan hệ để loại bỏ dư thừa và dị thường cập nhật, ta phân rã một quan hệ lớn thành nhiều quan hệ con. Hai tiêu chuẩn chất lượng độc lập đánh giá phép phân rã là: **Tính không mất mát thông tin nối** và **Tính bảo toàn phụ thuộc hàm**.
+Khi thực hiện chuẩn hóa cơ sở dữ liệu lên các dạng chuẩn cao hơn ([[theory/3nf|3NF]], [[theory/bcnf|BCNF]]), ta phải phân rã (decompose) một lược đồ quan hệ lớn thành nhiều lược đồ quan hệ nhỏ hơn. Phép phân rã chỉ có giá trị thực tiễn nếu nó thỏa mãn tính chất **kết nối không mất thông tin (Lossless-join)** và lý tưởng nhất là **bảo toàn phụ thuộc hàm (Dependency Preservation)**.
 
-## 1. Phân rã nối không mất mát thông tin (Lossless-Join)
+## 1. Định nghĩa toán học hình thức
 
-Phép phân rã lược đồ quan hệ $R$ thành tập các lược đồ con $\rho = \{R_1, R_2, \dots, R_k\}$ được gọi là **phân rã không mất mát thông tin** theo tập phụ thuộc hàm $F$ khi và chỉ khi với mọi thể hiện hợp lệ $r(R)$:
+Cho lược đồ quan hệ $R(U)$ và tập phụ thuộc hàm $F$.
+Một phép phân rã $\rho = \{R_1, R_2, \dots, R_k\}$ (với $R_1 \cup R_2 \cup \dots \cup R_k = U$) được gọi là **kết nối không mất thông tin (Lossless Join)** đối với $F$ nếu với mọi thể hiện hợp lệ $r$ của $R$ thỏa mãn $F$:
+
 $$\pi_{R_1}(r) \bowtie \pi_{R_2}(r) \bowtie \dots \bowtie \pi_{R_k}(r) = r$$
 
-Nếu phép phân rã bị mất mát (lossy), việc kết nối tự nhiên các bảng con sẽ tạo ra các bộ dữ liệu sai lệch không tồn tại trong thực tế (gọi là *spurious tuples* hay bộ giả).
+- **Cảnh báo:** Phép nối tự nhiên của các bảng con luôn chứa $r$ ($\pi_{R_1}(r) \bowtie \dots \bowtie \pi_{R_k}(r) \supseteq r$). Hiện tượng "mất thông tin" (lossy) không phải là mất dữ liệu, mà là **sinh ra các bộ giả mạo sai lệch (spurious tuples)** khiến ta không thể khôi phục lại chính xác trạng thái dữ liệu ban đầu.
 
-### Định lý kiểm tra cho phân rã hai quan hệ:
-Với phép phân rã thành hai quan hệ con $\rho = \{R_1, R_2\}$, phép phân rã là nối không mất mát thông tin khi và chỉ khi phần giao thuộc tính của chúng là siêu khóa của ít nhất một trong hai quan hệ con:
-$$(R_1 \cap R_2) \rightarrow R_1 \in F^+ \quad \text{hoặc} \quad (R_1 \cap R_2) \rightarrow R_2 \in F^+$$
+## 2. Nguy cơ sinh ra bộ giả (Spurious Tuples)
 
-Nghĩa là: $(R_1 \cap R_2)^+$ phải bao hàm $R_1$ hoặc bao hàm $R_2$.
+Xét quan hệ: $R(\text{NhanVien}, \text{ChiNhanh}, \text{DuAn})$
+- Giả sử một nhân viên làm việc ở nhiều chi nhánh và tham gia nhiều dự án độc lập.
+- Nếu ta tách sai thành $R_1(\text{NhanVien}, \text{ChiNhanh})$ và $R_2(\text{ChiNhanh}, \text{DuAn})$:
+  - Khi thực hiện phép kết tự nhiên $R_1 \bowtie R_2$ trên thuộc tính chung $\text{ChiNhanh}$, hệ thống sẽ ghép mọi nhân viên của chi nhánh với mọi dự án thuộc chi nhánh đó.
+  - Kết quả sinh ra các bộ dữ liệu ghi nhận nhân viên tham gia các dự án mà trên thực tế họ không hề làm $\implies$ **Bộ giả mạo (Spurious Tuples)**.
 
-## 2. Bảo toàn phụ thuộc hàm (Dependency Preservation)
+## 3. Định lý giao siêu khóa cho phép phân rã 2 quan hệ
 
-Phép phân rã $\rho = \{R_1, R_2, \dots, R_k\}$ được gọi là **bảo toàn phụ thuộc hàm** nếu việc thực thi các ràng buộc phụ thuộc hàm trên từng quan hệ con riêng lẻ đủ để bảo đảm toàn bộ tập phụ thuộc hàm gốc $F$:
-$$\left(\bigcup_{i=1}^k \pi_{R_i}(F)\right)^+ = F^+$$
+Trường hợp phân rã lược đồ $R$ thành hai lược đồ con $\rho = \{R_1, R_2\}$, có một định lý toán học đơn giản để kiểm tra tính không mất thông tin:
 
-Nếu một phụ thuộc hàm có các thuộc tính bị phân tán ở các bảng con khác nhau mà không thể suy diễn từ các FD cục bộ, hệ quản trị cơ sở dữ liệu sẽ buộc phải thực hiện phép kết nối tốn kém (`JOIN`) mỗi khi có thao tác cập nhật dữ liệu để kiểm tra tính toàn vẹn.
+Phép phân rã $\rho = \{R_1, R_2\}$ là **kết nối không mất thông tin** đối với $F$ nếu và chỉ nếu phần giao của hai lược đồ chứa một [[theory/candidate-keys|siêu khóa]] của ít nhất một trong hai lược đồ:
 
-## 3. Mối liên hệ với 3NF và BCNF
+$$(R_1 \cap R_2) \rightarrow R_1 \in F^+ \quad \text{HOẶC} \quad (R_1 \cap R_2) \rightarrow R_2 \in F^+$$
 
-- **Thuật toán tổng hợp Bernstein (3NF Synthesis):** Sử dụng [[theory/minimal-cover|phủ tối thiểu $F_c$]] luôn đảm bảo sinh ra các quan hệ con đạt [[theory/3nf|3NF]] thỏa mãn **cả hai tiêu chuẩn**: vừa là Lossless-Join, vừa là Dependency Preservation.
-- **Thuật toán phân rã BCNF:** Luôn luôn đảm bảo tính chất Lossless-Join, nhưng **không thể đảm bảo** luôn bảo toàn được phụ thuộc hàm (xem đánh đổi tại [[theory/bcnf|BCNF]]).
+- **Nói cách khác:** Thuộc tính chung giữa hai bảng con phải là một khóa (khóa chính hoặc khóa ứng viên) của bảng $R_1$ hoặc bảng $R_2$. Điều này tương đương với mô hình Khóa ngoại tham chiếu Khóa chính trong thiết kế CSDL thực tế.
 
-Xem thêm các tiên đề cơ sở tại [[theory/functional-dependencies|Phụ thuộc hàm]] và bảng kiểm định tại [[cheat-sheets/normalization|Normalization cheat sheet]].
+## 4. Tính bảo toàn phụ thuộc hàm (Dependency Preservation)
+
+Bên cạnh tính không mất thông tin, một phép phân rã $\rho = \{R_1, \dots, R_k\}$ được gọi là **bảo toàn phụ thuộc hàm** nếu:
+
+$$\Big( \bigcup_{i=1}^k \pi_{R_i}(F) \Big)^+ = F^+$$
+
+- **Ý nghĩa thực tiễn:** Mọi ràng buộc phụ thuộc hàm ban đầu đều có thể được kiểm tra độc lập trên từng bảng con mà không cần phải thực hiện phép nối (JOIN) nhiều bảng lại với nhau.
+- **Quy tắc thiết kế:**
+  - Chuẩn hóa lên [[theory/3nf|3NF]] luôn luôn đạt được đồng thời: vừa **Lossless-join**, vừa **Bảo toàn phụ thuộc hàm 100%**.
+  - Chuẩn hóa lên [[theory/bcnf|BCNF]] luôn đạt được **Lossless-join**, nhưng có thể làm **mất phụ thuộc hàm**.
+
+Xem chi tiết điều kiện kiểm tra tại [[theory/3nf|Dạng chuẩn 3 (3NF)]], thuật toán phân rã tại [[theory/bcnf|BCNF]], cách tìm siêu khóa tại [[theory/candidate-keys|Khóa ứng viên]], và bài tập worked example tại [[exercises/normalization-exercise|Bài tập chuẩn hóa]].
