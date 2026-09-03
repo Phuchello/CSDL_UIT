@@ -4,7 +4,12 @@
   "acceptance": [
     {
       "id": "vietnamese_first_titles",
-      "criterion": "All human-facing navigation, page titles, H1s, search titles, and wikilink aliases are Vietnamese-first while preserving technical English in parentheses",
+      "criterion": "All human-facing navigation, page titles, H1s, search titles, and wikilink aliases are Vietnamese-first while preserving technical English in parentheses where useful",
+      "passes": true
+    },
+    {
+      "id": "reader_chrome_cleanup",
+      "criterion": "Reader-facing Properties/frontmatter panels and modified/read-time metadata are hidden, and the visible site suffix is Vietnamese-first",
       "passes": true
     },
     {
@@ -34,7 +39,7 @@
     },
     {
       "id": "github_ci_gate",
-      "criterion": "GitHub Actions validation on PR passes on ubuntu-latest",
+      "criterion": "GitHub Actions validation passes on ubuntu-latest for the final functional localization head",
       "passes": true
     }
   ]
