@@ -101,7 +101,8 @@ def validate():
 
     print("\n=== [5/6] Validating Final Section Ordering & Layout ===")
     def page_of(marker: str) -> int:
-        return next(i for i, text in enumerate(pages, 1) if marker in text)
+        norm_marker = " ".join(marker.split())
+        return next(i for i, text in enumerate(pages, 1) if norm_marker in " ".join(text.split()))
 
     assert page_of("Câu 13: (Ví dụ tổng quát)") == 39, "Ex 13 not on page 39"
     assert page_of("E. Recall Sheet - Ôn tập nhanh 1 trang") == 46, "Recall sheet not on page 46"
