@@ -20,7 +20,7 @@ Khi người dùng thực hiện các thao tác thay đổi dữ liệu (`INSERT
 
 ## 2. Hệ thống 7 phân loại RBTV chuẩn tắc trong giáo trình IT004
 
-Căn cứ vào cấu trúc bài giảng và ma trận đề thi chính thức của học phần IT004 tại UIT (`LOC-LEC-LONG-CH05`), các ràng buộc toàn vẹn được phân loại theo hệ thống 7 nhóm học thuật chuẩn mực:
+Căn cứ vào slide bài giảng chính thức (`LOC-LEC-LONG-CH05`) và bản đồ mẫu đề thực chứng Phase A của học phần IT004 tại UIT, các ràng buộc toàn vẹn được phân loại theo hệ thống 7 nhóm học thuật chuẩn mực:
 
 1. **Miền giá trị (Domain Constraint):** Quy định kiểu dữ liệu, miền giá trị hoặc điều kiện logic trên từng thuộc tính đơn lẻ (ví dụ: `HESO >= 1.0`, `CHECK`, `NOT NULL`).
 2. **Liên thuộc tính 1 QH (Inter-attribute within 1 relation):** Quy tắc ngữ nghĩa giữa các thuộc tính khác nhau trong **cùng một dòng (bộ)** của một quan hệ (ví dụ: ngày vào làm phải sau ngày sinh: `NGVL > NGSINH`).

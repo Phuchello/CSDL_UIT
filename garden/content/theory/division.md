@@ -74,7 +74,7 @@ WHERE NOT EXISTS (
 ```
 
 **Hành vi khi $S = \emptyset$:** Mệnh đề `NOT EXISTS (SELECT 1 FROM dbo.RequiredCourses ...)` đánh giá thành `TRUE` cho **toàn bộ mọi dòng trong bảng ứng viên $c \in C$**.
-Do đó, câu truy vấn SQL trả về toàn bộ mọi ứng viên từ bảng miền ứng viên độc lập $\pi_{\text{StudentId}}(C)$ (bao gồm cả những sinh viên mới nhập học chưa từng có dòng nào trong bảng bằng chứng `tr_results`).
+Do đó, câu truy vấn SQL trả về toàn bộ mọi ứng viên từ bảng miền ứng viên độc lập $\pi_{\text{StudentId, FullName}}(C)$ (bao gồm cả những sinh viên mới nhập học chưa từng có dòng nào trong bảng bằng chứng `tr_results`).
 *Điểm cần lưu ý:* Không đánh đồng tập thuộc tính $X$ trong đại số quan hệ (vốn chỉ là thuộc tính của $R$) với một bảng quan hệ ứng viên độc lập $C$ trong SQL.
 
 ### Trường hợp B: Kỹ thuật Gom nhóm và Đếm (Aggregation Alternative)
@@ -92,7 +92,7 @@ HAVING COUNT(DISTINCT r.CourseId) = (SELECT COUNT(*) FROM dbo.RequiredCourses);
 
 #### Ba giới hạn ngữ nghĩa bắt buộc phải nắm vững khi dùng kỹ thuật Đếm nhóm:
 1. **Bắt buộc giới hạn bằng chứng vào tập $S$:** Nếu không thực hiện `JOIN dbo.RequiredCourses AS s ON r.CourseId = s.CourseId` (hoặc `WHERE r.CourseId IN (SELECT CourseId FROM dbo.RequiredCourses)`), hàm `COUNT(DISTINCT r.CourseId)` sẽ đếm cả những môn ngoài yêu cầu. Một sinh viên học đủ số lượng môn nhưng sai ngành/khoa sẽ bị nhận diện nhầm thành đạt yêu cầu.
-2. **Hành vi khi tập yêu cầu rỗng ($S = \emptyset$):** Phép `JOIN dbo.RequiredCourses` khi bảng yêu cầu rỗng sẽ triệt tiêu 100% các dòng dữ liệu. Câu truy vấn đếm sẽ trả về tập rỗng ($\emptyset$), vi phạm cả ngữ nghĩa đại số quan hệ cổ điển ($R \div \emptyset = \pi_X(R)$) lẫn ngữ nghĩa truy vấn ứng viên độc lập ($\pi(C)$).
+2. **Hành vi khi tập yêu cầu rỗng ($S = \emptyset$):** Phép `JOIN dbo.RequiredCourses` khi bảng yêu cầu rỗng sẽ triệt tiêu 100% các dòng dữ liệu, khiến câu truy vấn đếm luôn trả về tập rỗng ($\emptyset$). Khi miền ứng viên hoặc quan hệ bằng chứng không rỗng, kết quả này làm sai lệch cả ngữ nghĩa đại số quan hệ cổ điển ($R \div \emptyset = \pi_X(R) \neq \emptyset$) lẫn ngữ nghĩa truy vấn ứng viên độc lập ($\pi_{\text{StudentId, FullName}}(C) \neq \emptyset$). Sự sai lệch này chỉ không xảy ra trong trường hợp tầm thường khi chính miền ứng viên hoặc quan hệ bằng chứng cũng rỗng ngay từ đầu.
 3. **Bỏ sót ứng viên chưa có bằng chứng:** Câu lệnh `FROM dbo.tr_results AS r` chỉ duyệt qua các sinh viên đã có điểm thi trong hệ thống. Nếu muốn xét toàn bộ sinh viên trong trường, bắt buộc phải xuất phát từ `dbo.tr_students` và sử dụng `LEFT JOIN`.
 
 Xem minh họa kịch bản thực hành tại [[practice/lab-03|Lab 03 — Truy vấn nâng cao]], bài tập có lời giải tại [[exercises/division-exercise|Bài tập phép chia]], và kỹ thuật tổng hợp truy vấn phổ quát tại [[cheat-sheets/universal-query|Bảng tra Universal Query]].

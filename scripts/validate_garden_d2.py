@@ -71,6 +71,7 @@ OVERCLAIM_PATTERNS = [
     re.compile(r"bắt buộc phải dùng trigger", re.I),
     re.compile(r"đề thi chính thức.*EXAM-2024-2025-HK1-FINAL-01", re.I),
     re.compile(r"đề chính thức.*EXAM-2024-2025-HK1-FINAL-01", re.I),
+    re.compile(r"ma trận đề (?:thi )?chính thức", re.I),
 ]
 WIKILINK = re.compile(r"\[\[([^\]|#]+)(?:#[^\]|]+)?(?:\|[^\]]+)?\]\]")
 ID = re.compile(r"\b[A-Z][A-Z0-9]+-[A-Z0-9-]+\b")
@@ -311,10 +312,14 @@ def main() -> int:
     div_body = records.get("theory/division", (None, {}, ""))[2]
     if "R \\div \\emptyset = \\pi_X(R)" not in div_body:
         errors.append("theory/division missing classical empty-set theorem: R \\div \\emptyset = \\pi_X(R)")
+    if "\\pi_{\\text{StudentId, FullName}}(C)" not in div_body:
+        errors.append("theory/division projection does not match selected attributes (StudentId, FullName)")
     if not ("bảng quan hệ độc lập" in div_body.lower() or "ứng viên độc lập" in div_body.lower() or "independent candidate table" in div_body.lower()):
         errors.append("theory/division missing separation of outer candidate relation domain from attribute set X")
     if not ("JOIN dbo.RequiredCourses" in div_body or "JOIN dbo.RequiredSet" in div_body or "JOIN RequiredCourses" in div_body or "JOIN RequiredSet" in div_body or "IN (SELECT" in div_body):
         errors.append("theory/division COUNT-DISTINCT query missing explicit restriction to required set S")
+    if not ("không xảy ra" in div_body or "tầm thường" in div_body or "chính miền ứng viên" in div_body):
+        errors.append("theory/division missing qualification of empty-set aggregation failure")
 
     # Multi-row Trigger checks
     trigger = records.get("practice/multi-row-trigger", (None, {}, ""))[2]

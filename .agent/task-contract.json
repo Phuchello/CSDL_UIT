@@ -39,7 +39,7 @@
     },
     {
       "id": "provenance_wording",
-      "criterion": "No provenance overclaims remain (community-mirror distinct from official, no 'luôn xuất hiện' or 'bắt buộc')",
+      "criterion": "No provenance overclaims remain (no 'ma trận đề thi chính thức', community-mirror distinct from official, no 'luôn xuất hiện' or 'bắt buộc')",
       "passes": true
     },
     {
@@ -54,7 +54,7 @@
     },
     {
       "id": "division_count_distinct",
-      "criterion": "Division empty-set semantics correctly state R / 0 = pi_X(R) and separate outer candidate table SQL behavior from attribute set X",
+      "criterion": "Division empty-set semantics correctly state R / 0 = pi_X(R), projection matches selected attributes, and empty-set failure is qualified",
       "passes": true
     },
     {
