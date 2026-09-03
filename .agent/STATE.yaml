@@ -1,5 +1,5 @@
 project: CSDL_UIT
-status: active
+status: review_pending
 
 workflow:
   version: 2
@@ -27,7 +27,7 @@ frozen:
 
 current_task:
   id: v1.1-premerge-remediation
-  status: in_progress
+  status: review_pending
 
 verified:
   readme_remediated: true
@@ -40,7 +40,7 @@ verified:
   full_build_verified: true
   link_crawl_clean: true
   deployment_gate: true
-  github_ci_gate: false
+  github_ci_gate: true
 
 blockers: []
 
@@ -52,15 +52,17 @@ do_not_repeat:
   - alter frozen branch baselines
   - deploy Pages automatically on push to main
   - merge PR to main before mentor review
+  - publish historical draft release v1.0.0
 
 relevant_files:
   - .github/workflows/pages.yml
   - .github/workflows/validate.yml
   - docs/BUILD.md
+  - scripts/validate.py
   - .agent/STATE.yaml
   - .agent/task-contract.json
 
 next_action: >
-  Commit and push release-gate hardening to v1.1-release-candidate, open PR to
-  main, await CI validation on ubuntu-latest, mark github_ci_gate true on success,
-  and stop at mentor review.
+  Await human mentor review and authorization of PR #2 and CI validation run
+  33743104644 before fast-forward merge to main, tagging v1.1.0, release creation,
+  and manual Pages workflow_dispatch.

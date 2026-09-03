@@ -4,17 +4,22 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 
 ---
 
-## 2026-09-03 — Release-gate hardening on v1.1-release-candidate
-- **Commit**: pending (`chore: harden release gates and decouple Pages deployment`)
+## 2026-09-03 — Release-gate hardening & CI validation on v1.1-release-candidate
+- **Commit**: `e1bd46a` (`fix: use resilient heading marker for Chapter 7 in PDF layout validator`), `c512b14` (`chore: harden release gates and decouple Pages deployment`)
 - **Scope**:
   - Decoupled GitHub Pages deployment from `main` pushes in `.github/workflows/pages.yml`; configured as `workflow_dispatch` only (human-authorized publication gate).
   - Updated `docs/BUILD.md` to document the canonical 4-gate release sequence: 1. CI validation on ubuntu-latest $\rightarrow$ 2. Fast-forward merge to `main` $\rightarrow$ 3. Tag & Release $\rightarrow$ 4. Explicit human-authorized Pages dispatch.
   - Added `deployment_gate` and `github_ci_gate` to `.agent/task-contract.json` and `.agent/STATE.yaml`.
   - Maintained historical draft release v1.0.0 untouched.
+  - Opened PR #2 from `v1.1-release-candidate` to `main` for CI validation only.
+  - Diagnosed and resolved OS-dependent character spacing in PDF text extraction during `scripts/validate.py` by using resilient heading marker `7.1 Tổng quan môi trường` and NFC normalization.
+  - Verified GitHub Actions run `33743104644` on `ubuntu-latest`: ALL STEPS PASSED in 28s (Theory & Practice HTML build, Core validator, Practice static consistency, Garden assets copy, Garden npm ci, Garden D2 contract validator, Quartz build, Link crawl).
 - **Verification**:
+  - GitHub Actions run `33743104644`: PASS (28s, 0 errors).
+  - PR #2 checks: PASS (`validate` check green).
   - `scripts/agent/validate_state.py`: PASS (11 criteria synchronized).
   - `git diff --check`: PASS (zero trailing whitespace).
-- **Next Checkpoint**: Open PR to `main`, await CI run on `ubuntu-latest`, and report status to mentor.
+- **Next Checkpoint**: Mentor review of PR #2 before authorized fast-forward merge to `main`.
 
 ---
 

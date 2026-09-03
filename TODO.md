@@ -17,10 +17,10 @@
 - [x] Release-gate Hardening:
   - [x] Configured `pages.yml` as `workflow_dispatch` only (human-controlled gate; no auto-deploy on push to `main`)
   - [x] Documented 4-gate release sequence in `docs/BUILD.md` (validate -> merge -> tag/release -> Pages dispatch)
+  - [x] CI Validation Gate: Ran `validate.yml` on `ubuntu-latest` via PR #2 (run `33743104644`, ALL PASS in 28s)
 
 ## Active Queue
-- [ ] CI Validation Gate: Run `validate.yml` on `ubuntu-latest` via PR to `main`
-- [ ] Mentor review of `v1.1-release-candidate` (PR and CI status)
+- [ ] Mentor review of `v1.1-release-candidate` (PR #2 and CI status)
 
 ## Final Release Gates (Held until Mentor Review Approval)
 - [ ] Cổng 2: fast-forward merge to `main`

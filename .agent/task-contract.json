@@ -1,6 +1,6 @@
 {
   "id": "v1.1-premerge-remediation",
-  "status": "in_progress",
+  "status": "passed",
   "acceptance": [
     {
       "id": "readme_remediated",
@@ -55,7 +55,7 @@
     {
       "id": "github_ci_gate",
       "criterion": "GitHub Actions CI validation workflow passes on ubuntu-latest for release candidate PR",
-      "passes": false
+      "passes": true
     }
   ]
 }
