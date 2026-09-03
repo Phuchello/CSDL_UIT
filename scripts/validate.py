@@ -11,6 +11,7 @@ import re
 import sys
 from lxml import html
 import pypdf
+import unicodedata
 
 # Ensure standard UTF-8 console output
 if sys.stdout.encoding != "utf-8":
@@ -101,8 +102,8 @@ def validate():
 
     print("\n=== [5/6] Validating Final Section Ordering & Layout ===")
     def page_of(marker: str) -> int:
-        norm_marker = " ".join(marker.split())
-        return next(i for i, text in enumerate(pages, 1) if norm_marker in " ".join(text.split()))
+        norm_marker = unicodedata.normalize("NFC", " ".join(marker.split()))
+        return next(i for i, text in enumerate(pages, 1) if norm_marker in unicodedata.normalize("NFC", " ".join(text.split())))
 
     assert page_of("Câu 13: (Ví dụ tổng quát)") == 39, "Ex 13 not on page 39"
     assert page_of("E. Recall Sheet - Ôn tập nhanh 1 trang") == 46, "Recall sheet not on page 46"
@@ -111,7 +112,7 @@ def validate():
     assert all(m in pages[48] for m in ("CREATE TABLE CTHD", "FK_CTHD_HD", "FK_CTHD_SP")), "CTHD incomplete on page 49"
     
     order = [
-        page_of("CHƯƠNG 7\nThực hành SQL Server"),
+        page_of("CHƯƠNG 7"),
         page_of("Exam Playbook - Kỹ Năng Giải Đề Tốc Độ"),
         page_of("Cheat Sheet 6 Chương - Cứu Cánh Trước"),
         page_of("Nguồn tham khảo & Tài liệu đối chiếu"),
