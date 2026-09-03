@@ -61,6 +61,10 @@ jobs:
         run: |
           node ./quartz/bootstrap-cli.mjs build -d content -o public
 
+      - name: Run Garden Render Smoke Validation
+        run: |
+          python scripts/validate_garden_render.py
+
       - name: Run Garden Internal Link Checker
         run: |
           python scripts/agent/check_links.py
