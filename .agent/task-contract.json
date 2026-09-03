@@ -1,31 +1,31 @@
 {
   "id": "v1.1.1-visual-maintenance",
-  "status": "in_progress",
+  "status": "review_pending",
   "acceptance": [
     {
       "id": "latex_enabled",
       "criterion": "Quartz LaTeX plugin is enabled with KaTeX on the maintenance branch",
-      "passes": false
+      "passes": true
     },
     {
       "id": "math_render_smoke",
       "criterion": "Post-build render smoke confirms representative math-heavy pages contain KaTeX output and no raw TeX control sequences in article content",
-      "passes": false
+      "passes": true
     },
     {
       "id": "ci_render_gate",
       "criterion": "GitHub Actions validation runs the render smoke after the production Quartz build and passes on ubuntu-latest",
-      "passes": false
+      "passes": true
     },
     {
       "id": "academic_content_unchanged",
       "criterion": "Theory, Practice, frozen source PDFs, and academic Garden prose are unchanged by this presentation maintenance task",
-      "passes": false
+      "passes": true
     },
     {
       "id": "release_v1_1_0_preserved",
       "criterion": "Published v1.1.0 tag/release remains immutable and historical v1.0.0 remains draft",
-      "passes": false
+      "passes": true
     },
     {
       "id": "live_visual_smoke",

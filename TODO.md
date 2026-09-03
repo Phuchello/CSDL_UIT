@@ -21,9 +21,12 @@
 - [x] Enable KaTeX rendering on `v1.1.1-maintenance`
 - [x] Add post-build `scripts/validate_garden_render.py` regression smoke gate
 - [x] Wire render smoke into `.github/workflows/validate.yml`
-- [ ] Open maintenance PR to `main`
-- [ ] GitHub-hosted CI passes with render smoke enabled
-- [ ] Review duplicate H1 / sidebar visual findings after math fix
+- [x] Open maintenance PR #3 to `main`
+- [x] GitHub-hosted CI passes with render smoke enabled (runs `33763735969` and `33764039396`)
+- [x] Apply duplicate H1 / redundant TOC cleanup without changing Garden prose
+- [x] Replace nested desktop TOC/backlinks scrollbars with one context-rail scrollbar
+- [x] Shorten visible left-rail site title while keeping `Knowledge Garden` as title suffix
+- [ ] Merge PR #3 to `main`
 - [ ] Human-authorized Pages deployment for the maintenance fix
 - [ ] Desktop + mobile live visual smoke
 - [ ] Decide whether to tag `v1.1.1`

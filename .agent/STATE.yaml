@@ -1,5 +1,5 @@
 project: CSDL_UIT
-status: in_progress
+status: review_pending
 
 workflow:
   version: 2
@@ -27,16 +27,26 @@ frozen:
 
 current_task:
   id: v1.1.1-visual-maintenance
-  status: in_progress
+  status: review_pending
 
 verified:
   v1_1_0_release_complete: true
   v1_1_0_tag_immutable: true
   v1_1_0_pages_deployed: true
-  latex_plugin_enabled: false
-  math_render_smoke_passed: false
-  github_ci_gate: false
+  latex_plugin_enabled: true
+  math_render_smoke_passed: true
+  github_ci_gate: true
+  academic_content_unchanged: true
+  duplicate_heading_polish_applied: true
+  nested_sidebar_scroll_polish_applied: true
   live_visual_smoke_passed: false
+
+verification_evidence:
+  pr: 3
+  functional_ci_run: 33763735969
+  current_head_ci_run: 33764039396
+  current_head_ci_conclusion: success
+  current_head_sha: 21bf44f58c1fc369634a183e56bdaa9f4175fa0f
 
 blockers: []
 
@@ -58,6 +68,6 @@ relevant_files:
   - .agent/task-contract.json
 
 next_action: >
-  Open a maintenance PR from v1.1.1-maintenance to main, run GitHub-hosted validation,
-  verify the new post-build KaTeX render smoke gate, then review remaining visual-only
-  findings (duplicate H1/sidebar polish) before any merge or Pages dispatch.
+  Merge PR #3 to main only after its current-head CI remains green. Then use the existing
+  human-controlled Pages workflow_dispatch and perform desktop/mobile live visual smoke.
+  Do not create or move a v1.1.1 tag until the live smoke passes.
