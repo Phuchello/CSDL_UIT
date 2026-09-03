@@ -15,7 +15,7 @@
 - [x] Gate 3: tag and publish immutable `v1.1.0` at the same commit
 - [x] Gate 4: manual Pages deployment (`workflow_dispatch` run `33761760360`, SUCCESS)
 
-## Active Queue — v1.1.1 Maintenance
+## Completed — v1.1.1 Maintenance
 - [x] Reproduce live math-rendering defect from deployed v1.1.0 artifact
 - [x] Identify root cause: `@quartz-community/latex` disabled in `garden/quartz.config.yaml`
 - [x] Enable KaTeX rendering on `v1.1.1-maintenance`
@@ -25,7 +25,7 @@
 - [x] GitHub-hosted CI passes with render smoke enabled (runs `33763735969` and `33764039396`)
 - [x] Apply duplicate H1 / redundant TOC cleanup without changing Garden prose
 - [x] Replace nested desktop TOC/backlinks scrollbars with one context-rail scrollbar
-- [x] Shorten visible left-rail site title while keeping `Knowledge Garden` as title suffix
+- [x] Shorten visible left-rail site title
 - [x] Merge PR #3 to `main` (`5e4b0c17ec709aabe999a9d922c6679c3a3797ca`)
 - [x] Human-authorized Pages deployment for the maintenance fix (`workflow_dispatch` run `33765891591`, SUCCESS)
 
@@ -33,15 +33,31 @@
 - [x] Audit all 57 notes in `garden/content/**/*.md`
 - [x] Localize frontmatter titles and first H1s to Vietnamese-first while preserving technical English in parentheses
 - [x] Localize explicit wikilink display aliases across notes
-- [x] Localize breadcrumbs root to "Trang chủ" via `@quartz-community/breadcrumbs` options in `garden/quartz.config.yaml`
+- [x] Localize breadcrumbs root to `Trang chủ`
 - [x] Preserve all existing file paths and slugs unchanged
 - [x] Preserve academic content, formulas, SQL, and canonical provenance IDs unchanged
 - [x] Extend `scripts/validate_garden_d2.py` with deterministic Vietnamese title prefix regression checks
-- [x] Rebuild Quartz and run full verification suite (`verify.ps1 -Mode Full`, `validate_garden_render.py`, `check_links.py`)
-- [x] Inspect representative rendered pages (`/exercises/normalization-exercise`, `/theory/candidate-keys`, `/theory/relational-algebra`, `/practice/`, `/errors/`, `/cheat-sheets/`)
-- [ ] Commit, push branch to origin, and open PR to `main`
-- [ ] Wait for GitHub Actions CI validation
-- [ ] Report audit results and stop for mentor review
+- [x] Rebuild Quartz and run full verification suite
+- [x] Inspect representative rendered pages
+- [x] Open PR #4 to `main`
+- [x] GitHub-hosted CI passed on original localization head (`33769457047`)
+- [x] Final polish: remove remaining English-only visible aliases (`Closure`, `Setup`, `Date conversion`, `Multi-row trigger`, `Debugging`, `Exam patterns`, etc.)
+- [x] Final polish: hide reader-facing `Properties`/frontmatter panel
+- [x] Final polish: hide modified-date/read-time content metadata
+- [x] Final polish: change browser suffix from `Knowledge Garden` to `Vườn tri thức`
+- [x] Final functional verification on `ff682dc86552c355113cc1c8e13a85f9042db08c`: Actions run `33771223152` SUCCESS
+- [ ] Confirm bookkeeping-only current HEAD CI remains green
+- [ ] Human mentor review of PR #4
+- [ ] Merge PR #4 only after explicit authorization
+- [ ] Human-authorized Pages deployment after merge
+- [ ] Desktop + mobile live visual smoke after deployment
+- [ ] Decide whether to tag `v1.1.1`
+
+## Parallel Design — v1.2 Learning System
+- [x] Draft design architecture on `v1.2-learning-system-design`
+- [x] Open Draft PR #5
+- [x] CI run `33770162203` PASS
+- [ ] Do not implement Learning Engine until v1.1.1 localization release path is reviewed
 
 ## Deferred Maintenance
-- [ ] Triage Garden npm audit findings separately from the visual-render fix (1 low, 2 high observed during v1.1.0 Pages build)
+- [ ] Triage Garden npm audit findings separately (1 low, 2 high observed during v1.1.0 Pages build)
