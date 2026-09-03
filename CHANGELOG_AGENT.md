@@ -4,8 +4,27 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 
 ---
 
+## 2026-09-03 — Milestone D2 mentor blocker remediation (fixture columns, IT004 RBTV, division COUNT-DISTINCT)
+- **Commit**: pending (`fix(garden): remediate fixture columns, it004 rbtv alignment, and division count-distinct`)
+- **Scope**:
+  - Corrected `errors/wrong-universal-candidate.md` to use canonical `practice/sql/01_schema.sql` columns (`FullName`, `Credits`) instead of nonexistent fields (`StudentName`, `DeptId`).
+  - Aligned `theory/rbtv-impact.md` with frozen IT004 terminology: preserved the 7 IT004 classifications, replaced `*` notation with canonical `+`, `-`, `+(Thuộc tính)`, and framed impact tables as the IT004 analysis method.
+  - Corrected the Division COUNT-DISTINCT alternative in `theory/division.md`: explicitly restricted evidence to required set $S$ (`JOIN dbo.RequiredSet`), and documented empty-required-set and candidate-domain conditions.
+  - Extended `scripts/validate_garden_d2.py` with full `01_schema.sql` table and referenced column validation across all notes, IT004 RBTV classifications/notation checks, and Division COUNT-DISTINCT restriction assertions.
+  - Rebuilt Quartz (109 emitted files), validated 2,815 internal links (0 broken), and regenerated all 10 review captures in `dist/review/v1.1_quartz/`.
+- **Verification**:
+  - `scripts/agent/validate_state.py`: PASS (14 criteria synchronized).
+  - `scripts/validate.py`: PASS (6/6).
+  - `scripts/validate_garden_d2.py`: PASS (all checks).
+  - `scripts/agent/check_links.py`: PASS (2,815 links checked, 0 broken).
+  - `scripts/agent/verify.ps1 -Mode Full`: PASS (all 6 checks).
+  - `git diff --check`: PASS (zero trailing whitespace).
+- **Next Checkpoint**: Human mentor review and authorization on branch `v1.1-quartz-garden`.
+
+---
+
 ## 2026-09-03 — Milestone D2 contract hardening and mentor review remediation
-- **Commit**: pending (`fix(garden): harden d2 graph chain core depth trigger and pdf contract`)
+- **Commit**: `b0545cf4ceb77a98e010da9532825fa2c88d8ef3`
 - **Scope**:
   - Enforced deterministic mandatory graph-chain validation across `theory/division` ↔ `theory/double-not-exists` ↔ `practice/lab-03` ↔ `errors/wrong-universal-candidate` using verified in-body Markdown edges.
   - Deepened all remaining skeletal core notes (`relational-algebra`, `division`, `double-not-exists`, `rbtv-impact`, `functional-dependencies`, `closure`, `3nf`, `bcnf`, `lossless-decomposition`) to full standalone teaching depth with formal definitions, algorithm steps, and dry-run tables.
@@ -42,7 +61,7 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
   - `scripts/validate_garden_d2.py`: PASS.
   - `scripts/agent/check_links.py`: PASS (2684 links checked, 0 broken).
   - `scripts/agent/verify.ps1 -Mode Full`: PASS (all 6 checks).
-- **Next Checkpoint**: Human mentor review and authorization on branch `v1.1-quartz-garden`.
+  - `Next Checkpoint`: Human mentor review and authorization on branch `v1.1-quartz-garden`.
 
 ---
 

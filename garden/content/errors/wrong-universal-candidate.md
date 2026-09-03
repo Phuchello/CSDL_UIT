@@ -16,10 +16,10 @@ Trong các bài toán hiện thực hóa [[theory/division|Phép chia hình th�
 
 ## 2. Nguyên nhân (Root Cause)
 Người viết nhầm lẫn giữa **Tập ứng viên ($X$)** và **Tập yêu cầu ($Y$)**:
-- Đề bài: *"Tìm các sinh viên đã học tất cả các môn thuộc khoa Mạng máy tính"*.
+- Giả sử yêu cầu nghiệp vụ: *"Tìm các sinh viên đã học tất cả các môn học có 4 tín chỉ"*.
   - $X$ (Ứng viên): Danh sách sinh viên (`dbo.tr_students`).
-  - $Y$ (Yêu cầu): Danh sách môn học của khoa Mạng (`dbo.tr_courses`).
-- Lỗi sai: Viết tầng ngoài cùng là `FROM dbo.tr_courses AS c` và tầng giữa là `FROM dbo.tr_students AS s`. Điều này đảo ngược ngữ nghĩa thành: *"Tìm các môn học được học bởi tất cả sinh viên"*.
+  - $Y$ (Yêu cầu): Danh sách môn học 4 tín chỉ (`dbo.tr_courses` với `Credits = 4`).
+- Lỗi sai: Viết tầng ngoài cùng là `FROM dbo.tr_courses AS c` và tầng giữa là `FROM dbo.tr_students AS s`. Điều này đảo ngược ngữ nghĩa thành: *"Tìm các môn học 4 tín chỉ được học bởi tất cả sinh viên"*.
 
 ## 3. Cách thẩm tra và chẩn đoán (Verify)
 Trước khi đặt bút viết code SQL, luôn phân rã bài toán thành 3 tập hợp rõ ràng theo quy tắc tại [[theory/division|Phép chia]]:
@@ -28,16 +28,16 @@ Trước khi đặt bút viết code SQL, luôn phân rã bài toán thành 3 t�
 3. **$R$ (Evidence):** Sự kiện liên kết nằm ở đâu? $\implies$ Đưa bảng đó vào tầng `FROM` của subquery thứ hai, kết nối với cả $X$ và $Y$.
 
 ## 4. Cách khắc phục chuẩn xác (Fix)
-Đảm bảo cấu trúc câu truy vấn tuân thủ đúng vị trí phân tầng:
+Đảm bảo cấu trúc câu truy vấn tuân thủ đúng vị trí phân tầng và dùng đúng các cột chuẩn tắc trong schema:
 
 ```sql
 -- Cấu trúc chuẩn tắc: Outer FROM là Ứng viên (X)
-SELECT s.StudentId, s.StudentName
+SELECT s.StudentId, s.FullName
 FROM dbo.tr_students AS s -- Tập ứng viên X
 WHERE NOT EXISTS (
     SELECT 1
     FROM dbo.tr_courses AS c -- Tập yêu cầu Y
-    WHERE c.DeptId = 'MMT'
+    WHERE c.Credits = 4
       AND NOT EXISTS (
           SELECT 1
           FROM dbo.tr_results AS r -- Bảng bằng chứng R nối X và Y

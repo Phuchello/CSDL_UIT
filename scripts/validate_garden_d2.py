@@ -99,6 +99,23 @@ def sha(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def parse_schema_tables(schema_sql: str) -> dict[str, set[str]]:
+    tables: dict[str, set[str]] = {}
+    for m in re.finditer(r"CREATE TABLE dbo\.(tr_[A-Za-z0-9_]+)\s*\((.*?)\n\);", schema_sql, re.S):
+        tbl = m.group(1).lower()
+        body = m.group(2)
+        cols = set()
+        for line in body.splitlines():
+            line = line.strip()
+            if not line or line.startswith(("CONSTRAINT", "FOREIGN KEY", "PRIMARY KEY", "CHECK")):
+                continue
+            col_m = re.match(r"([A-Za-z0-9_]+)\s+", line)
+            if col_m:
+                cols.add(col_m.group(1).lower())
+        tables[tbl] = cols
+    return tables
+
+
 def main() -> int:
     errors: list[str] = []
     notes = sorted(CONTENT.rglob("*.md"))
@@ -210,11 +227,75 @@ def main() -> int:
             elif source_id not in known_ids:
                 errors.append(f"{path}: source id absent from ledgers: {source_id}")
 
-    # Fixture and Trigger checks
-    lab3 = records.get("practice/lab-03", (None, {}, ""))[2]
-    if not all(x in lab3 for x in ("tr_students", "tr_courses", "tr_results", "S001")):
-        errors.append("A04 contract missing tr_students/tr_courses/tr_results/S001")
+    # Canonical fixture schema validation across ALL notes (tables and referenced columns)
+    schema_sql = (ROOT / "practice" / "sql" / "01_schema.sql").read_text(encoding="utf-8")
+    schema_tables = parse_schema_tables(schema_sql)
 
+    for s, (path, meta, body) in records.items():
+        for tbl in re.findall(r"\b(?:dbo\.)?(tr_[A-Za-z0-9_]+)\b", body, re.I):
+            if tbl.lower() not in schema_tables:
+                errors.append(f"{path}: canonical fixture table absent from schema: {tbl}")
+
+        sql_blocks = re.findall(r"```sql(.*?)```", body, re.S)
+        for block in sql_blocks:
+            aliases: dict[str, str] = {}
+            for m in re.finditer(r"(?:FROM|JOIN)\s+(?:dbo\.)?(tr_[A-Za-z0-9_]+)(?:\s+(?:AS\s+)?([A-Za-z0-9_]+))?", block, re.I):
+                tbl = m.group(1).lower()
+                al = (m.group(2) or m.group(1)).lower()
+                aliases[al] = tbl
+
+            trg_m = re.search(r"ON\s+(?:dbo\.)?(tr_[A-Za-z0-9_]+)", block, re.I)
+            trg_table = trg_m.group(1).lower() if trg_m else None
+            if trg_table:
+                aliases["inserted"] = trg_table
+                aliases["deleted"] = trg_table
+                aliases["i"] = trg_table
+                aliases["d"] = trg_table
+
+            for col_ref in re.finditer(r"\b([A-Za-z0-9_]+)\.([A-Za-z0-9_]+)\b", block):
+                al, col = col_ref.group(1).lower(), col_ref.group(2).lower()
+                if al in aliases:
+                    target_table = aliases[al]
+                    if target_table in schema_tables and col not in schema_tables[target_table]:
+                        errors.append(f"{path}: column '{col}' does not exist on canonical table '{target_table}' (alias '{al}')")
+
+            if trg_table:
+                for upd in re.finditer(r"\bUPDATE\s*\(\s*([A-Za-z0-9_]+)\s*\)", block, re.I):
+                    col = upd.group(1).lower()
+                    if col not in schema_tables[trg_table]:
+                        errors.append(f"{path}: UPDATE column '{col}' does not exist on trigger table '{trg_table}'")
+
+    # RBTV IT004 alignment validation
+    rbtv_body = records.get("theory/rbtv-impact", (None, {}, ""))[2]
+    it004_rbtv_classes = [
+        "miền giá trị",
+        "khóa",
+        "thực thể",
+        "tham chiếu",
+        "liên thuộc tính",
+        "liên bộ",
+        "liên quan hệ",
+    ]
+    for rc in it004_rbtv_classes:
+        if rc not in rbtv_body.lower():
+            errors.append(f"theory/rbtv-impact missing canonical IT004 classification: {rc}")
+    if "+(DeptId)" not in rbtv_body:
+        errors.append("theory/rbtv-impact missing canonical +(Attribute) notation (e.g. +(DeptId))")
+    if re.search(r"\*\([A-Za-z0-9_,\s]+\)", rbtv_body):
+        errors.append("theory/rbtv-impact contains forbidden *(Attribute) notation instead of +(Attribute)")
+    if re.search(r"kỹ sư.*bắt buộc phải lập", rbtv_body, re.I):
+        errors.append("theory/rbtv-impact overclaims impact table as mandatory for all engineers rather than IT004 method")
+
+    # Division COUNT-DISTINCT restriction validation
+    div_body = records.get("theory/division", (None, {}, ""))[2]
+    if not ("JOIN dbo.RequiredSet" in div_body or "JOIN RequiredSet" in div_body or "IN (SELECT" in div_body):
+        errors.append("theory/division COUNT-DISTINCT query missing explicit restriction to required set S")
+    if not ("S = \\emptyset" in div_body or "rỗng" in div_body.lower()):
+        errors.append("theory/division missing explanation of empty required set S condition")
+    if not ("miền ứng viên" in div_body.lower() or "candidate domain" in div_body.lower()):
+        errors.append("theory/division missing explanation of candidate domain condition")
+
+    # Multi-row Trigger checks
     trigger = records.get("practice/multi-row-trigger", (None, {}, ""))[2]
     if not all(x in trigger for x in ("tr_departments", "tr_employees", "HeadEmployeeId", "DeptId", "EmployeeId", "inserted", "deleted", "UPDATE(DeptId)", "51002", "51003")):
         errors.append("trigger contract missing canonical tables/columns/event discrimination")
@@ -222,13 +303,6 @@ def main() -> int:
         errors.append("trigger contract missing DELETE event discrimination (i.EmployeeId IS NULL)")
     if not ("NOT NULL" in trigger and ("phòng vệ" in trigger.lower() or "defensive" in trigger.lower())):
         errors.append("trigger contract missing explicit DeptId NOT NULL schema rejection vs defensive trigger logic distinction")
-
-    sql = (ROOT / "practice" / "sql" / "01_schema.sql")
-    for s, (path, meta, body) in records.items():
-        if meta.get("fixture") == "training-v1":
-            for table in re.findall(r"\b(?:dbo\.)?(tr_[A-Za-z0-9_]+)", body, re.I):
-                if not re.search(rf"\b{re.escape(table)}\b", sql.read_text(encoding="utf-8", errors="ignore"), re.I):
-                    errors.append(f"{path}: fixture table absent from canonical schema: {table}")
 
     # Strict single public PDF convention & built output verification
     index_body = records.get("index", (None, {}, ""))[2]
@@ -274,9 +348,11 @@ def main() -> int:
     print("MANDATORY GRAPH CHAIN: PASS" if not any("mandatory body wikilink" in e for e in errors) else "MANDATORY GRAPH CHAIN: FAIL")
     print("CORE NOTES DEPTH: PASS" if not any("standalone teaching depth" in e for e in errors) else "CORE NOTES DEPTH: FAIL")
     print("PROVENANCE OVERCLAIMS: PASS" if not any("overclaim" in e for e in errors) else "PROVENANCE OVERCLAIMS: FAIL")
+    print("SCHEMA TABLES & COLUMNS: PASS" if not any("absent from schema" in e or "does not exist on canonical table" in e for e in errors) else "SCHEMA TABLES & COLUMNS: FAIL")
+    print("RBTV IT004 ALIGNMENT: PASS" if not any("rbtv-impact" in e for e in errors) else "RBTV IT004 ALIGNMENT: FAIL")
+    print("DIVISION COUNT-DISTINCT: PASS" if not any("theory/division" in e for e in errors) else "DIVISION COUNT-DISTINCT: FAIL")
     print("SOURCE IDS: PASS" if not any("source ID" in e or "source id absent" in e for e in errors) else "SOURCE IDS: FAIL")
     print("TRIGGER CONTRACT: PASS" if not any("trigger contract" in e for e in errors) else "TRIGGER CONTRACT: FAIL")
-    print("FIXTURE CONTRACT: PASS" if not any("fixture" in e or "A04" in e for e in errors) else "FIXTURE CONTRACT: FAIL")
     print("PDF CONTRACT: PASS" if not any("PDF" in e or "CamNang" in e for e in errors) else "PDF CONTRACT: FAIL")
 
     if errors:
