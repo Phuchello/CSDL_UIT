@@ -4,10 +4,10 @@ Durable architectural and operational decisions for AI agents and human contribu
 
 ---
 
-### DEC-001: Repository as Single Source of Truth
-- **Decision**: The repository files (`AGENTS.md`, `PROJECT_STATE.md`, `TODO.md`, git history) constitute the definitive source of truth, not chat context or ephemeral memory.
-- **Reason**: Agent context windows are transient and subject to truncation or hallucination across sessions.
-- **Status / Date**: ADOPTED — 2026-09-03
+### DEC-001: Machine-Readable Runtime State & JIT Context (Workflow v2)
+- **Decision**: The canonical operational runtime state is `.agent/STATE.yaml`. `AGENTS.md` + `.agent/STATE.yaml` + git state form the minimum boot context. Additional documentation is loaded Just-In-Time via `docs/index.md`. Task completion is governed strictly by `.agent/task-contract.json` plus executable verification. Human-readable files (`PROJECT_STATE.md`, `TODO.md`) serve as secondary compatibility summaries.
+- **Reason**: Eliminates token bloat from reading redundant prose files on every boot and prevents hallucinations through explicit machine-readable task contracts.
+- **Status / Date**: ADOPTED — 2026-09-03 (Upgraded from v1)
 
 ---
 
@@ -19,9 +19,14 @@ Durable architectural and operational decisions for AI agents and human contribu
 ---
 
 ### DEC-003: Frozen Baseline Artifacts
-- **Decision**: Phase A (`v1.1-editorial-practice`), Theory v1.1 (`v1.1-theory-redesign`), Practice v1.1 (`v1.1-practice-handbook`), and D1 Architecture (`v1.1-knowledge-garden`) are permanently frozen baselines. No changes may be made to their source trees or branches without explicit approval.
+- **Decision**: The following baselines are permanently frozen and immutable:
+  - Phase A: `v1.1-editorial-practice` (`6aef91eb2cb4a0b41827573bc03ec55640d19786`)
+  - Theory v1.1: `v1.1-theory-redesign` (`61eb5c8a60106be4251ce090a17c6c3482284332`)
+  - Practice v1.1: `v1.1-practice-handbook` (`59c519b94ede86f07fbc1778b120d0c8c3188b80`)
+  - D1 Architecture: `v1.1-knowledge-garden` (`922afe07bea7f28abf30c49054159a09a31be743`)
+  - `main`: `6ccf5a408934ab93760ac3242511beb43b05f24f`
 - **Reason**: Establish invariant baselines to prevent circular rewrites and regressions.
-- **Status / Date**: ADOPTED — 2026-09-02
+- **Status / Date**: ADOPTED — 2026-09-02 / Re-verified 2026-09-03
 
 ---
 

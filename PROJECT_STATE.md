@@ -1,5 +1,8 @@
 # PROJECT STATE
 
+> **Canonical runtime state**: `.agent/STATE.yaml`
+> Under Phuchello Agent Workflow v2, `.agent/STATE.yaml` is the machine-readable operational runtime state. This file is retained for human-readable milestone tracking.
+
 Last updated: 2026-09-03
 Status: ACTIVE — D2 CORRECTION REQUIRED
 

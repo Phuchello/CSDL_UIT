@@ -5,8 +5,9 @@
 - [x] Phase B2: Theory Handbook v1.1 Frozen (`v1.1-theory-redesign` @ `61eb5c8`)
 - [x] Phase C1: Practical Handbook Architecture & Proof Frozen (`v1.1-practice-handbook` @ `f7dd840`)
 - [x] Phase C2: Full Practical Handbook Frozen (`v1.1-practice-handbook` @ `59c519b`)
-- [x] Phase D1: Knowledge Garden Architecture Proof Frozen (`v1.1-knowledge-garden` @ `c7ba7e4`)
+- [x] Phase D1: Knowledge Garden Architecture Proof Frozen (`v1.1-knowledge-garden` @ `922afe07bea7f28abf30c49054159a09a31be743`)
 - [x] Phase D2 (Initial): Quartz Knowledge Garden Production Candidate Built (`v1.1-quartz-garden` @ `58b5474`)
+- [x] Workflow Migration: Phuchello Agent Workflow v2 Adopted
 
 ## Active Queue
 

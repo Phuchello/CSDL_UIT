@@ -1,11 +1,30 @@
 # AGENT CHANGELOG
 
-Operational record of changes made by AI agents under Phuchello Agent Workflow v1. Entries are concise and audit-focused.
+Operational record of changes made by AI agents under Phuchello Agent Workflow. Entries are concise and audit-focused.
+
+---
+
+## 2026-09-03 — Workflow v2 migration
+- **Commit**: pending (`chore: migrate agent workflow to v2`)
+- **Scope**:
+  - Upgraded repository control plane to Phuchello Agent Workflow v2.
+  - Replaced heavy `AGENTS.md` with thin control plane (40–70 lines) and JIT retrieval.
+  - Created canonical machine-readable runtime state (`.agent/STATE.yaml`).
+  - Created machine-readable task acceptance contract (`.agent/task-contract.json`).
+  - Created central repository documentation map (`docs/index.md`).
+  - Implemented executable verification script (`scripts/agent/verify.ps1`).
+  - Updated compatibility state documents and decision log (DEC-001/DEC-008).
+  - Fixed frozen D1 commit reference to `922afe07bea7f28abf30c49054159a09a31be743`.
+- **Verification**:
+  - Validated YAML/JSON syntax of `.agent/` state files.
+  - Executed `./scripts/agent/verify.ps1 -Mode Fast`.
+  - Zero modifications to product/content/frozen artifacts.
+- **Next Checkpoint**: D2 source / graph / content-integrity correction.
 
 ---
 
 ## 2026-09-03 — Workflow v1 bootstrap
-- **Commit**: pending (`chore: adopt Phuchello agent workflow v1`)
+- **Commit**: `07e4d720dfaa677a76cbd8e9bbbe48ea3cdf776e`
 - **Scope**:
   - Added repository operating protocol (`AGENTS.md`).
   - Compacted operational state (`PROJECT_STATE.md`) with explicit single `Exact Next Action`.
