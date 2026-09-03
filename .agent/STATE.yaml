@@ -1,5 +1,5 @@
 project: CSDL_UIT
-status: in_progress
+status: review_pending
 
 workflow:
   version: 2
@@ -27,7 +27,7 @@ frozen:
 
 current_task:
   id: v1.1.1-vietnamese-localization
-  status: in_progress
+  status: review_pending
 
 verified:
   v1_1_0_release_complete: true
@@ -39,14 +39,14 @@ verified:
   vietnamese_first_regression_gate_passed: true
   link_crawl_passed: true
   representative_render_inspected: true
-  github_ci_gate: false
+  github_ci_gate: true
   academic_content_unchanged: true
 
 verification_evidence:
-  pr: null
-  ci_run_id: null
-  ci_conclusion: null
-  head_sha: null
+  pr: 4
+  ci_run_id: 33769222806
+  ci_conclusion: success
+  head_sha: 5362c9e69f92ecb364c78f721613ac20c677169f
 
 blockers: []
 
@@ -66,5 +66,4 @@ relevant_files:
   - .agent/task-contract.json
 
 next_action: >
-  Commit and push v1.1.1-vietnamese-ui to origin, open PR to main, and verify GitHub Actions CI passes.
-  Do NOT merge and do NOT dispatch Pages yet.
+  Stop for mentor review of PR #4. DO NOT merge and DO NOT dispatch Pages yet.

@@ -1,6 +1,6 @@
 {
   "id": "v1.1.1-vietnamese-localization",
-  "status": "in_progress",
+  "status": "review_pending",
   "acceptance": [
     {
       "id": "vietnamese_first_titles",
@@ -35,7 +35,7 @@
     {
       "id": "github_ci_gate",
       "criterion": "GitHub Actions validation on PR passes on ubuntu-latest",
-      "passes": false
+      "passes": true
     }
   ]
 }
