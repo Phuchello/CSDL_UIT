@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
-  pageTitle: IT004 · Cơ sở dữ liệu · Knowledge Garden
-  pageTitleSuffix: ""
+  pageTitle: IT004 · Cơ sở dữ liệu
+  pageTitleSuffix: " · Knowledge Garden"
   enableSPA: false
   enablePopovers: true
   analytics: null

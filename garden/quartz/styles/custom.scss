@@ -84,6 +84,17 @@ article > h1:first-child {
   padding-bottom: 0.45rem;
 }
 
+// Quartz already renders the canonical frontmatter title in the page header.
+// Source Markdown keeps a leading H1 for portability, so suppress the duplicate
+// body heading and its redundant top-level TOC entry without touching content.
+.markdown-preview-view > h1:first-child {
+  display: none;
+}
+
+ul.toc-content.overflow > li.depth-0:first-child {
+  display: none;
+}
+
 // Keep the explorer useful without turning it into a dense dashboard.
 #explorer {
   border-inline-end: 1px solid var(--it004-rule);
@@ -91,6 +102,22 @@ article > h1:first-child {
 
 #toc {
   border-inline-start: 1px solid var(--it004-rule);
+}
+
+// On wide layouts, use one scroll container for the complete context rail
+// instead of separate nested scrollbars inside the TOC and backlinks lists.
+@media (min-width: 1200px) {
+  .page > #quartz-body .sidebar.right {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+  }
+
+  .page > #quartz-body .sidebar.right ul.toc-content.overflow,
+  .page > #quartz-body .sidebar.right .backlinks > ul.overflow {
+    max-height: none;
+    overflow: visible;
+  }
 }
 
 @media (max-width: 800px) {
