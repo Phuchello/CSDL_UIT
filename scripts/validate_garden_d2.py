@@ -321,12 +321,12 @@ def main() -> int:
     if not ("không xảy ra" in div_body or "tầm thường" in div_body or "chính miền ứng viên" in div_body):
         errors.append("theory/division missing qualification of empty-set aggregation failure")
 
-    # Multi-row Trigger checks
+    # Multi-row Trigger checks (declarative FK precedence over AFTER DELETE)
     trigger = records.get("practice/multi-row-trigger", (None, {}, ""))[2]
-    if not all(x in trigger for x in ("tr_departments", "tr_employees", "HeadEmployeeId", "DeptId", "EmployeeId", "inserted", "deleted", "UPDATE(DeptId)", "51002", "51003")):
-        errors.append("trigger contract missing canonical tables/columns/event discrimination")
-    if "i.EmployeeId IS NULL" not in trigger:
-        errors.append("trigger contract missing DELETE event discrimination (i.EmployeeId IS NULL)")
+    if not all(x in trigger for x in ("tr_departments", "tr_employees", "HeadEmployeeId", "DeptId", "EmployeeId", "inserted", "UPDATE(DeptId)", "51003")):
+        errors.append("trigger contract missing canonical tables/columns/UPDATE enforcement")
+    if not ("FK_tr_departments_head" in trigger and "547" in trigger):
+        errors.append("trigger contract missing declarative FK precedence (FK_tr_departments_head / Msg 547) over AFTER DELETE")
     if not ("NOT NULL" in trigger and ("phòng vệ" in trigger.lower() or "defensive" in trigger.lower())):
         errors.append("trigger contract missing explicit DeptId NOT NULL schema rejection vs defensive trigger logic distinction")
 

@@ -1,22 +1,22 @@
 project: CSDL_UIT
-status: integration_review_blocked
+status: review_pending
 
 workflow:
   version: 2
 
-branch: v1.1-integration-review
+branch: v1.1-release-candidate
 
 safe_repo_commit:
-  sha: ef6da113ea4b3aed983d607b1e0c8ac89251d0fd
-  purpose: d2-workflow-finalized-head
+  sha: b2bdaa680cad403418a8bc86d300237191a083b5
+  purpose: blind-integration-review-head
 
 safe_product_commit:
   sha: be34ef3ef79956d9c1c2541782cabc82e66d0c6e
   purpose: final-d2-quartz-checkpoint
 
 milestone:
-  id: INT-REV
-  name: Blind Public Product and Integration Review
+  id: REL-PREP
+  name: Pre-merge Defect Remediation & Release Candidate Preparation
 
 frozen:
   phase_a: 6aef91eb2cb4a0b41827573bc03ec55640d19786
@@ -26,38 +26,42 @@ frozen:
   main: 6ccf5a408934ab93760ac3242511beb43b05f24f
 
 current_task:
-  id: v1.1-blind-integration-review
-  status: completed
+  id: v1.1-premerge-remediation
+  status: review_pending
 
 verified:
-  academic_correctness_reviewed: true
-  practice_contract_reviewed: true
-  cross_product_consistency_reviewed: true
-  garden_runtime_reviewed: true
-  provenance_reviewed: true
-  copyright_reviewed: true
-  integration_topology_reviewed: true
-  existing_qa_compared: true
-  release_verdict_recorded: true
+  readme_remediated: true
+  pages_workflow_remediated: true
+  ci_workflow_remediated: true
+  build_docs_remediated: true
+  fk_trigger_precedence_corrected: true
+  practice_source_pdf_consistent: true
+  garden_consistency_verified: true
+  full_build_verified: true
+  link_crawl_clean: true
 
-blockers:
-  - M-01-obsolete-root-readme
-  - M-02-incompatible-pages-workflow
+blockers: []
 
 do_not_repeat:
-  - trust prior QA claims blindly
-  - modify product implementation or content files
+  - link to legacy 88p CamNang in v1.1 public badges
+  - deploy book/ to GitHub Pages instead of garden/public
+  - expect AFTER DELETE trigger 51002 when FK constraint fires first (Msg 547)
+  - delete historical CamNang PDF file
   - alter frozen branch baselines
-  - merge to main or publish Pages prematurely
 
 relevant_files:
-  - reports/v1.1_glm53_blind_integration_review.md
   - README.md
   - .github/workflows/pages.yml
-  - .agent/STATE.yaml
-  - .agent/task-contract.json
+  - .github/workflows/validate.yml
+  - docs/BUILD.md
+  - practice/sql/05_triggers.sql
+  - practice/sql/06_test_cases.sql
+  - practice/chapters/13_debugging_expanded.html
+  - practice/EXAMPLE_REGISTRY.md
+  - garden/content/practice/multi-row-trigger.md
+  - scripts/validate_garden_d2.py
+  - scripts/validate_practice_static.py
 
 next_action: >
-  Fix only the specific BLOCKER/MAJOR findings from
-  reports/v1.1_glm53_blind_integration_review.md and then rerun the
-  integration review.
+  Await mentor review of pre-merge remediation on branch v1.1-release-candidate
+  before fast-forward merge to main, tagging, and publication.

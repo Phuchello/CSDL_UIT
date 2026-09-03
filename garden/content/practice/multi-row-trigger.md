@@ -20,27 +20,17 @@ Trong lược đồ chuẩn tắc [[practice/setup|fixture training-v1]] (`tr_de
 
 ```sql
 -- Cài đặt chuẩn tắc trong practice/sql/05_triggers.sql
+-- Lưu ý thứ tự thẩm định trong SQL Server: Khóa ngoại được kiểm tra TRƯỚC AFTER trigger.
+-- Khóa ngoại FK_tr_departments_head ngăn chặn xóa trưởng bộ phận ở mức khai báo (Msg 547).
+-- Do đó, trigger chỉ cần quản lý sự kiện AFTER UPDATE cho các nghiệp vụ mà DDL không thể diễn đạt.
 CREATE TRIGGER dbo.trg_tr_employees_head_guard
 ON dbo.tr_employees
-AFTER DELETE, UPDATE
+AFTER UPDATE
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- 1. Phân biệt nhánh DELETE thực sự:
-    -- Dòng có trong deleted nhưng KHÔNG xuất hiện trong inserted
-    IF EXISTS (
-        SELECT 1
-        FROM deleted AS d
-        JOIN dbo.tr_departments AS dep ON dep.HeadEmployeeId = d.EmployeeId
-        LEFT JOIN inserted AS i ON i.EmployeeId = d.EmployeeId
-        WHERE i.EmployeeId IS NULL
-    )
-    BEGIN
-        THROW 51002, 'A department head cannot be deleted.', 1;
-    END;
-
-    -- 2. Nhánh UPDATE DeptId:
+    -- Nhánh UPDATE DeptId:
     -- Chỉ kiểm tra khi cột DeptId bị tác động và nhân viên là trưởng bộ phận.
     -- Lưu ý: i.DeptId IS NULL là logic phòng vệ sâu (defensive programming);
     -- trong fixture training-v1, cột DeptId đã có ràng buộc NOT NULL ở cấp schema.
@@ -63,11 +53,11 @@ Theo hợp đồng kiểm thử đã được chuẩn hóa trong [[theory/rbtv-i
 
 | Kịch bản | Thao tác | Hành vi mong đợi | Cơ chế bắt lỗi |
 | :--- | :--- | :---: | :--- |
-| **A. Sửa thông tin ngoài** | `UPDATE tr_employees SET Salary = Salary * 1.1 WHERE EmployeeId = ...` | **PASS** | `i.EmployeeId` tồn tại $\rightarrow$ bỏ qua DELETE; `UPDATE(DeptId)` là FALSE $\rightarrow$ bỏ qua UPDATE. |
-| **B. Đổi DeptId về cùng phòng** | `UPDATE tr_employees SET DeptId = DeptId WHERE EmployeeId = ...` | **PASS** | Không vi phạm điều kiện `i.DeptId <> dep.DeptId`. |
+| **A. Sửa thông tin ngoài** | `UPDATE tr_employees SET Salary = Salary * 1.1 WHERE EmployeeId = ...` | **PASS** | `UPDATE(DeptId)` trả về FALSE $\rightarrow$ bỏ qua kiểm tra, cập nhật an toàn. |
+| **B. Đổi DeptId về cùng phòng** | `UPDATE tr_employees SET DeptId = DeptId WHERE EmployeeId = ...` | **PASS** | Không thỏa mãn điều kiện `i.DeptId <> dep.DeptId`. |
 | **C. Đổi DeptId sang phòng khác** | `UPDATE tr_employees SET DeptId = 'D02' WHERE EmployeeId = 'E01'` | **REJECT** | Bị chặn bởi nhánh `UPDATE(DeptId)` của trigger $\rightarrow$ `THROW 51003`. |
-| **D. Đổi DeptId thành NULL** | `UPDATE tr_employees SET DeptId = NULL WHERE EmployeeId = 'E01'` | **REJECT** | **Cấp Schema:** Cột `DeptId` khai báo `NOT NULL` trong `01_schema.sql` chặn trực tiếp tại DDL engine; điều kiện `i.DeptId IS NULL` trong trigger là lớp phòng vệ sâu (defensive logic). |
-| **E. Xóa trưởng bộ phận** | `DELETE FROM tr_employees WHERE EmployeeId = 'E01'` | **REJECT** | Bị bắt bởi nhánh DELETE thực sự (`i.EmployeeId IS NULL`) $\rightarrow$ `THROW 51002`. |
+| **D. Đổi DeptId thành NULL** | `UPDATE tr_employees SET DeptId = NULL WHERE EmployeeId = 'E01'` | **REJECT** | **Cấp Schema:** Cột `DeptId` khai báo `NOT NULL` trong `01_schema.sql` chặn trực tiếp tại DDL engine (Msg 515); điều kiện `i.DeptId IS NULL` trong trigger là lớp phòng vệ sâu (defensive logic). |
+| **E. Xóa trưởng bộ phận** | `DELETE FROM tr_employees WHERE EmployeeId = 'E01'` | **REJECT** | **Cấp Khai báo (Declarative):** Khóa ngoại `FK_tr_departments_head` được SQL Server kiểm tra trước `AFTER` trigger $\rightarrow$ chặn trực tiếp ở tầng DDL với `Msg 547`. Nhánh `AFTER DELETE` không bao giờ được kích hoạt. |
 | **F. Thao tác đa dòng có 1 lỗi** | `UPDATE tr_employees SET DeptId = 'D02'` | **REJECT TOÀN BỘ** | `IF EXISTS` phát hiện ít nhất 1 dòng vi phạm $\rightarrow$ hủy toàn bộ batch (tính nguyên tố ACID). |
 
 Tham khảo quy trình chẩn đoán lỗi trong [[practice/debugging|debugging]] và kịch bản sập logic trong [[errors/multi-row-trigger-failure|multi-row-trigger-failure]]. Căn cứ tài liệu kỹ thuật Microsoft [[sources/technical|TECH-A04, TECH-A05, TECH-A06]].

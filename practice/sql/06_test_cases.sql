@@ -4,7 +4,7 @@ GO
 /* These checks are deliberately wrapped in transactions. The failing cases
    are commented so a student can enable one at a time and observe the error. */
 
--- A. UPDATE HOTEN of head: PASS
+-- A. UPDATE FullName of head: PASS
 BEGIN TRANSACTION;
 UPDATE dbo.tr_employees SET FullName = N'Lan Nguyễn (đã kiểm tra)' WHERE EmployeeId = 'E001';
 SELECT EmployeeId, FullName FROM dbo.tr_employees WHERE EmployeeId = 'E001';
@@ -26,7 +26,7 @@ ROLLBACK TRANSACTION;
 -- E. UPDATE DeptId to NULL: blocked by NOT NULL before the trigger.
 -- UPDATE dbo.tr_employees SET DeptId = NULL WHERE EmployeeId = 'E001';
 
--- F. DELETE department head: REJECT 51002
+-- F. DELETE department head: blocked declaratively by FK_tr_departments_head (Msg 547) before trigger execution.
 -- DELETE FROM dbo.tr_employees WHERE EmployeeId = 'E001';
 
 -- G. Multi-row unrelated UPDATE: PASS; no scalar assumption.

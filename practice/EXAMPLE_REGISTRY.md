@@ -22,7 +22,7 @@ Canonical contract between printed anchors and runnable SQL. All rows use practi
 | TRG-C | Debugging — trigger tests | 06_test_cases.sql | tr_employees | Same DeptId | pass | D001 unchanged | STATIC |
 | TRG-D | Debugging — trigger tests | 06_test_cases.sql | tr_employees | Different DeptId | reject | E001 → D002 blocked | STATIC |
 | TRG-E | Debugging — trigger tests | 06_test_cases.sql | tr_employees | NULL DeptId | schema reject | NOT NULL blocks before trigger | STATIC |
-| TRG-F | Debugging — trigger tests | 06_test_cases.sql | tr_employees | Delete department head | reject | E001 cannot delete | STATIC |
+| TRG-F | Debugging — trigger tests | 06_test_cases.sql | tr_employees | Delete department head | declarative reject | FK_tr_departments_head blocks before trigger (Msg 547) | STATIC |
 | TRG-G | Debugging — trigger tests | 06_test_cases.sql | tr_employees | Multi-row unrelated update | pass | D001 salaries update together | STATIC |
 | TRG-H | Debugging — trigger tests | 06_test_cases.sql | tr_employees | Multi-row violating update | reject whole statement | D001 → D002 blocked | STATIC |
 

@@ -1,72 +1,91 @@
 # Hướng Dẫn Biên Dịch & Xây Dựng (Build Guide)
 
-Tài liệu này hướng dẫn cách tái tạo (reproduce), biên dịch bản HTML từ các tệp chương nguồn và thực hiện kiểm thử tự động.
+Tài liệu này hướng dẫn cách tái tạo (reproduce), biên dịch các ấn bản Sổ tay (Lý thuyết & Thực hành) và xây dựng phiên bản trực tuyến **Quartz Knowledge Garden** triển khai trên GitHub Pages.
 
 ---
 
 ## 1. Yêu cầu Môi trường (Prerequisites)
 
-- **Python**: Phiên bản 3.10 trở lên.
-- **Thư viện Python phụ trợ** (phục vụ chạy test suite):
+- **Python**: Phiên bản 3.10 trở lên (khuyến nghị Python 3.12).
+- **Node.js**: Phiên bản **22.0.0 trở lên** (kèm npm >= 10.9.2, yêu cầu bắt buộc cho Quartz v5).
+- **Thư viện Python phụ trợ** (cho bộ kiểm thử và chuẩn hóa PDF):
   ```bash
-  pip install pypdf pypdfium2 pillow lxml
+  pip install pypdf pypdfium2 pillow lxml pyyaml
   ```
-- **Trình duyệt (tùy chọn để in ấn PDF)**: Google Chrome hoặc Microsoft Edge.
+- **Hệ quản trị CSDL (tùy chọn)**: Microsoft SQL Server (2019/2022/2025) để chạy trực tiếp bộ fixture `practice/sql/`.
 
 ---
 
-## 2. Quy trình Biên Dịch (Compilation Workflow)
+## 2. Biên dịch Sổ tay Học thuật (Handbooks)
 
-### Bước 1: Biên dịch HTML từ các chương nguồn
-Khi bạn chỉnh sửa nội dung trong thư mục `book/chapters/`, hãy chạy lệnh biên dịch để cập nhật `book/index.html`:
+Sản phẩm sách bao gồm 2 sổ tay độc lập được ghép từ các chương nguồn HTML:
 
+### 2.1 Sổ tay Lý thuyết (Theory Handbook)
+Khi cập nhật nội dung tại `book/chapters/`:
 ```bash
-# Bằng Python
 python scripts/build.py
-
-# Hoặc bằng PowerShell
-./scripts/build.ps1
 ```
+- Kết quả: Tổng hợp các chương thành `book/index.html`.
+- Xuất bản PDF chuẩn in ấn A4: Mở `book/index.html` trên trình duyệt Chrome/Edge, chọn `Ctrl + P` $\rightarrow$ *Save as PDF*, khổ giấy *A4*, lề *None*, tích chọn *Background graphics*, lưu tại `dist/IT004_CSDL_UIT_LyThuyet_VoTrongPhuc.pdf`.
 
-Script sẽ tự động:
-1. Đọc 11 tệp HTML theo đúng thứ tự sư phạm.
-2. Thêm thuộc tính `open` cho tất cả các thẻ `<details>` để bảo đảm toàn bộ lời giải và ví dụ được hiển thị đầy đủ khi xem hoặc in ấn.
-3. Gộp thành một tệp duy nhất `book/index.html`.
-
----
-
-### Bước 2: Kiểm thử tính toàn vẹn (Validation Suite)
-Chạy bộ kiểm thử tự động 6 bước để xác nhận không có liên kết hỏng, cấu trúc HTML hợp lệ, tệp PDF chuẩn hóa và an toàn mã nguồn:
-
+### 2.2 Sổ tay Thực hành (Practical Handbook)
+Khi cập nhật nội dung tại `practice/chapters/`:
 ```bash
-# Bằng Python
-python scripts/validate.py
+python scripts/build_practice.py
+```
+- Kết quả: Biên dịch 12 chương thực hành thành `practice/index.html`.
+- Kiểm thử tính nhất quán khế ước fixture:
+  ```bash
+  python scripts/validate_practice_static.py
+  ```
+- Xuất bản PDF thực hành: Lưu tại `dist/IT004_CSDL_UIT_ThucHanh_VoTrongPhuc.pdf` (chuẩn hóa metadata bằng `python scripts/normalize_practice_pdf.py`).
 
-# Hoặc bằng PowerShell
-./scripts/validate.ps1
+---
+
+## 3. Biên dịch Canonical Quartz Knowledge Garden (GitHub Pages Build)
+
+Knowledge Garden tại thư mục `garden/` là ấn bản web tương tác chính thức của CSDL_UIT v1.1.
+
+### Quy trình biên dịch cục bộ (Local Build):
+```bash
+# 1. Đồng bộ hóa tệp PDF và assets từ dist/ vào garden
+node scripts/copy_garden_assets.mjs
+
+# 2. Cài đặt các gói phụ thuộc của Quartz
+cd garden
+npm ci
+
+# 3. Biên dịch mã nguồn Markdown thành trang web tĩnh (static HTML)
+node ./quartz/bootstrap-cli.mjs build -d content -o public
+
+# 4. Kiểm thử toàn bộ liên kết nội bộ
+cd ..
+python scripts/agent/check_links.py
 ```
 
----
-
-## 3. Quy trình Xuất Bản PDF Chuẩn In ấn A4
-
-Nếu cần xuất bản lại tệp PDF chuẩn in ấn A4 từ `book/index.html`:
-
-1. Mở tệp `book/index.html` bằng Google Chrome hoặc Microsoft Edge.
-2. Nhấn `Ctrl + P` (hoặc chọn Menu $\rightarrow$ Print).
-3. Thiết lập thông số in:
-   - **Destination**: *Save as PDF*
-   - **Paper size**: *A4*
-   - **Layout**: *Portrait*
-   - **Margins**: *None* (hoặc *Custom: 0*) vì file CSS `book/css/book.css` đã quản lý lề `@page` tiêu chuẩn.
-   - **Options**: Tích chọn *Background graphics* (Đồ họa nền).
-4. Lưu tệp vào thư mục `dist/`.
+### Kiểm thử Hợp đồng D2 (Content Contract):
+```bash
+python scripts/validate_garden_d2.py
+```
+Script kiểm tra tính toàn vẹn của:
+- 57 ghi chú Markdown và các trường frontmatter ngữ nghĩa.
+- Đồ thị liên kết bắt buộc (`division` $\leftrightarrow$ `double-not-exists` $\leftrightarrow$ `lab-03` $\leftrightarrow$ `wrong-universal-candidate`).
+- Độ sâu sư phạm của các ghi chú cốt lõi (thuật toán, bảng dry-run).
+- Khế ước bảng và cột chuẩn tắc khớp 100% với `practice/sql/01_schema.sql`.
+- Thứ tự ưu tiên giữa khóa ngoại khai báo (`Msg 547`) và trigger `AFTER UPDATE`.
+- Tính hợp lệ của cặp tệp PDF xuất bản.
 
 ---
 
-## 4. Kích hoạt GitHub Pages (Online Reading Activation)
+## 4. Tự động hóa CI/CD & GitHub Pages Deployment
 
-Để kích hoạt tính năng đọc trực tuyến tự động qua GitHub Pages:
-1. Truy cập vào trang quản trị Repository trên GitHub: **Settings $\rightarrow$ Pages**.
-2. Tại mục **Build and deployment $\rightarrow$ Source**, chọn: **GitHub Actions**.
-3. Sau khi kích hoạt, workflow `.github/workflows/pages.yml` sẽ tự động triển khai bản HTML tại địa chỉ `https://phuchello.github.io/CSDL_UIT/` mỗi khi có commit mới trên nhánh `main`.
+Quy trình phát hành tự động được cấu hình qua hai GitHub Actions workflows:
+
+1. **Kiểm thử tự động (`.github/workflows/validate.yml`)**:
+   - Chạy trên mọi push và pull request vào nhánh `main`.
+   - Kiểm tra biên dịch HTML cho cả hai sổ tay, chạy `scripts/validate.py`, `scripts/validate_practice_static.py`, `scripts/validate_garden_d2.py`, build thử Quartz và quét toàn bộ liên kết nội bộ.
+
+2. **Triển khai GitHub Pages (`.github/workflows/pages.yml`)**:
+   - Tự động kích hoạt khi có commit mới trên nhánh `main`.
+   - Khởi tạo môi trường Node 22, đồng bộ assets, cài đặt dependencies, biên dịch Quartz từ `garden/` sang `garden/public`, và phát hành trực tiếp lên GitHub Pages tại địa chỉ:
+     **[https://phuchello.github.io/CSDL_UIT/](https://phuchello.github.io/CSDL_UIT/)**.

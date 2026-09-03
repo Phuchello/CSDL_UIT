@@ -30,28 +30,20 @@ END;
 GO
 
 /*
-  Combined DELETE/UPDATE trigger with event discrimination.
-  UPDATE HOTEN or SALARY leaves inserted rows present and does not enter
-  the DELETE branch. Every test below is statement-level and set-based.
+  Employee UPDATE trigger for department heads.
+  In SQL Server, foreign key constraints are evaluated BEFORE AFTER triggers.
+  Deleting a current department head is blocked declaratively by FK_tr_departments_head
+  (Msg 547) before any AFTER DELETE trigger can run.
+  Therefore, declarative FK enforcement handles DELETE, and this AFTER UPDATE trigger
+  safeguards department consistency (THROW 51003) when DeptId is modified.
+  Unrelated updates (FullName, Salary) leave DeptId unchanged and pass without penalty.
 */
 CREATE TRIGGER dbo.trg_tr_employees_head_guard
 ON dbo.tr_employees
-AFTER DELETE, UPDATE
+AFTER UPDATE
 AS
 BEGIN
     SET NOCOUNT ON;
-
-    /* DELETE: deleted row has no matching inserted row. */
-    IF EXISTS (
-        SELECT 1
-        FROM deleted AS d
-        JOIN dbo.tr_departments AS dep ON dep.HeadEmployeeId = d.EmployeeId
-        LEFT JOIN inserted AS i ON i.EmployeeId = d.EmployeeId
-        WHERE i.EmployeeId IS NULL
-    )
-    BEGIN
-        THROW 51002, 'A department head cannot be deleted.', 1;
-    END;
 
     /* UPDATE DeptId: check only surviving heads whose department changed. */
     IF UPDATE(DeptId) AND EXISTS (

@@ -1,4 +1,4 @@
-name: Deploy HTML Book to GitHub Pages
+name: Deploy Knowledge Garden to GitHub Pages
 
 on:
   push:
@@ -24,14 +24,21 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: "3.12"
+          node-version: "22"
 
-      - name: Build Single HTML Book
-        run: |
-          python scripts/build.py
+      - name: Copy Garden Assets
+        run: node scripts/copy_garden_assets.mjs
+
+      - name: Install Garden Dependencies
+        working-directory: garden
+        run: npm ci
+
+      - name: Build Quartz Knowledge Garden
+        working-directory: garden
+        run: node ./quartz/bootstrap-cli.mjs build -d content -o public
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -39,7 +46,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: 'book'
+          path: 'garden/public'
 
       - name: Deploy to GitHub Pages
         id: deployment

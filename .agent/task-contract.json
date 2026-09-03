@@ -1,50 +1,50 @@
 {
-  "id": "v1.1-blind-integration-review",
+  "id": "v1.1-premerge-remediation",
   "status": "passed",
   "acceptance": [
     {
-      "id": "academic_correctness_reviewed",
-      "criterion": "Academic correctness independently audited across Theory, Practice, and Garden",
+      "id": "readme_remediated",
+      "criterion": "Root README.md rewritten for v1.1 dual handbooks and Knowledge Garden, removing legacy CamNang active links",
       "passes": true
     },
     {
-      "id": "practice_contract_reviewed",
-      "criterion": "Canonical SQL fixture, queries, triggers, and runnability audited",
+      "id": "pages_workflow_remediated",
+      "criterion": "pages.yml deploys Quartz from garden/ using Node 22 and copy_garden_assets",
       "passes": true
     },
     {
-      "id": "cross_product_consistency_reviewed",
-      "criterion": "Consistency across Theory, Practice, and Garden verified",
+      "id": "ci_workflow_remediated",
+      "criterion": "validate.yml tests both core repository and Garden D2/links",
       "passes": true
     },
     {
-      "id": "garden_runtime_reviewed",
-      "criterion": "Clean Quartz build, link crawl, PDF contract, and responsive layouts verified",
+      "id": "build_docs_remediated",
+      "criterion": "docs/BUILD.md distinguishes handbook builds from canonical Quartz Pages build",
       "passes": true
     },
     {
-      "id": "provenance_reviewed",
-      "criterion": "Claims checked against Phase A evidence, preventing community-mirror overclaims",
+      "id": "fk_trigger_precedence_corrected",
+      "criterion": "FK precedence over AFTER DELETE trigger corrected in canonical triggers, test cases, and Garden notes",
       "passes": true
     },
     {
-      "id": "copyright_reviewed",
-      "criterion": "Copyright, MIT notice preservation, and clean public repository surface verified",
+      "id": "practice_source_pdf_consistent",
+      "criterion": "Practice sources, test matrix, and PDF (if regenerated) consistent with FK precedence",
       "passes": true
     },
     {
-      "id": "integration_topology_reviewed",
-      "criterion": "Git branch ancestry, merge safety, and Codex integration sequence determined",
+      "id": "garden_consistency_verified",
+      "criterion": "Garden notes and validators updated to match factual FK precedence",
       "passes": true
     },
     {
-      "id": "existing_qa_compared",
-      "criterion": "Independent findings compared against existing QA reports after blind pass",
+      "id": "full_build_verified",
+      "criterion": "Core validation, Quartz production build, and verification suite pass",
       "passes": true
     },
     {
-      "id": "release_verdict_recorded",
-      "criterion": "Formal release verdict and structured audit report generated in reports/",
+      "id": "link_crawl_clean",
+      "criterion": "Zero broken internal links on rebuilt site",
       "passes": true
     }
   ]

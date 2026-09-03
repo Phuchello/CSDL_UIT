@@ -1,4 +1,4 @@
-name: Validate Handbook Repository
+name: Validate Repository & Knowledge Garden
 
 on:
   push:
@@ -20,15 +20,47 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install Validation Dependencies
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Python Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pypdf pypdfium2 pillow lxml
+          pip install pypdf pypdfium2 pillow lxml pyyaml
 
-      - name: Verify HTML Compilation
+      - name: Verify Theory & Practice HTML Compilations
         run: |
           python scripts/build.py
+          python scripts/build_practice.py
 
-      - name: Run Validation Suite
+      - name: Run Core Validation Suite
         run: |
           python scripts/validate.py
+
+      - name: Run Practice Static Consistency Validation
+        run: |
+          python scripts/validate_practice_static.py
+
+      - name: Copy Garden Assets
+        run: |
+          node scripts/copy_garden_assets.mjs
+
+      - name: Install Garden Dependencies
+        working-directory: garden
+        run: |
+          npm ci
+
+      - name: Run Garden D2 Content Contract Validator
+        run: |
+          python scripts/validate_garden_d2.py
+
+      - name: Build Quartz Knowledge Garden
+        working-directory: garden
+        run: |
+          node ./quartz/bootstrap-cli.mjs build -d content -o public
+
+      - name: Run Garden Internal Link Checker
+        run: |
+          python scripts/agent/check_links.py

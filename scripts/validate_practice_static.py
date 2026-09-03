@@ -141,7 +141,7 @@ def enhanced_main():
     trig = read(SQL / "05_triggers.sql")
     for name in ["trg_tr_departments_head_guard", "trg_tr_employees_head_guard"]:
         check("trigger " + name, name.lower() in trig.lower(), "missing trigger " + name)
-    for token in ["inserted", "deleted", "IF EXISTS", "THROW"]:
+    for token in ["inserted", "UPDATE", "IF EXISTS", "THROW"]:
         check("trigger token " + token, token.lower() in trig.lower(), "trigger script missing " + token)
 
     known_refs = {x.lower() for x in EXPECTED_TABLES}
