@@ -1,22 +1,22 @@
 project: CSDL_UIT
-status: active
+status: integration_review_blocked
 
 workflow:
   version: 2
 
-branch: v1.1-quartz-garden
+branch: v1.1-integration-review
 
 safe_repo_commit:
-  sha: a487cc33f05ef3f6291f4ea0257c99a50540ce94
-  purpose: d2-final-mentor-remediation
+  sha: ef6da113ea4b3aed983d607b1e0c8ac89251d0fd
+  purpose: d2-workflow-finalized-head
 
 safe_product_commit:
   sha: be34ef3ef79956d9c1c2541782cabc82e66d0c6e
   purpose: final-d2-quartz-checkpoint
 
 milestone:
-  id: D2
-  name: Quartz Knowledge Garden content-contract correction
+  id: INT-REV
+  name: Blind Public Product and Integration Review
 
 frozen:
   phase_a: 6aef91eb2cb4a0b41827573bc03ec55640d19786
@@ -26,49 +26,38 @@ frozen:
   main: 6ccf5a408934ab93760ac3242511beb43b05f24f
 
 current_task:
-  id: d2-source-graph-content-contract
+  id: v1.1-blind-integration-review
   status: completed
 
 verified:
-  quartz_candidate_exists: true
-  quartz_build_passes: true
-  d2_content_contract_corrected: true
-  mandatory_graph_chains_verified: true
-  core_notes_depth_verified: true
-  provenance_overclaims_eliminated: true
-  trigger_null_schema_distinguished: true
-  single_pdf_convention_verified: true
-  canonical_fixture_columns_verified: true
-  rbtv_it004_alignment_verified: true
-  division_count_distinct_restricted: true
-  division_empty_set_semantics_verified: true
-  fresh_d2_review_captures_generated: true
-  prior_frozen_branches_untouched: true
-  zero_broken_internal_links: true
+  academic_correctness_reviewed: true
+  practice_contract_reviewed: true
+  cross_product_consistency_reviewed: true
+  garden_runtime_reviewed: true
+  provenance_reviewed: true
+  copyright_reviewed: true
+  integration_topology_reviewed: true
+  existing_qa_compared: true
+  release_verdict_recorded: true
 
-blockers: []
+blockers:
+  - M-01-obsolete-root-readme
+  - M-02-incompatible-pages-workflow
 
 do_not_repeat:
-  - invent TECH-MS source IDs
-  - invent UIT-E aggregate source IDs
-  - treat related frontmatter as equivalent to real graph edges
-  - use token presence alone to validate trigger semantics
-  - overclaim community artifacts as official exams
-  - copy redundant dual-cased PDFs instead of choosing one strict convention
-  - invent non-canonical columns on tr_* fixture tables
-  - use * notation or foreign 4-tier categories for IT004 RBTV
-  - conflate attribute set X with a candidate relation in division
-  - treat frozen Theory-book taxonomy as canonical over Phase A exam_pattern_map/LOC-LEC-LONG-CH05
-  - imply exam_pattern_map.md is an official UIT publication or use 'ma trận đề thi chính thức'
+  - trust prior QA claims blindly
+  - modify product implementation or content files
+  - alter frozen branch baselines
+  - merge to main or publish Pages prematurely
 
 relevant_files:
-  - garden/content/theory/rbtv-impact.md
-  - garden/content/theory/division.md
-  - scripts/validate_garden_d2.py
-  - reports/v1.1_quartz_d2_qa.md
-  - research/v1.1_phase_a/exam_pattern_map.md
-  - practice/sql/01_schema.sql
+  - reports/v1.1_glm53_blind_integration_review.md
+  - README.md
+  - .github/workflows/pages.yml
+  - .agent/STATE.yaml
+  - .agent/task-contract.json
 
 next_action: >
-  D2 milestone complete. Await human mentor integration review and authorization
-  on branch v1.1-quartz-garden. Do not merge, publish, tag, or release.
+  Fix only the specific BLOCKER/MAJOR findings from
+  reports/v1.1_glm53_blind_integration_review.md and then rerun the
+  integration review.

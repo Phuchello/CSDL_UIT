@@ -1,75 +1,50 @@
 {
-  "id": "d2-source-graph-content-contract",
+  "id": "v1.1-blind-integration-review",
   "status": "passed",
   "acceptance": [
     {
-      "id": "invented_source_ids",
-      "criterion": "No invented TECH-MS* or UIT-E* source IDs remain",
+      "id": "academic_correctness_reviewed",
+      "criterion": "Academic correctness independently audited across Theory, Practice, and Garden",
       "passes": true
     },
     {
-      "id": "ledger_source_contract",
-      "criterion": "Source IDs are derived only from frozen Phase A ledgers",
+      "id": "practice_contract_reviewed",
+      "criterion": "Canonical SQL fixture, queries, triggers, and runnability audited",
       "passes": true
     },
     {
-      "id": "related_targets",
-      "criterion": "Every related frontmatter target resolves uniquely",
+      "id": "cross_product_consistency_reviewed",
+      "criterion": "Consistency across Theory, Practice, and Garden verified",
       "passes": true
     },
     {
-      "id": "graph_edges",
-      "criterion": "Mandatory pedagogical relationships use real Markdown links with verified bidirectional graph chains",
+      "id": "garden_runtime_reviewed",
+      "criterion": "Clean Quartz build, link crawl, PDF contract, and responsive layouts verified",
       "passes": true
     },
     {
-      "id": "trigger_contract",
-      "criterion": "Canonical multi-row trigger event semantics are preserved with accurate DeptId NOT NULL schema distinction",
+      "id": "provenance_reviewed",
+      "criterion": "Claims checked against Phase A evidence, preventing community-mirror overclaims",
       "passes": true
     },
     {
-      "id": "pdf_contract",
-      "criterion": "Exactly one public PDF naming convention is used, copying one file per handbook and validating built output",
+      "id": "copyright_reviewed",
+      "criterion": "Copyright, MIT notice preservation, and clean public repository surface verified",
       "passes": true
     },
     {
-      "id": "core_content_depth",
-      "criterion": "Remaining skeletal core notes (relational algebra, division, Double NOT EXISTS) are deepened to standalone teaching depth",
+      "id": "integration_topology_reviewed",
+      "criterion": "Git branch ancestry, merge safety, and Codex integration sequence determined",
       "passes": true
     },
     {
-      "id": "provenance_wording",
-      "criterion": "No provenance overclaims remain (no 'ma trận đề thi chính thức', community-mirror distinct from official, no 'luôn xuất hiện' or 'bắt buộc')",
+      "id": "existing_qa_compared",
+      "criterion": "Independent findings compared against existing QA reports after blind pass",
       "passes": true
     },
     {
-      "id": "fixture_schema_columns",
-      "criterion": "Mechanically verified validation of all canonical tr_* fixture tables and their referenced SQL columns against 01_schema.sql across all notes",
-      "passes": true
-    },
-    {
-      "id": "rbtv_it004_alignment",
-      "criterion": "theory/rbtv-impact.md aligns with frozen Phase A exam_pattern_map.md/LOC-LEC-LONG-CH05 7-class taxonomy and +(Attribute) notation",
-      "passes": true
-    },
-    {
-      "id": "division_count_distinct",
-      "criterion": "Division empty-set semantics correctly state R / 0 = pi_X(R), projection matches selected attributes, and empty-set failure is qualified",
-      "passes": true
-    },
-    {
-      "id": "build",
-      "criterion": "Quartz production build passes after correction",
-      "passes": true
-    },
-    {
-      "id": "broken_links",
-      "criterion": "Built site has zero broken internal links",
-      "passes": true
-    },
-    {
-      "id": "fresh_visuals",
-      "criterion": "Fresh screenshots are generated from corrected build",
+      "id": "release_verdict_recorded",
+      "criterion": "Formal release verdict and structured audit report generated in reports/",
       "passes": true
     }
   ]
