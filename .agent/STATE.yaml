@@ -7,12 +7,12 @@ workflow:
 branch: v1.1-quartz-garden
 
 safe_repo_commit:
-  sha: f23ffd68fbdc11700b3b10b2277a52d14172f1cc
+  sha: a487cc33f05ef3f6291f4ea0257c99a50540ce94
   purpose: d2-final-mentor-remediation
 
 safe_product_commit:
-  sha: 58b5474be54971b886c28508a9702bcc22d5ac15
-  purpose: initial-d2-quartz-candidate
+  sha: be34ef3ef79956d9c1c2541782cabc82e66d0c6e
+  purpose: final-d2-quartz-checkpoint
 
 milestone:
   id: D2
@@ -27,7 +27,7 @@ frozen:
 
 current_task:
   id: d2-source-graph-content-contract
-  status: review_pending
+  status: completed
 
 verified:
   quartz_candidate_exists: true
@@ -59,6 +59,7 @@ do_not_repeat:
   - use * notation or foreign 4-tier categories for IT004 RBTV
   - conflate attribute set X with a candidate relation in division
   - treat frozen Theory-book taxonomy as canonical over Phase A exam_pattern_map/LOC-LEC-LONG-CH05
+  - imply exam_pattern_map.md is an official UIT publication or use 'ma trận đề thi chính thức'
 
 relevant_files:
   - garden/content/theory/rbtv-impact.md
@@ -69,5 +70,5 @@ relevant_files:
   - practice/sql/01_schema.sql
 
 next_action: >
-  Await human mentor review and authorization for D2 milestone completion on
-  branch v1.1-quartz-garden. Do not merge, tag, release, or publish to GitHub Pages.
+  D2 milestone complete. Await human mentor integration review and authorization
+  on branch v1.1-quartz-garden. Do not merge, publish, tag, or release.

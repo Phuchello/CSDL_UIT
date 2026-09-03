@@ -4,8 +4,27 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 
 ---
 
+## 2026-09-03 — Milestone D2 freeze patch and final safe_product_commit checkpoint
+- **Commit**: `be34ef3ef79956d9c1c2541782cabc82e66d0c6e` (safe_product_commit checkpoint)
+- **Scope**:
+  - Replaced unsupported provenance phrase "ma trận đề thi chính thức" in `theory/rbtv-impact.md` with evidence-safe phrasing: "slide bài giảng chính thức (`LOC-LEC-LONG-CH05`) và bản đồ mẫu đề thực chứng Phase A".
+  - Extended `OVERCLAIM_PATTERNS` in `scripts/validate_garden_d2.py` to mechanically reject `ma trận đề (thi )?chính thức`.
+  - Matched independent candidate projection in `theory/division.md` to actual selected attributes ($\pi_{\text{StudentId, FullName}}(C)$), and qualified empty-set aggregation failure so it is not falsely claimed when candidate domain is itself empty.
+  - Rebuilt Quartz production site (109 emitted files in 1.0s), verified 2,819 internal links (0 broken), and regenerated fresh visual evidence across all 10 review captures.
+  - Finalized D2 task contract (all 14 criteria passed), materialized `safe_product_commit: be34ef3ef79956d9c1c2541782cabc82e66d0c6e` in `.agent/STATE.yaml`, and transitioned workflow to integration review.
+- **Verification**:
+  - `scripts/agent/validate_state.py`: PASS (14 criteria synchronized).
+  - `scripts/validate.py`: PASS (6/6).
+  - `scripts/validate_garden_d2.py`: PASS (all 14 checks).
+  - `scripts/agent/check_links.py`: PASS (2,819 links checked, 0 broken).
+  - `scripts/agent/verify.ps1 -Mode Full`: PASS (all 6/6 checks).
+  - `git diff --check`: PASS (zero trailing whitespace).
+- **Next Checkpoint**: Human mentor integration review and authorization on branch `v1.1-quartz-garden`.
+
+---
+
 ## 2026-09-03 — Milestone D2 final mentor blocker remediation (Phase A RBTV taxonomy, Division empty-set theorem, truthful column validation)
-- **Commit**: pending (`fix(garden): align phase-a rbtv taxonomy, division empty-set theorem, and truthful column validation`)
+- **Commit**: `a487cc33f05ef3f6291f4ea0257c99a50540ce94`
 - **Scope**:
   - Aligned `theory/rbtv-impact.md` with frozen Phase A course taxonomy (`research/v1.1_phase_a/exam_pattern_map.md` and `LOC-LEC-LONG-CH05`): Miền giá trị; Liên thuộc tính 1 QH; Liên bộ 1 QH; Tham chiếu; Liên thuộc tính nhiều QH; Thuộc tính tổng hợp; Chu trình. Retained DBMS general constraint categories only as a separate cross-reference.
   - Updated validator `scripts/validate_garden_d2.py` so the IT004 taxonomy contract is dynamically derived and verified against frozen Phase A `exam_pattern_map.md`.
@@ -15,9 +34,9 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 - **Verification**:
   - `scripts/agent/validate_state.py`: PASS (14 criteria synchronized).
   - `scripts/validate.py`: PASS (6/6).
-  - `scripts/validate_garden_d2.py`: PASS (all 14 checks).
+  - `scripts/validate_garden_d2.py`: PASS (all checks).
   - `scripts/agent/check_links.py`: PASS (2,819 links checked, 0 broken).
-  - `scripts/agent/verify.ps1 -Mode Full`: PASS (all 6/6 checks).
+  - `scripts/agent/verify.ps1 -Mode Full`: PASS (all 6 checks).
   - `git diff --check`: PASS (zero trailing whitespace).
 - **Next Checkpoint**: Human mentor review and authorization on branch `v1.1-quartz-garden`.
 
@@ -80,7 +99,7 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
   - `scripts/validate_garden_d2.py`: PASS.
   - `scripts/agent/check_links.py`: PASS (2684 links checked, 0 broken).
   - `scripts/agent/verify.ps1 -Mode Full`: PASS (all 6 checks).
-- **Next Checkpoint**: Human mentor review and authorization on branch `v1.1-quartz-garden`.
+  - `Next Checkpoint`: Human mentor review and authorization on branch `v1.1-quartz-garden`.
 
 ---
 
