@@ -80,7 +80,7 @@ plugins:
     enabled: true
     order: 70
   - source: "@quartz-community/latex"
-    enabled: false
+    enabled: true
     options:
       renderEngine: katex
     order: 80
