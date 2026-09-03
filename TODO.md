@@ -1,4 +1,4 @@
-# TODO — CSDL_UIT v1.1
+# TODO — CSDL_UIT
 
 ## Completed Milestones
 - [x] Phase A: Research Snapshot Frozen (`v1.1-editorial-practice` @ `6aef91e`)
@@ -9,20 +9,24 @@
 - [x] Phase D2: Quartz Knowledge Garden Production Candidate Built & Verified (`v1.1-quartz-garden` @ `be34ef3ef79956d9c1c2541782cabc82e66d0c6e`)
 - [x] Workflow Migration: Phuchello Agent Workflow v2 Adopted
 - [x] Integration Review: Independent Blind Audit Completed (`v1.1-integration-review` @ `reports/v1.1_glm53_blind_integration_review.md`)
-- [x] Pre-merge Defect Remediation (`v1.1-release-candidate`):
-  - [x] M-01: Rewrote root `README.md` for v1.1 dual handbooks (Theory 64p + Practice 71p) and Quartz Knowledge Garden; retained historical note on v1.0 `CamNang`
-  - [x] M-02: Replaced `.github/workflows/pages.yml` with Node 22 Quartz deployment; updated `.github/workflows/validate.yml` to test handbooks and Quartz site; updated `docs/BUILD.md`
-  - [x] M-03: Factual correction for FK precedence over AFTER DELETE trigger (`FK_tr_departments_head` Msg 547); removed unreachable DELETE logic from `05_triggers.sql`, updated `06_test_cases.sql`, `multi-row-trigger.md`, `13_debugging_expanded.html`, `EXAMPLE_REGISTRY.md`, and validators; regenerated and normalized Practice PDF (71p)
-  - [x] Full verification suite, link crawl (2,819 links, 0 broken), and live SQL Server execution verified
-- [x] Release-gate Hardening:
-  - [x] Configured `pages.yml` as `workflow_dispatch` only (human-controlled gate; no auto-deploy on push to `main`)
-  - [x] Documented 4-gate release sequence in `docs/BUILD.md` (validate -> merge -> tag/release -> Pages dispatch)
-  - [x] CI Validation Gate: Ran `validate.yml` on `ubuntu-latest` via PR #2 (run `33743104644`, ALL PASS in 28s)
+- [x] Pre-merge Defect Remediation (`v1.1-release-candidate`)
+- [x] Release-gate Hardening and GitHub CI validation
+- [x] Gate 2: fast-forward release candidate to `main` @ `ad0ef293d0b85ba59de8ffad8966bd0d40720580`
+- [x] Gate 3: tag and publish immutable `v1.1.0` at the same commit
+- [x] Gate 4: manual Pages deployment (`workflow_dispatch` run `33761760360`, SUCCESS)
 
-## Active Queue
-- [ ] Mentor review of `v1.1-release-candidate` (PR #2 and CI status)
+## Active Queue — v1.1.1 Maintenance
+- [x] Reproduce live math-rendering defect from deployed v1.1.0 artifact
+- [x] Identify root cause: `@quartz-community/latex` disabled in `garden/quartz.config.yaml`
+- [x] Enable KaTeX rendering on `v1.1.1-maintenance`
+- [x] Add post-build `scripts/validate_garden_render.py` regression smoke gate
+- [x] Wire render smoke into `.github/workflows/validate.yml`
+- [ ] Open maintenance PR to `main`
+- [ ] GitHub-hosted CI passes with render smoke enabled
+- [ ] Review duplicate H1 / sidebar visual findings after math fix
+- [ ] Human-authorized Pages deployment for the maintenance fix
+- [ ] Desktop + mobile live visual smoke
+- [ ] Decide whether to tag `v1.1.1`
 
-## Final Release Gates (Held until Mentor Review Approval)
-- [ ] Cổng 2: fast-forward merge to `main`
-- [ ] Cổng 3: tag and release `v1.1.0`
-- [ ] Cổng 4: explicit human-authorized Pages dispatch
+## Deferred Maintenance
+- [ ] Triage Garden npm audit findings separately from the visual-render fix (1 low, 2 high observed during v1.1.0 Pages build)
