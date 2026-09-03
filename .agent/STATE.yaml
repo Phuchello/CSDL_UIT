@@ -37,6 +37,8 @@ verified:
   math_render_smoke_passed: true
   vietnamese_first_localization_applied: true
   vietnamese_first_regression_gate_passed: true
+  remaining_visible_aliases_cleaned: true
+  reader_chrome_cleanup_applied: true
   link_crawl_passed: true
   representative_render_inspected: true
   github_ci_gate: true
@@ -44,9 +46,17 @@ verified:
 
 verification_evidence:
   pr: 4
-  ci_run_id: 33769355516
+  functional_head_sha: ff682dc86552c355113cc1c8e13a85f9042db08c
+  ci_run_id: 33771223152
   ci_conclusion: success
-  head_sha: ebedef84d728511a364177d70ba9375ff607d727
+  ci_job: validate
+  ci_scope:
+    - core validation
+    - practice static consistency
+    - garden d2 content contract
+    - quartz build
+    - garden render smoke
+    - internal link checker
 
 blockers: []
 
@@ -64,6 +74,8 @@ relevant_files:
   - scripts/validate_garden_d2.py
   - .agent/STATE.yaml
   - .agent/task-contract.json
+  - TODO.md
 
 next_action: >
-  Stop for mentor review of PR #4. DO NOT merge and DO NOT dispatch Pages yet.
+  Human mentor review of PR #4 after the final Vietnamese-first alias and reader-chrome cleanup.
+  DO NOT merge, tag v1.1.1, or dispatch Pages until explicitly authorized after review.
