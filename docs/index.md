@@ -8,6 +8,11 @@
 - **D1 Visual & Information Architecture (Normative)**: [`design/v1.1_site/`](../design/v1.1_site/)
   - `DESIGN_SYSTEM.md`: Color palette, typography, responsive layouts.
   - `INFORMATION_ARCHITECTURE.md`: Route contracts, metadata schemas, graph principles.
+- **v1.2 Active Learning System (Design Only)**: [`design/v1.2_learning/`](../design/v1.2_learning/)
+  - `LEARNING_SYSTEM_SPEC.md`: Product philosophy, learning loop, mastery states, adaptation rules, review/mistake model.
+  - `CONTENT_CONTRACT.md`: Required instructional blocks, exercise taxonomy, IT004 coverage and QA contract.
+  - `UX_WIREFRAMES.md`: Learning/Reference modes, dashboard, trace, recall, practice, review and exam wireframes.
+  - `IMPLEMENTATION_PLAN.md`: Vertical-slice rollout, milestones, release boundaries and acceptance gates.
 - **Quartz v5 Static Site Engine**: [`garden/`](../garden/)
   - `garden/content/`: Source Markdown notes and semantic frontmatter.
   - `garden/quartz.config.yaml`: Quartz theme, plugins, and graph configuration.
