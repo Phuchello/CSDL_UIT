@@ -14,11 +14,15 @@
   - [x] M-02: Replaced `.github/workflows/pages.yml` with Node 22 Quartz deployment; updated `.github/workflows/validate.yml` to test handbooks and Quartz site; updated `docs/BUILD.md`
   - [x] M-03: Factual correction for FK precedence over AFTER DELETE trigger (`FK_tr_departments_head` Msg 547); removed unreachable DELETE logic from `05_triggers.sql`, updated `06_test_cases.sql`, `multi-row-trigger.md`, `13_debugging_expanded.html`, `EXAMPLE_REGISTRY.md`, and validators; regenerated and normalized Practice PDF (71p)
   - [x] Full verification suite, link crawl (2,819 links, 0 broken), and live SQL Server execution verified
+- [x] Release-gate Hardening:
+  - [x] Configured `pages.yml` as `workflow_dispatch` only (human-controlled gate; no auto-deploy on push to `main`)
+  - [x] Documented 4-gate release sequence in `docs/BUILD.md` (validate -> merge -> tag/release -> Pages dispatch)
 
 ## Active Queue
-- [ ] Mentor review of `v1.1-release-candidate`
+- [ ] CI Validation Gate: Run `validate.yml` on `ubuntu-latest` via PR to `main`
+- [ ] Mentor review of `v1.1-release-candidate` (PR and CI status)
 
 ## Final Release Gates (Held until Mentor Review Approval)
-- [ ] fast-forward merge to `main`
-- [ ] tag and release `v1.1.0`
-- [ ] publish GitHub Pages
+- [ ] Cổng 2: fast-forward merge to `main`
+- [ ] Cổng 3: tag and release `v1.1.0`
+- [ ] Cổng 4: explicit human-authorized Pages dispatch

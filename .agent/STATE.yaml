@@ -1,5 +1,5 @@
 project: CSDL_UIT
-status: review_pending
+status: active
 
 workflow:
   version: 2
@@ -27,7 +27,7 @@ frozen:
 
 current_task:
   id: v1.1-premerge-remediation
-  status: review_pending
+  status: in_progress
 
 verified:
   readme_remediated: true
@@ -39,6 +39,8 @@ verified:
   garden_consistency_verified: true
   full_build_verified: true
   link_crawl_clean: true
+  deployment_gate: true
+  github_ci_gate: false
 
 blockers: []
 
@@ -48,20 +50,17 @@ do_not_repeat:
   - expect AFTER DELETE trigger 51002 when FK constraint fires first (Msg 547)
   - delete historical CamNang PDF file
   - alter frozen branch baselines
+  - deploy Pages automatically on push to main
+  - merge PR to main before mentor review
 
 relevant_files:
-  - README.md
   - .github/workflows/pages.yml
   - .github/workflows/validate.yml
   - docs/BUILD.md
-  - practice/sql/05_triggers.sql
-  - practice/sql/06_test_cases.sql
-  - practice/chapters/13_debugging_expanded.html
-  - practice/EXAMPLE_REGISTRY.md
-  - garden/content/practice/multi-row-trigger.md
-  - scripts/validate_garden_d2.py
-  - scripts/validate_practice_static.py
+  - .agent/STATE.yaml
+  - .agent/task-contract.json
 
 next_action: >
-  Await mentor review of pre-merge remediation on branch v1.1-release-candidate
-  before fast-forward merge to main, tagging, and publication.
+  Commit and push release-gate hardening to v1.1-release-candidate, open PR to
+  main, await CI validation on ubuntu-latest, mark github_ci_gate true on success,
+  and stop at mentor review.

@@ -1,6 +1,6 @@
 {
   "id": "v1.1-premerge-remediation",
-  "status": "passed",
+  "status": "in_progress",
   "acceptance": [
     {
       "id": "readme_remediated",
@@ -46,6 +46,16 @@
       "id": "link_crawl_clean",
       "criterion": "Zero broken internal links on rebuilt site",
       "passes": true
+    },
+    {
+      "id": "deployment_gate",
+      "criterion": "Pages deployment configured as human-controlled workflow_dispatch only",
+      "passes": true
+    },
+    {
+      "id": "github_ci_gate",
+      "criterion": "GitHub Actions CI validation workflow passes on ubuntu-latest for release candidate PR",
+      "passes": false
     }
   ]
 }
