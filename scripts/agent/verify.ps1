@@ -115,30 +115,67 @@ if (Test-Path $gardenVal) {
     if ($overallStatus -ne "FAIL") { $overallStatus = "PARTIAL" }
 }
 
-# Full mode extra check: Quartz build
+# Full mode extra checks: Asset preparation & Quartz build
 if ($Mode -eq "Full") {
+    # Check 5: Asset preparation via copy_garden_assets.mjs
     Write-Host ""
-    Write-Host "[Extra/Full] Checking Quartz build capability..."
+    Write-Host "[5/6] Preparing Garden PDF assets (scripts/copy_garden_assets.mjs)..."
+    $assetScript = Join-Path $repoRoot "scripts\copy_garden_assets.mjs"
+    if (Test-Path $assetScript) {
+        $assetOut = & node $assetScript 2>&1
+        if ($LASTEXITCODE -eq 0) {
+            Write-Host "  [PASS] Frozen PDF assets verified and copied" -ForegroundColor Green
+            $results["asset_prep"] = "PASS"
+        } else {
+            Write-Host "  [FAIL] Asset preparation failed:" -ForegroundColor Red
+            Write-Host $assetOut
+            $results["asset_prep"] = "FAIL"
+            $overallStatus = "FAIL"
+        }
+    } else {
+        Write-Host "  [FAIL] scripts/copy_garden_assets.mjs not found" -ForegroundColor Red
+        $results["asset_prep"] = "FAIL"
+        $overallStatus = "FAIL"
+    }
+
+    # Check 6: Quartz build in garden working directory
+    Write-Host ""
+    Write-Host "[6/6] Checking Quartz build capability..."
     $quartzDir = Join-Path $repoRoot "garden"
     if (Test-Path $quartzDir) {
         $nodeModules = Join-Path $quartzDir "node_modules"
         if (Test-Path $nodeModules) {
-            Write-Host "  [INFO] Quartz dependencies present. Running build test..."
-            $qBuild = & npx --prefix "$quartzDir" quartz build 2>&1
-            if ($LASTEXITCODE -eq 0) {
-                Write-Host "  [PASS] Quartz build succeeded" -ForegroundColor Green
-                $results["quartz_build"] = "PASS"
-            } else {
-                Write-Host "  [FAIL] Quartz build failed:" -ForegroundColor Red
-                Write-Host $qBuild
+            Write-Host "  [INFO] Quartz dependencies present. Running build test in garden directory..."
+            Push-Location $quartzDir
+            try {
+                cmd.exe /c "npm run quartz -- build -d content -o public"
+                $buildExit = $LASTEXITCODE
+                if ($buildExit -eq 0) {
+                    Write-Host "  [PASS] Quartz build succeeded" -ForegroundColor Green
+                    $results["quartz_build"] = "PASS"
+                } else {
+                    Write-Host "  [FAIL] Quartz build failed with exit code $buildExit" -ForegroundColor Red
+                    $results["quartz_build"] = "FAIL"
+                    $overallStatus = "FAIL"
+                }
+            }
+            catch {
+                Write-Host "  [FAIL] Quartz build encountered an exception: $_" -ForegroundColor Red
                 $results["quartz_build"] = "FAIL"
                 $overallStatus = "FAIL"
+            }
+            finally {
+                Pop-Location
             }
         } else {
             Write-Host "  [PARTIAL] garden/node_modules not installed; Quartz build skipped" -ForegroundColor Yellow
             $results["quartz_build"] = "PARTIAL"
             if ($overallStatus -ne "FAIL") { $overallStatus = "PARTIAL" }
         }
+    } else {
+        Write-Host "  [FAIL] garden directory not found" -ForegroundColor Red
+        $results["quartz_build"] = "FAIL"
+        $overallStatus = "FAIL"
     }
 }
 

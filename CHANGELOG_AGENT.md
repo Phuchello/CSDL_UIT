@@ -4,8 +4,24 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 
 ---
 
+## 2026-09-03 — Workflow v2 guardrail hardening
+- **Commit**: pending (`chore: harden workflow v2 guardrails`)
+- **Scope**:
+  - Corrected `docs/index.md` practice fixture paths to match canonical scripts (`01_schema.sql` through `reset.sql`).
+  - Replaced absolute `file:///` links in `docs/index.md` with repository-relative Markdown links.
+  - Hardened `scripts/agent/verify.ps1` Full mode with deterministic asset preparation (`scripts/copy_garden_assets.mjs`) and explicit `Push-Location garden` execution.
+  - Added semantic cross-checks to `scripts/agent/validate_state.py` (contract sync, boolean passes, unique IDs, non-empty branch/next_action).
+  - Materialized previous v2 migration commit SHA in state files.
+- **Verification**:
+  - `scripts/agent/verify.ps1 -Mode Fast`: PASS.
+  - `scripts/agent/verify.ps1 -Mode Full`: PARTIAL (accurately detects uninstalled garden dependencies).
+  - `git diff --check`: PASS.
+- **Next Checkpoint**: D2 source / graph / content-integrity correction.
+
+---
+
 ## 2026-09-03 — Workflow v2 migration
-- **Commit**: pending (`chore: migrate agent workflow to v2`)
+- **Commit**: `13447239d458982fe2acab9622220bb0daf012bb`
 - **Scope**:
   - Upgraded repository control plane to Phuchello Agent Workflow v2.
   - Replaced heavy `AGENTS.md` with thin control plane (40–70 lines) and JIT retrieval.

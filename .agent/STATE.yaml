@@ -7,9 +7,8 @@ workflow:
 branch: v1.1-quartz-garden
 
 safe_repo_commit:
-  sha: 07e4d720dfaa677a76cbd8e9bbbe48ea3cdf776e
-  purpose: workflow-v1-bootstrap
-  checkpoint_commit: pending-current-commit
+  sha: 13447239d458982fe2acab9622220bb0daf012bb
+  purpose: workflow-v2-migration
 
 safe_product_commit:
   sha: 58b5474be54971b886c28508a9702bcc22d5ac15
