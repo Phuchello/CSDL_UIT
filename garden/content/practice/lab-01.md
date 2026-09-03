@@ -10,7 +10,7 @@ technicalSources: [TECH-A01, TECH-A03]
 ---
 # Lab 01 — DDL và ràng buộc toàn vẹn
 
-Thực hành tạo lập bảng và ràng buộc toàn vẹn khai báo trên SQL Server trong môi trường [[practice/setup|Setup]]:
+Thực hành tạo lập bảng và ràng buộc toàn vẹn khai báo trên SQL Server trong môi trường [[practice/setup|Cài đặt môi trường SQL Server]]:
 
 - **Thứ tự tạo bảng:** Tạo các bảng cha (không chứa khóa ngoại) trước, sau đó mới tạo các bảng con có khóa ngoại tham chiếu.
 - **Ràng buộc khóa chính và duy nhất:** Khai báo `PRIMARY KEY` (không chấp nhận NULL) và `UNIQUE` để định danh bộ dữ liệu, phòng ngừa [[errors/duplicate-key|Lỗi trùng lặp khóa chính]].
