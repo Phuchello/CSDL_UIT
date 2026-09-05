@@ -67,6 +67,20 @@
 - [ ] Human-authorized Pages deployment after merge
 - [ ] Desktop + mobile live visual smoke after deployment
 
+## Active Queue — v1.1.1 Reading and Visual UI Polish (`v1.1.1-reading-polish`)
+- [x] Audit live site typography, contrast, and layout issues
+- [x] Repair wikilink math syntax leaks (`[[...|$X^+$]]` -> `[[...|X⁺]]`)
+- [x] Enforce light-mode default on initial visit while preserving manual dark toggle
+- [x] Update Quartz palette to true clean white `#ffffff` with subtle sidebar `#fafbfc`
+- [x] Modernize typography to dependency-free system sans across headers and body
+- [x] Balance desktop side rails (300px panel, 210px graph) and prevent mobile overflow
+- [x] Deduplicate current page title from breadcrumbs
+- [x] Extend `scripts/validate_garden_render.py` with reading UI regression gates
+- [x] Run full local verification suite (all 6 repo validators PASS)
+- [ ] Commit, push branch `v1.1.1-reading-polish`, and open PR to `main`
+- [ ] Verify GitHub Actions CI
+- [ ] Mentor review and release authorization
+
 ## Parallel Design — v1.2 Learning System
 - [x] Draft design architecture on `v1.2-learning-system-design`
 - [x] Open Draft PR #5

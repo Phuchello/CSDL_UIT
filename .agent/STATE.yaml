@@ -1,10 +1,10 @@
 project: CSDL_UIT
-status: review_pending
+status: in_progress
 
 workflow:
   version: 2
 
-branch: v1.1.1-frontmatter-fix
+branch: v1.1.1-reading-polish
 
 safe_repo_commit:
   sha: ad0ef293d0b85ba59de8ffad8966bd0d40720580
@@ -16,18 +16,18 @@ safe_product_commit:
 
 milestone:
   id: MAINT-1.1.1
-  name: Knowledge Garden Vietnamese-first Localization QA Pass
+  name: Knowledge Garden Final Reading and UI Polish
 
 frozen:
   phase_a: 6aef91eb2cb4a0b41827573bc03ec55640d19786
   theory: 61eb5c8a60106be4251ce090a17c6c3482284332
   practice: 59c519b94ede86f07fbc1778b120d0c8c3188b80
   d1: 922afe07bea7f28abf30c49054159a09a31be743
-  main: 5e4b0c17ec709aabe999a9d922c6679c3a3797ca
+  main: ebce2939f2d2d69ee70bbf4982c24328f6b3ddf3
 
 current_task:
-  id: v1.1.1-frontmatter-fix
-  status: review_pending
+  id: v1.1.1-reading-polish
+  status: in_progress
 
 hotfix:
   root_cause: >
@@ -51,33 +51,23 @@ verified:
   v1_1_0_release_complete: true
   v1_1_0_tag_immutable: true
   v1_1_0_pages_deployed: true
-  latex_plugin_enabled: true
-  math_render_smoke_passed: true
-  vietnamese_first_localization_applied: true
-  vietnamese_first_regression_gate_passed: true
-  remaining_visible_aliases_cleaned: true
-  reader_chrome_cleanup_applied: true
-  link_crawl_passed: true
-  representative_render_inspected: true
-  rbtv_impact_notation_corrected: true
-  academic_scope_preserved: true
-  mentor_review_completed: true
-  github_ci_gate: true
+  theme_default_light: true
+  clean_white_palette: true
+  system_sans_typography: true
+  wikilink_math_repaired: true
+  breadcrumb_deduplicated: true
+  desktop_mobile_layout: true
+  regression_suite_passed: true
+  github_ci_gate: pending_push
 
 verification_evidence:
-  pr: 6
-  head_sha: b414905
-  functional_head_sha: b91c115
-  ci_run_id: 33942734334
-  ci_conclusion: success
-  ci_job: validate
-  ci_scope:
-    - core validation
-    - practice static consistency
-    - garden d2 content contract
-    - quartz build
-    - garden render smoke (frontmatter leak, browser title, breadcrumbs, KaTeX)
-    - internal link checker
+  local_suite:
+    - scripts/validate_garden_render.py (PASS)
+    - scripts/validate_garden_d2.py (PASS)
+    - scripts/agent/check_links.py (PASS, 2819 links checked, 0 broken)
+    - scripts/validate.py (PASS, 6/6 checks)
+    - scripts/validate_practice_static.py (PASS)
+    - scripts/agent/verify.ps1 -Mode Fast (PASS)
 
 blockers: []
 
@@ -90,13 +80,17 @@ do_not_repeat:
   - alter markdown file paths or slugs in garden/content
 
 relevant_files:
-  - garden/content/**/*.md
+  - garden/content/exam-patterns/normalization.md
+  - garden/content/theory/index.md
   - garden/quartz.config.yaml
-  - scripts/validate_garden_d2.py
+  - garden/quartz/plugins/loader/componentLoader.ts
+  - garden/quartz/styles/custom.scss
+  - garden/quartz/styles/variables.scss
+  - garden/quartz/util/theme.ts
+  - scripts/validate_garden_render.py
   - .agent/STATE.yaml
   - .agent/task-contract.json
-  - TODO.md
 
 next_action: >
-  Stop and await mentor release authorization to merge PR #6 to main.
+  Commit and push v1.1.1-reading-polish, open PR to main, and verify GitHub Actions CI.
   DO NOT merge and DO NOT dispatch Pages yet.

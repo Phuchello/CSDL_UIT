@@ -1,36 +1,46 @@
 {
-  "id": "v1.1.1-frontmatter-fix",
-  "status": "review_pending",
+  "id": "v1.1.1-reading-polish",
+  "status": "in_progress",
   "acceptance": [
     {
-      "id": "root_cause_proven",
-      "criterion": "Quartz Markdown parsing has a built-in YAML frontmatter transformer before configured community transformers",
+      "id": "theme_default_light",
+      "criterion": "Default first visit is light mode without stored preference; dark toggle remains functional and persists in localStorage",
       "passes": true
     },
     {
-      "id": "generated_title_and_body",
-      "criterion": "Generated Candidate Keys HTML has a meaningful Vietnamese title and no raw YAML frontmatter fields in article content",
+      "id": "clean_white_palette",
+      "criterion": "Light mode background is #ffffff with subtle #fafbfc sidebar, #1f2937 body text, #111827 headings, and #e5e7eb border",
       "passes": true
     },
     {
-      "id": "breadcrumb_and_metadata",
-      "criterion": "Generated representative content pages retain Trang chủ breadcrumbs and structured metadata remains internal",
+      "id": "system_sans_typography",
+      "criterion": "Dependency-free system sans stack applied to body, headings, and site title without Georgia/Times Roman serif overrides",
       "passes": true
     },
     {
-      "id": "katex_and_links",
-      "criterion": "KaTeX and internal-link regression gates pass after the parser fix",
+      "id": "wikilink_math_repaired",
+      "criterion": "Math delimiters inside wikilink aliases repaired to safe Unicode (X⁺) with zero literal $ leaks",
       "passes": true
     },
     {
-      "id": "canonical_verification",
-      "criterion": "Repository canonical verification passes without environment failures",
+      "id": "breadcrumb_deduplicated",
+      "criterion": "Breadcrumbs show Trang chủ and ancestors without redundantly repeating the current page title before H1",
+      "passes": true
+    },
+    {
+      "id": "desktop_mobile_layout",
+      "criterion": "Reading layout balances side rails (300px, 210px graph) and has zero horizontal overflow on 390px mobile view",
+      "passes": true
+    },
+    {
+      "id": "regression_suite",
+      "criterion": "Quartz build, render smoke, KaTeX, internal links, D2 contract, and core validators pass",
       "passes": true
     },
     {
       "id": "github_ci",
-      "criterion": "GitHub Actions passes on the hotfix PR HEAD",
-      "passes": true
+      "criterion": "GitHub Actions passes on the PR HEAD on ubuntu-latest",
+      "passes": false
     }
   ],
   "release_safety": {

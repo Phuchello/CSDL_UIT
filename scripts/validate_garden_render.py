@@ -81,6 +81,62 @@ def main() -> int:
         if "Trang chủ" not in breadcrumb_text:
             errors.append(f"{relative}: breadcrumb root is not Trang chủ")
 
+        # Breadcrumb deduplication gate: current page title must not appear in breadcrumbs
+        article_h1 = " ".join(
+            str(value).strip()
+            for value in doc.xpath("//h1[contains(@class, 'article-title')]//text()")
+        )
+        if article_h1 and article_h1 in breadcrumb_text:
+            errors.append(
+                f"{relative}: breadcrumbs duplicate current page title ({article_h1!r})"
+            )
+
+    # 1. Prescript light-mode default gate
+    prescripts = list(PUBLIC.glob("prescript*.js"))
+    if not prescripts:
+        errors.append("missing prescript.js in garden/public")
+    else:
+        prescript_text = prescripts[0].read_text(encoding="utf-8")
+        if 'localStorage.getItem("theme")' not in prescript_text:
+            errors.append("prescript.js does not check localStorage theme")
+        if 'setAttribute("saved-theme"' not in prescript_text:
+            errors.append("prescript.js does not set saved-theme attribute")
+        if "(prefers-color-scheme: light)" in prescript_text:
+            errors.append(
+                "prescript.js still contains prefers-color-scheme fallback to dark on first visit"
+            )
+
+    # 2. CSS theme and typography gate
+    css_files = list(PUBLIC.glob("index-*.css"))
+    if not css_files:
+        errors.append("missing index-*.css in garden/public")
+    else:
+        css_text = css_files[0].read_text(encoding="utf-8")
+        if not any(
+            token in css_text
+            for token in ("--light: #ffffff", "--light:#ffffff", "--light: #fff", "--light:#fff")
+        ):
+            errors.append("emitted CSS does not define --light as true white #ffffff")
+        if "Georgia" in css_text or "Times New Roman" in css_text:
+            errors.append("emitted CSS contains serif overrides (Georgia / Times New Roman)")
+        if "system-ui" not in css_text:
+            errors.append("emitted CSS does not include system-ui typography stack")
+
+    # 3. Wikilink math delimiter gate
+    norm_page = PUBLIC / "exam-patterns" / "normalization.html"
+    if norm_page.is_file():
+        norm_text = norm_page.read_text(encoding="utf-8")
+        if "$X^+$" in norm_text or "$X^+" in norm_text:
+            errors.append("normalization.html contains literal math delimiter $X^+$ in text")
+
+    content_dir = ROOT / "garden" / "content"
+    if content_dir.is_dir():
+        for md_path in content_dir.rglob("*.md"):
+            md_text = md_path.read_text(encoding="utf-8")
+            if re.search(r"\[\[[^\]]*\$", md_text):
+                rel = md_path.relative_to(ROOT)
+                errors.append(f"{rel}: source markdown contains math delimiter in wikilink alias")
+
     for relative, minimum_katex_nodes in MATH_PAGES.items():
         path = PUBLIC / relative
         if not path.is_file():
@@ -131,6 +187,11 @@ def main() -> int:
     print("Garden render smoke validation PASS")
     for relative in MATH_PAGES:
         print(f"- {relative}: KaTeX rendered; no raw TeX controls in article")
+    print("- Prescript theme default: light mode on first visit")
+    print("- Typography: clean system sans; no Georgia/Times serif overrides")
+    print("- Palette: #ffffff true white background")
+    print("- Wikilinks: 0 math delimiters leaked in wikilink aliases")
+    print("- Breadcrumbs: current page title deduplicated")
     return 0
 
 

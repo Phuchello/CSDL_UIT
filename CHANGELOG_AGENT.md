@@ -4,6 +4,22 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 
 ---
 
+## 2026-09-05 — Quartz Reading & Visual UI Polish
+- **Branch**: `v1.1.1-reading-polish`
+- **Scope**:
+  - Repaired wikilink math syntax leaks across notes (`[[...|$X^+$]]` -> `[[...|X⁺]]`, 0 math delimiters in wikilinks).
+  - Enforced light-mode default on initial visit via `lightDefaultDarkmodeScript` while preserving user toggle functionality and `localStorage` persistence.
+  - Updated Quartz palette to clean white `#ffffff` with subtle sidebar `#fafbfc` and accessible text `#1f2937` / `#111827`.
+  - Modernized typography to dependency-free system sans stack across headers, body, and site title (removed Georgia/Times New Roman serif overrides).
+  - Balanced desktop side rails (300px width, 210px interactive graph height) and prevented horizontal overflow on 390px mobile viewports.
+  - Deduplicated current page title in breadcrumbs (`rootName: "Trang chủ"`, `showCurrentPage: false`).
+  - Extended `scripts/validate_garden_render.py` with reading UI regression gates.
+- **Verification**:
+  - Local verification: `scripts/validate_garden_render.py` (PASS), `scripts/validate_garden_d2.py` (PASS), `scripts/agent/check_links.py` (PASS, 2,819 links checked, 0 broken), `scripts/validate.py` (PASS), `scripts/validate_practice_static.py` (PASS), `verify.ps1 -Mode Fast` (PASS).
+- **Release Safety**: Main branch untouched, Pages deployment remains workflow_dispatch only, v1.1.1 tag untouched, no bulk academic changes.
+
+---
+
 ## 2026-09-05 — Quartz YAML frontmatter parsing hotfix
 - **Branch**: `v1.1.1-frontmatter-fix` (PR #6)
 - **Root Cause**: The vendored Quartz parser registered `remark-parse` and configured community transformers but no YAML frontmatter transformer, so metadata was rendered as ordinary Markdown body content and document titles fell back to `Không có tiêu đề`.
