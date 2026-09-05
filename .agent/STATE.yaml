@@ -1,5 +1,5 @@
 project: CSDL_UIT
-status: hotfix_verification
+status: review_pending
 
 workflow:
   version: 2
@@ -27,7 +27,7 @@ frozen:
 
 current_task:
   id: v1.1.1-frontmatter-fix
-  status: hotfix_verification
+  status: review_pending
 
 hotfix:
   root_cause: >
@@ -38,13 +38,14 @@ hotfix:
     Register a built-in FrontMatter transformer before configured plugins; it
     parses the leading YAML node into VFile frontmatter data and removes it
     from the Markdown AST.
-  render_gate: blocked_by_missing_python
-  state_gate: blocked_by_missing_pyyaml
-  typecheck_gate: blocked_by_preexisting_preact_errors
+  render_gate: passed
+  state_gate: passed
+  typecheck_gate: pre_existing_preact_errors_only
   functional_commit: b91c115
   pr: 6
   pr_url: https://github.com/Phuchello/CSDL_UIT/pull/6
-  ci_run_id: pending
+  ci_run_id: 33942734334
+  ci_conclusion: success
 
 verified:
   v1_1_0_release_complete: true
@@ -64,9 +65,10 @@ verified:
   github_ci_gate: true
 
 verification_evidence:
-  pr: 4
-  functional_head_sha: b3839faddeaef4234b3b7c4543976ca6833eb1a8
-  ci_run_id: 33938087301
+  pr: 6
+  head_sha: b414905
+  functional_head_sha: b91c115
+  ci_run_id: 33942734334
   ci_conclusion: success
   ci_job: validate
   ci_scope:
@@ -74,12 +76,10 @@ verification_evidence:
     - practice static consistency
     - garden d2 content contract
     - quartz build
-    - garden render smoke
+    - garden render smoke (frontmatter leak, browser title, breadcrumbs, KaTeX)
     - internal link checker
 
-blockers:
-  - Python and PyYAML are unavailable locally, so Python render/state/link gates remain unexecuted.
-  - TypeScript check retains two pre-existing Preact tabindex errors outside this hotfix.
+blockers: []
 
 do_not_repeat:
   - modify or retag immutable v1.1.0 release
@@ -98,6 +98,5 @@ relevant_files:
   - TODO.md
 
 next_action: >
-  Install the repository Python verification dependencies, run the render and link
-  gates, then commit and open a PR for human review. Do not merge, deploy Pages, or
-  tag v1.1.1 until CI and live smoke pass.
+  Stop and await mentor release authorization to merge PR #6 to main.
+  DO NOT merge and DO NOT dispatch Pages yet.

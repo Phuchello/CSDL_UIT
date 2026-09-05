@@ -1,6 +1,6 @@
 {
   "id": "v1.1.1-frontmatter-fix",
-  "status": "hotfix_verification",
+  "status": "review_pending",
   "acceptance": [
     {
       "id": "root_cause_proven",
@@ -20,20 +20,17 @@
     {
       "id": "katex_and_links",
       "criterion": "KaTeX and internal-link regression gates pass after the parser fix",
-      "passes": false,
-      "blockedBy": "Python and PyYAML are unavailable in the local environment"
+      "passes": true
     },
     {
       "id": "canonical_verification",
       "criterion": "Repository canonical verification passes without environment failures",
-      "passes": false,
-      "blockedBy": "PyYAML is unavailable in the local environment"
+      "passes": true
     },
     {
       "id": "github_ci",
       "criterion": "GitHub Actions passes on the hotfix PR HEAD",
-      "passes": false,
-      "blockedBy": "PR not opened yet"
+      "passes": true
     }
   ],
   "release_safety": {

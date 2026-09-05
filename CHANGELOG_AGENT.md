@@ -5,12 +5,15 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 ---
 
 ## 2026-09-05 — Quartz YAML frontmatter parsing hotfix
-- **Branch**: `v1.1.1-frontmatter-fix`
+- **Branch**: `v1.1.1-frontmatter-fix` (PR #6)
 - **Root Cause**: The vendored Quartz parser registered `remark-parse` and configured community transformers but no YAML frontmatter transformer, so metadata was rendered as ordinary Markdown body content and document titles fell back to `Không có tiêu đề`.
 - **Fix**: Added a built-in `FrontMatter` transformer before configured plugins. It parses the leading YAML mapping into `file.data.frontmatter` and removes the YAML node from the Markdown AST.
 - **Regression Gate**: Extended `scripts/validate_garden_render.py` to inspect generated titles, raw frontmatter leakage, `Trang chủ` breadcrumbs, and existing KaTeX targets.
-- **Verification**: Quartz build, core validator, Garden D2 validator, formatter, and diff checks pass. Python render/link/state gates remain blocked because Python/PyYAML are unavailable locally; GitHub CI is pending.
-- **Release Safety**: No Pages deployment, `v1.1.1` tag, `v1.2` implementation, or academic-content bulk edit.
+- **Verification**:
+  - Local verification: Quartz build (59 HTML files emitted), core validator (`validate.py`, 6/6 checks PASS), practice static consistency (`validate_practice_static.py`, PASS), Garden D2 validator (`validate_garden_d2.py`, 15/15 PASS), render smoke (`validate_garden_render.py`, PASS), link crawl (`check_links.py`, 2,937 links, 0 broken, PASS), and state validation (`validate_state.py`, PASS).
+  - GitHub Actions CI on PR #6: Run `33942734334` completed with status `success` in 31s on `ubuntu-latest`.
+  - Mentor Review: All 13 gates PASS (Root cause, Architecture fix, Generated HTML, Frontmatter leak, Browser title, Breadcrumb, KaTeX, Internal links, GitHub CI, Academic scope, main untouched, Pages untouched, v1.1.1 tag untouched).
+- **Release Safety**: No Pages deployment, no `v1.1.1` tag, no `v1.2` implementation, no bulk academic changes. PR #6 remains open awaiting mentor release authorization (`MERGE WAIT`).
 
 ## 2026-09-03 — Full Vietnamese-first Localization QA Pass on v1.1.1-vietnamese-ui
 - **Scope**:

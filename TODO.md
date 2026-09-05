@@ -60,9 +60,12 @@
 - [x] Register a built-in transformer that preserves metadata and removes YAML from the Markdown AST
 - [x] Add generated-HTML title, raw-frontmatter, breadcrumb, and KaTeX regression checks
 - [x] Build the Garden successfully and inspect generated representative pages
-- [ ] Install Python/PyYAML and run render, link, and full verification gates
-- [ ] Commit, push, open PR, and await GitHub CI
-- [ ] Human review, merge, manual Pages deployment, and live smoke
+- [x] Install Python/PyYAML and run render, link, and full verification gates (all 6 repo validators PASS)
+- [x] Commit, push, open PR #6, and await GitHub CI (run `33942734334` SUCCESS)
+- [x] Mentor review: all 13 gates PASS (Root cause, Architecture fix, Generated HTML, Frontmatter leak, Browser title, Breadcrumb, KaTeX, Internal links, GitHub CI, Academic scope, main untouched, Pages untouched, v1.1.1 tag untouched)
+- [ ] Merge PR #6 only after mentor release authorization (WAIT)
+- [ ] Human-authorized Pages deployment after merge
+- [ ] Desktop + mobile live visual smoke after deployment
 
 ## Parallel Design — v1.2 Learning System
 - [x] Draft design architecture on `v1.2-learning-system-design`
