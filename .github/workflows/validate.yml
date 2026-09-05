@@ -68,3 +68,12 @@ jobs:
       - name: Run Garden Internal Link Checker
         run: |
           python scripts/agent/check_links.py
+
+      - name: Run Active Learning Unit Tests
+        working-directory: garden
+        run: |
+          npm test
+
+      - name: Run Active Learning Unit Validator
+        run: |
+          python scripts/validate_learning_unit.py

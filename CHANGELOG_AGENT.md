@@ -4,6 +4,41 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 
 ---
 
+## 2026-09-05 — Candidate Keys Active Learning Vertical Slice (v1.2)
+- **Branch**: `v1.2-candidate-keys-slice`
+- **Scope**:
+  - Authored the first v1.2 Active Learning Unit at `garden/content/learn/candidate-keys.md` adhering strictly to the 16-block pedagogical sequence: Skill Banner, Prerequisites, Orientation Check, Concept Definition, Intuition Analogy, Interactive Trace Stepper, Worked Example, Self-Explanation, Faded Scaffolding, Cold Practice, Transfer Challenge, Trap Activity, Error Diagnosis Registry, Closed-Book Recall, Mastery State Rules, and Reference Mode Escape Hatch.
+  - Implemented client-side deterministic engines in `garden/quartz/learning/`:
+    - `types.ts`: Domain contracts for problems, submissions, errors, and mastery states.
+    - `normalizer.ts`: Pure answer normalization engine handling arbitrary whitespace, lowercase/uppercase, set permutations, and canonical attribute order.
+    - `mastery.ts`: Versioned learner state machine (`csdl_uit_learning_state_v1`) stored in `localStorage` with strict anti-inflation rules (no upgrade from page views, hint depth gating for `INDEPENDENT`, spaced retrieval for `ROBUST`).
+    - `diagnosis.ts`: Deterministic error diagnosis registry detecting 6 canonical error classes (`minimality-not-checked`, `closure-stopped-too-early`, `missing-mandatory-attribute`, `only-one-key-found`, `redundant-branch-search`, `incorrect-FD-application`).
+  - Implemented interactive runtime in `garden/quartz/components/scripts/learning.inline.ts` wired via `componentResources.ts` to execute on `afterDOMLoaded`.
+  - Added scoped single-column 880px layout in `custom.scss` with interactive stepper controls, diagnosis cards, hint drawers, and recall accordions.
+  - Authored comprehensive test suite in `garden/quartz/learning.test.ts` (17 tests covering normalizer, mastery state transitions, hint gating, and error detectors). Total Garden tests: 180/180 passing.
+  - Created dedicated validator `scripts/validate_learning_unit.py` enforcing frontmatter, 16 blocks, 5 problems, 6 errors, rendered KaTeX, CSS layout constraints, and JS runtime bundle.
+  - Scoped `scripts/validate_garden_d2.py` to reference garden notes (`garden/content/theory`, `practice`, `errors`, etc.) to keep D2 reference taxonomy strictly isolated.
+  - Disambiguated `candidate-keys` wikilink in `garden/content/errors/duplicate-key.md` to `theory/candidate-keys` (0 broken links across 2,942 links).
+  - Extended `.github/workflows/validate.yml` to run active learning unit tests and validator.
+- **Verification**:
+  - `garden/npm test`: PASS (180/180 tests, 17 active learning tests).
+  - `scripts/validate_learning_unit.py`: PASS.
+  - `scripts/validate_garden_render.py`: PASS (KaTeX rendered, light-default verified, learn/candidate-keys.html verified).
+  - `scripts/validate_garden_d2.py`: PASS (15/15 checks).
+  - `scripts/agent/check_links.py`: PASS (2,942 links checked, 0 broken).
+  - `scripts/validate.py`: PASS (6/6 checks).
+  - `scripts/validate_practice_static.py`: PASS.
+  - `scripts/agent/validate_state.py`: PASS.
+  - `git diff --check`: PASS (0 errors, 0 trailing whitespaces).
+  - `scripts/agent/verify.ps1 -Mode Full`: PASS (6/6 checks).
+- **Release Safety**:
+  - Base commit: `99df074e8725af79ac90181d9276bcd0f3d870aa` (`origin/main`).
+  - Reference Mode note `garden/content/theory/candidate-keys.md` completely intact and unmodified.
+  - No chatbot / LLM / external backend dependencies.
+  - Main untouched, Pages deployment untouched (workflow_dispatch only), no release tags created.
+
+---
+
 ## 2026-09-05 — v1.2 Learning System Design Synchronization
 - **Branch**: `v1.2-learning-system-design` (PR #5)
 - **Scope**:
