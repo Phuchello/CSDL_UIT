@@ -13,10 +13,12 @@ PUBLIC = ROOT / "garden" / "public"
 MATH_PAGES = {
     "exercises/normalization-exercise.html": 8,
     "theory/closure.html": 12,
+    "learn/candidate-keys.html": 10,
 }
 
 REPRESENTATIVE_PAGES = {
     "theory/candidate-keys.html": "Khóa ứng viên",
+    "learn/candidate-keys.html": "Khóa ứng viên",
     "exercises/normalization-exercise.html": None,
     "exam-patterns/rbtv-trigger.html": None,
 }

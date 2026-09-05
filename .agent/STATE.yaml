@@ -4,53 +4,59 @@ status: ready_for_review
 workflow:
   version: 2
 
-branch: v1.2-learning-system-design
+branch: v1.2-candidate-keys-slice
 
 safe_repo_commit:
-  sha: 77951417b5e82b7dbe92748e7462b1680a21d5b2
-  purpose: current-main-baseline-after-v1.1.1-polish
+  sha: 99df074e8725af79ac90181d9276bcd0f3d870aa
+  purpose: current-main-baseline-before-v1.2-slice
 
 safe_product_commit:
   sha: ad0ef293d0b85ba59de8ffad8966bd0d40720580
   purpose: immutable-v1.1.0-release
 
 milestone:
-  id: DESIGN-1.2
-  name: Active Learning System Architecture
+  id: IMPLEMENT-1.2-SLICE
+  name: Candidate Keys Active Learning Vertical Slice
 
 frozen:
   phase_a: 6aef91eb2cb4a0b41827573bc03ec55640d19786
   theory: 61eb5c8a60106be4251ce090a17c6c3482284332
   practice: 59c519b94ede86f07fbc1778b120d0c8c3188b80
   d1: 922afe07bea7f28abf30c49054159a09a31be743
-  main: 77951417b5e82b7dbe92748e7462b1680a21d5b2
+  main: 99df074e8725af79ac90181d9276bcd0f3d870aa
 
 current_task:
-  id: v1.2-learning-system-design
+  id: v1.2-candidate-keys-slice
   status: ready_for_review
 
 verified:
-  product_thesis_defined: true
-  learning_loop_defined: true
-  mastery_model_defined: true
-  rule_based_adaptation_defined: true
-  learning_content_contract_defined: true
-  ux_wireframes_defined: true
-  implementation_gates_defined: true
+  learning_unit_16_blocks: true
+  answer_normalization_engine: true
+  mastery_state_machine: true
+  error_diagnosis_engine: true
+  trace_stepper_ui: true
+  unit_tests_180_pass: true
+  learning_unit_validator_pass: true
+  garden_render_smoke_pass: true
+  garden_d2_contract_pass: true
+  garden_links_0_broken: true
+  core_validate_pass: true
+  practice_static_pass: true
+  verify_full_pass: true
+  reference_mode_intact: true
   no_ai_backend_dependency: true
   existing_release_untouched: true
-  main_baseline_synchronized: true
-  candidate_keys_vertical_slice_first: true
-  github_ci_gate: true
 
 verification_evidence:
   local_suite:
-    - scripts/validate_garden_render.py (PASS)
-    - scripts/validate_garden_d2.py (PASS)
-    - scripts/agent/check_links.py (PASS, 2819 links checked, 0 broken)
+    - garden/npm test (PASS, 180/180 tests, 17 active learning tests)
+    - scripts/validate_learning_unit.py (PASS, 16 blocks, 5 problems, 6 errors, rendered KaTeX, CSS 880px, JS bundle)
+    - scripts/validate_garden_render.py (PASS, includes learn/candidate-keys.html)
+    - scripts/validate_garden_d2.py (PASS, 15/15 checks)
+    - scripts/agent/check_links.py (PASS, 2942 links checked, 0 broken)
     - scripts/validate.py (PASS, 6/6 checks)
     - scripts/validate_practice_static.py (PASS)
-    - scripts/agent/verify.ps1 -Mode Fast (PASS)
+    - scripts/agent/verify.ps1 -Mode Full (PASS, 6/6 checks)
 
 blockers: []
 
@@ -69,15 +75,26 @@ do_not_repeat:
   - alter markdown file paths or slugs in garden/content
 
 relevant_files:
-  - design/v1.2_learning/LEARNING_SYSTEM_SPEC.md
-  - design/v1.2_learning/CONTENT_CONTRACT.md
-  - design/v1.2_learning/UX_WIREFRAMES.md
-  - design/v1.2_learning/IMPLEMENTATION_PLAN.md
-  - docs/index.md
+  - garden/content/learn/candidate-keys.md
+  - garden/quartz/learning/types.ts
+  - garden/quartz/learning/normalizer.ts
+  - garden/quartz/learning/mastery.ts
+  - garden/quartz/learning/diagnosis.ts
+  - garden/quartz/components/scripts/learning.inline.ts
+  - garden/quartz/styles/learning.scss
+  - garden/quartz/styles/custom.scss
+  - garden/quartz/plugins/emitters/componentResources.ts
+  - garden/quartz/learning.test.ts
+  - scripts/validate_learning_unit.py
+  - scripts/validate_garden_d2.py
+  - scripts/validate_garden_render.py
+  - garden/content/errors/duplicate-key.md
+  - .github/workflows/validate.yml
   - .agent/STATE.yaml
   - .agent/task-contract.json
+  - TODO.md
+  - CHANGELOG_AGENT.md
 
 next_action: >
-  Mentor review of PR #5 (v1.2 learning-system design synchronized).
-  DO NOT merge PR #5 and DO NOT deploy Pages.
-  Create fresh branch v1.2-candidate-keys-slice after PR #5 is merged.
+  Commit, push branch v1.2-candidate-keys-slice to origin, and open PR to main.
+  Await mentor review of PR. DO NOT merge PR and DO NOT deploy Pages.

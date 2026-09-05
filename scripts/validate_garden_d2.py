@@ -121,7 +121,8 @@ def main() -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     errors: list[str] = []
-    notes = sorted(CONTENT.rglob("*.md"))
+    # Active learning units in garden/content/learn/ are governed independently by validate_learning_unit.py
+    notes = sorted(p for p in CONTENT.rglob("*.md") if "learn" not in p.relative_to(CONTENT).parts)
     records: dict[str, tuple[Path, dict[str, str], str]] = {}
     stem_map: dict[str, list[str]] = {}
     for path in notes:

@@ -1,35 +1,35 @@
 {
-  "id": "v1.2-learning-system-design",
+  "id": "v1.2-candidate-keys-slice",
   "status": "ready_for_review",
   "acceptance": [
     {
-      "id": "learning_system_spec",
-      "criterion": "Design defines a static-first active learning loop, mastery state model, rule-based adaptation, review and mistake handling without requiring AI or a backend",
+      "id": "learning_unit_16_blocks",
+      "criterion": "Candidate Keys Learning Unit authored at garden/content/learn/candidate-keys.md contains all 16 required pedagogical blocks, 5 problem IDs, 6 error classes, and ReferenceModeLink",
       "passes": true
     },
     {
-      "id": "content_contract",
-      "criterion": "Design defines a deterministic Learning Unit content contract, exercise taxonomy, IT004 chapter coverage and QA expectations",
+      "id": "client_side_learning_engine",
+      "criterion": "Client-side active learning engine implemented with normalizer, mastery state machine, error diagnosis, trace stepper, and hints without external runtime dependencies or LLM backend",
       "passes": true
     },
     {
-      "id": "ux_wireframes",
-      "criterion": "Design includes Learning Mode and Reference Mode wireframes for dashboard, concept map, trace, recall, practice, diagnosis, review and exam flows",
+      "id": "unit_test_suite",
+      "criterion": "Unit tests in garden/quartz/learning.test.ts cover normalizer, mastery state rules, and diagnosis detectors (180/180 total garden tests passing)",
       "passes": true
     },
     {
-      "id": "implementation_plan",
-      "criterion": "Design uses vertical-slice milestones and explicit acceptance gates before broad implementation, with Candidate Keys as first slice",
+      "id": "validation_gates",
+      "criterion": "All repository validators pass: validate_learning_unit.py, validate_garden_d2.py, validate_garden_render.py, check_links.py (0 broken links), validate.py, validate_practice_static.py, and verify.ps1 Full mode",
       "passes": true
     },
     {
-      "id": "main_sync_and_release_safety",
-      "criterion": "Design branch is synchronized with current main (7795141) preserving all v1.1.1 fixes, with no code/academic content changes",
+      "id": "reference_mode_intact",
+      "criterion": "Reference Mode note at garden/content/theory/candidate-keys.md remains completely intact and unchanged",
       "passes": true
     },
     {
       "id": "github_ci",
-      "criterion": "GitHub Actions passes on the PR HEAD on ubuntu-latest",
+      "criterion": "GitHub Actions validation workflow is extended to test the learning unit and passes cleanly on the PR HEAD",
       "passes": true
     }
   ],
@@ -37,7 +37,7 @@
     "main_untouched": true,
     "pages_deployed": false,
     "v1_1_1_tagged": false,
-    "v1_2_implemented": false,
+    "v1_2_tagged": false,
     "bulk_academic_changes": false
   }
 }

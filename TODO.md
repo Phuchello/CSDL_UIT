@@ -90,7 +90,25 @@
 - [x] Capture the 6 canonical Candidate Keys error classes in `CONTENT_CONTRACT.md`
 - [x] Complete merge commit, update PR #5 description, and push to origin
 - [x] Verify exact-head GitHub Actions CI run on PR #5 (run 33953285269 SUCCESS in 24s)
-- [ ] Await mentor review before merging PR #5 and branching for Candidate Keys slice
+- [x] PR #5 merged into `main` (`99df074e8725af79ac90181d9276bcd0f3d870aa`)
+
+## Active Queue — v1.2 Active Learning Vertical Slice: Candidate Keys (`v1.2-candidate-keys-slice`)
+- [x] Author complete 16-block Learning Unit at `garden/content/learn/candidate-keys.md` (pure UTF-8 without BOM, 5 problem IDs, 6 error IDs, ReferenceModeLink)
+- [x] Implement answer normalization engine in `garden/quartz/learning/normalizer.ts` (whitespace, casing, set-order, canonical attribute sorting)
+- [x] Implement deterministic versioned mastery state machine in `garden/quartz/learning/mastery.ts` (`csdl_uit_learning_state_v1` in `localStorage`, anti-inflation invariants)
+- [x] Implement deterministic error diagnosis engine in `garden/quartz/learning/diagnosis.ts` (6 canonical error classes with actionable remediation guidance)
+- [x] Implement interactive DOM runtime in `garden/quartz/components/scripts/learning.inline.ts` (TraceStepper, HintDrawer, form submit, closed-book recall)
+- [x] Style Learning Unit in `garden/quartz/styles/custom.scss` (scoped single-column 880px layout, responsive trace stepper, progress pill)
+- [x] Register interactive runtime in `garden/quartz/plugins/emitters/componentResources.ts`
+- [x] Author comprehensive unit tests in `garden/quartz/learning.test.ts` (17 tests covering normalizer, mastery, diagnosis; 180/180 total garden tests passing)
+- [x] Implement dedicated validator `scripts/validate_learning_unit.py` (checks 16 blocks, 5 problems, 6 errors, rendered KaTeX, CSS constraints, JS bundle)
+- [x] Scope `scripts/validate_garden_d2.py` to reference garden notes (preserving 100% strict reference taxonomy)
+- [x] Disambiguate `candidate-keys` wikilink in `garden/content/errors/duplicate-key.md` (0 broken internal links in `check_links.py`)
+- [x] Extend GitHub Actions CI workflow in `.github/workflows/validate.yml` to run active learning unit tests and validator
+- [x] Verify full test suite locally (`verify.ps1 -Mode Full`: all 6 validation gates PASS)
+- [ ] Push branch `v1.2-candidate-keys-slice` and open PR to `main`
+- [ ] Verify GitHub Actions CI run on PR HEAD
+- [ ] Await mentor review (do NOT merge to main, do NOT deploy Pages, do NOT tag release)
 
 ## Deferred Maintenance
 - [ ] Triage Garden npm audit findings separately (1 low, 2 high observed during v1.1.0 Pages build)
