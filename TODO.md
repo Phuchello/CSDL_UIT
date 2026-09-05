@@ -77,8 +77,8 @@
 - [x] Deduplicate current page title from breadcrumbs
 - [x] Extend `scripts/validate_garden_render.py` with reading UI regression gates
 - [x] Run full local verification suite (all 6 repo validators PASS)
-- [ ] Commit, push branch `v1.1.1-reading-polish`, and open PR to `main`
-- [ ] Verify GitHub Actions CI
+- [x] Commit, push branch `v1.1.1-reading-polish`, and open PR #7 to `main`
+- [x] Verify GitHub Actions CI (run `33945714588` SUCCESS in 30s)
 - [ ] Mentor review and release authorization
 
 ## Parallel Design — v1.2 Learning System

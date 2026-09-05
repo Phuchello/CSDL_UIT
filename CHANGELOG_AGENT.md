@@ -16,7 +16,8 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
   - Extended `scripts/validate_garden_render.py` with reading UI regression gates.
 - **Verification**:
   - Local verification: `scripts/validate_garden_render.py` (PASS), `scripts/validate_garden_d2.py` (PASS), `scripts/agent/check_links.py` (PASS, 2,819 links checked, 0 broken), `scripts/validate.py` (PASS), `scripts/validate_practice_static.py` (PASS), `verify.ps1 -Mode Fast` (PASS).
-- **Release Safety**: Main branch untouched, Pages deployment remains workflow_dispatch only, v1.1.1 tag untouched, no bulk academic changes.
+  - GitHub Actions CI on PR #7: Run `33945714588` completed with status `success` in 30s on `ubuntu-latest`.
+- **Release Safety**: Main branch untouched, Pages deployment remains workflow_dispatch only, v1.1.1 tag untouched, no bulk academic changes. PR #7 remains open awaiting mentor release authorization.
 
 ---
 
