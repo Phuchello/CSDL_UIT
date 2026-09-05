@@ -15,5 +15,5 @@ Hệ thống lý thuyết nền tảng IT004 được cấu trúc theo lộ trì
    - [[theory/functional-dependencies|Phụ thuộc hàm & Tiên đề Armstrong]]
    - [[theory/closure|Thuật toán bao đóng thuộc tính X⁺]]
    - [[theory/candidate-keys|Tìm toàn bộ khóa ứng viên (Candidate Keys)]]
-   - [[theory/minimal-cover|Tìm phủ tối thiểu (Minimal Cover)]]
+   - [[theory/minimal-cover|Tìm phủ tối thiểu (Minimal Cover)]] $F_c$
    - [[theory/3nf|Dạng chuẩn 3NF]] $\rightarrow$ [[theory/bcnf|Dạng chuẩn BCNF]] $\rightarrow$ [[theory/lossless-decomposition|Phân rã bảo toàn thông tin nối]].

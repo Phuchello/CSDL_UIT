@@ -1,5 +1,5 @@
 project: CSDL_UIT
-status: ready_for_review
+status: in_progress
 
 workflow:
   version: 2
@@ -27,7 +27,7 @@ frozen:
 
 current_task:
   id: v1.1.1-reading-polish
-  status: ready_for_review
+  status: in_progress
 
 hotfix:
   root_cause: >
@@ -58,7 +58,7 @@ verified:
   breadcrumb_deduplicated: true
   desktop_mobile_layout: true
   regression_suite_passed: true
-  github_ci_gate: true
+  github_ci_gate: pending_push
 
 verification_evidence:
   local_suite:
@@ -92,5 +92,5 @@ relevant_files:
   - .agent/task-contract.json
 
 next_action: >
-  Mentor review of PR #7 (v1.1.1-reading-polish).
+  Commit, push PR #7 review findings remediation to v1.1.1-reading-polish, and verify NEW exact-head GitHub Actions run.
   DO NOT merge and DO NOT dispatch Pages without explicit human release authorization.

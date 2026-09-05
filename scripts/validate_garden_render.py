@@ -122,12 +122,36 @@ def main() -> int:
         if "system-ui" not in css_text:
             errors.append("emitted CSS does not include system-ui typography stack")
 
-    # 3. Wikilink math delimiter gate
+    # 3. Wikilink math delimiter gate and academic notation preservation
     norm_page = PUBLIC / "exam-patterns" / "normalization.html"
     if norm_page.is_file():
         norm_text = norm_page.read_text(encoding="utf-8")
         if "$X^+$" in norm_text or "$X^+" in norm_text:
             errors.append("normalization.html contains literal math delimiter $X^+$ in text")
+
+    theory_index = PUBLIC / "theory" / "index.html"
+    if theory_index.is_file():
+        t_text = theory_index.read_text(encoding="utf-8")
+        if "$F_c$" in t_text:
+            errors.append("theory/index.html contains unrendered literal $F_c$")
+        try:
+            doc_t = html.fromstring(t_text)
+            mc_links = doc_t.xpath(
+                '//a[@data-slug="theory/minimal-cover" or contains(@href, "theory/minimal-cover")]'
+            )
+            if not mc_links:
+                errors.append("theory/index.html missing link to theory/minimal-cover")
+            else:
+                parent = mc_links[0].getparent()
+                katex_nodes = parent.xpath(
+                    './/*[contains(concat(" ", normalize-space(@class), " "), " katex ")]'
+                )
+                if not katex_nodes:
+                    errors.append(
+                        "theory/index.html missing KaTeX rendering for F_c notation adjacent to minimal-cover"
+                    )
+        except (OSError, ValueError) as exc:
+            errors.append(f"unable to parse theory/index.html: {exc}")
 
     content_dir = ROOT / "garden" / "content"
     if content_dir.is_dir():
@@ -136,6 +160,32 @@ def main() -> int:
             if re.search(r"\[\[[^\]]*\$", md_text):
                 rel = md_path.relative_to(ROOT)
                 errors.append(f"{rel}: source markdown contains math delimiter in wikilink alias")
+
+    # 4. Architectural mobile overflow gate (reject broad overflow-x: hidden clipping)
+    custom_scss = ROOT / "garden" / "quartz" / "styles" / "custom.scss"
+    if custom_scss.is_file():
+        scss_text = custom_scss.read_text(encoding="utf-8")
+        if re.search(r"(?:body|\.page|article)\s*\{[^}]*overflow-x:\s*hidden", scss_text):
+            errors.append(
+                "custom.scss still applies broad overflow-x: hidden clipping on body/.page/article"
+            )
+        if "min-width: 0" not in scss_text:
+            errors.append("custom.scss missing min-width: 0 flex/grid child constraint")
+        if not re.search(r"table\s*\{[^}]*overflow-x:\s*auto", scss_text):
+            errors.append("custom.scss missing table horizontal scroll constraint")
+        if not re.search(r"pre\s*\{[^}]*overflow-x:\s*auto", scss_text):
+            errors.append("custom.scss missing pre horizontal scroll constraint")
+        if not re.search(r"(?:\.katex-display|\.math)[^{]*\{[^}]*overflow-x:\s*auto", scss_text):
+            errors.append("custom.scss missing display math horizontal scroll constraint")
+        if "max-width: 100%" not in scss_text:
+            errors.append("custom.scss missing max-width: 100% element constraint")
+
+    if css_files:
+        css_text = css_files[0].read_text(encoding="utf-8")
+        if re.search(r"(?:^|[},;])(?:body|\.page|article)\s*\{[^}]*overflow-x:\s*hidden", css_text):
+            errors.append(
+                "emitted CSS applies broad overflow-x: hidden clipping on body/.page/article"
+            )
 
     for relative, minimum_katex_nodes in MATH_PAGES.items():
         path = PUBLIC / relative
@@ -191,7 +241,9 @@ def main() -> int:
     print("- Typography: clean system sans; no Georgia/Times serif overrides")
     print("- Palette: #ffffff true white background")
     print("- Wikilinks: 0 math delimiters leaked in wikilink aliases")
+    print("- Academic notation: F_c preserved outside wikilink alias and rendered via KaTeX")
     print("- Breadcrumbs: current page title deduplicated")
+    print("- Mobile overflow: broad clipping removed; wide elements architecturally constrained")
     return 0
 
 

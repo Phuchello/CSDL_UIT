@@ -17,6 +17,10 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 - **Verification**:
   - Local verification: `scripts/validate_garden_render.py` (PASS), `scripts/validate_garden_d2.py` (PASS), `scripts/agent/check_links.py` (PASS, 2,819 links checked, 0 broken), `scripts/validate.py` (PASS), `scripts/validate_practice_static.py` (PASS), `verify.ps1 -Mode Fast` (PASS).
   - GitHub Actions CI on PR #7: Run `33945714588` completed with status `success` in 30s on `ubuntu-latest`.
+- **Review Remediation (PR #7 Findings)**:
+  - Restored academic notation $F_c$ outside wikilink alias in `garden/content/theory/index.md` (`[[theory/minimal-cover|...]] $F_c$`).
+  - Removed broad `overflow-x: hidden` clipping on `body`, `.page`, and `article` in `custom.scss`; implemented architectural wide-element constraints (`table` horizontal scroll, `pre/code` touch scroll and inline word break, `img/svg/canvas/graph` `max-width: 100%`, `.katex-display` horizontal scroll, flex/grid `min-width: 0`).
+  - Extended `scripts/validate_garden_render.py` with gates ensuring zero broad clipping and enforcing architectural constraints and $F_c$ preservation.
 - **Release Safety**: Main branch untouched, Pages deployment remains workflow_dispatch only, v1.1.1 tag untouched, no bulk academic changes. PR #7 remains open awaiting mentor release authorization.
 
 ---

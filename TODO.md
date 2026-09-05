@@ -76,9 +76,11 @@
 - [x] Balance desktop side rails (300px panel, 210px graph) and prevent mobile overflow
 - [x] Deduplicate current page title from breadcrumbs
 - [x] Extend `scripts/validate_garden_render.py` with reading UI regression gates
-- [x] Run full local verification suite (all 6 repo validators PASS)
-- [x] Commit, push branch `v1.1.1-reading-polish`, and open PR #7 to `main`
-- [x] Verify GitHub Actions CI (run `33945714588` SUCCESS in 30s)
+- [x] Restore academic notation F_c outside wikilink alias in garden/content/theory/index.md
+- [x] Replace broad mobile overflow clipping (overflow-x: hidden on body/.page/article) with architectural element-level constraints (table, pre/code, SVG/canvas/graph, math display, flex/grid min-width: 0)
+- [x] Update render regression gate in scripts/validate_garden_render.py to enforce architectural constraints and reject global clipping
+- [x] Commit, push branch `v1.1.1-reading-polish`, and update PR #7
+- [ ] Verify NEW exact-head GitHub Actions CI run
 - [ ] Mentor review and release authorization
 
 ## Parallel Design — v1.2 Learning System
