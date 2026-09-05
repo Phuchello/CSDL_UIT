@@ -88,8 +88,8 @@
 - [x] Synchronize PR #5 with current `main` baseline (`77951417b5e82b7dbe92748e7462b1680a21d5b2`)
 - [x] Retain vertical-slice strategy (Candidate Keys first) in `IMPLEMENTATION_PLAN.md` with all 16 required blocks and acceptance contract
 - [x] Capture the 6 canonical Candidate Keys error classes in `CONTENT_CONTRACT.md`
-- [ ] Complete merge commit, update PR #5 description, and push to origin
-- [ ] Verify exact-head GitHub Actions CI run on PR #5
+- [x] Complete merge commit, update PR #5 description, and push to origin
+- [x] Verify exact-head GitHub Actions CI run on PR #5 (run 33953285269 SUCCESS in 24s)
 - [ ] Await mentor review before merging PR #5 and branching for Candidate Keys slice
 
 ## Deferred Maintenance

@@ -15,6 +15,7 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 - **Verification**:
   - State validation: `scripts/agent/validate_state.py` (PASS).
   - Validation suite: `scripts/validate_garden_render.py` (PASS), `scripts/validate_garden_d2.py` (PASS), `scripts/agent/check_links.py` (PASS), `scripts/validate.py` (PASS), `scripts/validate_practice_static.py` (PASS), `verify.ps1 -Mode Fast` (PASS).
+  - GitHub Actions CI on PR #5 exact HEAD (`e2700ad`): Run `33953285269` completed with status `success` in 24s on `ubuntu-latest`.
 - **Release Safety**: Main untouched, Pages deployment remains workflow_dispatch only, v1.1.1/v1.2.0 tags untouched, no Candidate Keys implementation files added, no academic content or PDFs changed. PR #5 remains draft awaiting mentor review.
 
 ---

@@ -1,6 +1,6 @@
 {
   "id": "v1.2-learning-system-design",
-  "status": "in_progress",
+  "status": "ready_for_review",
   "acceptance": [
     {
       "id": "learning_system_spec",
@@ -30,7 +30,7 @@
     {
       "id": "github_ci",
       "criterion": "GitHub Actions passes on the PR HEAD on ubuntu-latest",
-      "passes": false
+      "passes": true
     }
   ],
   "release_safety": {
