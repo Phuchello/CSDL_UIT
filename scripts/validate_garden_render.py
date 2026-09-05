@@ -15,6 +15,17 @@ MATH_PAGES = {
     "theory/closure.html": 12,
 }
 
+REPRESENTATIVE_PAGES = {
+    "theory/candidate-keys.html": "Khóa ứng viên",
+    "exercises/normalization-exercise.html": None,
+    "exam-patterns/rbtv-trigger.html": None,
+}
+
+RAW_FRONTMATTER = re.compile(
+    r"^\s*(?:title|description|type|topics|related|provenance|courseEvidence|aliases):",
+    re.MULTILINE,
+)
+
 RAW_TEX = re.compile(
     r"\\(?:rightarrow|leftarrow|implies|emptyset|subseteq|supseteq|cup|cap|models|neq|notin)\b"
 )
@@ -25,6 +36,50 @@ def main() -> int:
         sys.stdout.reconfigure(encoding="utf-8")
 
     errors: list[str] = []
+
+    for relative, expected_title in REPRESENTATIVE_PAGES.items():
+        path = PUBLIC / relative
+        if not path.is_file():
+            errors.append(f"missing built frontmatter render target: {relative}")
+            continue
+
+        try:
+            doc = html.fromstring(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError) as exc:
+            errors.append(f"unable to parse {relative}: {exc}")
+            continue
+
+        title = " ".join(str(value).strip() for value in doc.xpath("//title/text()"))
+        if "Không có tiêu đề" in title:
+            errors.append(f"{relative}: document title still uses the missing-title fallback")
+        if expected_title and expected_title not in title:
+            errors.append(f"{relative}: document title does not contain {expected_title!r}")
+
+        article_text = "\n".join(
+            str(value)
+            for value in doc.xpath(
+                "//article//text()["
+                "not(ancestor::code) and not(ancestor::pre) and "
+                "not(ancestor::script) and not(ancestor::style) and "
+                "not(ancestor::math) and not(ancestor::annotation)"
+                "]"
+            )
+        )
+        leaked_fields = sorted(set(RAW_FRONTMATTER.findall(article_text)))
+        if leaked_fields:
+            errors.append(
+                f"{relative}: raw YAML frontmatter fields remain in article: "
+                + ", ".join(leaked_fields)
+            )
+
+        breadcrumb_text = " ".join(
+            str(value).strip()
+            for value in doc.xpath(
+                '//nav[contains(concat(" ", normalize-space(@class), " "), " breadcrumb-container ")]//text()'
+            )
+        )
+        if "Trang chủ" not in breadcrumb_text:
+            errors.append(f"{relative}: breadcrumb root is not Trang chủ")
 
     for relative, minimum_katex_nodes in MATH_PAGES.items():
         path = PUBLIC / relative

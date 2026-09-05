@@ -1,1 +1,1 @@
-export {}
+export { FrontMatter } from "./frontmatter"

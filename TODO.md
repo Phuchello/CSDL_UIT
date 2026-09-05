@@ -55,6 +55,15 @@
 - [ ] Desktop + mobile live visual smoke after deployment
 - [ ] Decide whether to tag `v1.1.1`
 
+## Active Queue — v1.1.1 YAML Frontmatter Hotfix (`v1.1.1-frontmatter-fix`)
+- [x] Prove the vendored Quartz parser had no YAML frontmatter transformer
+- [x] Register a built-in transformer that preserves metadata and removes YAML from the Markdown AST
+- [x] Add generated-HTML title, raw-frontmatter, breadcrumb, and KaTeX regression checks
+- [x] Build the Garden successfully and inspect generated representative pages
+- [ ] Install Python/PyYAML and run render, link, and full verification gates
+- [ ] Commit, push, open PR, and await GitHub CI
+- [ ] Human review, merge, manual Pages deployment, and live smoke
+
 ## Parallel Design — v1.2 Learning System
 - [x] Draft design architecture on `v1.2-learning-system-design`
 - [x] Open Draft PR #5

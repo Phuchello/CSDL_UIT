@@ -4,6 +4,14 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
 
 ---
 
+## 2026-09-05 — Quartz YAML frontmatter parsing hotfix
+- **Branch**: `v1.1.1-frontmatter-fix`
+- **Root Cause**: The vendored Quartz parser registered `remark-parse` and configured community transformers but no YAML frontmatter transformer, so metadata was rendered as ordinary Markdown body content and document titles fell back to `Không có tiêu đề`.
+- **Fix**: Added a built-in `FrontMatter` transformer before configured plugins. It parses the leading YAML mapping into `file.data.frontmatter` and removes the YAML node from the Markdown AST.
+- **Regression Gate**: Extended `scripts/validate_garden_render.py` to inspect generated titles, raw frontmatter leakage, `Trang chủ` breadcrumbs, and existing KaTeX targets.
+- **Verification**: Quartz build, core validator, Garden D2 validator, formatter, and diff checks pass. Python render/link/state gates remain blocked because Python/PyYAML are unavailable locally; GitHub CI is pending.
+- **Release Safety**: No Pages deployment, `v1.1.1` tag, `v1.2` implementation, or academic-content bulk edit.
+
 ## 2026-09-03 — Full Vietnamese-first Localization QA Pass on v1.1.1-vietnamese-ui
 - **Scope**:
   - Localized human-facing navigation, frontmatter titles, H1s, and explicit wikilink aliases across all 57 Markdown notes in `garden/content/**/*.md` to Vietnamese-first while preserving standard English technical terms in parentheses (e.g. `Khóa ứng viên (Candidate Keys)`, `Phủ tối thiểu (Minimal Cover)`, `Đại số quan hệ (Relational Algebra)`).

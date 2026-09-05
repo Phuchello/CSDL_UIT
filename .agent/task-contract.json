@@ -1,51 +1,46 @@
 {
-  "id": "v1.1.1-vietnamese-localization",
-  "status": "review_pending",
+  "id": "v1.1.1-frontmatter-fix",
+  "status": "hotfix_verification",
   "acceptance": [
     {
-      "id": "vietnamese_first_titles",
-      "criterion": "All human-facing navigation, page titles, H1s, search titles, and wikilink aliases are Vietnamese-first while preserving technical English in parentheses where useful",
+      "id": "root_cause_proven",
+      "criterion": "Quartz Markdown parsing has a built-in YAML frontmatter transformer before configured community transformers",
       "passes": true
     },
     {
-      "id": "reader_chrome_cleanup",
-      "criterion": "Reader-facing Properties/frontmatter panels and modified/read-time metadata are hidden, and the visible site suffix is Vietnamese-first",
+      "id": "generated_title_and_body",
+      "criterion": "Generated Candidate Keys HTML has a meaningful Vietnamese title and no raw YAML frontmatter fields in article content",
       "passes": true
     },
     {
-      "id": "file_slugs_unchanged",
-      "criterion": "Every existing file path and slug in garden/content/ remains identical",
+      "id": "breadcrumb_and_metadata",
+      "criterion": "Generated representative content pages retain Trang chủ breadcrumbs and structured metadata remains internal",
       "passes": true
     },
     {
-      "id": "regression_check_extended",
-      "criterion": "scripts/validate_garden_d2.py enforces Vietnamese-first title prefixes on major sections and representative core notes",
-      "passes": true
+      "id": "katex_and_links",
+      "criterion": "KaTeX and internal-link regression gates pass after the parser fix",
+      "passes": false,
+      "blockedBy": "Python and PyYAML are unavailable in the local environment"
     },
     {
-      "id": "rbtv_notation_consistency",
-      "criterion": "RBTV impact-matrix notation matches the canonical course convention: +, -, +(Thuộc tính), with -(*) reserved for an operation that cannot be performed",
-      "passes": true
+      "id": "canonical_verification",
+      "criterion": "Repository canonical verification passes without environment failures",
+      "passes": false,
+      "blockedBy": "PyYAML is unavailable in the local environment"
     },
     {
-      "id": "render_and_link_smoke",
-      "criterion": "Quartz builds successfully, zero broken links across internal link crawl, math renders via KaTeX, and representative pages inspect clean in desktop/mobile layout",
-      "passes": true
-    },
-    {
-      "id": "academic_scope_preserved",
-      "criterion": "Theory and Practice handbooks, PDFs, formulas, SQL code, and canonical provenance remain untouched; the only academic prose correction in this pass is the targeted RBTV notation fix aligned to the course source",
-      "passes": true
-    },
-    {
-      "id": "release_v1_1_0_preserved",
-      "criterion": "Published v1.1.0 tag/release remains immutable and historical v1.0.0 remains draft",
-      "passes": true
-    },
-    {
-      "id": "github_ci_gate",
-      "criterion": "GitHub Actions validation passes on ubuntu-latest for the final functional localization head",
-      "passes": true
+      "id": "github_ci",
+      "criterion": "GitHub Actions passes on the hotfix PR HEAD",
+      "passes": false,
+      "blockedBy": "PR not opened yet"
     }
-  ]
+  ],
+  "release_safety": {
+    "main_untouched": true,
+    "pages_deployed": false,
+    "v1_1_1_tagged": false,
+    "v1_2_implemented": false,
+    "bulk_academic_changes": false
+  }
 }

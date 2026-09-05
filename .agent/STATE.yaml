@@ -1,10 +1,10 @@
 project: CSDL_UIT
-status: review_pending
+status: hotfix_verification
 
 workflow:
   version: 2
 
-branch: v1.1.1-vietnamese-ui
+branch: v1.1.1-frontmatter-fix
 
 safe_repo_commit:
   sha: ad0ef293d0b85ba59de8ffad8966bd0d40720580
@@ -26,8 +26,21 @@ frozen:
   main: 5e4b0c17ec709aabe999a9d922c6679c3a3797ca
 
 current_task:
-  id: v1.1.1-vietnamese-localization
-  status: review_pending
+  id: v1.1.1-frontmatter-fix
+  status: hotfix_verification
+
+hotfix:
+  root_cause: >
+    The vendored Quartz parser registered remark-parse and configured community
+    transformers but no YAML frontmatter transformer, so leading metadata was
+    parsed as ordinary Markdown body content.
+  fix: >
+    Register a built-in FrontMatter transformer before configured plugins; it
+    parses the leading YAML node into VFile frontmatter data and removes it
+    from the Markdown AST.
+  render_gate: blocked_by_missing_python
+  state_gate: blocked_by_missing_pyyaml
+  typecheck_gate: blocked_by_preexisting_preact_errors
 
 verified:
   v1_1_0_release_complete: true
@@ -60,7 +73,9 @@ verification_evidence:
     - garden render smoke
     - internal link checker
 
-blockers: []
+blockers:
+  - Python and PyYAML are unavailable locally, so Python render/state/link gates remain unexecuted.
+  - TypeScript check retains two pre-existing Preact tabindex errors outside this hotfix.
 
 do_not_repeat:
   - modify or retag immutable v1.1.0 release
@@ -79,6 +94,6 @@ relevant_files:
   - TODO.md
 
 next_action: >
-  Await explicit human authorization to merge PR #4. After merge, use the existing
-  human-controlled Pages workflow_dispatch and perform desktop/mobile live visual smoke.
-  DO NOT tag v1.1.1 until the live smoke passes.
+  Install the repository Python verification dependencies, run the render and link
+  gates, then commit and open a PR for human review. Do not merge, deploy Pages, or
+  tag v1.1.1 until CI and live smoke pass.
