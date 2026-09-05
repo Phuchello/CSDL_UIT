@@ -1,5 +1,5 @@
 ---
-title: Double NOT EXISTS
+title: Hai tầng phủ định tương quan (Double NOT EXISTS)
 description: Kỹ thuật hai tầng phủ định tương quan trong T-SQL, chuyển đổi lượng từ phổ quát và phòng ngừa bẫy NULL.
 type: theory
 topics: [sql, exists, not-exists, universal-query, division]
@@ -7,7 +7,7 @@ related: [theory/division, practice/lab-03, errors/wrong-universal-candidate, er
 provenance: original-practice
 technicalSources: [TECH-A07]
 ---
-# Double NOT EXISTS (Hai tầng phủ định tương quan)
+# Hai tầng phủ định tương quan (Double NOT EXISTS)
 
 Kỹ thuật hai tầng phủ định tương quan (`Double NOT EXISTS`) là phương pháp kinh điển và chuẩn tắc nhất để hiện thực hóa [[theory/division|Phép chia hình thức]] trong SQL Server, cho phép trả lời các câu hỏi mang lượng từ "Tất cả" mà không bị ảnh hưởng bởi bẫy logic giá trị rỗng NULL.
 
@@ -49,4 +49,4 @@ WHERE NOT EXISTS (
 - **Miễn nhiễm hoàn toàn với bẫy NULL:** Phép toán `NOT IN` sẽ trả về tập rỗng ngay lập tức nếu truy vấn con chứa bất kỳ giá trị `NULL` nào do cơ chế logic 3 trị (3VL, xem [[errors/not-in-null|Bẫy NOT IN với NULL]]). Ngược lại, `NOT EXISTS` chỉ kiểm tra sự tồn tại của dòng (tồn tại ít nhất một dòng hay không) nên hoàn toàn không bị ảnh hưởng bởi giá trị của các cột trong danh sách chọn (xem [[errors/null-comparison|So sánh với NULL]]).
 - **Bảo toàn ngữ nghĩa tập hợp:** So với phương pháp gom nhóm đếm `HAVING COUNT(DISTINCT CourseId) = ...`, `Double NOT EXISTS` phản ánh đúng ngữ nghĩa của phép chia đại số quan hệ và hoạt động chuẩn xác ngay cả khi danh mục yêu cầu có các cấu trúc ràng buộc phức tạp.
 
-Xem hướng dẫn thực thi trên cơ sở dữ liệu mẫu tại [[practice/lab-03|Lab 03 — Truy vấn nâng cao]], lý thuyết phép toán tại [[theory/division|Phép chia hình thức]], và bảng tra cứu đối chiếu tại [[cheat-sheets/universal-query|Universal Query cheat sheet]]. Căn cứ kỹ thuật Microsoft Learn [[sources/technical|TECH-A07]].
+Xem hướng dẫn thực thi trên cơ sở dữ liệu mẫu tại [[practice/lab-03|Lab 03 — Truy vấn nâng cao]], lý thuyết phép toán tại [[theory/division|Phép chia hình thức]], và bảng tra cứu đối chiếu tại [[cheat-sheets/universal-query|Bảng tra truy vấn phổ dụng "Tất cả"]]. Căn cứ kỹ thuật Microsoft Learn [[sources/technical|TECH-A07]].

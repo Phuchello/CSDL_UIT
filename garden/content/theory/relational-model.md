@@ -1,5 +1,5 @@
 ---
-title: Relational model
+title: Mô hình quan hệ (Relational Model)
 description: Relation, tuple, attribute, schema, instance và các ràng buộc toàn vẹn cơ bản trong mô hình quan hệ.
 type: theory
 topics: [relational-model, schema, instance]
@@ -7,7 +7,7 @@ related: [theory/relational-algebra, theory/candidate-keys, theory/rbtv-impact]
 provenance: verified-artifact
 courseEvidence: [UIT-O01, UIT-O02]
 ---
-# Relational model
+# Mô hình quan hệ (Relational Model)
 
 Mô hình dữ liệu quan hệ (Relational Data Model) được E.F. Codd đề xuất năm 1970, tổ chức dữ liệu dưới dạng các bảng hai chiều (quan hệ - Relation):
 

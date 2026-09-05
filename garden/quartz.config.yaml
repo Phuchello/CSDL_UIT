@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
 configuration:
   pageTitle: IT004 · Cơ sở dữ liệu
-  pageTitleSuffix: " · Knowledge Garden"
+  pageTitleSuffix: " · Vườn tri thức"
   enableSPA: false
   enablePopovers: true
   analytics: null
@@ -14,16 +14,16 @@ configuration:
     fontOrigin: local
     cdnCaching: false
     typography:
-      header: Georgia
-      body: Arial
-      code: Consolas
+      header: system-ui
+      body: system-ui
+      code: ui-monospace
     colors:
       lightMode:
-        light: "#f7f4ed"
-        lightgray: "#e4e0d7"
-        gray: "#9c978d"
-        darkgray: "#4b5563"
-        dark: "#0f2d40"
+        light: "#ffffff"
+        lightgray: "#f3f4f6"
+        gray: "#9ca3af"
+        darkgray: "#1f2937"
+        dark: "#111827"
         secondary: "#0f766e"
         tertiary: "#b45309"
         highlight: rgba(15, 118, 110, 0.12)
@@ -157,7 +157,7 @@ plugins:
       position: beforeBody
       priority: 10
   - source: "@quartz-community/content-meta"
-    enabled: true
+    enabled: false
     layout:
       position: beforeBody
       priority: 20
@@ -185,6 +185,9 @@ plugins:
       group: toolbar
   - source: "@quartz-community/breadcrumbs"
     enabled: true
+    options:
+      rootName: "Trang chủ"
+      showCurrentPage: false
     layout:
       position: beforeBody
       priority: 5
@@ -212,7 +215,7 @@ plugins:
     options: {}
     order: 50
   - source: "@quartz-community/note-properties"
-    enabled: true
+    enabled: false
     options:
       includeAll: false
       includedProperties:
@@ -220,7 +223,7 @@ plugins:
         - tags
         - aliases
       excludedProperties: []
-      hidePropertiesView: false
+      hidePropertiesView: true
       delimiters: ---
       language: yaml
     order: 5

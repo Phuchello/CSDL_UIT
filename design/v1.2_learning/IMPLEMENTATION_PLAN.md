@@ -21,55 +21,83 @@ This prevents a large amount of UI code from being built around an untested lear
 
 Before v1.2 implementation begins:
 
-- PR #4 Vietnamese-first localization is reviewed and resolved separately;
-- v1.1.1 content-completeness scope is decided;
-- visible Properties/raw metadata issue has a documented Reference Mode solution;
+- v1.1.1 maintenance and Vietnamese-first localization (PR #4, #6, #7) are merged to `main`;
+- v1.2 design branch is synchronized to `main` baseline (`7795141`);
+- vertical-slice strategy (Candidate Keys first) is explicitly retained;
 - canonical `research/coverage_matrix.md` remains the scope baseline;
 - existing v1.1.0 tag/release remains immutable;
 - Pages deployment remains human-controlled.
 
-## 3. Milestone A — Learning architecture prototype
+## 3. Milestone A — Learning architecture prototype (Candidate Keys Vertical Slice)
 
 Target one difficult, representative skill:
 
-**`theory/candidate-keys`**
+**`theory/candidate-keys` (Chương 6 — Khóa ứng viên)**
 
-Why this skill:
+### Why Candidate Keys first (Vertical Slice)
+Human review of the live Knowledge Garden established that while the site is a useful reference/wiki, exercise coverage is too sparse to serve as the primary active learning system. To avoid generating dozens of shallow pages, v1.2 MUST execute a deep vertical slice first on Candidate Keys to prove the reusable learning architecture.
 
-- depends on closure;
-- has algorithmic trace;
-- has a clear worked/faded/cold sequence;
-- contains common misconceptions;
-- connects directly to normalization and exam questions.
+### Required 16 Unit Components
+The Candidate Keys learning unit must contain:
+1. **Purpose**: Clear 1-sentence motivation answering "Tại sao phải học cái này?" (~60 words).
+2. **Prerequisite map**: Explicit dependency on attribute closure ($X^+$).
+3. **Concept map / 80-20 core**: Essential distinction:
+   - Superkey ($K^+ = R$)
+   - Candidate Key (minimal superkey)
+   - Primary Key (designated candidate key).
+4. **Mental model**: Systematic expansion and pruning model.
+5. **Mechanism**: Algorithmic rules for candidate key search ($L, R, N, LR$ classification, closure calculation, branching).
+6. **Execution trace**: Interactive step-by-step trace showing closure rounds, branch exploration, and minimality checks.
+7. **Worked example**: Complete canonical problem solved step-by-step with explicit justifications.
+8. **Self-explanation prompts**: Formative checkpoints (e.g. "Tại sao bước này đúng?", "Nếu bỏ thuộc tính X thì bao đóng còn là R không?").
+9. **Faded example**: Scaffolded problem with selected intermediate steps omitted for the learner to complete.
+10. **Cold problem**: Independent canonical problem solved without hints to test transfer.
+11. **Variant / transfer problem**: Problem with varied surface structure or composite keys.
+12. **Exam trap**: UIT-style trap (e.g. stopping after finding only one key, or concluding a superkey is candidate key without checking minimality).
+13. **Error diagnosis**: Diagnostic feedback mapping wrong answers to explicit error classes.
+14. **Closed-book recall**: Retrieval prompts testing definitions, distinctions, and algorithmic steps from memory.
+15. **Mastery update**: Local mastery state transition (UNSEEN → ORIENTED → FOLLOWED → GUIDED → INDEPENDENT → ROBUST).
+16. **Reference Mode escape hatch**: Seamless toggle to existing Reference Mode note (`theory/candidate-keys.md`).
 
-Deliver:
+### Target Learner Outcome
+A student who has not yet heard the lecture should be able to use the unit for roughly 30–45 minutes and then independently solve a canonical “find all candidate keys” problem.
+The unit must teach both:
+1. **Sufficiency**: $K^+ = R$ (superkey condition);
+2. **Minimality**: no proper subset of $K$ is still a superkey.
+Explicitly distinguish: superkey, candidate key, primary key.
 
-- Learning Mode shell;
-- stage navigation;
-- one concept map;
-- one execution trace;
-- one recall checkpoint;
-- one worked example;
-- one faded example;
-- one cold problem;
-- layered hints;
-- one error-diagnosis path;
-- local progress persistence;
-- switch to Reference Mode.
+### Proven Reusable Primitives
+The slice must prove these reusable primitives before Milestone B:
+- `LearningShell`
+- `ConceptMap`
+- `TraceStepper`
+- `RecallPrompt`
+- `WorkedExample`
+- `FadedExample`
+- `ProblemCard`
+- `HintDrawer`
+- `DiagnosisPanel`
+- `MasteryIndicator`
+- `ReferenceModeLink`
 
-Do NOT build full spaced repetition, mock exams, or all chapters yet.
+### Captured Error Classes
+The unit must diagnose and remediate:
+- `minimality-not-checked`: Finding a superkey and immediately concluding it is a candidate key without testing proper subsets;
+- `closure-stopped-too-early`: Terminating closure before reaching fixed point;
+- `missing-mandatory-attribute`: Leaving out attributes in $L \cup N$ that appear only on LHS or nowhere;
+- `only-one-key-found`: Terminating after finding a single key instead of searching all branches;
+- `redundant-branch-search`: Checking supersets of already-found candidate keys;
+- `incorrect-FD-application`: Applying functional dependency whose LHS is not yet in closure.
 
 ### Acceptance Gate A
-
 Human can complete the candidate-key unit on desktop and mobile without needing the Quartz Explorer.
 
 Automated checks:
-
 - production build passes;
 - links pass;
 - KaTeX passes;
 - localStorage schema unit tests pass;
-- no horizontal overflow at 390 / 900 / 1440 px;
+- no horizontal overflow at 390 / 900 / 1440 px without broad body/page clipping;
 - keyboard navigation smoke passes.
 
 ## 4. Milestone B — Reusable Learning Unit system

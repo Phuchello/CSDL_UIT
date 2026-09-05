@@ -1,5 +1,5 @@
 ---
-title: Dạng chuẩn Boyce-Codd (BCNF)
+title: "Dạng chuẩn Boyce-Codd (BCNF)"
 description: Định nghĩa hình thức BCNF, so sánh với 3NF, thuật toán phân rã BCNF và hiện tượng mất phụ thuộc hàm.
 type: theory
 topics: [bcnf, 3nf, normalization, decomposition]
@@ -46,7 +46,7 @@ Nếu lược đồ $R$ vi phạm BCNF do phụ thuộc hàm $X \rightarrow Y$ (
    $$R_1 = X \cup Y \quad \text{và} \quad R_2 = R - (Y - X)$$
 2. **Bước 2:** Xác định tập phụ thuộc hàm chiếu trên từng lược đồ con ($F_1$ và $F_2$).
 3. **Bước 3:** Tiếp tục kiểm tra BCNF trên $R_1$ và $R_2$. Nếu còn quan hệ con nào vi phạm thì đệ quy lặp lại thuật toán cho đến khi mọi quan hệ con đều đạt BCNF.
-4. **Đặc tính:** Phép phân rã BCNF luôn đảm bảo tính kết nối không mất thông tin ([[theory/lossless-decomposition|Lossless Join Decomposition]]).
+4. **Đặc tính:** Phép phân rã BCNF luôn đảm bảo tính kết nối không mất thông tin ([[theory/lossless-decomposition|Phân rã kết nối không mất thông tin (Lossless Join)]]).
 
 ## 4. Cái giá phải trả: Mất tính bảo toàn phụ thuộc hàm
 

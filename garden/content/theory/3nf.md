@@ -1,5 +1,5 @@
 ---
-title: Dạng chuẩn 3 (Third Normal Form - 3NF)
+title: "Dạng chuẩn 3 (Third Normal Form - 3NF)"
 description: Định nghĩa hình thức 3NF, điều kiện cứu vãn thuộc tính khóa, phụ thuộc bắc cầu và tính bảo toàn phụ thuộc hàm.
 type: theory
 topics: [3nf, normalization, functional-dependency, candidate-keys]

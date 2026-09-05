@@ -1,6 +1,6 @@
 {
   "id": "v1.2-learning-system-design",
-  "status": "review_pending",
+  "status": "in_progress",
   "acceptance": [
     {
       "id": "learning_system_spec",
@@ -19,18 +19,25 @@
     },
     {
       "id": "implementation_plan",
-      "criterion": "Design uses vertical-slice milestones and explicit acceptance gates before broad implementation",
+      "criterion": "Design uses vertical-slice milestones and explicit acceptance gates before broad implementation, with Candidate Keys as first slice",
       "passes": true
     },
     {
-      "id": "existing_release_safety",
-      "criterion": "Design-only branch does not modify v1.1.x academic content, PDFs, release tags, Pages workflow or production main",
+      "id": "main_sync_and_release_safety",
+      "criterion": "Design branch is synchronized with current main (7795141) preserving all v1.1.1 fixes, with no code/academic content changes",
       "passes": true
     },
     {
-      "id": "mentor_design_review",
-      "criterion": "Human mentor reviews and authorizes the v1.2 learning-system architecture before implementation begins",
+      "id": "github_ci",
+      "criterion": "GitHub Actions passes on the PR HEAD on ubuntu-latest",
       "passes": false
     }
-  ]
+  ],
+  "release_safety": {
+    "main_untouched": true,
+    "pages_deployed": false,
+    "v1_1_1_tagged": false,
+    "v1_2_implemented": false,
+    "bulk_academic_changes": false
+  }
 }

@@ -1,5 +1,5 @@
 ---
-title: Multi-row trigger
+title: "Trigger xử lý tập hợp đa dòng (Multi-row Trigger)"
 description: Mẫu trigger an toàn đa dòng với cơ chế phân biệt sự kiện DELETE và UPDATE.
 type: practice
 topics: [trigger, multi-row, sql-server]
@@ -8,9 +8,9 @@ provenance: original-practice
 fixture: training-v1
 technicalSources: [TECH-A04, TECH-A05, TECH-A06]
 ---
-# Multi-row trigger
+# Trigger xử lý tập hợp đa dòng (Multi-row Trigger)
 
-Trong SQL Server, câu lệnh DML tác động trên tập hợp dòng. Mọi DML Trigger phải được thiết kế dạng tập hợp (set-based), xử lý đồng thời nhiều dòng trong các bảng ảo `inserted` và `deleted` mà không dùng biến vô hướng (scalar variable, xem [[errors/scalar-trigger|scalar-trigger]]).
+Trong SQL Server, câu lệnh DML tác động trên tập hợp dòng. Mọi DML Trigger phải được thiết kế dạng tập hợp (set-based), xử lý đồng thời nhiều dòng trong các bảng ảo `inserted` và `deleted` mà không dùng biến vô hướng (scalar variable, xem [[errors/scalar-trigger|Lỗi gán biến vô hướng trong Trigger]]).
 
 ## Hợp đồng phân biệt sự kiện DELETE và UPDATE
 
@@ -60,4 +60,4 @@ Theo hợp đồng kiểm thử đã được chuẩn hóa trong [[theory/rbtv-i
 | **E. Xóa trưởng bộ phận** | `DELETE FROM tr_employees WHERE EmployeeId = 'E01'` | **REJECT** | **Cấp Khai báo (Declarative):** Khóa ngoại `FK_tr_departments_head` được SQL Server kiểm tra trước `AFTER` trigger $\rightarrow$ chặn trực tiếp ở tầng DDL với `Msg 547`. Nhánh `AFTER DELETE` không bao giờ được kích hoạt. |
 | **F. Thao tác đa dòng có 1 lỗi** | `UPDATE tr_employees SET DeptId = 'D02'` | **REJECT TOÀN BỘ** | `IF EXISTS` phát hiện ít nhất 1 dòng vi phạm $\rightarrow$ hủy toàn bộ batch (tính nguyên tố ACID). |
 
-Tham khảo quy trình chẩn đoán lỗi trong [[practice/debugging|debugging]] và kịch bản sập logic trong [[errors/multi-row-trigger-failure|multi-row-trigger-failure]]. Căn cứ tài liệu kỹ thuật Microsoft [[sources/technical|TECH-A04, TECH-A05, TECH-A06]].
+Tham khảo quy trình chẩn đoán lỗi trong [[practice/debugging|Quy trình chẩn đoán & gỡ lỗi SQL]] và kịch bản sập logic trong [[errors/multi-row-trigger-failure|Sập trigger khi chạy batch nhiều dòng]]. Căn cứ tài liệu kỹ thuật Microsoft [[sources/technical|TECH-A04, TECH-A05, TECH-A06]].

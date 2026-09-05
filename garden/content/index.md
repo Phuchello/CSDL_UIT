@@ -1,5 +1,5 @@
 ---
-title: IT004 Knowledge Garden
+title: Cơ sở dữ liệu IT004 — Vườn tri thức (Knowledge Garden)
 description: Bản đồ học IT004 nối lý thuyết quan hệ, SQL Server, bài tập và nguồn kiểm chứng.
 type: theory
 topics: [it004, orientation]

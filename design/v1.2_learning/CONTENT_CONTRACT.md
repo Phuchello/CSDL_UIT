@@ -48,16 +48,19 @@ Maximum ~60 words.
 
 ### B. 80/20 concept map
 
-Show 3–5 ideas only.
+Show 3–5 ideas only. Explicitly distinguish:
+- **Superkey**: Satisfies sufficiency ($K^+ = R$).
+- **Candidate Key**: Satisfies both sufficiency ($K^+ = R$) and minimality (no proper subset $K' \subset K$ has $K'^+ = R$).
+- **Primary Key**: Exactly one designated candidate key selected as the relation's principal identifier.
 
 Example:
 
 ```text
-Superkey
-   ↓ + minimality
-Candidate Key
-   ↓ choose one
-Primary Key
+Superkey (Sufficiency: K⁺ = R)
+   ↓ + Minimality (no proper subset is superkey)
+Candidate Key (Tập khóa ứng viên)
+   ↓ Choose one
+Primary Key (Khóa chính)
 ```
 
 ### C. Mental model
@@ -121,15 +124,30 @@ Passing delayed/mixed variants contributes to `ROBUST` mastery.
 
 ### J. Error diagnosis
 
-At least 2 common wrong paths with explicit error classes.
+At least 2 common wrong paths with explicit error classes (the Candidate Keys vertical slice captures all 6 canonical error classes below).
 
 Example:
 
 ```yaml
 error_classes:
   - id: minimality-not-checked
-    symptom: "Tìm được superkey và kết luận ngay là candidate key"
-    repair: "Thử loại từng thuộc tính và kiểm tra bao đóng lại"
+    symptom: "Tìm được superkey và kết luận ngay là candidate key mà không thử loại bỏ thuộc tính"
+    repair: "Thử loại từng thuộc tính và kiểm tra bao đóng lại để đảm bảo tính tối thiểu"
+  - id: closure-stopped-too-early
+    symptom: "Dừng tính bao đóng trước khi đạt điểm cố định (fixed point)"
+    repair: "Duyệt lại toàn bộ tập FD cho đến khi không còn thuộc tính mới nào được thêm vào"
+  - id: missing-mandatory-attribute
+    symptom: "Bỏ sót thuộc tính nguồn bắt buộc (L hoặc N) trong khóa ứng viên"
+    repair: "Lập bảng phân loại L, R, N, LR; mọi khóa đều phải chứa L ∪ N"
+  - id: only-one-key-found
+    symptom: "Dừng lại sau khi tìm được 1 khóa thay vì duyệt hết các nhánh LR khả dĩ"
+    repair: "Kiểm tra toàn bộ các tổ hợp thuộc tính LR chưa được bao quát"
+  - id: redundant-branch-search
+    symptom: "Tìm kiếm mở rộng trên tập cha của một candidate key đã tìm thấy"
+    repair: "Áp dụng điều kiện tối thiểu: nếu X đã là khóa, bỏ qua mọi nhánh XY"
+  - id: incorrect-FD-application
+    symptom: "Áp dụng phụ thuộc hàm X → Y khi vế trái X chưa hoàn toàn nằm trong bao đóng hiện tại"
+    repair: "Chỉ được kích hoạt FD khi toàn bộ thuộc tính vế trái X đã thuộc tập bao đóng"
 ```
 
 ### K. Recall set

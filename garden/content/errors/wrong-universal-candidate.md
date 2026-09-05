@@ -1,12 +1,12 @@
 ---
-title: Wrong universal-query candidate domain
+title: 'Sai miền ứng viên trong truy vấn phổ dụng "Tất cả"'
 description: Sai lầm xác định miền ứng viên trong câu truy vấn phổ quát mang lượng từ "Tất cả".
 type: error
 topics: [division, universal-query, exists]
 related: [theory/division, theory/double-not-exists, practice/lab-03]
 provenance: original-practice
 ---
-# Wrong universal-query candidate domain (Sai miền ứng viên trong câu hỏi Tất cả)
+# Sai miền ứng viên trong truy vấn phổ dụng "Tất cả" (Wrong Candidate Domain)
 
 Trong các bài toán hiện thực hóa [[theory/division|Phép chia hình thức]] hoặc viết câu truy vấn [[theory/double-not-exists|Double NOT EXISTS]], sai lầm phổ biến nhất của sinh viên là **đặt sai bảng ở tầng truy vấn ngoài cùng (Outer Query)**.
 

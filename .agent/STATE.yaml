@@ -1,5 +1,5 @@
 project: CSDL_UIT
-status: review_pending
+status: in_progress
 
 workflow:
   version: 2
@@ -7,8 +7,8 @@ workflow:
 branch: v1.2-learning-system-design
 
 safe_repo_commit:
-  sha: 5e4b0c17ec709aabe999a9d922c6679c3a3797ca
-  purpose: current-main-after-v1.1.1-render-maintenance
+  sha: 77951417b5e82b7dbe92748e7462b1680a21d5b2
+  purpose: current-main-baseline-after-v1.1.1-polish
 
 safe_product_commit:
   sha: ad0ef293d0b85ba59de8ffad8966bd0d40720580
@@ -23,11 +23,11 @@ frozen:
   theory: 61eb5c8a60106be4251ce090a17c6c3482284332
   practice: 59c519b94ede86f07fbc1778b120d0c8c3188b80
   d1: 922afe07bea7f28abf30c49054159a09a31be743
-  v1_1_0: ad0ef293d0b85ba59de8ffad8966bd0d40720580
+  main: 77951417b5e82b7dbe92748e7462b1680a21d5b2
 
 current_task:
   id: v1.2-learning-system-design
-  status: review_pending
+  status: in_progress
 
 verified:
   product_thesis_defined: true
@@ -39,14 +39,18 @@ verified:
   implementation_gates_defined: true
   no_ai_backend_dependency: true
   existing_release_untouched: true
-  mentor_design_review: false
+  main_baseline_synchronized: true
+  candidate_keys_vertical_slice_first: true
+  github_ci_gate: pending_push
 
-parallel_work:
-  localization_pr: 4
-  localization_head: 7f5b23f18b2821523d74b07a557735158dba0ea5
-  localization_ci_run: 33769457047
-  localization_ci_conclusion: success
-  localization_status: open_review_pending
+verification_evidence:
+  local_suite:
+    - scripts/validate_garden_render.py (PASS)
+    - scripts/validate_garden_d2.py (PASS)
+    - scripts/agent/check_links.py (PASS, 2819 links checked, 0 broken)
+    - scripts/validate.py (PASS, 6/6 checks)
+    - scripts/validate_practice_static.py (PASS)
+    - scripts/agent/verify.ps1 -Mode Fast (PASS)
 
 blockers: []
 
@@ -59,19 +63,21 @@ do_not_repeat:
   - expose raw metadata/provenance as default learning UI
   - modify or retag immutable v1.1.0 release
   - deploy Pages automatically on push to main
+  - modify frozen branch baselines
+  - make unrelated academic content changes
+  - publish historical draft release v1.0.0
+  - alter markdown file paths or slugs in garden/content
 
 relevant_files:
   - design/v1.2_learning/LEARNING_SYSTEM_SPEC.md
   - design/v1.2_learning/CONTENT_CONTRACT.md
   - design/v1.2_learning/UX_WIREFRAMES.md
   - design/v1.2_learning/IMPLEMENTATION_PLAN.md
-  - research/coverage_matrix.md
-  - research/v1.1_phase_a/essay_bank_plan.md
-  - garden/quartz.config.yaml
   - docs/index.md
+  - .agent/STATE.yaml
   - .agent/task-contract.json
 
 next_action: >
-  Stop for human mentor review of the v1.2 learning-system design. Do not implement the
-  Learning Engine yet. In parallel, review PR #4 separately for Vietnamese-first UX/content
-  quality; its green CI is necessary but not sufficient for human visual/content approval.
+  Complete PR #5 design synchronization to origin/main, verify design docs capture
+  Candidate Keys vertical slice requirements, run validation suite, and push to PR #5.
+  DO NOT merge PR #5 and DO NOT deploy Pages.

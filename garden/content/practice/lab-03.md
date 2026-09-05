@@ -1,5 +1,5 @@
 ---
-title: Lab 03 — truy vấn nâng cao
+title: Lab 03 — Truy vấn nâng cao (Advanced Queries)
 description: Double NOT EXISTS, tập hợp, ngày tháng và NULL trên fixture training-v1.
 type: practice
 topics: [advanced-query, division, exists, null, set-operators]
@@ -8,7 +8,7 @@ provenance: verified-artifact
 fixture: training-v1
 technicalSources: [TECH-A07, TECH-A08]
 ---
-# Lab 03 — truy vấn nâng cao
+# Lab 03 — Truy vấn nâng cao (Advanced Queries)
 
 Trong phòng thực hành, các bài toán phức tạp đòi hỏi kết hợp nhiều kỹ thuật suy luận ngữ nghĩa SQL:
 

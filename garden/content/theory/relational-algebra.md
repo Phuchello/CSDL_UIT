@@ -1,5 +1,5 @@
 ---
-title: Relational algebra
+title: Đại số quan hệ (Relational Algebra)
 description: Hệ thống 8 phép toán hình thức của đại số quan hệ, tính khả hợp, các phép toán phái sinh và mối liên hệ với SQL.
 type: theory
 topics: [relational-algebra, selection, projection, join, division]
@@ -7,7 +7,7 @@ related: [theory/relational-model, theory/division, theory/double-not-exists, pr
 provenance: verified-artifact
 courseEvidence: [UIT-O02, LOC-LEC-LONG-CH03]
 ---
-# Relational algebra (Đại số quan hệ)
+# Đại số quan hệ (Relational Algebra)
 
 Đại số quan hệ (Relational Algebra - RA) do E.F. Codd đề xuất là ngôn ngữ truy vấn hình thức mang tính thủ tục (procedural), đóng vai trò nền tảng toán học cho mô hình dữ liệu quan hệ và cơ chế tối ưu hóa câu truy vấn của các RDBMS hiện đại.
 
@@ -54,4 +54,4 @@ courseEvidence: [UIT-O02, LOC-LEC-LONG-CH03]
 | $R - S$ | `SELECT * FROM R EXCEPT SELECT * FROM S` | T-SQL tự động khử trùng lặp |
 | $R \div S$ | Dùng kỹ thuật [[theory/double-not-exists|Double NOT EXISTS]] | Hoặc kiểm tra đếm với `COUNT(DISTINCT)` |
 
-Luyện tập kết nối bảng trong thực hành tại [[practice/lab-02|Lab 02 — DML và JOIN]], truy vấn nâng cao tại [[practice/lab-03|Lab 03 — Truy vấn nâng cao]], và khảo sát cấu trúc đề thi tại [[exam-patterns/relational-algebra|Observed pattern — relational algebra]]. Căn cứ mô hình dữ liệu nền tảng tại [[theory/relational-model|Relational model]].
+Luyện tập kết nối bảng trong thực hành tại [[practice/lab-02|Lab 02 — DML và JOIN]], truy vấn nâng cao tại [[practice/lab-03|Lab 03 — Truy vấn nâng cao]], và khảo sát cấu trúc đề thi tại [[exam-patterns/relational-algebra|Dạng đề quan sát — Đại số quan hệ (Relational Algebra)]]. Căn cứ mô hình dữ liệu nền tảng tại [[theory/relational-model|Mô hình quan hệ (Relational Model)]].

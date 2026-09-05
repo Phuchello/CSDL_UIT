@@ -1,5 +1,5 @@
 ---
-title: Course and corpus sources
+title: "Tài liệu môn học & Corpus thực chứng (Course Sources)"
 description: UIT course artifacts and frozen source ledger with evidence labels.
 type: source
 topics: [sources, uit, provenance]
@@ -7,7 +7,7 @@ related: [exam-patterns/index, theory/index, practice/index]
 provenance: verified-artifact
 courseEvidence: [UIT-O01, UIT-O02, UIT-O03, UIT-O05, UIT-O06, UIT-O10, UIT-O11]
 ---
-# Course and corpus sources
+# Tài liệu môn học & Corpus thực chứng (Course Sources)
 
 Các tài liệu học phần IT004 và hiện vật khảo sát được dẫn chiếu trực tiếp từ Bảng kê nguồn tài liệu học thuật và Danh bộ hiện vật chuẩn hóa của kho lưu trữ, phân định rõ theo các cấp độ thẩm quyền:
 
@@ -28,4 +28,4 @@ Trong snapshot khảo sát có 17 hiện vật đề thi tự luận và 10 hi�
 - Các hiện vật này phục vụ việc quan sát mẫu câu hỏi (`observed pattern`), tuyệt đối không được coi là đề thi công bố chính thức từ trường.
 - Mọi tài liệu sinh viên hoặc cộng đồng đều giữ nguyên phân lớp Tier C thứ cấp.
 
-Xem thêm các tiêu chuẩn kỹ thuật tại [[sources/technical|Technical sources]] và cấu trúc đề quan sát được tại [[exam-patterns/index|Exam patterns]].
+Xem thêm các tiêu chuẩn kỹ thuật tại [[sources/technical|Tài liệu kỹ thuật (Technical Sources)]] và cấu trúc đề quan sát được tại [[exam-patterns/index|Dạng đề thi (Exam Patterns)]].

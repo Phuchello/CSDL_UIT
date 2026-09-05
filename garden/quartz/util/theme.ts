@@ -38,8 +38,9 @@ export interface Theme {
 export type ThemeKey = keyof Colors
 
 const DEFAULT_SANS_SERIF =
-  'system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
-const DEFAULT_MONO = "ui-monospace, SFMono-Regular, SF Mono, Menlo, monospace"
+  'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
+const DEFAULT_MONO =
+  'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace'
 
 export function getFontSpecificationName(spec: FontSpecification): string {
   if (typeof spec === "string") {
@@ -173,6 +174,13 @@ function hexToHsl(hex: string): { h: number; s: number; l: number } {
   return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) }
 }
 
+function formatFontFamily(spec: FontSpecification, fallback: string): string {
+  const name = getFontSpecificationName(spec)
+  const isGeneric = /^(system-ui|ui-monospace|sans-serif|serif|monospace|cursive|fantasy)$/i.test(name)
+  const primary = isGeneric ? name : `"${name}"`
+  return `${primary}, ${fallback}`
+}
+
 export function joinStyles(theme: Theme, ...stylesheet: string[]) {
   return `
 ${stylesheet.join("\n\n")}
@@ -188,10 +196,10 @@ ${stylesheet.join("\n\n")}
   --highlight: ${theme.colors.lightMode.highlight};
   --textHighlight: ${theme.colors.lightMode.textHighlight};
 
-  --titleFont: "${getFontSpecificationName(theme.typography.title || theme.typography.header)}", ${DEFAULT_SANS_SERIF};
-  --headerFont: "${getFontSpecificationName(theme.typography.header)}", ${DEFAULT_SANS_SERIF};
-  --bodyFont: "${getFontSpecificationName(theme.typography.body)}", ${DEFAULT_SANS_SERIF};
-  --codeFont: "${getFontSpecificationName(theme.typography.code)}", ${DEFAULT_MONO};
+  --titleFont: ${formatFontFamily(theme.typography.title || theme.typography.header, DEFAULT_SANS_SERIF)};
+  --headerFont: ${formatFontFamily(theme.typography.header, DEFAULT_SANS_SERIF)};
+  --bodyFont: ${formatFontFamily(theme.typography.body, DEFAULT_SANS_SERIF)};
+  --codeFont: ${formatFontFamily(theme.typography.code, DEFAULT_MONO)};
 }
 
 :root[saved-theme="dark"] {

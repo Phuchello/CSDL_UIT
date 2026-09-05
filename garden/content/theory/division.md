@@ -1,5 +1,5 @@
 ---
-title: Division — Phép chia hình thức cho truy vấn "Tất cả"
+title: 'Phép chia quan hệ (Division) — Truy vấn "Tất cả"'
 description: Định nghĩa toán học của phép chia quan hệ, ngữ nghĩa tập rỗng R ÷ ∅ = π_X(R), quy tắc 3 tập hợp, công thức Codd, kỹ thuật đếm nhóm và phân biệt với quan hệ ứng viên độc lập trong SQL.
 type: theory
 topics: [division, universal-query, relational-algebra]
@@ -7,7 +7,7 @@ related: [theory/relational-algebra, theory/double-not-exists, practice/lab-03, 
 provenance: verified-artifact
 courseEvidence: [UIT-O02, LOC-LEC-LONG-CH03]
 ---
-# Division (Phép chia hình thức cho truy vấn "Tất cả")
+# Phép chia quan hệ (Division) — Kỹ thuật giải quyết truy vấn "Tất cả"
 
 Phép chia quan hệ (Relational Division $R \div S$) là phép toán đại số quan hệ phái sinh giải quyết nhóm bài toán mang lượng từ phổ quát ($\forall$ - "Tất cả"). Đây là một trong những nội dung học thuật trọng tâm trong học phần IT004.
 

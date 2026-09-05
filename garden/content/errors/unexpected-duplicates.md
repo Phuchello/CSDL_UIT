@@ -1,12 +1,12 @@
 ---
-title: Unexpected duplicate rows
+title: Trùng lặp dòng ngoài ý muốn (Unexpected Duplicate Rows)
 description: JOIN hoặc bag semantics làm số dòng tăng bất thường do thiếu điều kiện kết nối hoặc sai mức chi tiết (grain).
 type: error
 topics: [join, duplicates, aggregation]
 related: [practice/lab-02, errors/group-by-8120, theory/relational-algebra]
 provenance: original-practice
 ---
-# Unexpected duplicate rows
+# Trùng lặp dòng ngoài ý muốn (Unexpected Duplicate Rows)
 
 - **Triệu chứng (Symptom):** Một đối tượng thực thể xuất hiện lặp lại nhiều lần trong kết quả truy vấn.
 - **Nguyên nhân (Cause):** Bội số quan hệ 1-N hoặc điều kiện `JOIN` bị thiếu/thiếu khóa ngoại, hoặc thực hiện phép tích Descartes trước khi lọc.

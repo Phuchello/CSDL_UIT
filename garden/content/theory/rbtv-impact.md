@@ -1,5 +1,5 @@
 ---
-title: RBTV và Bảng tầm ảnh hưởng
+title: RBTV và Bảng tầm ảnh hưởng (Impact Matrix)
 description: Hệ thống 7 phân loại RBTV chuẩn tắc IT004, phương pháp lập Bảng tầm ảnh hưởng với ký hiệu +, -, +(Thuộc tính) và chiến lược hiện thực hóa.
 type: theory
 topics: [integrity, constraints, impact-table, triggers]
@@ -69,7 +69,7 @@ Lập bảng tầm ảnh hưởng chuẩn tắc IT004 trên hai quan hệ `tr_de
 ## 4. Chiến lược hiện thực hóa và phân định trách nhiệm
 
 1. **Ưu tiên khai báo (Declarative First):** Nếu ràng buộc thuộc các nhóm có thể giải quyết bằng DDL (`CHECK`, `PRIMARY KEY`, `FOREIGN KEY`, `UNIQUE`), luôn ưu tiên dùng DDL vì được tối ưu sâu ở nhân lưu trữ (storage engine).
-2. **Cài đặt thủ tục khi cần thiết (Procedural Trigger):** Với các ràng buộc liên quan hệ, thuộc tính tổng hợp hoặc liên bộ phức tạp, cài đặt bằng DML Trigger an toàn đa dòng (xem [[practice/multi-row-trigger|Multi-row trigger]]).
+2. **Cài đặt thủ tục khi cần thiết (Procedural Trigger):** Với các ràng buộc liên quan hệ, thuộc tính tổng hợp hoặc liên bộ phức tạp, cài đặt bằng DML Trigger an toàn đa dòng (xem [[practice/multi-row-trigger|Trigger xử lý tập hợp đa dòng]]).
 3. **Phòng tránh lỗi sập logic:** Tuyệt đối không dùng biến vô hướng trong trigger (xem [[errors/scalar-trigger|Lỗi Trigger vô hướng]]) và đảm bảo trigger xử lý đúng toàn bộ batch dòng (xem [[errors/multi-row-trigger-failure|Sập trigger do batch đa dòng]]).
 
-Thực hành lập trình trigger tại [[practice/lab-04|Lab 04 — RBTV và Trigger]] và tham khảo dạng bài tập thi tại [[exam-patterns/rbtv-trigger|Observed pattern — RBTV and trigger]].
+Thực hành lập trình trigger tại [[practice/lab-04|Lab 04 — RBTV và Trigger]] và tham khảo dạng bài tập thi tại [[exam-patterns/rbtv-trigger|Dạng đề quan sát — RBTV và Trigger]].

@@ -1,5 +1,5 @@
 ---
-title: Functional dependencies
+title: "Phụ thuộc hàm & Tiên đề Armstrong (Functional Dependencies)"
 description: Định nghĩa hình thức của phụ thuộc hàm, hệ tiên đề Armstrong và các quy tắc dẫn xuất, ví dụ chứng minh hình thức.
 type: theory
 topics: [functional-dependency, armstrong, normalization]
@@ -7,7 +7,7 @@ related: [theory/closure, theory/candidate-keys, theory/minimal-cover, theory/3n
 provenance: verified-artifact
 courseEvidence: [UIT-O02, LOC-LEC-LONG-CH06]
 ---
-# Functional dependencies (Phụ thuộc hàm)
+# Phụ thuộc hàm & Tiên đề Armstrong (Functional Dependencies)
 
 Phụ thuộc hàm (Functional Dependency - FD) là khái niệm trung tâm trong lý thuyết thiết kế cơ sở dữ liệu quan hệ, làm nền tảng toán học để xác định khóa, bao đóng và thực hiện chuẩn hóa dữ liệu (1NF đến BCNF).
 

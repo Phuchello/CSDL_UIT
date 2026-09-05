@@ -1,5 +1,5 @@
 ---
-title: Observed pattern — SQL reasoning
+title: Dạng đề quan sát — Tư duy logic SQL (SQL Reasoning)
 description: Mẫu câu hỏi suy luận và bẫy ngữ nghĩa SQL trong đề thi và thực hành máy.
 type: exam-pattern
 topics: [exam, sql, null, join, exists]
@@ -7,7 +7,7 @@ related: [errors/null-comparison, errors/not-in-null, errors/group-by-8120, theo
 provenance: reconstructed-exam-pattern
 courseEvidence: [EXAM-2023-2024-HK1-FINAL-01, PRAC-2024-2025-HK1-01]
 ---
-# Observed pattern — SQL reasoning
+# Dạng đề quan sát — Tư duy logic SQL (SQL Reasoning)
 
 Trong các kỳ thi cuối kỳ và thực hành máy IT004 (như `EXAM-2023-2024-HK1-FINAL-01` và `PRAC-2024-2025-HK1-01`), câu hỏi SQL không chỉ dừng lại ở việc viết câu truy vấn thông thường mà thường cài cắm các bẫy ngữ nghĩa và yêu cầu suy luận kết quả:
 
