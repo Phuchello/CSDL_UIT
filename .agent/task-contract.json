@@ -1,6 +1,6 @@
 {
   "id": "v1.1.1-reading-polish",
-  "status": "in_progress",
+  "status": "ready_for_review",
   "acceptance": [
     {
       "id": "theme_default_light",
@@ -40,7 +40,7 @@
     {
       "id": "github_ci",
       "criterion": "GitHub Actions passes on the PR HEAD on ubuntu-latest",
-      "passes": false
+      "passes": true
     }
   ],
   "release_safety": {

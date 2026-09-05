@@ -21,6 +21,7 @@ Operational record of changes made by AI agents under Phuchello Agent Workflow. 
   - Restored academic notation $F_c$ outside wikilink alias in `garden/content/theory/index.md` (`[[theory/minimal-cover|...]] $F_c$`).
   - Removed broad `overflow-x: hidden` clipping on `body`, `.page`, and `article` in `custom.scss`; implemented architectural wide-element constraints (`table` horizontal scroll, `pre/code` touch scroll and inline word break, `img/svg/canvas/graph` `max-width: 100%`, `.katex-display` horizontal scroll, flex/grid `min-width: 0`).
   - Extended `scripts/validate_garden_render.py` with gates ensuring zero broad clipping and enforcing architectural constraints and $F_c$ preservation.
+  - GitHub Actions CI on PR #7 remediation head (`2db5984`): Run `33951223266` completed with status `success` in 24s on `ubuntu-latest`.
 - **Release Safety**: Main branch untouched, Pages deployment remains workflow_dispatch only, v1.1.1 tag untouched, no bulk academic changes. PR #7 remains open awaiting mentor release authorization.
 
 ---

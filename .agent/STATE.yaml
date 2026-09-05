@@ -1,5 +1,5 @@
 project: CSDL_UIT
-status: in_progress
+status: ready_for_review
 
 workflow:
   version: 2
@@ -27,7 +27,7 @@ frozen:
 
 current_task:
   id: v1.1.1-reading-polish
-  status: in_progress
+  status: ready_for_review
 
 hotfix:
   root_cause: >
@@ -41,10 +41,10 @@ hotfix:
   render_gate: passed
   state_gate: passed
   typecheck_gate: pre_existing_preact_errors_only
-  functional_commit: 976ef3e
+  functional_commit: 2db5984
   pr: 7
   pr_url: https://github.com/Phuchello/CSDL_UIT/pull/7
-  ci_run_id: 33945714588
+  ci_run_id: 33951223266
   ci_conclusion: success
 
 verified:
@@ -58,7 +58,7 @@ verified:
   breadcrumb_deduplicated: true
   desktop_mobile_layout: true
   regression_suite_passed: true
-  github_ci_gate: pending_push
+  github_ci_gate: true
 
 verification_evidence:
   local_suite:
@@ -92,5 +92,5 @@ relevant_files:
   - .agent/task-contract.json
 
 next_action: >
-  Commit, push PR #7 review findings remediation to v1.1.1-reading-polish, and verify NEW exact-head GitHub Actions run.
+  Mentor review of PR #7 (v1.1.1-reading-polish review findings remediated).
   DO NOT merge and DO NOT dispatch Pages without explicit human release authorization.

@@ -80,7 +80,7 @@
 - [x] Replace broad mobile overflow clipping (overflow-x: hidden on body/.page/article) with architectural element-level constraints (table, pre/code, SVG/canvas/graph, math display, flex/grid min-width: 0)
 - [x] Update render regression gate in scripts/validate_garden_render.py to enforce architectural constraints and reject global clipping
 - [x] Commit, push branch `v1.1.1-reading-polish`, and update PR #7
-- [ ] Verify NEW exact-head GitHub Actions CI run
+- [x] Verify NEW exact-head GitHub Actions CI run (run 33951223266 SUCCESS in 24s)
 - [ ] Mentor review and release authorization
 
 ## Parallel Design — v1.2 Learning System
