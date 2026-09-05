@@ -41,13 +41,15 @@ verified:
   reader_chrome_cleanup_applied: true
   link_crawl_passed: true
   representative_render_inspected: true
+  rbtv_impact_notation_corrected: true
+  academic_scope_preserved: true
+  mentor_review_completed: true
   github_ci_gate: true
-  academic_content_unchanged: true
 
 verification_evidence:
   pr: 4
-  functional_head_sha: ff682dc86552c355113cc1c8e13a85f9042db08c
-  ci_run_id: 33771223152
+  functional_head_sha: b3839faddeaef4234b3b7c4543976ca6833eb1a8
+  ci_run_id: 33938087301
   ci_conclusion: success
   ci_job: validate
   ci_scope:
@@ -63,7 +65,7 @@ blockers: []
 do_not_repeat:
   - modify or retag immutable v1.1.0 release
   - modify frozen branch baselines
-  - alter Theory or Practice academic content for a presentation-only defect
+  - make unrelated academic content changes during localization maintenance
   - deploy Pages automatically on push to main
   - publish historical draft release v1.0.0
   - alter markdown file paths or slugs in garden/content
@@ -77,5 +79,6 @@ relevant_files:
   - TODO.md
 
 next_action: >
-  Human mentor review of PR #4 after the final Vietnamese-first alias and reader-chrome cleanup.
-  DO NOT merge, tag v1.1.1, or dispatch Pages until explicitly authorized after review.
+  Await explicit human authorization to merge PR #4. After merge, use the existing
+  human-controlled Pages workflow_dispatch and perform desktop/mobile live visual smoke.
+  DO NOT tag v1.1.1 until the live smoke passes.

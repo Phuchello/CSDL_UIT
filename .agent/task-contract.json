@@ -23,13 +23,18 @@
       "passes": true
     },
     {
+      "id": "rbtv_notation_consistency",
+      "criterion": "RBTV impact-matrix notation matches the canonical course convention: +, -, +(Thuộc tính), with -(*) reserved for an operation that cannot be performed",
+      "passes": true
+    },
+    {
       "id": "render_and_link_smoke",
       "criterion": "Quartz builds successfully, zero broken links across internal link crawl, math renders via KaTeX, and representative pages inspect clean in desktop/mobile layout",
       "passes": true
     },
     {
-      "id": "academic_content_unchanged",
-      "criterion": "Theory and Practice handbooks, PDFs, formulas, SQL code, and canonical provenance remain untouched",
+      "id": "academic_scope_preserved",
+      "criterion": "Theory and Practice handbooks, PDFs, formulas, SQL code, and canonical provenance remain untouched; the only academic prose correction in this pass is the targeted RBTV notation fix aligned to the course source",
       "passes": true
     },
     {

@@ -35,7 +35,7 @@
 - [x] Localize explicit wikilink display aliases across notes
 - [x] Localize breadcrumbs root to `Trang chủ`
 - [x] Preserve all existing file paths and slugs unchanged
-- [x] Preserve academic content, formulas, SQL, and canonical provenance IDs unchanged
+- [x] Preserve formulas, SQL, canonical provenance IDs, Theory/Practice handbooks, and PDFs
 - [x] Extend `scripts/validate_garden_d2.py` with deterministic Vietnamese title prefix regression checks
 - [x] Rebuild Quartz and run full verification suite
 - [x] Inspect representative rendered pages
@@ -46,8 +46,10 @@
 - [x] Final polish: hide modified-date/read-time content metadata
 - [x] Final polish: change browser suffix from `Knowledge Garden` to `Vườn tri thức`
 - [x] Final functional verification on `ff682dc86552c355113cc1c8e13a85f9042db08c`: Actions run `33771223152` SUCCESS
-- [ ] Confirm bookkeeping-only current HEAD CI remains green
-- [ ] Human mentor review of PR #4
+- [x] Confirm bookkeeping-only head `a96002b433a071378b3cc3a78f060c24a555d7f5` remained green: Actions run `33771348905` SUCCESS
+- [x] Correct RBTV Impact Matrix notation to `+`, `-`, `+(Thuộc tính)` and reserve `-(*)` for an operation that cannot be performed
+- [x] Verify RBTV correction on functional head `b3839faddeaef4234b3b7c4543976ca6833eb1a8`: Actions run `33938087301` SUCCESS
+- [x] Human mentor review of PR #4
 - [ ] Merge PR #4 only after explicit authorization
 - [ ] Human-authorized Pages deployment after merge
 - [ ] Desktop + mobile live visual smoke after deployment
