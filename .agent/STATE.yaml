@@ -41,6 +41,10 @@ hotfix:
   render_gate: blocked_by_missing_python
   state_gate: blocked_by_missing_pyyaml
   typecheck_gate: blocked_by_preexisting_preact_errors
+  functional_commit: b91c115
+  pr: 6
+  pr_url: https://github.com/Phuchello/CSDL_UIT/pull/6
+  ci_run_id: pending
 
 verified:
   v1_1_0_release_complete: true
