@@ -1,0 +1,79 @@
+{
+  "mocks": [
+    {
+      "id": "MOCK-01",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 01 — Quản Lý Cung Ứng & Tiêm Chủng Vắc-Xin",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "HISTORICAL_2023_2024",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.5,
+          "problem_id": "M01-Q1"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "M01-Q2A"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "M01-Q2B"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "M01-Q2C1"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "M01-Q2C2"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "M01-Q2C3"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "M01-Q2C4"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "M01-Q2C5"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.0,
+          "problem_id": "M01-Q2C6"
+        }
+      ]
+    }
+  ]
+}

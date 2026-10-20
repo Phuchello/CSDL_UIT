@@ -32,7 +32,7 @@ current_task:
 verified:
   r0_inventory_complete: true
   r1_research_complete: true
-  p1_pilot_complete: false
+  p1_pilot_complete: true
   p2_expansion_complete: false
   p3_publication_complete: false
   frozen_baseline_untouched: true
@@ -40,6 +40,7 @@ verified:
 verification_evidence:
   local_suite:
     - scripts/agent/verify.ps1 -Mode Fast (PASS)
+    - exam/gk/scripts/validate_gk.py (PASS, 0 errors, 0 warnings)
 
 blockers: []
 
@@ -54,15 +55,13 @@ relevant_files:
   - Prompts/IT004_GK_Antigravity_Prompt.md
   - .agent/STATE.yaml
   - .agent/task-contract.json
-  - research/gk/source_ledger.md
-  - research/gk/exam_registry.md
-  - research/gk/exam_pattern_matrix.md
-  - research/gk/source_conflicts.md
-  - research/gk/research_report.md
-  - exam/gk/
+  - research/gk/
+  - exam/gk/data/problems.json
+  - exam/gk/data/mocks.json
+  - exam/gk/mocks/MOCK-01/
+  - exam/gk/scripts/validate_gk.py
 
 next_action: >
-  Execute Gate P1: Gold Standard Pilot.
-  Implement Full Mock Exam 01 (10 pts / 75 mins) with separate answer key,
-  construct 15 pilot representative questions across the 4 categories,
-  verify with test cases and preflight build pilot PDF.
+  Execute Gate P2: Full Question Bank & Mock Expansion.
+  Expand Question Bank across 4 topics (ERD >=30, RA Basic/Join >=55, RA Division/Grouping >=45, SQL >=20)
+  and expand to 15 full 75-minute mock exams with separated answer keys.

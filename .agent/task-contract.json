@@ -15,7 +15,7 @@
     {
       "id": "gate_p1_gold_standard_pilot",
       "criterion": "Implement and verify Pilot Mock 01 (10 pts / 75 mins) with step-by-step reasoning, test cases, and pilot PDF build",
-      "passes": false
+      "passes": true
     },
     {
       "id": "gate_p2_bank_and_mock_expansion",
