@@ -1,43 +1,43 @@
 {
-  "id": "v1.2-learning-system-design",
-  "status": "ready_for_review",
+  "id": "it004-gk-question-bank",
+  "status": "in_progress",
   "acceptance": [
     {
-      "id": "learning_system_spec",
-      "criterion": "Design defines a static-first active learning loop, mastery state model, rule-based adaptation, review and mistake handling without requiring AI or a backend",
+      "id": "gate_r0_inventory_and_contract",
+      "criterion": "Snapshot repository state, inventory local sources, audit 31 existing artifacts, and define the operational contract for the IT004 Midterm (GK) module",
       "passes": true
     },
     {
-      "id": "content_contract",
-      "criterion": "Design defines a deterministic Learning Unit content contract, exercise taxonomy, IT004 chapter coverage and QA expectations",
+      "id": "gate_r1_deep_research_and_patterns",
+      "criterion": "Execute deep research across UIT authentic exams, resolve mirrors/conflicts, and generate research/gk/ ledgers and pattern matrix",
       "passes": true
     },
     {
-      "id": "ux_wireframes",
-      "criterion": "Design includes Learning Mode and Reference Mode wireframes for dashboard, concept map, trace, recall, practice, diagnosis, review and exam flows",
-      "passes": true
+      "id": "gate_p1_gold_standard_pilot",
+      "criterion": "Implement and verify Pilot Mock 01 (10 pts / 75 mins) with step-by-step reasoning, test cases, and pilot PDF build",
+      "passes": false
     },
     {
-      "id": "implementation_plan",
-      "criterion": "Design uses vertical-slice milestones and explicit acceptance gates before broad implementation, with Candidate Keys as first slice",
-      "passes": true
+      "id": "gate_p2_bank_and_mock_expansion",
+      "criterion": "Expand bank across ERD, RA basic/join, RA division/grouping, and SQL DDL/DML, and construct 75-minute full mock exams with isolated answer keys",
+      "passes": false
     },
     {
-      "id": "main_sync_and_release_safety",
-      "criterion": "Design branch is synchronized with current main (7795141) preserving all v1.1.1 fixes, with no code/academic content changes",
-      "passes": true
+      "id": "gate_p3_publication_deliverables",
+      "criterion": "Produce 3 print-ready A4 PDFs authored by Võ Trọng Phúc, complete with editable sources, vector diagrams, and automated QA audit report",
+      "passes": false
     },
     {
-      "id": "github_ci",
-      "criterion": "GitHub Actions passes on the PR HEAD on ubuntu-latest",
-      "passes": true
+      "id": "repo_safety_and_verification",
+      "criterion": "Workflow v2 verification passes with no regression on frozen theory, practice, or Knowledge Garden baselines",
+      "passes": false
     }
   ],
   "release_safety": {
     "main_untouched": true,
     "pages_deployed": false,
-    "v1_1_1_tagged": false,
-    "v1_2_implemented": false,
+    "v1_1_0_tagged": false,
+    "v1_2_design_safe": true,
     "bulk_academic_changes": false
   }
 }

@@ -1,83 +1,68 @@
 project: CSDL_UIT
-status: ready_for_review
+status: in_progress
 
 workflow:
   version: 2
 
-branch: v1.2-learning-system-design
+branch: feat/gk-exam-bank
 
 safe_repo_commit:
-  sha: 77951417b5e82b7dbe92748e7462b1680a21d5b2
-  purpose: current-main-baseline-after-v1.1.1-polish
+  sha: 99df074e8725af79ac90181d9276bcd0f3d870aa
+  purpose: current-main-baseline-before-gk-module
 
 safe_product_commit:
   sha: ad0ef293d0b85ba59de8ffad8966bd0d40720580
   purpose: immutable-v1.1.0-release
 
 milestone:
-  id: DESIGN-1.2
-  name: Active Learning System Architecture
+  id: GK-2024-BANK
+  name: IT004 Midterm Question Bank & Verified Solutions
 
 frozen:
   phase_a: 6aef91eb2cb4a0b41827573bc03ec55640d19786
   theory: 61eb5c8a60106be4251ce090a17c6c3482284332
   practice: 59c519b94ede86f07fbc1778b120d0c8c3188b80
   d1: 922afe07bea7f28abf30c49054159a09a31be743
-  main: 77951417b5e82b7dbe92748e7462b1680a21d5b2
+  main: 99df074e8725af79ac90181d9276bcd0f3d870aa
 
 current_task:
-  id: v1.2-learning-system-design
-  status: ready_for_review
+  id: it004-gk-question-bank
+  status: in_progress
 
 verified:
-  product_thesis_defined: true
-  learning_loop_defined: true
-  mastery_model_defined: true
-  rule_based_adaptation_defined: true
-  learning_content_contract_defined: true
-  ux_wireframes_defined: true
-  implementation_gates_defined: true
-  no_ai_backend_dependency: true
-  existing_release_untouched: true
-  main_baseline_synchronized: true
-  candidate_keys_vertical_slice_first: true
-  github_ci_gate: true
+  r0_inventory_complete: true
+  r1_research_complete: true
+  p1_pilot_complete: false
+  p2_expansion_complete: false
+  p3_publication_complete: false
+  frozen_baseline_untouched: true
 
 verification_evidence:
   local_suite:
-    - scripts/validate_garden_render.py (PASS)
-    - scripts/validate_garden_d2.py (PASS)
-    - scripts/agent/check_links.py (PASS, 2819 links checked, 0 broken)
-    - scripts/validate.py (PASS, 6/6 checks)
-    - scripts/validate_practice_static.py (PASS)
     - scripts/agent/verify.ps1 -Mode Fast (PASS)
 
 blockers: []
 
 do_not_repeat:
-  - implement the entire learning engine before a vertical-slice human test
-  - use page views as mastery evidence
-  - duplicate academic truth between Learning Mode and Reference Mode
-  - add chatbot or generative AI as a v1.2 dependency
-  - bulk-generate low-quality exercise filler
-  - expose raw metadata/provenance as default learning UI
-  - modify or retag immutable v1.1.0 release
-  - deploy Pages automatically on push to main
-  - modify frozen branch baselines
-  - make unrelated academic content changes
-  - publish historical draft release v1.0.0
-  - alter markdown file paths or slugs in garden/content
+  - claim 31 total artifacts are 31 midterm exams
+  - publish unverified answer keys or skip reasoning steps
+  - mix final exam topics (BCNF, 3NF, triggers, complex RBTV) into GK mock without direct GK evidence
+  - overwrite frozen releases v1.1.0 or existing v1.2 design
+  - merge to main or push release tags directly
 
 relevant_files:
-  - design/v1.2_learning/LEARNING_SYSTEM_SPEC.md
-  - design/v1.2_learning/CONTENT_CONTRACT.md
-  - design/v1.2_learning/UX_WIREFRAMES.md
-  - design/v1.2_learning/IMPLEMENTATION_PLAN.md
-  - docs/index.md
+  - Prompts/IT004_GK_Antigravity_Prompt.md
   - .agent/STATE.yaml
   - .agent/task-contract.json
+  - research/gk/source_ledger.md
+  - research/gk/exam_registry.md
+  - research/gk/exam_pattern_matrix.md
+  - research/gk/source_conflicts.md
+  - research/gk/research_report.md
+  - exam/gk/
 
 next_action: >
-  Mentor review of PR #5 (v1.2 learning-system design synchronized).
-  DO NOT merge PR #5 and DO NOT deploy Pages.
-  Create fresh branch v1.2-candidate-keys-slice after PR #5 is merged.
+  Execute Gate P1: Gold Standard Pilot.
+  Implement Full Mock Exam 01 (10 pts / 75 mins) with separate answer key,
+  construct 15 pilot representative questions across the 4 categories,
+  verify with test cases and preflight build pilot PDF.

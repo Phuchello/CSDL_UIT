@@ -1,0 +1,43 @@
+{
+  "id": "v1.2-learning-system-design",
+  "status": "ready_for_review",
+  "acceptance": [
+    {
+      "id": "learning_system_spec",
+      "criterion": "Design defines a static-first active learning loop, mastery state model, rule-based adaptation, review and mistake handling without requiring AI or a backend",
+      "passes": true
+    },
+    {
+      "id": "content_contract",
+      "criterion": "Design defines a deterministic Learning Unit content contract, exercise taxonomy, IT004 chapter coverage and QA expectations",
+      "passes": true
+    },
+    {
+      "id": "ux_wireframes",
+      "criterion": "Design includes Learning Mode and Reference Mode wireframes for dashboard, concept map, trace, recall, practice, diagnosis, review and exam flows",
+      "passes": true
+    },
+    {
+      "id": "implementation_plan",
+      "criterion": "Design uses vertical-slice milestones and explicit acceptance gates before broad implementation, with Candidate Keys as first slice",
+      "passes": true
+    },
+    {
+      "id": "main_sync_and_release_safety",
+      "criterion": "Design branch is synchronized with current main (7795141) preserving all v1.1.1 fixes, with no code/academic content changes",
+      "passes": true
+    },
+    {
+      "id": "github_ci",
+      "criterion": "GitHub Actions passes on the PR HEAD on ubuntu-latest",
+      "passes": true
+    }
+  ],
+  "release_safety": {
+    "main_untouched": true,
+    "pages_deployed": false,
+    "v1_1_1_tagged": false,
+    "v1_2_implemented": false,
+    "bulk_academic_changes": false
+  }
+}

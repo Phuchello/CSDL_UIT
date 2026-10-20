@@ -1,0 +1,533 @@
+[0] --ĐỀ 2019 2020
+[1] --A
+[2] SELECT HOTEN,NGAYSINH,GIOITINH
+[3] FROM VANDONGVIEN 
+[4] ORDER BY HOTEN ASC
+[5] WHERE QUOCTINH='UK'
+[6] --B
+[7] SELECT VDV.MAVDV
+[8] FROM VANDONGVIEN VDV
+[9] INNER JOIN THAMGIA TG
+[10] ON TG.MAVDV=VDV.MAVDV
+[11] INNER JOIN THEVANHOI TVH
+[12] ON TG.MATVH=TVH.MATVH AND TVH.TENTVH='OLYMPIC TOKYO 2020'
+[13] INNER JOIN NOIDUNGTHI ND
+[14] ON TG.MANDT=ND.MANDT AND TENNDT='BAN CUNG'
+[15] --C
+[16] SELECT COUNT(HUYCHUONG) AS SLHUYCHUONG
+[17] FROM THAMGIA TG
+[18] WHERE HUYCHUONG=1
+[19] INNER JOIN VANDONGVIEN VDV
+[20] ON TG.MAVDV=VDV.MAVDV AND QUOCTINH ='NHAT BAN'
+[21] GROUP BY QUOCTICH 
+[22] COUNT(HUYCHUONG)
+[23] --D
+[24] SELECT VDV.HOTEN,QUOCTINH
+[25] FROM VANDONGVIEN VDV 
+[26] INNER JOIN THAMGIA TG
+[27] ON VDV.MAVDV=TF.MAVDV AND TENNDT='100M BOI NGUA'
+[28] INTERSECT
+[29] SELECT VDV.HOTEN,QUOCTINH
+[30] FROM VANDONGVIEN VDV 
+[31] INNER JOIN THAMGIA TG
+[32] ON VDV.MAVDV=TF.MAVDV AND TENNDT='200M TU DO'
+[33] --ĐỀ 2017 2018
+[34] --A
+[35] SELECT SOTK,TRANGTHAI,SODU
+[36] FROM TAIKHOAN
+[37] ORDER BY SODU ASC
+[38] WHERE NGAYMO='01/01/2017'
+[39] --B
+[40] SELECT GD.MALGD,SUM(SOTIEN)
+[41] FROM LOAIGIAODICH LGD
+[42] INNER JOIN GIAODICH GD
+[43] ON GD.MALGD=LGD.MALGD
+[44] GROUP BY (GD.MALGD)
+[45] SUM(SOTIEN)
+[46] --C
+[47] SELECT KH.MAKH,HOTEN,CMND
+[48] FROM KHACHHANG KH
+[49] INNER JOIN LOAITK LTK
+[50] ON KH.MAKH=LTK.MAKH AND TENLTK='TIEP KIEM'
+[51] INTERSECT
+[52] SELECT KH.MAKH,HOTEN,CMND
+[53] FROM KHACHHANG KH
+[54] INNER JOIN LOAITK LTK
+[55] ON KH.MAKH=LTK.MAKH AND TENLTK='THANH TOAN'
+[56] --2017-2018
+[57] --ĐỀ 1 17-18
+[58] --1.2
+[59] --a. Hiển thị thông tin các tài khoản của các khách hàng (SoTK, TrangThai, SoDu) đã mở tài khoản vào ngày ‘01/01/2017’ (NgayMo) và sắp xếp kết quả theo số dư tăng dần. (1đ)
+[60] SELECT SoTK, TrangThai, SoDu
+[61] FROM TaiKhoan
+[62] WHERE NgayMo = '1/1/2017'
+[63] ORDER BY SoDu
+[64] --b. Liệt kê mã loại giao dịch (MaLGD) cùng với tổng số tiền (SoTien) giao dịch của từng loại giao dịch. (1đ)
+[65] SELECT MaLGD, SUM(SoTien) AS TongSoTien
+[66] FROM GiaoDich
+[67] GROUP BY MaLGD
+[68] --c. Cho biết những khách hàng (MaKH, HoTen, CMND) đã mở cả hai loại tài khoản: tiết kiệm (TenLTK= ‘Tiết kiệm’) và thanh toán (TenLTK= ‘Thanh toán’).
+[69] SELECT MaKH, HoTen, CMND
+[70] FROM KhachHang
+[71] WHERE MaKH IN (SELECT MaKH
+[72] 			   FROM TaiKhoan
+[73] 					INNER JOIN LoaiTaiKhoan ON TaiKhoan.MaLTK = LoaiTaiKhoan.MaLTK
+[74] 			   WHERE TenLTK = N'Tiết kiệm'
+[75] 			   INTERSECT
+[76] 			   SELECT MaKH
+[77] 			   FROM TaiKhoan
+[78] 					INNER JOIN LoaiTaiKhoan ON TaiKhoan.MaLTK = LoaiTaiKhoan.MaLTK
+[79] 			   WHERE TenLTK = N'Thanh toán')
+[80] --d. Liệt kê thông tin các giao dịch (MaGD, SoTK, MaLGD, NgayGD, SoTien, NoiDung) có số tiền lớn nhất trong tháng 12 năm 2017.
+[81] SELECT * 
+[82] FROM GiaoDich
+[83] WHERE MONTH(NgayGD) = 12 AND YEAR(NgayGD) = 2017 AND SoTien = (SELECT MAX(SoTien)
+[84] 															   FROM GiaoDich
+[85] 															   WHERE MONTH(NgayGD) = 12 AND YEAR(NgayGD) = 2017)
+[86] --e. Liệt kê danh sách các khách hàng (MaKH, HoTen, SoDT) đã mở tất cả các loại tài khoản.
+[87] SELECT MaKH, HoTen, SoDT
+[88] FROM KhachHang
+[89] WHERE NOT EXISTS (SELECT *
+[90] 				  FROM LoaiTaiKhoan
+[91] 				  WHERE NOT EXISTS (SELECT *
+[92] 									FROM TaiKhoan
+[93] 									WHERE TaiKhoan.MaKH = KhachHang.MaKH AND TaiKhoan.MaLTK = LoaiTaiKhoan.MaLTK))
+[94] --f. Liệt kê những loại tài khoản (MaLTK, TenLTK) được mở nhiều nhất trong năm 2016.
+[95] SELECT MaLTK, TenLTK
+[96] FROM LoaiTaiKhoan
+[97] WHERE MALTK IN (SELECT MaLTK
+[98] 				FROM (SELECT MaLTK, COUNT(SoTK) SoTKMO
+[99] 					  FROM TaiKhoan
+[100] 					  GROUP BY MaLTK) A
+[101] 					  WHERE A.SoTKMO = (SELECT MAX(B.SoTKMO)
+[102] 										FROM (SELECT MaLTK, COUNT(SoTK) SoTKMO
+[103] 											  FROM TaiKhoan
+[104] 										      GROUP BY MaLTK) B))
+[105] ----------------------------------------------------------------------------------------------------------------------------------------
+[106] --ĐÈ 2 17-18
+[107] --1.2
+[108] --a. Hiển thị danh sách các giao dịch (MaGD, SoTK, SoTien) đã thực hiện giao dịch vào ngày ‘01/01/2017’ (NgayGD) và sắp xếp kết quả theo thứ tự giảm dần số tiền. (1đ)
+[109] SELECT MaGD, SoTK, SoTien
+[110] FROM GiaoDich
+[111] WHERE NgayGD = '1/1/2017' 
+[112] ORDER BY SoTien DESC
+[113] --b. Liệt kê mã loại tài khoản (MaLTK) cùng với tổng số dư (SoDu) của từng loại tài khoản. (1đ)
+[114] SELECT MaLTK, SUM(SoDu) AS TongSoDu
+[115] FROM TaiKhoan
+[116] GROUP BY MaLTK
+[117] --c. Cho biết những khách hàng (MaKH, HoTen, CMND) đã mở cả hai loại tài khoản: thanh toán (TenLTK= ‘Thanh toán’) và vay (TenLTK= ‘Vay’). (1đ)
+[118] SELECT MaKH, HoTen, CMND
+[119] FROM KhachHang
+[120] WHERE MaKH IN (SELECT MaKH
+[121] 			   FROM TaiKhoan
+[122] 					INNER JOIN LoaiTaiKhoan ON TaiKhoan.MaLTK = LoaiTaiKhoan.MaLTK
+[123] 			   WHERE TenLTK = N'Vay'
+[124] 			   INTERSECT
+[125] 			   SELECT MaKH
+[126] 			   FROM TaiKhoan
+[127] 					INNER JOIN LoaiTaiKhoan ON TaiKhoan.MaLTK = LoaiTaiKhoan.MaLTK
+[128] 			   WHERE TenLTK = N'Thanh toán')
+[129] --d. Liệt kê các tài khoản (SoTK, MaKH, MaLTK, NgayMo, SoDu, LaiSuat, TrangThai) mở trong tháng 12 năm 2017 có số dư lớn nhất. (1đ)
+[130] SELECT *
+[131] FROM TaiKhoan
+[132] WHERE MONTH(NgayMo) = 12 AND YEAR(NgayMo) = 2017 SoDu = (SELECT MAX(SoDu)
+[133] 														 FROM TaiKhoan
+[134] 														 WHERE MONTH(NgayMo) = 12 AND YEAR(NgayMo) = 2017)
+[135] --e. Liệt kê danh sách các tài khoản (SoTK, SoDu, TrangThai) đã thực hiện tất cả các loại giao dịch. (1đ)
+[136] SELECT SoTK, SoDu,TrangThai
+[137] FROM TaiKhoan
+[138] WHERE NOT EXISTS (SELECT *
+[139] 				  FROM LoaiGiaoDich
+[140] 				  WHERE NOT EXISTS (SELECT *
+[141] 									FROM GiaoDich
+[142] 									WHERE GiaoDich.MaLGD = LoaiGiaoDich.MaLGD AND GiaoDich.SoTK = TaiKhoan.SoTK))
+[143] --f. Liệt kê các khách hàng (MaKH, HoTen) có số lượng tài khoản ‘chưa kích hoạt’ nhiều nhất. (1đ)
+[144] SELECT A.MaKH, TenKH
+[145] FROM (SELECT (MaKH, COUNT(SoTK) STKCKH
+[146] 	  FROM TaiKhoan
+[147] 	  GROUP BY MaKH
+[148] 	  WHERE TrangThai = N'chưa kích hoạt') A
+[149] WHERE A.STKCKH = (SELECT MAX(B.STKCKH)
+[150] 				  FROM (SELECT MaKH, COUNT(SoTK) STKCKH
+[151] 						FROM TaiKhoan
+[152] 						GROUP BY MaKH
+[153] 						WHERE TrangThai = N'chưa kích hoạt') B)
+[154] )
+[155] 	  INNER JOIN KhachHang ON A.MaKH = KhachHang.MaKH
+[156] -- 2018-2019
+[157] -- Đề 1
+[158] -- a. Liệt kê danh sách các đơn hàng (MADH, NGAYDH, TONGTRIGIA) của tên nhà cung cấp ‘Vinamilk’ có tổng trị giá lớn hơn 1.000.000 đồng. (1 điểm) 
+[159] SELECT D.MADH, D.NGAYDH, D.TONGTRIGIA 
+[160] FROM DONDH D JOIN NHACC N ON D.MACC=N. MACC 
+[161] WHERE N.TENCC LIKE 'Vinamilk' AND D.TONGTRIGIA >100000
+[162] -- b. Liệt kê tổng số lượng sản phẩm có mã mặt hàng (MAMH) là ‘MH001’ đã đặt hàng trong năm 2018. (1 điểm)  
+[163] Select SUM(SOLUONG) as TongSoLuong 
+[164] From CHITIET CT inner join DONDH DH on CT.MADH = DH.MADH 
+[165] Where CT.MAMH = 'MH001' and year(NGAYDH) = 2018 
+[166] -- c. Liệt kê những nhà cung cấp (MACC, TENCC) có thể cung cấp những mặt hàng do ‘Việt Nam’ sản xuất mà không cung cấp những mặt hàng do ‘Trung Quốc’ sản xuất. (1 điểm) 
+[167] -- Cách 1: 
+[168] Select n.MACC, n.TENCC 
+[169] From MATHANG m, NHACC n, CUNGCAP c 
+[170] Where c.MACC = n.MACC and c.MAMH=m.MAMH and m.NUOCSX='VietNam' 
+[171] EXCEPT 
+[172] Select n.MACC, n.TENCC 
+[173] From MATHANG m, NHACC n, CUNGCAP c 
+[174] Where c.MACC = n.MACC and c.MAMH=m.MAMH and NUOCSX='TrungQuoc'
+[175] --Cách 2: Dùng truy vấn lồng:  
+[176] Select n.MACC, n.TENCC 
+[177] From MATHANG m, NHACC n, CUNGCAP c 
+[178] Where c.MACC = n.MACC and c.MAMH=m.MAMH and m.NUOCSX='Việt Nam' and   
+[179] c.MACC NOT IN  
+[180] 		(Select cc.MACC  
+[181] 		From MATHANG mh, CUNGCAP cc  
+[182] 		Where  cc.MAHANG=mh.MAHANG and mh.NUOCSX= 'Trung Quốc') 
+[183] -- d. Tính tổng số mặt hàng (SOMH) của tất cả các đơn đặt hàng theo từng năm. Thông tin hiển thị: Năm đặt hàng, Tổng số mặt hàng. (1 điểm) 
+[184] SELECT Year(NGAYDH) as 'Năm đặt hàng', SUM(SOMH) as 'Tổng số mặt hàng' 
+[185] FROM DONDH 
+[186] Group by Year(NGAYDH)
+[187] -- e. Tìm những mã đơn đặt hàng (MADH) đã đặt tất cả các mặt hàng của nhà cung cấp có tên là ‘Vissan’ (TENCC).
+[188] SELECT MADH 
+[189] FROM DONDH  
+[190] WHERE  
+[191]       NOT EXISTS( 
+[192]              SELECT * 
+[193]              FROM NHACC, CUNGCAP 
+[194]    WHERE NHACC.MACC = CUNGCAP.MACC AND   
+[195]                 TENCC = 'Vissan' AND 
+[196]        NOT EXISTS ( 
+[197]                     SELECT *  
+[198]                     FROM CHITIET 
+[199]                     WHERE CHITIET.MAMH=CUNGCAP.MAMH 
+[200]                         AND CHITIET.MADH=DONDH.MADH)) 
+[201] -- Cách 2: Truy vấn lồng
+[202] SELECT MADH 
+[203] FROM DONDH  
+[204] WHERE  
+[205]       NOT EXISTS( 
+[206]              SELECT * 
+[207]              FROM MATHANG, NHACC, CUNGCAP 
+[208]    WHERE MATHANG.MAMH = CUNGCAP.MAMH AND  
+[209]        NHACC.MACC = CUNGCAP.MACC AND   
+[210]                 TENCC = 'Vissan' AND 
+[211]        NOT EXISTS ( 
+[212]                     SELECT *  
+[213]                     FROM CHITIET 
+[214]                     WHERE CHITIET.MAMH=MATHANG.MAMH 
+[215]                         AND CHITIET.MADH=DONDH.MADH)) 
+[216] -- f.Tìm những mặt hàng (MAMH, TENMH) có số lượng đặt hàng nhiều nhất trong năm 2018. (1 điểm)  
+[217] SELECT CT.MAMH, MH.TENMH, SUM(CT.SOLUONG) AS TONGSL 
+[218] FROM DONDH DH JOIN CHITIET CT ON DH.MADH = CT.MADH JOIN MATHANG MH 
+[219] ON CT.MAMH = MH.MAMH 
+[220] WHERE YEAR(NGAYDH) = 2018 
+[221] GROUP BY CT.MAMH, MH.TENMH 
+[222] HAVING SUM(CT.SOLUONG) >= ALL ( 
+[223] 								SELECT SUM(CT2.SOLUONG) 
+[224] 								FROM DONDH DH2 JOIN CHITIET CT2 ON DH2.MADH = CT2.MADH 
+[225] 								WHERE YEAR(DH2.NGAYDH) = 2018  
+[226] 								GROUP BY CT2.MAMH) 
+[227] -- Đề 2 18-19
+[228] --a. Liệt kê danh sách các nhà cung cấp (MACC, TENCC, TUNGAY) có thể cung cấp mã mặt hàng ‘MH0001’ từ ngày ‘1/1/2018’ trở về sau. (1 điểm) 
+[229] SELECT N.MACC, N.TENCC, C.TUNGAY 
+[230] FROM CUNGCAP C JOIN NHACC N ON C.MACC=N.MACC 
+[231] WHERE C.MAMH = 'MH0001' AND C.TUNGAY >'1/1/2018'
+[232] --b. Tính tổng thành tiền của đơn đặt hàng có mã mặt hàng là ‘MH014’ từ nhà cung cấp có mã là ‘NCC007’. (1 điểm) 
+[233] Select SUM(THANHTIEN) as TongSoTien 
+[234] From CHITIET CT inner join DONDH DH on CT.MADH = DH.MADH  
+[235] Where CT.MAMH = 'MH014' and DH.MACC = 'NCC007' 
+[236] --c. Liệt kê những nhà cung cấp (MACC, TENCC) có thể cung cấp những mặt hàng do ‘Mỹ’ sản xuất mà không cung cấp những mặt hàng do ‘Hàn Quốc’ sản xuất. (1 điểm) 
+[237] -- Cách 1: 
+[238] Select n.MACC, n.TENCC 
+[239] From MATHANG m, NHACC n, CUNGCAP c 
+[240] Where c.MACC = n.MACC and c.MAMH=m.MAMH and m.NUOCSX='My' 
+[241] EXCEPT 
+[242] Select n.MACC, n.TENCC 
+[243] From MATHANG m, NHACC n, CUNGCAP c 
+[244] Where c.MACC = n.MACC and c.MAMH=m.MAMH and NUOCSX='HanQuoc'
+[245] -- d. Tính tổng trị giá của tất cả các đơn đặt hàng theo từng năm. Thông tin hiển thị: Năm đặt hàng, Tổng trị giá. (1 điểm) 
+[246] SELECT Year(NGAYDH) as 'Năm đặt hàng', SUM(TRIGIA) as 'Tổng trị giá' 
+[247] FROM DONDH 
+[248] Group by Year(NGAYDH) 
+[249] -- e. Tìm những mã đơn đặt hàng (MADH) đã đặt tất cả các mặt hàng của nhà cung cấp có tên ‘Vinamilk’ (TENCC). (1 điểm)  
+[250] SELECT MADH 
+[251] FROM DONDH  
+[252] WHERE  
+[253]       NOT EXISTS( 
+[254]              SELECT * 
+[255]              FROM NHACC, CUNGCAP 
+[256]    WHERE NHACC.MACC = CUNGCAP.MACC AND   
+[257]                 TENCC = 'Vinamilk' AND 
+[258]        NOT EXISTS ( 
+[259]                     SELECT *  
+[260]                     FROM CHITIET 
+[261]                     WHERE CHITIET.MAMH=CUNGCAP.MAMH 
+[262]                         AND CHITIET.MADH=DONDH.MADH)) 
+[263] -- f. Tìm những mặt hàng (MAMH, TENMH) có số lượng đặt hàng ít nhất trong năm 2018. (1 điểm) 
+[264] SELECT CT.MAMH, MH.TENMH, SUM(CT.SOLUONG) AS TONGSL 
+[265] FROM DONDH DH JOIN CHITIET CT ON DH.MADH = CT.MADH JOIN MATHANG 
+[266] MH ON CT.MAMH = MH.MAMH 
+[267] WHERE YEAR(NGAYDH) = 2018 
+[268] GROUP BY CT.MAMH, MH.TENMH 
+[269] HAVING SUM(CT.SOLUONG) <= ALL ( 
+[270] 								  SELECT SUM(CT2.SOLUONG) 
+[271] 								  FROM DONDH DH2 JOIN CHITIET CT2 ON DH2.MADH = CT2.MADH 
+[272] 								  WHERE YEAR(DH2.NGAYDH) = 2018  
+[273] 								  GROUP BY CT2.MAMH) 
+[274] -- 2019 - 2020
+[275] --ĐỀ 1 19-20
+[276] -- a. Liệt kê danh sách vận động viên (HoTen, NgSinh, GioiTinh) có Quốc tịch là ‘UK’ và sắp xếp danh sách theo (HoTen) tăng dần
+[277] SELECT Hoten, NgSInh, GioiTinh
+[278] FROM Vandongvien 
+[279] WHERE QuocTich = 'UK' 
+[280] ORDER BY HoTen ASC
+[281] -- b. In ra danh sách những vận động viên tham gia nội dung thi ‘Bắn Cung’ ở thế vận hội ‘Olympic Tokyo 2020’
+[282] SELECT * FROM Vandongvien vdv, Thamgia tg, Noidungthi ndt 
+[283] WHERE vdv.MaVDV = tg.MaVDV AND ndt.MaNDT = tg.MaNDT
+[284] AND TenNDT = N'Bắn Cung' AND TenTVH = 'Olympic Tokyo 2020'
+[285] -- c. Cho biết số lượng huy chương vàng mà các vận động viên ‘Nhật Bản’ đạt được ở thế vận hội diễn ra vào năm 2020
+[286] SELECT COUNT(HuyChuong) 
+[287] FROM Thamgia tg INNER JOIN Vandongvien vdv ON tg.MaVDV = vdv.MaVDV
+[288]         INNER JOIN Thevanhoi tvh ON tvh.MaTVH = tg.MaTVH
+[289] WHERE QuocTich = N'Nhật Bản' AND HuyChuong = 1 AND NAM = 2020
+[290] -- d. Liệt kê họ tên và quốc tịch của những vận động viên tham gia cả 2 nội dung thi ‘100m bơi ngửa’ và ‘200m tự do’
+[291] (SELECT HoTen, QuocTich 
+[292] FROM Vandongvien vdv INNER JOIN Thamgia tg ON vdv.MaVDV = tg.MaVDV 
+[293]              INNER JOIN Noidungthi ndt ON ndt.MaNDT = tg.MaNDT
+[294] WHERE TenNDT = N'100m bơi ngửa')
+[295] Intersect 
+[296] (SELECT HoTen, QuocTich 
+[297] FROM Vandongvien vdv INNER JOIN Thamgia tg ON vdv.MaVDV = tg.MaVDV 
+[298]              INNER JOIN Noidungthi ndt on ndt.MaNDT = tg.MaNDT
+[299] WHERE TenNDT = N'200m tự do')
+[300] -- e. In ra thông tin (MaVDV, HoTen) của những vận động viên Nữ người Anh (QuocTich=UK) tham gia tất cả các kỳ thế vận hội từ năm 2008 tới nay
+[301] SELECT vdv.MaVDV, HoTen 
+[302] FROM Vandongvien vdv
+[303] WHERE GioiTinh = N'Nữ' AND QuocTich = 'UK' 
+[304] AND NOT EXISTS(SELECT * FROM Thevanhoi tvh
+[305]                WHERE Nam >= 2008 
+[306]                AND NOT EXISTS(SELECT * FROM Thamgia tg
+[307]                       WHERE tg.MaVDV = vdv.MaVDV 
+[308]                       AND tg.MaTVH = tvh.MaTVH))
+[309] -- f. Tìm vận đông viên (MaVDV, HoTen) đã đạt từ 2 huy chương vàng trở lên tại thế vận hội ‘Olympic Rio 2016’
+[310] SELECT vdv.MaVDV, HoTen 
+[311] FROM Vandongvien vdv, Thevanhoi tvh, Thamgia tg 
+[312] WHERE vdv.MaVDV = tg.MaVDV AND tvh.MaTVH = tg.MaTVH
+[313] AND TenTVH = 'Olympic Rio 2016' AND HuyChuong = 1
+[314] GROUP BY vdv.MaVDV, HoTen 
+[315] HAVING COUNT(HuyChuong) >= 2
+[316] --ĐÈ 2 19-20
+[317] --1.2
+[318] --a. Liệt kê danh sách Nữ vận động viên (HoTen, NgSinh) có Quốc tịch là ‘JA’. (1 điểm)
+[319] SELECT HoTen, NgSinh
+[320] FROM Vandongvien
+[321] WHERE GioiTinh = N'Nữ' AND QuocTich = 'JA'
+[322] --b. In ra danh sách những vận động viên tham gia nội dung thi ‘Điền kinh’ ở thế vận hội ‘Olympic Rio 2016’. (1 điểm)
+[323] SELECT MaVDV
+[324] FROM Thamgia
+[325]  INNER JOIN Thevanhoi ON Thamgia.MaTVH = Thevanhoi.MaTVH
+[326]  INNER JOIN Noidungthi ON Thamgia.MaNDT = Noidungthi.MaNDT
+[327] WHERE TenNDT = N'Điền kinh' AND TenTVH = 'Olympic Rio 2016'
+[328] --c. Cho biết số lượng huy chương bạc mà các vận động viên nước ‘Trung Quốc’ đạt được tại thế vận hội diễn ra vào năm 2012. (1 điểm)
+[329] SELECT COUNT(*) AS SL_HCB
+[330] FROM Thamgia
+[331]  INNER JOIN Vandongvien ON Thamgia.MaVDV = Vandongvien.MaVDV
+[332]  INNER JOIN Thevanhoi ON Thamgia.MaTVH = Thevanhoi.MaTVH
+[333]  INNER JOIN Quocgia ON Vandongvien.QuocTich = Quocgia.MaQG
+[334] WHERE HuyChuong = 2 AND TenQG = N'Trung Quốc' AND Nam = 2012
+[335] --d. Liệt kê họ tên và quốc tịch của những vận động viên tham gia nội dung thi ‘100m bơi ngửa’ nhưng không tham gia nội dung thi ‘200m tự do’. (1 điểm)
+[336] SELECT HoTen, QuocTich
+[337] FROM Vandongvien
+[338] WHERE MaVDV IN (SELECT DISTINCT MaVDV
+[339] FROM Thamgia
+[340]  INNER JOIN Noidungthi ON Thamgia.MaNDT = Noidungthi.MaNDT
+[341] WHERE TenNDT = N'100m bơi ngửa'
+[342] EXCEPT
+[343] SELECT DISTINCT MaVDV
+[344] FROM Thamgia
+[345]  INNER JOIN Noidungthi ON Thamgia.MaNDT = Noidungthi.MaNDT
+[346] WHERE TenNDT = N'200m tự do')
+[347] --e. In ra thông tin (MaVDV, HoTen) của những vận động viên Nam người Đức (QuocTich=DE) tham gia tất cả các kỳ thế vận hội từ năm 2012 tới nay. (1 điểm)
+[348] SELECT MaVDV, HoTen
+[349] FROM Vandongvien
+[350] WHERE GioiTinh = 'Nam' AND QuocTich = 'DE' AND NOT EXISTS (SELECT *
+[351]    FROM Thevanhoi
+[352]    WHERE Nam >= 2012 AND NOT EXISTS (SELECT *
+[353]  FROM Thamgia
+[354]  WHERE Thamgia.MaTVH = Thevanhoi.MaTVH AND Thamgia.MaVDV = Vandongvien.MaVDV))
+[355] --f. Tìm vận đông viên (MaVDV, HoTen) đã đạt từ 2 huy chương vàng trở lên với nội dung thi ‘Bắn cung’. (1 điểm)
+[356] SELECT MaVDV, HoTen
+[357] FROM Vandongvien
+[358] WHERE MaVDV IN (SELECT MaVDV
+[359] 				FROM Thamgia
+[360] 					 INNER JOIN Noidungthi ON Thamgia.MaNDT = Noidungthi.MaNDT
+[361] 				WHERE HuyChuong = 1 AND TenNDT = N'Bắn cung'
+[362] 				GROUP BY MaVDV
+[363] 				HAVING COUNT(*) >= 2)
+[364] --ĐỀ 1 20-21
+[365] --1.2
+[366] --a.
+[367] SELECT HOTEN, CMND
+[368] FROM BENHNHAN
+[369] WHERE DOITUONG = 'BHYT' OR DIACHI = N'Đồng Nai'
+[370] ORDER BY SLPT DESC
+[371] --b.
+[372] SELECT MAKB, KB.MABN, HOTEN
+[373] FROM KHAMBENH KB
+[374] 	 INNER JOIN BENHNHAN BN ON KB.MABN = BN.MABN
+[375] WHERE YEAR(NGSINH) > 2020 AND BENH = N'Tim mạch'
+[376] --c.
+[377] SELECT BN.MABN, HOTEN COUNT(MAKB) AS SL
+[378] FROM KHAMBENH KB
+[379] 	 INNER JOIN BENHNHAN BN ON KB.MABN = BN.MABN
+[380] WHERE YEAR(BATDAU) = 2020
+[381] GROUP BY BN.MABN, HOTEN
+[382] --d.
+[383] SELECT MABS, HOTEN
+[384] FROM BACSI
+[385] WHERE MABS IN (SELECT MABS
+[386] 			   FROM BACSI
+[387] 			   WHERE CHUYENMON = N'Tai-Mũi-Họng'
+[388] 			   EXCEPT
+[389] 			   SELECT MABS
+[390] 			   FROM PHUTRACH
+[391] 			   WHERE YEAR(BATDAUPT) = 2020)
+[392] --e.
+[393] SELECT BACSI.MABS, BACSI.HOTEN
+[394] FROM BACSI
+[395] 	 INNER JOIN PHUTRACH ON BACSI.MABS = PHUTRACH.MABS
+[396] 	 INNER JOIN KHAMBENH ON PHUTRACH.MAKB = KHAMBENH.MAKB
+[397] 	 INNER JOIN BENHNHAN O KHAMBENH.MABN = BENHNHAN.MABN
+[398] WHERE CHUYENMON = N'Hồi sức - Cấp cứu' AND BENHNHAN.HOTEN = N'Nguyễn Văn A'
+[399] GROUP BY BACSI.MABS, BACSI.HOTEN
+[400] HAVING COUNT(PHUTRACH.MAKB) = (SELECT COUNT(MAKB)
+[401] 							   FROM KHAMBENH
+[402] 									INNER JOIN BENHNHAN ON KHAMBENH.MABN = BENHNHAN.MABN
+[403] 							   WHERE HOTEN = N'Nguyễn Văn A')
+[404] --f.
+[405] SELECT BACSI.MABS, HOTEN
+[406] FROM BACSI
+[407] 	 INNER JOIN PHUTRACH ON BACSI.MABS = PHUTRACH.MABS
+[408] GROUP BY BACSI.MABS, HOTEN
+[409] HAVING COUNT(MAKB) = (SELECT TOP 1 COUNT(MAKB)
+[410] 					  FROM PHUTRACH
+[411] 					  GROUP BY MABS
+[412] 					  ORDER BY COUNT(MAKB) DESC)
+[413] --ĐỀ 2 22-23
+[414] --1.2
+[415] --a
+[416] SELECT MACH, TENCH
+[417] FROM CANHO
+[418] 	 INNER JOIN LOAICH ON CANHO.MALCH = LOAICH.MALCH
+[419] WHERE GIA BETWEEN 1500000 AND 2000000
+[420] --b
+[421] SELECT TENCH, MALCH
+[422] FROM TRAGOP
+[423] 	 INNER JOIN HINHTHUCTG ON TRAGOP.MAHT = HINHTHUCTG.MAHT
+[424] 	 INNER JOIN CANHO ON TRAGOP.MACH = CANHO.MACH
+[425] WHERE KYHAN > 120
+[426] ORDER BY KYHAN DESC
+[427] --c
+[428] SELECT HT.MAHT, TENHT, COUNT(MACH) AS SLCHTG
+[429] FROM HINHTHUCTG HT
+[430] 	 INNER JOIN TRAGOP TG ON HT.MAHT = TG.MAHT
+[431] GROUP BY HT.MAHT, TENHT
+[432] --d
+[433] SELECT MAKH, TENKH
+[434] FROM KHACHHANG
+[435] WHERE MAKH IN (SELECT MAKH
+[436] 			   FROM TRAGOP TG
+[437] 					INNER JOIN CANHO CH ON TG.MACH = CH.MACH
+[438] 					INNER JOIN LOAICH LCH ON CH.MALCH = LCH.MALCH
+[439] 			   WHERE TENLCH = 'penthouse'
+[440] 			   INTERSECT
+[441] 			   SELECT MAKH
+[442] 			   FROM TRAGOP TG
+[443] 					INNER JOIN CANHO CH ON TG.MACH = CH.MACH
+[444] 					INNER JOIN LOAICH LCH ON CH.MALCH = LCH.MALCH
+[445] 			   WHERE TENLCH = 'duplex')
+[446] --e
+[447] SELECT TENKH
+[448] FROM KHACHHANG
+[449] WHERE MAKH IN (SELECT MAKH
+[450] 			   FROM TRAGOP
+[451] 					INNER JOIN CANHO ON TRAGOP.MACH = CANHO.MACH
+[452] 					INNER JOIN LOAICH ON CANHO.MALCH = LOAICH.MALCH
+[453] 			   WHERE TENLCH = 'duplex' AND NHOMCC = N'cao cấp'
+[454] 			   GROUP BY MAKH
+[455] 			   HAVING COUNT(MACH) = (SELECT COUNT(MACH)
+[456] 									 FROM CANHO
+[457] 										  INNER JOIN LOAICH ON CANHO.MALCH = LOAICH.MALCH
+[458] 									 WHERE TENLCH = 'duplex' AND NHOMCC = N'cao cấp'))
+[459] --f
+[460] SELECT MAKH,TENKH
+[461] FROM KHACHHANG
+[462] WHERE MAKH IN (SELECT MAKH
+[463] 			   FROM TRAGOP
+[464] 					INNER JOIN CANHO ON TRAGOP.MACH = CANHO.MACH
+[465] 			   WHERE YEAR(NGAYMUA) = 2019 AND SOPHONG = 4
+[466] 			   GROUP BY MAKH
+[467] 			   HAVING SUM(SOTIENTT) > 900000000)
+[468] --ĐỀ 1 23-24
+[469] --1.2
+[470] --a.
+[471] SELECT MaNV, HoTen, TenPhong
+[472] FROM NHANVIEN
+[473] 	 INNER JOIN PHONG ON NHANVIEN.MaPhong = PHONG.MaPhong
+[474] WHERE NhiemVu = N'Nghiên cứu'
+[475] ORDER BY MaNV DESC
+[476] --b.
+[477] SELECT NV.MaNV, HoTen, LoaiDT
+[478] FROM NHANVIEN NV
+[479] 	 INNER JOIN THAMGIADT TGDT ON NV.MaNV = TGDT.MaNV
+[480] 	 INNER JOIN DETAI DT ON TGDT.MaDT = DT.MaDT
+[481] WHERE YEAR(NgayBD) = 2023 AND VaiTroDT = N'chủ nhiệm'
+[482] --c.
+[483] SELECT MaNV, HoTen
+[484] FROM NHANVIEN
+[485] WHERE MaNV IN (SELECT MaNV
+[486] 			   FROM CONGBOBB
+[487] 			   EXCEPT
+[488] 			   SELECT MaNV
+[489] 			   FROM CONGBOBB
+[490] 			   WHERE VaiTroBB = N'tác giả chính')
+[491] --d.
+[492] SELECT DT.MaDT, TenDT, COUNT(MaBB) AS SLBB
+[493] FROM BAIBAOKH BB
+[494] 	 INNER JOIN DETAI DT ON BB.MaDT = DT.MaDT
+[495] WHERE YEAR(NgayCB) = 2023
+[496] GROUP BY DT.MaDT, TenDT
+[497] -- Cách 2
+[498] /*SELECT DT.MaDT, TenDT, A.SLBB
+[499]   FROM (SELECT MaDT, COUNT(MaBB) AS SLBB
+[500] 	    FROM BAIBAOKH
+[501] 	    WHERE YEAR(NgayCB) = 2023
+[502] 	    GROUP BY MaDT) A
+[503] 	  INNER JOIN DETAI DT ON DT.MaDT = A.MaDT*/
+[504] --e.
+[505] SELECT HoTen
+[506] FROM NHANVIEN
+[507] WHERE MaNV IN (SELECT MaNV
+[508] 			   FROM CONGBOBB CB
+[509] 					INNER JOIN BAIBAOKH BB ON CB.MaBB = BB.MaBB
+[510] 			   WHERE LoaiBB = N'tạp chí quốc tế' AND MaDT = 'DT01'
+[511] 			   GROUP BY MaNV
+[512] 			   HAVING COUNT(CB.MaBB) = (SELECT COUNT(MaBB)
+[513] 										FROM BAIBAOKH
+[514] 										WHERE LoaiBB = N'tạp chí quốc tế' AND MaDT = 'DT01'))
+[515] SELECT HoTen
+[516] FROM NHANVIEN
+[517] WHERE NOT EXISTS (SELECT *
+[518] 				  FROM BAIBAOKH
+[519] 				  WHERE LoaiBB = N'tạp chí quốc tế' AND MaDT = 'DT01' AND NOT EXISTS (SELECT *
+[520] 																					  FROM CONGBOBB
+[521] 																					  WHERE CONGBOBB.MaBB = BAIBAOKH.MaBB AND CONGBB.MaNV = NHANVIEN.MaNV))
+[522] --f
+[523] SELECT MaPhong, THAMGIADT.MaNV, HoTen
+[524] FROM NHANVIEN
+[525] 		  INNER JOIN THAMGIADT ON NHANVIEN.MaNV = THAMGIADT.MaNV
+[526] GROUP BY MaPhong, THAMGIADT.MaNV, HoTen
+[527] HAVING COUNT(MaDT) = (SELECT TOP 1 COUNT(MaDT)
+[528] 					  FROM NHANVIEN
+[529] 						   INNER JOIN THAMGIADT ON NHANVIEN.MaNV = THAMGIADT.MaNV
+[530] 					  GROUP BY MaPhong, THAMGIADT.MaNV
+[531] 					  ORDER BY COUNT(MaDT) ASC)
+[532] ORDER BY MaPhong
