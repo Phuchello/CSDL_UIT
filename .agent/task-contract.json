@@ -1,6 +1,6 @@
 {
   "id": "it004-gk-question-bank",
-  "status": "in_progress",
+  "status": "ready_for_review",
   "acceptance": [
     {
       "id": "gate_r0_inventory_and_contract",
@@ -25,12 +25,12 @@
     {
       "id": "gate_p3_publication_deliverables",
       "criterion": "Produce 3 print-ready A4 PDFs authored by Võ Trọng Phúc, complete with editable sources, vector diagrams, and automated QA audit report",
-      "passes": false
+      "passes": true
     },
     {
       "id": "repo_safety_and_verification",
       "criterion": "Workflow v2 verification passes with no regression on frozen theory, practice, or Knowledge Garden baselines",
-      "passes": false
+      "passes": true
     }
   ],
   "release_safety": {

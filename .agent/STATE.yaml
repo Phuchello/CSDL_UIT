@@ -1,5 +1,5 @@
 project: CSDL_UIT
-status: in_progress
+status: ready_for_review
 
 workflow:
   version: 2
@@ -27,20 +27,25 @@ frozen:
 
 current_task:
   id: it004-gk-question-bank
-  status: in_progress
+  status: ready_for_review
 
 verified:
   r0_inventory_complete: true
   r1_research_complete: true
   p1_pilot_complete: true
   p2_expansion_complete: true
-  p3_publication_complete: false
+  p3_publication_complete: true
   frozen_baseline_untouched: true
+  pdf_deliverables_3_verified: true
+  zero_blank_pages: true
+  zero_solution_leak: true
 
 verification_evidence:
   local_suite:
     - scripts/agent/verify.ps1 -Mode Fast (PASS)
+    - scripts/validate.py (PASS, 6/6 checks)
     - exam/gk/scripts/validate_gk.py (PASS, 173 problems, 15 full mocks, 0 errors, 0 warnings)
+    - exam/gk/scripts/verify_pdf_preflight.py (PASS, 100% preflight visual and symbol verification)
 
 blockers: []
 
@@ -55,14 +60,21 @@ relevant_files:
   - Prompts/IT004_GK_Antigravity_Prompt.md
   - .agent/STATE.yaml
   - .agent/task-contract.json
+  - research/gk/source_ledger.md
+  - research/gk/exam_registry.md
+  - research/gk/exam_pattern_matrix.md
+  - research/gk/source_conflicts.md
+  - research/gk/research_report.md
   - exam/gk/README.md
-  - exam/gk/data/problems.json
-  - exam/gk/data/mocks.json
   - exam/gk/bank/
   - exam/gk/mocks/
+  - exam/gk/dist/IT004_GK_NganHangDe_VoTrongPhuc.pdf
+  - exam/gk/dist/IT004_GK_LoiGiaiChiTiet_VoTrongPhuc.pdf
+  - exam/gk/dist/IT004_GK_CheatSheet_VoTrongPhuc.pdf
   - exam/gk/scripts/validate_gk.py
+  - exam/gk/scripts/verify_pdf_preflight.py
 
 next_action: >
-  Execute Gate P3: Publication Candidate.
-  Build the 3 A4 PDF deliverables (NganHangDe, LoiGiaiChiTiet, CheatSheet),
-  verify page layout, KaTeX rendering, vector diagrams, and run full adversarial QA.
+  Handoff for mentor review. All 6 acceptance gates passed.
+  Feature branch feat/gk-exam-bank ready for review.
+  DO NOT merge to main, DO NOT deploy Pages, DO NOT alter frozen releases.
