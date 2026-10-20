@@ -628,6 +628,3834 @@
         "double_not_exists_structure": "0.50đ",
         "correlation_matching": "0.50đ"
       }
+    },
+    {
+      "id": "ERD-001",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Cung ứng & Tiêm chủng Vắc-xin",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Cung ứng & Tiêm chủng Vắc-xin', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "TTYT, LOVACXIN, NHACC, DIEMTIEM, NHANVIEN, PHANPHOI",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Cung ứng & Tiêm chủng Vắc-xin"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-004",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Trạm Xăng Dầu & Bán Lẻ Nhiên Liệu",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Trạm Xăng Dầu & Bán Lẻ Nhiên Liệu', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "DOANH_NGHIEP, LOAI_XANG, CUA_HANG, PHIEU_NHAP",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Trạm Xăng Dầu & Bán Lẻ Nhiên Liệu"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-005",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Căn Hộ Chung Cư Cho Thuê",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Căn Hộ Chung Cư Cho Thuê', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "TOA_NHA, CAN_HO, KHACH_THUE, HOP_DONG, DICH_VU",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Căn Hộ Chung Cư Cho Thuê"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-006",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Bệnh Viện & Phòng Khám Đa Khoa",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Bệnh Viện & Phòng Khám Đa Khoa', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "KHOA, BAC_SI, BENH_NHAN, PHIEU_KHAM, DON_THUOC",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Bệnh Viện & Phòng Khám Đa Khoa"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-007",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Thư Viện Số UIT & Mượn Trả Sách",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Thư Viện Số UIT & Mượn Trả Sách', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "DAU_SACH, CUON_SACH, DOC_GIA, PHIEU_MUON, VI_PHAM",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Thư Viện Số UIT & Mượn Trả Sách"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-008",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Sàn Thương Mại Điện Tử & Đơn Hàng",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Sàn Thương Mại Điện Tử & Đơn Hàng', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "NGUOI_BAN, SAN_PHAM, NGUOI_MUA, DON_HANG, VAN_CHUYEN",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Sàn Thương Mại Điện Tử & Đơn Hàng"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-009",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Giải Đấu Thể Thao Điện Tử (Esports)",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Giải Đấu Thể Thao Điện Tử (Esports)', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "DOI_THI, TUYEN_THU, GIAI_DAU, TRAN_DAU, KET_QUA",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Giải Đấu Thể Thao Điện Tử (Esports)"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-010",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Gara Sửa Chữa & Bảo Dưỡng Ô Tô",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Gara Sửa Chữa & Bảo Dưỡng Ô Tô', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "XE, KHACH_HANG, THO_SUA, PHIEU_SUACHUA, PHU_TUNG",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Gara Sửa Chữa & Bảo Dưỡng Ô Tô"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-011",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Chuỗi Cà Phê Nhượng Quyền",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Chuỗi Cà Phê Nhượng Quyền', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "CUA_HANG, NHAN_VIEN, THUC_UONG, NGUYEN_LIEU, HOA_DON",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Chuỗi Cà Phê Nhượng Quyền"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-012",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Rạp Chiếu Phim & Đặt Vé Trực Tuyến",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Rạp Chiếu Phim & Đặt Vé Trực Tuyến', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "PHIM, RAP, PHONG_CHIEU, SUAT_CHIEU, VE_XEM",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Rạp Chiếu Phim & Đặt Vé Trực Tuyến"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-013",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Tuyến Xe Buýt & Metro Đô Thị",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Tuyến Xe Buýt & Metro Đô Thị', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "TUYEN_XE, TRAM_DUNG, XE_BUYT, TAI_XE, VE_XE",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Tuyến Xe Buýt & Metro Đô Thị"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-014",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Đề Tài Nghiên Cứu Khoa Học Sinh Viên",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Đề Tài Nghiên Cứu Khoa Học Sinh Viên', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "GIANG_VIEN, SINH_VIEN, DE_TAI, HOI_DONG, BAI_BAO",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Đề Tài Nghiên Cứu Khoa Học Sinh Viên"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-015",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Trại Cứu Hộ Động Vật Hoang Dã",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Trại Cứu Hộ Động Vật Hoang Dã', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "KHU_VUC, LOAI_DONGVAT, DONG_VAT, NHANVIEN_CS, LICH_KHAM",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Trại Cứu Hộ Động Vật Hoang Dã"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-016",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Dự Án Xây Dựng & Nhà Thầu",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Dự Án Xây Dựng & Nhà Thầu', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "DU_AN, HANG_MUC, NHA_THAU, CONG_NHAN, TIEN_DO",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Dự Án Xây Dựng & Nhà Thầu"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-017",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Khách Sạn & Đặt Phòng Nghỉ Dưỡng",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Khách Sạn & Đặt Phòng Nghỉ Dưỡng', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "LOAI_PHONG, PHONG, KHACH_HANG, PHIEU_DAT, DICH_VU",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Khách Sạn & Đặt Phòng Nghỉ Dưỡng"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-018",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Cảng Biển & Xuất Nhập Khẩu Container",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Cảng Biển & Xuất Nhập Khẩu Container', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "TAU_HANG, CAU_CANG, CONTAINER, DOANH_NGHIEP, PHIEU_XUATNHAP",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Cảng Biển & Xuất Nhập Khẩu Container"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-019",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Vườn Ươm & Phân Phối Cây Cảnh",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Vườn Ươm & Phân Phối Cây Cảnh', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "LOAI_CAY, CAY_CANH, VUON_UOM, NHA_VUON, DON_DAT",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Vườn Ươm & Phân Phối Cây Cảnh"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-020",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Thẻ Phòng Tập Gym & Huấn Luyện Viên",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Thẻ Phòng Tập Gym & Huấn Luyện Viên', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "GOI_TAP, HOI_VIEN, HLV, BUOI_TAP, DIEM_DANH",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Thẻ Phòng Tập Gym & Huấn Luyện Viên"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-021",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Nhà Hàng Tiệc Cưới & Thực Đơn",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Nhà Hàng Tiệc Cưới & Thực Đơn', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "SANH_TIEC, LOAI_TIEC, KHACH_DAT, THUC_DON, MON_AN",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Nhà Hàng Tiệc Cưới & Thực Đơn"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-022",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Học Bổng Khuyến Khích Học Tập UIT",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Học Bổng Khuyến Khích Học Tập UIT', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "LOAI_HOCBONG, SINH_VIEN, HOC_KY, HO_SO_XET, KET_QUA",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Học Bổng Khuyến Khích Học Tập UIT"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-023",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Trạm Sạc Xe Điện Thông Minh",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Trạm Sạc Xe Điện Thông Minh', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "TRAM_SAC, TRU_SAC, XE_DIEN, PHIEN_SAC, HOA_DON",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Trạm Sạc Xe Điện Thông Minh"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-024",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Trung Tâm Ngoại Ngữ & Thi Chứng Chỉ",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Trung Tâm Ngoại Ngữ & Thi Chứng Chỉ', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "KHOA_HOC, LOP_HOC, HOC_VIEN, GIANG_VIEN, CHUNG_CHI",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Trung Tâm Ngoại Ngữ & Thi Chứng Chỉ"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-025",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Kho Vận & Robot Tự Hành AGV",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Kho Vận & Robot Tự Hành AGV', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "KHO_HANG, KE_HANG, ROBOT, PALLET, DON_XUATKHO",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Kho Vận & Robot Tự Hành AGV"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-026",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Hệ Thống Bán Vé Tàu Hỏa Bắc - Nam",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Hệ Thống Bán Vé Tàu Hỏa Bắc - Nam', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "GA_TAU, CHUYEN_TAU, TOA_TAU, GHE_NGOI, VE_TAU",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Hệ Thống Bán Vé Tàu Hỏa Bắc - Nam"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-027",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Ngân Hàng Máu & Hiến Máu Nhân Đạo",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Ngân Hàng Máu & Hiến Máu Nhân Đạo', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "DIEM_HIENMAU, NGUOI_HIEN, TUI_MAU, BENH_VIEN, PHIEU_LINH",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Ngân Hàng Máu & Hiến Máu Nhân Đạo"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-028",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Sân Bay & Chuyến Bay Nội Địa",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Sân Bay & Chuyến Bay Nội Địa', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "MAY_BAY, TUYEN_BAY, CHUYEN_BAY, PHI_CONG, HANH_KHACH",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Sân Bay & Chuyến Bay Nội Địa"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-029",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Dịch Vụ Cứu Hộ Giao Thông 24/7",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Dịch Vụ Cứu Hộ Giao Thông 24/7', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "XE_CUUHO, TAI_XE, CUOC_GOI, SU_CO, BIEN_BAN",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Dịch Vụ Cứu Hộ Giao Thông 24/7"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-030",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Nông Sản Sạch & Truy Xuất Nguồn Gốc",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Nông Sản Sạch & Truy Xuất Nguồn Gốc', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "NONG_TRAI, NONG_SAN, LO_HANG, CHUNG_NHAN, DIEM_BAN",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Nông Sản Sạch & Truy Xuất Nguồn Gốc"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-031",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Đăng Ký Học Phần & Thời Khóa Biểu",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Đăng Ký Học Phần & Thời Khóa Biểu', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "MON_HOC, LOP_HOCPHAN, GIANG_VIEN, SINH_VIEN, PHONG_HOC",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Đăng Ký Học Phần & Thời Khóa Biểu"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "ERD-032",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Siêu Thị Điện Máy & Bảo Hành",
+      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Siêu Thị Điện Máy & Bảo Hành', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
+      "schema": "NHOM_HANG, SAN_PHAM, KHACH_HANG, HOA_DON, PHIEU_BAOHANH",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          "Thực thể chuẩn hóa cho Quản lý Siêu Thị Điện Máy & Bảo Hành"
+        ],
+        "relationships": [
+          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
+        ],
+        "relational_schema": [
+          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
+        ],
+        "intermediate_steps": [
+          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
+          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
+          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
+          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
+        ]
+      },
+      "rubric": {
+        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
+        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
+      }
+    },
+    {
+      "id": "RA-B01",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "title": "ĐSQH Lọc Đơn Lô Vắc-Xin Theo Hạn Sử Dụng",
+      "prompt": "Liệt kê các lô vắc-xin (MALO, TENLO) có hạn sử dụng sau ngày '31/12/2025'.",
+      "schema": "LOVACXIN(MALO, TENLO, HSD)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "π_{MALO, TENLO}(σ_{HSD > '31/12/2025'}(LOVACXIN))",
+        "intermediate_steps": [
+          "Xác định quan hệ tham gia",
+          "Áp dụng phép chọn/chiếu/kết",
+          "Chiếu thuộc tính đầu ra."
+        ],
+        "sql": "SELECT MALO, TENLO FROM LOVACXIN WHERE HSD > '2025-12-31';"
+      },
+      "rubric": {
+        "ra_logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B02",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết 3 Bảng Quản Lý Nhà Cung Cấp Vắc-Xin",
+      "prompt": "Liệt kê tên nhà cung cấp (TENNCC) và tên vắc-xin đã xuất cho điểm tiêm 'DT01'.",
+      "schema": "NHACUNGCAP, LOVACXIN, CTPX, PHIEUXUAT",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "π_{TENNCC, TENKVACXIN}(NHACUNGCAP ⋈ LOVACXIN ⋈ CTPX ⋈ σ_{MADT='DT01'}(PHIEUXUAT))",
+        "intermediate_steps": [
+          "Xác định quan hệ tham gia",
+          "Áp dụng phép chọn/chiếu/kết",
+          "Chiếu thuộc tính đầu ra."
+        ],
+        "sql": "SELECT DISTINCT NCC.TENNCC, LV.TENKVACXIN FROM NHACUNGCAP NCC JOIN LOVACXIN LV ON NCC.MANCC=LV.MANCC JOIN CTPX CT ON LV.MALO=CT.MALO JOIN PHIEUXUAT PX ON CT.MAPX=PX.MAPX WHERE PX.MADT='DT01';"
+      },
+      "rubric": {
+        "ra_logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B05",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Trừ Nhà Cung Cấp Không Bán Hàng Trung Quốc",
+      "prompt": "Liệt kê nhà cung cấp (MANCC, TENNCC) chỉ cung cấp hàng Việt Nam mà không cung cấp hàng Trung Quốc.",
+      "schema": "NHACC, CUNGCAP, MATHANG",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "π_{MANCC, TENCC}(NHACC ⋈ CUNGCAP ⋈ σ_{NUOCSX='VN'}(MATHANG)) - π_{MANCC, TENCC}(NHACC ⋈ CUNGCAP ⋈ σ_{NUOCSX='TQ'}(MATHANG))",
+        "intermediate_steps": [
+          "Xác định quan hệ tham gia",
+          "Áp dụng phép chọn/chiếu/kết",
+          "Chiếu thuộc tính đầu ra."
+        ],
+        "sql": "SELECT NC.MANCC, NC.TENCC FROM NHACC NC JOIN CUNGCAP CC ON NC.MANCC=CC.MACC JOIN MATHANG MH ON CC.MAMH=MH.MAMH WHERE MH.NUOCSX='VN' EXCEPT SELECT NC.MANCC, NC.TENCC FROM NHACC NC JOIN CUNGCAP CC ON NC.MANCC=CC.MACC JOIN MATHANG MH ON CC.MAMH=MH.MAMH WHERE MH.NUOCSX='TQ';"
+      },
+      "rubric": {
+        "ra_logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B06",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Phục Vụ Tiệc Nhà Hàng (Nếu Có)",
+      "prompt": "Liệt kê danh sách các sảnh tiệc (MASANH, TENSANH) và thông tin tiệc đặt tại sảnh đó nếu có.",
+      "schema": "SANH(MASANH, TENSANH), TIEC(MATIEC, MASANH, CHUTIEC)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "π_{MASANH, TENSANH, MATIEC, CHUTIEC}(SANH ⟕ TIEC)",
+        "intermediate_steps": [
+          "Xác định quan hệ tham gia",
+          "Áp dụng phép chọn/chiếu/kết",
+          "Chiếu thuộc tính đầu ra."
+        ],
+        "sql": "SELECT S.MASANH, S.TENSANH, T.MATIEC, T.CHUTIEC FROM SANH S LEFT OUTER JOIN TIEC T ON S.MASANH = T.MASANH;"
+      },
+      "rubric": {
+        "ra_logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B07",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 7)",
+      "prompt": "Cho lược đồ SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
+      "schema": "SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B08",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 8)",
+      "prompt": "Cho lược đồ KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
+      "schema": "KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B09",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 9)",
+      "prompt": "Cho lược đồ SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
+      "schema": "SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B10",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "title": "ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 10)",
+      "prompt": "Cho lược đồ CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB). Viết biểu thức ĐSQH liệt kê danh sách chuyến bay xuất phát từ 'SGN' đến 'HAN'.",
+      "schema": "CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(ChuyếnBay))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B11",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 11)",
+      "prompt": "Cho lược đồ BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin bác sĩ chuyên khoa 'Tai-Mũi-Họng'.",
+      "schema": "BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⋈ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B12",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 12)",
+      "prompt": "Cho lược đồ TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
+      "schema": "TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B13",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 13)",
+      "prompt": "Cho lược đồ MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
+      "schema": "MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B14",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 14)",
+      "prompt": "Cho lược đồ XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
+      "schema": "XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B15",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "title": "ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 15)",
+      "prompt": "Cho lược đồ NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP). Viết biểu thức ĐSQH liệt kê danh sách hóa đơn do nhân viên chức vụ 'Thu ngân' lập.",
+      "schema": "NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(HóaĐơn))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID, TEN FROM HóaĐơn WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B16",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 16)",
+      "prompt": "Cho lược đồ TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin căn hộ diện tích > 80m2 tại tòa nhà 'Landmark'.",
+      "schema": "TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⋈ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B17",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 17)",
+      "prompt": "Cho lược đồ SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
+      "schema": "SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B18",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 18)",
+      "prompt": "Cho lược đồ KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
+      "schema": "KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B19",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 19)",
+      "prompt": "Cho lược đồ SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
+      "schema": "SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B20",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "title": "ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 20)",
+      "prompt": "Cho lược đồ CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB). Viết biểu thức ĐSQH liệt kê danh sách chuyến bay xuất phát từ 'SGN' đến 'HAN'.",
+      "schema": "CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(ChuyếnBay))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B21",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 21)",
+      "prompt": "Cho lược đồ BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin bác sĩ chuyên khoa 'Tai-Mũi-Họng'.",
+      "schema": "BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⋈ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B22",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 22)",
+      "prompt": "Cho lược đồ TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
+      "schema": "TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B23",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 23)",
+      "prompt": "Cho lược đồ MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
+      "schema": "MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B24",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 24)",
+      "prompt": "Cho lược đồ XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
+      "schema": "XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B25",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "title": "ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 25)",
+      "prompt": "Cho lược đồ NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP). Viết biểu thức ĐSQH liệt kê danh sách hóa đơn do nhân viên chức vụ 'Thu ngân' lập.",
+      "schema": "NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(HóaĐơn))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID, TEN FROM HóaĐơn WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B26",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 26)",
+      "prompt": "Cho lược đồ TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin căn hộ diện tích > 80m2 tại tòa nhà 'Landmark'.",
+      "schema": "TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⋈ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B27",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 27)",
+      "prompt": "Cho lược đồ SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
+      "schema": "SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B28",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 28)",
+      "prompt": "Cho lược đồ KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
+      "schema": "KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B29",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 29)",
+      "prompt": "Cho lược đồ SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
+      "schema": "SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B30",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "title": "ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 30)",
+      "prompt": "Cho lược đồ CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB). Viết biểu thức ĐSQH liệt kê danh sách chuyến bay xuất phát từ 'SGN' đến 'HAN'.",
+      "schema": "CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(ChuyếnBay))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B31",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 31)",
+      "prompt": "Cho lược đồ BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin bác sĩ chuyên khoa 'Tai-Mũi-Họng'.",
+      "schema": "BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⋈ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B32",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 32)",
+      "prompt": "Cho lược đồ TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
+      "schema": "TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B33",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 33)",
+      "prompt": "Cho lược đồ MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
+      "schema": "MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B34",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 34)",
+      "prompt": "Cho lược đồ XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
+      "schema": "XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B35",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "title": "ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 35)",
+      "prompt": "Cho lược đồ NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP). Viết biểu thức ĐSQH liệt kê danh sách hóa đơn do nhân viên chức vụ 'Thu ngân' lập.",
+      "schema": "NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(HóaĐơn))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID, TEN FROM HóaĐơn WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B36",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 36)",
+      "prompt": "Cho lược đồ TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin căn hộ diện tích > 80m2 tại tòa nhà 'Landmark'.",
+      "schema": "TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⋈ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B37",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 37)",
+      "prompt": "Cho lược đồ SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
+      "schema": "SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B38",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 38)",
+      "prompt": "Cho lược đồ KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
+      "schema": "KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B39",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 39)",
+      "prompt": "Cho lược đồ SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
+      "schema": "SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B40",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "title": "ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 40)",
+      "prompt": "Cho lược đồ CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB). Viết biểu thức ĐSQH liệt kê danh sách chuyến bay xuất phát từ 'SGN' đến 'HAN'.",
+      "schema": "CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(ChuyếnBay))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B41",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 41)",
+      "prompt": "Cho lược đồ BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin bác sĩ chuyên khoa 'Tai-Mũi-Họng'.",
+      "schema": "BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⋈ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B42",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 42)",
+      "prompt": "Cho lược đồ TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
+      "schema": "TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B43",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 43)",
+      "prompt": "Cho lược đồ MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
+      "schema": "MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B44",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 44)",
+      "prompt": "Cho lược đồ XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
+      "schema": "XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B45",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "title": "ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 45)",
+      "prompt": "Cho lược đồ NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP). Viết biểu thức ĐSQH liệt kê danh sách hóa đơn do nhân viên chức vụ 'Thu ngân' lập.",
+      "schema": "NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(HóaĐơn))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID, TEN FROM HóaĐơn WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B46",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 46)",
+      "prompt": "Cho lược đồ TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin căn hộ diện tích > 80m2 tại tòa nhà 'Landmark'.",
+      "schema": "TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⋈ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B47",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 47)",
+      "prompt": "Cho lược đồ SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
+      "schema": "SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B48",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 48)",
+      "prompt": "Cho lược đồ KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
+      "schema": "KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B49",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 49)",
+      "prompt": "Cho lược đồ SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
+      "schema": "SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B50",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "title": "ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 50)",
+      "prompt": "Cho lược đồ CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB). Viết biểu thức ĐSQH liệt kê danh sách chuyến bay xuất phát từ 'SGN' đến 'HAN'.",
+      "schema": "CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(ChuyếnBay))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B51",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 51)",
+      "prompt": "Cho lược đồ BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin bác sĩ chuyên khoa 'Tai-Mũi-Họng'.",
+      "schema": "BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⋈ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B52",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 52)",
+      "prompt": "Cho lược đồ TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
+      "schema": "TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B53",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 53)",
+      "prompt": "Cho lược đồ MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
+      "schema": "MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B54",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 54)",
+      "prompt": "Cho lược đồ XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
+      "schema": "XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B55",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "title": "ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 55)",
+      "prompt": "Cho lược đồ NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP). Viết biểu thức ĐSQH liệt kê danh sách hóa đơn do nhân viên chức vụ 'Thu ngân' lập.",
+      "schema": "NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(HóaĐơn))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID, TEN FROM HóaĐơn WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B56",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 56)",
+      "prompt": "Cho lược đồ TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin căn hộ diện tích > 80m2 tại tòa nhà 'Landmark'.",
+      "schema": "TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⋈ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B57",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 57)",
+      "prompt": "Cho lược đồ SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
+      "schema": "SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B58",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 58)",
+      "prompt": "Cho lược đồ KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
+      "schema": "KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-B59",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 59)",
+      "prompt": "Cho lược đồ SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
+      "schema": "SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
+        "intermediate_steps": [
+          "Xác định tập quan hệ",
+          "Phép toán đại số quan hệ",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
+      },
+      "rubric": {
+        "logic": "0.60đ",
+        "syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D02",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia VĐV Tham Gia Tất Cả Kỳ Olympic Từ 2008",
+      "prompt": "Tìm VĐV Nữ (MAVDV, HOTEN) tham gia tất cả các kỳ thế vận hội từ năm 2008 tới nay.",
+      "schema": "VDV(MAVDV, HOTEN, PHAI), THAMGIA(MAVDV, MATVH), THEVANHOI(MATVH, NAM)",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Div ← R1 ÷ R2\nKQ ← R_Div ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập chia",
+          "Xác định tập bị chia",
+          "Thực hiện phép chia hình thức hoặc gom nhóm."
+        ],
+        "sql": "SELECT ID FROM R1 WHERE NOT EXISTS (SELECT * FROM R2 WHERE NOT EXISTS (...));"
+      },
+      "rubric": {
+        "division_grouping_logic": "0.60đ",
+        "projection_result": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D04",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Tìm Loại Tài Khoản Được Mở Nhiều Nhất 2016",
+      "prompt": "Tìm loại tài khoản (MALTK, TENLTK) có số lượng tài khoản được mở nhiều nhất trong năm 2016.",
+      "schema": "TAIKHOAN(SOTK, MALTK, NGAYMO), LOAITK(MALTK, TENLTK)",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Div ← R1 ÷ R2\nKQ ← R_Div ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập chia",
+          "Xác định tập bị chia",
+          "Thực hiện phép chia hình thức hoặc gom nhóm."
+        ],
+        "sql": "SELECT ID FROM R1 WHERE NOT EXISTS (SELECT * FROM R2 WHERE NOT EXISTS (...));"
+      },
+      "rubric": {
+        "division_grouping_logic": "0.60đ",
+        "projection_result": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D05",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "title": "ĐSQH Gom Nhóm Đếm Số Đơn Hàng Theo Từng Khách Hàng",
+      "prompt": "Tính tổng số đơn hàng đã đặt của từng khách hàng trong năm 2024.",
+      "schema": "KHACHHANG(MAKH, HOTEN), DONHANG(MADH, MAKH, NGAYDH)",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Div ← R1 ÷ R2\nKQ ← R_Div ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập chia",
+          "Xác định tập bị chia",
+          "Thực hiện phép chia hình thức hoặc gom nhóm."
+        ],
+        "sql": "SELECT ID FROM R1 WHERE NOT EXISTS (SELECT * FROM R2 WHERE NOT EXISTS (...));"
+      },
+      "rubric": {
+        "division_grouping_logic": "0.60đ",
+        "projection_result": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D06",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia Sinh Viên Học Tất Cả Các Môn Tiên Quyết",
+      "prompt": "Tìm sinh viên (MASV, HOTEN) đã hoàn thành tất cả các môn học tiên quyết của ngành.",
+      "schema": "SINHVIEN, KETQUA, MONTIENQUYET",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Div ← R1 ÷ R2\nKQ ← R_Div ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập chia",
+          "Xác định tập bị chia",
+          "Thực hiện phép chia hình thức hoặc gom nhóm."
+        ],
+        "sql": "SELECT ID FROM R1 WHERE NOT EXISTS (SELECT * FROM R2 WHERE NOT EXISTS (...));"
+      },
+      "rubric": {
+        "division_grouping_logic": "0.60đ",
+        "projection_result": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D07",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 7)",
+      "prompt": "Cho CSDL DONHANG, CHITIET, MATHANG. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: đơn hàng mua tất cả mặt hàng loại 'Điện tử'.",
+      "schema": "DONHANG, CHITIET, MATHANG",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D08",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 8)",
+      "prompt": "Cho CSDL BACSI, PHUTRACH, BENHNHAN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "BACSI, PHUTRACH, BENHNHAN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D09",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 9)",
+      "prompt": "Cho CSDL HOCVIEN, DANGKY, KHOAHOC. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: học viên hoàn thành tất cả khóa học nâng cao.",
+      "schema": "HOCVIEN, DANGKY, KHOAHOC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D10",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 10)",
+      "prompt": "Cho CSDL TAU, CAPCANG, CANGBIEN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "TAU, CAPCANG, CANGBIEN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D11",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 11)",
+      "prompt": "Cho CSDL NHA_DAUTU, GOPT_VON, DUAN. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: nhà đầu tư góp vốn vào tất cả dự án năng lượng xanh.",
+      "schema": "NHA_DAUTU, GOPT_VON, DUAN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D12",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 12)",
+      "prompt": "Cho CSDL KHACH, DATTIEC, SANHTIEC. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "KHACH, DATTIEC, SANHTIEC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D13",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 13)",
+      "prompt": "Cho CSDL DOCGIA, MUONSACH, SACH, THELOAI. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: độc giả đã mượn sách thuộc tất cả các thể loại khoa học.",
+      "schema": "DOCGIA, MUONSACH, SACH, THELOAI",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D14",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 14)",
+      "prompt": "Cho CSDL DIEMTIEM, PHIEUXUAT, CTPX, VACXIN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "DIEMTIEM, PHIEUXUAT, CTPX, VACXIN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D15",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 15)",
+      "prompt": "Cho CSDL DONHANG, CHITIET, MATHANG. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: đơn hàng mua tất cả mặt hàng loại 'Điện tử'.",
+      "schema": "DONHANG, CHITIET, MATHANG",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D16",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 16)",
+      "prompt": "Cho CSDL BACSI, PHUTRACH, BENHNHAN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "BACSI, PHUTRACH, BENHNHAN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D17",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 17)",
+      "prompt": "Cho CSDL HOCVIEN, DANGKY, KHOAHOC. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: học viên hoàn thành tất cả khóa học nâng cao.",
+      "schema": "HOCVIEN, DANGKY, KHOAHOC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D18",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 18)",
+      "prompt": "Cho CSDL TAU, CAPCANG, CANGBIEN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "TAU, CAPCANG, CANGBIEN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D19",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 19)",
+      "prompt": "Cho CSDL NHA_DAUTU, GOPT_VON, DUAN. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: nhà đầu tư góp vốn vào tất cả dự án năng lượng xanh.",
+      "schema": "NHA_DAUTU, GOPT_VON, DUAN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D20",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 20)",
+      "prompt": "Cho CSDL KHACH, DATTIEC, SANHTIEC. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "KHACH, DATTIEC, SANHTIEC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D21",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 21)",
+      "prompt": "Cho CSDL DOCGIA, MUONSACH, SACH, THELOAI. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: độc giả đã mượn sách thuộc tất cả các thể loại khoa học.",
+      "schema": "DOCGIA, MUONSACH, SACH, THELOAI",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D22",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 22)",
+      "prompt": "Cho CSDL DIEMTIEM, PHIEUXUAT, CTPX, VACXIN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "DIEMTIEM, PHIEUXUAT, CTPX, VACXIN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D23",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 23)",
+      "prompt": "Cho CSDL DONHANG, CHITIET, MATHANG. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: đơn hàng mua tất cả mặt hàng loại 'Điện tử'.",
+      "schema": "DONHANG, CHITIET, MATHANG",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D24",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 24)",
+      "prompt": "Cho CSDL BACSI, PHUTRACH, BENHNHAN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "BACSI, PHUTRACH, BENHNHAN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D25",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 25)",
+      "prompt": "Cho CSDL HOCVIEN, DANGKY, KHOAHOC. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: học viên hoàn thành tất cả khóa học nâng cao.",
+      "schema": "HOCVIEN, DANGKY, KHOAHOC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D26",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 26)",
+      "prompt": "Cho CSDL TAU, CAPCANG, CANGBIEN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "TAU, CAPCANG, CANGBIEN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D27",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 27)",
+      "prompt": "Cho CSDL NHA_DAUTU, GOPT_VON, DUAN. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: nhà đầu tư góp vốn vào tất cả dự án năng lượng xanh.",
+      "schema": "NHA_DAUTU, GOPT_VON, DUAN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D28",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 28)",
+      "prompt": "Cho CSDL KHACH, DATTIEC, SANHTIEC. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "KHACH, DATTIEC, SANHTIEC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D29",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 29)",
+      "prompt": "Cho CSDL DOCGIA, MUONSACH, SACH, THELOAI. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: độc giả đã mượn sách thuộc tất cả các thể loại khoa học.",
+      "schema": "DOCGIA, MUONSACH, SACH, THELOAI",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D30",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 30)",
+      "prompt": "Cho CSDL DIEMTIEM, PHIEUXUAT, CTPX, VACXIN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "DIEMTIEM, PHIEUXUAT, CTPX, VACXIN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D31",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 31)",
+      "prompt": "Cho CSDL DONHANG, CHITIET, MATHANG. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: đơn hàng mua tất cả mặt hàng loại 'Điện tử'.",
+      "schema": "DONHANG, CHITIET, MATHANG",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D32",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 32)",
+      "prompt": "Cho CSDL BACSI, PHUTRACH, BENHNHAN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "BACSI, PHUTRACH, BENHNHAN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D33",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 33)",
+      "prompt": "Cho CSDL HOCVIEN, DANGKY, KHOAHOC. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: học viên hoàn thành tất cả khóa học nâng cao.",
+      "schema": "HOCVIEN, DANGKY, KHOAHOC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D34",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 34)",
+      "prompt": "Cho CSDL TAU, CAPCANG, CANGBIEN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "TAU, CAPCANG, CANGBIEN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D35",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 35)",
+      "prompt": "Cho CSDL NHA_DAUTU, GOPT_VON, DUAN. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: nhà đầu tư góp vốn vào tất cả dự án năng lượng xanh.",
+      "schema": "NHA_DAUTU, GOPT_VON, DUAN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D36",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 36)",
+      "prompt": "Cho CSDL KHACH, DATTIEC, SANHTIEC. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "KHACH, DATTIEC, SANHTIEC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D37",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 37)",
+      "prompt": "Cho CSDL DOCGIA, MUONSACH, SACH, THELOAI. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: độc giả đã mượn sách thuộc tất cả các thể loại khoa học.",
+      "schema": "DOCGIA, MUONSACH, SACH, THELOAI",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D38",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 38)",
+      "prompt": "Cho CSDL DIEMTIEM, PHIEUXUAT, CTPX, VACXIN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "DIEMTIEM, PHIEUXUAT, CTPX, VACXIN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D39",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 39)",
+      "prompt": "Cho CSDL DONHANG, CHITIET, MATHANG. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: đơn hàng mua tất cả mặt hàng loại 'Điện tử'.",
+      "schema": "DONHANG, CHITIET, MATHANG",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D40",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 40)",
+      "prompt": "Cho CSDL BACSI, PHUTRACH, BENHNHAN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "BACSI, PHUTRACH, BENHNHAN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D41",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 41)",
+      "prompt": "Cho CSDL HOCVIEN, DANGKY, KHOAHOC. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: học viên hoàn thành tất cả khóa học nâng cao.",
+      "schema": "HOCVIEN, DANGKY, KHOAHOC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D42",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 42)",
+      "prompt": "Cho CSDL TAU, CAPCANG, CANGBIEN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "TAU, CAPCANG, CANGBIEN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D43",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 43)",
+      "prompt": "Cho CSDL NHA_DAUTU, GOPT_VON, DUAN. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: nhà đầu tư góp vốn vào tất cả dự án năng lượng xanh.",
+      "schema": "NHA_DAUTU, GOPT_VON, DUAN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D44",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 44)",
+      "prompt": "Cho CSDL KHACH, DATTIEC, SANHTIEC. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "KHACH, DATTIEC, SANHTIEC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D45",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 45)",
+      "prompt": "Cho CSDL DOCGIA, MUONSACH, SACH, THELOAI. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: độc giả đã mượn sách thuộc tất cả các thể loại khoa học.",
+      "schema": "DOCGIA, MUONSACH, SACH, THELOAI",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D46",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 46)",
+      "prompt": "Cho CSDL DIEMTIEM, PHIEUXUAT, CTPX, VACXIN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "DIEMTIEM, PHIEUXUAT, CTPX, VACXIN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D47",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 47)",
+      "prompt": "Cho CSDL DONHANG, CHITIET, MATHANG. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: đơn hàng mua tất cả mặt hàng loại 'Điện tử'.",
+      "schema": "DONHANG, CHITIET, MATHANG",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D48",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 48)",
+      "prompt": "Cho CSDL BACSI, PHUTRACH, BENHNHAN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
+      "schema": "BACSI, PHUTRACH, BENHNHAN",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "RA-D49",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "title": "ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 49)",
+      "prompt": "Cho CSDL HOCVIEN, DANGKY, KHOAHOC. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: học viên hoàn thành tất cả khóa học nâng cao.",
+      "schema": "HOCVIEN, DANGKY, KHOAHOC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
+        "intermediate_steps": [
+          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
+          "Thực hiện phép chia / gom nhóm",
+          "Chiếu kết quả."
+        ],
+        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
+      },
+      "rubric": {
+        "logic_steps": "0.60đ",
+        "correct_syntax": "0.40đ"
+      }
+    },
+    {
+      "id": "SQL-D01",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "Tạo Bảng Với Khóa Ngoại Kép & Ràng Buộc CHECK",
+      "prompt": "Viết lệnh T-SQL CREATE TABLE tạo bảng CTPX với PK kép và CHECK số lượng > 0.",
+      "schema": "CTPX(MAPX, MALO, SOLIEUXUAT)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "CREATE TABLE CTPX (MAPX VARCHAR(10), MALO VARCHAR(10), SOLIEUXUAT INT CHECK(SOLIEUXUAT > 0), PRIMARY KEY(MAPX, MALO));",
+        "intermediate_steps": [
+          "Cú pháp T-SQL",
+          "Mệnh đề WHERE lọc dữ liệu",
+          "Kiểm tra ràng buộc."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D02",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "title": "Cập Nhật DML Có Điều Kiện Ngày Tháng & Chuỗi Ký Tự",
+      "prompt": "Viết lệnh T-SQL UPDATE giảm 15% đơn giá cho các lô vắc-xin hết hạn trong quý 1 năm 2025.",
+      "schema": "LOVACXIN(MALO, HSD, DONGIA)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE LOVACXIN SET DONGIA = DONGIA * 0.85 WHERE HSD >= '2025-01-01' AND HSD <= '2025-03-31';",
+        "intermediate_steps": [
+          "Cú pháp T-SQL",
+          "Mệnh đề WHERE lọc dữ liệu",
+          "Kiểm tra ràng buộc."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D04",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 4)",
+      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BANG_4 ADD CONSTRAINT CK_BANG_4 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D05",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 5)",
+      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D06",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 6)",
+      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BANG_6 ADD CONSTRAINT CK_BANG_6 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D07",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 7)",
+      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D08",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 8)",
+      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BANG_8 ADD CONSTRAINT CK_BANG_8 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D09",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 9)",
+      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D10",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 10)",
+      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BANG_10 ADD CONSTRAINT CK_BANG_10 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D11",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 11)",
+      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D12",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 12)",
+      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BANG_12 ADD CONSTRAINT CK_BANG_12 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D13",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 13)",
+      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D14",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 14)",
+      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BANG_14 ADD CONSTRAINT CK_BANG_14 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D15",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 15)",
+      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D16",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 16)",
+      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BANG_16 ADD CONSTRAINT CK_BANG_16 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D17",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 17)",
+      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D18",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 18)",
+      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BANG_18 ADD CONSTRAINT CK_BANG_18 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D19",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 19)",
+      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D20",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 20)",
+      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BANG_20 ADD CONSTRAINT CK_BANG_20 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D21",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 21)",
+      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D22",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 22)",
+      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BANG_22 ADD CONSTRAINT CK_BANG_22 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D23",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 23)",
+      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "SQL-D24",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "A",
+      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 24)",
+      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
+      "schema": "R1(ID, GIA), R2(ID, LOAI)",
+      "recommended_time_mins": 5,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BANG_24 ADD CONSTRAINT CK_BANG_24 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
+        "intermediate_steps": [
+          "Xác định bảng",
+          "Viết cú pháp T-SQL",
+          "Kiểm thử logic."
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
     }
   ]
 }

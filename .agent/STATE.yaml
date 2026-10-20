@@ -33,14 +33,14 @@ verified:
   r0_inventory_complete: true
   r1_research_complete: true
   p1_pilot_complete: true
-  p2_expansion_complete: false
+  p2_expansion_complete: true
   p3_publication_complete: false
   frozen_baseline_untouched: true
 
 verification_evidence:
   local_suite:
     - scripts/agent/verify.ps1 -Mode Fast (PASS)
-    - exam/gk/scripts/validate_gk.py (PASS, 0 errors, 0 warnings)
+    - exam/gk/scripts/validate_gk.py (PASS, 173 problems, 15 full mocks, 0 errors, 0 warnings)
 
 blockers: []
 
@@ -55,13 +55,14 @@ relevant_files:
   - Prompts/IT004_GK_Antigravity_Prompt.md
   - .agent/STATE.yaml
   - .agent/task-contract.json
-  - research/gk/
+  - exam/gk/README.md
   - exam/gk/data/problems.json
   - exam/gk/data/mocks.json
-  - exam/gk/mocks/MOCK-01/
+  - exam/gk/bank/
+  - exam/gk/mocks/
   - exam/gk/scripts/validate_gk.py
 
 next_action: >
-  Execute Gate P2: Full Question Bank & Mock Expansion.
-  Expand Question Bank across 4 topics (ERD >=30, RA Basic/Join >=55, RA Division/Grouping >=45, SQL >=20)
-  and expand to 15 full 75-minute mock exams with separated answer keys.
+  Execute Gate P3: Publication Candidate.
+  Build the 3 A4 PDF deliverables (NganHangDe, LoiGiaiChiTiet, CheatSheet),
+  verify page layout, KaTeX rendering, vector diagrams, and run full adversarial QA.

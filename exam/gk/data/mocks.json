@@ -74,6 +74,1056 @@
           "problem_id": "M01-Q2C6"
         }
       ]
+    },
+    {
+      "id": "MOCK-02",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 02 — Quản Lý Hệ Thống Phòng Cháy Chữa Cháy Chung Cư",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "HISTORICAL_2023_2024",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.5,
+          "problem_id": "ERD-002"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D02"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D04"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B02"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B05"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B06"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D04"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D05"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.0,
+          "problem_id": "RA-D06"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-03",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 03 — Quản Lý Tiếp Nhận & Phân Bổ Tiền Cứu Trợ Bão Lũ",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "RECENT_VERIFIED",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.0,
+          "problem_id": "ERD-003"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D05"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D06"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B07"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B08"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B09"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D07"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D08"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.5,
+          "problem_id": "RA-D09"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-04",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 04 — Quản Lý Chuỗi Cửa Hàng Bán Lẻ Xăng Dầu",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "HISTORICAL_2023_2024",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.5,
+          "problem_id": "ERD-004"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D07"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D08"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B10"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B11"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B12"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D10"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D11"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.0,
+          "problem_id": "RA-D12"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-05",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 05 — Quản Lý Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "RECENT_VERIFIED",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.0,
+          "problem_id": "ERD-005"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D09"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D10"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B13"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B14"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B15"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D13"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D14"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.5,
+          "problem_id": "RA-D15"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-06",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 06 — Quản Lý Bệnh Viện Đa Khoa & Hồ Sơ Khám Bệnh",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "HISTORICAL_2023_2024",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.5,
+          "problem_id": "ERD-006"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D11"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D12"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B16"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B17"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B18"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D16"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D17"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.0,
+          "problem_id": "RA-D18"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-07",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 07 — Quản Lý Thư Viện Số UIT & Mượn Trả Tài Liệu",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "RECENT_VERIFIED",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.0,
+          "problem_id": "ERD-007"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D13"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D14"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B19"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B20"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B21"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D19"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D20"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.5,
+          "problem_id": "RA-D21"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-08",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 08 — Quản Lý Sàn Thương Mại Điện Tử & Vận Chuyển Hàng",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "HISTORICAL_2023_2024",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.5,
+          "problem_id": "ERD-008"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D15"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D16"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B22"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B23"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B24"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D22"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D23"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.0,
+          "problem_id": "RA-D24"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-09",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 09 — Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "RECENT_VERIFIED",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.0,
+          "problem_id": "ERD-009"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D17"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D18"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B25"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B26"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B27"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D25"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D26"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.5,
+          "problem_id": "RA-D27"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-10",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 10 — Quản Lý Gara Ô Tô & Phụ Tùng Bảo Dưỡng",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "HISTORICAL_2023_2024",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.5,
+          "problem_id": "ERD-010"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D19"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D20"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B28"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B29"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B30"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D28"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D29"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.0,
+          "problem_id": "RA-D30"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-11",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 11 — Quản Lý Chuỗi Cà Phê Nhượng Quyền & Nguyên Liệu",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "RECENT_VERIFIED",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.0,
+          "problem_id": "ERD-011"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D21"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D22"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B31"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B32"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B33"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D31"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D32"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.5,
+          "problem_id": "RA-D33"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-12",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 12 — Quản Lý Cụm Rạp Chiếu Phim & Đặt Vé Trực Tuyến",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "HISTORICAL_2023_2024",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.5,
+          "problem_id": "ERD-012"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D23"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D24"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B34"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B35"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B36"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D34"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D35"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.0,
+          "problem_id": "RA-D36"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-13",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 13 — Quản Lý Hệ Thống Tuyến Xe Buýt & Metro TP.HCM",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "RECENT_VERIFIED",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.0,
+          "problem_id": "ERD-013"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "M01-Q2A"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "M01-Q2B"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B37"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B38"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B39"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D37"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D38"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.5,
+          "problem_id": "RA-D39"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-14",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 14 — Quản Lý Đề Tài Nghiên Cứu Khoa Học Trọng Điểm",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "HISTORICAL_2023_2024",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.5,
+          "problem_id": "ERD-014"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D03"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D01"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B40"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B41"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B42"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D40"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D41"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.0,
+          "problem_id": "RA-D42"
+        }
+      ]
+    },
+    {
+      "id": "MOCK-15",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 15 — Quản Lý Trại Cứu Hộ Động Vật Hoang Dã",
+      "duration_mins": 75,
+      "total_points": 10.0,
+      "profile": "RECENT_VERIFIED",
+      "target_skills": [
+        "ERD_DESIGN",
+        "SCHEMA_MAPPING",
+        "SQL_CHECK",
+        "SQL_UPDATE",
+        "RA_SELECT",
+        "RA_JOIN",
+        "RA_OUTER_JOIN",
+        "RA_GROUPING",
+        "RA_DIVISION",
+        "RA_EXTREME"
+      ],
+      "questions": [
+        {
+          "num": "1",
+          "sub": "",
+          "points": 2.0,
+          "problem_id": "ERD-015"
+        },
+        {
+          "num": "2",
+          "sub": "1a",
+          "points": 0.75,
+          "problem_id": "SQL-D02"
+        },
+        {
+          "num": "2",
+          "sub": "1b",
+          "points": 0.75,
+          "problem_id": "SQL-D04"
+        },
+        {
+          "num": "2",
+          "sub": "2a",
+          "points": 1.0,
+          "problem_id": "RA-B43"
+        },
+        {
+          "num": "2",
+          "sub": "2b",
+          "points": 1.0,
+          "problem_id": "RA-B44"
+        },
+        {
+          "num": "2",
+          "sub": "2c",
+          "points": 1.0,
+          "problem_id": "RA-B45"
+        },
+        {
+          "num": "2",
+          "sub": "2d",
+          "points": 1.0,
+          "problem_id": "RA-D43"
+        },
+        {
+          "num": "2",
+          "sub": "2e",
+          "points": 1.0,
+          "problem_id": "RA-D44"
+        },
+        {
+          "num": "2",
+          "sub": "2f",
+          "points": 1.5,
+          "problem_id": "RA-D45"
+        }
+      ]
     }
   ]
 }

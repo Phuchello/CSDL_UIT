@@ -1,23 +1,23 @@
 {
   "status": "PASS",
   "stats": {
-    "total_problems": 16,
+    "total_problems": 173,
     "topics": {
-      "ERD_MAPPING": 3,
-      "SQL_DDL_DML": 3,
-      "RA_BASIC_JOIN": 5,
-      "RA_DIVISION_GROUPING": 5
+      "ERD_MAPPING": 33,
+      "SQL_DDL_DML": 26,
+      "RA_BASIC_JOIN": 62,
+      "RA_DIVISION_GROUPING": 52
     },
     "difficulties": {
-      "A": 2,
-      "B": 10,
-      "C": 4
+      "A": 25,
+      "B": 108,
+      "C": 40
     },
-    "verified_solutions": 16,
-    "rubrics_present": 16,
-    "mocks_count": 1,
-    "mock_points_valid": 1,
-    "no_solution_leak": 1
+    "verified_solutions": 173,
+    "rubrics_present": 173,
+    "mocks_count": 15,
+    "mock_points_valid": 15,
+    "no_solution_leak": 15
   },
   "errors": [],
   "warnings": []

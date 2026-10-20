@@ -20,7 +20,7 @@
     {
       "id": "gate_p2_bank_and_mock_expansion",
       "criterion": "Expand bank across ERD, RA basic/join, RA division/grouping, and SQL DDL/DML, and construct 75-minute full mock exams with isolated answer keys",
-      "passes": false
+      "passes": true
     },
     {
       "id": "gate_p3_publication_deliverables",
