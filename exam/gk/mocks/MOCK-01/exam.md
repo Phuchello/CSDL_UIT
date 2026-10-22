@@ -1,7 +1,7 @@
 # ĐỀ THI GIỮA KỲ MÔ PHỎNG SỐ 01 (MOCK-01)
 ### MÔN HỌC: IT004 — CƠ SỞ DỮ LIỆU
-**Thời gian làm bài:** 75 phút | **Hình thức:** Tự luận | **Tài liệu:** KHÔNG sử dụng tài liệu  
-**Biên soạn & Thiết kế:** VÕ TRỌNG PHÚC — CSDL_UIT Master Series  
+**Thời gian làm bài:** 75 phút | **Hình thức:** Tự luận | **Tài liệu:** KHÔNG sử dụng tài liệu
+**Biên soạn & Thẩm định:** VÕ TRỌNG PHÚC — CSDL_UIT Master Series
 
 ---
 
@@ -26,31 +26,31 @@
 
 Cho Lược đồ cơ sở dữ liệu "Quản lý Cung ứng & Phân phối Vắc-xin" gồm các quan hệ sau (thuộc tính gạch chân là khóa chính):
 
-- `NHACUNGCAP` (**`MANCC`**, `TENNCC`, `QUOCGIA`, `SDT`)  
+- `NHACUNGCAP` (**`MANCC`**, `TENNCC`, `QUOCGIA`, `SDT`)
   *Tân từ:* Thông tin nhà cung cấp vắc-xin.
-- `LOVACXIN` (**`MALO`**, `TENLO`, `TENKVACXIN`, `MANCC`, `NGAYSX`, `HSD`, `SOLIEU`, `DONGIA`)  
+- `LOVACXIN` (**`MALO`**, `TENLO`, `TENKVACXIN`, `MANCC`, `NGAYSX`, `HSD`, `SOLIEU`, `DONGIA`)
   *Tân từ:* Thông tin lô vắc-xin nhập kho. `MANCC` là khóa ngoại trỏ về `NHACUNGCAP`.
-- `DIEMTIEM` (**`MADT`**, `TENDT`, `QUAN`, `SUCCHUA`, `MATRP`)  
+- `DIEMTIEM` (**`MADT`**, `TENDT`, `QUAN`, `SUCCHUA`, `MATRP`)
   *Tân từ:* Điểm tiêm chủng lưu động. `MATRP` là mã bác sĩ trưởng điểm tiêm phụ trách.
-- `BACSI` (**`MABS`**, `HOTEN`, `CHUYENKHOA`, `SDT`, `MADT`)  
-  *Tân từ:* Danh sách bác sĩ tham gia tiêm chủng. `MADT` là điểm tiêm bác sĩ đang trực.
-- `PHIEUXUAT` (**`MAPX`**, `NGAYXUAT`, `MADT`, `TRANGTHAI`)  
+- `BACSI` (**`MABS`**, `HOTEN`, `CHUYENKHOA`, `SDT`, `MADT`)
+  *Tân từ:* Danh sách bác sĩ tham gia tiêm chủng. `MADT` là khóa ngoại trỏ về `DIEMTIEM` ghi nhận điểm tiêm bác sĩ đang trực.
+- `PHIEUXUAT` (**`MAPX`**, `NGAYXUAT`, `MADT`, `TRANGTHAI`)
   *Tân từ:* Phiếu xuất vắc-xin đến điểm tiêm. `MADT` là khóa ngoại trỏ về `DIEMTIEM`.
-- `CTPX` (**`MAPX`**, **`MALO`**, `SOLIEUXUAT`)  
-  *Tân từ:* Chi tiết số liều xuất theo từng lô vắc-xin trong mỗi phiếu xuất.
+- `CTPX` (**`MAPX`**, **`MALO`**, `SOLIEUXUAT`)
+  *Tân từ:* Chi tiết số liều xuất theo từng lô vắc-xin trong mỗi phiếu xuất. `MAPX` trỏ về `PHIEUXUAT(MAPX)`, `MALO` trỏ về `LOVACXIN(MALO)`.
 
 ### 1. Viết các câu lệnh SQL (1.5 điểm)
-a. *(0.75 điểm)* Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra thuộc tính `SOLIEUXUAT` trong quan hệ `CTPX` phải là số nguyên dương ($> 0$), và thuộc tính `TRANGTHAI` trong quan hệ `PHIEUXUAT` chỉ nhận một trong hai giá trị là `0` hoặc `1`.  
+a. *(0.75 điểm)* Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra thuộc tính `SOLIEUXUAT` trong quan hệ `CTPX` phải là số nguyên dương ($> 0$), và thuộc tính `TRANGTHAI` trong quan hệ `PHIEUXUAT` chỉ nhận một trong hai giá trị là `0` hoặc `1`.
 b. *(0.75 điểm)* Viết câu lệnh SQL cập nhật (`UPDATE`) tăng giá đơn vị (`DONGIA`) thêm 10% đối với các lô vắc-xin có hạn sử dụng (`HSD`) trong năm 2025 do nhà cung cấp có tên là 'AstraZeneca' cung cấp.
 
 ### 2. Viết các biểu thức Đại số quan hệ (6.0 điểm - mỗi câu 1.0 điểm)
-a. *(1.0 điểm)* Liệt kê thông tin các lô vắc-xin (`MALO`, `TENLO`, `SOLIEU`, `DONGIA`) có tên vắc-xin là 'Pfizer-BioNTech' và được sản xuất trong năm 2024.  
-b. *(1.0 điểm)* Cho biết danh sách các điểm tiêm (`MADT`, `TENDT`, `QUAN`) đã tiếp nhận các phiếu xuất vắc-xin vào ngày '15/10/2024'.  
-c. *(1.0 điểm)* Liệt kê thông tin các điểm tiêm ở quận 'Bình Thạnh' (`MADT`, `TENDT`) và họ tên bác sĩ (`HOTEN`) đang phụ trách tại điểm tiêm đó **nếu có**.  
-d. *(1.0 điểm)* Tính tổng số liều vắc-xin xuất (`SOLIEUXUAT`) theo từng điểm tiêm (`MADT`) trong tháng 10 năm 2024. Thông tin hiển thị gồm: `MADT`, `TONGLIEU`.  
-e. *(1.0 điểm)* Tìm các điểm tiêm (`MADT`, `TENDT`) đã tiếp nhận **tất cả** các lô vắc-xin của nhà cung cấp có tên là 'Moderna' (`TENNCC = 'Moderna'`).  
+a. *(1.0 điểm)* Liệt kê thông tin các lô vắc-xin (`MALO`, `TENLO`, `SOLIEU`, `DONGIA`) có tên vắc-xin là 'Pfizer-BioNTech' và được sản xuất trong năm 2024.
+b. *(1.0 điểm)* Cho biết danh sách các điểm tiêm (`MADT`, `TENDT`, `QUAN`) đã tiếp nhận các phiếu xuất vắc-xin vào ngày '15/10/2024'.
+c. *(1.0 điểm)* Liệt kê thông tin các điểm tiêm ở quận 'Bình Thạnh' (`MADT`, `TENDT`) và họ tên các bác sĩ (`HOTEN`) đang trực tại điểm tiêm đó **nếu có**.
+d. *(1.0 điểm)* Tính tổng số liều vắc-xin xuất (`SOLIEUXUAT`) theo từng điểm tiêm (`MADT`) trong tháng 10 năm 2024. Thông tin hiển thị gồm: `MADT`, `TONGLIEU`.
+e. *(1.0 điểm)* Tìm các điểm tiêm (`MADT`, `TENDT`) đã tiếp nhận **tất cả** các lô vắc-xin của nhà cung cấp có tên là 'Moderna' (`TENNCC = 'Moderna'`).
 f. *(1.0 điểm)* Cho biết điểm tiêm nào (`MADT`, `TENDT`) có sức chứa (`SUCCHUA`) lớn nhất trong số các điểm tiêm thuộc quận 'Thủ Đức'.
 
 ---
-**HẾT ĐỀ THI MÔ PHỎNG SỐ 01**  
+**HẾT ĐỀ THI MÔ PHỎNG SỐ 01**
 *Cán bộ coi thi không giải thích gì thêm.*
