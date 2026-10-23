@@ -140,7 +140,8 @@
         "erd_entities": "0.75đ (Xác định đúng 5 thực thể và khóa chính)",
         "erd_relationships_cardinality": "0.75đ (Vẽ đúng mối kết hợp và bản số min-max hai phía)",
         "mapping_pk_fk": "1.00đ (Chuyển đổi đúng quan hệ, gạch chân PK và xác định rõ FK)"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "M01-Q2A",
@@ -163,7 +164,8 @@
         "syntax_alter_table": "0.25đ",
         "check_solieuxuat": "0.25đ",
         "check_trangthai": "0.25đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "M01-Q2B",
@@ -186,7 +188,8 @@
         "update_set_calculation": "0.25đ",
         "join_condition": "0.25đ",
         "where_filtering": "0.25đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "M01-Q2C1",
@@ -208,7 +211,8 @@
       "rubric": {
         "selection_condition": "0.50đ (Đúng điều kiện chuỗi và ngày tháng)",
         "projection_attributes": "0.50đ (Đúng tập thuộc tính đầu ra)"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "M01-Q2C2",
@@ -232,7 +236,8 @@
         "selection_filter": "0.25đ",
         "join_operation": "0.50đ",
         "projection": "0.25đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "M01-Q2C3",
@@ -255,7 +260,8 @@
       "rubric": {
         "outer_join_recognition": "0.50đ (Bắt buộc dùng ⟕ hoặc phân tích trường hợp NULL)",
         "selection_and_projection": "0.50đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "M01-Q2C4",
@@ -278,7 +284,8 @@
       "rubric": {
         "time_filter_and_join": "0.50đ",
         "grouping_gamma_aggregate": "0.50đ (Đúng thuộc tính gom nhóm và hàm SUM)"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "M01-Q2C5",
@@ -303,7 +310,8 @@
         "target_set_construction": "0.25đ",
         "candidate_relation_projection": "0.25đ",
         "division_operation": "0.50đ (Đúng bản chất toán học của phép chia)"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "M01-Q2C6",
@@ -327,7 +335,8 @@
       "rubric": {
         "subquery_or_self_join": "0.50đ",
         "subtraction_or_max_logic": "0.50đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "ERD-002",
@@ -421,7 +430,8 @@
       "rubric": {
         "erd": "1.50đ",
         "mapping": "1.00đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "ERD-003",
@@ -513,7 +523,8 @@
       "rubric": {
         "erd": "1.25đ",
         "mapping": "0.75đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B03",
@@ -536,7 +547,8 @@
       "rubric": {
         "rename_operation": "0.50đ",
         "self_join_and_projection": "0.50đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B04",
@@ -559,7 +571,8 @@
       "rubric": {
         "intersect_operands": "0.50đ",
         "set_intersection": "0.50đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D01",
@@ -582,7 +595,8 @@
       "rubric": {
         "division_algebra": "0.50đ",
         "equivalence_proof": "0.50đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D03",
@@ -604,7 +618,8 @@
       "rubric": {
         "join_and_grouping": "0.50đ",
         "expression_calculation": "0.50đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "SQL-D03",
@@ -627,7 +642,8 @@
       "rubric": {
         "double_not_exists_structure": "0.50đ",
         "correlation_matching": "0.50đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "ERD-001",
@@ -658,7 +674,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-004",
@@ -689,7 +706,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-005",
@@ -720,7 +738,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-006",
@@ -751,7 +770,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-007",
@@ -782,7 +802,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-008",
@@ -813,7 +834,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-009",
@@ -844,7 +866,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-010",
@@ -875,7 +898,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-011",
@@ -906,7 +930,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-012",
@@ -937,7 +962,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-013",
@@ -968,7 +994,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-014",
@@ -999,7 +1026,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-015",
@@ -1030,7 +1058,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-016",
@@ -1061,7 +1090,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-017",
@@ -1092,7 +1122,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-018",
@@ -1123,7 +1154,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-019",
@@ -1154,7 +1186,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-020",
@@ -1185,7 +1218,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-021",
@@ -1216,7 +1250,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-022",
@@ -1247,7 +1282,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-023",
@@ -1278,7 +1314,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-024",
@@ -1309,7 +1346,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-025",
@@ -1340,7 +1378,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-026",
@@ -1371,7 +1410,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-027",
@@ -1402,7 +1442,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-028",
@@ -1433,7 +1474,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-029",
@@ -1464,7 +1506,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-030",
@@ -1495,7 +1538,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-031",
@@ -1526,7 +1570,8 @@
       "rubric": {
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "ERD-032",
@@ -1557,7 +1602,8 @@
       "rubric": {
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B01",
@@ -1580,7 +1626,8 @@
       "rubric": {
         "ra_logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B02",
@@ -1603,7 +1650,8 @@
       "rubric": {
         "ra_logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B05",
@@ -1626,7 +1674,8 @@
       "rubric": {
         "ra_logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B06",
@@ -1649,7 +1698,8 @@
       "rubric": {
         "ra_logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B07",
@@ -1672,7 +1722,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B08",
@@ -1695,7 +1746,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B09",
@@ -1718,7 +1770,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B10",
@@ -1741,7 +1794,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B11",
@@ -1764,7 +1818,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B12",
@@ -1787,7 +1842,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B13",
@@ -1810,7 +1866,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B14",
@@ -1833,7 +1890,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B15",
@@ -1856,7 +1914,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B16",
@@ -1879,7 +1938,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B17",
@@ -1902,7 +1962,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B18",
@@ -1925,7 +1986,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B19",
@@ -1948,7 +2010,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B20",
@@ -1971,7 +2034,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B21",
@@ -1994,7 +2058,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B22",
@@ -2017,7 +2082,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B23",
@@ -2040,7 +2106,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B24",
@@ -2063,7 +2130,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B25",
@@ -2086,7 +2154,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B26",
@@ -2109,7 +2178,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B27",
@@ -2132,7 +2202,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B28",
@@ -2155,7 +2226,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B29",
@@ -2178,7 +2250,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B30",
@@ -2201,7 +2274,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B31",
@@ -2224,7 +2298,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B32",
@@ -2247,7 +2322,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B33",
@@ -2270,7 +2346,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B34",
@@ -2293,7 +2370,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B35",
@@ -2316,7 +2394,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B36",
@@ -2339,7 +2418,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B37",
@@ -2362,7 +2442,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B38",
@@ -2385,7 +2466,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B39",
@@ -2408,7 +2490,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B40",
@@ -2431,7 +2514,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B41",
@@ -2454,7 +2538,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B42",
@@ -2477,7 +2562,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B43",
@@ -2500,7 +2586,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B44",
@@ -2523,7 +2610,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B45",
@@ -2546,7 +2634,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B46",
@@ -2569,7 +2658,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B47",
@@ -2592,7 +2682,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B48",
@@ -2615,7 +2706,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B49",
@@ -2638,7 +2730,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B50",
@@ -2661,7 +2754,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B51",
@@ -2684,7 +2778,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B52",
@@ -2707,7 +2802,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B53",
@@ -2730,7 +2826,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B54",
@@ -2753,7 +2850,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-B55",
@@ -2776,7 +2874,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B56",
@@ -2799,7 +2898,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B57",
@@ -2822,7 +2922,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B58",
@@ -2845,7 +2946,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-B59",
@@ -2868,7 +2970,8 @@
       "rubric": {
         "logic": "0.60đ",
         "syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D02",
@@ -2891,7 +2994,8 @@
       "rubric": {
         "division_grouping_logic": "0.60đ",
         "projection_result": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D04",
@@ -2914,7 +3018,8 @@
       "rubric": {
         "division_grouping_logic": "0.60đ",
         "projection_result": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D05",
@@ -2937,7 +3042,8 @@
       "rubric": {
         "division_grouping_logic": "0.60đ",
         "projection_result": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D06",
@@ -2960,7 +3066,8 @@
       "rubric": {
         "division_grouping_logic": "0.60đ",
         "projection_result": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D07",
@@ -2983,7 +3090,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D08",
@@ -3006,7 +3114,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D09",
@@ -3029,7 +3138,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D10",
@@ -3052,7 +3162,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D11",
@@ -3075,7 +3186,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D12",
@@ -3098,7 +3210,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D13",
@@ -3121,7 +3234,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D14",
@@ -3144,7 +3258,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D15",
@@ -3167,7 +3282,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D16",
@@ -3190,7 +3306,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D17",
@@ -3213,7 +3330,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D18",
@@ -3236,7 +3354,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D19",
@@ -3259,7 +3378,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D20",
@@ -3282,7 +3402,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D21",
@@ -3305,7 +3426,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D22",
@@ -3328,7 +3450,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D23",
@@ -3351,7 +3474,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D24",
@@ -3374,7 +3498,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D25",
@@ -3397,7 +3522,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D26",
@@ -3420,7 +3546,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D27",
@@ -3443,7 +3570,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D28",
@@ -3466,7 +3594,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D29",
@@ -3489,7 +3618,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D30",
@@ -3512,7 +3642,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D31",
@@ -3535,7 +3666,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D32",
@@ -3558,7 +3690,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D33",
@@ -3581,7 +3714,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D34",
@@ -3604,7 +3738,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D35",
@@ -3627,7 +3762,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D36",
@@ -3650,7 +3786,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D37",
@@ -3673,7 +3810,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D38",
@@ -3696,7 +3834,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D39",
@@ -3719,7 +3858,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D40",
@@ -3742,7 +3882,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D41",
@@ -3765,7 +3906,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D42",
@@ -3788,7 +3930,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D43",
@@ -3811,7 +3954,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D44",
@@ -3834,7 +3978,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D45",
@@ -3857,7 +4002,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D46",
@@ -3880,7 +4026,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D47",
@@ -3903,7 +4050,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "RA-D48",
@@ -3926,7 +4074,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "RA-D49",
@@ -3949,7 +4098,8 @@
       "rubric": {
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D01",
@@ -3971,7 +4121,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "SQL-D02",
@@ -3993,7 +4144,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "VERIFIED"
     },
     {
       "id": "SQL-D04",
@@ -4015,7 +4167,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D05",
@@ -4037,7 +4190,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D06",
@@ -4059,7 +4213,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D07",
@@ -4081,7 +4236,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D08",
@@ -4103,7 +4259,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D09",
@@ -4125,7 +4282,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D10",
@@ -4147,7 +4305,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D11",
@@ -4169,7 +4328,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D12",
@@ -4191,7 +4351,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D13",
@@ -4213,7 +4374,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D14",
@@ -4235,7 +4397,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D15",
@@ -4257,7 +4420,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D16",
@@ -4279,7 +4443,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D17",
@@ -4301,7 +4466,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D18",
@@ -4323,7 +4489,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D19",
@@ -4345,7 +4512,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D20",
@@ -4367,7 +4535,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D21",
@@ -4389,7 +4558,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D22",
@@ -4411,7 +4581,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D23",
@@ -4433,7 +4604,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     },
     {
       "id": "SQL-D24",
@@ -4455,7 +4627,8 @@
       "rubric": {
         "syntax": "0.40đ",
         "logic": "0.35đ"
-      }
+      },
+      "status": "DRAFT"
     }
   ]
 }

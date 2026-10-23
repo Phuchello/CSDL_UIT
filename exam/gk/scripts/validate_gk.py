@@ -31,6 +31,8 @@ class GKValidator:
             "total_problems": 0,
             "topics": {},
             "difficulties": {"A": 0, "B": 0, "C": 0},
+            "verified_problems": 0,
+            "draft_problems": 0,
             "verified_solutions": 0,
             "rubrics_present": 0,
             "mocks_count": 0,
@@ -87,6 +89,12 @@ class GKValidator:
 
             top = p.get("topic")
             self.stats["topics"][top] = self.stats["topics"].get(top, 0) + 1
+
+            status = p.get("status", "DRAFT")
+            if status == "VERIFIED":
+                self.stats["verified_problems"] += 1
+            else:
+                self.stats["draft_problems"] += 1
 
             if p.get("solution"):
                 self.stats["verified_solutions"] += 1
@@ -197,7 +205,8 @@ class GKValidator:
         print("\n==================================================")
         print(" AUDIT SUMMARY:")
         print(f"  Total Problems in Catalog : {self.stats['total_problems']}")
-        print(f"  Verified Solutions        : {self.stats['verified_solutions']}")
+        print(f"  Verified Problems         : {self.stats['verified_problems']}")
+        print(f"  Draft Problems            : {self.stats['draft_problems']}")
         print(f"  Rubrics Present           : {self.stats['rubrics_present']}")
         print(f"  Difficulties (A/B/C)      : {self.stats['difficulties']}")
         print(f"  Mock Exams Audited        : {self.stats['mocks_count']}")
