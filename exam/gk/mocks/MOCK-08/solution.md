@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-08)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 08 — Quản Lý Sàn Thương Mại Điện Tử & Vận Chuyển Hàng  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 08 — Quản Lý Sàn Thương Mại Điện Tử & Vận Chuyển Hàng
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

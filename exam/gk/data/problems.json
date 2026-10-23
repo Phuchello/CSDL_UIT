@@ -4,158 +4,151 @@
       "id": "M01-Q1",
       "topic": "ERD_MAPPING",
       "difficulty": "B",
-      "title": "Thiết kế ERD & Ánh xạ CSDL Quản lý Tiêm Chủng Vắc-Xin",
-      "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Tiêm Chủng Vắc-Xin tại các Trung tâm Y tế. Bối cảnh gồm TTYT, LO_VACXIN, NHACUNGCAP, DIEMTIEM, NHANVIEN, và Đợt phân phối PHANPHOI.",
-      "schema": "ERD: TTYT, LOVACXIN, NHACC, DIEMTIEM, NHANVIEN, PHANPHOI",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Tiêm Chủng Vắc-Xin",
+      "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Tiếp nhận, Phân phối vắc-xin và Điều động nhân sự tiêm chủng.",
+      "schema": "ERD: NHACUNGCAP, LOVACXIN, DIEMTIEM, NHANVIEN, PHIEUXUAT",
       "recommended_time_mins": 25,
       "points": 2.5,
       "solution": {
         "erd_entities": [
           {
-            "name": "TRUNGTAM_YTE",
-            "pk": "MaTT",
+            "name": "NHACUNGCAP",
+            "pk": "MANCC",
             "attributes": [
-              "MaTT",
-              "TenTT",
-              "DiaChiQuan"
-            ]
-          },
-          {
-            "name": "NHA_CUNGCAP",
-            "pk": "MaNCC",
-            "attributes": [
-              "MaNCC",
-              "TenNCC",
-              "QuocGia",
+              "MANCC",
+              "TENNCC",
+              "QUOCGIA",
               "SDT"
-            ]
+            ],
+            "description": "Nhà cung ứng nguồn vắc-xin."
           },
           {
-            "name": "LO_VACXIN",
-            "pk": "MaLo",
+            "name": "LOVACXIN",
+            "pk": "MALO",
             "attributes": [
-              "MaLo",
-              "TenLo",
-              "TenVacxin",
-              "NgaySX",
+              "MALO",
+              "TENLO",
+              "TENVACXIN",
+              "NGAYSX",
               "HSD",
-              "SoLieuNhap",
-              "DonGia"
-            ]
+              "SOLIEU",
+              "DONGIA"
+            ],
+            "description": "Lô vắc-xin nhập kho."
           },
           {
-            "name": "DIEM_TIEM",
-            "pk": "MaDT",
+            "name": "DIEMTIEM",
+            "pk": "MADT",
             "attributes": [
-              "MaDT",
-              "TenDT",
-              "DiaDiem",
-              "SucChua"
-            ]
+              "MADT",
+              "TENDT",
+              "DIACHI",
+              "QUAN",
+              "SUCCHUA"
+            ],
+            "description": "Điểm tiêm chủng lưu động hoặc cố định."
           },
           {
-            "name": "NHAN_VIEN",
-            "pk": "MaNV",
+            "name": "NHANVIEN",
+            "pk": "MANV",
             "attributes": [
-              "MaNV",
-              "HoTen",
-              "ChuyenMon",
+              "MANV",
+              "HOTEN",
+              "CHUYENMON",
               "SDT"
-            ]
+            ],
+            "description": "Nhân viên y tế (bác sĩ, điều dưỡng) phục vụ tiêm chủng."
+          },
+          {
+            "name": "PHIEUXUAT",
+            "pk": "MAPX",
+            "attributes": [
+              "MAPX",
+              "NGAYXUAT",
+              "TRANGTHAI"
+            ],
+            "description": "Phiếu xuất điều phối vắc-xin đến các điểm tiêm."
           }
         ],
         "relationships": [
           {
             "name": "CUNG_CAP",
             "entities": [
-              "NHA_CUNGCAP",
-              "LO_VACXIN"
+              "NHACUNGCAP",
+              "LOVACXIN"
             ],
             "cardinality": "1:N",
-            "min_max": "NHA_CUNGCAP (1, N) - (1, 1) LO_VACXIN"
-          },
-          {
-            "name": "QUAN_LY_DIEMTIEM",
-            "entities": [
-              "TRUNGTAM_YTE",
-              "DIEM_TIEM"
-            ],
-            "cardinality": "1:N",
-            "min_max": "TRUNGTAM_YTE (1, N) - (1, 1) DIEM_TIEM"
+            "min_max": "NHACUNGCAP (1, N) - (1, 1) LOVACXIN"
           },
           {
             "name": "CONG_TAC",
             "entities": [
-              "TRUNGTAM_YTE",
-              "NHAN_VIEN"
+              "DIEMTIEM",
+              "NHANVIEN"
             ],
             "cardinality": "1:N",
-            "min_max": "TRUNGTAM_YTE (1, N) - (1, 1) NHAN_VIEN"
+            "min_max": "DIEMTIEM (0, N) - (0, 1) NHANVIEN"
           },
           {
-            "name": "PHAN_PHOI",
+            "name": "XUAT_DEN",
             "entities": [
-              "LO_VACXIN",
-              "DIEM_TIEM"
+              "DIEMTIEM",
+              "PHIEUXUAT"
+            ],
+            "cardinality": "1:N",
+            "min_max": "DIEMTIEM (0, N) - (1, 1) PHIEUXUAT"
+          },
+          {
+            "name": "CHI_TIET_XUAT",
+            "entities": [
+              "PHIEUXUAT",
+              "LOVACXIN"
             ],
             "cardinality": "M:N",
             "attributes": [
-              "NgayPP",
-              "SoLieuPP",
-              "TrangThai"
+              "SOLIEUXUAT"
             ],
-            "min_max": "LO_VACXIN (0, N) - (1, N) DIEM_TIEM"
-          },
-          {
-            "name": "TRUC_CA",
-            "entities": [
-              "NHAN_VIEN",
-              "DIEM_TIEM"
-            ],
-            "cardinality": "M:N",
-            "attributes": [
-              "NgayTruc",
-              "VaiTroTruc"
-            ],
-            "min_max": "NHAN_VIEN (0, N) - (1, N) DIEM_TIEM"
+            "min_max": "PHIEUXUAT (1, N) - (0, N) LOVACXIN"
           }
         ],
         "relational_schema": [
-          "TRUNGTAM_YTE (MaTT, TenTT, DiaChiQuan) - PK: MaTT",
-          "NHA_CUNGCAP (MaNCC, TenNCC, QuocGia, SDT) - PK: MaNCC",
-          "LO_VACXIN (MaLo, TenLo, TenVacxin, NgaySX, HSD, SoLieuNhap, DonGia, MaNCC) - PK: MaLo, FK: MaNCC -> NHA_CUNGCAP(MaNCC)",
-          "DIEM_TIEM (MaDT, TenDT, DiaDiem, SucChua, MaTT) - PK: MaDT, FK: MaTT -> TRUNGTAM_YTE(MaTT)",
-          "NHAN_VIEN (MaNV, HoTen, ChuyenMon, SDT, MaTT) - PK: MaNV, FK: MaTT -> TRUNGTAM_YTE(MaTT)",
-          "PHAN_PHOI (MaLo, MaDT, NgayPP, SoLieuPP, TrangThai) - PK: (MaLo, MaDT, NgayPP), FK: MaLo -> LO_VACXIN(MaLo), MaDT -> DIEM_TIEM(MaDT)",
-          "TRUC_CA (MaNV, MaDT, NgayTruc, VaiTroTruc) - PK: (MaNV, MaDT, NgayTruc), FK: MaNV -> NHAN_VIEN(MaNV), MaDT -> DIEM_TIEM(MaDT)"
+          "NHACUNGCAP (MANCC, TENNCC, QUOCGIA, SDT) - PK: MANCC",
+          "LOVACXIN (MALO, TENLO, TENVACXIN, NGAYSX, HSD, SOLIEU, DONGIA, MANCC) - PK: MALO, FK: MANCC -> NHACUNGCAP(MANCC)",
+          "DIEMTIEM (MADT, TENDT, DIACHI, QUAN, SUCCHUA) - PK: MADT",
+          "NHANVIEN (MANV, HOTEN, CHUYENMON, SDT, MADT) - PK: MANV, FK: MADT -> DIEMTIEM(MADT)",
+          "PHIEUXUAT (MAPX, NGAYXUAT, TRANGTHAI, MADT) - PK: MAPX, FK: MADT -> DIEMTIEM(MADT)",
+          "CTPX (MAPX, MALO, SOLIEUXUAT) - PK: (MAPX, MALO), FK: MAPX -> PHIEUXUAT(MAPX), MALO -> LOVACXIN(MALO)"
         ],
         "intermediate_steps": [
-          "Bước 1: Liệt kê thực thể và thuộc tính nhận diện từ văn bản.",
-          "Bước 2: Xác định bản số min-max dựa trên từ khóa: 'mỗi lô do duy nhất 1 NCC' -> (1,1); 'một NCC cung cấp nhiều lô' -> (1,N).",
-          "Bước 3: Chuyển đổi mối kết hợp 1:N bằng cách mang PK phía 1 sang làm FK phía N.",
-          "Bước 4: Chuyển đổi mối kết hợp M:N (PHAN_PHOI, TRUC_CA) thành bảng riêng với khóa chính là tổ hợp PK hai phía kèm thuộc tính phân biệt thời gian."
+          "Bước 1: Xác định 5 tập thực thể, thuộc tính và khóa chính.",
+          "Bước 2: Phân tích 4 mối kết hợp và bản số min-max hai phía (3 quan hệ 1:N và 1 quan hệ M:N).",
+          "Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa ngoại vào bảng phía N.",
+          "Bước 4: Ánh xạ quan hệ M:N CHI_TIET_XUAT thành bảng quan hệ trung gian CTPX gồm 2 khóa ngoại làm khóa chính phức hợp và thuộc tính SOLIEUXUAT."
         ]
       },
       "rubric": {
-        "erd_entities": "0.75đ (Xác định đúng 5 thực thể và khóa chính)",
-        "erd_relationships_cardinality": "0.75đ (Vẽ đúng mối kết hợp và bản số min-max hai phía)",
-        "mapping_pk_fk": "1.00đ (Chuyển đổi đúng quan hệ, gạch chân PK và xác định rõ FK)"
-      },
-      "status": "VERIFIED"
+        "entities_and_keys": "0.50đ",
+        "relationships_and_cardinality": "1.00đ (mỗi mối kết hợp 0.25đ)",
+        "relational_mapping_pk_fk": "1.00đ"
+      }
     },
     {
       "id": "M01-Q2A",
       "topic": "SQL_DDL_DML",
       "difficulty": "A",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
       "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên CTPX và PHIEUXUAT",
       "prompt": "Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra thuộc tính SOLIEUXUAT trong CTPX phải là số nguyên dương (> 0), và thuộc tính TRANGTHAI trong PHIEUXUAT chỉ nhận một trong hai giá trị là 0 hoặc 1.",
-      "schema": "CTPX(MAPX, MALO, SOLIEUXUAT), PHIEUXUAT(MAPX, NGAYXUAT, MADT, TRANGTHAI)",
+      "schema": "CTPX(MAPX, MALO, SOLIEUXUAT), PHIEUXUAT(MAPX, NGAYXUAT, TRANGTHAI, MADT)",
       "recommended_time_mins": 5,
       "points": 0.75,
       "solution": {
         "sql": "ALTER TABLE CTPX ADD CONSTRAINT CK_CTPX_SOLIEUXUAT CHECK (SOLIEUXUAT > 0);\n\nALTER TABLE PHIEUXUAT ADD CONSTRAINT CK_PHIEUXUAT_TRANGTHAI CHECK (TRANGTHAI IN (0, 1));",
         "intermediate_steps": [
-          "Xác định bảng cần áp dụng: CTPX và PHIEUXUAT.",
+          "Xác định bảng áp dụng: CTPX và PHIEUXUAT.",
           "Dùng cú pháp ALTER TABLE ... ADD CONSTRAINT ... CHECK (...).",
           "Điều kiện miền giá trị: SOLIEUXUAT > 0 và TRANGTHAI IN (0, 1)."
         ]
@@ -164,179 +157,185 @@
         "syntax_alter_table": "0.25đ",
         "check_solieuxuat": "0.25đ",
         "check_trangthai": "0.25đ"
-      },
-      "status": "VERIFIED"
+      }
     },
     {
       "id": "M01-Q2B",
       "topic": "SQL_DDL_DML",
       "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
       "title": "Cập Nhật Tăng Đơn Giá Vắc-Xin Theo HSD Và Nhà Cung Cấp",
       "prompt": "Viết câu lệnh SQL cập nhật (UPDATE) tăng giá đơn vị (DONGIA) thêm 10% đối với các lô vắc-xin có hạn sử dụng (HSD) trong năm 2025 do nhà cung cấp có tên là 'AstraZeneca' cung cấp.",
-      "schema": "LOVACXIN(MALO, TENLO, TENKVACXIN, MANCC, NGAYSX, HSD, SOLIEU, DONGIA), NHACUNGCAP(MANCC, TENNCC, QUOCGIA, SDT)",
+      "schema": "LOVACXIN(MALO, TENLO, TENVACXIN, NGAYSX, HSD, SOLIEU, DONGIA, MANCC), NHACUNGCAP(MANCC, TENNCC, QUOCGIA, SDT)",
       "recommended_time_mins": 6,
       "points": 0.75,
       "solution": {
         "sql": "UPDATE LOVACXIN\nSET DONGIA = DONGIA * 1.1\nFROM LOVACXIN LV\nINNER JOIN NHACUNGCAP NCC ON LV.MANCC = NCC.MANCC\nWHERE YEAR(LV.HSD) = 2025 AND NCC.TENNCC = 'AstraZeneca';",
         "intermediate_steps": [
-          "Phép tính: Tăng 10% tức DONGIA = DONGIA * 1.1 (hoặc DONGIA + DONGIA * 0.1).",
+          "Tính giá mới: DONGIA = DONGIA * 1.1.",
           "Điều kiện lọc: YEAR(HSD) = 2025 và TENNCC = 'AstraZeneca'.",
-          "Dùng cú pháp T-SQL UPDATE ... FROM ... INNER JOIN để liên kết bảng an toàn."
+          "Cú pháp T-SQL UPDATE ... FROM ... INNER JOIN."
         ]
       },
       "rubric": {
         "update_set_calculation": "0.25đ",
         "join_condition": "0.25đ",
         "where_filtering": "0.25đ"
-      },
-      "status": "VERIFIED"
+      }
     },
     {
       "id": "M01-Q2C1",
       "topic": "RA_BASIC_JOIN",
       "difficulty": "A",
-      "title": "ĐSQH Lọc Lô Vắc-Xin Theo Tên Và Năm Sản Xuất",
-      "prompt": "Liệt kê thông tin các lô vắc-xin (MALO, TENLO, SOLIEU, DONGIA) có tên vắc-xin là 'Pfizer-BioNTech' và được sản xuất trong năm 2024.",
-      "schema": "LOVACXIN(MALO, TENLO, TENKVACXIN, MANCC, NGAYSX, HSD, SOLIEU, DONGIA)",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Lọc Lô Vắc-Xin Theo Tên Loại Và Năm Sản Xuất",
+      "prompt": "Liệt kê thông tin các lô vắc-xin (MALO, TENLO, SOLIEU, DONGIA) có tên loại vắc-xin là 'Pfizer-BioNTech' và được sản xuất trong năm 2024.",
+      "schema": "LOVACXIN(MALO, TENLO, TENVACXIN, NGAYSX, HSD, SOLIEU, DONGIA, MANCC)",
       "recommended_time_mins": 5,
       "points": 1.0,
       "solution": {
-        "relational_algebra": "R1 ← σ_{TENKVACXIN = 'Pfizer-BioNTech' ∧ NGAYSX ≥ '01/01/2024' ∧ NGAYSX ≤ '31/12/2024'}(LOVACXIN)\nKQ ← π_{MALO, TENLO, SOLIEU, DONGIA}(R1)",
+        "relational_algebra": "R1 ← σ_{TENVACXIN = 'Pfizer-BioNTech' ∧ NGAYSX ≥ '01/01/2024' ∧ NGAYSX ≤ '31/12/2024'}(LOVACXIN)\nKQ ← π_{MALO, TENLO, SOLIEU, DONGIA}(R1)",
         "intermediate_steps": [
-          "Bước 1: Phép chọn σ trên quan hệ LOVACXIN với điều kiện kép TENKVACXIN = 'Pfizer-BioNTech' và năm sản xuất 2024.",
+          "Bước 1: Phép chọn σ trên quan hệ LOVACXIN với điều kiện TENVACXIN = 'Pfizer-BioNTech' và năm sản xuất 2024.",
           "Bước 2: Phép chiếu π lấy đúng 4 thuộc tính yêu cầu: MALO, TENLO, SOLIEU, DONGIA."
         ],
-        "sql": "SELECT MALO, TENLO, SOLIEU, DONGIA\nFROM LOVACXIN\nWHERE TENKVACXIN = 'Pfizer-BioNTech' AND YEAR(NGAYSX) = 2024;"
+        "sql": "SELECT MALO, TENLO, SOLIEU, DONGIA\nFROM LOVACXIN\nWHERE TENVACXIN = 'Pfizer-BioNTech' AND YEAR(NGAYSX) = 2024;"
       },
       "rubric": {
-        "selection_condition": "0.50đ (Đúng điều kiện chuỗi và ngày tháng)",
-        "projection_attributes": "0.50đ (Đúng tập thuộc tính đầu ra)"
-      },
-      "status": "VERIFIED"
+        "selection_condition": "0.50đ",
+        "projection_attributes": "0.50đ"
+      }
     },
     {
       "id": "M01-Q2C2",
       "topic": "RA_BASIC_JOIN",
       "difficulty": "B",
-      "title": "ĐSQH Kết Nối Điểm Tiêm Nhận Phiếu Xuất Ngày 15/10/2024",
-      "prompt": "Cho biết danh sách các điểm tiêm (MADT, TENDT, QUAN) đã tiếp nhận các phiếu xuất vắc-xin vào ngày '15/10/2024'.",
-      "schema": "DIEMTIEM(MADT, TENDT, QUAN, SUCCHUA, MATRP), PHIEUXUAT(MAPX, NGAYXUAT, MADT, TRANGTHAI)",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Kết Nối Điểm Tiêm Đã Tiếp Nhận Phiếu Xuất Ngày 15/10/2024",
+      "prompt": "Cho biết danh sách các điểm tiêm (MADT, TENDT, QUAN) đã tiếp nhận (TRANGTHAI = 1) các phiếu xuất vắc-xin vào ngày '15/10/2024'.",
+      "schema": "DIEMTIEM(MADT, TENDT, DIACHI, QUAN, SUCCHUA), PHIEUXUAT(MAPX, NGAYXUAT, TRANGTHAI, MADT)",
       "recommended_time_mins": 6,
       "points": 1.0,
       "solution": {
-        "relational_algebra": "R1 ← σ_{NGAYXUAT = '15/10/2024'}(PHIEUXUAT)\nR2 ← DIEMTIEM ⋈_{DIEMTIEM.MADT = R1.MADT} R1\nKQ ← π_{MADT, TENDT, QUAN}(R2)",
+        "relational_algebra": "R1 ← σ_{NGAYXUAT = '15/10/2024' ∧ TRANGTHAI = 1}(PHIEUXUAT)\nR2 ← DIEMTIEM ⋈ R1\nKQ ← π_{MADT, TENDT, QUAN}(R2)",
         "intermediate_steps": [
-          "Bước 1: Lọc các phiếu xuất có NGAYXUAT = '15/10/2024' thành R1.",
-          "Bước 2: Kết tự nhiên hoặc kết bằng giữa DIEMTIEM và R1 qua khóa ngoại MADT.",
-          "Bước 3: Chiếu lấy các thuộc tính định danh điểm tiêm: MADT, TENDT, QUAN."
+          "Bước 1: Lọc trên PHIEUXUAT với ngày xuất '15/10/2024' và TRANGTHAI = 1 (đã tiếp nhận).",
+          "Bước 2: Kết nối tự nhiên DIEMTIEM ⋈ R1 qua thuộc tính chung MADT.",
+          "Bước 3: Chiếu lấy MADT, TENDT, QUAN."
         ],
-        "sql": "SELECT DISTINCT DT.MADT, DT.TENDT, DT.QUAN\nFROM DIEMTIEM DT\nINNER JOIN PHIEUXUAT PX ON DT.MADT = PX.MADT\nWHERE PX.NGAYXUAT = '2024-10-15';"
+        "sql": "SELECT DISTINCT DT.MADT, DT.TENDT, DT.QUAN\nFROM DIEMTIEM DT\nINNER JOIN PHIEUXUAT PX ON DT.MADT = PX.MADT\nWHERE PX.NGAYXUAT = '2024-10-15' AND PX.TRANGTHAI = 1;"
       },
       "rubric": {
-        "selection_filter": "0.25đ",
-        "join_operation": "0.50đ",
-        "projection": "0.25đ"
-      },
-      "status": "VERIFIED"
+        "selection_with_trangthai": "0.50đ",
+        "join_and_projection": "0.50đ"
+      }
     },
     {
       "id": "M01-Q2C3",
       "topic": "RA_BASIC_JOIN",
       "difficulty": "B",
-      "title": "ĐSQH Kết Ngoài Phụ Trách Điểm Tiêm Quận Bình Thạnh (Nếu Có)",
-      "prompt": "Liệt kê thông tin các điểm tiêm ở quận 'Bình Thạnh' (MADT, TENDT) và họ tên bác sĩ (HOTEN) đang phụ trách tại điểm tiêm đó nếu có.",
-      "schema": "DIEMTIEM(MADT, TENDT, QUAN, SUCCHUA, MATRP), BACSI(MABS, HOTEN, CHUYENKHOA, SDT, MADT)",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Kết Ngoài Điểm Tiêm Quận Bình Thạnh Và Nhân Viên (Nếu Có)",
+      "prompt": "Liệt kê thông tin các điểm tiêm ở quận 'Bình Thạnh' (MADT, TENDT) và họ tên nhân viên y tế (HOTEN) đang công tác tại điểm tiêm đó nếu có.",
+      "schema": "DIEMTIEM(MADT, TENDT, DIACHI, QUAN, SUCCHUA), NHANVIEN(MANV, HOTEN, CHUYENMON, SDT, MADT)",
       "recommended_time_mins": 7,
       "points": 1.0,
       "solution": {
-        "relational_algebra": "R1 ← σ_{QUAN = 'Bình Thạnh'}(DIEMTIEM)\nR2 ← R1 ⟕_{R1.MADT = BACSI.MADT} BACSI\nKQ ← π_{MADT, TENDT, HOTEN}(R2)",
+        "relational_algebra": "R1 ← σ_{QUAN = 'Bình Thạnh'}(DIEMTIEM)\nR2 ← R1 ⟕_{R1.MADT = NHANVIEN.MADT} NHANVIEN\nKQ ← π_{MADT, TENDT, HOTEN}(R2)",
         "intermediate_steps": [
           "Bước 1: Lọc điểm tiêm ở quận Bình Thạnh thành R1.",
-          "Bước 2: Nhận diện từ khóa 'NẾU CÓ' -> Phải dùng Phép Kết Ngoài Trái (Left Outer Join ⟕) từ R1 sang BACSI để không làm mất các điểm tiêm chưa có bác sĩ trực.",
+          "Bước 2: Nhận diện từ khóa 'NẾU CÓ' -> Phải dùng Phép Kết Ngoài Trái (Left Outer Join ⟕) từ R1 sang NHANVIEN để không làm mất các điểm tiêm chưa có nhân viên công tác.",
           "Bước 3: Chiếu lấy MADT, TENDT, HOTEN."
         ],
-        "sql": "SELECT DT.MADT, DT.TENDT, BS.HOTEN\nFROM DIEMTIEM DT\nLEFT OUTER JOIN BACSI BS ON DT.MADT = BS.MADT\nWHERE DT.QUAN = N'Bình Thạnh';"
+        "sql": "SELECT DT.MADT, DT.TENDT, NV.HOTEN\nFROM DIEMTIEM DT\nLEFT OUTER JOIN NHANVIEN NV ON DT.MADT = NV.MADT\nWHERE DT.QUAN = N'Bình Thạnh';"
       },
       "rubric": {
-        "outer_join_recognition": "0.50đ (Bắt buộc dùng ⟕ hoặc phân tích trường hợp NULL)",
-        "selection_and_projection": "0.50đ"
-      },
-      "status": "VERIFIED"
+        "selection_condition": "0.25đ",
+        "outer_join_recognition": "0.50đ (Bắt buộc dùng ⟕)",
+        "projection": "0.25đ"
+      }
     },
     {
       "id": "M01-Q2C4",
       "topic": "RA_DIVISION_GROUPING",
       "difficulty": "B",
-      "title": "ĐSQH Gom Nhóm Tính Tổng Liều Vắc-Xin Xuất Theo Điểm Tiêm",
-      "prompt": "Tính tổng số liều vắc-xin xuất (SOLIEUXUAT) theo từng điểm tiêm (MADT) trong tháng 10 năm 2024. Thông tin hiển thị gồm: MADT, TONGLIEU.",
-      "schema": "PHIEUXUAT(MAPX, NGAYXUAT, MADT, TRANGTHAI), CTPX(MAPX, MALO, SOLIEUXUAT)",
-      "recommended_time_mins": 7,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Liều Vắc-Xin Đã Tiếp Nhận Theo Điểm Tiêm",
+      "prompt": "Tính tổng số liều vắc-xin đã tiếp nhận (SOLIEUXUAT, với TRANGTHAI = 1) theo từng điểm tiêm (MADT) trong tháng 10 năm 2024. Thông tin hiển thị gồm: MADT, TONGLIEU.",
+      "schema": "DIEMTIEM(MADT, TENDT, DIACHI, QUAN, SUCCHUA), PHIEUXUAT(MAPX, NGAYXUAT, TRANGTHAI, MADT), CTPX(MAPX, MALO, SOLIEUXUAT)",
+      "recommended_time_mins": 8,
       "points": 1.0,
       "solution": {
-        "relational_algebra": "R1 ← σ_{NGAYXUAT ≥ '01/10/2024' ∧ NGAYXUAT ≤ '31/10/2024'}(PHIEUXUAT)\nR2 ← R1 ⋈_{R1.MAPX = CTPX.MAPX} CTPX\nKQ ← _{MADT} γ _{SUM(SOLIEUXUAT) → TONGLIEU}(R2)",
+        "relational_algebra": "R1 ← σ_{NGAYXUAT ≥ '01/10/2024' ∧ NGAYXUAT ≤ '31/10/2024' ∧ TRANGTHAI = 1}(PHIEUXUAT)\nR2 ← R1 ⋈ CTPX\nKQ ← _{MADT} γ _{SUM(SOLIEUXUAT) → TONGLIEU}(R2)",
         "intermediate_steps": [
-          "Bước 1: Lọc phiếu xuất phát sinh trong tháng 10/2024 thành R1.",
-          "Bước 2: Kết nối R1 với CTPX qua MAPX để lấy số liều xuất.",
-          "Bước 3: Thực hiện phép gom nhóm γ theo thuộc tính MADT, tính hàm tổng SUM(SOLIEUXUAT) và đổi tên thành TONGLIEU."
+          "Bước 1: Lọc phiếu xuất phát sinh trong tháng 10/2024 và đã tiếp nhận thực tế (TRANGTHAI = 1).",
+          "Bước 2: Kết nối với CTPX qua MAPX để lấy số lượng liều xuất SOLIEUXUAT.",
+          "Bước 3: Thực hiện phép gom nhóm γ theo MADT và tính tổng SUM(SOLIEUXUAT) đổi tên thành TONGLIEU."
         ],
-        "sql": "SELECT PX.MADT, SUM(CT.SOLIEUXUAT) AS TONGLIEU\nFROM PHIEUXUAT PX\nINNER JOIN CTPX CT ON PX.MAPX = CT.MAPX\nWHERE MONTH(PX.NGAYXUAT) = 10 AND YEAR(PX.NGAYXUAT) = 2024\nGROUP BY PX.MADT;"
+        "sql": "SELECT PX.MADT, SUM(CT.SOLIEUXUAT) AS TONGLIEU\nFROM PHIEUXUAT PX\nINNER JOIN CTPX CT ON PX.MAPX = CT.MAPX\nWHERE PX.NGAYXUAT >= '2024-10-01' AND PX.NGAYXUAT <= '2024-10-31' AND PX.TRANGTHAI = 1\nGROUP BY PX.MADT;"
       },
       "rubric": {
-        "time_filter_and_join": "0.50đ",
-        "grouping_gamma_aggregate": "0.50đ (Đúng thuộc tính gom nhóm và hàm SUM)"
-      },
-      "status": "VERIFIED"
+        "filtering_and_join": "0.50đ",
+        "grouping_and_aggregation": "0.50đ"
+      }
     },
     {
       "id": "M01-Q2C5",
       "topic": "RA_DIVISION_GROUPING",
       "difficulty": "C",
-      "title": "ĐSQH Phép Chia Tìm Điểm Tiêm Nhận Tất Cả Lô Vắc-Xin Của Moderna",
-      "prompt": "Tìm các điểm tiêm (MADT, TENDT) đã tiếp nhận tất cả các lô vắc-xin của nhà cung cấp có tên là 'Moderna' (TENNCC = 'Moderna').",
-      "schema": "NHACUNGCAP(MANCC, TENNCC, QUOCGIA, SDT), LOVACXIN(MALO, TENLO, TENKVACXIN, MANCC, NGAYSX, HSD, SOLIEU, DONGIA), DIEMTIEM(MADT, TENDT, QUAN, SUCCHUA, MATRP), PHIEUXUAT(MAPX, NGAYXUAT, MADT, TRANGTHAI), CTPX(MAPX, MALO, SOLIEUXUAT)",
-      "recommended_time_mins": 9,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Phép Chia Tìm Điểm Tiêm Đã Tiếp Nhận Tất Cả Lô Vắc-Xin Của Moderna",
+      "prompt": "Tìm các điểm tiêm (MADT, TENDT) đã tiếp nhận thực tế (TRANGTHAI = 1) tất cả các lô vắc-xin của nhà cung cấp có tên là 'Moderna' (TENNCC = 'Moderna').",
+      "schema": "NHACUNGCAP(MANCC, TENNCC, QUOCGIA, SDT), LOVACXIN(MALO, TENLO, TENVACXIN, NGAYSX, HSD, SOLIEU, DONGIA, MANCC), DIEMTIEM(MADT, TENDT, DIACHI, QUAN, SUCCHUA), PHIEUXUAT(MAPX, NGAYXUAT, TRANGTHAI, MADT), CTPX(MAPX, MALO, SOLIEUXUAT)",
+      "recommended_time_mins": 10,
       "points": 1.0,
       "solution": {
-        "relational_algebra": "R_Moderna ← π_{MALO}(σ_{TENNCC = 'Moderna'}(NHACUNGCAP ⋈ LOVACXIN))\nR_DiemTiem_Lo ← π_{MADT, MALO}(DIEMTIEM ⋈ PHIEUXUAT ⋈ CTPX)\nR_Chia ← R_DiemTiem_Lo ÷ R_Moderna\nKQ ← π_{MADT, TENDT}(R_Chia ⋈ DIEMTIEM)",
+        "relational_algebra": "R_Moderna ← π_{MALO}(σ_{TENNCC = 'Moderna'}(NHACUNGCAP ⋈ LOVACXIN))\nR_DT_Lo ← π_{MADT, MALO}((σ_{TRANGTHAI = 1}(PHIEUXUAT)) ⋈ CTPX)\nR_Chia ← R_DT_Lo ÷ R_Moderna\nKQ ← π_{MADT, TENDT}(R_Chia ⋈ DIEMTIEM)",
         "intermediate_steps": [
-          "Bước 1: Xác định tập mục tiêu (tập bị chia) R_Moderna: Chiếu lấy danh sách MALO thuộc nhà cung cấp 'Moderna'.",
-          "Bước 2: Xác định quan hệ tham gia R_DiemTiem_Lo: Chiếu lấy các cặp (MADT, MALO) thực tế đã xuất vắc-xin đến điểm tiêm.",
-          "Bước 3: Thực hiện phép chia hình thức R_Chia = R_DiemTiem_Lo ÷ R_Moderna. Kết quả trả về các MADT nhận đủ mọi MALO của Moderna.",
-          "Bước 4: Kết nối ngược với DIEMTIEM để lấy TENDT."
+          "Bước 1 (Tập chia): Lấy tất cả MALO của nhà cung cấp 'Moderna'.",
+          "Bước 2 (Tập bị chia): Lấy các cặp (MADT, MALO) thực tế đã tiếp nhận (TRANGTHAI = 1).",
+          "Bước 3 (Phép chia): Thực hiện R_DT_Lo ÷ R_Moderna để tìm các MADT nhận đủ mọi lô.",
+          "Bước 4: Kết nối với DIEMTIEM để lấy TENDT."
         ],
-        "sql": "SELECT DT.MADT, DT.TENDT\nFROM DIEMTIEM DT\nWHERE NOT EXISTS (\n    SELECT LV.MALO\n    FROM LOVACXIN LV\n    INNER JOIN NHACUNGCAP NCC ON LV.MANCC = NCC.MANCC\n    WHERE NCC.TENNCC = 'Moderna'\n    EXCEPT\n    SELECT CT.MALO\n    FROM PHIEUXUAT PX\n    INNER JOIN CTPX CT ON PX.MAPX = CT.MAPX\n    WHERE PX.MADT = DT.MADT\n);"
+        "sql": "SELECT DT.MADT, DT.TENDT\nFROM DIEMTIEM DT\nWHERE NOT EXISTS (\n    SELECT LV.MALO\n    FROM LOVACXIN LV\n    INNER JOIN NHACUNGCAP NCC ON LV.MANCC = NCC.MANCC\n    WHERE NCC.TENNCC = 'Moderna'\n    EXCEPT\n    SELECT CT.MALO\n    FROM PHIEUXUAT PX\n    INNER JOIN CTPX CT ON PX.MAPX = CT.MAPX\n    WHERE PX.MADT = DT.MADT AND PX.TRANGTHAI = 1\n);"
       },
       "rubric": {
-        "target_set_construction": "0.25đ",
-        "candidate_relation_projection": "0.25đ",
-        "division_operation": "0.50đ (Đúng bản chất toán học của phép chia)"
-      },
-      "status": "VERIFIED"
+        "dividing_set": "0.25đ",
+        "divided_set_with_trangthai": "0.25đ",
+        "division_and_result": "0.50đ"
+      }
     },
     {
       "id": "M01-Q2C6",
       "topic": "RA_DIVISION_GROUPING",
       "difficulty": "C",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
       "title": "ĐSQH Tìm Điểm Tiêm Có Sức Chứa Lớn Nhất Tại Quận Thủ Đức",
-      "prompt": "Cho biết điểm tiêm nào (MADT, TENDT) có sức chứa (SUCCHUA) lớn nhất trong số các điểm tiêm thuộc quận 'Thủ Đức'.",
-      "schema": "DIEMTIEM(MADT, TENDT, QUAN, SUCCHUA, MATRP)",
-      "recommended_time_mins": 8,
+      "prompt": "Cho biết điểm tiêm nào (MADT, TENDT) có sức chứa (SUCCHUA) lớn nhất trong số các điểm tiêm thuộc quận 'Thủ Đức' (xét cả trường hợp có nhiều điểm tiêm đồng hạng lớn nhất).",
+      "schema": "DIEMTIEM(MADT, TENDT, DIACHI, QUAN, SUCCHUA)",
+      "recommended_time_mins": 9,
       "points": 1.0,
       "solution": {
-        "relational_algebra": "R1 ← σ_{QUAN = 'Thủ Đức'}(DIEMTIEM)\nR2 ← ρ_{DT1}(R1)\nR3 ← ρ_{DT2}(R1)\nR_KhongLonNhat ← π_{DT1.MADT}(R2 ⋈_{DT1.SUCCHUA < DT2.SUCCHUA} R3)\nR_LonNhat ← π_{MADT}(R1) - R_KhongLonNhat\nKQ ← π_{MADT, TENDT}(R_LonNhat ⋈ R1)",
+        "relational_algebra": "R1 ← σ_{QUAN = 'Thủ Đức'}(DIEMTIEM)\nR2 ← ρ_{D1}(R1)\nR3 ← ρ_{D2}(R1)\nR_KoMax ← π_{D1.MADT}(R2 ⋈_{D1.SUCCHUA < D2.SUCCHUA} R3)\nR_Max ← π_{MADT}(R1) - R_KoMax\nKQ ← π_{MADT, TENDT}(R_Max ⋈ R1)",
         "intermediate_steps": [
-          "Bước 1: Lọc các điểm tiêm thuộc quận 'Thủ Đức' thành R1.",
-          "Bước 2: Phép tìm cực trị MAX trong ĐSQH bằng phương pháp loại trừ: Tự kết R1 với chính nó qua điều kiện SUCCHUA1 < SUCCHUA2.",
-          "Bước 3: Chiếu lấy DT1.MADT; đây là tập các điểm tiêm KHÔNG phải lớn nhất vì tồn tại điểm tiêm khác có sức chứa lớn hơn nó.",
-          "Bước 4: Lấy toàn bộ MADT của Thủ Đức trừ đi tập R_KhongLonNhat, thu được điểm tiêm có sức chứa lớn nhất (có thể có đồng hạng)."
+          "Bước 1: Lọc điểm tiêm ở quận Thủ Đức thành R1.",
+          "Bước 2: Tự kết R1 so sánh bé hơn để tìm các điểm tiêm không phải lớn nhất (R_KoMax).",
+          "Bước 3: Dùng phép trừ tìm cực trị R_Max = R1 - R_KoMax (đảm bảo giữ lại toàn bộ các điểm tiêm đồng hạng).",
+          "Bước 4: Chiếu lấy MADT, TENDT."
         ],
         "sql": "SELECT MADT, TENDT\nFROM DIEMTIEM\nWHERE QUAN = N'Thủ Đức'\n  AND SUCCHUA = (SELECT MAX(SUCCHUA) FROM DIEMTIEM WHERE QUAN = N'Thủ Đức');"
       },
       "rubric": {
-        "subquery_or_self_join": "0.50đ",
-        "subtraction_or_max_logic": "0.50đ"
-      },
-      "status": "VERIFIED"
+        "self_join_inequality": "0.50đ",
+        "set_difference_and_projection": "0.50đ"
+      }
     },
     {
       "id": "ERD-002",
@@ -431,7 +430,8 @@
         "erd": "1.50đ",
         "mapping": "1.00đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "ERD-003",
@@ -524,7 +524,8 @@
         "erd": "1.25đ",
         "mapping": "0.75đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B03",
@@ -548,7 +549,8 @@
         "rename_operation": "0.50đ",
         "self_join_and_projection": "0.50đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B04",
@@ -572,7 +574,8 @@
         "intersect_operands": "0.50đ",
         "set_intersection": "0.50đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D01",
@@ -596,7 +599,8 @@
         "division_algebra": "0.50đ",
         "equivalence_proof": "0.50đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D03",
@@ -619,7 +623,8 @@
         "join_and_grouping": "0.50đ",
         "expression_calculation": "0.50đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "SQL-D03",
@@ -643,7 +648,8 @@
         "double_not_exists_structure": "0.50đ",
         "correlation_matching": "0.50đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "ERD-001",
@@ -675,7 +681,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-004",
@@ -707,7 +714,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-005",
@@ -739,7 +747,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-006",
@@ -771,7 +780,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-007",
@@ -803,7 +813,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-008",
@@ -835,7 +846,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-009",
@@ -867,7 +879,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-010",
@@ -899,7 +912,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-011",
@@ -931,7 +945,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-012",
@@ -963,7 +978,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-013",
@@ -995,7 +1011,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-014",
@@ -1027,7 +1044,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-015",
@@ -1059,7 +1077,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-016",
@@ -1091,7 +1110,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-017",
@@ -1123,7 +1143,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-018",
@@ -1155,7 +1176,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-019",
@@ -1187,7 +1209,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-020",
@@ -1219,7 +1242,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-021",
@@ -1251,7 +1275,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-022",
@@ -1283,7 +1308,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-023",
@@ -1315,7 +1341,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-024",
@@ -1347,7 +1374,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-025",
@@ -1379,7 +1407,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-026",
@@ -1411,7 +1440,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-027",
@@ -1443,7 +1473,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-028",
@@ -1475,7 +1506,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-029",
@@ -1507,7 +1539,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-030",
@@ -1539,7 +1572,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-031",
@@ -1571,7 +1605,8 @@
         "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "ERD-032",
@@ -1603,7 +1638,8 @@
         "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
         "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B01",
@@ -1627,7 +1663,8 @@
         "ra_logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B02",
@@ -1651,7 +1688,8 @@
         "ra_logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B05",
@@ -1675,7 +1713,8 @@
         "ra_logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B06",
@@ -1699,7 +1738,8 @@
         "ra_logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B07",
@@ -1723,7 +1763,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B08",
@@ -1747,7 +1788,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B09",
@@ -1771,7 +1813,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B10",
@@ -1795,7 +1838,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B11",
@@ -1819,7 +1863,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B12",
@@ -1843,7 +1888,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B13",
@@ -1867,7 +1913,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B14",
@@ -1891,7 +1938,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B15",
@@ -1915,7 +1963,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B16",
@@ -1939,7 +1988,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B17",
@@ -1963,7 +2013,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B18",
@@ -1987,7 +2038,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B19",
@@ -2011,7 +2063,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B20",
@@ -2035,7 +2088,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B21",
@@ -2059,7 +2113,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B22",
@@ -2083,7 +2138,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B23",
@@ -2107,7 +2163,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B24",
@@ -2131,7 +2188,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B25",
@@ -2155,7 +2213,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B26",
@@ -2179,7 +2238,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B27",
@@ -2203,7 +2263,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B28",
@@ -2227,7 +2288,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B29",
@@ -2251,7 +2313,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B30",
@@ -2275,7 +2338,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B31",
@@ -2299,7 +2363,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B32",
@@ -2323,7 +2388,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B33",
@@ -2347,7 +2413,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B34",
@@ -2371,7 +2438,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B35",
@@ -2395,7 +2463,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B36",
@@ -2419,7 +2488,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B37",
@@ -2443,7 +2513,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B38",
@@ -2467,7 +2538,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B39",
@@ -2491,7 +2563,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B40",
@@ -2515,7 +2588,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B41",
@@ -2539,7 +2613,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B42",
@@ -2563,7 +2638,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B43",
@@ -2587,7 +2663,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B44",
@@ -2611,7 +2688,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B45",
@@ -2635,7 +2713,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B46",
@@ -2659,7 +2738,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B47",
@@ -2683,7 +2763,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B48",
@@ -2707,7 +2788,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B49",
@@ -2731,7 +2813,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B50",
@@ -2755,7 +2838,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B51",
@@ -2779,7 +2863,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B52",
@@ -2803,7 +2888,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B53",
@@ -2827,7 +2913,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B54",
@@ -2851,7 +2938,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-B55",
@@ -2875,7 +2963,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B56",
@@ -2899,7 +2988,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B57",
@@ -2923,7 +3013,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B58",
@@ -2947,7 +3038,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B59",
@@ -2971,7 +3063,8 @@
         "logic": "0.60đ",
         "syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D02",
@@ -2995,7 +3088,8 @@
         "division_grouping_logic": "0.60đ",
         "projection_result": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D04",
@@ -3019,7 +3113,8 @@
         "division_grouping_logic": "0.60đ",
         "projection_result": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D05",
@@ -3043,7 +3138,8 @@
         "division_grouping_logic": "0.60đ",
         "projection_result": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D06",
@@ -3067,7 +3163,8 @@
         "division_grouping_logic": "0.60đ",
         "projection_result": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D07",
@@ -3091,7 +3188,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D08",
@@ -3115,7 +3213,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D09",
@@ -3139,7 +3238,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D10",
@@ -3163,7 +3263,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D11",
@@ -3187,7 +3288,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D12",
@@ -3211,7 +3313,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D13",
@@ -3235,7 +3338,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D14",
@@ -3259,7 +3363,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D15",
@@ -3283,7 +3388,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D16",
@@ -3307,7 +3413,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D17",
@@ -3331,7 +3438,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D18",
@@ -3355,7 +3463,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D19",
@@ -3379,7 +3488,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D20",
@@ -3403,7 +3513,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D21",
@@ -3427,7 +3538,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D22",
@@ -3451,7 +3563,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D23",
@@ -3475,7 +3588,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D24",
@@ -3499,7 +3613,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D25",
@@ -3523,7 +3638,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D26",
@@ -3547,7 +3663,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D27",
@@ -3571,7 +3688,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D28",
@@ -3595,7 +3713,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D29",
@@ -3619,7 +3738,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D30",
@@ -3643,7 +3763,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D31",
@@ -3667,7 +3788,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D32",
@@ -3691,7 +3813,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D33",
@@ -3715,7 +3838,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D34",
@@ -3739,7 +3863,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D35",
@@ -3763,7 +3888,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D36",
@@ -3787,7 +3913,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D37",
@@ -3811,7 +3938,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D38",
@@ -3835,7 +3963,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D39",
@@ -3859,7 +3988,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D40",
@@ -3883,7 +4013,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D41",
@@ -3907,7 +4038,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D42",
@@ -3931,7 +4063,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D43",
@@ -3955,7 +4088,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D44",
@@ -3979,7 +4113,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D45",
@@ -4003,7 +4138,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D46",
@@ -4027,7 +4163,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D47",
@@ -4051,7 +4188,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "RA-D48",
@@ -4075,7 +4213,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "RA-D49",
@@ -4099,7 +4238,8 @@
         "logic_steps": "0.60đ",
         "correct_syntax": "0.40đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D01",
@@ -4122,7 +4262,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "SQL-D02",
@@ -4145,7 +4286,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "VERIFIED"
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
       "id": "SQL-D04",
@@ -4168,7 +4310,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D05",
@@ -4191,7 +4334,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D06",
@@ -4214,7 +4358,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D07",
@@ -4237,7 +4382,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D08",
@@ -4260,7 +4406,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D09",
@@ -4283,7 +4430,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D10",
@@ -4306,7 +4454,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D11",
@@ -4329,7 +4478,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D12",
@@ -4352,7 +4502,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D13",
@@ -4375,7 +4526,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D14",
@@ -4398,7 +4550,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D15",
@@ -4421,7 +4574,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D16",
@@ -4444,7 +4598,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D17",
@@ -4467,7 +4622,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D18",
@@ -4490,7 +4646,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D19",
@@ -4513,7 +4670,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D20",
@@ -4536,7 +4694,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D21",
@@ -4559,7 +4718,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D22",
@@ -4582,7 +4742,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D23",
@@ -4605,7 +4766,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D24",
@@ -4628,7 +4790,8 @@
         "syntax": "0.40đ",
         "logic": "0.35đ"
       },
-      "status": "DRAFT"
+      "status": "DRAFT",
+      "verification_level": "DRAFT"
     }
   ]
 }

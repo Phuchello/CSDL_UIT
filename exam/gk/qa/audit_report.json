@@ -15,6 +15,11 @@
     },
     "verified_problems": 54,
     "draft_problems": 119,
+    "verification_levels": {
+      "EXECUTION_VERIFIED": 9,
+      "SEMANTICALLY_REVIEWED": 45,
+      "DRAFT": 119
+    },
     "verified_solutions": 173,
     "rubrics_present": 173,
     "mocks_count": 15,

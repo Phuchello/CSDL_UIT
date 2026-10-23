@@ -22,7 +22,8 @@ DIST_DIR = REPO_ROOT / "exam" / "gk" / "dist"
 pdf_files = [
     DIST_DIR / "IT004_GK_NganHangDe_VoTrongPhuc.pdf",
     DIST_DIR / "IT004_GK_LoiGiaiChiTiet_VoTrongPhuc.pdf",
-    DIST_DIR / "IT004_GK_CheatSheet_VoTrongPhuc.pdf"
+    DIST_DIR / "IT004_GK_CheatSheet_VoTrongPhuc.pdf",
+    DIST_DIR / "IT004_GK_VerifiedOnly_VoTrongPhuc.pdf"
 ]
 
 all_passed = True

@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-11)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 11 — Quản Lý Chuỗi Cà Phê Nhượng Quyền & Nguyên Liệu  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 11 — Quản Lý Chuỗi Cà Phê Nhượng Quyền & Nguyên Liệu
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

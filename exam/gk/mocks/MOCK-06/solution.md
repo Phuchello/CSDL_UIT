@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-06)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 06 — Quản Lý Bệnh Viện Đa Khoa & Hồ Sơ Khám Bệnh  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 06 — Quản Lý Bệnh Viện Đa Khoa & Hồ Sơ Khám Bệnh
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

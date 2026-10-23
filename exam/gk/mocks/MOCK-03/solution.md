@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-03)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 03 — Quản Lý Tiếp Nhận & Phân Bổ Tiền Cứu Trợ Bão Lũ  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 03 — Quản Lý Tiếp Nhận & Phân Bổ Tiền Cứu Trợ Bão Lũ
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

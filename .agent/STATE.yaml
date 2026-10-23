@@ -35,17 +35,21 @@ verified:
   p1_pilot_complete: true
   p2_expansion_complete: true
   p3_publication_complete: true
+  phase_b_mock01_remediation_complete: true
   frozen_baseline_untouched: true
-  pdf_deliverables_3_verified: true
+  pdf_deliverables_4_verified: true
   zero_blank_pages: true
   zero_solution_leak: true
+  sql_server_execution_verified: true
 
 verification_evidence:
   local_suite:
     - scripts/agent/verify.ps1 -Mode Fast (PASS)
     - scripts/validate.py (PASS, 6/6 checks)
-    - exam/gk/scripts/validate_gk.py (PASS, 173 problems, 15 full mocks, 0 errors, 0 warnings)
-    - exam/gk/scripts/verify_pdf_preflight.py (PASS, 100% preflight visual and symbol verification)
+    - exam/gk/scripts/validate_gk.py (PASS, 173 problems: 54 VERIFIED [9 EXECUTION_VERIFIED, 45 SEMANTICALLY_REVIEWED], 119 DRAFT)
+    - exam/gk/scripts/verify_pdf_preflight.py (PASS, 4/4 PDFs verified 100%)
+    - exam/gk/qa/mock01_sql_execution.log (PASS, Microsoft SQL Server 2025)
+    - exam/gk/qa/defect_register.md (P0-01 through P0-04 RESOLVED, P0-05 IN_PROGRESS)
 
 blockers: []
 

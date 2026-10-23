@@ -7,14 +7,14 @@
 
 ## CÂU 1: THIẾT KẾ MÔ HÌNH DỮ LIỆU (2.5 ĐIỂM)
 
-Để phục vụ công tác tiêm chủng phòng dịch trên địa bàn thành phố, Sở Y tế cần xây dựng cơ sở dữ liệu quản lý việc tiếp nhận và phân phối vắc-xin tại các điểm tiêm chủng, cụ thể như sau:
+Để phục vụ công tác tiêm chủng phòng dịch trên địa bàn thành phố, Sở Y tế cần xây dựng cơ sở dữ liệu quản lý việc tiếp nhận, phân phối vắc-xin và điều động nhân sự tại các điểm tiêm chủng, cụ thể như sau:
 
-- Mỗi **Trung tâm Y tế** (`TRUNGTAM_YTE`) có mã trung tâm (`MaTT`) để phân biệt giữa các trung tâm, có tên trung tâm (`TenTT`), và địa chỉ quận/huyện (`DiaChiQuan`).
-- Các **Nhà cung cấp** (`NHA_CUNGCAP`) cung ứng vắc-xin cần lưu trữ: mã nhà cung cấp (`MaNCC`), tên nhà cung cấp (`TenNCC`), quốc gia (`QuocGia`), và số điện thoại liên hệ (`SDT`).
-- Mỗi **Lô vắc-xin** (`LO_VACXIN`) nhập kho được ghi nhận: mã lô (`MaLo`) duy nhất, tên lô (`TenLo`), tên loại vắc-xin (`TenVacxin`), ngày sản xuất (`NgaySX`), hạn sử dụng (`HSD`), số liều nhập (`SoLieuNhap`), và đơn giá mỗi liều (`DonGia`). Mỗi lô vắc-xin do duy nhất một nhà cung cấp cung ứng; một nhà cung cấp có thể cung cấp nhiều lô vắc-xin khác nhau.
-- Các **Điểm tiêm chủng** (`DIEM_TIEM`) trực thuộc một Trung tâm Y tế quản lý gồm các thông tin: mã điểm tiêm (`MaDT`), tên điểm tiêm (`TenDT`), địa điểm cụ thể (`DiaDiem`), và sức chứa tối đa người tiêm trong ngày (`SucChua`). Mỗi điểm tiêm chỉ trực thuộc duy nhất một trung tâm y tế; một trung tâm y tế quản lý nhiều điểm tiêm khác nhau.
-- Công tác phân phối vắc-xin từ các lô đến điểm tiêm được thực hiện qua các đợt **Phân phối** (`PHAN_PHOI`). Thông tin lưu trữ gồm: ngày phân phối (`NgayPP`), số liều phân phối (`SoLieuPP`), và trạng thái tiếp nhận (`TrangThai` nhận giá trị 1 nếu đã nhận, 0 nếu đang chuyển). Một lô vắc-xin có thể phân phối cho nhiều điểm tiêm; một điểm tiêm có thể tiếp nhận vắc-xin từ nhiều lô khác nhau vào các ngày khác nhau.
-- Mỗi **Nhân viên y tế** (`NHAN_VIEN`) có mã nhân viên (`MaNV`), họ tên (`HoTen`), chuyên môn y tế (`ChuyenMon`), và số điện thoại (`SDT`). Mỗi nhân viên chỉ thuộc biên chế chính thức của một trung tâm y tế. Nhân viên được điều động tham gia trực tại các điểm tiêm trong các ca trực (`TRUC_CA`) cụ thể, ghi nhận ngày trực (`NgayTruc`) và vai trò trực (`VaiTroTruc`).
+- Các **Nhà cung cấp** (`NHACUNGCAP`) cung ứng vắc-xin cần lưu trữ: mã nhà cung cấp (`MANCC`) định danh duy nhất, tên nhà cung cấp (`TENNCC`), quốc gia xuất xứ (`QUOCGIA`), và số điện thoại liên hệ (`SDT`).
+- Mỗi **Lô vắc-xin** (`LOVACXIN`) nhập kho được ghi nhận: mã lô (`MALO`) định danh duy nhất, tên lô (`TENLO`), tên loại vắc-xin (`TENVACXIN`), ngày sản xuất (`NGAYSX`), hạn sử dụng (`HSD`), số lượng liều nhập (`SOLIEU`), và đơn giá mỗi liều (`DONGIA`). Mỗi lô vắc-xin do duy nhất một nhà cung cấp cung ứng; một nhà cung cấp có thể cung ứng nhiều lô vắc-xin khác nhau.
+- Các **Điểm tiêm chủng** (`DIEMTIEM`) gồm các thông tin: mã điểm tiêm (`MADT`) định danh duy nhất, tên điểm tiêm (`TENDT`), địa chỉ cụ thể (`DIACHI`), quận phụ trách (`QUAN`), và sức chứa tối đa người tiêm trong ngày (`SUCCHUA`).
+- Mỗi **Nhân viên y tế** (`NHANVIEN`) tham gia công tác tiêm chủng (gồm bác sĩ, điều dưỡng) có: mã nhân viên (`MANV`) định danh duy nhất, họ tên (`HOTEN`), chuyên môn y tế (`CHUYENMON`), và số điện thoại (`SDT`). Mỗi nhân viên được điều động công tác tại tối đa một điểm tiêm; một điểm tiêm có thể có nhiều nhân viên y tế công tác (hoặc chưa có nhân viên nào công tác).
+- Công tác phân phối vắc-xin đến các điểm tiêm được quản lý thông qua các **Phiếu xuất** (`PHIEUXUAT`). Mỗi phiếu xuất có mã phiếu (`MAPX`) định danh duy nhất, ngày xuất (`NGAYXUAT`), và trạng thái tiếp nhận (`TRANGTHAI`: nhận giá trị 1 nếu điểm tiêm đã tiếp nhận thực tế, nhận giá trị 0 nếu đang trên đường vận chuyển). Mỗi phiếu xuất được điều phối đến duy nhất một điểm tiêm; một điểm tiêm có thể tiếp nhận nhiều phiếu xuất khác nhau (hoặc chưa tiếp nhận phiếu xuất nào).
+- Mỗi phiếu xuất có thể gồm nhiều lô vắc-xin khác nhau; mỗi lô vắc-xin có thể được xuất trong nhiều phiếu xuất khác nhau theo các đợt điều phối. Trong mỗi phiếu xuất, với mỗi lô vắc-xin cụ thể, cần lưu trữ số liều thực tế được xuất (`SOLIEUXUAT`).
 
 **Yêu cầu:**
 1. Xác định các tập thực thể, thuộc tính khóa, các mối kết hợp và bản số $(min, max)$ hai phía. Vẽ mô hình Thực thể – Mối kết hợp (ERD). *(1.5 điểm)*
@@ -24,32 +24,32 @@
 
 ## CÂU 2: SQL & ĐẠI SỐ QUAN HỆ (7.5 ĐIỂM)
 
-Cho Lược đồ cơ sở dữ liệu "Quản lý Cung ứng & Phân phối Vắc-xin" gồm các quan hệ sau (thuộc tính gạch chân là khóa chính):
+Cho Lược đồ cơ sở dữ liệu "Quản lý Cung ứng & Phân phối Vắc-xin" gồm các quan hệ chuẩn hóa sau (thuộc tính gạch chân là khóa chính):
 
 - `NHACUNGCAP` (**`MANCC`**, `TENNCC`, `QUOCGIA`, `SDT`)
-  *Tân từ:* Thông tin nhà cung cấp vắc-xin.
-- `LOVACXIN` (**`MALO`**, `TENLO`, `TENKVACXIN`, `MANCC`, `NGAYSX`, `HSD`, `SOLIEU`, `DONGIA`)
-  *Tân từ:* Thông tin lô vắc-xin nhập kho. `MANCC` là khóa ngoại trỏ về `NHACUNGCAP`.
-- `DIEMTIEM` (**`MADT`**, `TENDT`, `QUAN`, `SUCCHUA`, `MATRP`)
-  *Tân từ:* Điểm tiêm chủng lưu động. `MATRP` là mã bác sĩ trưởng điểm tiêm phụ trách.
-- `BACSI` (**`MABS`**, `HOTEN`, `CHUYENKHOA`, `SDT`, `MADT`)
-  *Tân từ:* Danh sách bác sĩ tham gia tiêm chủng. `MADT` là khóa ngoại trỏ về `DIEMTIEM` ghi nhận điểm tiêm bác sĩ đang trực.
-- `PHIEUXUAT` (**`MAPX`**, `NGAYXUAT`, `MADT`, `TRANGTHAI`)
-  *Tân từ:* Phiếu xuất vắc-xin đến điểm tiêm. `MADT` là khóa ngoại trỏ về `DIEMTIEM`.
+  *Tân từ:* Danh sách nhà cung cấp vắc-xin.
+- `LOVACXIN` (**`MALO`**, `TENLO`, `TENVACXIN`, `NGAYSX`, `HSD`, `SOLIEU`, `DONGIA`, `MANCC`)
+  *Tân từ:* Lô vắc-xin nhập kho. `MANCC` là khóa ngoại tham chiếu đến `NHACUNGCAP(MANCC)`.
+- `DIEMTIEM` (**`MADT`**, `TENDT`, `DIACHI`, `QUAN`, `SUCCHUA`)
+  *Tân từ:* Điểm tiêm chủng lưu động hoặc cố định.
+- `NHANVIEN` (**`MANV`**, `HOTEN`, `CHUYENMON`, `SDT`, `MADT`)
+  *Tân từ:* Nhân viên y tế phục vụ tiêm chủng. `MADT` là khóa ngoại tham chiếu đến `DIEMTIEM(MADT)`.
+- `PHIEUXUAT` (**`MAPX`**, `NGAYXUAT`, `TRANGTHAI`, `MADT`)
+  *Tân từ:* Phiếu xuất điều phối vắc-xin. `MADT` là khóa ngoại tham chiếu đến `DIEMTIEM(MADT)`.
 - `CTPX` (**`MAPX`**, **`MALO`**, `SOLIEUXUAT`)
-  *Tân từ:* Chi tiết số liều xuất theo từng lô vắc-xin trong mỗi phiếu xuất. `MAPX` trỏ về `PHIEUXUAT(MAPX)`, `MALO` trỏ về `LOVACXIN(MALO)`.
+  *Tân từ:* Chi tiết số liều xuất theo từng lô vắc-xin. `MAPX` tham chiếu `PHIEUXUAT(MAPX)`, `MALO` tham chiếu `LOVACXIN(MALO)`.
 
 ### 1. Viết các câu lệnh SQL (1.5 điểm)
 a. *(0.75 điểm)* Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra thuộc tính `SOLIEUXUAT` trong quan hệ `CTPX` phải là số nguyên dương ($> 0$), và thuộc tính `TRANGTHAI` trong quan hệ `PHIEUXUAT` chỉ nhận một trong hai giá trị là `0` hoặc `1`.
 b. *(0.75 điểm)* Viết câu lệnh SQL cập nhật (`UPDATE`) tăng giá đơn vị (`DONGIA`) thêm 10% đối với các lô vắc-xin có hạn sử dụng (`HSD`) trong năm 2025 do nhà cung cấp có tên là 'AstraZeneca' cung cấp.
 
 ### 2. Viết các biểu thức Đại số quan hệ (6.0 điểm - mỗi câu 1.0 điểm)
-a. *(1.0 điểm)* Liệt kê thông tin các lô vắc-xin (`MALO`, `TENLO`, `SOLIEU`, `DONGIA`) có tên vắc-xin là 'Pfizer-BioNTech' và được sản xuất trong năm 2024.
-b. *(1.0 điểm)* Cho biết danh sách các điểm tiêm (`MADT`, `TENDT`, `QUAN`) đã tiếp nhận các phiếu xuất vắc-xin vào ngày '15/10/2024'.
-c. *(1.0 điểm)* Liệt kê thông tin các điểm tiêm ở quận 'Bình Thạnh' (`MADT`, `TENDT`) và họ tên các bác sĩ (`HOTEN`) đang trực tại điểm tiêm đó **nếu có**.
-d. *(1.0 điểm)* Tính tổng số liều vắc-xin xuất (`SOLIEUXUAT`) theo từng điểm tiêm (`MADT`) trong tháng 10 năm 2024. Thông tin hiển thị gồm: `MADT`, `TONGLIEU`.
-e. *(1.0 điểm)* Tìm các điểm tiêm (`MADT`, `TENDT`) đã tiếp nhận **tất cả** các lô vắc-xin của nhà cung cấp có tên là 'Moderna' (`TENNCC = 'Moderna'`).
-f. *(1.0 điểm)* Cho biết điểm tiêm nào (`MADT`, `TENDT`) có sức chứa (`SUCCHUA`) lớn nhất trong số các điểm tiêm thuộc quận 'Thủ Đức'.
+a. *(1.0 điểm)* Liệt kê thông tin các lô vắc-xin (`MALO`, `TENLO`, `SOLIEU`, `DONGIA`) có tên loại vắc-xin là 'Pfizer-BioNTech' và được sản xuất trong năm 2024.
+b. *(1.0 điểm)* Cho biết danh sách các điểm tiêm (`MADT`, `TENDT`, `QUAN`) đã tiếp nhận (`TRANGTHAI = 1`) các phiếu xuất vắc-xin vào ngày '15/10/2024'.
+c. *(1.0 điểm)* Liệt kê thông tin các điểm tiêm ở quận 'Bình Thạnh' (`MADT`, `TENDT`) và họ tên nhân viên y tế (`HOTEN`) đang công tác tại điểm tiêm đó **nếu có**.
+d. *(1.0 điểm)* Tính tổng số liều vắc-xin đã tiếp nhận (`SOLIEUXUAT`, với `TRANGTHAI = 1`) theo từng điểm tiêm (`MADT`) trong tháng 10 năm 2024. Thông tin hiển thị gồm: `MADT`, `TONGLIEU`.
+e. *(1.0 điểm)* Tìm các điểm tiêm (`MADT`, `TENDT`) đã tiếp nhận thực tế (`TRANGTHAI = 1`) **tất cả** các lô vắc-xin của nhà cung cấp có tên là 'Moderna' (`TENNCC = 'Moderna'`).
+f. *(1.0 điểm)* Cho biết điểm tiêm nào (`MADT`, `TENDT`) có sức chứa (`SUCCHUA`) lớn nhất trong số các điểm tiêm thuộc quận 'Thủ Đức' (xét cả trường hợp có nhiều điểm tiêm đồng hạng lớn nhất).
 
 ---
 **HẾT ĐỀ THI MÔ PHỎNG SỐ 01**

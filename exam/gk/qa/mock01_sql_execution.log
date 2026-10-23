@@ -1,0 +1,76 @@
+Changed database context to 'IT004_MOCK01_DB'.
+=== [TEST 2.1a: CHECK Constraints Verification] ===
+
+(0 rows affected)
+PASS: CK_CTPX_SOLIEUXUAT successfully rejected invalid value 0 (Error 547)
+
+(0 rows affected)
+PASS: CK_PHIEUXUAT_TRANGTHAI successfully rejected invalid value 2 (Error 547)
+
+(4 rows affected)
+
+(6 rows affected)
+
+(6 rows affected)
+
+(5 rows affected)
+
+(6 rows affected)
+
+(9 rows affected)
+--- [TEST 2.1b: UPDATE 10% AstraZeneca 2025] ---
+
+(2 rows affected)
+MALO       TENLO                                              DONGIA         HSD              MANCC     
+---------- -------------------------------------------------- -------------- ---------------- ----------
+LO01       Lô AZ-01                                               165000.00       2025-05-30 NCC01     
+LO02       Lô AZ-02                                               176000.00       2025-11-20 NCC01     
+
+(2 rows affected)
+--- [TEST 2.2a: Select Pfizer 2024] ---
+MALO       TENLO                                              SOLIEU      DONGIA        
+---------- -------------------------------------------------- ----------- --------------
+LO03       Lô PF-01                                                40000      250000.00
+LO04       Lô PF-02                                                60000      270000.00
+
+(2 rows affected)
+--- [TEST 2.2b: Điểm tiA�m đA� tiếp nhận 15/10/2024] ---
+MADT       TENDT                                                                                                QUAN                                              
+---------- ---------------------------------------------------------------------------------------------------- --------------------------------------------------
+DT01       Trạm Y Tế P.25                                                                                   Bình Thạnh                                     
+DT02       Trung Tâm Y Tế Q.Bình Thạnh                                                                    Bình Thạnh                                     
+DT03       Ký Túc Xá Khu A                                                                                   Thủ Đức                                      
+
+(3 rows affected)
+--- [TEST 2.2c: Left Outer Join BA�nh Thạnh] ---
+MADT       TENDT                                                                                                HOTEN                                                                                               
+---------- ---------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------
+DT01       Trạm Y Tế P.25                                                                                   Nguyễn Văn A                                                                                     
+DT02       Trung Tâm Y Tế Q.Bình Thạnh                                                                    Trần Thị B                                                                                      
+DT06       Trạm Y Tế P.12                                                                                   NULL                                                                                                
+
+(3 rows affected)
+--- [TEST 2.2d: Gom nhA�m tổng liều đA� tiếp nhận T10/2024] ---
+MADT       TONGLIEU   
+---------- -----------
+DT01              3500
+DT02              3500
+DT03              2000
+DT04              3000
+
+(4 rows affected)
+--- [TEST 2.2e: PhA�p chia Moderna] ---
+MADT       TENDT                                                                                               
+---------- ----------------------------------------------------------------------------------------------------
+DT01       Trạm Y Tế P.25                                                                                  
+DT02       Trung Tâm Y Tế Q.Bình Thạnh                                                                   
+
+(2 rows affected)
+--- [TEST 2.2f: Cực trị MAX sức chứa Thủ Đức (Đồng Hạng)] ---
+MADT       TENDT                                                                                               
+---------- ----------------------------------------------------------------------------------------------------
+DT04       Ký Túc Xá Khu B                                                                                  
+DT05       Nhà Thi Đấu Thể Thao                                                                          
+
+(2 rows affected)
+=== [MOCK-01 FIXTURE: ALL VERIFICATION QUERIES EXECUTED SUCCESSFULLY] ===

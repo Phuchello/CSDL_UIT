@@ -33,6 +33,11 @@ class GKValidator:
             "difficulties": {"A": 0, "B": 0, "C": 0},
             "verified_problems": 0,
             "draft_problems": 0,
+            "verification_levels": {
+                "EXECUTION_VERIFIED": 0,
+                "SEMANTICALLY_REVIEWED": 0,
+                "DRAFT": 0,
+            },
             "verified_solutions": 0,
             "rubrics_present": 0,
             "mocks_count": 0,
@@ -95,6 +100,9 @@ class GKValidator:
                 self.stats["verified_problems"] += 1
             else:
                 self.stats["draft_problems"] += 1
+
+            v_level = p.get("verification_level", "DRAFT")
+            self.stats["verification_levels"][v_level] = self.stats["verification_levels"].get(v_level, 0) + 1
 
             if p.get("solution"):
                 self.stats["verified_solutions"] += 1
@@ -197,7 +205,7 @@ class GKValidator:
         print("==================================================")
         print(" IT004 Midterm Exam Module — Automated QA Auditor ")
         print("==================================================")
-        
+
         catalog = self.validate_problems_data()
         self.validate_mock_exams(catalog)
         self.validate_relational_algebra_and_sql(catalog)
@@ -207,6 +215,7 @@ class GKValidator:
         print(f"  Total Problems in Catalog : {self.stats['total_problems']}")
         print(f"  Verified Problems         : {self.stats['verified_problems']}")
         print(f"  Draft Problems            : {self.stats['draft_problems']}")
+        print(f"  Verification Breakdown    : {self.stats['verification_levels']}")
         print(f"  Rubrics Present           : {self.stats['rubrics_present']}")
         print(f"  Difficulties (A/B/C)      : {self.stats['difficulties']}")
         print(f"  Mock Exams Audited        : {self.stats['mocks_count']}")

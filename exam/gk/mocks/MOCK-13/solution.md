@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-13)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 13 — Quản Lý Hệ Thống Tuyến Xe Buýt & Metro TP.HCM  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 13 — Quản Lý Hệ Thống Tuyến Xe Buýt & Metro TP.HCM
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

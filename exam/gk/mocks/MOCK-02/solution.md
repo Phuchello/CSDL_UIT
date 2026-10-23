@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-02)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 02 — Quản Lý Hệ Thống Phòng Cháy Chữa Cháy Chung Cư  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 02 — Quản Lý Hệ Thống Phòng Cháy Chữa Cháy Chung Cư
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

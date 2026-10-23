@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-05)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 05 — Quản Lý Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 05 — Quản Lý Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

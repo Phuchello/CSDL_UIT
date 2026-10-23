@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-10)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 10 — Quản Lý Gara Ô Tô & Phụ Tùng Bảo Dưỡng  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 10 — Quản Lý Gara Ô Tô & Phụ Tùng Bảo Dưỡng
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

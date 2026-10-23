@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-12)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 12 — Quản Lý Cụm Rạp Chiếu Phim & Đặt Vé Trực Tuyến  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 12 — Quản Lý Cụm Rạp Chiếu Phim & Đặt Vé Trực Tuyến
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

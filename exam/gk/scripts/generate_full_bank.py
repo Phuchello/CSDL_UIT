@@ -156,7 +156,7 @@ for idx in range(7, 60):
         continue
     c_idx = (idx - 7) % len(ra_contexts)
     c_name, c_schema, c_filter = ra_contexts[c_idx]
-    
+
     # Alternate between Selection, Equi-Join, Outer Join, Self Join, Set Operations
     style = idx % 5
     if style == 0:
@@ -393,7 +393,7 @@ sql_keys = [p["id"] for p in problem_map.values() if p["topic"] == "SQL_DDL_DML"
 for m_idx, (mid, m_title, m_profile, erd_id) in enumerate(mock_configs, start=1):
     if mid in mock_dict and mid == "MOCK-01":
         continue # keep mock 1 custom
-    
+
     is_profile_a = (m_profile == "HISTORICAL_2023_2024")
     erd_pts = 2.5 if is_profile_a else 2.0
     sql_a_pts = 0.75
@@ -401,7 +401,7 @@ for m_idx, (mid, m_title, m_profile, erd_id) in enumerate(mock_configs, start=1)
     # RA questions: 6 questions
     # If Profile A: 6.0 pts (each 1.0)
     # If Profile B: 6.5 pts (5 questions x 1.0 + 1 question x 1.5)
-    
+
     # Pick distinct questions for this mock
     m_ra_b = [ra_b_keys[(m_idx * 3 + i) % len(ra_b_keys)] for i in range(3)]
     m_ra_d = [ra_d_keys[(m_idx * 3 + i) % len(ra_d_keys)] for i in range(3)]
@@ -437,8 +437,8 @@ for m_idx, (mid, m_title, m_profile, erd_id) in enumerate(mock_configs, start=1)
     # Write exam.md (ZERO LEAKS)
     exam_text = f"""# ĐỀ THI GIỮA KỲ MÔ PHỎNG SỐ {m_idx:02d} ({mid})
 ### MÔN HỌC: IT004 — CƠ SỞ DỮ LIỆU
-**Thời gian làm bài:** 75 phút | **Hình thức:** Tự luận | **Tài liệu:** KHÔNG sử dụng tài liệu  
-**Biên soạn & Thiết kế:** VÕ TRỌNG PHÚC — CSDL_UIT Master Series  
+**Thời gian làm bài:** 75 phút | **Hình thức:** Tự luận | **Tài liệu:** KHÔNG sử dụng tài liệu
+**Biên soạn & Thiết kế:** VÕ TRỌNG PHÚC — CSDL_UIT Master Series
 
 ---
 
@@ -455,19 +455,19 @@ for m_idx, (mid, m_title, m_profile, erd_id) in enumerate(mock_configs, start=1)
 Cho Lược đồ cơ sở dữ liệu '{m_title}' gồm các quan hệ chuẩn hóa.
 
 ### 1. Viết các câu lệnh SQL (1.5 điểm)
-a. ({sql_a_pts} điểm) {problem_map[m_sql[0]]['prompt']}  
-b. ({sql_b_pts} điểm) {problem_map[m_sql[1]]['prompt']}  
+a. ({sql_a_pts} điểm) {problem_map[m_sql[0]]['prompt']}
+b. ({sql_b_pts} điểm) {problem_map[m_sql[1]]['prompt']}
 
 ### 2. Viết các biểu thức Đại số quan hệ ({10.0 - erd_pts - 1.5} điểm)
-a. (1.0 điểm) {problem_map[m_ra_b[0]]['prompt']}  
-b. (1.0 điểm) {problem_map[m_ra_b[1]]['prompt']}  
-c. (1.0 điểm) {problem_map[m_ra_b[2]]['prompt']}  
-d. (1.0 điểm) {problem_map[m_ra_d[0]]['prompt']}  
-e. (1.0 điểm) {problem_map[m_ra_d[1]]['prompt']}  
-f. ({1.0 if is_profile_a else 1.5} điểm) {problem_map[m_ra_d[2]]['prompt']}  
+a. (1.0 điểm) {problem_map[m_ra_b[0]]['prompt']}
+b. (1.0 điểm) {problem_map[m_ra_b[1]]['prompt']}
+c. (1.0 điểm) {problem_map[m_ra_b[2]]['prompt']}
+d. (1.0 điểm) {problem_map[m_ra_d[0]]['prompt']}
+e. (1.0 điểm) {problem_map[m_ra_d[1]]['prompt']}
+f. ({1.0 if is_profile_a else 1.5} điểm) {problem_map[m_ra_d[2]]['prompt']}
 
 ---
-**HẾT ĐỀ THI MÔ PHỎNG SỐ {m_idx:02d}**  
+**HẾT ĐỀ THI MÔ PHỎNG SỐ {m_idx:02d}**
 *Cán bộ coi thi không giải thích gì thêm.*
 """
     with open(m_folder / "exam.md", "w", encoding="utf-8") as f:
@@ -475,8 +475,8 @@ f. ({1.0 if is_profile_a else 1.5} điểm) {problem_map[m_ra_d[2]]['prompt']}
 
     # Write solution.md (SEPARATE ANSWER KEY)
     sol_text = f"""# HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT ({mid})
-**Đề thi:** {mock_entry['title']}  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** {mock_entry['title']}
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

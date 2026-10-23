@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-09)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 09 — Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 09 — Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

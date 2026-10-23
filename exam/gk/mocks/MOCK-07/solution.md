@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-07)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 07 — Quản Lý Thư Viện Số UIT & Mượn Trả Tài Liệu  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 07 — Quản Lý Thư Viện Số UIT & Mượn Trả Tài Liệu
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

@@ -461,8 +461,8 @@ with open(DATA_DIR / "mocks.json", "w", encoding="utf-8") as f:
 # -------------------------------------------------------------
 exam_md = """# ĐỀ THI GIỮA KỲ MÔ PHỎNG SỐ 01 (MOCK-01)
 ### MÔN HỌC: IT004 — CƠ SỞ DỮ LIỆU
-**Thời gian làm bài:** 75 phút | **Hình thức:** Tự luận | **Tài liệu:** KHÔNG sử dụng tài liệu  
-**Biên soạn & Thiết kế:** VÕ TRỌNG PHÚC — CSDL_UIT Master Series  
+**Thời gian làm bài:** 75 phút | **Hình thức:** Tự luận | **Tài liệu:** KHÔNG sử dụng tài liệu
+**Biên soạn & Thiết kế:** VÕ TRỌNG PHÚC — CSDL_UIT Master Series
 
 ---
 
@@ -487,33 +487,33 @@ exam_md = """# ĐỀ THI GIỮA KỲ MÔ PHỎNG SỐ 01 (MOCK-01)
 
 Cho Lược đồ cơ sở dữ liệu "Quản lý Cung ứng & Phân phối Vắc-xin" gồm các quan hệ sau (thuộc tính gạch chân là khóa chính):
 
-- `NHACUNGCAP` (**`MANCC`**, `TENNCC`, `QUOCGIA`, `SDT`)  
+- `NHACUNGCAP` (**`MANCC`**, `TENNCC`, `QUOCGIA`, `SDT`)
   *Tân từ:* Thông tin nhà cung cấp vắc-xin.
-- `LOVACXIN` (**`MALO`**, `TENLO`, `TENKVACXIN`, `MANCC`, `NGAYSX`, `HSD`, `SOLIEU`, `DONGIA`)  
+- `LOVACXIN` (**`MALO`**, `TENLO`, `TENKVACXIN`, `MANCC`, `NGAYSX`, `HSD`, `SOLIEU`, `DONGIA`)
   *Tân từ:* Thông tin lô vắc-xin nhập kho. `MANCC` là khóa ngoại trỏ về `NHACUNGCAP`.
-- `DIEMTIEM` (**`MADT`**, `TENDT`, `QUAN`, `SUCCHUA`, `MATRP`)  
+- `DIEMTIEM` (**`MADT`**, `TENDT`, `QUAN`, `SUCCHUA`, `MATRP`)
   *Tân từ:* Điểm tiêm chủng lưu động. `MATRP` là mã bác sĩ trưởng điểm tiêm phụ trách.
-- `BACSI` (**`MABS`**, `HOTEN`, `CHUYENKHOA`, `SDT`, `MADT`)  
+- `BACSI` (**`MABS`**, `HOTEN`, `CHUYENKHOA`, `SDT`, `MADT`)
   *Tân từ:* Danh sách bác sĩ tham gia tiêm chủng. `MADT` là điểm tiêm bác sĩ đang trực.
-- `PHIEUXUAT` (**`MAPX`**, `NGAYXUAT`, `MADT`, `TRANGTHAI`)  
+- `PHIEUXUAT` (**`MAPX`**, `NGAYXUAT`, `MADT`, `TRANGTHAI`)
   *Tân từ:* Phiếu xuất vắc-xin đến điểm tiêm. `MADT` là khóa ngoại trỏ về `DIEMTIEM`.
-- `CTPX` (**`MAPX`**, **`MALO`**, `SOLIEUXUAT`)  
+- `CTPX` (**`MAPX`**, **`MALO`**, `SOLIEUXUAT`)
   *Tân từ:* Chi tiết số liều xuất theo từng lô vắc-xin trong mỗi phiếu xuất.
 
 ### 1. Viết các câu lệnh SQL (1.5 điểm)
-a. *(0.75 điểm)* Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra thuộc tính `SOLIEUXUAT` trong quan hệ `CTPX` phải là số nguyên dương ($> 0$), và thuộc tính `TRANGTHAI` trong quan hệ `PHIEUXUAT` chỉ nhận một trong hai giá trị là `0` hoặc `1`.  
+a. *(0.75 điểm)* Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra thuộc tính `SOLIEUXUAT` trong quan hệ `CTPX` phải là số nguyên dương ($> 0$), và thuộc tính `TRANGTHAI` trong quan hệ `PHIEUXUAT` chỉ nhận một trong hai giá trị là `0` hoặc `1`.
 b. *(0.75 điểm)* Viết câu lệnh SQL cập nhật (`UPDATE`) tăng giá đơn vị (`DONGIA`) thêm 10% đối với các lô vắc-xin có hạn sử dụng (`HSD`) trong năm 2025 do nhà cung cấp có tên là 'AstraZeneca' cung cấp.
 
 ### 2. Viết các biểu thức Đại số quan hệ (6.0 điểm - mỗi câu 1.0 điểm)
-a. *(1.0 điểm)* Liệt kê thông tin các lô vắc-xin (`MALO`, `TENLO`, `SOLIEU`, `DONGIA`) có tên vắc-xin là 'Pfizer-BioNTech' và được sản xuất trong năm 2024.  
-b. *(1.0 điểm)* Cho biết danh sách các điểm tiêm (`MADT`, `TENDT`, `QUAN`) đã tiếp nhận các phiếu xuất vắc-xin vào ngày '15/10/2024'.  
-c. *(1.0 điểm)* Liệt kê thông tin các điểm tiêm ở quận 'Bình Thạnh' (`MADT`, `TENDT`) và họ tên bác sĩ (`HOTEN`) đang phụ trách tại điểm tiêm đó **nếu có**.  
-d. *(1.0 điểm)* Tính tổng số liều vắc-xin xuất (`SOLIEUXUAT`) theo từng điểm tiêm (`MADT`) trong tháng 10 năm 2024. Thông tin hiển thị gồm: `MADT`, `TONGLIEU`.  
-e. *(1.0 điểm)* Tìm các điểm tiêm (`MADT`, `TENDT`) đã tiếp nhận **tất cả** các lô vắc-xin của nhà cung cấp có tên là 'Moderna' (`TENNCC = 'Moderna'`).  
+a. *(1.0 điểm)* Liệt kê thông tin các lô vắc-xin (`MALO`, `TENLO`, `SOLIEU`, `DONGIA`) có tên vắc-xin là 'Pfizer-BioNTech' và được sản xuất trong năm 2024.
+b. *(1.0 điểm)* Cho biết danh sách các điểm tiêm (`MADT`, `TENDT`, `QUAN`) đã tiếp nhận các phiếu xuất vắc-xin vào ngày '15/10/2024'.
+c. *(1.0 điểm)* Liệt kê thông tin các điểm tiêm ở quận 'Bình Thạnh' (`MADT`, `TENDT`) và họ tên bác sĩ (`HOTEN`) đang phụ trách tại điểm tiêm đó **nếu có**.
+d. *(1.0 điểm)* Tính tổng số liều vắc-xin xuất (`SOLIEUXUAT`) theo từng điểm tiêm (`MADT`) trong tháng 10 năm 2024. Thông tin hiển thị gồm: `MADT`, `TONGLIEU`.
+e. *(1.0 điểm)* Tìm các điểm tiêm (`MADT`, `TENDT`) đã tiếp nhận **tất cả** các lô vắc-xin của nhà cung cấp có tên là 'Moderna' (`TENNCC = 'Moderna'`).
 f. *(1.0 điểm)* Cho biết điểm tiêm nào (`MADT`, `TENDT`) có sức chứa (`SUCCHUA`) lớn nhất trong số các điểm tiêm thuộc quận 'Thủ Đức'.
 
 ---
-**HẾT ĐỀ THI MÔ PHỎNG SỐ 01**  
+**HẾT ĐỀ THI MÔ PHỎNG SỐ 01**
 *Cán bộ coi thi không giải thích gì thêm.*
 """
 
@@ -524,8 +524,8 @@ with open(MOCKS_DIR / "exam.md", "w", encoding="utf-8") as f:
 # 4. Write Mock 01 Answer Key & Rubrics
 # -------------------------------------------------------------
 solution_md = """# HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT ĐỀ THI MÔ PHỎNG SỐ 01 (MOCK-01)
-**Môn học:** IT004 — Cơ sở dữ liệu | **Thời gian thi:** 75 phút | **Thang điểm:** 10.0  
-**Tác giả biên soạn:** VÕ TRỌNG PHÚC  
+**Môn học:** IT004 — Cơ sở dữ liệu | **Thời gian thi:** 75 phút | **Thang điểm:** 10.0
+**Tác giả biên soạn:** VÕ TRỌNG PHÚC
 **Tiêu chuẩn học thuật:** Hợp đồng lời giải chi tiết, phân tích tư duy tự nhiên $\\to$ biểu thức toán $\\to$ T-SQL, barem điểm và bẫy lỗi.
 
 ---
@@ -583,15 +583,15 @@ solution_md = """# HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT ĐỀ THI MÔ
 Áp dụng các quy tắc ánh xạ chuẩn UIT:
 1. `TRUNGTAM_YTE` ($\\underline{\\text{MaTT}}$, TenTT, DiaChiQuan)
 2. `NHA_CUNGCAP` ($\\underline{\\text{MaNCC}}$, TenNCC, QuocGia, SDT)
-3. `LO_VACXIN` ($\\underline{\\text{MaLo}}$, TenLo, TenVacxin, NgaySX, HSD, SoLieuNhap, DonGia, MaNCC)  
+3. `LO_VACXIN` ($\\underline{\\text{MaLo}}$, TenLo, TenVacxin, NgaySX, HSD, SoLieuNhap, DonGia, MaNCC)
    *Khóa ngoại:* `MaNCC` $\\to$ `NHA_CUNGCAP(MaNCC)`.
-4. `DIEM_TIEM` ($\\underline{\\text{MaDT}}$, TenDT, DiaDiem, SucChua, MaTT)  
+4. `DIEM_TIEM` ($\\underline{\\text{MaDT}}$, TenDT, DiaDiem, SucChua, MaTT)
    *Khóa ngoại:* `MaTT` $\\to$ `TRUNGTAM_YTE(MaTT)`.
-5. `NHAN_VIEN` ($\\underline{\\text{MaNV}}$, HoTen, ChuyenMon, SDT, MaTT)  
+5. `NHAN_VIEN` ($\\underline{\\text{MaNV}}$, HoTen, ChuyenMon, SDT, MaTT)
    *Khóa ngoại:* `MaTT` $\\to$ `TRUNGTAM_YTE(MaTT)`.
-6. `PHAN_PHOI` ($\\underline{\\text{MaLo}}$, $\\underline{\\text{MaDT}}$, $\\underline{\\text{NgayPP}}$, SoLieuPP, TrangThai)  
+6. `PHAN_PHOI` ($\\underline{\\text{MaLo}}$, $\\underline{\\text{MaDT}}$, $\\underline{\\text{NgayPP}}$, SoLieuPP, TrangThai)
    *Khóa ngoại:* `MaLo` $\\to$ `LO_VACXIN(MaLo)`, `MaDT` $\\to$ `DIEM_TIEM(MaDT)`.
-7. `TRUC_CA` ($\\underline{\\text{MaNV}}$, $\\underline{\\text{MaDT}}$, $\\underline{\\text{NgayTruc}}$, VaiTroTruc)  
+7. `TRUC_CA` ($\\underline{\\text{MaNV}}$, $\\underline{\\text{MaDT}}$, $\\underline{\\text{NgayTruc}}$, VaiTroTruc)
    *Khóa ngoại:* `MaNV` $\\to$ `NHAN_VIEN(MaNV)`, `MaDT` $\\to$ `DIEM_TIEM(MaDT)`.
 
 **Barem chấm Câu 1:**
@@ -608,11 +608,11 @@ solution_md = """# HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT ĐỀ THI MÔ
 #### a. Ràng buộc CHECK miền giá trị (0.75 điểm)
 ```sql
 -- Ràng buộc SOLIEUXUAT > 0 trong CTPX
-ALTER TABLE CTPX 
+ALTER TABLE CTPX
 ADD CONSTRAINT CK_CTPX_SOLIEUXUAT CHECK (SOLIEUXUAT > 0);
 
 -- Ràng buộc TRANGTHAI nhận 0 hoặc 1 trong PHIEUXUAT
-ALTER TABLE PHIEUXUAT 
+ALTER TABLE PHIEUXUAT
 ADD CONSTRAINT CK_PHIEUXUAT_TRANGTHAI CHECK (TRANGTHAI IN (0, 1));
 ```
 - *Lỗi dễ mắc:* Dùng sai tên bảng, viết nhầm cú pháp `CREATE CONSTRAINT`, quên đặt tên ràng buộc.
@@ -626,14 +626,14 @@ UPDATE LOVACXIN
 SET DONGIA = DONGIA * 1.1
 FROM LOVACXIN LV
 INNER JOIN NHACUNGCAP NCC ON LV.MANCC = NCC.MANCC
-WHERE YEAR(LV.HSD) = 2025 
+WHERE YEAR(LV.HSD) = 2025
   AND NCC.TENNCC = 'AstraZeneca';
 ```
 *(Cách 2 dùng Subquery cũng được trọn điểm):*
 ```sql
 UPDATE LOVACXIN
 SET DONGIA = DONGIA * 1.1
-WHERE YEAR(HSD) = 2025 
+WHERE YEAR(HSD) = 2025
   AND MANCC IN (SELECT MANCC FROM NHACUNGCAP WHERE TENNCC = 'AstraZeneca');
 ```
 - *Barem:* Mệnh đề UPDATE & SET: **0.25đ**; Mệnh đề WHERE lọc năm và NCC: **0.50đ**.

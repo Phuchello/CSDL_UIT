@@ -1,6 +1,6 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT (MOCK-15)
-**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 15 — Quản Lý Trại Cứu Hộ Động Vật Hoang Dã  
-**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC  
+**Đề thi:** Đề Thi Giữa Kỳ Mô Phỏng Số 15 — Quản Lý Trại Cứu Hộ Động Vật Hoang Dã
+**Thời gian thi:** 75 phút | **Thang điểm:** 10.0 | **Tác giả:** VÕ TRỌNG PHÚC
 
 ---
 

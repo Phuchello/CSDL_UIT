@@ -1,7 +1,7 @@
 # NGÂN HÀNG ĐỀ THI & LỜI GIẢI GIỮA KỲ IT004 — CƠ SỞ DỮ LIỆU
-**Đơn vị:** Trường Đại học Công nghệ Thông tin, ĐHQG-HCM  
-**Tác giả biên soạn:** VÕ TRỌNG PHÚC  
-**Phiên bản:** v1.2 GK Master Release  
+**Đơn vị:** Trường Đại học Công nghệ Thông tin, ĐHQG-HCM
+**Tác giả biên soạn:** VÕ TRỌNG PHÚC
+**Phiên bản:** v1.2 GK Master Release
 
 ---
 
