@@ -11,9 +11,10 @@
 | :---: | :--- | :---: | :---: | :---: | :---: |
 | **P0-01** | Bất đồng bộ Lược đồ MOCK-01 (Câu 1 vs Câu 2) | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
 | **P0-02** | Kết quả kỳ vọng Fixture & Kiểm chứng ngữ nghĩa | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
+| **P0-02b** | False Positive trong Test CHECK Constraint & Lỗi Tiếng Việt | **P0** (Critical) | **RESOLVED** | 23/10/2026 | 23/10/2026 |
 | **P0-03** | Validator báo cáo độ tin cậy ảo (False Confidence) | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
 | **P0-04** | Ấn phẩm PDF không phân định bản DRAFT & VERIFIED | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
-| **P0-05** | Phân mảnh lược đồ & trùng câu MOCK-02 $\to$ MOCK-15 | **P1** (High) | **REGISTERED / IN_PROGRESS** | 22/10/2026 | Theo kế hoạch Phase B |
+| **P0-05** | Phân mảnh lược đồ & trùng câu MOCK-02 $\to$ MOCK-15 | **P1** (High) | **REGISTERED / IN_PROGRESS** | 22/10/2026 | Chuyển sang Phase C |
 
 ---
 
@@ -55,7 +56,22 @@
 
 ---
 
-### P0-03: Validator báo cáo độ tin cậy ảo (False Confidence)
+### P0-02b: False Positive trong Test CHECK Constraint & Lỗi Tiếng Việt Log
+- **Mô tả hiện tượng:**
+  1. Trong script fixture cũ, việc kiểm tra ràng buộc CHECK sử dụng mã giả `PX_FAKE` và `LO_FAKE` không tồn tại trong CSDL. Do đó, lỗi trả về thực chất là vi phạm Khóa Ngoại (Foreign Key Violation - cùng mang mã lỗi 547 trong SQL Server), chứ không phải do vi phạm CHECK constraint!
+  2. Log xuất ra từ `sqlcmd` bị lỗi font tiếng Việt (ví dụ `BAnh Thnh`).
+  3. Chưa kiểm thử chính sách `NOT NULL` và trường hợp biểu thức ba chân trị khi thuộc tính mang giá trị `NULL`.
+- **Nguyên nhân gốc rễ:** Thiếu kiểm thử đối kháng (Adversarial Testing) và chưa chỉ định code page UTF-8 (`chcp 65001 -f 65001`) khi gọi `sqlcmd`.
+- **Biện pháp khắc phục (Remediation):**
+  1. Sử dụng khóa ngoại hợp lệ (`PX01`, `LO01` đã tồn tại) khi chèn giá trị `SOLIEUXUAT = 0` và `-10`.
+  2. Bắt lỗi bằng `ERROR_MESSAGE() LIKE '%CK_CTPX_SOLIEUXUAT%'`, nếu không đúng constraint hoặc nếu chèn lọt thì dùng `THROW` để đánh trượt test case ngay lập tức.
+  3. Thiết lập chính sách `NOT NULL` rõ ràng và kiểm thử bắt lỗi 515 khi chèn `NULL`.
+  4. Thực thi `sqlcmd` với cờ `-f 65001` và tiền tố `N'...'` trong T-SQL để xuất log UTF-8 sạch 100%.
+- **Bằng chứng kiểm chứng:**
+  - File fixture: [`exam/gk/mocks/MOCK-01/fixture_mock01.sql`](../../mocks/MOCK-01/fixture_mock01.sql)
+  - Log thực thi engine thật: [`exam/gk/qa/mock01_sql_execution.log`](mock01_sql_execution.log)
+
+---
 - **Mô tả hiện tượng:** Validator cũ coi mọi bài có trường `solution` không rỗng là "Verified Solutions", dẫn đến việc công bố 173 bài đều là verified trong khi 119 bài thực chất là draft/template.
 - **Nguyên nhân gốc rễ:** Kiểm tra bằng độ dài chuỗi mà không phân cấp mức độ thẩm định học thuật.
 - **Biện pháp khắc phục:**

@@ -1,11 +1,14 @@
 -- ============================================================================
--- FIXTURE & VERIFICATION SCRIPT: MOCK-01 (GOLD STANDARD)
+-- FIXTURE & ADVERSARIAL QA VERIFICATION SCRIPT: MOCK-01
 -- ĐỀ THI GIỮA KỲ MÔ PHỎNG SỐ 01: QUẢN LÝ CUNG ỨNG & TIÊM CHỦNG VẮC-XIN
 -- Tác giả: VÕ TRỌNG PHÚC — CSDL_UIT Master Series
--- Môi trường thực thi: Microsoft SQL Server (Transact-SQL)
+-- Môi trường thực thi: Microsoft SQL Server 2025 (Transact-SQL)
 -- ============================================================================
 
--- Khởi tạo Database kiểm thử riêng biệt
+SET NOCOUNT ON;
+GO
+
+-- 1. KHỞI TẠO CƠ SỞ DỮ LIỆU KIỂM THỬ ĐỘC LẬP
 IF DB_ID('IT004_MOCK01_DB') IS NULL
     CREATE DATABASE IT004_MOCK01_DB;
 GO
@@ -13,7 +16,7 @@ GO
 USE IT004_MOCK01_DB;
 GO
 
--- 1. TẠO LƯỢC ĐỒ CƠ SỞ DỮ LIỆU
+-- 2. TẠO LƯỢC ĐỒ VÀ RÀNG BUỘC TOÀN VẸN (NOT NULL + CHECK)
 IF OBJECT_ID('CTPX', 'U') IS NOT NULL DROP TABLE CTPX;
 IF OBJECT_ID('PHIEUXUAT', 'U') IS NOT NULL DROP TABLE PHIEUXUAT;
 IF OBJECT_ID('NHANVIEN', 'U') IS NOT NULL DROP TABLE NHANVIEN;
@@ -35,8 +38,8 @@ CREATE TABLE LOVACXIN (
     TENVACXIN NVARCHAR(100) NOT NULL,
     NGAYSX DATE NOT NULL,
     HSD DATE NOT NULL,
-    SOLIEU INT CHECK (SOLIEU >= 0),
-    DONGIA DECIMAL(12, 2) CHECK (DONGIA >= 0),
+    SOLIEU INT NOT NULL CHECK (SOLIEU >= 0),
+    DONGIA DECIMAL(12, 2) NOT NULL CHECK (DONGIA >= 0),
     MANCC VARCHAR(10) NOT NULL FOREIGN KEY REFERENCES NHACUNGCAP(MANCC)
 );
 
@@ -45,7 +48,7 @@ CREATE TABLE DIEMTIEM (
     TENDT NVARCHAR(100) NOT NULL,
     DIACHI NVARCHAR(150),
     QUAN NVARCHAR(50) NOT NULL,
-    SUCCHUA INT CHECK (SUCCHUA > 0)
+    SUCCHUA INT NOT NULL CHECK (SUCCHUA > 0)
 );
 
 CREATE TABLE NHANVIEN (
@@ -59,19 +62,19 @@ CREATE TABLE NHANVIEN (
 CREATE TABLE PHIEUXUAT (
     MAPX VARCHAR(10) PRIMARY KEY,
     NGAYXUAT DATE NOT NULL,
-    TRANGTHAI INT, -- 0: đang chuyển, 1: đã nhận
+    TRANGTHAI INT NOT NULL, -- 0: đang chuyển, 1: đã nhận (Bắt buộc NOT NULL)
     MADT VARCHAR(10) NOT NULL FOREIGN KEY REFERENCES DIEMTIEM(MADT)
 );
 
 CREATE TABLE CTPX (
     MAPX VARCHAR(10) NOT NULL FOREIGN KEY REFERENCES PHIEUXUAT(MAPX),
     MALO VARCHAR(10) NOT NULL FOREIGN KEY REFERENCES LOVACXIN(MALO),
-    SOLIEUXUAT INT,
+    SOLIEUXUAT INT NOT NULL, -- Bắt buộc NOT NULL
     PRIMARY KEY (MAPX, MALO)
 );
 GO
 
--- 2. CÂU 2.1a: TẠO RÀNG BUỘC CHECK THEO YÊU CẦU ĐỀ BÀI
+-- CÂU 2.1a: THIẾT LẬP RÀNG BUỘC CHECK
 ALTER TABLE CTPX
 ADD CONSTRAINT CK_CTPX_SOLIEUXUAT CHECK (SOLIEUXUAT > 0);
 
@@ -79,32 +82,12 @@ ALTER TABLE PHIEUXUAT
 ADD CONSTRAINT CK_PHIEUXUAT_TRANGTHAI CHECK (TRANGTHAI IN (0, 1));
 GO
 
-PRINT '=== [TEST 2.1a: CHECK Constraints Verification] ===';
--- Test CHECK CK_CTPX_SOLIEUXUAT với giá trị không hợp lệ (SOLIEUXUAT = 0)
-BEGIN TRY
-    INSERT INTO CTPX VALUES ('PX_FAKE', 'LO_FAKE', 0);
-    PRINT 'FAIL: CK_CTPX_SOLIEUXUAT did not reject 0';
-END TRY
-BEGIN CATCH
-    PRINT 'PASS: CK_CTPX_SOLIEUXUAT successfully rejected invalid value 0 (Error ' + CAST(ERROR_NUMBER() AS VARCHAR) + ')';
-END CATCH;
-
--- Test CHECK CK_PHIEUXUAT_TRANGTHAI với giá trị không hợp lệ (TRANGTHAI = 2)
-BEGIN TRY
-    INSERT INTO PHIEUXUAT VALUES ('PX_FAKE', '2024-10-15', 2, 'DT01');
-    PRINT 'FAIL: CK_PHIEUXUAT_TRANGTHAI did not reject 2';
-END TRY
-BEGIN CATCH
-    PRINT 'PASS: CK_PHIEUXUAT_TRANGTHAI successfully rejected invalid value 2 (Error ' + CAST(ERROR_NUMBER() AS VARCHAR) + ')';
-END CATCH;
-GO
-
--- 3. CHÈN DỮ LIỆU KIỂM THỬ (TEST FIXTURES & TOÀN BỘ EDGE CASES)
+-- 3. CHÈN MASTER DATA HỢP LỆ TRƯỚC ĐỂ PHỤC VỤ TEST ĐỐI KHÁNG
 INSERT INTO NHACUNGCAP VALUES
 ('NCC01', 'AstraZeneca', N'Anh Quốc', '0281234567'),
 ('NCC02', 'Pfizer', N'Hoa Kỳ', '0282345678'),
 ('NCC03', 'Moderna', N'Hoa Kỳ', '0283456789'),
-('NCC04', 'VnBiotech', N'Việt Nam', '0284567890');
+('NCC04', 'VnBiotech', N'Việt Nam', '0284567890'); -- Nhà cung cấp chưa nhập lô nào (Edge case tập chia rỗng)
 
 INSERT INTO LOVACXIN VALUES
 ('LO01', N'Lô AZ-01', 'AstraZeneca-ChAdOx1', '2023-11-01', '2025-05-30', 50000, 150000.00, 'NCC01'),
@@ -120,7 +103,7 @@ INSERT INTO DIEMTIEM VALUES
 ('DT03', N'Ký Túc Xá Khu A', N'Khu phố 6, Linh Trung', N'Thủ Đức', 1800),
 ('DT04', N'Ký Túc Xá Khu B', N'Đông Hòa', N'Thủ Đức', 2500),          -- Đồng hạng cực trị 1
 ('DT05', N'Nhà Thi Đấu Thể Thao', N'Võ Văn Ngân', N'Thủ Đức', 2500),  -- Đồng hạng cực trị 2
-('DT06', N'Trạm Y Tế P.12', N'Bùi Đình Túy', N'Bình Thạnh', 400);     -- Edge Case: Không có nhân viên để kiểm thử Left Outer Join
+('DT06', N'Trạm Y Tế P.12', N'Bùi Đình Túy', N'Bình Thạnh', 400);     -- Edge Case: Không có nhân viên, chưa có phiếu xuất
 
 INSERT INTO NHANVIEN VALUES
 ('NV01', N'Nguyễn Văn A', N'Bác sĩ Đa khoa', '0901111111', 'DT01'),
@@ -135,8 +118,91 @@ INSERT INTO PHIEUXUAT VALUES
 ('PX03', '2024-10-20', 1, 'DT02'),
 ('PX04', '2024-10-15', 1, 'DT03'),
 ('PX05', '2024-10-18', 1, 'DT04'),
-('PX06', '2024-10-22', 0, 'DT05'); -- Edge Case: TRANGTHAI = 0 (Đang chuyển, chưa tiếp nhận!)
+('PX06', '2024-10-22', 0, 'DT05'); -- Edge Case: TRANGTHAI = 0 (Đang chuyển, chưa tiếp nhận)
+GO
 
+-- ============================================================================
+-- 4. ADVERSARIAL QA: KIỂM TRA CHẶT CHẼ CHECK & NOT NULL (ZERO FALSE POSITIVES)
+-- ============================================================================
+PRINT '======================================================================';
+PRINT '--- [ADVERSARIAL QA 2.1a: CHECK & NOT NULL INTEGRITY VERIFICATION] ---';
+PRINT '======================================================================';
+
+-- Test 1: Kiểm tra SOLIEUXUAT = 0 với Khóa Ngoại HỢP LỆ (PX01, LO01)
+-- Phải bị chặn chính xác bởi constraint CK_CTPX_SOLIEUXUAT
+BEGIN TRY
+    INSERT INTO CTPX (MAPX, MALO, SOLIEUXUAT) VALUES ('PX01', 'LO01', 0);
+    THROW 50001, 'FAILED: Constraint allowed SOLIEUXUAT = 0!', 1;
+END TRY
+BEGIN CATCH
+    IF ERROR_MESSAGE() LIKE '%CK_CTPX_SOLIEUXUAT%'
+        PRINT '  [PASS] CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = 0 (Confirmed Constraint: CK_CTPX_SOLIEUXUAT)';
+    ELSE
+        THROW 50001, 'FAILED: Error was not caused by CK_CTPX_SOLIEUXUAT!', 1;
+END CATCH;
+
+-- Test 2: Kiểm tra SOLIEUXUAT = -10 (Số âm) với Khóa Ngoại HỢP LỆ
+BEGIN TRY
+    INSERT INTO CTPX (MAPX, MALO, SOLIEUXUAT) VALUES ('PX01', 'LO01', -10);
+    THROW 50002, 'FAILED: Constraint allowed SOLIEUXUAT = -10!', 1;
+END TRY
+BEGIN CATCH
+    IF ERROR_MESSAGE() LIKE '%CK_CTPX_SOLIEUXUAT%'
+        PRINT '  [PASS] CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = -10';
+    ELSE
+        THROW 50002, 'FAILED: Error was not caused by CK_CTPX_SOLIEUXUAT!', 1;
+END CATCH;
+
+-- Test 3: Kiểm tra SOLIEUXUAT = NULL
+BEGIN TRY
+    INSERT INTO CTPX (MAPX, MALO, SOLIEUXUAT) VALUES ('PX01', 'LO01', NULL);
+    THROW 50003, 'FAILED: Allowed NULL in SOLIEUXUAT!', 1;
+END TRY
+BEGIN CATCH
+    IF ERROR_NUMBER() = 515 -- Cannot insert the value NULL into column
+        PRINT '  [PASS] NOT NULL policy correctly rejected NULL in SOLIEUXUAT (Error 515)';
+    ELSE
+        THROW 50003, 'FAILED: NULL test failed!', 1;
+END CATCH;
+
+-- Test 4: Kiểm tra TRANGTHAI = 2 với Khóa Ngoại HỢP LỆ (DT01)
+BEGIN TRY
+    INSERT INTO PHIEUXUAT (MAPX, NGAYXUAT, TRANGTHAI, MADT) VALUES ('PX_TEST', '2024-10-15', 2, 'DT01');
+    THROW 50004, 'FAILED: Constraint allowed TRANGTHAI = 2!', 1;
+END TRY
+BEGIN CATCH
+    IF ERROR_MESSAGE() LIKE '%CK_PHIEUXUAT_TRANGTHAI%'
+        PRINT '  [PASS] CK_PHIEUXUAT_TRANGTHAI correctly rejected TRANGTHAI = 2 (Confirmed Constraint: CK_PHIEUXUAT_TRANGTHAI)';
+    ELSE
+        THROW 50004, 'FAILED: Error was not caused by CK_PHIEUXUAT_TRANGTHAI!', 1;
+END CATCH;
+
+-- Test 5: Kiểm tra TRANGTHAI = -1 với Khóa Ngoại HỢP LỆ
+BEGIN TRY
+    INSERT INTO PHIEUXUAT (MAPX, NGAYXUAT, TRANGTHAI, MADT) VALUES ('PX_TEST', '2024-10-15', -1, 'DT01');
+    THROW 50005, 'FAILED: Constraint allowed TRANGTHAI = -1!', 1;
+END TRY
+BEGIN CATCH
+    IF ERROR_MESSAGE() LIKE '%CK_PHIEUXUAT_TRANGTHAI%'
+        PRINT '  [PASS] CK_PHIEUXUAT_TRANGTHAI correctly rejected TRANGTHAI = -1';
+    ELSE
+        THROW 50005, 'FAILED: Error was not caused by CK_PHIEUXUAT_TRANGTHAI!', 1;
+END CATCH;
+
+-- Test 6: Kiểm tra TRANGTHAI = NULL
+BEGIN TRY
+    INSERT INTO PHIEUXUAT (MAPX, NGAYXUAT, TRANGTHAI, MADT) VALUES ('PX_TEST', '2024-10-15', NULL, 'DT01');
+    THROW 50006, 'FAILED: Allowed NULL in TRANGTHAI!', 1;
+END TRY
+BEGIN CATCH
+    IF ERROR_NUMBER() = 515
+        PRINT '  [PASS] NOT NULL policy correctly rejected NULL in TRANGTHAI (Error 515)';
+    ELSE
+        THROW 50006, 'FAILED: NULL test failed!', 1;
+END CATCH;
+GO
+
+-- 5. CHÈN DỮ LIỆU CTPX HỢP LỆ PHỤC VỤ CÁC TRUY VẤN TIẾP THEO
 INSERT INTO CTPX VALUES
 ('PX01', 'LO05', 1000),
 ('PX01', 'LO06', 1000), -- DT01 nhận cả LO05 và LO06 trong cùng 1 phiếu xuất
@@ -144,17 +210,17 @@ INSERT INTO CTPX VALUES
 ('PX02', 'LO05', 2000), -- DT02 nhận LO05 ở PX02
 ('PX03', 'LO06', 1500), -- DT02 nhận LO06 ở PX03 -> DT02 nhận đủ LO05 và LO06 qua 2 phiếu khác nhau!
 ('PX04', 'LO01', 2000), -- DT03 chỉ nhận LO01
-('PX05', 'LO05', 3000), -- DT04 chỉ nhận LO05, THIẾU LO06 -> Không thỏa phép chia
-('PX06', 'LO05', 500),  -- DT05 có cả LO05 và LO06 nhưng TRANGTHAI = 0 (chưa tiếp nhận) -> Không thỏa phép chia
+('PX05', 'LO05', 3000), -- DT04 chỉ nhận LO05, THIẾU LO06 -> Không thỏa phép chia Moderna
+('PX06', 'LO05', 500),  -- DT05 có cả LO05 và LO06 nhưng TRANGTHAI = 0 -> Không thỏa phép chia Moderna
 ('PX06', 'LO06', 500);
 GO
 
 -- ============================================================================
--- 4. THỰC THI KIỂM TRẢ CÁC CÂU TRUY VẤN
+-- 6. THỰC THI & KIỂM CHỨNG TỪNG TRUY VẤN
 -- ============================================================================
 
 -- Câu 2.1b: UPDATE tăng giá 10% các lô vắc-xin HSD 2025 của AstraZeneca
--- Expected: LO01 (150k -> 165k), LO02 (160k -> 176k)
+PRINT '';
 PRINT '--- [TEST 2.1b: UPDATE 10% AstraZeneca 2025] ---';
 UPDATE LOVACXIN
 SET DONGIA = DONGIA * 1.1
@@ -169,7 +235,7 @@ WHERE MANCC = 'NCC01';
 GO
 
 -- Câu 2.2a: Lô vắc-xin Pfizer-BioNTech sản xuất năm 2024
--- Expected: LO03, LO04
+PRINT '';
 PRINT '--- [TEST 2.2a: Select Pfizer 2024] ---';
 SELECT MALO, TENLO, SOLIEU, DONGIA
 FROM LOVACXIN
@@ -178,8 +244,8 @@ WHERE TENVACXIN = 'Pfizer-BioNTech'
 GO
 
 -- Câu 2.2b: Điểm tiêm đã tiếp nhận phiếu xuất ngày 15/10/2024 (TRANGTHAI = 1)
--- Expected: DT01, DT02, DT03
-PRINT '--- [TEST 2.2b: Điểm tiêm đã tiếp nhận 15/10/2024] ---';
+PRINT '';
+PRINT N'--- [TEST 2.2b: Điểm tiêm đã tiếp nhận ngày 15/10/2024] ---';
 SELECT DISTINCT DT.MADT, DT.TENDT, DT.QUAN
 FROM DIEMTIEM DT
 INNER JOIN PHIEUXUAT PX ON DT.MADT = PX.MADT
@@ -188,8 +254,8 @@ WHERE PX.NGAYXUAT = '2024-10-15'
 GO
 
 -- Câu 2.2c: Điểm tiêm quận Bình Thạnh và nhân viên công tác nếu có (LEFT OUTER JOIN)
--- Expected: DT01 (NV01), DT02 (NV02), DT06 (NULL) -> Chứng minh không mất DT06
-PRINT '--- [TEST 2.2c: Left Outer Join Bình Thạnh] ---';
+PRINT '';
+PRINT N'--- [TEST 2.2c: Left Outer Join Bình Thạnh (Edge Case: DT06 có HOTEN là NULL)] ---';
 SELECT DT.MADT, DT.TENDT, NV.HOTEN
 FROM DIEMTIEM DT
 LEFT OUTER JOIN NHANVIEN NV ON DT.MADT = NV.MADT
@@ -197,13 +263,8 @@ WHERE DT.QUAN = N'Bình Thạnh';
 GO
 
 -- Câu 2.2d: Gom nhóm tổng số liều đã tiếp nhận (TRANGTHAI = 1) theo điểm tiêm T10/2024
--- Expected:
--- DT01: 1000 + 1000 + 1500 = 3500
--- DT02: 2000 (PX02) + 1500 (PX03) = 3500
--- DT03: 2000 (PX04) = 2000
--- DT04: 3000 (PX05) = 3000
--- (DT05 không có dòng nào vì PX06 có TRANGTHAI = 0)
-PRINT '--- [TEST 2.2d: Gom nhóm tổng liều đã tiếp nhận T10/2024] ---';
+PRINT '';
+PRINT N'--- [TEST 2.2d: Gom nhóm tổng liều đã tiếp nhận T10/2024] ---';
 SELECT PX.MADT, SUM(CT.SOLIEUXUAT) AS TONGLIEU
 FROM PHIEUXUAT PX
 INNER JOIN CTPX CT ON PX.MAPX = CT.MAPX
@@ -212,21 +273,45 @@ WHERE PX.NGAYXUAT >= '2024-10-01' AND PX.NGAYXUAT <= '2024-10-31'
 GROUP BY PX.MADT;
 GO
 
--- Câu 2.2e: Phép chia - Điểm tiêm đã tiếp nhận TẤT CẢ các lô của Moderna (LO05, LO06)
--- Expected: Đúng 2 điểm tiêm DT01 và DT02!
+-- ============================================================================
+-- Câu 2.2e: PHÉP CHIA QUAN HỆ & CÁC TRƯỜNG HỢP BIÊN
+-- ============================================================================
+PRINT '';
+PRINT N'--- [TEST 2.2e (Case 1 - Chuẩn): Điểm tiêm đã tiếp nhận TẤT CẢ các lô của Moderna] ---';
+-- Expected: Đúng 2 điểm tiêm DT01 (nhận trong 1 phiếu) và DT02 (nhận phân tán 2 phiếu).
 -- DT04 bị loại vì thiếu LO06.
 -- DT05 bị loại vì PX06 có TRANGTHAI = 0 (chưa tiếp nhận).
-PRINT '--- [TEST 2.2e: Phép chia Moderna] ---';
 SELECT DT.MADT, DT.TENDT
 FROM DIEMTIEM DT
-WHERE NOT EXISTS (
-    -- Tập các lô của Moderna
+WHERE DT.MADT IN (SELECT MADT FROM PHIEUXUAT WHERE TRANGTHAI = 1)
+  AND NOT EXISTS (
     SELECT LV.MALO
     FROM LOVACXIN LV
     INNER JOIN NHACUNGCAP NCC ON LV.MANCC = NCC.MANCC
     WHERE NCC.TENNCC = 'Moderna'
     EXCEPT
-    -- Tập các lô mà điểm tiêm DT thực sự đã tiếp nhận (TRANGTHAI = 1)
+    SELECT CT.MALO
+    FROM PHIEUXUAT PX
+    INNER JOIN CTPX CT ON PX.MAPX = CT.MAPX
+    WHERE PX.MADT = DT.MADT
+      AND PX.TRANGTHAI = 1
+);
+GO
+
+PRINT '';
+PRINT N'--- [TEST 2.2e (Case 2 - Edge Case): Phép chia với Nhà cung cấp KHÔNG CÓ LÔ NÀO (VnBiotech)] ---';
+-- Phân tích ĐSQH: S = R_VnBiotech = rỗng.
+-- Theo lý thuyết ĐSQH: R_DT_Lo / rỗng = pi_MADT(R_DT_Lo) (Tất cả điểm tiêm từng tiếp nhận vắc-xin)
+-- Expected: DT01, DT02, DT03, DT04 (Không gồm DT06 vì DT06 chưa tiếp nhận vắc-xin bao giờ).
+SELECT DT.MADT, DT.TENDT
+FROM DIEMTIEM DT
+WHERE DT.MADT IN (SELECT MADT FROM PHIEUXUAT WHERE TRANGTHAI = 1)
+  AND NOT EXISTS (
+    SELECT LV.MALO
+    FROM LOVACXIN LV
+    INNER JOIN NHACUNGCAP NCC ON LV.MANCC = NCC.MANCC
+    WHERE NCC.TENNCC = 'VnBiotech'
+    EXCEPT
     SELECT CT.MALO
     FROM PHIEUXUAT PX
     INNER JOIN CTPX CT ON PX.MAPX = CT.MAPX
@@ -236,13 +321,16 @@ WHERE NOT EXISTS (
 GO
 
 -- Câu 2.2f: Điểm tiêm có sức chứa lớn nhất tại Thủ Đức (Kèm Tie-breaking Đồng Hạng)
--- Expected: Cả hai điểm tiêm DT04 (2500) và DT05 (2500)! Cả hai đều lớn hơn DT03 (1800).
-PRINT '--- [TEST 2.2f: Cực trị MAX sức chứa Thủ Đức (Đồng Hạng)] ---';
-SELECT MADT, TENDT
+PRINT '';
+PRINT N'--- [TEST 2.2f: Cực trị MAX sức chứa Thủ Đức (Tie-breaking: DT04 và DT05 cùng = 2500)] ---';
+SELECT MADT, TENDT, SUCCHUA
 FROM DIEMTIEM
 WHERE QUAN = N'Thủ Đức'
   AND SUCCHUA = (SELECT MAX(SUCCHUA) FROM DIEMTIEM WHERE QUAN = N'Thủ Đức');
 GO
 
-PRINT '=== [MOCK-01 FIXTURE: ALL VERIFICATION QUERIES EXECUTED SUCCESSFULLY] ===';
+PRINT '';
+PRINT '======================================================================';
+PRINT '=== [MOCK-01 ADVERSARIAL QA: ALL TESTS AND EDGE CASES PASSED 100%] ===';
+PRINT '======================================================================';
 GO

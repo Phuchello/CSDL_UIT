@@ -38,7 +38,7 @@ class GKValidator:
                 "SEMANTICALLY_REVIEWED": 0,
                 "DRAFT": 0,
             },
-            "verified_solutions": 0,
+            "solutions_present": 0,
             "rubrics_present": 0,
             "mocks_count": 0,
             "mock_points_valid": 0,
@@ -95,17 +95,29 @@ class GKValidator:
             top = p.get("topic")
             self.stats["topics"][top] = self.stats["topics"].get(top, 0) + 1
 
-            status = p.get("status", "DRAFT")
-            if status == "VERIFIED":
+            v_level = p.get("verification_level", "DRAFT")
+            if v_level not in self.stats["verification_levels"]:
+                self.log_error(f"Problem {pid} has invalid verification_level: {v_level}")
+                v_level = "DRAFT"
+
+            # Strict verification criteria
+            if v_level == "EXECUTION_VERIFIED":
+                exec_log = QA_DIR / "mock01_sql_execution.log"
+                if not exec_log.exists():
+                    self.log_error(f"Problem {pid} marked EXECUTION_VERIFIED but execution log is missing!")
                 self.stats["verified_problems"] += 1
+                self.stats["verification_levels"]["EXECUTION_VERIFIED"] += 1
+            elif v_level == "SEMANTICALLY_REVIEWED":
+                if p.get("status") != "VERIFIED":
+                    self.log_warning(f"Problem {pid} marked SEMANTICALLY_REVIEWED but status is not VERIFIED.")
+                self.stats["verified_problems"] += 1
+                self.stats["verification_levels"]["SEMANTICALLY_REVIEWED"] += 1
             else:
                 self.stats["draft_problems"] += 1
-
-            v_level = p.get("verification_level", "DRAFT")
-            self.stats["verification_levels"][v_level] = self.stats["verification_levels"].get(v_level, 0) + 1
+                self.stats["verification_levels"]["DRAFT"] += 1
 
             if p.get("solution"):
-                self.stats["verified_solutions"] += 1
+                self.stats["solutions_present"] += 1
             if p.get("rubric"):
                 self.stats["rubrics_present"] += 1
 
@@ -213,9 +225,10 @@ class GKValidator:
         print("\n==================================================")
         print(" AUDIT SUMMARY:")
         print(f"  Total Problems in Catalog : {self.stats['total_problems']}")
-        print(f"  Verified Problems         : {self.stats['verified_problems']}")
-        print(f"  Draft Problems            : {self.stats['draft_problems']}")
-        print(f"  Verification Breakdown    : {self.stats['verification_levels']}")
+        print(f"  Solutions Present         : {self.stats['solutions_present']}")
+        print(f"  - Execution Verified      : {self.stats['verification_levels']['EXECUTION_VERIFIED']}")
+        print(f"  - Semantically Reviewed   : {self.stats['verification_levels']['SEMANTICALLY_REVIEWED']}")
+        print(f"  - Draft / Pending Remed.  : {self.stats['verification_levels']['DRAFT']}")
         print(f"  Rubrics Present           : {self.stats['rubrics_present']}")
         print(f"  Difficulties (A/B/C)      : {self.stats['difficulties']}")
         print(f"  Mock Exams Audited        : {self.stats['mocks_count']}")

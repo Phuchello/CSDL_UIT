@@ -1,7 +1,7 @@
 # HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT ĐỀ THI MÔ PHỎNG SỐ 01 (MOCK-01)
 **Môn học:** IT004 — Cơ sở dữ liệu | **Thời gian thi:** 75 phút | **Thang điểm:** 10.0
 **Tác giả biên soạn:** VÕ TRỌNG PHÚC — CSDL_UIT Master Series
-**Tiêu chuẩn học thuật:** Lược đồ nghiệp vụ nhất quán 100%, tư duy tự nhiên $\to$ biểu thức logic $\to$ ĐSQH $\to$ T-SQL, barem điểm từng ý và kiểm chứng thực thi.
+**Tiêu chuẩn học thuật:** Lược đồ nhất quán 100%, tư duy toán $\to$ ĐSQH $\to$ T-SQL, Adversarial QA và kiểm chứng thực thi trên SQL Server.
 
 ---
 
@@ -20,26 +20,26 @@
 
 #### B. Phân tích mối kết hợp và bản số Min–Max hai phía
 1. **Mối kết hợp `CUNG_CAP` (NHACUNGCAP — LOVACXIN):**
-   - Một nhà cung cấp có thể cung cấp nhiều lô vắc-xin: $(1, N)$.
-   - Một lô vắc-xin do duy nhất 1 nhà cung cấp cung ứng: $(1, 1)$.
-   - $\implies$ **Loại quan hệ: 1:N**. Bản số: `NHACUNGCAP (1, N)` — `(1, 1) LOVACXIN`.
+   - Một nhà cung cấp có thể cung ứng nhiều lô vắc-xin (hoặc là đối tác mới ký hợp đồng, chưa nhập lô nào về kho): $(0, N)$.
+   - Một lô vắc-xin nhập kho bắt buộc phải do duy nhất 1 nhà cung cấp cung ứng: $(1, 1)$.
+   - $\implies$ **Loại quan hệ: 1:N**. Bản số: `NHACUNGCAP (0, N)` — `(1, 1) LOVACXIN`.
 2. **Mối kết hợp `CONG_TAC` (DIEMTIEM — NHANVIEN):**
-   - Một điểm tiêm có thể có nhiều nhân viên y tế công tác (hoặc chưa có nhân viên): $(0, N)$.
-   - Mỗi nhân viên y tế chỉ được điều động công tác tại tối đa 1 điểm tiêm: $(0, 1)$.
+   - Một điểm tiêm có thể có nhiều nhân viên y tế công tác (hoặc điểm tiêm mới lập chưa phân công nhân viên): $(0, N)$.
+   - Mỗi nhân viên y tế được điều động công tác tại tối đa 1 điểm tiêm (hoặc nhân viên dự bị chưa phân công): $(0, 1)$.
    - $\implies$ **Loại quan hệ: 1:N**. Bản số: `DIEMTIEM (0, N)` — `(0, 1) NHANVIEN`.
 3. **Mối kết hợp `XUAT_DEN` (DIEMTIEM — PHIEUXUAT):**
    - Một điểm tiêm có thể tiếp nhận nhiều phiếu xuất (hoặc chưa tiếp nhận phiếu nào): $(0, N)$.
    - Mỗi phiếu xuất được điều phối đến duy nhất 1 điểm tiêm tiếp nhận: $(1, 1)$.
    - $\implies$ **Loại quan hệ: 1:N**. Bản số: `DIEMTIEM (0, N)` — `(1, 1) PHIEUXUAT`.
 4. **Mối kết hợp `CHI_TIET_XUAT` (PHIEUXUAT — LOVACXIN):**
-   - Một phiếu xuất gồm một hoặc nhiều lô vắc-xin: $(1, N)$.
-   - Một lô vắc-xin có thể xuất trong nhiều phiếu xuất khác nhau: $(0, N)$.
+   - Mỗi phiếu xuất bắt buộc phải gồm ít nhất một lô vắc-xin xuất kho: $(1, N)$.
+   - Một lô vắc-xin có thể được xuất trong nhiều phiếu xuất khác nhau (hoặc lưu kho chưa xuất): $(0, N)$.
    - Thuộc tính của mối kết hợp: `SOLIEUXUAT` (số liều vắc-xin xuất thực tế).
    - $\implies$ **Loại quan hệ: M:N**. Bản số: `PHIEUXUAT (1, N)` — `(0, N) LOVACXIN`.
 
 #### C. Sơ đồ Thực thể – Mối kết hợp (ERD Textual Representation)
 ```
-[NHACUNGCAP] 1 ──── (1,N) ──── <CUNG_CAP> ──── (1,1) ──── N [LOVACXIN]
+[NHACUNGCAP] 1 ──── (0,N) ──── <CUNG_CAP> ──── (1,1) ──── N [LOVACXIN]
                                                                │
                                                                │ (0,N)
                                                        <CHI_TIET_XUAT> [SOLIEUXUAT]
@@ -86,10 +86,16 @@
 
 ### 2.1. Viết các câu lệnh SQL (1.5 điểm)
 
-#### a. Ràng buộc CHECK miền giá trị trên CTPX và PHIEUXUAT (0.75 điểm)
-- **Mục tiêu:** Ràng buộc toàn vẹn miền giá trị: `SOLIEUXUAT > 0` và `TRANGTHAI` chỉ nhận `0` hoặc `1`.
+#### a. Ràng buộc CHECK miền giá trị & Chính sách NOT NULL (0.75 điểm)
+- **Mục tiêu:** Ràng buộc toàn vẹn miền giá trị: `SOLIEUXUAT > 0` và `TRANGTHAI IN (0, 1)`.
+- **Phân tích bẫy logic SQL ba chân trị (Three-Valued Logic):**
+  Trong SQL, nếu thuộc tính chấp nhận `NULL`, biểu thức `NULL > 0` cho kết quả `UNKNOWN`. Ràng buộc CHECK chỉ kích hoạt vi phạm khi biểu thức đánh giá là `FALSE`, do đó `UNKNOWN` sẽ được hệ quản trị cho phép vượt qua (PASS)! Do đó, trong thiết kế CSDL thực tế, cả hai thuộc tính bắt buộc phải khai báo `NOT NULL` trước khi đặt CHECK constraint.
 - **Cú pháp T-SQL chuẩn:**
 ```sql
+-- Đảm bảo chính sách NOT NULL theo nghiệp vụ
+ALTER TABLE CTPX ALTER COLUMN SOLIEUXUAT INT NOT NULL;
+ALTER TABLE PHIEUXUAT ALTER COLUMN TRANGTHAI INT NOT NULL;
+
 -- Ràng buộc 1: Số liều xuất phải là số nguyên dương (> 0)
 ALTER TABLE CTPX
 ADD CONSTRAINT CK_CTPX_SOLIEUXUAT CHECK (SOLIEUXUAT > 0);
@@ -98,9 +104,6 @@ ADD CONSTRAINT CK_CTPX_SOLIEUXUAT CHECK (SOLIEUXUAT > 0);
 ALTER TABLE PHIEUXUAT
 ADD CONSTRAINT CK_PHIEUXUAT_TRANGTHAI CHECK (TRANGTHAI IN (0, 1));
 ```
-- *Bẫy lỗi thường gặp:*
-  - Dùng sai điều kiện `SOLIEUXUAT >= 0` (đề bài yêu cầu số nguyên dương, tức $> 0$).
-  - Viết nhầm `CREATE CONSTRAINT` thay vì `ADD CONSTRAINT` trong lệnh `ALTER TABLE`.
 - *Barem điểm:* Mỗi ràng buộc đúng cú pháp và điều kiện: **0.375đ**.
 
 #### b. Cập nhật UPDATE tăng giá theo HSD và Nhà cung cấp (0.75 điểm)
@@ -113,13 +116,6 @@ FROM LOVACXIN LV
 INNER JOIN NHACUNGCAP NCC ON LV.MANCC = NCC.MANCC
 WHERE YEAR(LV.HSD) = 2025
   AND NCC.TENNCC = 'AstraZeneca';
-```
-- **Cú pháp T-SQL tương đương (Subquery):**
-```sql
-UPDATE LOVACXIN
-SET DONGIA = DONGIA * 1.1
-WHERE YEAR(HSD) = 2025
-  AND MANCC IN (SELECT MANCC FROM NHACUNGCAP WHERE TENNCC = 'AstraZeneca');
 ```
 - *Barem điểm:*
   - Mệnh đề `UPDATE ... SET DONGIA = DONGIA * 1.1`: **0.25đ**
@@ -177,9 +173,28 @@ WHERE YEAR(HSD) = 2025
      $$R_{\text{Chia}} \leftarrow R_{\text{DT\_Lo}} \div R_{\text{Moderna}}$$
   4. **Kết nối lấy tên điểm tiêm:**
      $$KQ \leftarrow \pi_{\text{MADT}, \text{TENDT}}(R_{\text{Chia}} \bowtie \text{DIEMTIEM})$$
-- *Phân tích biên (Edge Case):*
-  - Nếu NCC 'Moderna' không có lô nào trong kho ($R_{\text{Moderna}} = \emptyset$), theo tiên đề ĐSQH, phép chia trả về toàn bộ các `MADT` có trong quan hệ bị chia.
-  - Một điểm tiêm nhận đủ các lô phân tán trên nhiều phiếu xuất khác nhau (miễn là đều có `TRANGTHAI = 1`) vẫn thỏa phép chia.
+
+- **Phân tích chuyên sâu về Tập ứng viên & Edge Case Tập chia Rỗng:**
+  - *Tập ứng viên trong ĐSQH:* Theo định nghĩa Codd, phép chia $R(X, Y) \div S(Y)$ có miền kết quả $X \subseteq \pi_X(R)$. Tức là chỉ các điểm tiêm **đã từng tiếp nhận ít nhất một lô vắc-xin** ($\pi_{\text{MADT}}(R_{\text{DT\_Lo}})$) mới nằm trong tập ứng viên xem xét. Điểm tiêm `DT06` chưa từng tiếp nhận lô nào không thuộc tập bị chia $R_{\text{DT\_Lo}}$.
+  - *Trường hợp tập chia rỗng ($S = \emptyset$):*
+    Nếu nhà cung cấp chưa có lô nào trong kho ($R_{\text{NCC}} = \emptyset$), mệnh đề điều kiện $\forall y \in \emptyset, (x, y) \in R$ mang chân trị hiển nhiên đúng (Vacuously True). Khi đó trong ĐSQH, kết quả phép chia trả về toàn bộ tập ứng viên $\pi_{\text{MADT}}(R_{\text{DT\_Lo}})$.
+  - *Cú pháp T-SQL tương đương chuẩn mực (Strict RA Semantics):*
+```sql
+SELECT DT.MADT, DT.TENDT
+FROM DIEMTIEM DT
+WHERE DT.MADT IN (SELECT MADT FROM PHIEUXUAT WHERE TRANGTHAI = 1) -- Ràng buộc tập ứng viên pi_X(R)
+  AND NOT EXISTS (
+    SELECT LV.MALO
+    FROM LOVACXIN LV
+    INNER JOIN NHACUNGCAP NCC ON LV.MANCC = NCC.MANCC
+    WHERE NCC.TENNCC = 'Moderna'
+    EXCEPT
+    SELECT CT.MALO
+    FROM PHIEUXUAT PX
+    INNER JOIN CTPX CT ON PX.MAPX = CT.MAPX
+    WHERE PX.MADT = DT.MADT AND PX.TRANGTHAI = 1
+);
+```
 - *Barem điểm:* Xác định đúng tập chia: **0.25đ**; Chiếu đúng quan hệ bị chia kèm điều kiện `TRANGTHAI = 1`: **0.25đ**; Phép chia $\div$ và kết lấy thông tin điểm tiêm: **0.50đ**.
 
 #### f. Điểm tiêm có sức chứa lớn nhất tại quận Thủ Đức (1.0 điểm)
@@ -196,24 +211,28 @@ WHERE YEAR(HSD) = 2025
      $$R_{\text{Max}} \leftarrow \pi_{\text{MADT}}(R_1) - R_{\text{KoMax}}$$
   5. Chiếu thông tin đầu ra:
      $$KQ \leftarrow \pi_{\text{MADT}, \text{TENDT}}(R_{\text{Max}} \bowtie R_1)$$
-- *Kiểm chứng trường hợp đồng hạng:* Nếu có từ 2 điểm tiêm trở lên cùng đạt sức chứa cực đại (ví dụ cả `DT04` và `DT05` đều có `SUCCHUA = 2500`), không có điểm tiêm nào trong số chúng có sức chứa bé hơn điểm kia $\implies$ cả 2 đều không rơi vào $R_{\text{KoMax}}$ $\implies$ **cả 2 đều được giữ lại trong kết quả $KQ$**.
+- *Kiểm chứng trường hợp đồng hạng:* Cả `DT04` và `DT05` cùng có `SUCCHUA = 2500` (lớn hơn `DT03: 1800`). Vì $2500 < 2500$ là FALSE nên không điểm tiêm nào trong hai điểm này bị đưa vào $R_{\text{KoMax}} \implies$ **cả hai điểm tiêm đồng hạng đều được giữ lại trong kết quả $KQ$**.
 - *Barem điểm:* Tự kết so sánh bé hơn tìm tập bù: **0.50đ**; Phép trừ tìm cực trị và chiếu kết quả: **0.50đ**.
 
 ---
 
-## CÂU 3: BẢNG KIỂM CHỨNG THỰC THI TRÊN SQL SERVER
+## CÂU 3: BẢNG ĐỐI CHIẾU ADVERSARIAL QA & KIỂM CHỨNG THỰC THI TRÊN SQL SERVER
 
-Toàn bộ câu lệnh SQL và các biểu thức ĐSQH đã được chuyển đổi tương đương và thực thi kiểm chứng trực tiếp trên Microsoft SQL Server 2025 (`MSSQLSERVER`) thông qua script [`fixture_mock01.sql`](fixture_mock01.sql).
+Toàn bộ câu lệnh SQL và các biểu thức ĐSQH đã được kiểm chứng đối kháng (Adversarial QA) trực tiếp trên Microsoft SQL Server 2025 (`MSSQLSERVER`) thông qua script [`fixture_mock01.sql`](fixture_mock01.sql).
 
-| Câu | Phép toán / Vấn đề kiểm thử | Trường hợp biên (Edge Case) | Kết quả kỳ vọng (Expected) | Kết quả thực thi (Actual) | Trạng thái |
+| Câu | Phép toán / Vấn đề kiểm thử | Trường hợp biên kiểm thử đối kháng (Adversarial Test Case) | Kết quả kỳ vọng (Expected) | Kết quả thực thi (Actual) | Trạng thái |
 | :---: | :--- | :--- | :--- | :--- | :---: |
-| **2.1a** | CHECK constraint | Thử chèn `SOLIEUXUAT = 0` và `TRANGTHAI = 2` | Lỗi vi phạm CK (`CK_CTPX...`, `CK_PHIEUXUAT...`) | Bị chặn bởi engine, mã lỗi 547 | **PASS** |
-| **2.1b** | UPDATE 10% đơn giá | Chỉ tăng các lô HSD 2025 của AstraZeneca | `LO01` (150k $\to$ 165k), `LO02` (160k $\to$ 176k) | Đúng 2 dòng được cập nhật, giá trị khớp 100% | **PASS** |
+| **2.1a** | CHECK constraint: `SOLIEUXUAT > 0` | Thử chèn `SOLIEUXUAT = 0` và `-5` với FK hợp lệ (`PX01`, `LO01`) | Chặn đúng bởi `CK_CTPX_SOLIEUXUAT` (Error 547) | Engine chặn đúng mã constraint `CK_CTPX_SOLIEUXUAT` | **PASS** |
+| **2.1a** | NOT NULL constraint: `SOLIEUXUAT` | Thử chèn `SOLIEUXUAT = NULL` với FK hợp lệ | Chặn bởi ràng buộc NOT NULL (Error 515) | Engine chặn đúng mã lỗi 515 | **PASS** |
+| **2.1a** | CHECK constraint: `TRANGTHAI IN (0, 1)` | Thử chèn `TRANGTHAI = 2` và `-1` với FK hợp lệ (`DT01`) | Chặn đúng bởi `CK_PHIEUXUAT_TRANGTHAI` | Engine chặn đúng mã constraint `CK_PHIEUXUAT_TRANGTHAI` | **PASS** |
+| **2.1a** | NOT NULL constraint: `TRANGTHAI` | Thử chèn `TRANGTHAI = NULL` với FK hợp lệ | Chặn bởi ràng buộc NOT NULL (Error 515) | Engine chặn đúng mã lỗi 515 | **PASS** |
+| **2.1b** | UPDATE 10% đơn giá | Chỉ tăng các lô HSD 2025 của AstraZeneca | `LO01` (165k), `LO02` (176k) | Đúng 2 dòng được cập nhật, giá trị khớp 100% | **PASS** |
 | **2.2a** | Select kết hợp $\sigma$ | Lô Pfizer sản xuất 2024 | `LO03`, `LO04` | Trả về đúng 2 dòng `LO03`, `LO04` | **PASS** |
 | **2.2b** | Join kết hợp $\sigma$ | Phiếu ngày 15/10/2024 có `TRANGTHAI = 1` | `DT01`, `DT02`, `DT03` | Trả về đúng 3 điểm tiêm | **PASS** |
 | **2.2c** | Left Outer Join $\mathbin{⟕}$ | Điểm tiêm `DT06` chưa có nhân viên | `DT01` (NV01), `DT02` (NV02), `DT06` (NULL) | Không mất dòng `DT06`, cột `HOTEN` là NULL | **PASS** |
 | **2.2d** | Grouping & Sum $\gamma$ | Chỉ tính phiếu `TRANGTHAI = 1`, loại phiếu đang chuyển | `DT01`: 3500; `DT02`: 3500; `DT03`: 2000; `DT04`: 3000 | Đúng 4 dòng gom nhóm, giá trị tổng liều chuẩn | **PASS** |
-| **2.2e** | Phép chia $\div$ | `DT01` (1 phiếu), `DT02` (2 phiếu), `DT04` (thiếu lô), `DT05` (TRANGTHAI=0) | **Chỉ có `DT01` và `DT02`** (loại `DT04` và loại `DT05`) | Trả về chính xác 2 dòng: `DT01`, `DT02` | **PASS** |
-| **2.2f** | Cực trị MAX | Đồng hạng cực trị: cả `DT04` và `DT05` cùng có sức chứa 2500 | Cả `DT04` và `DT05` | Trả về đủ cả 2 điểm tiêm đồng hạng | **PASS** |
+| **2.2e** | Phép chia $\div$ (Moderna: 2 lô) | `DT01` (1 phiếu), `DT02` (2 phiếu), `DT04` (thiếu lô), `DT05` (TRANGTHAI=0) | **Chỉ có `DT01` và `DT02`** (loại `DT04` và loại `DT05`) | Trả về chính xác 2 dòng: `DT01`, `DT02` | **PASS** |
+| **2.2e** | Phép chia $\div$ (Tập chia rỗng: VnBiotech) | Nhà cung cấp `NCC04` không có lô nào trong kho ($S = \emptyset$) | Trả về toàn bộ tập ứng viên $\pi_{\text{MADT}}(R_{\text{DT\_Lo}})$ (`DT01` $\to$ `DT04`) | Khớp 100% giữa lý thuyết ĐSQH và T-SQL | **PASS** |
+| **2.2f** | Cực trị MAX (Tie-breaking) | Đồng hạng cực trị: cả `DT04` và `DT05` cùng có sức chứa 2500 | Cả `DT04` và `DT05` | Trả về đủ cả 2 điểm tiêm đồng hạng | **PASS** |
 
-*Toàn bộ log thực thi được lưu tại:* [`exam/gk/qa/mock01_sql_execution.log`](../../qa/mock01_sql_execution.log).
+*Bằng chứng thực thi lưu tại:* [`exam/gk/qa/mock01_sql_execution.log`](../../qa/mock01_sql_execution.log).
