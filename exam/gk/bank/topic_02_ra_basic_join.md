@@ -4,48 +4,48 @@
 
 ---
 
-## Bài 01 [M01-Q2C1] — ĐSQH Lọc Lô Vắc-Xin Theo Tên Và Năm Sản Xuất
+## Bài 01 [M01-Q2C1] — ĐSQH Lọc Lô Vắc-Xin Theo Tên Loại Và Năm Sản Xuất
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `LOVACXIN(MALO, TENLO, TENKVACXIN, MANCC, NGAYSX, HSD, SOLIEU, DONGIA)`
+- **Lược đồ tham chiếu:** `LOVACXIN(MALO, TENLO, TENVACXIN, NGAYSX, HSD, SOLIEU, DONGIA, MANCC)`
 
 ### 1. Đề Bài
-Liệt kê thông tin các lô vắc-xin (MALO, TENLO, SOLIEU, DONGIA) có tên vắc-xin là 'Pfizer-BioNTech' và được sản xuất trong năm 2024.
+Liệt kê thông tin các lô vắc-xin (MALO, TENLO, SOLIEU, DONGIA) có tên loại vắc-xin là 'Pfizer-BioNTech' và được sản xuất trong năm 2024.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**
 ```text
-R1 ← σ_{TENKVACXIN = 'Pfizer-BioNTech' ∧ NGAYSX ≥ '01/01/2024' ∧ NGAYSX ≤ '31/12/2024'}(LOVACXIN)
+R1 ← σ_{TENVACXIN = 'Pfizer-BioNTech' ∧ NGAYSX ≥ '01/01/2024' ∧ NGAYSX ≤ '31/12/2024'}(LOVACXIN)
 KQ ← π_{MALO, TENLO, SOLIEU, DONGIA}(R1)
 ```
 **Câu lệnh SQL tương đương:**
 ```sql
 SELECT MALO, TENLO, SOLIEU, DONGIA
 FROM LOVACXIN
-WHERE TENKVACXIN = 'Pfizer-BioNTech' AND YEAR(NGAYSX) = 2024;
+WHERE TENVACXIN = 'Pfizer-BioNTech' AND YEAR(NGAYSX) = 2024;
 ```
 
 **Các bước suy luận tư duy:**
-1. Bước 1: Phép chọn σ trên quan hệ LOVACXIN với điều kiện kép TENKVACXIN = 'Pfizer-BioNTech' và năm sản xuất 2024.
+1. Bước 1: Phép chọn σ trên quan hệ LOVACXIN với điều kiện TENVACXIN = 'Pfizer-BioNTech' và năm sản xuất 2024.
 1. Bước 2: Phép chiếu π lấy đúng 4 thuộc tính yêu cầu: MALO, TENLO, SOLIEU, DONGIA.
 
 **Barem chấm điểm đề xuất:**
-- `selection_condition`: 0.50đ (Đúng điều kiện chuỗi và ngày tháng)
-- `projection_attributes`: 0.50đ (Đúng tập thuộc tính đầu ra)
+- `selection_condition`: 0.50đ
+- `projection_attributes`: 0.50đ
 
 ---
 
-## Bài 02 [M01-Q2C2] — ĐSQH Kết Nối Điểm Tiêm Nhận Phiếu Xuất Ngày 15/10/2024
+## Bài 02 [M01-Q2C2] — ĐSQH Kết Nối Điểm Tiêm Đã Tiếp Nhận Phiếu Xuất Ngày 15/10/2024
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `DIEMTIEM(MADT, TENDT, QUAN, SUCCHUA, MATRP), PHIEUXUAT(MAPX, NGAYXUAT, MADT, TRANGTHAI)`
+- **Lược đồ tham chiếu:** `DIEMTIEM(MADT, TENDT, DIACHI, QUAN, SUCCHUA), PHIEUXUAT(MAPX, NGAYXUAT, TRANGTHAI, MADT)`
 
 ### 1. Đề Bài
-Cho biết danh sách các điểm tiêm (MADT, TENDT, QUAN) đã tiếp nhận các phiếu xuất vắc-xin vào ngày '15/10/2024'.
+Cho biết danh sách các điểm tiêm (MADT, TENDT, QUAN) đã tiếp nhận (TRANGTHAI = 1) các phiếu xuất vắc-xin vào ngày '15/10/2024'.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**
 ```text
-R1 ← σ_{NGAYXUAT = '15/10/2024'}(PHIEUXUAT)
-R2 ← DIEMTIEM ⋈_{DIEMTIEM.MADT = R1.MADT} R1
+R1 ← σ_{NGAYXUAT = '15/10/2024' ∧ TRANGTHAI = 1}(PHIEUXUAT)
+R2 ← DIEMTIEM ⋈ R1
 KQ ← π_{MADT, TENDT, QUAN}(R2)
 ```
 **Câu lệnh SQL tương đương:**
@@ -53,55 +53,144 @@ KQ ← π_{MADT, TENDT, QUAN}(R2)
 SELECT DISTINCT DT.MADT, DT.TENDT, DT.QUAN
 FROM DIEMTIEM DT
 INNER JOIN PHIEUXUAT PX ON DT.MADT = PX.MADT
-WHERE PX.NGAYXUAT = '2024-10-15';
+WHERE PX.NGAYXUAT = '2024-10-15' AND PX.TRANGTHAI = 1;
 ```
 
 **Các bước suy luận tư duy:**
-1. Bước 1: Lọc các phiếu xuất có NGAYXUAT = '15/10/2024' thành R1.
-1. Bước 2: Kết tự nhiên hoặc kết bằng giữa DIEMTIEM và R1 qua khóa ngoại MADT.
-1. Bước 3: Chiếu lấy các thuộc tính định danh điểm tiêm: MADT, TENDT, QUAN.
+1. Bước 1: Lọc trên PHIEUXUAT với ngày xuất '15/10/2024' và TRANGTHAI = 1 (đã tiếp nhận).
+1. Bước 2: Kết nối tự nhiên DIEMTIEM ⋈ R1 qua thuộc tính chung MADT.
+1. Bước 3: Chiếu lấy MADT, TENDT, QUAN.
 
 **Barem chấm điểm đề xuất:**
-- `selection_filter`: 0.25đ
-- `join_operation`: 0.50đ
-- `projection`: 0.25đ
+- `selection_with_trangthai`: 0.50đ
+- `join_and_projection`: 0.50đ
 
 ---
 
-## Bài 03 [M01-Q2C3] — ĐSQH Kết Ngoài Phụ Trách Điểm Tiêm Quận Bình Thạnh (Nếu Có)
+## Bài 03 [M01-Q2C3] — ĐSQH Kết Ngoài Điểm Tiêm Quận Bình Thạnh Và Nhân Viên (Nếu Có)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 7 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `DIEMTIEM(MADT, TENDT, QUAN, SUCCHUA, MATRP), BACSI(MABS, HOTEN, CHUYENKHOA, SDT, MADT)`
+- **Lược đồ tham chiếu:** `DIEMTIEM(MADT, TENDT, DIACHI, QUAN, SUCCHUA), NHANVIEN(MANV, HOTEN, CHUYENMON, SDT, MADT)`
 
 ### 1. Đề Bài
-Liệt kê thông tin các điểm tiêm ở quận 'Bình Thạnh' (MADT, TENDT) và họ tên bác sĩ (HOTEN) đang phụ trách tại điểm tiêm đó nếu có.
+Liệt kê thông tin các điểm tiêm ở quận 'Bình Thạnh' (MADT, TENDT) và họ tên nhân viên y tế (HOTEN) đang công tác tại điểm tiêm đó nếu có.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**
 ```text
 R1 ← σ_{QUAN = 'Bình Thạnh'}(DIEMTIEM)
-R2 ← R1 ⟕_{R1.MADT = BACSI.MADT} BACSI
+R2 ← R1 ⟕_{R1.MADT = NHANVIEN.MADT} NHANVIEN
 KQ ← π_{MADT, TENDT, HOTEN}(R2)
 ```
 **Câu lệnh SQL tương đương:**
 ```sql
-SELECT DT.MADT, DT.TENDT, BS.HOTEN
+SELECT DT.MADT, DT.TENDT, NV.HOTEN
 FROM DIEMTIEM DT
-LEFT OUTER JOIN BACSI BS ON DT.MADT = BS.MADT
+LEFT OUTER JOIN NHANVIEN NV ON DT.MADT = NV.MADT
 WHERE DT.QUAN = N'Bình Thạnh';
 ```
 
 **Các bước suy luận tư duy:**
 1. Bước 1: Lọc điểm tiêm ở quận Bình Thạnh thành R1.
-1. Bước 2: Nhận diện từ khóa 'NẾU CÓ' -> Phải dùng Phép Kết Ngoài Trái (Left Outer Join ⟕) từ R1 sang BACSI để không làm mất các điểm tiêm chưa có bác sĩ trực.
+1. Bước 2: Nhận diện từ khóa 'NẾU CÓ' -> Phải dùng Phép Kết Ngoài Trái (Left Outer Join ⟕) từ R1 sang NHANVIEN để không làm mất các điểm tiêm chưa có nhân viên công tác.
 1. Bước 3: Chiếu lấy MADT, TENDT, HOTEN.
 
 **Barem chấm điểm đề xuất:**
-- `outer_join_recognition`: 0.50đ (Bắt buộc dùng ⟕ hoặc phân tích trường hợp NULL)
-- `selection_and_projection`: 0.50đ
+- `selection_condition`: 0.25đ
+- `outer_join_recognition`: 0.50đ (Bắt buộc dùng ⟕)
+- `projection`: 0.25đ
 
 ---
 
-## Bài 04 [RA-B03] — ĐSQH Tự Kết Nối Phân Cấp Nhân Viên Và Người Quản Lý
+## Bài 04 [M02-Q2C1] — ĐSQH Lọc Thiết Bị PCCC Theo Loại Và Hạn Sử Dụng
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `THIETBI_PCCC`
+
+### 1. Đề Bài
+Liệt kê danh sách các thiết bị PCCC (MATB, TENTB, VITRI_LAPDAT, HANSUDUNG) thuộc loại 'Bình chữa cháy bột' có hạn sử dụng (HANSUDUNG) trong năm 2025.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+E1 ← σ_{LOAITB='Bình chữa cháy bột' ∧ HANSUDUNG ≥ '2025-01-01' ∧ HANSUDUNG ≤ '2025-12-31'}(THIETBI_PCCC)
+KQ ← π_{MATB, TENTB, VITRI_LAPDAT, HANSUDUNG}(E1)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT MATB, TENTB, VITRI_LAPDAT, HANSUDUNG FROM THIETBI_PCCC WHERE LOAITB = N'Bình chữa cháy bột' AND HANSUDUNG >= '2025-01-01' AND HANSUDUNG <= '2025-12-31';
+```
+
+**Các bước suy luận tư duy:**
+1. Lọc thiết bị loại bình bột có HSD năm 2025
+1. Chiếu các cột yêu cầu
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.40đ
+- `logic`: 0.35đ
+- `projection`: 0.25đ
+
+---
+
+## Bài 05 [M02-Q2C2] — ĐSQH Kết Nối Căn Hộ Ruby Tower Từ Tầng 10 Trở Lên
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `CANHO, TANG, TOANHA`
+
+### 1. Đề Bài
+Cho biết danh sách các căn hộ (MACANHO, SOCANHO, DIENTICH) thuộc tòa nhà có tên 'Ruby Tower' và nằm ở các tầng có số thứ tự tầng (STTTANG) từ tầng 10 trở lên.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+E_TN ← σ_{TENTN='Ruby Tower'}(TOANHA)
+E_Tang ← σ_{STTTANG ≥ 10}(TANG)
+KQ ← π_{MACANHO, SOCANHO, DIENTICH}(E_TN ⋈ E_Tang ⋈ CANHO)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT CH.MACANHO, CH.SOCANHO, CH.DIENTICH FROM CANHO CH JOIN TANG T ON CH.MATANG = T.MATANG JOIN TOANHA TN ON T.MATN = TN.MATN WHERE TN.TENTN = N'Ruby Tower' AND T.STTTANG >= 10;
+```
+
+**Các bước suy luận tư duy:**
+1. Chọn tòa nhà Ruby Tower
+1. Chọn tầng >= 10
+1. Kết nối với căn hộ và chiếu
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.40đ
+- `logic`: 0.35đ
+- `projection`: 0.25đ
+
+---
+
+## Bài 06 [M02-Q2C3] — ĐSQH Kết Ngoài Tầng Tòa Nhà TN01 Và Thiết Bị PCCC (Nếu Có)
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `TANG, THIETBI_PCCC`
+
+### 1. Đề Bài
+Liệt kê thông tin tất cả các tầng thuộc tòa nhà 'TN01' (MATANG, STTTANG) và danh sách các mã thiết bị PCCC (MATB), tên thiết bị (TENTB) được bố trí tại tầng đó nếu có.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+E_Tang ← σ_{MATN='TN01'}(TANG)
+KQ ← π_{MATANG, STTTANG, MATB, TENTB}(E_Tang ⟕ THIETBI_PCCC)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT T.MATANG, T.STTTANG, TB.MATB, TB.TENTB FROM TANG T LEFT OUTER JOIN THIETBI_PCCC TB ON T.MATANG = TB.MATANG WHERE T.MATN = 'TN01';
+```
+
+**Các bước suy luận tư duy:**
+1. Chọn tầng thuộc tòa TN01
+1. Kết ngoài trái với thiết bị PCCC
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.40đ
+- `logic`: 0.35đ
+- `projection`: 0.25đ
+
+---
+
+## Bài 07 [RA-B03] — ĐSQH Tự Kết Nối Phân Cấp Nhân Viên Và Người Quản Lý
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHANVIEN(MANV, HOTEN, PHAI, NGSINH, MA_NQL)`
 
@@ -134,7 +223,7 @@ INNER JOIN NHANVIEN QL ON NV.MA_NQL = QL.MANV;
 
 ---
 
-## Bài 05 [RA-B04] — ĐSQH Phép Giao Khách Hàng Mở Cả Hai Loại Tài Khoản
+## Bài 08 [RA-B04] — ĐSQH Phép Giao Khách Hàng Mở Cả Hai Loại Tài Khoản
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 7 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACHHANG(MAKH, HOTEN), TAIKHOAN(SOTK, MAKH, MALTK), LOAITK(MALTK, TENLTK)`
 
@@ -174,7 +263,7 @@ WHERE LTK.TENLTK = N'Thanh toán';
 
 ---
 
-## Bài 06 [RA-B01] — ĐSQH Lọc Đơn Lô Vắc-Xin Theo Hạn Sử Dụng
+## Bài 09 [RA-B01] — ĐSQH Lọc Đơn Lô Vắc-Xin Theo Hạn Sử Dụng
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `LOVACXIN(MALO, TENLO, HSD)`
 
@@ -189,90 +278,6 @@ Liệt kê các lô vắc-xin (MALO, TENLO) có hạn sử dụng sau ngày '31/
 **Câu lệnh SQL tương đương:**
 ```sql
 SELECT MALO, TENLO FROM LOVACXIN WHERE HSD > '2025-12-31';
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định quan hệ tham gia
-1. Áp dụng phép chọn/chiếu/kết
-1. Chiếu thuộc tính đầu ra.
-
-**Barem chấm điểm đề xuất:**
-- `ra_logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 07 [RA-B02] — ĐSQH Kết 3 Bảng Quản Lý Nhà Cung Cấp Vắc-Xin
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `NHACUNGCAP, LOVACXIN, CTPX, PHIEUXUAT`
-
-### 1. Đề Bài
-Liệt kê tên nhà cung cấp (TENNCC) và tên vắc-xin đã xuất cho điểm tiêm 'DT01'.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-π_{TENNCC, TENKVACXIN}(NHACUNGCAP ⋈ LOVACXIN ⋈ CTPX ⋈ σ_{MADT='DT01'}(PHIEUXUAT))
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT DISTINCT NCC.TENNCC, LV.TENKVACXIN FROM NHACUNGCAP NCC JOIN LOVACXIN LV ON NCC.MANCC=LV.MANCC JOIN CTPX CT ON LV.MALO=CT.MALO JOIN PHIEUXUAT PX ON CT.MAPX=PX.MAPX WHERE PX.MADT='DT01';
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định quan hệ tham gia
-1. Áp dụng phép chọn/chiếu/kết
-1. Chiếu thuộc tính đầu ra.
-
-**Barem chấm điểm đề xuất:**
-- `ra_logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 08 [RA-B05] — ĐSQH Phép Trừ Nhà Cung Cấp Không Bán Hàng Trung Quốc
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `NHACC, CUNGCAP, MATHANG`
-
-### 1. Đề Bài
-Liệt kê nhà cung cấp (MANCC, TENNCC) chỉ cung cấp hàng Việt Nam mà không cung cấp hàng Trung Quốc.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-π_{MANCC, TENCC}(NHACC ⋈ CUNGCAP ⋈ σ_{NUOCSX='VN'}(MATHANG)) - π_{MANCC, TENCC}(NHACC ⋈ CUNGCAP ⋈ σ_{NUOCSX='TQ'}(MATHANG))
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT NC.MANCC, NC.TENCC FROM NHACC NC JOIN CUNGCAP CC ON NC.MANCC=CC.MACC JOIN MATHANG MH ON CC.MAMH=MH.MAMH WHERE MH.NUOCSX='VN' EXCEPT SELECT NC.MANCC, NC.TENCC FROM NHACC NC JOIN CUNGCAP CC ON NC.MANCC=CC.MACC JOIN MATHANG MH ON CC.MAMH=MH.MAMH WHERE MH.NUOCSX='TQ';
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định quan hệ tham gia
-1. Áp dụng phép chọn/chiếu/kết
-1. Chiếu thuộc tính đầu ra.
-
-**Barem chấm điểm đề xuất:**
-- `ra_logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 09 [RA-B06] — ĐSQH Kết Ngoài Phục Vụ Tiệc Nhà Hàng (Nếu Có)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `SANH(MASANH, TENSANH), TIEC(MATIEC, MASANH, CHUTIEC)`
-
-### 1. Đề Bài
-Liệt kê danh sách các sảnh tiệc (MASANH, TENSANH) và thông tin tiệc đặt tại sảnh đó nếu có.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-π_{MASANH, TENSANH, MATIEC, CHUTIEC}(SANH ⟕ TIEC)
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT S.MASANH, S.TENSANH, T.MATIEC, T.CHUTIEC FROM SANH S LEFT OUTER JOIN TIEC T ON S.MASANH = T.MASANH;
 ```
 
 **Các bước suy luận tư duy:**

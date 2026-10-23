@@ -3,8 +3,8 @@
   "stats": {
     "total_problems": 173,
     "topics": {
-      "ERD_MAPPING": 33,
-      "SQL_DDL_DML": 26,
+      "ERD_MAPPING": 29,
+      "SQL_DDL_DML": 30,
       "RA_BASIC_JOIN": 62,
       "RA_DIVISION_GROUPING": 52
     },
@@ -13,12 +13,12 @@
       "B": 108,
       "C": 40
     },
-    "verified_problems": 54,
-    "draft_problems": 119,
+    "verified_problems": 58,
+    "draft_problems": 115,
     "verification_levels": {
-      "EXECUTION_VERIFIED": 9,
-      "SEMANTICALLY_REVIEWED": 45,
-      "DRAFT": 119
+      "EXECUTION_VERIFIED": 18,
+      "SEMANTICALLY_REVIEWED": 40,
+      "DRAFT": 115
     },
     "solutions_present": 173,
     "rubrics_present": 173,

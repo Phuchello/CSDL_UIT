@@ -98,55 +98,55 @@
           "num": "1",
           "sub": "",
           "points": 2.5,
-          "problem_id": "ERD-002"
+          "problem_id": "M02-Q1"
         },
         {
           "num": "2",
           "sub": "1a",
           "points": 0.75,
-          "problem_id": "SQL-D02"
+          "problem_id": "M02-Q2A"
         },
         {
           "num": "2",
           "sub": "1b",
           "points": 0.75,
-          "problem_id": "SQL-D04"
+          "problem_id": "M02-Q2B"
         },
         {
           "num": "2",
           "sub": "2a",
           "points": 1.0,
-          "problem_id": "RA-B02"
+          "problem_id": "M02-Q2C1"
         },
         {
           "num": "2",
           "sub": "2b",
           "points": 1.0,
-          "problem_id": "RA-B05"
+          "problem_id": "M02-Q2C2"
         },
         {
           "num": "2",
           "sub": "2c",
           "points": 1.0,
-          "problem_id": "RA-B06"
+          "problem_id": "M02-Q2C3"
         },
         {
           "num": "2",
           "sub": "2d",
           "points": 1.0,
-          "problem_id": "RA-D04"
+          "problem_id": "M02-Q2C4"
         },
         {
           "num": "2",
           "sub": "2e",
           "points": 1.0,
-          "problem_id": "RA-D05"
+          "problem_id": "M02-Q2C5"
         },
         {
           "num": "2",
           "sub": "2f",
           "points": 1.0,
-          "problem_id": "RA-D06"
+          "problem_id": "M02-Q2C6"
         }
       ]
     },
@@ -929,13 +929,13 @@
           "num": "2",
           "sub": "1a",
           "points": 0.75,
-          "problem_id": "M01-Q2A"
+          "problem_id": "SQL-D27"
         },
         {
           "num": "2",
           "sub": "1b",
           "points": 0.75,
-          "problem_id": "M01-Q2B"
+          "problem_id": "SQL-D28"
         },
         {
           "num": "2",
@@ -1079,13 +1079,13 @@
           "num": "2",
           "sub": "1a",
           "points": 0.75,
-          "problem_id": "SQL-D02"
+          "problem_id": "SQL-D25"
         },
         {
           "num": "2",
           "sub": "1b",
           "points": 0.75,
-          "problem_id": "SQL-D04"
+          "problem_id": "SQL-D26"
         },
         {
           "num": "2",

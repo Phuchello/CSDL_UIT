@@ -14,7 +14,7 @@
 | **P0-02b** | False Positive trong Test CHECK Constraint & Lỗi Tiếng Việt | **P0** (Critical) | **RESOLVED** | 23/10/2026 | 23/10/2026 |
 | **P0-03** | Validator báo cáo độ tin cậy ảo (False Confidence) | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
 | **P0-04** | Ấn phẩm PDF không phân định bản DRAFT & VERIFIED | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
-| **P0-05** | Phân mảnh lược đồ & trùng câu MOCK-02 $\to$ MOCK-15 | **P1** (High) | **REGISTERED / IN_PROGRESS** | 22/10/2026 | Chuyển sang Phase C |
+| **P0-05** | Phân mảnh lược đồ & trùng câu MOCK-02 $\to$ MOCK-15 | **P1** (High) | **IN_PROGRESS (MOCK-02 RESOLVED)** | 22/10/2026 | Đang xử lý Phase C |
 
 ---
 
@@ -106,6 +106,12 @@
   - Các đề MOCK-02 đến MOCK-15 có Câu 1 là một miền nghiệp vụ (ví dụ PCCC, bão lũ), nhưng Câu 2 không có lược đồ riêng mà ghép các câu hỏi con từ vắc-xin, sảnh tiệc, ngân hàng, sinh viên.
   - Trùng câu SQL giữa MOCK-01 và MOCK-13, MOCK-02 và MOCK-15.
 - **Nguyên nhân gốc rễ:** Do thuật toán sinh tự động trước đây bốc ngẫu nhiên câu hỏi từ ngân hàng để lấp đầy số lượng 15 mock.
-- **Kế hoạch xử lý (Phase B Remediation):**
-  1. Tạm thời giữ nguyên trạng thái `DRAFT / NOT_RELEASE_READY` cho MOCK-02 đến MOCK-15.
-  2. Sau khi MOCK-01 đạt toàn bộ Acceptance Gate, tiến hành xây dựng lần lượt từng đề một theo tiêu chuẩn vàng của MOCK-01 (mỗi đề sở hữu một ngữ cảnh nghiệp vụ duy nhất xuyên suốt).
+- **Tiến độ xử lý (Phase C — Sequential Gold Standard Reconstruction):**
+  1. **MOCK-02 (ĐÃ HOÀN TẤT & KIỂM CHỨNG 100%):**
+     - Tái thiết kế toàn diện theo một miền nghiệp vụ duy nhất: *Quản lý An toàn Phòng cháy Chữa cháy (PCCC) Chung Cư Cao Tầng*.
+     - Lược đồ chuẩn 6 quan hệ: `TOANHA`, `TANG`, `CANHO`, `THIETBI_PCCC`, `DOT_KIEMTRA`, `CT_KIEMTRA`.
+     - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.5đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu x 1.0đ = 6.0đ).
+     - Viết bài kiểm thử [`exam/gk/mocks/MOCK-02/fixture_mock02.sql`](../../exam/gk/mocks/MOCK-02/fixture_mock02.sql) thực thi 100% PASS trên Microsoft SQL Server 2025, bắt trúng vi phạm CHECK/NOT NULL, kiểm chứng phép chia, gom nhóm và đồng hạng cực đại. Log lưu tại [`exam/gk/qa/mock02_sql_execution.log`](../../exam/gk/qa/mock02_sql_execution.log).
+     - Triệt tiêu 100% hiện tượng trùng lặp câu hỏi giữa các đề: MOCK-13 và MOCK-15 được phân bổ các mã DRAFT riêng biệt (`SQL-D25` đến `SQL-D28`), zero overlap.
+     - Số câu `EXECUTION_VERIFIED` nâng lên **18 câu** (MOCK-01: 9, MOCK-02: 9).
+  2. **MOCK-03 đến MOCK-15:** Giữ nguyên trạng thái `DRAFT / NOT_RELEASE_READY`, tiếp tục tái cấu trúc tuần tự trong Phase C.

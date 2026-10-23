@@ -102,9 +102,15 @@ class GKValidator:
 
             # Strict verification criteria
             if v_level == "EXECUTION_VERIFIED":
-                exec_log = QA_DIR / "mock01_sql_execution.log"
+                if pid.startswith("M01"):
+                    exec_log = QA_DIR / "mock01_sql_execution.log"
+                elif pid.startswith("M02"):
+                    exec_log = QA_DIR / "mock02_sql_execution.log"
+                else:
+                    exec_log = QA_DIR / f"{pid.lower()}_sql_execution.log"
+
                 if not exec_log.exists():
-                    self.log_error(f"Problem {pid} marked EXECUTION_VERIFIED but execution log is missing!")
+                    self.log_error(f"Problem {pid} marked EXECUTION_VERIFIED but execution log is missing ({exec_log.name})!")
                 self.stats["verified_problems"] += 1
                 self.stats["verification_levels"]["EXECUTION_VERIFIED"] += 1
             elif v_level == "SEMANTICALLY_REVIEWED":

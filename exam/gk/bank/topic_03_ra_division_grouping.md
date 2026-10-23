@@ -4,18 +4,18 @@
 
 ---
 
-## Bài 01 [M01-Q2C4] — ĐSQH Gom Nhóm Tính Tổng Liều Vắc-Xin Xuất Theo Điểm Tiêm
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 7 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `PHIEUXUAT(MAPX, NGAYXUAT, MADT, TRANGTHAI), CTPX(MAPX, MALO, SOLIEUXUAT)`
+## Bài 01 [M01-Q2C4] — ĐSQH Gom Nhóm Tính Tổng Liều Vắc-Xin Đã Tiếp Nhận Theo Điểm Tiêm
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `DIEMTIEM(MADT, TENDT, DIACHI, QUAN, SUCCHUA), PHIEUXUAT(MAPX, NGAYXUAT, TRANGTHAI, MADT), CTPX(MAPX, MALO, SOLIEUXUAT)`
 
 ### 1. Đề Bài
-Tính tổng số liều vắc-xin xuất (SOLIEUXUAT) theo từng điểm tiêm (MADT) trong tháng 10 năm 2024. Thông tin hiển thị gồm: MADT, TONGLIEU.
+Tính tổng số liều vắc-xin đã tiếp nhận (SOLIEUXUAT, với TRANGTHAI = 1) theo từng điểm tiêm (MADT) trong tháng 10 năm 2024. Thông tin hiển thị gồm: MADT, TONGLIEU.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**
 ```text
-R1 ← σ_{NGAYXUAT ≥ '01/10/2024' ∧ NGAYXUAT ≤ '31/10/2024'}(PHIEUXUAT)
-R2 ← R1 ⋈_{R1.MAPX = CTPX.MAPX} CTPX
+R1 ← σ_{NGAYXUAT ≥ '01/10/2024' ∧ NGAYXUAT ≤ '31/10/2024' ∧ TRANGTHAI = 1}(PHIEUXUAT)
+R2 ← R1 ⋈ CTPX
 KQ ← _{MADT} γ _{SUM(SOLIEUXUAT) → TONGLIEU}(R2)
 ```
 **Câu lệnh SQL tương đương:**
@@ -23,34 +23,34 @@ KQ ← _{MADT} γ _{SUM(SOLIEUXUAT) → TONGLIEU}(R2)
 SELECT PX.MADT, SUM(CT.SOLIEUXUAT) AS TONGLIEU
 FROM PHIEUXUAT PX
 INNER JOIN CTPX CT ON PX.MAPX = CT.MAPX
-WHERE MONTH(PX.NGAYXUAT) = 10 AND YEAR(PX.NGAYXUAT) = 2024
+WHERE PX.NGAYXUAT >= '2024-10-01' AND PX.NGAYXUAT <= '2024-10-31' AND PX.TRANGTHAI = 1
 GROUP BY PX.MADT;
 ```
 
 **Các bước suy luận tư duy:**
-1. Bước 1: Lọc phiếu xuất phát sinh trong tháng 10/2024 thành R1.
-1. Bước 2: Kết nối R1 với CTPX qua MAPX để lấy số liều xuất.
-1. Bước 3: Thực hiện phép gom nhóm γ theo thuộc tính MADT, tính hàm tổng SUM(SOLIEUXUAT) và đổi tên thành TONGLIEU.
+1. Bước 1: Lọc phiếu xuất phát sinh trong tháng 10/2024 và đã tiếp nhận thực tế (TRANGTHAI = 1).
+1. Bước 2: Kết nối với CTPX qua MAPX để lấy số lượng liều xuất SOLIEUXUAT.
+1. Bước 3: Thực hiện phép gom nhóm γ theo MADT và tính tổng SUM(SOLIEUXUAT) đổi tên thành TONGLIEU.
 
 **Barem chấm điểm đề xuất:**
-- `time_filter_and_join`: 0.50đ
-- `grouping_gamma_aggregate`: 0.50đ (Đúng thuộc tính gom nhóm và hàm SUM)
+- `filtering_and_join`: 0.50đ
+- `grouping_and_aggregation`: 0.50đ
 
 ---
 
-## Bài 02 [M01-Q2C5] — ĐSQH Phép Chia Tìm Điểm Tiêm Nhận Tất Cả Lô Vắc-Xin Của Moderna
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 9 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `NHACUNGCAP(MANCC, TENNCC, QUOCGIA, SDT), LOVACXIN(MALO, TENLO, TENKVACXIN, MANCC, NGAYSX, HSD, SOLIEU, DONGIA), DIEMTIEM(MADT, TENDT, QUAN, SUCCHUA, MATRP), PHIEUXUAT(MAPX, NGAYXUAT, MADT, TRANGTHAI), CTPX(MAPX, MALO, SOLIEUXUAT)`
+## Bài 02 [M01-Q2C5] — ĐSQH Phép Chia Tìm Điểm Tiêm Đã Tiếp Nhận Tất Cả Lô Vắc-Xin Của Moderna
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `NHACUNGCAP(MANCC, TENNCC, QUOCGIA, SDT), LOVACXIN(MALO, TENLO, TENVACXIN, NGAYSX, HSD, SOLIEU, DONGIA, MANCC), DIEMTIEM(MADT, TENDT, DIACHI, QUAN, SUCCHUA), PHIEUXUAT(MAPX, NGAYXUAT, TRANGTHAI, MADT), CTPX(MAPX, MALO, SOLIEUXUAT)`
 
 ### 1. Đề Bài
-Tìm các điểm tiêm (MADT, TENDT) đã tiếp nhận tất cả các lô vắc-xin của nhà cung cấp có tên là 'Moderna' (TENNCC = 'Moderna').
+Tìm các điểm tiêm (MADT, TENDT) đã tiếp nhận thực tế (TRANGTHAI = 1) tất cả các lô vắc-xin của nhà cung cấp có tên là 'Moderna' (TENNCC = 'Moderna').
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**
 ```text
 R_Moderna ← π_{MALO}(σ_{TENNCC = 'Moderna'}(NHACUNGCAP ⋈ LOVACXIN))
-R_DiemTiem_Lo ← π_{MADT, MALO}(DIEMTIEM ⋈ PHIEUXUAT ⋈ CTPX)
-R_Chia ← R_DiemTiem_Lo ÷ R_Moderna
+R_DT_Lo ← π_{MADT, MALO}((σ_{TRANGTHAI = 1}(PHIEUXUAT)) ⋈ CTPX)
+R_Chia ← R_DT_Lo ÷ R_Moderna
 KQ ← π_{MADT, TENDT}(R_Chia ⋈ DIEMTIEM)
 ```
 **Câu lệnh SQL tương đương:**
@@ -66,39 +66,39 @@ WHERE NOT EXISTS (
     SELECT CT.MALO
     FROM PHIEUXUAT PX
     INNER JOIN CTPX CT ON PX.MAPX = CT.MAPX
-    WHERE PX.MADT = DT.MADT
+    WHERE PX.MADT = DT.MADT AND PX.TRANGTHAI = 1
 );
 ```
 
 **Các bước suy luận tư duy:**
-1. Bước 1: Xác định tập mục tiêu (tập bị chia) R_Moderna: Chiếu lấy danh sách MALO thuộc nhà cung cấp 'Moderna'.
-1. Bước 2: Xác định quan hệ tham gia R_DiemTiem_Lo: Chiếu lấy các cặp (MADT, MALO) thực tế đã xuất vắc-xin đến điểm tiêm.
-1. Bước 3: Thực hiện phép chia hình thức R_Chia = R_DiemTiem_Lo ÷ R_Moderna. Kết quả trả về các MADT nhận đủ mọi MALO của Moderna.
-1. Bước 4: Kết nối ngược với DIEMTIEM để lấy TENDT.
+1. Bước 1 (Tập chia): Lấy tất cả MALO của nhà cung cấp 'Moderna'.
+1. Bước 2 (Tập bị chia): Lấy các cặp (MADT, MALO) thực tế đã tiếp nhận (TRANGTHAI = 1).
+1. Bước 3 (Phép chia): Thực hiện R_DT_Lo ÷ R_Moderna để tìm các MADT nhận đủ mọi lô.
+1. Bước 4: Kết nối với DIEMTIEM để lấy TENDT.
 
 **Barem chấm điểm đề xuất:**
-- `target_set_construction`: 0.25đ
-- `candidate_relation_projection`: 0.25đ
-- `division_operation`: 0.50đ (Đúng bản chất toán học của phép chia)
+- `dividing_set`: 0.25đ
+- `divided_set_with_trangthai`: 0.25đ
+- `division_and_result`: 0.50đ
 
 ---
 
 ## Bài 03 [M01-Q2C6] — ĐSQH Tìm Điểm Tiêm Có Sức Chứa Lớn Nhất Tại Quận Thủ Đức
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `DIEMTIEM(MADT, TENDT, QUAN, SUCCHUA, MATRP)`
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 9 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `DIEMTIEM(MADT, TENDT, DIACHI, QUAN, SUCCHUA)`
 
 ### 1. Đề Bài
-Cho biết điểm tiêm nào (MADT, TENDT) có sức chứa (SUCCHUA) lớn nhất trong số các điểm tiêm thuộc quận 'Thủ Đức'.
+Cho biết điểm tiêm nào (MADT, TENDT) có sức chứa (SUCCHUA) lớn nhất trong số các điểm tiêm thuộc quận 'Thủ Đức' (xét cả trường hợp có nhiều điểm tiêm đồng hạng lớn nhất).
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**
 ```text
 R1 ← σ_{QUAN = 'Thủ Đức'}(DIEMTIEM)
-R2 ← ρ_{DT1}(R1)
-R3 ← ρ_{DT2}(R1)
-R_KhongLonNhat ← π_{DT1.MADT}(R2 ⋈_{DT1.SUCCHUA < DT2.SUCCHUA} R3)
-R_LonNhat ← π_{MADT}(R1) - R_KhongLonNhat
-KQ ← π_{MADT, TENDT}(R_LonNhat ⋈ R1)
+R2 ← ρ_{D1}(R1)
+R3 ← ρ_{D2}(R1)
+R_KoMax ← π_{D1.MADT}(R2 ⋈_{D1.SUCCHUA < D2.SUCCHUA} R3)
+R_Max ← π_{MADT}(R1) - R_KoMax
+KQ ← π_{MADT, TENDT}(R_Max ⋈ R1)
 ```
 **Câu lệnh SQL tương đương:**
 ```sql
@@ -109,18 +109,113 @@ WHERE QUAN = N'Thủ Đức'
 ```
 
 **Các bước suy luận tư duy:**
-1. Bước 1: Lọc các điểm tiêm thuộc quận 'Thủ Đức' thành R1.
-1. Bước 2: Phép tìm cực trị MAX trong ĐSQH bằng phương pháp loại trừ: Tự kết R1 với chính nó qua điều kiện SUCCHUA1 < SUCCHUA2.
-1. Bước 3: Chiếu lấy DT1.MADT; đây là tập các điểm tiêm KHÔNG phải lớn nhất vì tồn tại điểm tiêm khác có sức chứa lớn hơn nó.
-1. Bước 4: Lấy toàn bộ MADT của Thủ Đức trừ đi tập R_KhongLonNhat, thu được điểm tiêm có sức chứa lớn nhất (có thể có đồng hạng).
+1. Bước 1: Lọc điểm tiêm ở quận Thủ Đức thành R1.
+1. Bước 2: Tự kết R1 so sánh bé hơn để tìm các điểm tiêm không phải lớn nhất (R_KoMax).
+1. Bước 3: Dùng phép trừ tìm cực trị R_Max = R1 - R_KoMax (đảm bảo giữ lại toàn bộ các điểm tiêm đồng hạng).
+1. Bước 4: Chiếu lấy MADT, TENDT.
 
 **Barem chấm điểm đề xuất:**
-- `subquery_or_self_join`: 0.50đ
-- `subtraction_or_max_logic`: 0.50đ
+- `self_join_inequality`: 0.50đ
+- `set_difference_and_projection`: 0.50đ
 
 ---
 
-## Bài 04 [RA-D01] — ĐSQH Phép Chia Đơn Đặt Hàng Đặt Tất Cả Mặt Hàng Của 'Vinamilk'
+## Bài 04 [M02-Q2C4] — ĐSQH Gom Nhóm Đếm Tổng Số Thiết Bị PCCC Theo Tòa Nhà
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 7 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `TOANHA, TANG, THIETBI_PCCC`
+
+### 1. Đề Bài
+Tính tổng số lượng thiết bị PCCC (TONG_THIETBI) được bố trí tại mỗi tòa nhà. Thông tin hiển thị gồm: MATN, TENTN, TONG_THIETBI.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+E1 ← TOANHA ⋈ TANG ⋈ THIETBI_PCCC
+KQ ← _{MATN, TENTN}γ_{COUNT(MATB) → TONG_THIETBI}(E1)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT TN.MATN, TN.TENTN, COUNT(TB.MATB) AS TONG_THIETBI FROM TOANHA TN JOIN TANG T ON TN.MATN = T.MATN JOIN THIETBI_PCCC TB ON T.MATANG = TB.MATANG GROUP BY TN.MATN, TN.TENTN;
+```
+
+**Các bước suy luận tư duy:**
+1. Kết nối 3 quan hệ để có thông tin tòa nhà và thiết bị
+1. Gom nhóm theo tòa nhà và tính tổng
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.40đ
+- `logic`: 0.35đ
+- `projection`: 0.25đ
+
+---
+
+## Bài 05 [M02-Q2C5] — ĐSQH Phép Chia Tìm Đợt Kiểm Tra Đã Kiểm Tra Tất Cả Đầu Báo Khói
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `DOT_KIEMTRA, CT_KIEMTRA, THIETBI_PCCC`
+
+### 1. Đề Bài
+Tìm các đợt kiểm tra (MADOT, NGAYKT, NGUOIKT) đã tiến hành kiểm tra tất cả các thiết bị PCCC thuộc loại 'Đầu báo khói'.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+R ← π_{MADOT, MATB}(CT_KIEMTRA)
+S ← π_{MATB}(σ_{LOAITB='Đầu báo khói'}(THIETBI_PCCC))
+R_KQ ← R ÷ S
+KQ ← π_{MADOT, NGAYKT, NGUOIKT}(R_KQ ⋈ DOT_KIEMTRA)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT DK.MADOT, DK.NGAYKT, DK.NGUOIKT FROM DOT_KIEMTRA DK WHERE NOT EXISTS (SELECT * FROM THIETBI_PCCC TB WHERE TB.LOAITB = N'Đầu báo khói' AND NOT EXISTS (SELECT * FROM CT_KIEMTRA CT WHERE CT.MADOT = DK.MADOT AND CT.MATB = TB.MATB)) AND EXISTS (SELECT * FROM CT_KIEMTRA WHERE MADOT = DK.MADOT);
+```
+
+**Các bước suy luận tư duy:**
+1. Xác định quan hệ R(MADOT, MATB)
+1. Xác định tập chia S(MATB) gồm các đầu báo khói
+1. Thực hiện phép chia R / S
+1. Kết nối lấy thông tin chi tiết đợt kiểm tra
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.40đ
+- `logic`: 0.35đ
+- `projection`: 0.25đ
+
+---
+
+## Bài 06 [M02-Q2C6] — ĐSQH Tìm Tòa Nhà Có Số Lượng Căn Hộ Nhiều Nhất
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `TOANHA, TANG, CANHO`
+
+### 1. Đề Bài
+Tìm thông tin tòa nhà (MATN, TENTN, SOTANG) có số lượng căn hộ nhiều nhất trong khu chung cư (bảo toàn tất cả các tòa nhà nếu có đồng hạng lớn nhất).
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+R_Dem ← _{MATN}γ_{COUNT(MACANHO) → SOCAN}(TANG ⋈ CANHO)
+R_NhoHon ← π_{R1.SOCAN}(σ_{R1.SOCAN < R2.SOCAN}(ρ_{R1}(R_Dem) × ρ_{R2}(R_Dem)))
+R_Max ← π_{SOCAN}(R_Dem) - R_NhoHon
+KQ ← π_{MATN, TENTN, SOTANG}(TOANHA ⋈ R_Dem ⋈ R_Max)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT TOP 1 WITH TIES TN.MATN, TN.TENTN, TN.SOTANG, COUNT(CH.MACANHO) AS SOCAN FROM TOANHA TN JOIN TANG T ON TN.MATN = T.MATN JOIN CANHO CH ON T.MATANG = CH.MATANG GROUP BY TN.MATN, TN.TENTN, TN.SOTANG ORDER BY COUNT(CH.MACANHO) DESC;
+```
+
+**Các bước suy luận tư duy:**
+1. Gom nhóm tính số căn hộ từng tòa
+1. Tìm giá trị không cực đại bằng tích Descartes
+1. Lấy giá trị lớn nhất bảo toàn đồng hạng
+1. Chiếu thông tin tòa nhà
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.40đ
+- `logic`: 0.35đ
+- `projection`: 0.25đ
+
+---
+
+## Bài 07 [RA-D01] — ĐSQH Phép Chia Đơn Đặt Hàng Đặt Tất Cả Mặt Hàng Của 'Vinamilk'
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 9 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DONDH(MADH, NGAYDH, MACC), CHITIET(MADH, MAMH, SOLUONG), CUNGCAP(MACC, MAMH), NHACC(MACC, TENCC)`
 
@@ -161,7 +256,7 @@ WHERE NOT EXISTS (
 
 ---
 
-## Bài 05 [RA-D03] — ĐSQH Gom Nhóm Doanh Thu Từng Sảnh Nhà Hàng White Palace
+## Bài 08 [RA-D03] — ĐSQH Gom Nhóm Doanh Thu Từng Sảnh Nhà Hàng White Palace
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 7 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SANH(MASANH, TENSANH, LOAIBAN, SUCCHUA), TIEC(MATIEC, MASANH, CHUTIEC, SOBAN, DONGIA)`
 
@@ -192,99 +287,12 @@ GROUP BY S.MASANH, S.TENSANH;
 
 ---
 
-## Bài 06 [RA-D02] — ĐSQH Phép Chia VĐV Tham Gia Tất Cả Kỳ Olympic Từ 2008
+## Bài 09 [RA-D02] — ĐSQH Phép Chia VĐV Tham Gia Tất Cả Kỳ Olympic Từ 2008
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `VDV(MAVDV, HOTEN, PHAI), THAMGIA(MAVDV, MATVH), THEVANHOI(MATVH, NAM)`
 
 ### 1. Đề Bài
 Tìm VĐV Nữ (MAVDV, HOTEN) tham gia tất cả các kỳ thế vận hội từ năm 2008 tới nay.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Div ← R1 ÷ R2
-KQ ← R_Div ⋈ INFO
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT ID FROM R1 WHERE NOT EXISTS (SELECT * FROM R2 WHERE NOT EXISTS (...));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập chia
-1. Xác định tập bị chia
-1. Thực hiện phép chia hình thức hoặc gom nhóm.
-
-**Barem chấm điểm đề xuất:**
-- `division_grouping_logic`: 0.60đ
-- `projection_result`: 0.40đ
-
----
-
-## Bài 07 [RA-D04] — ĐSQH Tìm Loại Tài Khoản Được Mở Nhiều Nhất 2016
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `TAIKHOAN(SOTK, MALTK, NGAYMO), LOAITK(MALTK, TENLTK)`
-
-### 1. Đề Bài
-Tìm loại tài khoản (MALTK, TENLTK) có số lượng tài khoản được mở nhiều nhất trong năm 2016.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Div ← R1 ÷ R2
-KQ ← R_Div ⋈ INFO
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT ID FROM R1 WHERE NOT EXISTS (SELECT * FROM R2 WHERE NOT EXISTS (...));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập chia
-1. Xác định tập bị chia
-1. Thực hiện phép chia hình thức hoặc gom nhóm.
-
-**Barem chấm điểm đề xuất:**
-- `division_grouping_logic`: 0.60đ
-- `projection_result`: 0.40đ
-
----
-
-## Bài 08 [RA-D05] — ĐSQH Gom Nhóm Đếm Số Đơn Hàng Theo Từng Khách Hàng
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `KHACHHANG(MAKH, HOTEN), DONHANG(MADH, MAKH, NGAYDH)`
-
-### 1. Đề Bài
-Tính tổng số đơn hàng đã đặt của từng khách hàng trong năm 2024.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Div ← R1 ÷ R2
-KQ ← R_Div ⋈ INFO
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT ID FROM R1 WHERE NOT EXISTS (SELECT * FROM R2 WHERE NOT EXISTS (...));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập chia
-1. Xác định tập bị chia
-1. Thực hiện phép chia hình thức hoặc gom nhóm.
-
-**Barem chấm điểm đề xuất:**
-- `division_grouping_logic`: 0.60đ
-- `projection_result`: 0.40đ
-
----
-
-## Bài 09 [RA-D06] — ĐSQH Phép Chia Sinh Viên Học Tất Cả Các Môn Tiên Quyết
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `SINHVIEN, KETQUA, MONTIENQUYET`
-
-### 1. Đề Bài
-Tìm sinh viên (MASV, HOTEN) đã hoàn thành tất cả các môn học tiên quyết của ngành.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**

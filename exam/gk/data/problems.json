@@ -338,100 +338,394 @@
       }
     },
     {
-      "id": "ERD-002",
+      "id": "M02-Q1",
       "topic": "ERD_MAPPING",
       "difficulty": "B",
-      "title": "Thiết Kế ERD Hệ Thống Phòng Cháy Chữa Cháy Chung Cư (Authentic 2023–2024)",
-      "prompt": "Vẽ mô hình ERD và ánh xạ Lược đồ quan hệ quản lý PCCC: Khu chung cư có nhiều tòa nhà; mỗi tòa nhà có nhiều tầng. Mỗi tầng có mã số duy nhất, tên tầng, số căn hộ. Thiết bị PCCC có tên loại, mô tả. Đợt kiểm tra ghi nhận tình trạng hoạt động.",
-      "schema": "ERD: TOANHA, TANG, LOAI_DUNG_CU, DOT_KIEM_TRA, CAN_HO",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý PCCC Chung Cư",
+      "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý An toàn Phòng cháy Chữa cháy (PCCC) Chung Cư Cao Tầng gồm TOANHA, TANG, CANHO, THIETBI_PCCC, DOT_KIEMTRA và CT_KIEMTRA.",
+      "schema": "ERD: TOANHA, TANG, CANHO, THIETBI_PCCC, DOT_KIEMTRA, CT_KIEMTRA",
       "recommended_time_mins": 25,
       "points": 2.5,
       "solution": {
         "erd_entities": [
           {
-            "name": "TOA_NHA",
-            "pk": "MaToa",
+            "name": "TOANHA",
+            "pk": "MATN",
             "attributes": [
-              "MaToa",
-              "TenToa",
-              "SoTang"
-            ]
+              "MATN",
+              "TENTN",
+              "SOTANG",
+              "DIACHI"
+            ],
+            "description": "Tòa nhà trong khu chung cư."
           },
           {
             "name": "TANG",
-            "pk": "MaTang",
+            "pk": "MATANG",
             "attributes": [
-              "MaTang",
-              "TenTang",
-              "SoCanHo"
-            ]
+              "MATANG",
+              "MATN",
+              "STTTANG",
+              "DIENTICH"
+            ],
+            "description": "Tầng thuộc tòa nhà."
           },
           {
-            "name": "LOAI_THIETBI",
-            "pk": "MaLoai",
+            "name": "CANHO",
+            "pk": "MACANHO",
             "attributes": [
-              "MaLoai",
-              "TenLoai",
-              "MoTa"
-            ]
+              "MACANHO",
+              "MATANG",
+              "SOCANHO",
+              "DIENTICH",
+              "SOPHONGNGU",
+              "TRANGTHAI"
+            ],
+            "description": "Căn hộ trên tầng."
           },
           {
-            "name": "THIET_BI",
-            "pk": "MaTB",
+            "name": "THIETBI_PCCC",
+            "pk": "MATB",
             "attributes": [
-              "MaTB",
-              "ViTriLapDat",
-              "NgayTrangBi"
-            ]
+              "MATB",
+              "MATANG",
+              "TENTB",
+              "LOAITB",
+              "VITRI_LAPDAT",
+              "NGAYLAP",
+              "HANSUDUNG"
+            ],
+            "description": "Thiết bị PCCC được lắp đặt trên tầng."
+          },
+          {
+            "name": "DOT_KIEMTRA",
+            "pk": "MADOT",
+            "attributes": [
+              "MADOT",
+              "NGAYKT",
+              "NGUOIKT",
+              "KETLUAN_CHUNG"
+            ],
+            "description": "Đợt kiểm tra an toàn PCCC."
           }
         ],
         "relationships": [
           {
-            "name": "THUOC_TOA",
+            "name": "THUOC_TOANHA",
             "entities": [
-              "TOA_NHA",
+              "TOANHA",
               "TANG"
             ],
             "cardinality": "1:N",
-            "min_max": "TOA_NHA (1, N) - (1, 1) TANG"
+            "min_max": "TOANHA (1, N) - (1, 1) TANG"
           },
           {
-            "name": "PHAN_LOAI",
-            "entities": [
-              "LOAI_THIETBI",
-              "THIET_BI"
-            ],
-            "cardinality": "1:N",
-            "min_max": "LOAI_THIETBI (1, N) - (1, 1) THIET_BI"
-          },
-          {
-            "name": "LAP_DAT",
+            "name": "CO_CANHO",
             "entities": [
               "TANG",
-              "THIET_BI"
+              "CANHO"
             ],
             "cardinality": "1:N",
-            "min_max": "TANG (0, N) - (1, 1) THIET_BI"
+            "min_max": "TANG (0, N) - (1, 1) CANHO"
+          },
+          {
+            "name": "DAT_THIETBI",
+            "entities": [
+              "TANG",
+              "THIETBI_PCCC"
+            ],
+            "cardinality": "1:N",
+            "min_max": "TANG (0, N) - (1, 1) THIETBI_PCCC"
+          },
+          {
+            "name": "KIEM_TRA_CT",
+            "entities": [
+              "DOT_KIEMTRA",
+              "THIETBI_PCCC"
+            ],
+            "cardinality": "M:N",
+            "min_max": "DOT_KIEMTRA (1, N) - (0, N) THIETBI_PCCC",
+            "attributes": [
+              "TINHTRANG",
+              "GHICHU"
+            ]
           }
         ],
         "relational_schema": [
-          "TOA_NHA (MaToa, TenToa, SoTang) - PK: MaToa",
-          "TANG (MaTang, TenTang, SoCanHo, MaToa) - PK: MaTang, FK: MaToa -> TOA_NHA(MaToa)",
-          "LOAI_THIETBI (MaLoai, TenLoai, MoTa) - PK: MaLoai",
-          "THIET_BI (MaTB, ViTriLapDat, NgayTrangBi, MaLoai, MaTang) - PK: MaTB, FK: MaLoai -> LOAI_THIETBI, MaTang -> TANG"
-        ],
-        "intermediate_steps": [
-          "Xác định thực thể yếu/mạnh",
-          "Bản số min-max",
-          "Chuyển đổi quan hệ 1:N bằng FK."
+          {
+            "table": "TOANHA",
+            "pk": [
+              "MATN"
+            ],
+            "fk": []
+          },
+          {
+            "table": "TANG",
+            "pk": [
+              "MATANG"
+            ],
+            "fk": [
+              {
+                "column": "MATN",
+                "ref_table": "TOANHA",
+                "ref_column": "MATN"
+              }
+            ]
+          },
+          {
+            "table": "CANHO",
+            "pk": [
+              "MACANHO"
+            ],
+            "fk": [
+              {
+                "column": "MATANG",
+                "ref_table": "TANG",
+                "ref_column": "MATANG"
+              }
+            ]
+          },
+          {
+            "table": "THIETBI_PCCC",
+            "pk": [
+              "MATB"
+            ],
+            "fk": [
+              {
+                "column": "MATANG",
+                "ref_table": "TANG",
+                "ref_column": "MATANG"
+              }
+            ]
+          },
+          {
+            "table": "DOT_KIEMTRA",
+            "pk": [
+              "MADOT"
+            ],
+            "fk": []
+          },
+          {
+            "table": "CT_KIEMTRA",
+            "pk": [
+              "MADOT",
+              "MATB"
+            ],
+            "fk": [
+              {
+                "column": "MADOT",
+                "ref_table": "DOT_KIEMTRA",
+                "ref_column": "MADOT"
+              },
+              {
+                "column": "MATB",
+                "ref_table": "THIETBI_PCCC",
+                "ref_column": "MATB"
+              }
+            ]
+          }
         ]
       },
       "rubric": {
-        "erd": "1.50đ",
-        "mapping": "1.00đ"
-      },
+        "syntax": "0.50đ",
+        "logic": "1.00đ",
+        "intermediate_steps": "1.00đ"
+      }
+    },
+    {
+      "id": "M02-Q2A",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên CANHO và THIETBI_PCCC",
+      "prompt": "Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra thuộc tính DIENTICH trong quan hệ CANHO phải lớn hơn 0 (> 0), và thuộc tính HANSUDUNG trong quan hệ THIETBI_PCCC phải lớn hơn hoặc bằng ngày lắp đặt (HANSUDUNG >= NGAYLAP). Cả hai thuộc tính đều không được mang giá trị NULL.",
+      "schema": "CANHO, THIETBI_PCCC",
+      "recommended_time_mins": 10,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE CANHO ALTER COLUMN DIENTICH FLOAT NOT NULL;\nALTER TABLE CANHO ADD CONSTRAINT CK_CANHO_DIENTICH CHECK (DIENTICH > 0);\n\nALTER TABLE THIETBI_PCCC ALTER COLUMN HANSUDUNG DATE NOT NULL;\nALTER TABLE THIETBI_PCCC ADD CONSTRAINT CK_TB_HANSUDUNG CHECK (HANSUDUNG >= NGAYLAP);"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "M02-Q2B",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Cập Nhật Tình Trạng Hết Hạn Trong CT_KIEMTRA Theo HSD",
+      "prompt": "Viết câu lệnh SQL cập nhật tình trạng (TINHTRANG) trong quan hệ CT_KIEMTRA thành 'Hết hạn' cho tất cả các thiết bị được kiểm tra trong đợt kiểm tra có mã 'DKT01' mà thiết bị đó có hạn sử dụng (HANSUDUNG) trước ngày '01/06/2025'.",
+      "schema": "CT_KIEMTRA, THIETBI_PCCC",
+      "recommended_time_mins": 10,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE CT\nSET CT.TINHTRANG = N'Hết hạn'\nFROM CT_KIEMTRA CT\nINNER JOIN THIETBI_PCCC TB ON CT.MATB = TB.MATB\nWHERE CT.MADOT = 'DKT01'\n  AND TB.HANSUDUNG < '2025-06-01';"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "M02-Q2C1",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Lọc Thiết Bị PCCC Theo Loại Và Hạn Sử Dụng",
+      "prompt": "Liệt kê danh sách các thiết bị PCCC (MATB, TENTB, VITRI_LAPDAT, HANSUDUNG) thuộc loại 'Bình chữa cháy bột' có hạn sử dụng (HANSUDUNG) trong năm 2025.",
+      "schema": "THIETBI_PCCC",
+      "recommended_time_mins": 5,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E1 ← σ_{LOAITB='Bình chữa cháy bột' ∧ HANSUDUNG ≥ '2025-01-01' ∧ HANSUDUNG ≤ '2025-12-31'}(THIETBI_PCCC)\nKQ ← π_{MATB, TENTB, VITRI_LAPDAT, HANSUDUNG}(E1)",
+        "intermediate_steps": [
+          "Lọc thiết bị loại bình bột có HSD năm 2025",
+          "Chiếu các cột yêu cầu"
+        ],
+        "sql": "SELECT MATB, TENTB, VITRI_LAPDAT, HANSUDUNG FROM THIETBI_PCCC WHERE LOAITB = N'Bình chữa cháy bột' AND HANSUDUNG >= '2025-01-01' AND HANSUDUNG <= '2025-12-31';"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ",
+        "projection": "0.25đ"
+      }
+    },
+    {
+      "id": "M02-Q2C2",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Kết Nối Căn Hộ Ruby Tower Từ Tầng 10 Trở Lên",
+      "prompt": "Cho biết danh sách các căn hộ (MACANHO, SOCANHO, DIENTICH) thuộc tòa nhà có tên 'Ruby Tower' và nằm ở các tầng có số thứ tự tầng (STTTANG) từ tầng 10 trở lên.",
+      "schema": "CANHO, TANG, TOANHA",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E_TN ← σ_{TENTN='Ruby Tower'}(TOANHA)\nE_Tang ← σ_{STTTANG ≥ 10}(TANG)\nKQ ← π_{MACANHO, SOCANHO, DIENTICH}(E_TN ⋈ E_Tang ⋈ CANHO)",
+        "intermediate_steps": [
+          "Chọn tòa nhà Ruby Tower",
+          "Chọn tầng >= 10",
+          "Kết nối với căn hộ và chiếu"
+        ],
+        "sql": "SELECT CH.MACANHO, CH.SOCANHO, CH.DIENTICH FROM CANHO CH JOIN TANG T ON CH.MATANG = T.MATANG JOIN TOANHA TN ON T.MATN = TN.MATN WHERE TN.TENTN = N'Ruby Tower' AND T.STTTANG >= 10;"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ",
+        "projection": "0.25đ"
+      }
+    },
+    {
+      "id": "M02-Q2C3",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Kết Ngoài Tầng Tòa Nhà TN01 Và Thiết Bị PCCC (Nếu Có)",
+      "prompt": "Liệt kê thông tin tất cả các tầng thuộc tòa nhà 'TN01' (MATANG, STTTANG) và danh sách các mã thiết bị PCCC (MATB), tên thiết bị (TENTB) được bố trí tại tầng đó nếu có.",
+      "schema": "TANG, THIETBI_PCCC",
+      "recommended_time_mins": 6,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E_Tang ← σ_{MATN='TN01'}(TANG)\nKQ ← π_{MATANG, STTTANG, MATB, TENTB}(E_Tang ⟕ THIETBI_PCCC)",
+        "intermediate_steps": [
+          "Chọn tầng thuộc tòa TN01",
+          "Kết ngoài trái với thiết bị PCCC"
+        ],
+        "sql": "SELECT T.MATANG, T.STTTANG, TB.MATB, TB.TENTB FROM TANG T LEFT OUTER JOIN THIETBI_PCCC TB ON T.MATANG = TB.MATANG WHERE T.MATN = 'TN01';"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ",
+        "projection": "0.25đ"
+      }
+    },
+    {
+      "id": "M02-Q2C4",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Gom Nhóm Đếm Tổng Số Thiết Bị PCCC Theo Tòa Nhà",
+      "prompt": "Tính tổng số lượng thiết bị PCCC (TONG_THIETBI) được bố trí tại mỗi tòa nhà. Thông tin hiển thị gồm: MATN, TENTN, TONG_THIETBI.",
+      "schema": "TOANHA, TANG, THIETBI_PCCC",
+      "recommended_time_mins": 7,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E1 ← TOANHA ⋈ TANG ⋈ THIETBI_PCCC\nKQ ← _{MATN, TENTN}γ_{COUNT(MATB) → TONG_THIETBI}(E1)",
+        "intermediate_steps": [
+          "Kết nối 3 quan hệ để có thông tin tòa nhà và thiết bị",
+          "Gom nhóm theo tòa nhà và tính tổng"
+        ],
+        "sql": "SELECT TN.MATN, TN.TENTN, COUNT(TB.MATB) AS TONG_THIETBI FROM TOANHA TN JOIN TANG T ON TN.MATN = T.MATN JOIN THIETBI_PCCC TB ON T.MATANG = TB.MATANG GROUP BY TN.MATN, TN.TENTN;"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ",
+        "projection": "0.25đ"
+      }
+    },
+    {
+      "id": "M02-Q2C5",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Phép Chia Tìm Đợt Kiểm Tra Đã Kiểm Tra Tất Cả Đầu Báo Khói",
+      "prompt": "Tìm các đợt kiểm tra (MADOT, NGAYKT, NGUOIKT) đã tiến hành kiểm tra tất cả các thiết bị PCCC thuộc loại 'Đầu báo khói'.",
+      "schema": "DOT_KIEMTRA, CT_KIEMTRA, THIETBI_PCCC",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R ← π_{MADOT, MATB}(CT_KIEMTRA)\nS ← π_{MATB}(σ_{LOAITB='Đầu báo khói'}(THIETBI_PCCC))\nR_KQ ← R ÷ S\nKQ ← π_{MADOT, NGAYKT, NGUOIKT}(R_KQ ⋈ DOT_KIEMTRA)",
+        "intermediate_steps": [
+          "Xác định quan hệ R(MADOT, MATB)",
+          "Xác định tập chia S(MATB) gồm các đầu báo khói",
+          "Thực hiện phép chia R / S",
+          "Kết nối lấy thông tin chi tiết đợt kiểm tra"
+        ],
+        "sql": "SELECT DK.MADOT, DK.NGAYKT, DK.NGUOIKT FROM DOT_KIEMTRA DK WHERE NOT EXISTS (SELECT * FROM THIETBI_PCCC TB WHERE TB.LOAITB = N'Đầu báo khói' AND NOT EXISTS (SELECT * FROM CT_KIEMTRA CT WHERE CT.MADOT = DK.MADOT AND CT.MATB = TB.MATB)) AND EXISTS (SELECT * FROM CT_KIEMTRA WHERE MADOT = DK.MADOT);"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ",
+        "projection": "0.25đ"
+      }
+    },
+    {
+      "id": "M02-Q2C6",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Tìm Tòa Nhà Có Số Lượng Căn Hộ Nhiều Nhất",
+      "prompt": "Tìm thông tin tòa nhà (MATN, TENTN, SOTANG) có số lượng căn hộ nhiều nhất trong khu chung cư (bảo toàn tất cả các tòa nhà nếu có đồng hạng lớn nhất).",
+      "schema": "TOANHA, TANG, CANHO",
+      "recommended_time_mins": 8,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_Dem ← _{MATN}γ_{COUNT(MACANHO) → SOCAN}(TANG ⋈ CANHO)\nR_NhoHon ← π_{R1.SOCAN}(σ_{R1.SOCAN < R2.SOCAN}(ρ_{R1}(R_Dem) × ρ_{R2}(R_Dem)))\nR_Max ← π_{SOCAN}(R_Dem) - R_NhoHon\nKQ ← π_{MATN, TENTN, SOTANG}(TOANHA ⋈ R_Dem ⋈ R_Max)",
+        "intermediate_steps": [
+          "Gom nhóm tính số căn hộ từng tòa",
+          "Tìm giá trị không cực đại bằng tích Descartes",
+          "Lấy giá trị lớn nhất bảo toàn đồng hạng",
+          "Chiếu thông tin tòa nhà"
+        ],
+        "sql": "SELECT TOP 1 WITH TIES TN.MATN, TN.TENTN, TN.SOTANG, COUNT(CH.MACANHO) AS SOCAN FROM TOANHA TN JOIN TANG T ON TN.MATN = T.MATN JOIN CANHO CH ON T.MATANG = CH.MATANG GROUP BY TN.MATN, TN.TENTN, TN.SOTANG ORDER BY COUNT(CH.MACANHO) DESC;"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ",
+        "projection": "0.25đ"
+      }
     },
     {
       "id": "ERD-003",
@@ -1510,136 +1804,80 @@
       "verification_level": "DRAFT"
     },
     {
-      "id": "ERD-029",
-      "topic": "ERD_MAPPING",
+      "id": "SQL-D27",
+      "topic": "SQL_DDL_DML",
       "difficulty": "B",
-      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Dịch Vụ Cứu Hộ Giao Thông 24/7",
-      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Dịch Vụ Cứu Hộ Giao Thông 24/7', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
-      "schema": "XE_CUUHO, TAI_XE, CUOC_GOI, SU_CO, BIEN_BAN",
-      "recommended_time_mins": 25,
-      "points": 2.0,
+      "status": "DRAFT",
+      "verification_level": "DRAFT",
+      "title": "T-SQL DML Ràng Buộc Hệ Thống Tuyến Xe Buýt (Bài 27)",
+      "prompt": "Tạo ràng buộc toàn vẹn kiểm tra tuyến xe buýt và metro.",
+      "schema": "TUYEN_XE, METRO",
+      "recommended_time_mins": 10,
+      "points": 0.75,
       "solution": {
-        "erd_entities": [
-          "Thực thể chuẩn hóa cho Quản lý Dịch Vụ Cứu Hộ Giao Thông 24/7"
-        ],
-        "relationships": [
-          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
-        ],
-        "relational_schema": [
-          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
-        ],
-        "intermediate_steps": [
-          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
-          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
-          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
-          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
-        ]
+        "sql": "-- DRAFT solution for SQL-D27"
       },
       "rubric": {
-        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
-        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
     },
     {
-      "id": "ERD-030",
-      "topic": "ERD_MAPPING",
+      "id": "SQL-D28",
+      "topic": "SQL_DDL_DML",
       "difficulty": "B",
-      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Nông Sản Sạch & Truy Xuất Nguồn Gốc",
-      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Nông Sản Sạch & Truy Xuất Nguồn Gốc', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
-      "schema": "NONG_TRAI, NONG_SAN, LO_HANG, CHUNG_NHAN, DIEM_BAN",
-      "recommended_time_mins": 25,
-      "points": 2.5,
+      "status": "DRAFT",
+      "verification_level": "DRAFT",
+      "title": "T-SQL Cập Nhật Trạng Thái Chuyến Xe Buýt (Bài 28)",
+      "prompt": "Cập nhật trạng thái chuyến xe buýt.",
+      "schema": "CHUYEN_XE",
+      "recommended_time_mins": 10,
+      "points": 0.75,
       "solution": {
-        "erd_entities": [
-          "Thực thể chuẩn hóa cho Quản lý Nông Sản Sạch & Truy Xuất Nguồn Gốc"
-        ],
-        "relationships": [
-          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
-        ],
-        "relational_schema": [
-          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
-        ],
-        "intermediate_steps": [
-          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
-          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
-          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
-          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
-        ]
+        "sql": "-- DRAFT solution for SQL-D28"
       },
       "rubric": {
-        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
-        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
     },
     {
-      "id": "ERD-031",
-      "topic": "ERD_MAPPING",
+      "id": "SQL-D25",
+      "topic": "SQL_DDL_DML",
       "difficulty": "B",
-      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Đăng Ký Học Phần & Thời Khóa Biểu",
-      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Đăng Ký Học Phần & Thời Khóa Biểu', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
-      "schema": "MON_HOC, LOP_HOCPHAN, GIANG_VIEN, SINH_VIEN, PHONG_HOC",
-      "recommended_time_mins": 25,
-      "points": 2.5,
+      "status": "DRAFT",
+      "verification_level": "DRAFT",
+      "title": "T-SQL DML Ràng Buộc Trại Cứu Hộ Động Vật (Bài 25)",
+      "prompt": "Tạo ràng buộc toàn vẹn kiểm tra thông tin chuồng trại và động vật.",
+      "schema": "DONG_VAT, CHUONG_TRAI",
+      "recommended_time_mins": 10,
+      "points": 0.75,
       "solution": {
-        "erd_entities": [
-          "Thực thể chuẩn hóa cho Quản lý Đăng Ký Học Phần & Thời Khóa Biểu"
-        ],
-        "relationships": [
-          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
-        ],
-        "relational_schema": [
-          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
-        ],
-        "intermediate_steps": [
-          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
-          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
-          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
-          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
-        ]
+        "sql": "-- DRAFT solution for SQL-D25"
       },
       "rubric": {
-        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
-        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
     },
     {
-      "id": "ERD-032",
-      "topic": "ERD_MAPPING",
+      "id": "SQL-D26",
+      "topic": "SQL_DDL_DML",
       "difficulty": "B",
-      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Siêu Thị Điện Máy & Bảo Hành",
-      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Siêu Thị Điện Máy & Bảo Hành', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
-      "schema": "NHOM_HANG, SAN_PHAM, KHACH_HANG, HOA_DON, PHIEU_BAOHANH",
-      "recommended_time_mins": 25,
-      "points": 2.0,
+      "status": "DRAFT",
+      "verification_level": "DRAFT",
+      "title": "T-SQL Cập Nhật Khẩu Phần Ăn Trại Cứu Hộ (Bài 26)",
+      "prompt": "Cập nhật khẩu phần ăn động vật.",
+      "schema": "KHAU_PHAN",
+      "recommended_time_mins": 10,
+      "points": 0.75,
       "solution": {
-        "erd_entities": [
-          "Thực thể chuẩn hóa cho Quản lý Siêu Thị Điện Máy & Bảo Hành"
-        ],
-        "relationships": [
-          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
-        ],
-        "relational_schema": [
-          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
-        ],
-        "intermediate_steps": [
-          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
-          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
-          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
-          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
-        ]
+        "sql": "-- DRAFT solution for SQL-D26"
       },
       "rubric": {
-        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
-        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
     },
     {
       "id": "RA-B01",
@@ -1658,81 +1896,6 @@
           "Chiếu thuộc tính đầu ra."
         ],
         "sql": "SELECT MALO, TENLO FROM LOVACXIN WHERE HSD > '2025-12-31';"
-      },
-      "rubric": {
-        "ra_logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "RA-B02",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "B",
-      "title": "ĐSQH Kết 3 Bảng Quản Lý Nhà Cung Cấp Vắc-Xin",
-      "prompt": "Liệt kê tên nhà cung cấp (TENNCC) và tên vắc-xin đã xuất cho điểm tiêm 'DT01'.",
-      "schema": "NHACUNGCAP, LOVACXIN, CTPX, PHIEUXUAT",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "π_{TENNCC, TENKVACXIN}(NHACUNGCAP ⋈ LOVACXIN ⋈ CTPX ⋈ σ_{MADT='DT01'}(PHIEUXUAT))",
-        "intermediate_steps": [
-          "Xác định quan hệ tham gia",
-          "Áp dụng phép chọn/chiếu/kết",
-          "Chiếu thuộc tính đầu ra."
-        ],
-        "sql": "SELECT DISTINCT NCC.TENNCC, LV.TENKVACXIN FROM NHACUNGCAP NCC JOIN LOVACXIN LV ON NCC.MANCC=LV.MANCC JOIN CTPX CT ON LV.MALO=CT.MALO JOIN PHIEUXUAT PX ON CT.MAPX=PX.MAPX WHERE PX.MADT='DT01';"
-      },
-      "rubric": {
-        "ra_logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "RA-B05",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "B",
-      "title": "ĐSQH Phép Trừ Nhà Cung Cấp Không Bán Hàng Trung Quốc",
-      "prompt": "Liệt kê nhà cung cấp (MANCC, TENNCC) chỉ cung cấp hàng Việt Nam mà không cung cấp hàng Trung Quốc.",
-      "schema": "NHACC, CUNGCAP, MATHANG",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "π_{MANCC, TENCC}(NHACC ⋈ CUNGCAP ⋈ σ_{NUOCSX='VN'}(MATHANG)) - π_{MANCC, TENCC}(NHACC ⋈ CUNGCAP ⋈ σ_{NUOCSX='TQ'}(MATHANG))",
-        "intermediate_steps": [
-          "Xác định quan hệ tham gia",
-          "Áp dụng phép chọn/chiếu/kết",
-          "Chiếu thuộc tính đầu ra."
-        ],
-        "sql": "SELECT NC.MANCC, NC.TENCC FROM NHACC NC JOIN CUNGCAP CC ON NC.MANCC=CC.MACC JOIN MATHANG MH ON CC.MAMH=MH.MAMH WHERE MH.NUOCSX='VN' EXCEPT SELECT NC.MANCC, NC.TENCC FROM NHACC NC JOIN CUNGCAP CC ON NC.MANCC=CC.MACC JOIN MATHANG MH ON CC.MAMH=MH.MAMH WHERE MH.NUOCSX='TQ';"
-      },
-      "rubric": {
-        "ra_logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "RA-B06",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "B",
-      "title": "ĐSQH Kết Ngoài Phục Vụ Tiệc Nhà Hàng (Nếu Có)",
-      "prompt": "Liệt kê danh sách các sảnh tiệc (MASANH, TENSANH) và thông tin tiệc đặt tại sảnh đó nếu có.",
-      "schema": "SANH(MASANH, TENSANH), TIEC(MATIEC, MASANH, CHUTIEC)",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "π_{MASANH, TENSANH, MATIEC, CHUTIEC}(SANH ⟕ TIEC)",
-        "intermediate_steps": [
-          "Xác định quan hệ tham gia",
-          "Áp dụng phép chọn/chiếu/kết",
-          "Chiếu thuộc tính đầu ra."
-        ],
-        "sql": "SELECT S.MASANH, S.TENSANH, T.MATIEC, T.CHUTIEC FROM SANH S LEFT OUTER JOIN TIEC T ON S.MASANH = T.MASANH;"
       },
       "rubric": {
         "ra_logic": "0.60đ",
@@ -3092,81 +3255,6 @@
       "verification_level": "DRAFT"
     },
     {
-      "id": "RA-D04",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "C",
-      "title": "ĐSQH Tìm Loại Tài Khoản Được Mở Nhiều Nhất 2016",
-      "prompt": "Tìm loại tài khoản (MALTK, TENLTK) có số lượng tài khoản được mở nhiều nhất trong năm 2016.",
-      "schema": "TAIKHOAN(SOTK, MALTK, NGAYMO), LOAITK(MALTK, TENLTK)",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Div ← R1 ÷ R2\nKQ ← R_Div ⋈ INFO",
-        "intermediate_steps": [
-          "Xác định tập chia",
-          "Xác định tập bị chia",
-          "Thực hiện phép chia hình thức hoặc gom nhóm."
-        ],
-        "sql": "SELECT ID FROM R1 WHERE NOT EXISTS (SELECT * FROM R2 WHERE NOT EXISTS (...));"
-      },
-      "rubric": {
-        "division_grouping_logic": "0.60đ",
-        "projection_result": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "RA-D05",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "B",
-      "title": "ĐSQH Gom Nhóm Đếm Số Đơn Hàng Theo Từng Khách Hàng",
-      "prompt": "Tính tổng số đơn hàng đã đặt của từng khách hàng trong năm 2024.",
-      "schema": "KHACHHANG(MAKH, HOTEN), DONHANG(MADH, MAKH, NGAYDH)",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Div ← R1 ÷ R2\nKQ ← R_Div ⋈ INFO",
-        "intermediate_steps": [
-          "Xác định tập chia",
-          "Xác định tập bị chia",
-          "Thực hiện phép chia hình thức hoặc gom nhóm."
-        ],
-        "sql": "SELECT ID FROM R1 WHERE NOT EXISTS (SELECT * FROM R2 WHERE NOT EXISTS (...));"
-      },
-      "rubric": {
-        "division_grouping_logic": "0.60đ",
-        "projection_result": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "RA-D06",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "C",
-      "title": "ĐSQH Phép Chia Sinh Viên Học Tất Cả Các Môn Tiên Quyết",
-      "prompt": "Tìm sinh viên (MASV, HOTEN) đã hoàn thành tất cả các môn học tiên quyết của ngành.",
-      "schema": "SINHVIEN, KETQUA, MONTIENQUYET",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Div ← R1 ÷ R2\nKQ ← R_Div ⋈ INFO",
-        "intermediate_steps": [
-          "Xác định tập chia",
-          "Xác định tập bị chia",
-          "Thực hiện phép chia hình thức hoặc gom nhóm."
-        ],
-        "sql": "SELECT ID FROM R1 WHERE NOT EXISTS (SELECT * FROM R2 WHERE NOT EXISTS (...));"
-      },
-      "rubric": {
-        "division_grouping_logic": "0.60đ",
-        "projection_result": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
       "id": "RA-D07",
       "topic": "RA_DIVISION_GROUPING",
       "difficulty": "C",
@@ -4264,54 +4352,6 @@
       },
       "status": "VERIFIED",
       "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "SQL-D02",
-      "topic": "SQL_DDL_DML",
-      "difficulty": "B",
-      "title": "Cập Nhật DML Có Điều Kiện Ngày Tháng & Chuỗi Ký Tự",
-      "prompt": "Viết lệnh T-SQL UPDATE giảm 15% đơn giá cho các lô vắc-xin hết hạn trong quý 1 năm 2025.",
-      "schema": "LOVACXIN(MALO, HSD, DONGIA)",
-      "recommended_time_mins": 5,
-      "points": 0.75,
-      "solution": {
-        "sql": "UPDATE LOVACXIN SET DONGIA = DONGIA * 0.85 WHERE HSD >= '2025-01-01' AND HSD <= '2025-03-31';",
-        "intermediate_steps": [
-          "Cú pháp T-SQL",
-          "Mệnh đề WHERE lọc dữ liệu",
-          "Kiểm tra ràng buộc."
-        ]
-      },
-      "rubric": {
-        "syntax": "0.40đ",
-        "logic": "0.35đ"
-      },
-      "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "SQL-D04",
-      "topic": "SQL_DDL_DML",
-      "difficulty": "A",
-      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 4)",
-      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
-      "schema": "R1(ID, GIA), R2(ID, LOAI)",
-      "recommended_time_mins": 5,
-      "points": 0.75,
-      "solution": {
-        "sql": "ALTER TABLE BANG_4 ADD CONSTRAINT CK_BANG_4 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
-        "intermediate_steps": [
-          "Xác định bảng",
-          "Viết cú pháp T-SQL",
-          "Kiểm thử logic."
-        ]
-      },
-      "rubric": {
-        "syntax": "0.40đ",
-        "logic": "0.35đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
     },
     {
       "id": "SQL-D05",
