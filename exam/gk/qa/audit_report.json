@@ -1,7 +1,7 @@
 {
   "structural_qa_status": "PASS",
-  "academic_semantic_qa_status": "IN_PROGRESS (11/15 Mocks Gold Standard)",
-  "gold_standard_mocks_count": 11,
+  "academic_semantic_qa_status": "PASS (15/15 Mocks Gold Standard)",
+  "gold_standard_mocks_count": 15,
   "stats": {
     "total_problems": 173,
     "topics": {
@@ -11,16 +11,16 @@
       "RA_DIVISION_GROUPING": 52
     },
     "difficulties": {
-      "A": 20,
-      "B": 116,
-      "C": 37
+      "A": 19,
+      "B": 119,
+      "C": 35
     },
-    "verified_problems": 120,
-    "draft_problems": 53,
+    "verified_problems": 145,
+    "draft_problems": 28,
     "verification_levels": {
-      "EXECUTION_VERIFIED": 99,
-      "SEMANTICALLY_REVIEWED": 21,
-      "DRAFT": 53
+      "EXECUTION_VERIFIED": 135,
+      "SEMANTICALLY_REVIEWED": 10,
+      "DRAFT": 28
     },
     "solutions_present": 173,
     "rubrics_present": 173,

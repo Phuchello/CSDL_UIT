@@ -14,7 +14,7 @@
 | **P0-02b** | False Positive trong Test CHECK Constraint & Lỗi Tiếng Việt | **P0** (Critical) | **RESOLVED** | 23/10/2026 | 23/10/2026 |
 | **P0-03** | Validator báo cáo độ tin cậy ảo (False Confidence) | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
 | **P0-04** | Ấn phẩm PDF không phân định bản DRAFT & VERIFIED | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
-| **P0-05** | Phân mảnh lược đồ & trùng câu MOCK-02 $\to$ MOCK-15 | **P1** (High) | **IN_PROGRESS (MOCK-01 &rarr; MOCK-11 RESOLVED)** | 22/10/2026 | Đang xử lý Phase C |
+| **P0-05** | Phân mảnh lược đồ & trùng câu MOCK-02 $\to$ MOCK-15 | **P1** (High) | **RESOLVED (15/15 Mocks Gold Standard)** | 22/10/2026 | 23/10/2026 |
 
 ---
 
@@ -167,4 +167,39 @@
      - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.0đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu = 6.5đ). Thang điểm: 10.0đ.
      - Viết bài kiểm thử [`exam/gk/mocks/MOCK-11/fixture_mock11.sql`](../../exam/gk/mocks/MOCK-11/fixture_mock11.sql) có 9 suite kiểm thử đối kháng với automated assertions (`THROW 500XX`), chạy 100% PASS trên Microsoft SQL Server 2025. Log lưu tại [`exam/gk/qa/mock11_sql_execution.log`](../../exam/gk/qa/mock11_sql_execution.log).
      - Thay thế 9 câu DRAFT cũ bằng 9 câu chuẩn hóa (`M11-Q1` đến `M11-Q2C6`), nâng tổng số câu `EXECUTION_VERIFIED` lên **99 câu** (MOCK-01 đến MOCK-11: mỗi đề 9 câu). Tổng số câu toàn ngân hàng giữ vững 173 câu.
-  11. **MOCK-12 đến MOCK-15:** Giữ nguyên trạng thái `DRAFT / NOT_RELEASE_READY`, tiếp tục tái cấu trúc tuần tự trong Phase C (Batch C.6: MOCK-12, MOCK-13, MOCK-14, MOCK-15).
+  11. **MOCK-12 (ĐÃ HOÀN TẤT & KIỂM CHỨNG 100%):**
+     - Tái thiết kế toàn diện theo miền nghiệp vụ: *Quản Lý Cụm Rạp Chiếu Phim & Đặt Vé Trực Tuyến* (Profile `RECENT_VERIFIED`).
+     - Lược đồ thống nhất 6 quan hệ: `CUMRAP`, `PHONGCHIEU`, `PHIM`, `SUATCHIEU`, `KHACHHANG`, `VEXEM`.
+     - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.0đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu = 6.5đ). Thang điểm: 10.0đ.
+     - Viết bài kiểm thử [`exam/gk/mocks/MOCK-12/fixture_mock12.sql`](../../exam/gk/mocks/MOCK-12/fixture_mock12.sql) có 9 suite kiểm thử đối kháng với automated assertions (`THROW 500XX`), chạy 100% PASS trên Microsoft SQL Server 2025 (`localhost`). Log lưu tại [`exam/gk/qa/mock12_sql_execution.log`](../../exam/gk/qa/mock12_sql_execution.log).
+     - Thay thế 9 câu DRAFT cũ bằng 9 câu chuẩn hóa (`M12-Q1` đến `M12-Q2C6`), nâng tổng số câu `EXECUTION_VERIFIED` lên **108 câu**.
+  12. **MOCK-13 (ĐÃ HOÀN TẤT & KIỂM CHỨNG 100%):**
+     - Tái thiết kế toàn diện theo miền nghiệp vụ: *Quản Lý Tuyến Xe Buýt & Metro TP.HCM* (Profile `RECENT_VERIFIED`).
+     - Lược đồ thống nhất 6 quan hệ: `TUYEN_XE`, `TRAM_DUNG`, `LOTRINH`, `PHUONGTIEN`, `TAIXE`, `CHUYEN_DI`.
+     - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.0đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu = 6.5đ). Thang điểm: 10.0đ.
+     - Viết bài kiểm thử [`exam/gk/mocks/MOCK-13/fixture_mock13.sql`](../../exam/gk/mocks/MOCK-13/fixture_mock13.sql) có 9 suite kiểm thử đối kháng với automated assertions (`THROW 500XX`), chạy 100% PASS trên Microsoft SQL Server 2025. Log lưu tại [`exam/gk/qa/mock13_sql_execution.log`](../../exam/gk/qa/mock13_sql_execution.log).
+     - Thay thế 9 câu DRAFT cũ bằng 9 câu chuẩn hóa (`M13-Q1` đến `M13-Q2C6`), nâng tổng số câu `EXECUTION_VERIFIED` lên **117 câu**.
+  13. **MOCK-14 (ĐÃ HOÀN TẤT & KIỂM CHỨNG 100%):**
+     - Tái thiết kế toàn diện theo miền nghiệp vụ: *Quản Lý Đề Tài Nghiên Cứu Khoa Học Trọng Điểm* (Profile `RECENT_VERIFIED`).
+     - Lược đồ thống nhất 6 quan hệ: `KHOA_VIEN`, `GIANGVIEN`, `DETAI`, `THAMGIA_DT`, `SANPHAM_KH`, `GIAINGAN`.
+     - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.0đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu = 6.5đ). Thang điểm: 10.0đ.
+     - Viết bài kiểm thử [`exam/gk/mocks/MOCK-14/fixture_mock14.sql`](../../exam/gk/mocks/MOCK-14/fixture_mock14.sql) có 9 suite kiểm thử đối kháng với automated assertions (`THROW 500XX`), chạy 100% PASS trên Microsoft SQL Server 2025. Log lưu tại [`exam/gk/qa/mock14_sql_execution.log`](../../exam/gk/qa/mock14_sql_execution.log).
+     - Thay thế 9 câu DRAFT cũ bằng 9 câu chuẩn hóa (`M14-Q1` đến `M14-Q2C6`), nâng tổng số câu `EXECUTION_VERIFIED` lên **126 câu**.
+  14. **MOCK-15 (ĐÃ HOÀN TẤT & KIỂM CHỨNG 100%):**
+     - Tái thiết kế toàn diện theo miền nghiệp vụ: *Quản Lý Trại Cứu Hộ Động Vật Hoang Dã* (Profile `RECENT_VERIFIED`).
+     - Lược đồ thống nhất 6 quan hệ: `KHU_BAOTON`, `LOAI_DONGVAT`, `DONGVAT`, `NHANVIEN`, `CHITIET_CS`, `DOT_TAITHA`.
+     - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.0đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu = 6.5đ). Thang điểm: 10.0đ.
+     - Viết bài kiểm thử [`exam/gk/mocks/MOCK-15/fixture_mock15.sql`](../../exam/gk/mocks/MOCK-15/fixture_mock15.sql) có 9 suite kiểm thử đối kháng với automated assertions (`THROW 500XX`), chạy 100% PASS trên Microsoft SQL Server 2025. Log lưu tại [`exam/gk/qa/mock15_sql_execution.log`](../../exam/gk/qa/mock15_sql_execution.log).
+     - Thay thế 9 câu DRAFT cũ bằng 9 câu chuẩn hóa (`M15-Q1` đến `M15-Q2C6`), nâng tổng số câu `EXECUTION_VERIFIED` lên **135 câu** (MOCK-01 đến MOCK-15: 15 đề x 9 câu = 135 câu). Tổng số câu toàn ngân hàng giữ vững 173 câu.
+
+---
+
+## 3. KẾT LUẬN KIỂM TOÁN PHASE C
+
+Toàn bộ 15/15 Đề thi mô phỏng (MOCK-01 đến MOCK-15) đã được chuẩn hóa thành công đạt tiêu chuẩn **Gold Standard**:
+1. **Lược đồ thống nhất 100%**: Mỗi đề sở hữu 1 bài toán thực tế độc lập, không ghép nối chắp vá.
+2. **ERD chuẩn hóa**: 100% có Mermaid ERD, bản số min-max rõ ràng, ánh xạ đầy đủ khóa chính (PK) và khóa ngoại (FK).
+3. **Thang điểm chuẩn xác 10.0đ, thời gian 75 phút**: Phân bổ cấu trúc chuẩn UIT (Câu 1: 2.0-2.5đ; Câu 2.1: 1.5đ; Câu 2.2: 6.0-6.5đ với 6 câu ĐSQH phân hóa độ khó).
+4. **Kiểm chứng thực thi SQL Server 2025**: 100% cả 15 đề có fixture SQL với ma trận kiểm thử đối kháng, automated assertions `THROW 500XX`, chạy trực tiếp trên Microsoft SQL Server 2025 và sinh log kiểm chứng đạt 100% PASS.
+5. **Ngân hàng bài tập chuẩn hóa**: Đạt 135 câu `EXECUTION_VERIFIED` (chiếm trọn 15 bộ đề), 10 câu `SEMANTICALLY_REVIEWED`, 28 câu `DRAFT` bổ trợ. Không trùng lặp, không rò rỉ đáp án vào đề thi.
+6. **Ấn phẩm PDF xuất bản**: Đã biên dịch hoàn tất 4 ấn phẩm A4 chuyên nghiệp, kiểm định preflight 100% PASS. Lỗi **P0-05** chính thức được đóng (**RESOLVED**).

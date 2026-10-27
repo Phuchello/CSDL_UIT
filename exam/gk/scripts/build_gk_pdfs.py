@@ -323,7 +323,8 @@ def print_html_to_pdf(html_text: str, output_pdf_path: Path):
 GOLD_MOCK_IDS = [
     "MOCK-01", "MOCK-02", "MOCK-03", "MOCK-04",
     "MOCK-05", "MOCK-06", "MOCK-07", "MOCK-08",
-    "MOCK-09", "MOCK-10", "MOCK-11"
+    "MOCK-09", "MOCK-10", "MOCK-11", "MOCK-12",
+    "MOCK-13", "MOCK-14", "MOCK-15"
 ]
 
 MOCK_SCHEMA_TITLES = {
@@ -337,7 +338,11 @@ MOCK_SCHEMA_TITLES = {
     "MOCK-08": "Quản Lý Sàn Thương Mại Điện Tử & Vận Chuyển Hàng",
     "MOCK-09": "Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên",
     "MOCK-10": "Quản Lý Gara Ô Tô & Phụ Tùng Bảo Dưỡng",
-    "MOCK-11": "Quản Lý Chuỗi Cà Phê Nhượng Quyền & Nguyên Liệu Pha Chế"
+    "MOCK-11": "Quản Lý Chuỗi Cà Phê Nhượng Quyền & Nguyên Liệu Pha Chế",
+    "MOCK-12": "Quản Lý Cụm Rạp Chiếu Phim & Đặt Vé Trực Tuyến",
+    "MOCK-13": "Quản Lý Tuyến Xe Buýt & Metro TP.HCM",
+    "MOCK-14": "Quản Lý Đề Tài Nghiên Cứu Khoa Học Trọng Điểm",
+    "MOCK-15": "Quản Lý Trại Cứu Hộ Động Vật Hoang Dã"
 }
 
 MOCK_EXECUTION_DATA = {
@@ -494,6 +499,62 @@ MOCK_EXECUTION_DATA = {
             ("2.2e", "Phép chia ÷", "Cửa hàng nhập tất cả Syrup pha chế (NL03, NL04) & S=Ø check", "Đúng 2 cửa hàng: CH01 và CH02", "PASS"),
             ("2.2f", "Cực trị MAX", "Đồng hạng cực trị tổng số lượng nguyên liệu nhập năm 2024", "Cả CH01 (60 đơn vị) và CH02 (60 đơn vị) bảo toàn", "PASS")
         ]
+    },
+    "MOCK-12": {
+        "title": "MOCK-12",
+        "log": "exam/gk/qa/mock12_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn GIAVE_THUC <= 0, TRANGTHAI không hợp lệ, NULL", "Chặn lỗi CK_VEXEM_GIAVE, CK_VEXEM_TRANGTHAI, 515", "PASS"),
+            ("2.1b", "UPDATE giảm giá vé 10%", "Giảm 10% vé chuẩn phim Hoạt hình chiếu tháng 12/2024", "SC01 (108k), SC02 (90k), SC03 không đổi", "PASS"),
+            ("2.2a", "Select σ", "Phim Khoa học viễn tưởng thời lượng từ 120 phút trở lên", "P01 (Dune 2, 166p), P02 (Interstellar, 169p)", "PASS"),
+            ("2.2b", "Join ⋈", "Vé xem phim tại cụm rạp CGV Landmark 81", "13 vé thuộc các suất SC04, SC05 tại Landmark 81", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Cụm rạp CR04 (Cần Thơ) chưa có phòng chiếu", "CR01-03 có phòng; CR04 có MAPC = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng doanh thu vé Đã thanh toán tháng 11/2024 theo suất", "SC04 (1.08m), SC05 (1.50m) — đã loại vé hủy", "PASS"),
+            ("2.2e", "Phép chia ÷", "Khách hàng mua vé xem tất cả phim Kinh dị & S=Ø check", "Đúng 2 khách hàng: KH01 và KH02", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị tổng số vé bán năm 2024", "Cả P01 (6 vé) và P02 (6 vé) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-13": {
+        "title": "MOCK-13",
+        "log": "exam/gk/qa/mock13_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn SOLUONG_KHACH < 0, DOANHTHU < 0, NULL", "Chặn lỗi CK_CHUYENDI_KHACH, CK_CHUYENDI_DOANHTHU, 515", "PASS"),
+            ("2.1b", "UPDATE lương tài xế", "Tăng 10% lương tài xế tuyến Xe buýt điện VinBus", "TXE01 (13.2m), TXE02 (15.4m), TXE03 không đổi", "PASS"),
+            ("2.2a", "Select σ", "Tuyến Metro có cự ly từ 15 km trở lên", "TX01 (Metro Số 1 Bến Thành - Suối Tiên, 19.7km)", "PASS"),
+            ("2.2b", "Join ⋈", "Phương tiện phục vụ tuyến Bến Thành - BX Miền Đông mới", "PT01 (51B-11111), PT02 (51B-22222)", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Trạm dừng TR06 chưa có tuyến nào đi qua", "TR01-05 có tuyến; TR06 có MATUYEN = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng số khách phục vụ ngày 20/11/2024 theo phương tiện", "PT01 (180 khách), PT02 (110 khách)", "PASS"),
+            ("2.2e", "Phép chia ÷", "Tuyến xe đi qua tất cả trạm ở Thủ Đức & S=Ø check", "Đúng 2 tuyến: TX01 và TX04", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị tổng doanh thu chuyến đi năm 2024", "Cả TX01 (25m) và TX04 (25m) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-14": {
+        "title": "MOCK-14",
+        "log": "exam/gk/qa/mock14_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn SOTIEN_GN <= 0, NGAYKT <= NGAYBD, NULL", "Chặn lỗi CK_GIAINGAN_SOTIEN, CK_DETAI_NGAY, 515", "PASS"),
+            ("2.1b", "UPDATE lương giảng viên", "Tăng 15% lương Tiến sĩ Viện Công Nghệ Thông Tin", "GV01 (28.75m), GV02 (25.3m), GV03-04 không đổi", "PASS"),
+            ("2.2a", "Select σ", "Đề tài Cấp Nhà nước có kinh phí từ 1 tỷ đồng trở lên", "DT01 (2.5 tỷ), DT02 (1.2 tỷ)", "PASS"),
+            ("2.2b", "Join ⋈", "Sản phẩm công bố từ đề tài do GV01 làm chủ nhiệm", "SP01..SP06 (6 bài báo quốc tế uy tín)", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Khoa viện KV04 chưa có giảng viên chủ nhiệm đề tài", "KV01-03 có đề tài; KV04 có MADT = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng kinh phí giải ngân thực tế năm 2024 theo đề tài", "DT01 (900m), DT02 (600m), DT03 (300m), DT05 (200m)", "PASS"),
+            ("2.2e", "Phép chia ÷", "Giảng viên tham gia tất cả đề tài Cấp Nhà nước & S=Ø check", "Đúng 2 giảng viên: GV01 và GV02", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị số lượng sản phẩm công bố Q1", "Cả DT01 (3 Q1) và DT02 (3 Q1) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-15": {
+        "title": "MOCK-15",
+        "log": "exam/gk/qa/mock15_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn CHIPHI_CS < 0, CANNANG_KG <= 0, NULL", "Chặn lỗi CK_CHITIETCS_CHIPHI, CK_DONGVAT_CANNANG, 515", "PASS"),
+            ("2.1b", "UPDATE lương thú y", "Tăng 10% lương Bác sĩ thú y Khu Cứu Hộ Thú Lớn", "NV01 (19.8m), NV02 (17.6m), NV03-05 không đổi", "PASS"),
+            ("2.2a", "Select σ", "Các loài động vật hoang dã Cực kỳ nguy cấp", "L01 (Voọc chà vá), L02 (Tê tê Java)", "PASS"),
+            ("2.2b", "Join ⋈", "Cá thể động vật thuộc Khu Bán Tự Nhiên Cát Tiên", "DV01, DV02, DV03 (3 cá thể)", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Phân khu KB04 mới mở chưa bố trí nhân viên", "KB01-03 có nhân viên; KB04 có MANV = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng chi phí chăm sóc y tế tháng 10/2024 theo cá thể", "DV01 (4.0m), DV02 (3.0m), DV04 (5.0m)", "PASS"),
+            ("2.2e", "Phép chia ÷", "Nhân viên trực tiếp chăm sóc tất cả Tê tê Java & S=Ø check", "Đúng 2 nhân viên: NV01 và NV04", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị số cá thể động vật tiếp nhận cứu hộ", "Cả KB01 (3 cá thể) và KB02 (3 cá thể) bảo toàn", "PASS")
+        ]
     }
 }
 
@@ -649,8 +710,8 @@ def build_pdf_solutions():
     <div class="cover-univ">Trường Đại Học Công Nghệ Thông Tin — ĐHQG-HCM</div>
     <div class="cover-faculty">Khoa Hệ Thống Thông Tin</div>
     <div class="cover-title">HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT<br>IT004 — CƠ SỞ DỮ LIỆU GIỮA KỲ</div>
-    <div class="cover-subtitle">Phân Tích Tư Duy Toán Học — Biểu Thức ĐSQH — Mã Nguồn T-SQL<br>MOCK-01 &rarr; MOCK-11 Đã Kiểm Chứng Thực Thi — 4 Đề Bản Thảo Đang Hoàn Thiện</div>
-    <div class="cover-badge">HỌC LIỆU ÔN TẬP — MOCK-01 &rarr; MOCK-11 CHUẨN VÀNG & BẢN THẢO MÔ PHỎNG</div>
+    <div class="cover-subtitle">Phân Tích Tư Duy Toán Học — Biểu Thức ĐSQH — Mã Nguồn T-SQL<br>MOCK-01 &rarr; MOCK-15 Đã Kiểm Chứng Thực Thi 100% Trên Microsoft SQL Server 2025</div>
+    <div class="cover-badge">HỌC LIỆU ÔN TẬP — TOÀN BỘ 15 ĐỀ THI MÔ PHỎNG ĐẠT CHUẨN VÀNG (GOLD STANDARD)</div>
     <div class="cover-author-box">
         <div class="cover-author-label">Tác giả & Biên soạn</div>
         <div class="cover-author-name">BIÊN SOẠN: VÕ TRỌNG PHÚC</div>
@@ -661,9 +722,9 @@ def build_pdf_solutions():
     <h1 class="topic-header">MỤC LỤC & CẤU TRÚC KIỂM ĐỊNH HỌC THUẬT</h1>
     <p>Ấn phẩm này cung cấp hướng dẫn chấm và lời giải chi tiết theo 3 cấp độ kiểm chứng minh bạch:</p>
     <ul>
-        <li><strong>EXECUTION_VERIFIED (Chuẩn Vàng):</strong> 11 đề thi mô phỏng (MOCK-01 &rarr; MOCK-11) đã được kiểm chứng thực thi 100% trên engine Microsoft SQL Server 2025 với kịch bản kiểm thử toàn bộ các ca biên (edge cases).</li>
-        <li><strong>SEMANTICALLY_REVIEWED (Đã rà soát học thuật):</strong> 21 bài tập phân dạng đã được đối sánh công thức toán học và lược đồ chuẩn UIT.</li>
-        <li><strong>DRAFT / INTERNAL REVIEW (Bản thảo nội bộ):</strong> 53 bài tập và 4 đề mô phỏng (MOCK-12 &rarr; MOCK-15) đang trong lộ trình tái cấu trúc theo chuẩn vàng trong Phase C.</li>
+        <li><strong>EXECUTION_VERIFIED (Chuẩn Vàng 100%):</strong> Toàn bộ 15 đề thi mô phỏng (MOCK-01 &rarr; MOCK-15) đã được kiểm chứng thực thi 100% trên engine Microsoft SQL Server 2025 với kịch bản kiểm thử toàn bộ các ca biên (edge cases).</li>
+        <li><strong>SEMANTICALLY_REVIEWED (Đã rà soát học thuật):</strong> 10 bài tập phân dạng đã được đối sánh công thức toán học và lược đồ chuẩn UIT.</li>
+        <li><strong>DRAFT / INTERNAL REVIEW (Bản thảo nội bộ):</strong> 28 bài tập câu hỏi bổ trợ trong ngân hàng học liệu.</li>
     </ul>
 </div>
 """
@@ -933,7 +994,7 @@ def build_pdf_verified_only():
     <div class="cover-univ">Trường Đại Học Công Nghệ Thông Tin — ĐHQG-HCM</div>
     <div class="cover-faculty">Khoa Hệ Thống Thông Tin</div>
     <div class="cover-title">TUYỂN TẬP ĐỀ THI & BÀI TẬP ĐÃ KIỂM CHỨNG<br>IT004 — CƠ SỞ DỮ LIỆU GIỮA KỲ</div>
-    <div class="cover-subtitle">ẤN BẢN CHUẨN MỰC (VERIFIED ONLY)<br>MOCK-01 &rarr; MOCK-11 Kiểm Chứng Thực Thi SQL Server — {len(verified_probs)} Bài Tập Đã Rà Soát Học Thuật</div>
+    <div class="cover-subtitle">ẤN BẢN CHUẨN MỰC (VERIFIED ONLY)<br>MOCK-01 &rarr; MOCK-15 Kiểm Chứng Thực Thi SQL Server — {len(verified_probs)} Bài Tập Đã Rà Soát Học Thuật</div>
     <div class="cover-badge">BẢN KIỂM CHỨNG CHÍNH THỨC — KHÔNG CHỨA BÀI TẬP BẢN THẢO</div>
     <div class="cover-author-box">
         <div class="cover-author-label">Tác giả & Biên soạn</div>
@@ -956,6 +1017,10 @@ def build_pdf_verified_only():
         <li><strong>Đề thi mô phỏng MOCK-09 (Chuẩn Vàng):</strong> Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
         <li><strong>Đề thi mô phỏng MOCK-10 (Chuẩn Vàng):</strong> Quản Lý Gara Ô Tô & Phụ Tùng Bảo Dưỡng, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
         <li><strong>Đề thi mô phỏng MOCK-11 (Chuẩn Vàng):</strong> Quản Lý Chuỗi Cà Phê Nhượng Quyền & Nguyên Liệu Pha Chế, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
+        <li><strong>Đề thi mô phỏng MOCK-12 (Chuẩn Vàng):</strong> Quản Lý Cụm Rạp Chiếu Phim & Đặt Vé Trực Tuyến, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
+        <li><strong>Đề thi mô phỏng MOCK-13 (Chuẩn Vàng):</strong> Quản Lý Tuyến Xe Buýt & Metro TP.HCM, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
+        <li><strong>Đề thi mô phỏng MOCK-14 (Chuẩn Vàng):</strong> Quản Lý Đề Tài Nghiên Cứu Khoa Học Trọng Điểm, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
+        <li><strong>Đề thi mô phỏng MOCK-15 (Chuẩn Vàng):</strong> Quản Lý Trại Cứu Hộ Động Vật Hoang Dã, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
         <li><strong>{len(verified_probs)} bài tập phân dạng đã kiểm chứng (Verified Problems):</strong> Gồm các bài tập EXECUTION_VERIFIED và SEMANTICALLY_REVIEWED có lời giải và barem chi tiết.</li>
     </ul>
 </div>

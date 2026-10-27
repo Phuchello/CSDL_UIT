@@ -811,125 +811,279 @@ SELECT px.MAPX, px.NGAYXUAT, SUM(ct.SOLUONG * ct.DONGIA_XUAT) AS TONG_GIA_TRI_XU
 
 ---
 
-## Bài 26 [RA-D34] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 34)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `TAU, CAPCANG, CANGBIEN`
+## Bài 26 [M12-Q2C4] — ĐSQH Gom Nhóm Doanh Thu Vé Đã Thanh Toán Tháng 11/2024
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SUATCHIEU(MASC, MAPHIM, MAPC, NGAYCHIEU, GIOCHIEU, GIAVE_CHUAN), VEXEM(MAVE, MASC, MAKH, SOGHE, GIAVE_THUC, TRANGTHAI)`
 
 ### 1. Đề Bài
-Cho CSDL TAU, CAPCANG, CANGBIEN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.
+Tính tổng doanh thu thực tế bán vé (TONG_DOANHTHU = SUM(GIAVE_THUC)) của từng suất chiếu (MASC, NGAYCHIEU) diễn ra trong tháng 11 năm 2024 có trạng thái vé là 'Đã thanh toán'.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**
 ```text
-R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)
-KQ ← π_{KEY, TONG}(R_Group)
+KQ = \pi_{MASC, NGAYCHIEU, TONG_DOANHTHU}(E_1 \bowtie \gamma_{MASC, \text{SUM}(GIAVE_THUC) \to TONG_DOANHTHU}(E_2))
 ```
 **Câu lệnh SQL tương đương:**
 ```sql
-SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;
+SELECT sc.MASC, sc.NGAYCHIEU, SUM(vx.GIAVE_THUC) AS TONG_DOANHTHU FROM SUATCHIEU sc JOIN VEXEM vx ON sc.MASC = vx.MASC WHERE sc.NGAYCHIEU >= '2024-11-01' AND sc.NGAYCHIEU <= '2024-11-30' AND vx.TRANGTHAI = N'Đã thanh toán' GROUP BY sc.MASC, sc.NGAYCHIEU;
 ```
 
 **Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
+1. E_1 = \sigma_{NGAYCHIEU \ge '2024-11-01' \wedge NGAYCHIEU \le '2024-11-30'}(SUATCHIEU)
+1. E_2 = \sigma_{TRANGTHAI = 'Đã thanh toán'}(VEXEM)
+1. E_3 = \gamma_{MASC, \text{SUM}(GIAVE_THUC) \to TONG_DOANHTHU}(E_2)
+1. E_4 = E_1 \bowtie E_3
+1. KQ = \pi_{MASC, NGAYCHIEU, TONG_DOANHTHU}(E_4)
 
 **Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
 
 ---
 
-## Bài 27 [RA-D35] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 35)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `NHA_DAUTU, GOPT_VON, DUAN`
+## Bài 27 [M13-Q2C4] — ĐSQH Gom Nhóm Số Khách Phục Vụ Của Phương Tiện Ngày 20/11/2024
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `PHUONGTIEN(MAPT, BIENSO, SOGHE, NAMSX, MATUYEN), CHUYEN_DI(MACHUYEN, MAPT, NGAYCHAY, GIOXUATPHAT, SOLUONG_KHACH, DOANHTHU)`
 
 ### 1. Đề Bài
-Cho CSDL NHA_DAUTU, GOPT_VON, DUAN. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: nhà đầu tư góp vốn vào tất cả dự án năng lượng xanh.
+Tính tổng số lượng hành khách phục vụ (TONG_KHACH = SUM(SOLUONG_KHACH)) của từng phương tiện (MAPT, BIENSO) thực hiện các chuyến đi trong ngày 20 tháng 11 năm 2024.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**
 ```text
-R_Target ← π_{KEY2}(σ_{DK}(R2))
-R_Cand ← π_{KEY1, KEY2}(R1)
-KQ ← (R_Cand ÷ R_Target) ⋈ INFO
+KQ = \pi_{MAPT, BIENSO, TONG_KHACH}(PHUONGTIEN \bowtie \gamma_{MAPT, \text{SUM}(SOLUONG_KHACH) \to TONG_KHACH}(\sigma_{NGAYCHAY = '2024-11-20'}(CHUYEN_DI)))
 ```
 **Câu lệnh SQL tương đương:**
 ```sql
-SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));
+SELECT pt.MAPT, pt.BIENSO, SUM(cd.SOLUONG_KHACH) AS TONG_KHACH FROM PHUONGTIEN pt JOIN CHUYEN_DI cd ON pt.MAPT = cd.MAPT WHERE cd.NGAYCHAY = '2024-11-20' GROUP BY pt.MAPT, pt.BIENSO;
 ```
 
 **Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
+1. E_1 = \sigma_{NGAYCHAY = '2024-11-20'}(CHUYEN_DI)
+1. E_2 = \gamma_{MAPT, \text{SUM}(SOLUONG_KHACH) \to TONG_KHACH}(E_1)
+1. E_3 = E_2 \bowtie PHUONGTIEN
+1. KQ = \pi_{MAPT, BIENSO, TONG_KHACH}(E_3)
 
 **Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
 
 ---
 
-## Bài 28 [RA-D36] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 36)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `KHACH, DATTIEC, SANHTIEC`
+## Bài 28 [M13-Q2C5] — ĐSQH Phép Chia Tìm Tuyến Xe Đi Qua Tất Cả Trạm Ở Thủ Đức
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `TUYEN_XE(MATUYEN, TENTUYEN, LOAI_HINH, CULY_KM, GIAVE_LUOT), TRAM_DUNG(MATRAM, TENTRAM, DIACHI, QUAN_HUYEN), LOTRINH(MATUYEN, MATRAM, SOTHUTU, KHOANGCACH_KM)`
 
 ### 1. Đề Bài
-Cho CSDL KHACH, DATTIEC, SANHTIEC. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.
+Tìm các tuyến xe (MATUYEN, TENTUYEN, LOAI_HINH) đi qua tất cả các trạm dừng nằm trên địa bàn quận 'Thủ Đức'.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**
 ```text
-R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)
-KQ ← π_{KEY, TONG}(R_Group)
+KQ = \pi_{MATUYEN, TENTUYEN, LOAI_HINH}((\pi_{MATUYEN, MATRAM}(LOTRINH) \div \pi_{MATRAM}(\sigma_{QUAN_HUYEN = 'Thủ Đức'}(TRAM_DUNG))) \bowtie TUYEN_XE)
 ```
 **Câu lệnh SQL tương đương:**
 ```sql
-SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;
+SELECT tx.MATUYEN, tx.TENTUYEN, tx.LOAI_HINH FROM TUYEN_XE tx WHERE EXISTS (SELECT 1 FROM LOTRINH lt WHERE lt.MATUYEN = tx.MATUYEN) AND NOT EXISTS (SELECT 1 FROM TRAM_DUNG td WHERE td.QUAN_HUYEN = N'Thủ Đức' AND NOT EXISTS (SELECT 1 FROM LOTRINH lt2 WHERE lt2.MATUYEN = tx.MATUYEN AND lt2.MATRAM = td.MATRAM));
 ```
 
 **Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
+1. R = \pi_{MATUYEN, MATRAM}(LOTRINH)
+1. S = \pi_{MATRAM}(\sigma_{QUAN_HUYEN = 'Thủ Đức'}(TRAM_DUNG))
+1. E_{DIV} = R \div S
+1. KQ = \pi_{MATUYEN, TENTUYEN, LOAI_HINH}(E_{DIV} \bowtie TUYEN_XE)
 
 **Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
 
 ---
 
-## Bài 29 [RA-D37] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 37)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `DOCGIA, MUONSACH, SACH, THELOAI`
+## Bài 29 [M13-Q2C6] — ĐSQH Cực Trị Tìm Tuyến Xe Có Doanh Thu Cao Nhất Năm 2024
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.5 điểm
+- **Lược đồ tham chiếu:** `TUYEN_XE(MATUYEN, TENTUYEN, LOAI_HINH, CULY_KM, GIAVE_LUOT), PHUONGTIEN(MAPT, BIENSO, SOGHE, NAMSX, MATUYEN), CHUYEN_DI(MACHUYEN, MAPT, NGAYCHAY, GIOXUATPHAT, SOLUONG_KHACH, DOANHTHU)`
 
 ### 1. Đề Bài
-Cho CSDL DOCGIA, MUONSACH, SACH, THELOAI. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: độc giả đã mượn sách thuộc tất cả các thể loại khoa học.
+Tìm tuyến xe (MATUYEN, TENTUYEN, LOAI_HINH) có tổng doanh thu các chuyến đi (TONG_DOANHTHU) trong toàn bộ năm 2024 đạt cao nhất (bảo toàn tất cả các tuyến nếu đồng hạng).
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**
 ```text
-R_Target ← π_{KEY2}(σ_{DK}(R2))
-R_Cand ← π_{KEY1, KEY2}(R1)
-KQ ← (R_Cand ÷ R_Target) ⋈ INFO
+KQ = \pi_{MATUYEN, TENTUYEN, LOAI_HINH, TONG_DOANHTHU}((E_{DEM} - \pi_{MATUYEN, TONG_DOANHTHU}(E_{DEM} \bowtie_{TONG_DOANHTHU < TONG_DOANHTHU2} \rho_{MATUYEN2, TONG_DOANHTHU2}(E_{DEM}))) \bowtie TUYEN_XE)
 ```
 **Câu lệnh SQL tương đương:**
 ```sql
-SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));
+WITH ThongKe AS (SELECT pt.MATUYEN, SUM(cd.DOANHTHU) AS TONG_DOANHTHU FROM PHUONGTIEN pt JOIN CHUYEN_DI cd ON pt.MAPT = cd.MAPT WHERE cd.NGAYCHAY >= '2024-01-01' AND cd.NGAYCHAY <= '2024-12-31' GROUP BY pt.MATUYEN) SELECT tx.MATUYEN, tx.TENTUYEN, tx.LOAI_HINH, tk.TONG_DOANHTHU FROM TUYEN_XE tx JOIN ThongKe tk ON tx.MATUYEN = tk.MATUYEN WHERE tk.TONG_DOANHTHU = (SELECT MAX(TONG_DOANHTHU) FROM ThongKe);
 ```
 
 **Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
+1. E_1 = \sigma_{NGAYCHAY \ge '2024-01-01' \wedge NGAYCHAY \le '2024-12-31'}(CHUYEN_DI) \bowtie PHUONGTIEN
+1. E_{DEM} = \gamma_{MATUYEN, \text{SUM}(DOANHTHU) \to TONG_DOANHTHU}(E_1)
+1. E_{NHO_HON} = \pi_{MATUYEN, TONG_DOANHTHU}(E_{DEM} \bowtie_{TONG_DOANHTHU < TONG_DOANHTHU2} \rho_{MATUYEN2, TONG_DOANHTHU2}(E_{DEM}))
+1. E_{MAX} = E_{DEM} - E_{NHO_HON}
+1. KQ = \pi_{MATUYEN, TENTUYEN, LOAI_HINH, TONG_DOANHTHU}(E_{MAX} \bowtie TUYEN_XE)
 
 **Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
+- `syntax`: 0.30đ
+- `logic`: 0.60đ
+- `intermediate_steps`: 0.60đ
 
 ---
 
-## Bài 30 [RA-D38] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 38)
+## Bài 30 [M14-Q2C4] — ĐSQH Gom Nhóm Kinh Phí Giải Ngân Thực Tế Năm 2024 Theo Đề Tài
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `DETAI(MADT, TENDT, CAP_QUANLY, KINHPHI, NGAYBD, NGAYKT, CHUNHIEM_DT), GIAINGAN(MAGN, MADT, NGAYGN, SOTIEN_GN, NOIDUNG)`
+
+### 1. Đề Bài
+Tính tổng kinh phí đã giải ngân thực tế (TONG_GIAINGAN = SUM(SOTIEN_GN)) của từng đề tài (MADT, TENDT) đã được giải ngân trong năm 2024.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MADT, TENDT, TONG_GIAINGAN}(DETAI \bowtie \gamma_{MADT, \text{SUM}(SOTIEN_GN) \to TONG_GIAINGAN}(\sigma_{NGAYGN \ge '2024-01-01' \wedge NGAYGN \le '2024-12-31'}(GIAINGAN)))
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT dt.MADT, dt.TENDT, SUM(gn.SOTIEN_GN) AS TONG_GIAINGAN FROM DETAI dt JOIN GIAINGAN gn ON dt.MADT = gn.MADT WHERE gn.NGAYGN >= '2024-01-01' AND gn.NGAYGN <= '2024-12-31' GROUP BY dt.MADT, dt.TENDT;
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = \sigma_{NGAYGN \ge '2024-01-01' \wedge NGAYGN \le '2024-12-31'}(GIAINGAN)
+1. E_2 = \gamma_{MADT, \text{SUM}(SOTIEN_GN) \to TONG_GIAINGAN}(E_1)
+1. E_3 = DETAI \bowtie E_2
+1. KQ = \pi_{MADT, TENDT, TONG_GIAINGAN}(E_3)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 31 [M14-Q2C5] — ĐSQH Phép Chia Tìm Giảng Viên Tham Gia Tất Cả Đề Tài Cấp Nhà Nước
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `DETAI(MADT, TENDT, CAP_QUANLY, KINHPHI, NGAYBD, NGAYKT, CHUNHIEM_DT), THAMGIA_DT(MADT, MAGV, VAITRO, SOGIO_TG), GIANGVIEN(MAGV, HOTEN, HOCHAM, HOCVI, LUONG, MAKV)`
+
+### 1. Đề Bài
+Tìm các giảng viên (MAGV, HOTEN, HOCVI) đã từng tham gia thực hiện tất cả các đề tài NCKH thuộc cấp quản lý 'Cấp Nhà nước' của trường.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MAGV, HOTEN, HOCVI}((\pi_{MAGV, MADT}(THAMGIA_DT) \div \pi_{MADT}(\sigma_{CAP_QUANLY = 'Cấp Nhà nước'}(DETAI))) \bowtie GIANGVIEN)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT gv.MAGV, gv.HOTEN, gv.HOCVI FROM GIANGVIEN gv WHERE EXISTS (SELECT 1 FROM THAMGIA_DT tg WHERE tg.MAGV = gv.MAGV) AND NOT EXISTS (SELECT 1 FROM DETAI dt WHERE dt.CAP_QUANLY = N'Cấp Nhà nước' AND NOT EXISTS (SELECT 1 FROM THAMGIA_DT tg2 WHERE tg2.MAGV = gv.MAGV AND tg2.MADT = dt.MADT));
+```
+
+**Các bước suy luận tư duy:**
+1. R = \pi_{MAGV, MADT}(THAMGIA_DT)
+1. S = \pi_{MADT}(\sigma_{CAP_QUANLY = 'Cấp Nhà nước'}(DETAI))
+1. E_{DIV} = R \div S
+1. KQ = \pi_{MAGV, HOTEN, HOCVI}(E_{DIV} \bowtie GIANGVIEN)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 32 [M15-Q2C4] — ĐSQH Gom Nhóm Chi Phí Chăm Sóc Động Vật Tháng 10/2024
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `DONGVAT(MADV, MALOAI, GIOITINH, CANNANG_KG, TINHTRANG_SK, MAKHU), CHITIET_CS(MACS, MADV, MANV, NGAYCS, CHIPHI_CS, GHI_CHU)`
+
+### 1. Đề Bài
+Tính tổng chi phí chăm sóc y tế (TONG_CHIPHI = SUM(CHIPHI_CS)) của từng cá thể động vật (MADV, TINHTRANG_SK) phát sinh trong tháng 10 năm 2024.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MADV, TINHTRANG_SK, TONG_CHIPHI}(DONGVAT \bowtie \gamma_{MADV, \text{SUM}(CHIPHI_CS) \to TONG_CHIPHI}(\sigma_{NGAYCS \ge '2024-10-01' \wedge NGAYCS \le '2024-10-31'}(CHITIET_CS)))
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT dv.MADV, dv.TINHTRANG_SK, SUM(cs.CHIPHI_CS) AS TONG_CHIPHI FROM DONGVAT dv JOIN CHITIET_CS cs ON dv.MADV = cs.MADV WHERE cs.NGAYCS >= '2024-10-01' AND cs.NGAYCS <= '2024-10-31' GROUP BY dv.MADV, dv.TINHTRANG_SK;
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = \sigma_{NGAYCS \ge '2024-10-01' \wedge NGAYCS \le '2024-10-31'}(CHITIET_CS)
+1. E_2 = \gamma_{MADV, \text{SUM}(CHIPHI_CS) \to TONG_CHIPHI}(E_1)
+1. E_3 = E_2 \bowtie DONGVAT
+1. KQ = \pi_{MADV, TINHTRANG_SK, TONG_CHIPHI}(E_3)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 33 [M15-Q2C5] — ĐSQH Phép Chia Tìm Nhân Viên Chăm Sóc Tất Cả Tê Tê Java
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `DONGVAT(MADV, MALOAI, GIOITINH, CANNANG_KG, TINHTRANG_SK, MAKHU), LOAI_DONGVAT(MALOAI, TENLOAI, TEN_KHOAHOC, MUC_NGUYCAP), CHITIET_CS(MACS, MADV, MANV, NGAYCS, CHIPHI_CS, GHI_CHU), NHANVIEN(MANV, HOTEN, CHUYENMON, LUONG, MAKHU)`
+
+### 1. Đề Bài
+Tìm các nhân viên (MANV, HOTEN, CHUYENMON) đã từng trực tiếp chăm sóc tất cả các cá thể động vật thuộc loài mang tên 'Tê tê Java'.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MANV, HOTEN, CHUYENMON}((\pi_{MANV, MADV}(CHITIET_CS) \div \pi_{MADV}(DONGVAT \bowtie \sigma_{TENLOAI = 'Tê tê Java'}(LOAI_DONGVAT))) \bowtie NHANVIEN)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT nv.MANV, nv.HOTEN, nv.CHUYENMON FROM NHANVIEN nv WHERE EXISTS (SELECT 1 FROM CHITIET_CS cs WHERE cs.MANV = nv.MANV) AND NOT EXISTS (SELECT 1 FROM DONGVAT dv JOIN LOAI_DONGVAT ldv ON dv.MALOAI = ldv.MALOAI WHERE ldv.TENLOAI = N'Tê tê Java' AND NOT EXISTS (SELECT 1 FROM CHITIET_CS cs2 WHERE cs2.MANV = nv.MANV AND cs2.MADV = dv.MADV));
+```
+
+**Các bước suy luận tư duy:**
+1. R = \pi_{MANV, MADV}(CHITIET_CS)
+1. S = \pi_{MADV}(DONGVAT \bowtie \sigma_{TENLOAI = 'Tê tê Java'}(LOAI_DONGVAT))
+1. E_{DIV} = R \div S
+1. KQ = \pi_{MANV, HOTEN, CHUYENMON}(E_{DIV} \bowtie NHANVIEN)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 34 [M15-Q2C6] — ĐSQH Cực Trị Tìm Phân Khu Tiếp Nhận Nhiều Động Vật Nhất
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.5 điểm
+- **Lược đồ tham chiếu:** `KHU_BAOTON(MAKHU, TENKHU, DIENTICH_HA, NGUOI_PHUTRACH), DONGVAT(MADV, MALOAI, GIOITINH, CANNANG_KG, TINHTRANG_SK, MAKHU)`
+
+### 1. Đề Bài
+Tìm phân khu bảo tồn (MAKHU, TENKHU, DIENTICH_HA) có tổng số lượng cá thể động vật (TONG_DONGVAT) đang tiếp nhận nuôi dưỡng nhiều nhất (bảo toàn tất cả các phân khu nếu đồng hạng).
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MAKHU, TENKHU, DIENTICH_HA, TONG_DONGVAT}((E_{DEM} - \pi_{MAKHU, TONG_DONGVAT}(E_{DEM} \bowtie_{TONG_DONGVAT < TONG_DONGVAT2} \rho_{MAKHU2, TONG_DONGVAT2}(E_{DEM}))) \bowtie KHU_BAOTON)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+WITH ThongKe AS (SELECT dv.MAKHU, COUNT(dv.MADV) AS TONG_DONGVAT FROM DONGVAT dv GROUP BY dv.MAKHU) SELECT kb.MAKHU, kb.TENKHU, kb.DIENTICH_HA, tk.TONG_DONGVAT FROM KHU_BAOTON kb JOIN ThongKe tk ON kb.MAKHU = tk.MAKHU WHERE tk.TONG_DONGVAT = (SELECT MAX(TONG_DONGVAT) FROM ThongKe);
+```
+
+**Các bước suy luận tư duy:**
+1. E_{DEM} = \gamma_{MAKHU, \text{COUNT}(MADV) \to TONG_DONGVAT}(DONGVAT)
+1. E_{NHO_HON} = \pi_{MAKHU, TONG_DONGVAT}(E_{DEM} \bowtie_{TONG_DONGVAT < TONG_DONGVAT2} \rho_{MAKHU2, TONG_DONGVAT2}(E_{DEM}))
+1. E_{MAX} = E_{DEM} - E_{NHO_HON}
+1. KQ = \pi_{MAKHU, TENKHU, DIENTICH_HA, TONG_DONGVAT}(E_{MAX} \bowtie KHU_BAOTON)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.60đ
+- `intermediate_steps`: 0.60đ
+
+---
+
+## Bài 35 [RA-D46] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 46)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DIEMTIEM, PHIEUXUAT, CTPX, VACXIN`
 
@@ -958,7 +1112,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 31 [RA-D39] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 39)
+## Bài 36 [RA-D47] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 47)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DONHANG, CHITIET, MATHANG`
 
@@ -988,7 +1142,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 32 [RA-D40] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 40)
+## Bài 37 [RA-D48] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 48)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI, PHUTRACH, BENHNHAN`
 
@@ -1017,7 +1171,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 33 [RA-D41] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 41)
+## Bài 38 [RA-D49] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 49)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `HOCVIEN, DANGKY, KHOAHOC`
 
@@ -1047,243 +1201,38 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 34 [RA-D42] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 42)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `TAU, CAPCANG, CANGBIEN`
+## Bài 39 [M14-Q2C6] — ĐSQH Cực Trị Tìm Đề Tài Có Nhiều Bài Báo Xếp Hạng Q1 Nhất
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `DETAI(MADT, TENDT, CAP_QUANLY, KINHPHI, NGAYBD, NGAYKT, CHUNHIEM_DT), SANPHAM_KH(MASP, TENSP, LOAISP, XEP_HANG, MADT)`
 
 ### 1. Đề Bài
-Cho CSDL TAU, CAPCANG, CANGBIEN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.
+Tìm đề tài NCKH (MADT, TENDT, CAP_QUANLY) có tổng số lượng sản phẩm khoa học đạt xếp hạng 'Q1' công bố nhiều nhất (bảo toàn tất cả các đề tài nếu đồng hạng).
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ:**
 ```text
-R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)
-KQ ← π_{KEY, TONG}(R_Group)
+KQ = \pi_{MADT, TENDT, CAP_QUANLY, TONG_SP}((E_{DEM} - \pi_{MADT, TONG_SP}(E_{DEM} \bowtie_{TONG_SP < TONG_SP2} \rho_{MADT2, TONG_SP2}(E_{DEM}))) \bowtie DETAI)
 ```
 **Câu lệnh SQL tương đương:**
 ```sql
-SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;
+WITH ThongKe AS (SELECT sp.MADT, COUNT(sp.MASP) AS TONG_SP FROM SANPHAM_KH sp WHERE sp.XEP_HANG = 'Q1' GROUP BY sp.MADT) SELECT dt.MADT, dt.TENDT, dt.CAP_QUANLY, tk.TONG_SP FROM DETAI dt JOIN ThongKe tk ON dt.MADT = tk.MADT WHERE tk.TONG_SP = (SELECT MAX(TONG_SP) FROM ThongKe);
 ```
 
 **Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
+1. E_1 = \sigma_{XEP_HANG = 'Q1'}(SANPHAM_KH)
+1. E_{DEM} = \gamma_{MADT, \text{COUNT}(MASP) \to TONG_SP}(E_1)
+1. E_{NHO_HON} = \pi_{MADT, TONG_SP}(E_{DEM} \bowtie_{TONG_SP < TONG_SP2} \rho_{MADT2, TONG_SP2}(E_{DEM}))
+1. E_{MAX} = E_{DEM} - E_{NHO_HON}
+1. KQ = \pi_{MADT, TENDT, CAP_QUANLY, TONG_SP}(E_{MAX} \bowtie DETAI)
 
 **Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
 
 ---
 
-## Bài 35 [RA-D43] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 43)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `NHA_DAUTU, GOPT_VON, DUAN`
-
-### 1. Đề Bài
-Cho CSDL NHA_DAUTU, GOPT_VON, DUAN. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: nhà đầu tư góp vốn vào tất cả dự án năng lượng xanh.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Target ← π_{KEY2}(σ_{DK}(R2))
-R_Cand ← π_{KEY1, KEY2}(R1)
-KQ ← (R_Cand ÷ R_Target) ⋈ INFO
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
-
----
-
-## Bài 36 [RA-D44] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 44)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `KHACH, DATTIEC, SANHTIEC`
-
-### 1. Đề Bài
-Cho CSDL KHACH, DATTIEC, SANHTIEC. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)
-KQ ← π_{KEY, TONG}(R_Group)
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
-
----
-
-## Bài 37 [RA-D45] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 45)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `DOCGIA, MUONSACH, SACH, THELOAI`
-
-### 1. Đề Bài
-Cho CSDL DOCGIA, MUONSACH, SACH, THELOAI. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: độc giả đã mượn sách thuộc tất cả các thể loại khoa học.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Target ← π_{KEY2}(σ_{DK}(R2))
-R_Cand ← π_{KEY1, KEY2}(R1)
-KQ ← (R_Cand ÷ R_Target) ⋈ INFO
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
-
----
-
-## Bài 38 [RA-D46] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 46)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `DIEMTIEM, PHIEUXUAT, CTPX, VACXIN`
-
-### 1. Đề Bài
-Cho CSDL DIEMTIEM, PHIEUXUAT, CTPX, VACXIN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)
-KQ ← π_{KEY, TONG}(R_Group)
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
-
----
-
-## Bài 39 [RA-D47] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 47)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `DONHANG, CHITIET, MATHANG`
-
-### 1. Đề Bài
-Cho CSDL DONHANG, CHITIET, MATHANG. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: đơn hàng mua tất cả mặt hàng loại 'Điện tử'.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Target ← π_{KEY2}(σ_{DK}(R2))
-R_Cand ← π_{KEY1, KEY2}(R1)
-KQ ← (R_Cand ÷ R_Target) ⋈ INFO
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
-
----
-
-## Bài 40 [RA-D48] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 48)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `BACSI, PHUTRACH, BENHNHAN`
-
-### 1. Đề Bài
-Cho CSDL BACSI, PHUTRACH, BENHNHAN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)
-KQ ← π_{KEY, TONG}(R_Group)
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
-
----
-
-## Bài 41 [RA-D49] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 49)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `HOCVIEN, DANGKY, KHOAHOC`
-
-### 1. Đề Bài
-Cho CSDL HOCVIEN, DANGKY, KHOAHOC. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: học viên hoàn thành tất cả khóa học nâng cao.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Target ← π_{KEY2}(σ_{DK}(R2))
-R_Cand ← π_{KEY1, KEY2}(R1)
-KQ ← (R_Cand ÷ R_Target) ⋈ INFO
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
-
----
-
-## Bài 42 [M11-Q2C5] — ĐSQH Phép Chia Tìm Cửa Hàng Nhập Tất Cả Syrup Pha Chế
+## Bài 40 [M11-Q2C5] — ĐSQH Phép Chia Tìm Cửa Hàng Nhập Tất Cả Syrup Pha Chế
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `PHIEUXUAT(MAPX, NGAYXUAT, MACH, TONGTIEN, TRANGTHAI), CHITIET_PX(MAPX, MANL, SOLUONG, DONGIA_XUAT), NGUYENLIEU(MANL, TENNL, LOAINL, DONGIA_CHUAN, DVT), CUAHANG(MACH, TENCH, DIACHI, MAKV, NAM_KYHD)`
 
@@ -1313,7 +1262,7 @@ SELECT ch.MACH, ch.TENCH, ch.MAKV FROM CUAHANG ch WHERE EXISTS (SELECT 1 FROM PH
 
 ---
 
-## Bài 43 [M11-Q2C6] — ĐSQH Cực Trị Tìm Cửa Hàng Nhập Tổng Số Lượng Nhiều Nhất Năm 2024
+## Bài 41 [M11-Q2C6] — ĐSQH Cực Trị Tìm Cửa Hàng Nhập Tổng Số Lượng Nhiều Nhất Năm 2024
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.5 điểm
 - **Lược đồ tham chiếu:** `PHIEUXUAT(MAPX, NGAYXUAT, MACH, TONGTIEN, TRANGTHAI), CHITIET_PX(MAPX, MANL, SOLUONG, DONGIA_XUAT), CUAHANG(MACH, TENCH, DIACHI, MAKV, NAM_KYHD), KHUVUC(MAKV, TENKV, TRUONGVUNG)`
 
@@ -1342,6 +1291,67 @@ WITH ThongKe AS (SELECT px.MACH, SUM(ct.SOLUONG) AS TONG_SOLUONG_NHAP FROM PHIEU
 - `syntax`: 0.30đ
 - `logic`: 0.60đ
 - `intermediate_steps`: 0.60đ
+
+---
+
+## Bài 42 [M12-Q2C5] — ĐSQH Phép Chia Tìm Khách Hàng Mua Vé Xem Tất Cả Phim Kinh Dị
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SUATCHIEU(MASC, MAPHIM, MAPC, NGAYCHIEU, GIOCHIEU, GIAVE_CHUAN), VEXEM(MAVE, MASC, MAKH, SOGHE, GIAVE_THUC, TRANGTHAI), PHIM(MAPHIM, TENPHIM, THELOAI, THOILUONG, DAODIEN, NAMSX), KHACHHANG(MAKH, HOTEN, SDT, EMAIL, LOAITHANHVIEN)`
+
+### 1. Đề Bài
+Tìm các khách hàng (MAKH, HOTEN, SDT) đã từng mua vé xem ('Đã thanh toán') tất cả các bộ phim thuộc thể loại 'Kinh dị' của cụm rạp.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MAKH, HOTEN, SDT}((\pi_{MAKH, MAPHIM}(SUATCHIEU \bowtie \sigma_{TRANGTHAI = 'Đã thanh toán'}(VEXEM)) \div \pi_{MAPHIM}(\sigma_{THELOAI = 'Kinh dị'}(PHIM))) \bowtie KHACHHANG)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT kh.MAKH, kh.HOTEN, kh.SDT FROM KHACHHANG kh WHERE EXISTS (SELECT 1 FROM VEXEM vx WHERE vx.MAKH = kh.MAKH AND vx.TRANGTHAI = N'Đã thanh toán') AND NOT EXISTS (SELECT 1 FROM PHIM p WHERE p.THELOAI = N'Kinh dị' AND NOT EXISTS (SELECT 1 FROM VEXEM vx2 JOIN SUATCHIEU sc2 ON vx2.MASC = sc2.MASC WHERE vx2.MAKH = kh.MAKH AND sc2.MAPHIM = p.MAPHIM AND vx2.TRANGTHAI = N'Đã thanh toán'));
+```
+
+**Các bước suy luận tư duy:**
+1. R = \pi_{MAKH, MAPHIM}(SUATCHIEU \bowtie \sigma_{TRANGTHAI = 'Đã thanh toán'}(VEXEM))
+1. S = \pi_{MAPHIM}(\sigma_{THELOAI = 'Kinh dị'}(PHIM))
+1. E_{DIV} = R \div S
+1. KQ = \pi_{MAKH, HOTEN, SDT}(E_{DIV} \bowtie KHACHHANG)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 43 [M12-Q2C6] — ĐSQH Cực Trị Tìm Phim Bán Được Nhiều Vé Nhất Năm 2024
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SUATCHIEU(MASC, MAPHIM, MAPC, NGAYCHIEU, GIOCHIEU, GIAVE_CHUAN), VEXEM(MAVE, MASC, MAKH, SOGHE, GIAVE_THUC, TRANGTHAI), PHIM(MAPHIM, TENPHIM, THELOAI, THOILUONG, DAODIEN, NAMSX)`
+
+### 1. Đề Bài
+Tìm bộ phim (MAPHIM, TENPHIM, THELOAI) có tổng số lượng vé đã bán thành công ('Đã thanh toán') nhiều nhất trong toàn bộ năm 2024 (bảo toàn tất cả các bộ phim nếu đồng hạng).
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MAPHIM, TENPHIM, THELOAI, TONG_VE}((E_{DEM} - \pi_{MAPHIM, TONG_VE}(E_{DEM} \bowtie_{TONG_VE < TONG_VE2} \rho_{MAPHIM2, TONG_VE2}(E_{DEM}))) \bowtie PHIM)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+WITH ThongKe AS (SELECT sc.MAPHIM, COUNT(vx.MAVE) AS TONG_VE FROM SUATCHIEU sc JOIN VEXEM vx ON sc.MASC = vx.MASC WHERE sc.NGAYCHIEU >= '2024-01-01' AND sc.NGAYCHIEU <= '2024-12-31' AND vx.TRANGTHAI = N'Đã thanh toán' GROUP BY sc.MAPHIM) SELECT p.MAPHIM, p.TENPHIM, p.THELOAI, tk.TONG_VE FROM PHIM p JOIN ThongKe tk ON p.MAPHIM = tk.MAPHIM WHERE tk.TONG_VE = (SELECT MAX(TONG_VE) FROM ThongKe);
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = \sigma_{NGAYCHIEU \ge '2024-01-01' \wedge NGAYCHIEU \le '2024-12-31'}(SUATCHIEU) \bowtie \sigma_{TRANGTHAI = 'Đã thanh toán'}(VEXEM)
+1. E_{DEM} = \gamma_{MAPHIM, \text{COUNT}(MAVE) \to TONG_VE}(E_1)
+1. E_{NHO_HON} = \pi_{MAPHIM, TONG_VE}(E_{DEM} \bowtie_{TONG_VE < TONG_VE2} \rho_{MAPHIM2, TONG_VE2}(E_{DEM}))
+1. E_{MAX} = E_{DEM} - E_{NHO_HON}
+1. KQ = \pi_{MAPHIM, TENPHIM, THELOAI, TONG_VE}(E_{MAX} \bowtie PHIM)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
 
 ---
 

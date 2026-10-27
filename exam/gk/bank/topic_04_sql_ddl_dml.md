@@ -107,42 +107,7 @@ WHERE CT.MADOT = 'DKT01'
 
 ---
 
-## Bài 05 [SQL-D03] — Chuyển Đổi Phép Chia ĐSQH Sang Double NOT EXISTS Trong T-SQL
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `KHACHHANG(MAKH, HOTEN), TAIKHOAN(SOTK, MAKH, MALTK), LOAITK(MALTK, TENLTK)`
-
-### 1. Đề Bài
-Viết câu truy vấn T-SQL bằng kỹ thuật tương quan hai lần lặp Double NOT EXISTS để tìm các khách hàng (MAKH, HOTEN) đã mở tất cả các loại tài khoản.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT KH.MAKH, KH.HOTEN
-FROM KHACHHANG KH
-WHERE NOT EXISTS (
-    SELECT *
-    FROM LOAITK LTK
-    WHERE NOT EXISTS (
-        SELECT *
-        FROM TAIKHOAN TK
-        WHERE TK.MAKH = KH.MAKH AND TK.MALTK = LTK.MALTK
-    )
-);
-```
-
-**Các bước suy luận tư duy:**
-1. Nguyên lý: 'Không tồn tại loại tài khoản nào mà khách hàng KH đó KHÔNG mở'.
-1. Vòng lặp ngoài duyệt qua từng KHACHHANG.
-1. Vòng lặp giữa duyệt qua từng LOAITK.
-1. Vòng lặp trong kiểm tra sự tồn tại trong TAIKHOAN.
-
-**Barem chấm điểm đề xuất:**
-- `double_not_exists_structure`: 0.50đ
-- `correlation_matching`: 0.50đ
-
----
-
-## Bài 06 [M06-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_DV và DICHVU_KHAM
+## Bài 05 [M06-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_DV và DICHVU_KHAM
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `CHITIET_DV(MAPK, MADV, SOLUONG, DONGIA_THU, KETQUA), DICHVU_KHAM(MADV, TENDV, LOAIDV, DONGIA)`
 
@@ -162,7 +127,7 @@ ALTER TABLE DICHVU_KHAM ADD CONSTRAINT CK_DVKHAM_DONGIA CHECK (DONGIA > 0);
 
 ---
 
-## Bài 07 [M06-Q2B] — Cập Nhật Tăng Lương Bác Sĩ Chuyên Khoa Nội Tổng Quát
+## Bài 06 [M06-Q2B] — Cập Nhật Tăng Lương Bác Sĩ Chuyên Khoa Nội Tổng Quát
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `BACSI(MABS, HOTEN, HOCVI, MAKC, LUONG), CHUYENKHOA(MAKC, TENKHOA, TRUONGKHOA)`
 
@@ -186,7 +151,7 @@ WHERE ck.TENKHOA = N'Nội tổng quát'
 
 ---
 
-## Bài 08 [M07-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên SACH và CHITIET_MUON
+## Bài 07 [M07-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên SACH và CHITIET_MUON
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `SACH(MASACH, TENSACH, TACGIA, NXB, NAMXB, SOLUONGTON), CHITIET_MUON(MAPM, MASACH, NGAYTRA, TIENPHAT)`
 
@@ -206,7 +171,7 @@ ALTER TABLE CHITIET_MUON ADD CONSTRAINT CK_CTMUON_TIENPHAT CHECK (TIENPHAT >= 0)
 
 ---
 
-## Bài 09 [M07-Q2B] — Cập Nhật Gia Hạn Hạn Trả Cho Độc Giả Giảng Viên Tháng 10/2024
+## Bài 08 [M07-Q2B] — Cập Nhật Gia Hạn Hạn Trả Cho Độc Giả Giảng Viên Tháng 10/2024
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `PHIEUMUON(MAPM, NGAYMUON, HANTRA, MADG, MATT, TRANGTHAI), DOCGIA(MADG, HOTEN, NGAYSINH, LOAIDG, MAKV)`
 
@@ -231,7 +196,7 @@ WHERE dg.LOAIDG = N'Giảng viên'
 
 ---
 
-## Bài 10 [M08-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_DH và SANPHAM
+## Bài 09 [M08-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_DH và SANPHAM
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `CHITIET_DH(MADH, MASP, SOLUONG, DONGIA_BAN), SANPHAM(MASP, TENSP, LOAISP, GIANIEMYET, MAGH)`
 
@@ -251,7 +216,7 @@ ALTER TABLE SANPHAM ADD CONSTRAINT CK_SANPHAM_GIANIEMYET CHECK (GIANIEMYET > 0);
 
 ---
 
-## Bài 11 [M08-Q2B] — Cập Nhật Giảm Giá 10% Cho Hàng Gia Dụng Của Gian Hàng Lê Hoàng Nam
+## Bài 10 [M08-Q2B] — Cập Nhật Giảm Giá 10% Cho Hàng Gia Dụng Của Gian Hàng Lê Hoàng Nam
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `SANPHAM(MASP, TENSP, LOAISP, GIANIEMYET, MAGH), GIANHANG(MAGH, TENGH, NGUOIDAIDIEN, THANHPHO)`
 
@@ -275,7 +240,7 @@ WHERE gh.NGUOIDAIDIEN = N'Lê Hoàng Nam'
 
 ---
 
-## Bài 12 [M09-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên THAMGIA_TRAN và TUYENTHU
+## Bài 11 [M09-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên THAMGIA_TRAN và TUYENTHU
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `THAMGIA_TRAN(MATRAN, MADOI, SOVANTHANG, TIENTHUONG, KETQUA), TUYENTHU(MATT, HOTEN, VITRI, MADOI, TIENLUONG)`
 
@@ -295,7 +260,7 @@ ALTER TABLE TUYENTHU ADD CONSTRAINT CK_TUYENTHU_TIENLUONG CHECK (TIENLUONG > 0);
 
 ---
 
-## Bài 13 [M09-Q2B] — Cập Nhật Tăng Thù Lao Cho Tuyển Thủ Đường Giữa Đại Học CNTT
+## Bài 12 [M09-Q2B] — Cập Nhật Tăng Thù Lao Cho Tuyển Thủ Đường Giữa Đại Học CNTT
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `TUYENTHU(MATT, HOTEN, VITRI, MADOI, TIENLUONG), DOITHI(MADOI, TENDOI, MATRUONG, NGUOIQUANLY), TRUONG(MATRUONG, TENTRUONG, THANHPHO)`
 
@@ -320,7 +285,7 @@ WHERE tr.TENTRUONG = N'Đại học CNTT'
 
 ---
 
-## Bài 14 [M10-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên PHUTUNG
+## Bài 13 [M10-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên PHUTUNG
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `PHUTUNG(MAPT, TENPT, LOAIPT, DONGIA, SOLUONGTON)`
 
@@ -340,7 +305,7 @@ ALTER TABLE PHUTUNG ADD CONSTRAINT CK_PHUTUNG_DONGIA CHECK (DONGIA > 0);
 
 ---
 
-## Bài 15 [M10-Q2B] — Cập Nhật Tăng Lương Cho Thợ Máy Gầm Có Phiếu Bảo Dưỡng Tháng 11/2024
+## Bài 14 [M10-Q2B] — Cập Nhật Tăng Lương Cho Thợ Máy Gầm Có Phiếu Bảo Dưỡng Tháng 11/2024
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `THO(MATHO, HOTEN, CHUYENMON, LUONG_CB), PHIEU_BD(MAPHIEU, NGAYLAP, BIENSO, MATHO, TONGTIEN, TRANGTHAI)`
 
@@ -368,79 +333,111 @@ WHERE t.CHUYENMON = N'Máy gầm'
 
 ---
 
-## Bài 16 [SQL-D27] — T-SQL DML Ràng Buộc Hệ Thống Tuyến Xe Buýt (Bài 27)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `TUYEN_XE, METRO`
+## Bài 15 [M14-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên GIAINGAN Và DETAI
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `GIAINGAN(MAGN, MADT, NGAYGN, SOTIEN_GN, NOIDUNG), DETAI(MADT, TENDT, CAP_QUANLY, KINHPHI, NGAYBD, NGAYKT, CHUNHIEM_DT)`
 
 ### 1. Đề Bài
-Tạo ràng buộc toàn vẹn kiểm tra tuyến xe buýt và metro.
+Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra số tiền giải ngân (SOTIEN_GN > 0) trong bảng GIAINGAN và ngày kết thúc đề tài phải sau ngày bắt đầu (NGAYKT > NGAYBD) trong bảng DETAI, cả hai thuộc tính không được NULL.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Câu lệnh SQL tương đương:**
 ```sql
--- DRAFT solution for SQL-D27
+ALTER TABLE GIAINGAN ADD CONSTRAINT CK_GIAINGAN_SOTIEN CHECK (SOTIEN_GN > 0);
+ALTER TABLE DETAI ADD CONSTRAINT CK_DETAI_NGAY CHECK (NGAYKT > NGAYBD);
 ```
 
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
 
 ---
 
-## Bài 17 [SQL-D28] — T-SQL Cập Nhật Trạng Thái Chuyến Xe Buýt (Bài 28)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `CHUYEN_XE`
+## Bài 16 [M13-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHUYEN_DI
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `CHUYEN_DI(MACHUYEN, MAPT, NGAYCHAY, GIOXUATPHAT, SOLUONG_KHACH, DOANHTHU)`
 
 ### 1. Đề Bài
-Cập nhật trạng thái chuyến xe buýt.
+Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra số lượng hành khách (SOLUONG_KHACH >= 0) và doanh thu (DOANHTHU >= 0) trong bảng CHUYEN_DI, cả hai thuộc tính không được NULL.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Câu lệnh SQL tương đương:**
 ```sql
--- DRAFT solution for SQL-D28
+ALTER TABLE CHUYEN_DI ADD CONSTRAINT CK_CHUYENDI_KHACH CHECK (SOLUONG_KHACH >= 0);
+ALTER TABLE CHUYEN_DI ADD CONSTRAINT CK_CHUYENDI_DOANHTHU CHECK (DOANHTHU >= 0);
 ```
 
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
 
 ---
 
-## Bài 18 [SQL-D25] — T-SQL DML Ràng Buộc Trại Cứu Hộ Động Vật (Bài 25)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `DONG_VAT, CHUONG_TRAI`
+## Bài 17 [M13-Q2B] — Cập Nhật Tăng Lương Tài Xế Tuyến Xe Buýt Điện VinBus
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `TUYEN_XE(MATUYEN, TENTUYEN, LOAI_HINH, CULY_KM, GIAVE_LUOT), PHUONGTIEN(MAPT, BIENSO, SOGHE, NAMSX, MATUYEN), TAIXE(MATX, HOTEN, HANG_GPLX, LUONG_CB, MAPT)`
 
 ### 1. Đề Bài
-Tạo ràng buộc toàn vẹn kiểm tra thông tin chuồng trại và động vật.
+Viết câu lệnh SQL cập nhật tăng 10% mức lương cơ bản (LUONG_CB = LUONG_CB * 1.10) cho các tài xế điều khiển phương tiện đang phục vụ trên tuyến xe có loại hình là 'Xe buýt điện VinBus'.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Câu lệnh SQL tương đương:**
 ```sql
--- DRAFT solution for SQL-D25
+UPDATE TAIXE
+SET LUONG_CB = LUONG_CB * 1.10
+FROM TAIXE tx
+JOIN PHUONGTIEN pt ON tx.MAPT = pt.MAPT
+JOIN TUYEN_XE tx_route ON pt.MATUYEN = tx_route.MATUYEN
+WHERE tx_route.LOAI_HINH = N'Xe buýt điện VinBus';
 ```
 
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
 
 ---
 
-## Bài 19 [SQL-D26] — T-SQL Cập Nhật Khẩu Phần Ăn Trại Cứu Hộ (Bài 26)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `KHAU_PHAN`
+## Bài 18 [M15-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_CS Và DONGVAT
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `CHITIET_CS(MACS, MADV, MANV, NGAYCS, CHIPHI_CS, GHI_CHU), DONGVAT(MADV, MALOAI, GIOITINH, CANNANG_KG, TINHTRANG_SK, MAKHU)`
 
 ### 1. Đề Bài
-Cập nhật khẩu phần ăn động vật.
+Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra chi phí chăm sóc (CHIPHI_CS >= 0) trong bảng CHITIET_CS và cân nặng cá thể động vật (CANNANG_KG > 0) trong bảng DONGVAT, cả hai thuộc tính không được NULL.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Câu lệnh SQL tương đương:**
 ```sql
--- DRAFT solution for SQL-D26
+ALTER TABLE CHITIET_CS ADD CONSTRAINT CK_CHITIETCS_CHIPHI CHECK (CHIPHI_CS >= 0);
+ALTER TABLE DONGVAT ADD CONSTRAINT CK_DONGVAT_CANNANG CHECK (CANNANG_KG > 0);
 ```
 
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
+
+---
+
+## Bài 19 [M15-Q2B] — Cập Nhật Tăng Lương Bác Sĩ Thú Y Khu Cứu Hộ Thú Lớn
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `KHU_BAOTON(MAKHU, TENKHU, DIENTICH_HA, NGUOI_PHUTRACH), NHANVIEN(MANV, HOTEN, CHUYENMON, LUONG, MAKHU)`
+
+### 1. Đề Bài
+Viết câu lệnh SQL cập nhật tăng 10% mức lương (LUONG = LUONG * 1.10) cho các nhân viên có chuyên môn là 'Bác sĩ thú y' công tác tại phân khu có tên là 'Khu Cứu Hộ Thú Lớn'.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh SQL tương đương:**
+```sql
+UPDATE NHANVIEN
+SET LUONG = LUONG * 1.10
+FROM NHANVIEN nv
+JOIN KHU_BAOTON kb ON nv.MAKHU = kb.MAKHU
+WHERE kb.TENKHU = N'Khu Cứu Hộ Thú Lớn'
+  AND nv.CHUYENMON = N'Bác sĩ thú y';
+```
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
 
 ---
 
@@ -489,75 +486,72 @@ WHERE kv.TENKV = N'Khu vực Trung tâm'
 
 ---
 
-## Bài 22 [SQL-D01] — Tạo Bảng Với Khóa Ngoại Kép & Ràng Buộc CHECK
-- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `CTPX(MAPX, MALO, SOLIEUXUAT)`
+## Bài 22 [M12-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên VEXEM
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `VEXEM(MAVE, MASC, MAKH, SOGHE, GIAVE_THUC, TRANGTHAI)`
 
 ### 1. Đề Bài
-Viết lệnh T-SQL CREATE TABLE tạo bảng CTPX với PK kép và CHECK số lượng > 0.
+Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra giá vé thực tế thanh toán (GIAVE_THUC > 0) và trạng thái vé (TRANGTHAI IN ('Đã thanh toán', 'Đã hủy', 'Đang giữ chỗ')) trong bảng VEXEM, cả hai thuộc tính không được NULL.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Câu lệnh SQL tương đương:**
 ```sql
-CREATE TABLE CTPX (MAPX VARCHAR(10), MALO VARCHAR(10), SOLIEUXUAT INT CHECK(SOLIEUXUAT > 0), PRIMARY KEY(MAPX, MALO));
+ALTER TABLE VEXEM ADD CONSTRAINT CK_VEXEM_GIAVE CHECK (GIAVE_THUC > 0);
+ALTER TABLE VEXEM ADD CONSTRAINT CK_VEXEM_TRANGTHAI CHECK (TRANGTHAI IN (N'Đã thanh toán', N'Đã hủy', N'Đang giữ chỗ'));
 ```
 
-**Các bước suy luận tư duy:**
-1. Cú pháp T-SQL
-1. Mệnh đề WHERE lọc dữ liệu
-1. Kiểm tra ràng buộc.
-
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
 
 ---
 
-## Bài 23 [SQL-D23] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 23)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
+## Bài 23 [M12-Q2B] — Cập Nhật Giảm Giá 10% Vé Chuẩn Phim Hoạt Hình Tháng 12/2024
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `PHIM(MAPHIM, TENPHIM, THELOAI, THOILUONG, DAODIEN, NAMSX), SUATCHIEU(MASC, MAPHIM, MAPC, NGAYCHIEU, GIOCHIEU, GIAVE_CHUAN)`
 
 ### 1. Đề Bài
-Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.
+Viết câu lệnh SQL cập nhật giảm giá 10% giá vé chuẩn (GIAVE_CHUAN = GIAVE_CHUAN * 0.90) cho các suất chiếu của các bộ phim thuộc thể loại là 'Hoạt hình' có ngày chiếu trong tháng 12 năm 2024.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Câu lệnh SQL tương đương:**
 ```sql
-UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';
+UPDATE SUATCHIEU
+SET GIAVE_CHUAN = GIAVE_CHUAN * 0.90
+FROM SUATCHIEU sc
+JOIN PHIM p ON sc.MAPHIM = p.MAPHIM
+WHERE p.THELOAI = N'Hoạt hình'
+  AND sc.NGAYCHIEU >= '2024-12-01'
+  AND sc.NGAYCHIEU <= '2024-12-31';
 ```
 
-**Các bước suy luận tư duy:**
-1. Xác định bảng
-1. Viết cú pháp T-SQL
-1. Kiểm thử logic.
-
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
 
 ---
 
-## Bài 24 [SQL-D24] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 24)
-- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
+## Bài 24 [M14-Q2B] — Cập Nhật Tăng Lương Giảng Viên Tiến Sĩ Viện Công Nghệ Thông Tin
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `KHOA_VIEN(MAKV, TENKV, DIENTHOAI, TRUONGKHOA), GIANGVIEN(MAGV, HOTEN, HOCHAM, HOCVI, LUONG, MAKV)`
 
 ### 1. Đề Bài
-Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.
+Viết câu lệnh SQL cập nhật tăng 15% mức lương (LUONG = LUONG * 1.15) cho các giảng viên có học vị là 'Tiến sĩ' công tác tại khoa viện có tên là 'Viện Công Nghệ Thông Tin'.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Câu lệnh SQL tương đương:**
 ```sql
-ALTER TABLE BANG_24 ADD CONSTRAINT CK_BANG_24 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));
+UPDATE GIANGVIEN
+SET LUONG = LUONG * 1.15
+FROM GIANGVIEN gv
+JOIN KHOA_VIEN kv ON gv.MAKV = kv.MAKV
+WHERE kv.TENKV = N'Viện Công Nghệ Thông Tin'
+  AND gv.HOCVI = N'Tiến sĩ';
 ```
 
-**Các bước suy luận tư duy:**
-1. Xác định bảng
-1. Viết cú pháp T-SQL
-1. Kiểm thử logic.
-
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
 
 ---
 

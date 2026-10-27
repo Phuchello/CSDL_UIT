@@ -14,9 +14,9 @@ Module này cung cấp học liệu ôn tập toàn diện cho sinh viên ôn th
    - Chuyên đề 4: [Transact-SQL DDL/DML & chuyển đổi ĐSQH](bank/topic_04_sql_ddl_dml.md) (30 bài)
 
 2. **Tiêu chuẩn kiểm chứng học thuật (Academic Verification Status)**:
-   - **EXECUTION_VERIFIED (Chuẩn Vàng):** 99 bài (11/15 đề thi mô phỏng đã kiểm chứng 100% trên Microsoft SQL Server 2025).
-   - **SEMANTICALLY_REVIEWED (Đã rà soát học thuật):** 21 bài.
-   - **DRAFT / PENDING REMEDIATION (Bản thảo đang tái cấu trúc):** 53 bài.
+   - **EXECUTION_VERIFIED (Chuẩn Vàng):** 135 bài (15/15 đề thi mô phỏng đã kiểm chứng 100% trên Microsoft SQL Server 2025).
+   - **SEMANTICALLY_REVIEWED (Đã rà soát học thuật):** 10 bài.
+   - **DRAFT / PENDING REMEDIATION (Bản thảo đang tái cấu trúc):** 28 bài.
 
 3. **15 Đề thi mô phỏng 75 phút chuẩn hóa**:
    - Mỗi đề đúng 10.0 điểm, 75 phút tự luận, có đề bài riêng không lộ đáp án và hướng dẫn chấm chi tiết kèm barem điểm từng ý.

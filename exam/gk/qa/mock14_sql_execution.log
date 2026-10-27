@@ -1,0 +1,51 @@
+﻿Changed database context to 'master'.
+Changed database context to 'Mock14_Research_DB'.
+============================================================
+=== MOCK-14: CREATING TABLES WITH INTEGRITY CONSTRAINTS   ===
+============================================================
+------------------------------------------------------------
+=== TEST 1: QUESTION 2.1A CHECK & NOT NULL INTEGRITY     ===
+------------------------------------------------------------
+  [PASS] Test 1A: CK_GIAINGAN_SOTIEN correctly blocked zero SOTIEN_GN.
+  [PASS] Test 1B: CK_DETAI_NGAY correctly blocked NGAYKT <= NGAYBD.
+  [PASS] Test 1C: NOT NULL policy correctly rejected NULL SOTIEN_GN (Error 515).
+------------------------------------------------------------
+=== SEEDING COMPREHENSIVE BENCHMARK DATASET               ===
+------------------------------------------------------------
+------------------------------------------------------------
+=== TEST 2: QUESTION 2.1B UPDATE QUERY                   ===
+------------------------------------------------------------
+  [PASS] Test 2: Salaries verified: GV01=28.75m (+15%), GV02=25.3m (+15%), others unchanged.
+------------------------------------------------------------
+=== TEST 3: QUESTION 2.2A SELECTION QUERY                ===
+------------------------------------------------------------
+  [PASS] Test 3: Selection returned exactly 2 State-level projects >= 1 billion (DT01, DT02).
+------------------------------------------------------------
+=== TEST 4: QUESTION 2.2B JOIN QUERY                     ===
+------------------------------------------------------------
+  [PASS] Test 4: Join returned exactly 6 publications from GV01 projects (SP01..SP06).
+------------------------------------------------------------
+=== TEST 5: QUESTION 2.2C OUTER JOIN QUERY               ===
+------------------------------------------------------------
+  [PASS] Test 5: Outer join preserved KV04 and GV02/GV03 with NULL project info (total 8 rows, 3 NULLs).
+------------------------------------------------------------
+=== TEST 6: QUESTION 2.2D GROUPING & AGGREGATE           ===
+------------------------------------------------------------
+  [PASS] Test 6: Grouping SUM verified: DT01=900m, DT02=600m disbursed in 2024.
+------------------------------------------------------------
+=== TEST 7: QUESTION 2.2E RELATIONAL DIVISION            ===
+------------------------------------------------------------
+Warning: Null value is eliminated by an aggregate or other SET operation.
+  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (GV01, GV02).
+------------------------------------------------------------
+=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
+------------------------------------------------------------
+Warning: Null value is eliminated by an aggregate or other SET operation.
+  [PASS] Test 8: Empty target S=Ø verified with EXCEPT set comparison: RA, NOT EXISTS and HAVING COUNT identical (5 researchers).
+------------------------------------------------------------
+=== TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING           ===
+------------------------------------------------------------
+  [PASS] Test 9: Extreme tie-breaking verified: DT01 (3 Q1) and DT02 (3 Q1) preserved; others excluded.
+------------------------------------------------------------
+=== ALL 9 MOCK-14 VERIFICATION SUITES PASSED WITH ASSERTIONS ===
+------------------------------------------------------------

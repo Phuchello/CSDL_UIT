@@ -68,7 +68,36 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 03 [ERD-001] — Thiết kế ERD & Ánh xạ Schema: Quản lý Cung ứng & Tiêm chủng Vắc-xin
+## Bài 03 [M14-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Đề Tài NCKH Trọng Điểm
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `ERD: KHOA_VIEN, GIANGVIEN, DETAI, THAMGIA_DT, SANPHAM_KH, GIAINGAN`
+
+### 1. Đề Bài
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Đề tài NCKH Trọng điểm gồm các thực thể: KHOA_VIEN, GIANGVIEN, DETAI, SANPHAM_KH, GIAINGAN và mối kết hợp THAMGIA_DT.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- {'name': 'KHOA_VIEN', 'pk': 'MAKV', 'attributes': ['MAKV', 'TENKV', 'DIENTHOAI', 'TRUONGKHOA'], 'description': 'Khoa viện nghiên cứu chuyên ngành.'}
+- {'name': 'GIANGVIEN', 'pk': 'MAGV', 'attributes': ['MAGV', 'HOTEN', 'HOCHAM', 'HOCVI', 'LUONG', 'MAKV'], 'description': 'Giảng viên / Nhà nghiên cứu.'}
+- {'name': 'DETAI', 'pk': 'MADT', 'attributes': ['MADT', 'TENDT', 'CAP_QUANLY', 'KINHPHI', 'NGAYBD', 'NGAYKT', 'CHUNHIEM_DT'], 'description': 'Đề tài nghiên cứu khoa học.'}
+- {'name': 'SANPHAM_KH', 'pk': 'MASP', 'attributes': ['MASP', 'TENSP', 'LOAISP', 'XEP_HANG', 'MADT'], 'description': 'Sản phẩm khoa học công bố quốc tế.'}
+- {'name': 'GIAINGAN', 'pk': 'MAGN', 'attributes': ['MAGN', 'MADT', 'NGAYGN', 'SOTIEN_GN', 'NOIDUNG'], 'description': 'Đợt giải ngân kinh phí.'}
+**Lược đồ quan hệ chuyển đổi:**
+- {'table': 'KHOA_VIEN', 'pk': ['MAKV'], 'fk': []}
+- {'table': 'GIANGVIEN', 'pk': ['MAGV'], 'fk': [{'column': 'MAKV', 'ref_table': 'KHOA_VIEN', 'ref_column': 'MAKV'}]}
+- {'table': 'DETAI', 'pk': ['MADT'], 'fk': [{'column': 'CHUNHIEM_DT', 'ref_table': 'GIANGVIEN', 'ref_column': 'MAGV'}]}
+- {'table': 'THAMGIA_DT', 'pk': ['MADT', 'MAGV'], 'fk': [{'column': 'MADT', 'ref_table': 'DETAI', 'ref_column': 'MADT'}, {'column': 'MAGV', 'ref_table': 'GIANGVIEN', 'ref_column': 'MAGV'}]}
+- {'table': 'SANPHAM_KH', 'pk': ['MASP'], 'fk': [{'column': 'MADT', 'ref_table': 'DETAI', 'ref_column': 'MADT'}]}
+- {'table': 'GIAINGAN', 'pk': ['MAGN'], 'fk': [{'column': 'MADT', 'ref_table': 'DETAI', 'ref_column': 'MADT'}]}
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.50đ
+- `logic`: 1.00đ
+- `intermediate_steps`: 1.00đ
+
+---
+
+## Bài 04 [ERD-001] — Thiết kế ERD & Ánh xạ Schema: Quản lý Cung ứng & Tiêm chủng Vắc-xin
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `TTYT, LOVACXIN, NHACC, DIEMTIEM, NHANVIEN, PHANPHOI`
 
@@ -93,7 +122,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 04 [M06-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Phòng Khám Đa Khoa & Hồ Sơ Khám Bệnh
+## Bài 05 [M06-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Phòng Khám Đa Khoa & Hồ Sơ Khám Bệnh
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `ERD: CHUYENKHOA, BACSI, BENHNHAN, DICHVU_KHAM, PHIEUKHAM, CHITIET_DV`
 
@@ -122,7 +151,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 05 [M07-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Thư Viện Đại Học & Mượn Trả Sách
+## Bài 06 [M07-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Thư Viện Đại Học & Mượn Trả Sách
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `ERD: KHOAVIEN, DOCGIA, SACH, THUTHU, PHIEUMUON, CHITIET_MUON`
 
@@ -151,7 +180,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 06 [M08-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Sàn Thương Mại Điện Tử & Đơn Hàng
+## Bài 07 [M08-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Sàn Thương Mại Điện Tử & Đơn Hàng
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `ERD: GIANHANG, SANPHAM, KHACHHANG, DONHANG, VANCHUYEN, CHITIET_DH`
 
@@ -180,7 +209,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 07 [M09-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên
+## Bài 08 [M09-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `ERD: TRUONG, DOITHI, TUYENTHU, TRANDAU, NHATAITRO, THAMGIA_TRAN`
 
@@ -209,7 +238,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 08 [M10-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Gara Ô Tô & Lịch Trình Bảo Dưỡng
+## Bài 09 [M10-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Gara Ô Tô & Lịch Trình Bảo Dưỡng
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `ERD: KHACHHANG, XE, THO, PHUTUNG, PHIEU_BD, CHITIET_BD`
 
@@ -238,7 +267,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 09 [M11-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Chuỗi Cà Phê Nhượng Quyền
+## Bài 10 [M11-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Chuỗi Cà Phê Nhượng Quyền
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 20 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `ERD: KHUVUC, CUAHANG, NHANVIEN, NGUYENLIEU, PHIEUXUAT, CHITIET_PX`
 
@@ -267,103 +296,92 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 10 [ERD-012] — Thiết kế ERD & Ánh xạ Schema: Quản lý Rạp Chiếu Phim & Đặt Vé Trực Tuyến
+## Bài 11 [M12-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Cụm Rạp Chiếu Phim & Đặt Vé
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `PHIM, RAP, PHONG_CHIEU, SUAT_CHIEU, VE_XEM`
+- **Lược đồ tham chiếu:** `ERD: CUMRAP, PHONGCHIEU, PHIM, SUATCHIEU, KHACHHANG, VEXEM`
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Rạp Chiếu Phim & Đặt Vé Trực Tuyến', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Cụm Rạp Chiếu Phim & Đặt Vé gồm các thực thể: CUMRAP, PHONGCHIEU, PHIM, SUATCHIEU, KHACHHANG, VEXEM.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Rạp Chiếu Phim & Đặt Vé Trực Tuyến
+- {'name': 'CUMRAP', 'pk': 'MACR', 'attributes': ['MACR', 'TENCR', 'DIACHI', 'THANHPHO'], 'description': 'Cụm rạp chiếu phim.'}
+- {'name': 'PHONGCHIEU', 'pk': 'MAPC', 'attributes': ['MAPC', 'TENPHONG', 'SOGHETOI_DA', 'LOAIPHONG', 'MACR'], 'description': 'Phòng chiếu phim trực thuộc cụm rạp.'}
+- {'name': 'PHIM', 'pk': 'MAPHIM', 'attributes': ['MAPHIM', 'TENPHIM', 'THELOAI', 'THOILUONG', 'DAODIEN', 'NAMSX'], 'description': 'Danh mục phim phát hành.'}
+- {'name': 'SUATCHIEU', 'pk': 'MASC', 'attributes': ['MASC', 'MAPHIM', 'MAPC', 'NGAYCHIEU', 'GIOCHIEU', 'GIAVE_CHUAN'], 'description': 'Suất chiếu phim cụ thể.'}
+- {'name': 'KHACHHANG', 'pk': 'MAKH', 'attributes': ['MAKH', 'HOTEN', 'SDT', 'EMAIL', 'LOAITHANHVIEN'], 'description': 'Thành viên rạp đặt vé.'}
+- {'name': 'VEXEM', 'pk': 'MAVE', 'attributes': ['MAVE', 'MASC', 'MAKH', 'SOGHE', 'GIAVE_THUC', 'TRANGTHAI'], 'description': 'Vé xem phim đã phát hành.'}
 **Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+- {'table': 'CUMRAP', 'pk': ['MACR'], 'fk': []}
+- {'table': 'PHONGCHIEU', 'pk': ['MAPC'], 'fk': [{'column': 'MACR', 'ref_table': 'CUMRAP', 'ref_column': 'MACR'}]}
+- {'table': 'PHIM', 'pk': ['MAPHIM'], 'fk': []}
+- {'table': 'SUATCHIEU', 'pk': ['MASC'], 'fk': [{'column': 'MAPHIM', 'ref_table': 'PHIM', 'ref_column': 'MAPHIM'}, {'column': 'MAPC', 'ref_table': 'PHONGCHIEU', 'ref_column': 'MAPC'}]}
+- {'table': 'KHACHHANG', 'pk': ['MAKH'], 'fk': []}
+- {'table': 'VEXEM', 'pk': ['MAVE'], 'fk': [{'column': 'MASC', 'ref_table': 'SUATCHIEU', 'ref_column': 'MASC'}, {'column': 'MAKH', 'ref_table': 'KHACHHANG', 'ref_column': 'MAKH'}]}
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `syntax`: 0.50đ
+- `logic`: 1.00đ
+- `intermediate_steps`: 1.00đ
 
 ---
 
-## Bài 11 [ERD-013] — Thiết kế ERD & Ánh xạ Schema: Quản lý Tuyến Xe Buýt & Metro Đô Thị
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `TUYEN_XE, TRAM_DUNG, XE_BUYT, TAI_XE, VE_XE`
+## Bài 12 [M13-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Tuyến Xe Buýt & Metro TP.HCM
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 20 phút | **Điểm số:** 2.0 điểm
+- **Lược đồ tham chiếu:** `ERD: TUYEN_XE, TRAM_DUNG, LOTRINH, PHUONGTIEN, TAIXE, CHUYEN_DI`
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Tuyến Xe Buýt & Metro Đô Thị', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Tuyến Xe Buýt & Metro gồm các thực thể: TUYEN_XE, TRAM_DUNG, PHUONGTIEN, TAIXE, CHUYEN_DI và mối kết hợp LOTRINH.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Tuyến Xe Buýt & Metro Đô Thị
+- {'name': 'TUYEN_XE', 'pk': 'MATUYEN', 'attributes': ['MATUYEN', 'TENTUYEN', 'LOAI_HINH', 'CULY_KM', 'GIAVE_LUOT'], 'description': 'Tuyến vận chuyển hành khách.'}
+- {'name': 'TRAM_DUNG', 'pk': 'MATRAM', 'attributes': ['MATRAM', 'TENTRAM', 'DIACHI', 'QUAN_HUYEN'], 'description': 'Trạm dừng đón trả khách.'}
+- {'name': 'PHUONGTIEN', 'pk': 'MAPT', 'attributes': ['MAPT', 'BIENSO', 'SOGHE', 'NAMSX', 'MATUYEN'], 'description': 'Phương tiện xe buýt / tàu metro.'}
+- {'name': 'TAIXE', 'pk': 'MATX', 'attributes': ['MATX', 'HOTEN', 'HANG_GPLX', 'LUONG_CB', 'MAPT'], 'description': 'Tài xế điều khiển phương tiện.'}
+- {'name': 'CHUYEN_DI', 'pk': 'MACHUYEN', 'attributes': ['MACHUYEN', 'MAPT', 'NGAYCHAY', 'GIOXUATPHAT', 'SOLUONG_KHACH', 'DOANHTHU'], 'description': 'Chuyến xe vận hành thực tế.'}
 **Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+- {'table': 'TUYEN_XE', 'pk': ['MATUYEN'], 'fk': []}
+- {'table': 'TRAM_DUNG', 'pk': ['MATRAM'], 'fk': []}
+- {'table': 'LOTRINH', 'pk': ['MATUYEN', 'MATRAM'], 'fk': [{'column': 'MATUYEN', 'ref_table': 'TUYEN_XE', 'ref_column': 'MATUYEN'}, {'column': 'MATRAM', 'ref_table': 'TRAM_DUNG', 'ref_column': 'MATRAM'}]}
+- {'table': 'PHUONGTIEN', 'pk': ['MAPT'], 'fk': [{'column': 'MATUYEN', 'ref_table': 'TUYEN_XE', 'ref_column': 'MATUYEN'}]}
+- {'table': 'TAIXE', 'pk': ['MATX'], 'fk': [{'column': 'MAPT', 'ref_table': 'PHUONGTIEN', 'ref_column': 'MAPT'}]}
+- {'table': 'CHUYEN_DI', 'pk': ['MACHUYEN'], 'fk': [{'column': 'MAPT', 'ref_table': 'PHUONGTIEN', 'ref_column': 'MAPT'}]}
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
+- `syntax`: 0.40đ
+- `logic`: 0.80đ
+- `intermediate_steps`: 0.80đ
 
 ---
 
-## Bài 12 [ERD-014] — Thiết kế ERD & Ánh xạ Schema: Quản lý Đề Tài Nghiên Cứu Khoa Học Sinh Viên
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `GIANG_VIEN, SINH_VIEN, DE_TAI, HOI_DONG, BAI_BAO`
+## Bài 13 [M15-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Trại Cứu Hộ Động Vật Hoang Dã
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 20 phút | **Điểm số:** 2.0 điểm
+- **Lược đồ tham chiếu:** `ERD: KHU_BAOTON, LOAI_DONGVAT, DONGVAT, NHANVIEN, CHITIET_CS, DOT_TAITHA`
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Đề Tài Nghiên Cứu Khoa Học Sinh Viên', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Trại Cứu Hộ Động Vật Hoang Dã gồm các thực thể: KHU_BAOTON, LOAI_DONGVAT, DONGVAT, NHANVIEN, CHITIET_CS, DOT_TAITHA.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Đề Tài Nghiên Cứu Khoa Học Sinh Viên
+- {'name': 'KHU_BAOTON', 'pk': 'MAKHU', 'attributes': ['MAKHU', 'TENKHU', 'DIENTICH_HA', 'NGUOI_PHUTRACH'], 'description': 'Phân khu bảo tồn chức năng.'}
+- {'name': 'LOAI_DONGVAT', 'pk': 'MALOAI', 'attributes': ['MALOAI', 'TENLOAI', 'TEN_KHOAHOC', 'MUC_NGUYCAP'], 'description': 'Danh mục loài động vật quý hiếm.'}
+- {'name': 'DONGVAT', 'pk': 'MADV', 'attributes': ['MADV', 'MALOAI', 'GIOITINH', 'CANNANG_KG', 'TINHTRANG_SK', 'MAKHU'], 'description': 'Cá thể động vật cứu hộ.'}
+- {'name': 'NHANVIEN', 'pk': 'MANV', 'attributes': ['MANV', 'HOTEN', 'CHUYENMON', 'LUONG', 'MAKHU'], 'description': 'Nhân viên bảo tồn và thú y.'}
+- {'name': 'CHITIET_CS', 'pk': 'MACS', 'attributes': ['MACS', 'MADV', 'MANV', 'NGAYCS', 'CHIPHI_CS', 'GHI_CHU'], 'description': 'Nhật ký chăm sóc điều trị.'}
+- {'name': 'DOT_TAITHA', 'pk': 'MADOT', 'attributes': ['MADOT', 'MADV', 'NGAYTHA', 'DIADIEM_THA', 'TRANGTHAI'], 'description': 'Đợt tái thả về tự nhiên.'}
 **Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+- {'table': 'KHU_BAOTON', 'pk': ['MAKHU'], 'fk': []}
+- {'table': 'LOAI_DONGVAT', 'pk': ['MALOAI'], 'fk': []}
+- {'table': 'DONGVAT', 'pk': ['MADV'], 'fk': [{'column': 'MALOAI', 'ref_table': 'LOAI_DONGVAT', 'ref_column': 'MALOAI'}, {'column': 'MAKHU', 'ref_table': 'KHU_BAOTON', 'ref_column': 'MAKHU'}]}
+- {'table': 'NHANVIEN', 'pk': ['MANV'], 'fk': [{'column': 'MAKHU', 'ref_table': 'KHU_BAOTON', 'ref_column': 'MAKHU'}]}
+- {'table': 'CHITIET_CS', 'pk': ['MACS'], 'fk': [{'column': 'MADV', 'ref_table': 'DONGVAT', 'ref_column': 'MADV'}, {'column': 'MANV', 'ref_table': 'NHANVIEN', 'ref_column': 'MANV'}]}
+- {'table': 'DOT_TAITHA', 'pk': ['MADOT'], 'fk': [{'column': 'MADV', 'ref_table': 'DONGVAT', 'ref_column': 'MADV'}]}
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
-
----
-
-## Bài 13 [ERD-015] — Thiết kế ERD & Ánh xạ Schema: Quản lý Trại Cứu Hộ Động Vật Hoang Dã
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `KHU_VUC, LOAI_DONGVAT, DONG_VAT, NHANVIEN_CS, LICH_KHAM`
-
-### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Trại Cứu Hộ Động Vật Hoang Dã', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Trại Cứu Hộ Động Vật Hoang Dã
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
-
-**Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
+- `syntax`: 0.40đ
+- `logic`: 0.80đ
+- `intermediate_steps`: 0.80đ
 
 ---
 
