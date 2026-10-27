@@ -248,55 +248,55 @@
           "num": "1",
           "sub": "",
           "points": 2.5,
-          "problem_id": "ERD-004"
+          "problem_id": "M04-Q1"
         },
         {
           "num": "2",
           "sub": "1a",
           "points": 0.75,
-          "problem_id": "SQL-D07"
+          "problem_id": "M04-Q2A"
         },
         {
           "num": "2",
           "sub": "1b",
           "points": 0.75,
-          "problem_id": "SQL-D08"
+          "problem_id": "M04-Q2B"
         },
         {
           "num": "2",
           "sub": "2a",
           "points": 1.0,
-          "problem_id": "RA-B10"
+          "problem_id": "M04-Q2C1"
         },
         {
           "num": "2",
           "sub": "2b",
           "points": 1.0,
-          "problem_id": "RA-B11"
+          "problem_id": "M04-Q2C2"
         },
         {
           "num": "2",
           "sub": "2c",
           "points": 1.0,
-          "problem_id": "RA-B12"
+          "problem_id": "M04-Q2C3"
         },
         {
           "num": "2",
           "sub": "2d",
           "points": 1.0,
-          "problem_id": "RA-D10"
+          "problem_id": "M04-Q2C4"
         },
         {
           "num": "2",
           "sub": "2e",
           "points": 1.0,
-          "problem_id": "RA-D11"
+          "problem_id": "M04-Q2C5"
         },
         {
           "num": "2",
           "sub": "2f",
           "points": 1.0,
-          "problem_id": "RA-D12"
+          "problem_id": "M04-Q2C6"
         }
       ]
     },
@@ -323,55 +323,55 @@
           "num": "1",
           "sub": "",
           "points": 2.0,
-          "problem_id": "ERD-005"
+          "problem_id": "M05-Q1"
         },
         {
           "num": "2",
           "sub": "1a",
           "points": 0.75,
-          "problem_id": "SQL-D09"
+          "problem_id": "M05-Q2A"
         },
         {
           "num": "2",
           "sub": "1b",
           "points": 0.75,
-          "problem_id": "SQL-D10"
+          "problem_id": "M05-Q2B"
         },
         {
           "num": "2",
           "sub": "2a",
           "points": 1.0,
-          "problem_id": "RA-B13"
+          "problem_id": "M05-Q2C1"
         },
         {
           "num": "2",
           "sub": "2b",
           "points": 1.0,
-          "problem_id": "RA-B14"
+          "problem_id": "M05-Q2C2"
         },
         {
           "num": "2",
           "sub": "2c",
           "points": 1.0,
-          "problem_id": "RA-B15"
+          "problem_id": "M05-Q2C3"
         },
         {
           "num": "2",
           "sub": "2d",
           "points": 1.0,
-          "problem_id": "RA-D13"
+          "problem_id": "M05-Q2C4"
         },
         {
           "num": "2",
           "sub": "2e",
           "points": 1.0,
-          "problem_id": "RA-D14"
+          "problem_id": "M05-Q2C5"
         },
         {
           "num": "2",
           "sub": "2f",
           "points": 1.5,
-          "problem_id": "RA-D15"
+          "problem_id": "M05-Q2C6"
         }
       ]
     },

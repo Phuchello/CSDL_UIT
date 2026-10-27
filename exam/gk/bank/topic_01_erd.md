@@ -93,57 +93,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 04 [ERD-004] — Thiết kế ERD & Ánh xạ Schema: Quản lý Trạm Xăng Dầu & Bán Lẻ Nhiên Liệu
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `DOANH_NGHIEP, LOAI_XANG, CUA_HANG, PHIEU_NHAP`
-
-### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Trạm Xăng Dầu & Bán Lẻ Nhiên Liệu', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Trạm Xăng Dầu & Bán Lẻ Nhiên Liệu
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
-
-**Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
-
----
-
-## Bài 05 [ERD-005] — Thiết kế ERD & Ánh xạ Schema: Quản lý Căn Hộ Chung Cư Cho Thuê
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `TOA_NHA, CAN_HO, KHACH_THUE, HOP_DONG, DICH_VU`
-
-### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Căn Hộ Chung Cư Cho Thuê', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Căn Hộ Chung Cư Cho Thuê
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
-
-**Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
-
----
-
-## Bài 06 [ERD-006] — Thiết kế ERD & Ánh xạ Schema: Quản lý Bệnh Viện & Phòng Khám Đa Khoa
+## Bài 04 [ERD-006] — Thiết kế ERD & Ánh xạ Schema: Quản lý Bệnh Viện & Phòng Khám Đa Khoa
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `KHOA, BAC_SI, BENH_NHAN, PHIEU_KHAM, DON_THUOC`
 
@@ -168,7 +118,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 07 [ERD-007] — Thiết kế ERD & Ánh xạ Schema: Quản lý Thư Viện Số UIT & Mượn Trả Sách
+## Bài 05 [ERD-007] — Thiết kế ERD & Ánh xạ Schema: Quản lý Thư Viện Số UIT & Mượn Trả Sách
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `DAU_SACH, CUON_SACH, DOC_GIA, PHIEU_MUON, VI_PHAM`
 
@@ -193,7 +143,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 08 [ERD-008] — Thiết kế ERD & Ánh xạ Schema: Quản lý Sàn Thương Mại Điện Tử & Đơn Hàng
+## Bài 06 [ERD-008] — Thiết kế ERD & Ánh xạ Schema: Quản lý Sàn Thương Mại Điện Tử & Đơn Hàng
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `NGUOI_BAN, SAN_PHAM, NGUOI_MUA, DON_HANG, VAN_CHUYEN`
 
@@ -218,7 +168,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 09 [ERD-009] — Thiết kế ERD & Ánh xạ Schema: Quản lý Giải Đấu Thể Thao Điện Tử (Esports)
+## Bài 07 [ERD-009] — Thiết kế ERD & Ánh xạ Schema: Quản lý Giải Đấu Thể Thao Điện Tử (Esports)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `DOI_THI, TUYEN_THU, GIAI_DAU, TRAN_DAU, KET_QUA`
 
@@ -243,7 +193,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 10 [ERD-010] — Thiết kế ERD & Ánh xạ Schema: Quản lý Gara Sửa Chữa & Bảo Dưỡng Ô Tô
+## Bài 08 [ERD-010] — Thiết kế ERD & Ánh xạ Schema: Quản lý Gara Sửa Chữa & Bảo Dưỡng Ô Tô
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `XE, KHACH_HANG, THO_SUA, PHIEU_SUACHUA, PHU_TUNG`
 
@@ -268,7 +218,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 11 [ERD-011] — Thiết kế ERD & Ánh xạ Schema: Quản lý Chuỗi Cà Phê Nhượng Quyền
+## Bài 09 [ERD-011] — Thiết kế ERD & Ánh xạ Schema: Quản lý Chuỗi Cà Phê Nhượng Quyền
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `CUA_HANG, NHAN_VIEN, THUC_UONG, NGUYEN_LIEU, HOA_DON`
 
@@ -293,7 +243,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 12 [ERD-012] — Thiết kế ERD & Ánh xạ Schema: Quản lý Rạp Chiếu Phim & Đặt Vé Trực Tuyến
+## Bài 10 [ERD-012] — Thiết kế ERD & Ánh xạ Schema: Quản lý Rạp Chiếu Phim & Đặt Vé Trực Tuyến
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `PHIM, RAP, PHONG_CHIEU, SUAT_CHIEU, VE_XEM`
 
@@ -318,7 +268,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 13 [ERD-013] — Thiết kế ERD & Ánh xạ Schema: Quản lý Tuyến Xe Buýt & Metro Đô Thị
+## Bài 11 [ERD-013] — Thiết kế ERD & Ánh xạ Schema: Quản lý Tuyến Xe Buýt & Metro Đô Thị
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `TUYEN_XE, TRAM_DUNG, XE_BUYT, TAI_XE, VE_XE`
 
@@ -343,7 +293,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 14 [ERD-014] — Thiết kế ERD & Ánh xạ Schema: Quản lý Đề Tài Nghiên Cứu Khoa Học Sinh Viên
+## Bài 12 [ERD-014] — Thiết kế ERD & Ánh xạ Schema: Quản lý Đề Tài Nghiên Cứu Khoa Học Sinh Viên
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `GIANG_VIEN, SINH_VIEN, DE_TAI, HOI_DONG, BAI_BAO`
 
@@ -368,7 +318,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 15 [ERD-015] — Thiết kế ERD & Ánh xạ Schema: Quản lý Trại Cứu Hộ Động Vật Hoang Dã
+## Bài 13 [ERD-015] — Thiết kế ERD & Ánh xạ Schema: Quản lý Trại Cứu Hộ Động Vật Hoang Dã
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `KHU_VUC, LOAI_DONGVAT, DONG_VAT, NHANVIEN_CS, LICH_KHAM`
 
@@ -393,7 +343,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 16 [ERD-016] — Thiết kế ERD & Ánh xạ Schema: Quản lý Dự Án Xây Dựng & Nhà Thầu
+## Bài 14 [ERD-016] — Thiết kế ERD & Ánh xạ Schema: Quản lý Dự Án Xây Dựng & Nhà Thầu
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `DU_AN, HANG_MUC, NHA_THAU, CONG_NHAN, TIEN_DO`
 
@@ -418,7 +368,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 17 [ERD-017] — Thiết kế ERD & Ánh xạ Schema: Quản lý Khách Sạn & Đặt Phòng Nghỉ Dưỡng
+## Bài 15 [ERD-017] — Thiết kế ERD & Ánh xạ Schema: Quản lý Khách Sạn & Đặt Phòng Nghỉ Dưỡng
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `LOAI_PHONG, PHONG, KHACH_HANG, PHIEU_DAT, DICH_VU`
 
@@ -443,7 +393,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 18 [ERD-018] — Thiết kế ERD & Ánh xạ Schema: Quản lý Cảng Biển & Xuất Nhập Khẩu Container
+## Bài 16 [ERD-018] — Thiết kế ERD & Ánh xạ Schema: Quản lý Cảng Biển & Xuất Nhập Khẩu Container
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `TAU_HANG, CAU_CANG, CONTAINER, DOANH_NGHIEP, PHIEU_XUATNHAP`
 
@@ -468,7 +418,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 19 [ERD-019] — Thiết kế ERD & Ánh xạ Schema: Quản lý Vườn Ươm & Phân Phối Cây Cảnh
+## Bài 17 [ERD-019] — Thiết kế ERD & Ánh xạ Schema: Quản lý Vườn Ươm & Phân Phối Cây Cảnh
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `LOAI_CAY, CAY_CANH, VUON_UOM, NHA_VUON, DON_DAT`
 
@@ -493,7 +443,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 20 [ERD-020] — Thiết kế ERD & Ánh xạ Schema: Quản lý Thẻ Phòng Tập Gym & Huấn Luyện Viên
+## Bài 18 [ERD-020] — Thiết kế ERD & Ánh xạ Schema: Quản lý Thẻ Phòng Tập Gym & Huấn Luyện Viên
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `GOI_TAP, HOI_VIEN, HLV, BUOI_TAP, DIEM_DANH`
 
@@ -518,7 +468,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 21 [ERD-021] — Thiết kế ERD & Ánh xạ Schema: Quản lý Nhà Hàng Tiệc Cưới & Thực Đơn
+## Bài 19 [ERD-021] — Thiết kế ERD & Ánh xạ Schema: Quản lý Nhà Hàng Tiệc Cưới & Thực Đơn
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `SANH_TIEC, LOAI_TIEC, KHACH_DAT, THUC_DON, MON_AN`
 
@@ -543,7 +493,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 22 [ERD-022] — Thiết kế ERD & Ánh xạ Schema: Quản lý Học Bổng Khuyến Khích Học Tập UIT
+## Bài 20 [ERD-022] — Thiết kế ERD & Ánh xạ Schema: Quản lý Học Bổng Khuyến Khích Học Tập UIT
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `LOAI_HOCBONG, SINH_VIEN, HOC_KY, HO_SO_XET, KET_QUA`
 
@@ -568,7 +518,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 23 [ERD-023] — Thiết kế ERD & Ánh xạ Schema: Quản lý Trạm Sạc Xe Điện Thông Minh
+## Bài 21 [ERD-023] — Thiết kế ERD & Ánh xạ Schema: Quản lý Trạm Sạc Xe Điện Thông Minh
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `TRAM_SAC, TRU_SAC, XE_DIEN, PHIEN_SAC, HOA_DON`
 
@@ -593,7 +543,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 24 [ERD-024] — Thiết kế ERD & Ánh xạ Schema: Quản lý Trung Tâm Ngoại Ngữ & Thi Chứng Chỉ
+## Bài 22 [ERD-024] — Thiết kế ERD & Ánh xạ Schema: Quản lý Trung Tâm Ngoại Ngữ & Thi Chứng Chỉ
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `KHOA_HOC, LOP_HOC, HOC_VIEN, GIANG_VIEN, CHUNG_CHI`
 
@@ -618,7 +568,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 25 [ERD-025] — Thiết kế ERD & Ánh xạ Schema: Quản lý Kho Vận & Robot Tự Hành AGV
+## Bài 23 [ERD-025] — Thiết kế ERD & Ánh xạ Schema: Quản lý Kho Vận & Robot Tự Hành AGV
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `KHO_HANG, KE_HANG, ROBOT, PALLET, DON_XUATKHO`
 
@@ -643,7 +593,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 26 [ERD-026] — Thiết kế ERD & Ánh xạ Schema: Quản lý Hệ Thống Bán Vé Tàu Hỏa Bắc - Nam
+## Bài 24 [ERD-026] — Thiết kế ERD & Ánh xạ Schema: Quản lý Hệ Thống Bán Vé Tàu Hỏa Bắc - Nam
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `GA_TAU, CHUYEN_TAU, TOA_TAU, GHE_NGOI, VE_TAU`
 
@@ -668,7 +618,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 27 [ERD-027] — Thiết kế ERD & Ánh xạ Schema: Quản lý Ngân Hàng Máu & Hiến Máu Nhân Đạo
+## Bài 25 [ERD-027] — Thiết kế ERD & Ánh xạ Schema: Quản lý Ngân Hàng Máu & Hiến Máu Nhân Đạo
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `DIEM_HIENMAU, NGUOI_HIEN, TUI_MAU, BENH_VIEN, PHIEU_LINH`
 
@@ -693,7 +643,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 28 [ERD-028] — Thiết kế ERD & Ánh xạ Schema: Quản lý Sân Bay & Chuyến Bay Nội Địa
+## Bài 26 [ERD-028] — Thiết kế ERD & Ánh xạ Schema: Quản lý Sân Bay & Chuyến Bay Nội Địa
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
 - **Lược đồ tham chiếu:** `MAY_BAY, TUYEN_BAY, CHUYEN_BAY, PHI_CONG, HANH_KHACH`
 
@@ -718,7 +668,7 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 29 [M03-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Cứu Trợ Bão Lũ
+## Bài 27 [M03-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Cứu Trợ Bão Lũ
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
 - **Lược đồ tham chiếu:** `ERD: XA, HO_DAN, NHA_HAOTAM, DOT_CUUTRO, DONG_GOP, PHIEU_NHAN`
 
@@ -738,6 +688,65 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 - {'table': 'DOT_CUUTRO', 'pk': ['MADOT'], 'fk': []}
 - {'table': 'DONG_GOP', 'pk': ['MADG'], 'fk': [{'column': 'MANHT', 'ref_table': 'NHA_HAOTAM', 'ref_column': 'MANHT'}, {'column': 'MADOT', 'ref_table': 'DOT_CUUTRO', 'ref_column': 'MADOT'}]}
 - {'table': 'PHIEU_NHAN', 'pk': ['MAPHIEU'], 'fk': [{'column': 'MAHO', 'ref_table': 'HO_DAN', 'ref_column': 'MAHO'}, {'column': 'MADOT', 'ref_table': 'DOT_CUUTRO', 'ref_column': 'MADOT'}]}
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.40đ
+- `logic`: 0.80đ
+- `intermediate_steps`: 0.80đ
+
+---
+
+## Bài 28 [M04-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Chuỗi Cửa Hàng Xăng Dầu
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `ERD: CUAHANG, NHANVIEN, NHIENLIEU, BE_CHUA, HOADON, CTHD`
+
+### 1. Đề Bài
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Chuỗi Cửa hàng Bán lẻ Xăng dầu gồm các thực thể: CUAHANG, NHANVIEN, NHIENLIEU, BE_CHUA, HOADON cùng các mối kết hợp tương ứng.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- {'name': 'CUAHANG', 'pk': 'MACH', 'attributes': ['MACH', 'TENCH', 'DIACHI', 'QUAN', 'SO_TRU_BOM'], 'description': 'Cửa hàng xăng dầu trực thuộc chuỗi.'}
+- {'name': 'NHANVIEN', 'pk': 'MANV', 'attributes': ['MANV', 'HOTEN', 'NGAYSINH', 'CHUCVU', 'LUONG'], 'description': 'Nhân viên công tác tại cửa hàng.'}
+- {'name': 'NHIENLIEU', 'pk': 'MANL', 'attributes': ['MANL', 'TENNL', 'LOAINL', 'DONVITINH', 'DONGIA'], 'description': 'Mặt hàng xăng dầu phân phối.'}
+- {'name': 'BE_CHUA', 'pk': 'MABE', 'attributes': ['MABE', 'DUNGTICH', 'LUONG_TON'], 'description': 'Bể ngầm chứa nhiên liệu tại cửa hàng.'}
+- {'name': 'HOADON', 'pk': 'MAHD', 'attributes': ['MAHD', 'NGAYHD', 'HINHTHUC_TT'], 'description': 'Hóa đơn xuất bán lẻ xăng dầu.'}
+**Lược đồ quan hệ chuyển đổi:**
+- {'table': 'CUAHANG', 'pk': ['MACH'], 'fk': []}
+- {'table': 'NHANVIEN', 'pk': ['MANV'], 'fk': [{'column': 'MACH', 'ref_table': 'CUAHANG', 'ref_column': 'MACH'}]}
+- {'table': 'NHIENLIEU', 'pk': ['MANL'], 'fk': []}
+- {'table': 'BE_CHUA', 'pk': ['MABE'], 'fk': [{'column': 'MACH', 'ref_table': 'CUAHANG', 'ref_column': 'MACH'}, {'column': 'MANL', 'ref_table': 'NHIENLIEU', 'ref_column': 'MANL'}]}
+- {'table': 'HOADON', 'pk': ['MAHD'], 'fk': [{'column': 'MACH', 'ref_table': 'CUAHANG', 'ref_column': 'MACH'}, {'column': 'MANV', 'ref_table': 'NHANVIEN', 'ref_column': 'MANV'}]}
+- {'table': 'CTHD', 'pk': ['MAHD', 'MANL'], 'fk': [{'column': 'MAHD', 'ref_table': 'HOADON', 'ref_column': 'MAHD'}, {'column': 'MANL', 'ref_table': 'NHIENLIEU', 'ref_column': 'MANL'}]}
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.50đ
+- `logic`: 1.00đ
+- `intermediate_steps`: 1.00đ
+
+---
+
+## Bài 29 [M05-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
+- **Lược đồ tham chiếu:** `ERD: TOANHA, CANHO, KHACHHANG, NHANVIEN, HOPDONG, PHIEUTHU`
+
+### 1. Đề Bài
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Căn hộ Chung cư & Hợp đồng Thuê nhà gồm các thực thể: TOANHA, CANHO, KHACHHANG, NHANVIEN, HOPDONG, PHIEUTHU cùng các mối kết hợp tương ứng.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- {'name': 'TOANHA', 'pk': 'MATN', 'attributes': ['MATN', 'TENTN', 'DIACHI', 'SOTANG'], 'description': 'Tòa nhà / Block chung cư.'}
+- {'name': 'CANHO', 'pk': 'MACH', 'attributes': ['MACH', 'SOPHONG', 'DIENTICH', 'GIATHUE_CHUAN', 'TRANGTHAI'], 'description': 'Căn hộ trong tòa nhà.'}
+- {'name': 'KHACHHANG', 'pk': 'MAKH', 'attributes': ['MAKH', 'HOTEN', 'CCCD', 'SDT', 'LOAIKH'], 'description': 'Khách hàng thuê căn hộ.'}
+- {'name': 'NHANVIEN', 'pk': 'MANV', 'attributes': ['MANV', 'HOTEN', 'PHONGBAN', 'SDT'], 'description': 'Nhân viên môi giới / quản lý.'}
+- {'name': 'HOPDONG', 'pk': 'MAHD', 'attributes': ['MAHD', 'NGAYKY', 'NGAYBD', 'NGAYKT', 'GIATHUE_THUCTE', 'TIENCOC'], 'description': 'Hợp đồng cho thuê căn hộ.'}
+- {'name': 'PHIEUTHU', 'pk': 'SOPHIEU', 'attributes': ['SOPHIEU', 'THANG', 'NAM', 'NGAYTHU', 'SOTIEN'], 'description': 'Phiếu thu tiền thuê hàng tháng.'}
+**Lược đồ quan hệ chuyển đổi:**
+- {'table': 'TOANHA', 'pk': ['MATN'], 'fk': []}
+- {'table': 'CANHO', 'pk': ['MACH'], 'fk': [{'column': 'MATN', 'ref_table': 'TOANHA', 'ref_column': 'MATN'}]}
+- {'table': 'KHACHHANG', 'pk': ['MAKH'], 'fk': []}
+- {'table': 'NHANVIEN', 'pk': ['MANV'], 'fk': []}
+- {'table': 'HOPDONG', 'pk': ['MAHD'], 'fk': [{'column': 'MACH', 'ref_table': 'CANHO', 'ref_column': 'MACH'}, {'column': 'MAKH', 'ref_table': 'KHACHHANG', 'ref_column': 'MAKH'}, {'column': 'MANV', 'ref_table': 'NHANVIEN', 'ref_column': 'MANV'}]}
+- {'table': 'PHIEUTHU', 'pk': ['SOPHIEU'], 'fk': [{'column': 'MAHD', 'ref_table': 'HOPDONG', 'ref_column': 'MAHD'}]}
 
 **Barem chấm điểm đề xuất:**
 - `syntax`: 0.40đ

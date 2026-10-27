@@ -885,72 +885,6 @@
       "verification_level": "DRAFT"
     },
     {
-      "id": "ERD-004",
-      "topic": "ERD_MAPPING",
-      "difficulty": "B",
-      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Trạm Xăng Dầu & Bán Lẻ Nhiên Liệu",
-      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Trạm Xăng Dầu & Bán Lẻ Nhiên Liệu', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
-      "schema": "DOANH_NGHIEP, LOAI_XANG, CUA_HANG, PHIEU_NHAP",
-      "recommended_time_mins": 25,
-      "points": 2.5,
-      "solution": {
-        "erd_entities": [
-          "Thực thể chuẩn hóa cho Quản lý Trạm Xăng Dầu & Bán Lẻ Nhiên Liệu"
-        ],
-        "relationships": [
-          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
-        ],
-        "relational_schema": [
-          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
-        ],
-        "intermediate_steps": [
-          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
-          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
-          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
-          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
-        ]
-      },
-      "rubric": {
-        "erd_design": "1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)",
-        "schema_mapping": "1.00đ (Ánh xạ đúng PK, FK không sót)"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "ERD-005",
-      "topic": "ERD_MAPPING",
-      "difficulty": "B",
-      "title": "Thiết kế ERD & Ánh xạ Schema: Quản lý Căn Hộ Chung Cư Cho Thuê",
-      "prompt": "Đọc ngữ cảnh bài toán 'Quản lý Căn Hộ Chung Cư Cho Thuê', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).",
-      "schema": "TOA_NHA, CAN_HO, KHACH_THUE, HOP_DONG, DICH_VU",
-      "recommended_time_mins": 25,
-      "points": 2.0,
-      "solution": {
-        "erd_entities": [
-          "Thực thể chuẩn hóa cho Quản lý Căn Hộ Chung Cư Cho Thuê"
-        ],
-        "relationships": [
-          "Mối kết hợp 1:N và M:N phân định rõ bản số min-max hai phía"
-        ],
-        "relational_schema": [
-          "Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh"
-        ],
-        "intermediate_steps": [
-          "Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.",
-          "Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.",
-          "Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.",
-          "Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp."
-        ]
-      },
-      "rubric": {
-        "erd_design": "1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)",
-        "schema_mapping": "0.80đ (Ánh xạ đúng PK, FK không sót)"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
       "id": "ERD-006",
       "topic": "ERD_MAPPING",
       "difficulty": "B",
@@ -1809,156 +1743,6 @@
       },
       "status": "VERIFIED",
       "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "RA-B10",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "A",
-      "title": "ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 10)",
-      "prompt": "Cho lược đồ CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB). Viết biểu thức ĐSQH liệt kê danh sách chuyến bay xuất phát từ 'SGN' đến 'HAN'.",
-      "schema": "CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(ChuyếnBay))",
-        "intermediate_steps": [
-          "Xác định tập quan hệ",
-          "Phép toán đại số quan hệ",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;"
-      },
-      "rubric": {
-        "logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "RA-B11",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "B",
-      "title": "ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 11)",
-      "prompt": "Cho lược đồ BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin bác sĩ chuyên khoa 'Tai-Mũi-Họng'.",
-      "schema": "BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⋈ R2)",
-        "intermediate_steps": [
-          "Xác định tập quan hệ",
-          "Phép toán đại số quan hệ",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;"
-      },
-      "rubric": {
-        "logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "RA-B12",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "B",
-      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 12)",
-      "prompt": "Cho lược đồ TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
-      "schema": "TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
-        "intermediate_steps": [
-          "Xác định tập quan hệ",
-          "Phép toán đại số quan hệ",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
-      },
-      "rubric": {
-        "logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "RA-B13",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "B",
-      "title": "ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 13)",
-      "prompt": "Cho lược đồ MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
-      "schema": "MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
-        "intermediate_steps": [
-          "Xác định tập quan hệ",
-          "Phép toán đại số quan hệ",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
-      },
-      "rubric": {
-        "logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "RA-B14",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "B",
-      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 14)",
-      "prompt": "Cho lược đồ XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
-      "schema": "XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
-        "intermediate_steps": [
-          "Xác định tập quan hệ",
-          "Phép toán đại số quan hệ",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
-      },
-      "rubric": {
-        "logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "RA-B15",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "A",
-      "title": "ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 15)",
-      "prompt": "Cho lược đồ NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP). Viết biểu thức ĐSQH liệt kê danh sách hóa đơn do nhân viên chức vụ 'Thu ngân' lập.",
-      "schema": "NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP)",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(HóaĐơn))",
-        "intermediate_steps": [
-          "Xác định tập quan hệ",
-          "Phép toán đại số quan hệ",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT ID, TEN FROM HóaĐơn WHERE DIEUKIEN;"
-      },
-      "rubric": {
-        "logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
     },
     {
       "id": "RA-B16",
@@ -3086,156 +2870,6 @@
       "verification_level": "DRAFT"
     },
     {
-      "id": "RA-D10",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "B",
-      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 10)",
-      "prompt": "Cho CSDL TAU, CAPCANG, CANGBIEN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
-      "schema": "TAU, CAPCANG, CANGBIEN",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
-        "intermediate_steps": [
-          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
-          "Thực hiện phép chia / gom nhóm",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
-      },
-      "rubric": {
-        "logic_steps": "0.60đ",
-        "correct_syntax": "0.40đ"
-      },
-      "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "RA-D11",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "C",
-      "title": "ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 11)",
-      "prompt": "Cho CSDL NHA_DAUTU, GOPT_VON, DUAN. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: nhà đầu tư góp vốn vào tất cả dự án năng lượng xanh.",
-      "schema": "NHA_DAUTU, GOPT_VON, DUAN",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
-        "intermediate_steps": [
-          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
-          "Thực hiện phép chia / gom nhóm",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
-      },
-      "rubric": {
-        "logic_steps": "0.60đ",
-        "correct_syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "RA-D12",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "C",
-      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 12)",
-      "prompt": "Cho CSDL KHACH, DATTIEC, SANHTIEC. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
-      "schema": "KHACH, DATTIEC, SANHTIEC",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
-        "intermediate_steps": [
-          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
-          "Thực hiện phép chia / gom nhóm",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
-      },
-      "rubric": {
-        "logic_steps": "0.60đ",
-        "correct_syntax": "0.40đ"
-      },
-      "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "RA-D13",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "C",
-      "title": "ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 13)",
-      "prompt": "Cho CSDL DOCGIA, MUONSACH, SACH, THELOAI. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: độc giả đã mượn sách thuộc tất cả các thể loại khoa học.",
-      "schema": "DOCGIA, MUONSACH, SACH, THELOAI",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
-        "intermediate_steps": [
-          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
-          "Thực hiện phép chia / gom nhóm",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
-      },
-      "rubric": {
-        "logic_steps": "0.60đ",
-        "correct_syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "RA-D14",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "B",
-      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 14)",
-      "prompt": "Cho CSDL DIEMTIEM, PHIEUXUAT, CTPX, VACXIN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
-      "schema": "DIEMTIEM, PHIEUXUAT, CTPX, VACXIN",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
-        "intermediate_steps": [
-          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
-          "Thực hiện phép chia / gom nhóm",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
-      },
-      "rubric": {
-        "logic_steps": "0.60đ",
-        "correct_syntax": "0.40đ"
-      },
-      "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "RA-D15",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "C",
-      "title": "ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 15)",
-      "prompt": "Cho CSDL DONHANG, CHITIET, MATHANG. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: đơn hàng mua tất cả mặt hàng loại 'Điện tử'.",
-      "schema": "DONHANG, CHITIET, MATHANG",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
-        "intermediate_steps": [
-          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
-          "Thực hiện phép chia / gom nhóm",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
-      },
-      "rubric": {
-        "logic_steps": "0.60đ",
-        "correct_syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
       "id": "RA-D16",
       "topic": "RA_DIVISION_GROUPING",
       "difficulty": "C",
@@ -4110,102 +3744,6 @@
       "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
-      "id": "SQL-D07",
-      "topic": "SQL_DDL_DML",
-      "difficulty": "B",
-      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 7)",
-      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
-      "schema": "R1(ID, GIA), R2(ID, LOAI)",
-      "recommended_time_mins": 5,
-      "points": 0.75,
-      "solution": {
-        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
-        "intermediate_steps": [
-          "Xác định bảng",
-          "Viết cú pháp T-SQL",
-          "Kiểm thử logic."
-        ]
-      },
-      "rubric": {
-        "syntax": "0.40đ",
-        "logic": "0.35đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "SQL-D08",
-      "topic": "SQL_DDL_DML",
-      "difficulty": "A",
-      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 8)",
-      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
-      "schema": "R1(ID, GIA), R2(ID, LOAI)",
-      "recommended_time_mins": 5,
-      "points": 0.75,
-      "solution": {
-        "sql": "ALTER TABLE BANG_8 ADD CONSTRAINT CK_BANG_8 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
-        "intermediate_steps": [
-          "Xác định bảng",
-          "Viết cú pháp T-SQL",
-          "Kiểm thử logic."
-        ]
-      },
-      "rubric": {
-        "syntax": "0.40đ",
-        "logic": "0.35đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "SQL-D09",
-      "topic": "SQL_DDL_DML",
-      "difficulty": "B",
-      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 9)",
-      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
-      "schema": "R1(ID, GIA), R2(ID, LOAI)",
-      "recommended_time_mins": 5,
-      "points": 0.75,
-      "solution": {
-        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
-        "intermediate_steps": [
-          "Xác định bảng",
-          "Viết cú pháp T-SQL",
-          "Kiểm thử logic."
-        ]
-      },
-      "rubric": {
-        "syntax": "0.40đ",
-        "logic": "0.35đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "SQL-D10",
-      "topic": "SQL_DDL_DML",
-      "difficulty": "A",
-      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 10)",
-      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
-      "schema": "R1(ID, GIA), R2(ID, LOAI)",
-      "recommended_time_mins": 5,
-      "points": 0.75,
-      "solution": {
-        "sql": "ALTER TABLE BANG_10 ADD CONSTRAINT CK_BANG_10 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
-        "intermediate_steps": [
-          "Xác định bảng",
-          "Viết cú pháp T-SQL",
-          "Kiểm thử logic."
-        ]
-      },
-      "rubric": {
-        "syntax": "0.40đ",
-        "logic": "0.35đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
       "id": "SQL-D11",
       "topic": "SQL_DDL_DML",
       "difficulty": "B",
@@ -4905,6 +4443,827 @@
           "Kết nối XA và bảo toàn đồng hạng"
         ],
         "sql": "SELECT TOP 1 WITH TIES X.MAXA, X.TENXA, X.HUYEN, SUM(PN.SOTIEN) AS TONG_CUUTRO FROM XA X INNER JOIN HO_DAN HD ON X.MAXA = HD.MAXA INNER JOIN PHIEU_NHAN PN ON HD.MAHO = PN.MAHO GROUP BY X.MAXA, X.TENXA, X.HUYEN ORDER BY SUM(PN.SOTIEN) DESC;"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.60đ",
+        "projection": "0.50đ"
+      }
+    },
+    {
+      "id": "M04-Q1",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Chuỗi Cửa Hàng Xăng Dầu",
+      "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Chuỗi Cửa hàng Bán lẻ Xăng dầu gồm các thực thể: CUAHANG, NHANVIEN, NHIENLIEU, BE_CHUA, HOADON cùng các mối kết hợp tương ứng.",
+      "schema": "ERD: CUAHANG, NHANVIEN, NHIENLIEU, BE_CHUA, HOADON, CTHD",
+      "recommended_time_mins": 25,
+      "points": 2.5,
+      "solution": {
+        "erd_entities": [
+          {
+            "name": "CUAHANG",
+            "pk": "MACH",
+            "attributes": [
+              "MACH",
+              "TENCH",
+              "DIACHI",
+              "QUAN",
+              "SO_TRU_BOM"
+            ],
+            "description": "Cửa hàng xăng dầu trực thuộc chuỗi."
+          },
+          {
+            "name": "NHANVIEN",
+            "pk": "MANV",
+            "attributes": [
+              "MANV",
+              "HOTEN",
+              "NGAYSINH",
+              "CHUCVU",
+              "LUONG"
+            ],
+            "description": "Nhân viên công tác tại cửa hàng."
+          },
+          {
+            "name": "NHIENLIEU",
+            "pk": "MANL",
+            "attributes": [
+              "MANL",
+              "TENNL",
+              "LOAINL",
+              "DONVITINH",
+              "DONGIA"
+            ],
+            "description": "Mặt hàng xăng dầu phân phối."
+          },
+          {
+            "name": "BE_CHUA",
+            "pk": "MABE",
+            "attributes": [
+              "MABE",
+              "DUNGTICH",
+              "LUONG_TON"
+            ],
+            "description": "Bể ngầm chứa nhiên liệu tại cửa hàng."
+          },
+          {
+            "name": "HOADON",
+            "pk": "MAHD",
+            "attributes": [
+              "MAHD",
+              "NGAYHD",
+              "HINHTHUC_TT"
+            ],
+            "description": "Hóa đơn xuất bán lẻ xăng dầu."
+          }
+        ],
+        "relationships": [
+          {
+            "name": "CONG_TAC",
+            "entities": [
+              "CUAHANG",
+              "NHANVIEN"
+            ],
+            "cardinality": "1:N",
+            "min_max": "CUAHANG (1, N) - (1, 1) NHANVIEN"
+          },
+          {
+            "name": "LAP_DAT",
+            "entities": [
+              "CUAHANG",
+              "BE_CHUA"
+            ],
+            "cardinality": "1:N",
+            "min_max": "CUAHANG (0, N) - (1, 1) BE_CHUA"
+          },
+          {
+            "name": "CHUA_NL",
+            "entities": [
+              "BE_CHUA",
+              "NHIENLIEU"
+            ],
+            "cardinality": "1:N",
+            "min_max": "BE_CHUA (1, 1) - (0, N) NHIENLIEU"
+          },
+          {
+            "name": "PHAT_HANH",
+            "entities": [
+              "CUAHANG",
+              "HOADON"
+            ],
+            "cardinality": "1:N",
+            "min_max": "CUAHANG (0, N) - (1, 1) HOADON"
+          },
+          {
+            "name": "LAP_HD",
+            "entities": [
+              "NHANVIEN",
+              "HOADON"
+            ],
+            "cardinality": "1:N",
+            "min_max": "NHANVIEN (0, N) - (1, 1) HOADON"
+          },
+          {
+            "name": "CHI_TIET_BAN",
+            "entities": [
+              "HOADON",
+              "NHIENLIEU"
+            ],
+            "cardinality": "M:N",
+            "min_max": "HOADON (1, N) - (0, N) NHIENLIEU",
+            "attributes": [
+              "SOLUONG",
+              "DONGIA_BAN",
+              "THANHTIEN"
+            ]
+          }
+        ],
+        "relational_schema": [
+          {
+            "table": "CUAHANG",
+            "pk": [
+              "MACH"
+            ],
+            "fk": []
+          },
+          {
+            "table": "NHANVIEN",
+            "pk": [
+              "MANV"
+            ],
+            "fk": [
+              {
+                "column": "MACH",
+                "ref_table": "CUAHANG",
+                "ref_column": "MACH"
+              }
+            ]
+          },
+          {
+            "table": "NHIENLIEU",
+            "pk": [
+              "MANL"
+            ],
+            "fk": []
+          },
+          {
+            "table": "BE_CHUA",
+            "pk": [
+              "MABE"
+            ],
+            "fk": [
+              {
+                "column": "MACH",
+                "ref_table": "CUAHANG",
+                "ref_column": "MACH"
+              },
+              {
+                "column": "MANL",
+                "ref_table": "NHIENLIEU",
+                "ref_column": "MANL"
+              }
+            ]
+          },
+          {
+            "table": "HOADON",
+            "pk": [
+              "MAHD"
+            ],
+            "fk": [
+              {
+                "column": "MACH",
+                "ref_table": "CUAHANG",
+                "ref_column": "MACH"
+              },
+              {
+                "column": "MANV",
+                "ref_table": "NHANVIEN",
+                "ref_column": "MANV"
+              }
+            ]
+          },
+          {
+            "table": "CTHD",
+            "pk": [
+              "MAHD",
+              "MANL"
+            ],
+            "fk": [
+              {
+                "column": "MAHD",
+                "ref_table": "HOADON",
+                "ref_column": "MAHD"
+              },
+              {
+                "column": "MANL",
+                "ref_table": "NHIENLIEU",
+                "ref_column": "MANL"
+              }
+            ]
+          }
+        ]
+      },
+      "rubric": {
+        "syntax": "0.50đ",
+        "logic": "1.00đ",
+        "intermediate_steps": "1.00đ"
+      }
+    },
+    {
+      "id": "M04-Q2A",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên BE_CHUA",
+      "prompt": "Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra thuộc tính dung tích bể (DUNGTICH) trong bảng BE_CHUA phải lớn hơn 0 (> 0), và lượng nhiên liệu tồn (LUONG_TON) phải lớn hơn hoặc bằng 0 đồng thời không vượt quá dung tích của bể (0 <= LUONG_TON <= DUNGTICH). Cả hai thuộc tính đều không được mang giá trị NULL.",
+      "schema": "BE_CHUA",
+      "recommended_time_mins": 10,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE BE_CHUA ALTER COLUMN DUNGTICH FLOAT NOT NULL;\nALTER TABLE BE_CHUA ADD CONSTRAINT CK_BECHUA_DUNGTICH CHECK (DUNGTICH > 0);\n\nALTER TABLE BE_CHUA ALTER COLUMN LUONG_TON FLOAT NOT NULL;\nALTER TABLE BE_CHUA ADD CONSTRAINT CK_BECHUA_LUONGTON CHECK (LUONG_TON >= 0 AND LUONG_TON <= DUNGTICH);"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "M04-Q2B",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Cập Nhật Đơn Giá Tăng 5% Cho Xăng Khoáng",
+      "prompt": "Viết câu lệnh SQL cập nhật tăng đơn giá niêm yết (DONGIA) thêm 5% cho tất cả các mặt hàng nhiên liệu thuộc phân loại (LOAINL) là 'Xăng khoáng' có đơn vị tính (DONVITINH) là 'Lít'.",
+      "schema": "NHIENLIEU",
+      "recommended_time_mins": 10,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE NHIENLIEU\nSET DONGIA = DONGIA * 1.05\nWHERE LOAINL = N'Xăng khoáng'\n  AND DONVITINH = N'Lít';"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "M04-Q2C1",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Lọc Nhân Viên Bán Hàng Có Lương Từ 8 Triệu",
+      "prompt": "Liệt kê danh sách các nhân viên (MANV, HOTEN, NGAYSINH, LUONG) có chức vụ là 'Nhân viên bán hàng' và có mức lương cơ bản từ 8,000,000 đồng trở lên.",
+      "schema": "NHANVIEN",
+      "recommended_time_mins": 5,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E1 ← σ_{CHUCVU='Nhân viên bán hàng' ∧ LUONG ≥ 8000000}(NHANVIEN)\nKQ ← π_{MANV, HOTEN, NGAYSINH, LUONG}(E1)",
+        "intermediate_steps": [
+          "Lọc nhân viên có chức vụ Nhân viên bán hàng và lương >= 8,000,000",
+          "Chiếu các thuộc tính MANV, HOTEN, NGAYSINH, LUONG"
+        ],
+        "sql": "SELECT MANV, HOTEN, NGAYSINH, LUONG FROM NHANVIEN WHERE CHUCVU = N'Nhân viên bán hàng' AND LUONG >= 8000000;"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ",
+        "projection": "0.25đ"
+      }
+    },
+    {
+      "id": "M04-Q2C2",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Kết Nối Hóa Đơn Chuyển Khoản Tại Bình Thạnh",
+      "prompt": "Cho biết danh sách các hóa đơn (MAHD, NGAYHD, HINHTHUC_TT, TENCH) được phát hành tại các cửa hàng xăng dầu thuộc quận 'Bình Thạnh' với hình thức thanh toán là 'Chuyển khoản'.",
+      "schema": "CUAHANG, HOADON",
+      "recommended_time_mins": 5,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E_CH ← σ_{QUAN='Bình Thạnh'}(CUAHANG)\nE_HD ← σ_{HINHTHUC_TT='Chuyển khoản'}(HOADON)\nKQ ← π_{MAHD, NGAYHD, HINHTHUC_TT, TENCH}(E_CH ⋈ E_HD)",
+        "intermediate_steps": [
+          "Lọc cửa hàng thuộc quận Bình Thạnh",
+          "Lọc hóa đơn có hình thức thanh toán Chuyển khoản",
+          "Kết tự nhiên trên MACH và chiếu kết quả"
+        ],
+        "sql": "SELECT HD.MAHD, HD.NGAYHD, HD.HINHTHUC_TT, CH.TENCH FROM HOADON HD INNER JOIN CUAHANG CH ON HD.MACH = CH.MACH WHERE CH.QUAN = N'Bình Thạnh' AND HD.HINHTHUC_TT = N'Chuyển khoản';"
+      },
+      "rubric": {
+        "syntax": "0.30đ",
+        "logic": "0.40đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M04-Q2C3",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Kết Ngoài Cửa Hàng Xăng Dầu Và Bể Chứa (Nếu Có)",
+      "prompt": "Liệt kê danh sách thông tin tất cả các cửa hàng xăng dầu (MACH, TENCH, QUAN) và mã các bể chứa (MABE), dung tích bể (DUNGTICH) trực thuộc cửa hàng đó (nếu cửa hàng chưa lắp đặt bể chứa nào thì thông tin bể chứa mang giá trị NULL).",
+      "schema": "CUAHANG, BE_CHUA",
+      "recommended_time_mins": 5,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{MACH, TENCH, QUAN, MABE, DUNGTICH}(CUAHANG ⟕ BE_CHUA)",
+        "intermediate_steps": [
+          "Kết ngoài trái CUAHANG với BE_CHUA trên MACH để bảo tồn cửa hàng chưa có bể",
+          "Chiếu các cột MACH, TENCH, QUAN, MABE, DUNGTICH"
+        ],
+        "sql": "SELECT CH.MACH, CH.TENCH, CH.QUAN, BC.MABE, BC.DUNGTICH FROM CUAHANG CH LEFT OUTER JOIN BE_CHUA BC ON CH.MACH = BC.MACH;"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.30đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M04-Q2C4",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Số Lít Nhiên Liệu Đã Bán Tháng 10/2024",
+      "prompt": "Tính tổng số lít nhiên liệu đã bán (TONG_LIT_BAN) của từng cửa hàng xăng dầu trong tháng 10 năm 2024. Thông tin hiển thị gồm: MACH, TENCH, TONG_LIT_BAN.",
+      "schema": "CUAHANG, HOADON, CTHD",
+      "recommended_time_mins": 10,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E1 ← σ_{NGAYHD ≥ '2024-10-01' ∧ NGAYHD ≤ '2024-10-31'}(HOADON)\nE2 ← CUAHANG ⋈ E1 ⋈ CTHD\nKQ ← _{MACH, TENCH}γ_{SUM(SOLUONG) → TONG_LIT_BAN}(E2)",
+        "intermediate_steps": [
+          "Lọc hóa đơn trong tháng 10/2024",
+          "Kết nối CUAHANG, HOADON, CTHD",
+          "Gom nhóm theo MACH, TENCH và tính SUM(SOLUONG)"
+        ],
+        "sql": "SELECT CH.MACH, CH.TENCH, SUM(CT.SOLUONG) AS TONG_LIT_BAN FROM CUAHANG CH INNER JOIN HOADON HD ON CH.MACH = HD.MACH INNER JOIN CTHD CT ON HD.MAHD = CT.MAHD WHERE HD.NGAYHD >= '2024-10-01' AND HD.NGAYHD <= '2024-10-31 23:59:59' GROUP BY CH.MACH, CH.TENCH;"
+      },
+      "rubric": {
+        "syntax": "0.30đ",
+        "logic": "0.40đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M04-Q2C5",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Phép Chia Tìm Hóa Đơn Đã Bán Tất Cả Các Loại Xăng Khoáng",
+      "prompt": "Tìm các hóa đơn (MAHD, NGAYHD, MACH) đã bán tất cả các loại nhiên liệu thuộc phân loại 'Xăng khoáng'.",
+      "schema": "HOADON, CTHD, NHIENLIEU",
+      "recommended_time_mins": 15,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R ← π_{MAHD, MANL}(CTHD)\nS ← π_{MANL}(σ_{LOAINL='Xăng khoáng'}(NHIENLIEU))\nR_KQ ← R ÷ S\nKQ ← π_{MAHD, NGAYHD, MACH}(R_KQ ⋈ HOADON)",
+        "intermediate_steps": [
+          "Xác định quan hệ bị chia R(MAHD, MANL)",
+          "Xác định tập chia S(MANL) gồm các mặt hàng Xăng khoáng",
+          "Thực hiện phép chia R ÷ S để tìm hóa đơn bán đủ các mặt hàng",
+          "Kết nối HOADON và chiếu kết quả"
+        ],
+        "sql": "SELECT HD.MAHD, HD.NGAYHD, HD.MACH FROM HOADON HD WHERE NOT EXISTS (SELECT * FROM NHIENLIEU NL WHERE NL.LOAINL = N'Xăng khoáng' AND NOT EXISTS (SELECT * FROM CTHD CT WHERE CT.MAHD = HD.MAHD AND CT.MANL = NL.MANL)) AND EXISTS (SELECT 1 FROM CTHD WHERE MAHD = HD.MAHD);"
+      },
+      "rubric": {
+        "syntax": "0.30đ",
+        "logic": "0.40đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M04-Q2C6",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Tìm Cửa Hàng Có Tổng Dung Tích Bể Chứa Lớn Nhất",
+      "prompt": "Tìm cửa hàng xăng dầu (MACH, TENCH, QUAN) có tổng dung tích các bể chứa (TONG_DUNGTICH) lớn nhất trong hệ thống (bảo toàn tất cả các cửa hàng nếu có nhiều cửa hàng cùng đạt tổng dung tích lớn nhất).",
+      "schema": "CUAHANG, BE_CHUA",
+      "recommended_time_mins": 15,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R_TongDT ← _{MACH}γ_{SUM(DUNGTICH) → TONG_DUNGTICH}(BE_CHUA)\nR_NhoHon ← π_{R1.TONG_DUNGTICH}(σ_{R1.TONG_DUNGTICH < R2.TONG_DUNGTICH}(ρ_{R1}(R_TongDT) × ρ_{R2}(R_TongDT)))\nR_Max ← π_{TONG_DUNGTICH}(R_TongDT) - R_NhoHon\nKQ ← π_{MACH, TENCH, QUAN}(CUAHANG ⋈ R_TongDT ⋈ R_Max)",
+        "intermediate_steps": [
+          "Gom nhóm tính tổng dung tích các bể theo MACH",
+          "Dùng tích Descartes tìm các tổng dung tích nhỏ hơn",
+          "Trừ tập hợp để tìm giá trị cực đại lớn nhất",
+          "Kết nối CUAHANG và bảo toàn đồng hạng"
+        ],
+        "sql": "SELECT TOP 1 WITH TIES CH.MACH, CH.TENCH, CH.QUAN, SUM(BC.DUNGTICH) AS TONG_DUNGTICH FROM CUAHANG CH INNER JOIN BE_CHUA BC ON CH.MACH = BC.MACH GROUP BY CH.MACH, CH.TENCH, CH.QUAN ORDER BY SUM(BC.DUNGTICH) DESC;"
+      },
+      "rubric": {
+        "syntax": "0.30đ",
+        "logic": "0.40đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M05-Q1",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà",
+      "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Căn hộ Chung cư & Hợp đồng Thuê nhà gồm các thực thể: TOANHA, CANHO, KHACHHANG, NHANVIEN, HOPDONG, PHIEUTHU cùng các mối kết hợp tương ứng.",
+      "schema": "ERD: TOANHA, CANHO, KHACHHANG, NHANVIEN, HOPDONG, PHIEUTHU",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          {
+            "name": "TOANHA",
+            "pk": "MATN",
+            "attributes": [
+              "MATN",
+              "TENTN",
+              "DIACHI",
+              "SOTANG"
+            ],
+            "description": "Tòa nhà / Block chung cư."
+          },
+          {
+            "name": "CANHO",
+            "pk": "MACH",
+            "attributes": [
+              "MACH",
+              "SOPHONG",
+              "DIENTICH",
+              "GIATHUE_CHUAN",
+              "TRANGTHAI"
+            ],
+            "description": "Căn hộ trong tòa nhà."
+          },
+          {
+            "name": "KHACHHANG",
+            "pk": "MAKH",
+            "attributes": [
+              "MAKH",
+              "HOTEN",
+              "CCCD",
+              "SDT",
+              "LOAIKH"
+            ],
+            "description": "Khách hàng thuê căn hộ."
+          },
+          {
+            "name": "NHANVIEN",
+            "pk": "MANV",
+            "attributes": [
+              "MANV",
+              "HOTEN",
+              "PHONGBAN",
+              "SDT"
+            ],
+            "description": "Nhân viên môi giới / quản lý."
+          },
+          {
+            "name": "HOPDONG",
+            "pk": "MAHD",
+            "attributes": [
+              "MAHD",
+              "NGAYKY",
+              "NGAYBD",
+              "NGAYKT",
+              "GIATHUE_THUCTE",
+              "TIENCOC"
+            ],
+            "description": "Hợp đồng cho thuê căn hộ."
+          },
+          {
+            "name": "PHIEUTHU",
+            "pk": "SOPHIEU",
+            "attributes": [
+              "SOPHIEU",
+              "THANG",
+              "NAM",
+              "NGAYTHU",
+              "SOTIEN"
+            ],
+            "description": "Phiếu thu tiền thuê hàng tháng."
+          }
+        ],
+        "relationships": [
+          {
+            "name": "THUOC_TOA",
+            "entities": [
+              "TOANHA",
+              "CANHO"
+            ],
+            "cardinality": "1:N",
+            "min_max": "TOANHA (1, N) - (1, 1) CANHO"
+          },
+          {
+            "name": "CHO_THUE",
+            "entities": [
+              "CANHO",
+              "HOPDONG"
+            ],
+            "cardinality": "1:N",
+            "min_max": "CANHO (0, N) - (1, 1) HOPDONG"
+          },
+          {
+            "name": "KY_KET",
+            "entities": [
+              "KHACHHANG",
+              "HOPDONG"
+            ],
+            "cardinality": "1:N",
+            "min_max": "KHACHHANG (0, N) - (1, 1) HOPDONG"
+          },
+          {
+            "name": "MOI_GIOI",
+            "entities": [
+              "NHANVIEN",
+              "HOPDONG"
+            ],
+            "cardinality": "1:N",
+            "min_max": "NHANVIEN (0, N) - (1, 1) HOPDONG"
+          },
+          {
+            "name": "THANH_TOAN",
+            "entities": [
+              "HOPDONG",
+              "PHIEUTHU"
+            ],
+            "cardinality": "1:N",
+            "min_max": "HOPDONG (0, N) - (1, 1) PHIEUTHU"
+          }
+        ],
+        "relational_schema": [
+          {
+            "table": "TOANHA",
+            "pk": [
+              "MATN"
+            ],
+            "fk": []
+          },
+          {
+            "table": "CANHO",
+            "pk": [
+              "MACH"
+            ],
+            "fk": [
+              {
+                "column": "MATN",
+                "ref_table": "TOANHA",
+                "ref_column": "MATN"
+              }
+            ]
+          },
+          {
+            "table": "KHACHHANG",
+            "pk": [
+              "MAKH"
+            ],
+            "fk": []
+          },
+          {
+            "table": "NHANVIEN",
+            "pk": [
+              "MANV"
+            ],
+            "fk": []
+          },
+          {
+            "table": "HOPDONG",
+            "pk": [
+              "MAHD"
+            ],
+            "fk": [
+              {
+                "column": "MACH",
+                "ref_table": "CANHO",
+                "ref_column": "MACH"
+              },
+              {
+                "column": "MAKH",
+                "ref_table": "KHACHHANG",
+                "ref_column": "MAKH"
+              },
+              {
+                "column": "MANV",
+                "ref_table": "NHANVIEN",
+                "ref_column": "MANV"
+              }
+            ]
+          },
+          {
+            "table": "PHIEUTHU",
+            "pk": [
+              "SOPHIEU"
+            ],
+            "fk": [
+              {
+                "column": "MAHD",
+                "ref_table": "HOPDONG",
+                "ref_column": "MAHD"
+              }
+            ]
+          }
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.80đ",
+        "intermediate_steps": "0.80đ"
+      }
+    },
+    {
+      "id": "M05-Q2A",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên HOPDONG",
+      "prompt": "Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra tiền đặt cọc (TIENCOC) trong quan hệ HOPDONG phải lớn hơn hoặc bằng 0 (>= 0), và ngày kết thúc hợp đồng thuê (NGAYKT) phải sau ngày bắt đầu hiệu lực thuê (NGAYKT > NGAYBD). Cả hai thuộc tính đều không được mang giá trị NULL.",
+      "schema": "HOPDONG",
+      "recommended_time_mins": 10,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE HOPDONG ALTER COLUMN TIENCOC DECIMAL(18, 2) NOT NULL;\nALTER TABLE HOPDONG ADD CONSTRAINT CK_HOPDONG_TIENCOC CHECK (TIENCOC >= 0);\n\nALTER TABLE HOPDONG ALTER COLUMN NGAYKT DATE NOT NULL;\nALTER TABLE HOPDONG ADD CONSTRAINT CK_HOPDONG_NGAY CHECK (NGAYKT > NGAYBD);"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "M05-Q2B",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Cập Nhật Trạng Thái Đang Thuê Cho Căn Hộ Có Hợp Đồng Năm 2024",
+      "prompt": "Cập nhật trạng thái (TRANGTHAI) thành 'Đang thuê' cho tất cả các căn hộ có trong các hợp đồng thuê (HOPDONG) được ký trong năm 2024 mà ngày kết thúc hợp đồng (NGAYKT) từ ngày '2024-12-31' trở về sau.",
+      "schema": "CANHO, HOPDONG",
+      "recommended_time_mins": 10,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE CH\nSET CH.TRANGTHAI = N'Đang thuê'\nFROM CANHO CH\nINNER JOIN HOPDONG HD ON CH.MACH = HD.MACH\nWHERE HD.NGAYKY >= '2024-01-01' AND HD.NGAYKY <= '2024-12-31'\n  AND HD.NGAYKT >= '2024-12-31';"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "M05-Q2C1",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Lọc Khách Hàng Doanh Nghiệp",
+      "prompt": "Liệt kê danh sách các khách hàng (MAKH, HOTEN, SDT) thuộc phân loại khách hàng là 'Doanh nghiệp'.",
+      "schema": "KHACHHANG",
+      "recommended_time_mins": 5,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E1 ← σ_{LOAIKH='Doanh nghiệp'}(KHACHHANG)\nKQ ← π_{MAKH, HOTEN, SDT}(E1)",
+        "intermediate_steps": [
+          "Lọc khách hàng có loại hình Doanh nghiệp",
+          "Chiếu các thuộc tính MAKH, HOTEN, SDT"
+        ],
+        "sql": "SELECT MAKH, HOTEN, SDT FROM KHACHHANG WHERE LOAIKH = N'Doanh nghiệp';"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ",
+        "projection": "0.25đ"
+      }
+    },
+    {
+      "id": "M05-Q2C2",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Kết Nối Căn Hộ Sky Garden Giá Thuê Từ 15 Triệu",
+      "prompt": "Cho biết danh sách các căn hộ (MACH, SOPHONG, DIENTICH, TENTN) thuộc tòa nhà 'Sky Garden' có giá thuê chuẩn (GIATHUE_CHUAN) từ 15,000,000 đồng/tháng trở lên.",
+      "schema": "CANHO, TOANHA",
+      "recommended_time_mins": 5,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E_TN ← σ_{TENTN='Sky Garden'}(TOANHA)\nE_CH ← σ_{GIATHUE_CHUAN ≥ 15000000}(CANHO)\nKQ ← π_{MACH, SOPHONG, DIENTICH, TENTN}(E_TN ⋈ E_CH)",
+        "intermediate_steps": [
+          "Lọc tòa nhà tên Sky Garden",
+          "Lọc căn hộ có giá thuê chuẩn >= 15 triệu",
+          "Kết tự nhiên trên MATN và chiếu kết quả"
+        ],
+        "sql": "SELECT CH.MACH, CH.SOPHONG, CH.DIENTICH, TN.TENTN FROM CANHO CH INNER JOIN TOANHA TN ON CH.MATN = TN.MATN WHERE TN.TENTN = N'Sky Garden' AND CH.GIATHUE_CHUAN >= 15000000;"
+      },
+      "rubric": {
+        "syntax": "0.30đ",
+        "logic": "0.40đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M05-Q2C3",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Kết Ngoài Tòa Nhà Chung Cư Và Căn Hộ (Nếu Có)",
+      "prompt": "Liệt kê danh sách thông tin tất cả các tòa nhà chung cư (MATN, TENTN, DIACHI) và mã các căn hộ (MACH), số phòng ngủ (SOPHONG) thuộc tòa nhà đó (nếu tòa nhà chưa có căn hộ nào thì thông tin căn hộ mang giá trị NULL).",
+      "schema": "TOANHA, CANHO",
+      "recommended_time_mins": 5,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "KQ ← π_{MATN, TENTN, DIACHI, MACH, SOPHONG}(TOANHA ⟕ CANHO)",
+        "intermediate_steps": [
+          "Kết ngoài trái TOANHA với CANHO trên MATN để bảo tồn tòa nhà chưa có căn hộ",
+          "Chiếu các cột MATN, TENTN, DIACHI, MACH, SOPHONG"
+        ],
+        "sql": "SELECT TN.MATN, TN.TENTN, TN.DIACHI, CH.MACH, CH.SOPHONG FROM TOANHA TN LEFT OUTER JOIN CANHO CH ON TN.MATN = CH.MATN;"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.30đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M05-Q2C4",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Tiền Thu Năm 2024 Theo Hợp Đồng",
+      "prompt": "Tính tổng số tiền thu được (TONG_TIEN_THU) theo từng hợp đồng trong năm 2024. Thông tin hiển thị gồm: MAHD, NGAYKY, TONG_TIEN_THU.",
+      "schema": "HOPDONG, PHIEUTHU",
+      "recommended_time_mins": 10,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E1 ← σ_{NAM=2024}(PHIEUTHU)\nE2 ← HOPDONG ⋈ E1\nKQ ← _{MAHD, NGAYKY}γ_{SUM(SOTIEN) → TONG_TIEN_THU}(E2)",
+        "intermediate_steps": [
+          "Lọc phiếu thu trong năm 2024",
+          "Kết nối HOPDONG với PHIEUTHU trên MAHD",
+          "Gom nhóm theo MAHD, NGAYKY và tính SUM(SOTIEN)"
+        ],
+        "sql": "SELECT HD.MAHD, HD.NGAYKY, SUM(PT.SOTIEN) AS TONG_TIEN_THU FROM HOPDONG HD INNER JOIN PHIEUTHU PT ON HD.MAHD = PT.MAHD WHERE PT.NAM = 2024 GROUP BY HD.MAHD, HD.NGAYKY;"
+      },
+      "rubric": {
+        "syntax": "0.30đ",
+        "logic": "0.40đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M05-Q2C5",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Phép Chia Tìm Khách Hàng Thuê Căn Hộ Ở Tất Cả Tòa Nhà Quận 7",
+      "prompt": "Tìm các khách hàng (MAKH, HOTEN, SDT) đã từng ký hợp đồng thuê căn hộ tại tất cả các tòa nhà tọa lạc tại địa bàn 'Quận 7'.",
+      "schema": "KHACHHANG, HOPDONG, CANHO, TOANHA",
+      "recommended_time_mins": 15,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R ← π_{MAKH, MATN}(HOPDONG ⋈ CANHO)\nS ← π_{MATN}(σ_{DIACHI='Quận 7'}(TOANHA))\nR_KQ ← R ÷ S\nKQ ← π_{MAKH, HOTEN, SDT}(R_KQ ⋈ KHACHHANG)",
+        "intermediate_steps": [
+          "Xác định quan hệ bị chia R(MAKH, MATN) giữa khách hàng và tòa nhà đã thuê",
+          "Xác định tập chia S(MATN) gồm các tòa nhà tại Quận 7",
+          "Thực hiện phép chia R ÷ S để tìm khách hàng thuê đủ tất cả tòa nhà Quận 7",
+          "Kết nối KHACHHANG và chiếu kết quả"
+        ],
+        "sql": "SELECT KH.MAKH, KH.HOTEN, KH.SDT FROM KHACHHANG KH WHERE NOT EXISTS (SELECT * FROM TOANHA TN WHERE TN.DIACHI = N'Quận 7' AND NOT EXISTS (SELECT * FROM HOPDONG HD INNER JOIN CANHO CH ON HD.MACH = CH.MACH WHERE HD.MAKH = KH.MAKH AND CH.MATN = TN.MATN)) AND EXISTS (SELECT 1 FROM HOPDONG WHERE MAKH = KH.MAKH);"
+      },
+      "rubric": {
+        "syntax": "0.30đ",
+        "logic": "0.40đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M05-Q2C6",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Tìm Tòa Nhà Có Số Căn Hộ Đang Thuê Nhiều Nhất",
+      "prompt": "Tìm thông tin tòa nhà (MATN, TENTN, DIACHI) có số lượng căn hộ đang ở trạng thái 'Đang thuê' nhiều nhất trong hệ thống (bảo toàn tất cả các tòa nhà nếu có nhiều tòa nhà cùng đạt số lượng căn hộ đang thuê lớn nhất).",
+      "schema": "TOANHA, CANHO",
+      "recommended_time_mins": 15,
+      "points": 1.5,
+      "solution": {
+        "relational_algebra": "E1 ← σ_{TRANGTHAI='Đang thuê'}(CANHO)\nR_SoLuong ← _{MATN}γ_{COUNT(MACH) → SO_CAN_THUE}(E1)\nR_NhoHon ← π_{R1.SO_CAN_THUE}(σ_{R1.SO_CAN_THUE < R2.SO_CAN_THUE}(ρ_{R1}(R_SoLuong) × ρ_{R2}(R_SoLuong)))\nR_Max ← π_{SO_CAN_THUE}(R_SoLuong) - R_NhoHon\nKQ ← π_{MATN, TENTN, DIACHI}(TOANHA ⋈ R_SoLuong ⋈ R_Max)",
+        "intermediate_steps": [
+          "Lọc căn hộ có trạng thái Đang thuê và gom nhóm đếm theo MATN",
+          "Dùng tích Descartes tìm các số lượng nhỏ hơn",
+          "Trừ tập hợp để tìm giá trị cực đại lớn nhất",
+          "Kết nối TOANHA và bảo toàn đồng hạng"
+        ],
+        "sql": "SELECT TOP 1 WITH TIES TN.MATN, TN.TENTN, TN.DIACHI, COUNT(CH.MACH) AS SO_CAN_THUE FROM TOANHA TN INNER JOIN CANHO CH ON TN.MATN = CH.MATN WHERE CH.TRANGTHAI = N'Đang thuê' GROUP BY TN.MATN, TN.TENTN, TN.DIACHI ORDER BY COUNT(CH.MACH) DESC;"
       },
       "rubric": {
         "syntax": "0.40đ",

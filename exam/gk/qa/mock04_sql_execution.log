@@ -1,0 +1,44 @@
+﻿Changed database context to 'tempdb'.
+------------------------------------------------------------
+=== TEST 1: CHECK CONSTRAINT ADVERSARIAL INTEGRITY ===
+------------------------------------------------------------
+  [PASS] Test 1A: CK_BECHUA_DUNGTICH correctly blocked DUNGTICH = 0.
+  [PASS] Test 1B: CK_BECHUA_LUONGTON correctly blocked LUONG_TON < 0.
+  [PASS] Test 1C: CK_BECHUA_LUONGTON correctly blocked LUONG_TON > DUNGTICH.
+  [PASS] Test 1D: NOT NULL policy correctly rejected NULL DUNGTICH (Error 515).
+------------------------------------------------------------
+=== TEST 2: QUESTION 2.1B UPDATE VERIFICATION ===
+------------------------------------------------------------
+  [PASS] Test 2: UPDATE correctly affected 2 items (NL01, NL02).
+  [PASS] Test 2b: Price verified (NL01=25,200; NL02=23,100; NL03 unchanged at 20,000).
+------------------------------------------------------------
+=== TEST 3: QUESTION 2.2A SELECTION & PROJECTION ===
+------------------------------------------------------------
+  [PASS] Test 3: Selection returned exactly 2 staff members (NV02, NV04).
+------------------------------------------------------------
+=== TEST 4: QUESTION 2.2B JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 4: Join returned exactly 2 transfer invoices in Binh Thanh (HD01, HD03).
+------------------------------------------------------------
+=== TEST 5: QUESTION 2.2C OUTER JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 5: Outer join preserved CH05 with NULL tank info (total 8 rows).
+------------------------------------------------------------
+=== TEST 6: QUESTION 2.2D GROUPING & AGGREGATE ===
+------------------------------------------------------------
+  [PASS] Test 6: Grouping SUM verified: CH01=105 lit, CH02=80 lit.
+------------------------------------------------------------
+=== TEST 7: QUESTION 2.2E RELATIONAL DIVISION ===
+------------------------------------------------------------
+  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (HD01, HD03).
+------------------------------------------------------------
+=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
+------------------------------------------------------------
+  [PASS] Test 8: Empty target S=Ø semantic verified: candidate universe returns 6 active invoices.
+------------------------------------------------------------
+=== TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===
+------------------------------------------------------------
+  [PASS] Test 9: Extreme tie-breaking verified: CH01 (40,000L) and CH04 (40,000L) preserved; CH02 (35,000L) excluded.
+------------------------------------------------------------
+=== ALL 9 MOCK-04 VERIFICATION SUITES PASSED WITH ASSERTIONS ===
+------------------------------------------------------------

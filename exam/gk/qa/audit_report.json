@@ -9,16 +9,16 @@
       "RA_DIVISION_GROUPING": 52
     },
     "difficulties": {
-      "A": 25,
-      "B": 109,
+      "A": 23,
+      "B": 111,
       "C": 39
     },
-    "verified_problems": 64,
-    "draft_problems": 109,
+    "verified_problems": 78,
+    "draft_problems": 95,
     "verification_levels": {
-      "EXECUTION_VERIFIED": 27,
-      "SEMANTICALLY_REVIEWED": 37,
-      "DRAFT": 109
+      "EXECUTION_VERIFIED": 45,
+      "SEMANTICALLY_REVIEWED": 33,
+      "DRAFT": 95
     },
     "solutions_present": 173,
     "rubrics_present": 173,

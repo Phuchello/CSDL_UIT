@@ -1,0 +1,43 @@
+﻿Changed database context to 'tempdb'.
+------------------------------------------------------------
+=== TEST 1: CHECK CONSTRAINT ADVERSARIAL INTEGRITY ===
+------------------------------------------------------------
+  [PASS] Test 1A: CK_HOPDONG_TIENCOC correctly blocked negative TIENCOC.
+  [PASS] Test 1B: CK_HOPDONG_NGAY correctly blocked NGAYKT <= NGAYBD.
+  [PASS] Test 1C: NOT NULL policy correctly rejected NULL TIENCOC (Error 515).
+------------------------------------------------------------
+=== TEST 2: QUESTION 2.1B UPDATE VERIFICATION ===
+------------------------------------------------------------
+  [PASS] Test 2: UPDATE correctly affected 5 apartments (CH01, CH02, CH04, CH05, CH06).
+  [PASS] Test 2b: Verified CH03 remains Trong as HD05 expired before 2024-12-31.
+------------------------------------------------------------
+=== TEST 3: QUESTION 2.2A SELECTION & PROJECTION ===
+------------------------------------------------------------
+  [PASS] Test 3: Selection returned exactly 2 corporate clients (KH01, KH02).
+------------------------------------------------------------
+=== TEST 4: QUESTION 2.2B JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 4: Join returned exactly 2 apartments in Sky Garden >= 15tr (CH01, CH02).
+------------------------------------------------------------
+=== TEST 5: QUESTION 2.2C OUTER JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 5: Outer join preserved TN04 with NULL apartment info (total 7 rows).
+------------------------------------------------------------
+=== TEST 6: QUESTION 2.2D GROUPING & AGGREGATE ===
+------------------------------------------------------------
+  [PASS] Test 6: Grouping SUM verified: HD01=32,000,000; HD02=18,000,000.
+------------------------------------------------------------
+=== TEST 7: QUESTION 2.2E RELATIONAL DIVISION ===
+------------------------------------------------------------
+  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (KH01, KH02).
+------------------------------------------------------------
+=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
+------------------------------------------------------------
+  [PASS] Test 8: Empty target S=Ø semantic verified: candidate universe returns 4 active clients.
+------------------------------------------------------------
+=== TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===
+------------------------------------------------------------
+  [PASS] Test 9: Extreme tie-breaking verified: TN01 (2 units) and TN02 (2 units) preserved; TN03 (1 unit) excluded.
+------------------------------------------------------------
+=== ALL 9 MOCK-05 VERIFICATION SUITES PASSED WITH ASSERTIONS ===
+------------------------------------------------------------

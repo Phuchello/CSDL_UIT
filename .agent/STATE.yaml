@@ -38,6 +38,8 @@ verified:
   phase_b_mock01_remediation_complete: true
   phase_c_mock02_reconstruction_complete: true
   phase_c_mock03_reconstruction_complete: true
+  phase_c_mock04_reconstruction_complete: true
+  phase_c_mock05_reconstruction_complete: true
   frozen_baseline_untouched: true
   pdf_deliverables_4_verified: true
   zero_blank_pages: true
@@ -48,12 +50,14 @@ verification_evidence:
   local_suite:
     - scripts/agent/verify.ps1 -Mode Fast (PASS)
     - scripts/validate.py (PASS, 6/6 checks)
-    - exam/gk/scripts/validate_gk.py (PASS, 173 problems: 64 VERIFIED [27 EXECUTION_VERIFIED, 37 SEMANTICALLY_REVIEWED], 109 DRAFT)
+    - exam/gk/scripts/validate_gk.py (PASS, 173 problems: 78 VERIFIED [45 EXECUTION_VERIFIED, 33 SEMANTICALLY_REVIEWED], 95 DRAFT)
     - exam/gk/scripts/verify_pdf_preflight.py (PASS, 4/4 PDFs verified 100%)
     - exam/gk/qa/mock01_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock02_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock03_sql_execution.log (PASS, Microsoft SQL Server 2025)
-    - exam/gk/qa/defect_register.md (P0-01 through P0-04 RESOLVED, P0-05 IN_PROGRESS [MOCK-01, MOCK-02, MOCK-03 RESOLVED])
+    - exam/gk/qa/mock04_sql_execution.log (PASS, Microsoft SQL Server 2025)
+    - exam/gk/qa/mock05_sql_execution.log (PASS, Microsoft SQL Server 2025)
+    - exam/gk/qa/defect_register.md (P0-01 through P0-04 RESOLVED, P0-05 IN_PROGRESS [MOCK-01 through MOCK-05 RESOLVED])
 
 blockers: []
 
