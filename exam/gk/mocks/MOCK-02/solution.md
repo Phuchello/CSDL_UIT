@@ -240,6 +240,12 @@ WHERE MADOT = 'DKT01'
   GROUP BY TN.MATN, TN.TENTN;
   ```
 
+*Lưu ý ngữ nghĩa học thuật:*
+- Phép kết tự nhiên (INNER JOIN) trong biểu thức ĐSQH chuẩn tính tổng thiết bị cho các tòa nhà *thực tế có bố trí thiết bị*. Những tòa nhà chưa lắp đặt thiết bị nào (ví dụ đang hoàn thiện) sẽ không xuất hiện trong kết quả.
+- Trong trường hợp muốn bảo toàn mọi tòa nhà (tòa nhà chưa có thiết bị sẽ hiển thị số lượng = 0), ta sử dụng phép kết ngoài trái ($\leftouterjoin$):
+  $$E_{\text{Outer}} = \text{TOANHA} \leftouterjoin \text{TANG} \leftouterjoin \text{THIETBI\_PCCC}$$
+  $$\text{KQ}_{\text{Outer}} = {}_{\text{MATN}, \text{TENTN}}\gamma_{\text{COUNT}(\text{MATB}) \to \text{TONG\_THIETBI}}(E_{\text{Outer}})$$
+
 *Barem chấm:*
 - Kết nối đúng các quan hệ để có đầy đủ thông tin tòa nhà và thiết bị: 0.30đ.
 - Sử dụng đúng toán tử gom nhóm $\gamma$, thuộc tính gom nhóm và hàm $\text{COUNT}$: 0.40đ.
@@ -298,8 +304,12 @@ WHERE MADOT = 'DKT01'
   );
   ```
 
-*Phân tích biên (Edge Case):*
-- Nếu $S = \emptyset$ (hệ thống chưa lắp đặt đầu báo khói nào), theo định nghĩa lý thuyết tập hợp, mọi đợt kiểm tra trong miền ứng viên đều thỏa mãn chân không (vacuously true). Trong SQL thực tế, mệnh đề `EXISTS (SELECT * FROM CT_KIEMTRA ...)` đảm bảo chỉ trả về các đợt kiểm tra thực sự có dữ liệu hoạt động.
+*Phân tích biên (Edge Case) & Ngữ nghĩa phép chia khi tập chia rỗng ($S = \emptyset$):*
+- Theo định nghĩa đại số quan hệ hình thức: $R(A, B) \div S(B) = \{ a \in \pi_A(R) \mid \forall b \in S, (a, b) \in R \}$.
+- Khi $S = \emptyset$ (hệ thống chưa lắp đặt đầu báo khói nào), điều kiện phổ quát $\forall b \in \emptyset$ luôn đúng chân không (vacuously true) với mọi phần tử trong miền ứng viên.
+  1. *Miền ứng viên thực tế $\pi_{\text{MADOT}}(R)$:* Biểu thức đại số thuần túy $\pi_{\text{MADOT}}(R) - \pi_{\text{MADOT}}(\pi_{\text{MADOT}}(R) \times S - R)$ và câu lệnh SQL có mệnh đề `AND EXISTS (SELECT 1 FROM CT_KIEMTRA ...)` đều trả về toàn bộ các đợt kiểm tra đã hoạt động.
+  2. *Miền ứng viên mở rộng $\pi_{\text{MADOT}}(\text{DOT\_KIEMTRA})$:* Câu lệnh SQL `FROM DOT_KIEMTRA DK WHERE NOT EXISTS ...` (không có ràng buộc EXISTS bảng con) trả về toàn bộ danh mục đợt kiểm tra, kể cả đợt mới tạo chưa có bản ghi chi tiết nào.
+- *So sánh hai cách viết SQL:* Phương pháp `HAVING COUNT(DISTINCT TB.MATB) = (SELECT COUNT(*) FROM ...)` chỉ tương đương hoàn toàn khi $S \ne \emptyset$. Khi $S = \emptyset$, vế phải bằng 0 nhưng phép INNER JOIN loại bỏ các nhóm không có dữ liệu, do đó phương pháp phủ định kép `NOT EXISTS` phản ánh chính xác nhất bản chất logic vị từ của đại số quan hệ.
 
 *Barem chấm:*
 - Xác định đúng tập chia $S$ và tập bị chia $R$: 0.30đ.
@@ -344,6 +354,10 @@ WHERE MADOT = 'DKT01'
       GROUP BY T2.MATN
   );
   ```
+
+*Lưu ý ngữ nghĩa cực trị & Trường hợp tòa nhà không có căn hộ:*
+- Các tòa nhà có 0 căn hộ (tòa nhà thương mại hoặc mới xây) sẽ không tạo bản ghi trong phép kết INNER JOIN `TANG ⋈ CANHO`, do đó số căn hộ đếm được của các tòa này không tham gia cạnh tranh cực đại MAX ($> 0$).
+- Biểu thức đại số quan hệ sử dụng phép trừ tập hợp đối xứng so sánh nhỏ hơn ($R1.\text{SOCAN} < R2.\text{SOCAN}$) bảo toàn hoàn toàn tất cả các tòa nhà cùng đạt giá trị lớn nhất (đồng hạng cực đại).
 
 *Barem chấm:*
 - Gom nhóm tính số lượng căn hộ từng tòa: 0.30đ.

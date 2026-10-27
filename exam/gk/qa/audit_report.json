@@ -10,15 +10,15 @@
     },
     "difficulties": {
       "A": 25,
-      "B": 108,
-      "C": 40
+      "B": 109,
+      "C": 39
     },
-    "verified_problems": 58,
-    "draft_problems": 115,
+    "verified_problems": 64,
+    "draft_problems": 109,
     "verification_levels": {
-      "EXECUTION_VERIFIED": 18,
-      "SEMANTICALLY_REVIEWED": 40,
-      "DRAFT": 115
+      "EXECUTION_VERIFIED": 27,
+      "SEMANTICALLY_REVIEWED": 37,
+      "DRAFT": 109
     },
     "solutions_present": 173,
     "rubrics_present": 173,

@@ -1,0 +1,44 @@
+﻿Changed database context to 'tempdb'.
+------------------------------------------------------------
+=== TEST 1: CHECK CONSTRAINT ADVERSARIAL INTEGRITY ===
+------------------------------------------------------------
+  [PASS] Test 1A: CK_PHIEUNHAN_SOTIEN correctly blocked negative SOTIEN.
+  [PASS] Test 1B: CK_PHIEUNHAN_SOTIEN correctly blocked SOTIEN = 0.
+  [PASS] Test 1C: CK_DOTCUUTRO_NGAY correctly blocked NGAYKT < NGAYBD.
+  [PASS] Test 1D: NOT NULL policy correctly rejected NULL SOTIEN (Error 515).
+------------------------------------------------------------
+=== TEST 2: QUESTION 2.1B UPDATE VERIFICATION ===
+------------------------------------------------------------
+  [PASS] Test 2: UPDATE correctly affected 2 households (HD01, HD02).
+  [PASS] Test 2b: Verified both HD01 and HD02 updated to Nang.
+------------------------------------------------------------
+=== TEST 3: QUESTION 2.2A SELECTION & PROJECTION ===
+------------------------------------------------------------
+  [PASS] Test 3: Selection returned exactly 2 individual donors (NHT03, NHT04).
+------------------------------------------------------------
+=== TEST 4: QUESTION 2.2B JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 4: Join returned exactly 4 severely damaged households in Can Gio.
+------------------------------------------------------------
+=== TEST 5: QUESTION 2.2C OUTER JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 5: Outer join preserved XA03 with NULL household info (total 7 rows).
+------------------------------------------------------------
+=== TEST 6: QUESTION 2.2D GROUPING & AGGREGATE ===
+------------------------------------------------------------
+  [PASS] Test 6: Grouping SUM verified: NHT01=1,000,000,000; NHT02=550,000,000.
+------------------------------------------------------------
+=== TEST 7: QUESTION 2.2E RELATIONAL DIVISION ===
+------------------------------------------------------------
+  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (DOT01, DOT02).
+------------------------------------------------------------
+=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
+------------------------------------------------------------
+  [PASS] Test 8: Empty target S=Ø semantic verified: candidate universe returns 4 active batches.
+------------------------------------------------------------
+=== TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===
+------------------------------------------------------------
+  [PASS] Test 9: Extreme tie-breaking verified: XA01 (20tr) and XA02 (20tr) preserved; XA04 (5tr) excluded.
+------------------------------------------------------------
+=== ALL 9 MOCK-03 VERIFICATION SUITES PASSED WITH ASSERTIONS ===
+------------------------------------------------------------

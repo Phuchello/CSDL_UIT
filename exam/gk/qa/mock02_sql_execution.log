@@ -10,69 +10,35 @@
 === TEST 2: QUESTION 2.1B UPDATE VERIFICATION ===
 ------------------------------------------------------------
   [PASS] Test 2: UPDATE correctly affected 1 row as expected.
-MADOT      MATB       TENTB                                                                                                HANSUDUNG        TINHTRANG
----------- ---------- ---------------------------------------------------------------------------------------------------- ---------------- --------------------------------------------------
-DKT01      TB04       Bình bột MFZ4 - 01                                                                                         2025-05-15 Hết hạn
+  [PASS] Test 2b: Verified TINHTRANG in database is updated to 'Het han'.
 ------------------------------------------------------------
 === TEST 3: QUESTION 2.2A SELECTION & PROJECTION ===
 ------------------------------------------------------------
-MATB       TENTB                                                                                                VITRI_LAPDAT                                                                                         HANSUDUNG
----------- ---------------------------------------------------------------------------------------------------- ---------------------------------------------------------------------------------------------------- ----------------
-TB04       Bình bột MFZ4 - 01                                                                                   Hộp PCCC vách tường T1                                                                                     2025-05-15
-TB05       Bình bột MFZ4 - 02                                                                                   Hộp PCCC vách tường T10                                                                                    2025-11-20
+  [PASS] Test 3: Selection returned exactly 2 devices (TB04, TB05) with HSD in 2025.
 ------------------------------------------------------------
 === TEST 4: QUESTION 2.2B JOIN QUERY ===
 ------------------------------------------------------------
-MACANHO    SOCANHO              DIENTICH
----------- -------------------- ------------------------
-CH02       A1001                                    85.0
-CH03       A1002                                    72.0
-CH04       A1501                                   110.0
+  [PASS] Test 4: Join returned exactly 3 apartments (CH02, CH03, CH04) at floors >= 10.
 ------------------------------------------------------------
 === TEST 5: QUESTION 2.2C OUTER JOIN QUERY ===
 ------------------------------------------------------------
-MATANG     STTTANG     MATB       TENTB
----------- ----------- ---------- ----------------------------------------------------------------------------------------------------
-TANG01               1 TB01       Đầu báo khói quang điện T1
-TANG01               1 TB04       Bình bột MFZ4 - 01
-TANG02              10 TB02       Đầu báo khói nhiệt T10
-TANG02              10 TB05       Bình bột MFZ4 - 02
-TANG03              15 TB03       Đầu báo khói thông minh T15
-TANG04              20 NULL       NULL
+  [PASS] Test 5: Outer join correctly preserved TANG04 with NULL device info (total 6 rows).
 ------------------------------------------------------------
 === TEST 6: QUESTION 2.2D GROUPING & AGGREGATE ===
 ------------------------------------------------------------
-MATN       TENTN                                                                                                TONG_THIETBI
----------- ---------------------------------------------------------------------------------------------------- ------------
-TN01       Ruby Tower                                                                                                      5
-TN02       Sapphire Tower                                                                                                  2
+  [PASS] Test 6: Grouping verified: TN01=5, TN02=2; TN03 excluded in INNER JOIN, counted as 0 in LEFT JOIN.
 ------------------------------------------------------------
 === TEST 7: QUESTION 2.2E RELATIONAL DIVISION ===
 ------------------------------------------------------------
-MADOT      NGAYKT           NGUOIKT
----------- ---------------- ----------------------------------------------------------------------------------------------------
-DKT01            2024-10-15 Đoàn kiểm tra PCCC Q.Thủ Đức
-DKT02            2024-11-20 Trung tâm Kiểm định PCCC TP.HCM
-MADOT      NGAYKT           NGUOIKT
----------- ---------------- ----------------------------------------------------------------------------------------------------
-DKT01            2024-10-15 Đoàn kiểm tra PCCC Q.Thủ Đức
-DKT02            2024-11-20 Trung tâm Kiểm định PCCC TP.HCM
+  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (DKT01, DKT02).
 ------------------------------------------------------------
 === TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
 ------------------------------------------------------------
-MADOT
-----------
-DKT01
-DKT02
-DKT03
-DKT04
+  [PASS] Test 8: Empty target S=Ø semantic verified: bounded candidate universe returns 4 batches, unbounded returns 5.
 ------------------------------------------------------------
 === TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===
 ------------------------------------------------------------
-MATN       TENTN                                                                                                SOTANG      SOCAN
----------- ---------------------------------------------------------------------------------------------------- ----------- -----------
-TN01       Ruby Tower                                                                                                    25           4
-TN02       Sapphire Tower                                                                                                30           4
+  [PASS] Test 9: Extreme tie-breaking verified: TN01 (4) and TN02 (4) preserved; TN03 (2) and TN04 (0) excluded.
 ------------------------------------------------------------
-=== ALL 9 MOCK-02 VERIFICATION SUITES PASSED CLEANLY ===
+=== ALL 9 MOCK-02 VERIFICATION SUITES PASSED WITH ASSERTIONS ===
 ------------------------------------------------------------

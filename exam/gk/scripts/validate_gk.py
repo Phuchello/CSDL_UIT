@@ -102,10 +102,8 @@ class GKValidator:
 
             # Strict verification criteria
             if v_level == "EXECUTION_VERIFIED":
-                if pid.startswith("M01"):
-                    exec_log = QA_DIR / "mock01_sql_execution.log"
-                elif pid.startswith("M02"):
-                    exec_log = QA_DIR / "mock02_sql_execution.log"
+                if pid.startswith("M") and len(pid) >= 3 and pid[1:3].isdigit():
+                    exec_log = QA_DIR / f"mock{pid[1:3]}_sql_execution.log"
                 else:
                     exec_log = QA_DIR / f"{pid.lower()}_sql_execution.log"
 

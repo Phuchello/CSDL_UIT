@@ -14,7 +14,7 @@
 | **P0-02b** | False Positive trong Test CHECK Constraint & Lỗi Tiếng Việt | **P0** (Critical) | **RESOLVED** | 23/10/2026 | 23/10/2026 |
 | **P0-03** | Validator báo cáo độ tin cậy ảo (False Confidence) | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
 | **P0-04** | Ấn phẩm PDF không phân định bản DRAFT & VERIFIED | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
-| **P0-05** | Phân mảnh lược đồ & trùng câu MOCK-02 $\to$ MOCK-15 | **P1** (High) | **IN_PROGRESS (MOCK-02 RESOLVED)** | 22/10/2026 | Đang xử lý Phase C |
+| **P0-05** | Phân mảnh lược đồ & trùng câu MOCK-02 $\to$ MOCK-15 | **P1** (High) | **IN_PROGRESS (MOCK-01, MOCK-02, MOCK-03 RESOLVED)** | 22/10/2026 | Đang xử lý Phase C |
 
 ---
 
@@ -111,7 +111,12 @@
      - Tái thiết kế toàn diện theo một miền nghiệp vụ duy nhất: *Quản lý An toàn Phòng cháy Chữa cháy (PCCC) Chung Cư Cao Tầng*.
      - Lược đồ chuẩn 6 quan hệ: `TOANHA`, `TANG`, `CANHO`, `THIETBI_PCCC`, `DOT_KIEMTRA`, `CT_KIEMTRA`.
      - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.5đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu x 1.0đ = 6.0đ).
-     - Viết bài kiểm thử [`exam/gk/mocks/MOCK-02/fixture_mock02.sql`](../../exam/gk/mocks/MOCK-02/fixture_mock02.sql) thực thi 100% PASS trên Microsoft SQL Server 2025, bắt trúng vi phạm CHECK/NOT NULL, kiểm chứng phép chia, gom nhóm và đồng hạng cực đại. Log lưu tại [`exam/gk/qa/mock02_sql_execution.log`](../../exam/gk/qa/mock02_sql_execution.log).
+     - Viết bài kiểm thử [`exam/gk/mocks/MOCK-02/fixture_mock02.sql`](../../exam/gk/mocks/MOCK-02/fixture_mock02.sql) thực thi 100% PASS trên Microsoft SQL Server 2025 với automated assertions (`THROW 500XX`), bắt trúng vi phạm CHECK/NOT NULL, kiểm chứng phép chia (bao gồm trường hợp biên tập chia rỗng $S = \emptyset$), gom nhóm bảo toàn số 0 và đồng hạng cực đại. Log lưu tại [`exam/gk/qa/mock02_sql_execution.log`](../../exam/gk/qa/mock02_sql_execution.log).
      - Triệt tiêu 100% hiện tượng trùng lặp câu hỏi giữa các đề: MOCK-13 và MOCK-15 được phân bổ các mã DRAFT riêng biệt (`SQL-D25` đến `SQL-D28`), zero overlap.
-     - Số câu `EXECUTION_VERIFIED` nâng lên **18 câu** (MOCK-01: 9, MOCK-02: 9).
-  2. **MOCK-03 đến MOCK-15:** Giữ nguyên trạng thái `DRAFT / NOT_RELEASE_READY`, tiếp tục tái cấu trúc tuần tự trong Phase C.
+  2. **MOCK-03 (ĐÃ HOÀN TẤT & KIỂM CHỨNG 100%):**
+     - Tái thiết kế toàn diện theo miền nghiệp vụ thực tế UIT: *Quản Lý Tiếp Nhận & Phân Bổ Tiền Cứu Trợ Bão Lũ* (Profile `RECENT_VERIFIED`).
+     - Lược đồ thống nhất 6 quan hệ: `XA`, `HO_DAN`, `NHA_HAOTAM`, `DOT_CUUTRO`, `DONG_GOP`, `PHIEU_NHAN`.
+     - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.0đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu = 6.5đ; gồm Selection, Join, Outer Join, Grouping, Division, Extreme Tie-breaking). Tổng thang điểm: chính xác 10.0đ.
+     - Viết bài kiểm thử [`exam/gk/mocks/MOCK-03/fixture_mock03.sql`](../../exam/gk/mocks/MOCK-03/fixture_mock03.sql) có 9 suite kiểm thử đối kháng với automated assertions (`THROW 500XX`), chạy 100% PASS trên Microsoft SQL Server 2025 (`localhost`). Log lưu tại [`exam/gk/qa/mock03_sql_execution.log`](../../exam/gk/qa/mock03_sql_execution.log).
+     - Thay thế 9 câu DRAFT cũ bằng 9 câu chuẩn hóa (`M03-Q1` đến `M03-Q2C6`), nâng tổng số câu `EXECUTION_VERIFIED` lên **27 câu** (MOCK-01: 9, MOCK-02: 9, MOCK-03: 9). Tổng số câu toàn ngân hàng giữ vững 173 câu.
+  3. **MOCK-04 đến MOCK-15:** Giữ nguyên trạng thái `DRAFT / NOT_RELEASE_READY`, tiếp tục tái cấu trúc tuần tự trong Phase C (Batch C.3: MOCK-04 & MOCK-05).

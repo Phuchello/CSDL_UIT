@@ -242,7 +242,7 @@ CREATE TABLE CTPX (MAPX VARCHAR(10), MALO VARCHAR(10), SOLIEUXUAT INT CHECK(SOLI
 
 ---
 
-## Bài 11 [SQL-D05] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 5)
+## Bài 11 [SQL-D07] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 7)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -266,55 +266,7 @@ UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.I
 
 ---
 
-## Bài 12 [SQL-D06] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 6)
-- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
-
-### 1. Đề Bài
-Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
-```sql
-ALTER TABLE BANG_6 ADD CONSTRAINT CK_BANG_6 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định bảng
-1. Viết cú pháp T-SQL
-1. Kiểm thử logic.
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
-
----
-
-## Bài 13 [SQL-D07] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 7)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
-
-### 1. Đề Bài
-Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
-```sql
-UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định bảng
-1. Viết cú pháp T-SQL
-1. Kiểm thử logic.
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
-
----
-
-## Bài 14 [SQL-D08] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 8)
+## Bài 12 [SQL-D08] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 8)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -338,7 +290,7 @@ ALTER TABLE BANG_8 ADD CONSTRAINT CK_BANG_8 CHECK (SOLUONG > 0 AND TRANGTHAI IN 
 
 ---
 
-## Bài 15 [SQL-D09] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 9)
+## Bài 13 [SQL-D09] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 9)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -362,7 +314,7 @@ UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.I
 
 ---
 
-## Bài 16 [SQL-D10] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 10)
+## Bài 14 [SQL-D10] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 10)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -386,7 +338,7 @@ ALTER TABLE BANG_10 ADD CONSTRAINT CK_BANG_10 CHECK (SOLUONG > 0 AND TRANGTHAI I
 
 ---
 
-## Bài 17 [SQL-D11] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 11)
+## Bài 15 [SQL-D11] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 11)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -410,7 +362,7 @@ UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.I
 
 ---
 
-## Bài 18 [SQL-D12] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 12)
+## Bài 16 [SQL-D12] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 12)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -434,7 +386,7 @@ ALTER TABLE BANG_12 ADD CONSTRAINT CK_BANG_12 CHECK (SOLUONG > 0 AND TRANGTHAI I
 
 ---
 
-## Bài 19 [SQL-D13] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 13)
+## Bài 17 [SQL-D13] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 13)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -458,7 +410,7 @@ UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.I
 
 ---
 
-## Bài 20 [SQL-D14] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 14)
+## Bài 18 [SQL-D14] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 14)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -482,7 +434,7 @@ ALTER TABLE BANG_14 ADD CONSTRAINT CK_BANG_14 CHECK (SOLUONG > 0 AND TRANGTHAI I
 
 ---
 
-## Bài 21 [SQL-D15] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 15)
+## Bài 19 [SQL-D15] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 15)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -506,7 +458,7 @@ UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.I
 
 ---
 
-## Bài 22 [SQL-D16] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 16)
+## Bài 20 [SQL-D16] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 16)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -530,7 +482,7 @@ ALTER TABLE BANG_16 ADD CONSTRAINT CK_BANG_16 CHECK (SOLUONG > 0 AND TRANGTHAI I
 
 ---
 
-## Bài 23 [SQL-D17] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 17)
+## Bài 21 [SQL-D17] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 17)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -554,7 +506,7 @@ UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.I
 
 ---
 
-## Bài 24 [SQL-D18] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 18)
+## Bài 22 [SQL-D18] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 18)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -578,7 +530,7 @@ ALTER TABLE BANG_18 ADD CONSTRAINT CK_BANG_18 CHECK (SOLUONG > 0 AND TRANGTHAI I
 
 ---
 
-## Bài 25 [SQL-D19] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 19)
+## Bài 23 [SQL-D19] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 19)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -602,7 +554,7 @@ UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.I
 
 ---
 
-## Bài 26 [SQL-D20] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 20)
+## Bài 24 [SQL-D20] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 20)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -626,7 +578,7 @@ ALTER TABLE BANG_20 ADD CONSTRAINT CK_BANG_20 CHECK (SOLUONG > 0 AND TRANGTHAI I
 
 ---
 
-## Bài 27 [SQL-D21] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 21)
+## Bài 25 [SQL-D21] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 21)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -650,7 +602,7 @@ UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.I
 
 ---
 
-## Bài 28 [SQL-D22] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 22)
+## Bài 26 [SQL-D22] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 22)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -674,7 +626,7 @@ ALTER TABLE BANG_22 ADD CONSTRAINT CK_BANG_22 CHECK (SOLUONG > 0 AND TRANGTHAI I
 
 ---
 
-## Bài 29 [SQL-D23] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 23)
+## Bài 27 [SQL-D23] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 23)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -698,7 +650,7 @@ UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.I
 
 ---
 
-## Bài 30 [SQL-D24] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 24)
+## Bài 28 [SQL-D24] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 24)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
 
@@ -715,6 +667,53 @@ ALTER TABLE BANG_24 ADD CONSTRAINT CK_BANG_24 CHECK (SOLUONG > 0 AND TRANGTHAI I
 1. Xác định bảng
 1. Viết cú pháp T-SQL
 1. Kiểm thử logic.
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.40đ
+- `logic`: 0.35đ
+
+---
+
+## Bài 29 [M03-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên PHIEU_NHAN và DOT_CUUTRO
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `PHIEU_NHAN, DOT_CUUTRO`
+
+### 1. Đề Bài
+Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra số tiền nhận (SOTIEN) trong bảng PHIEU_NHAN phải lớn hơn 0 (> 0), và ngày kết thúc đợt cứu trợ (NGAYKT) trong bảng DOT_CUUTRO phải lớn hơn hoặc bằng ngày bắt đầu (NGAYKT >= NGAYBD). Cả hai thuộc tính đều không được mang giá trị NULL.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh SQL tương đương:**
+```sql
+ALTER TABLE PHIEU_NHAN ALTER COLUMN SOTIEN DECIMAL(18, 2) NOT NULL;
+ALTER TABLE PHIEU_NHAN ADD CONSTRAINT CK_PHIEUNHAN_SOTIEN CHECK (SOTIEN > 0);
+
+ALTER TABLE DOT_CUUTRO ALTER COLUMN NGAYKT DATE NOT NULL;
+ALTER TABLE DOT_CUUTRO ADD CONSTRAINT CK_DOTCUUTRO_NGAY CHECK (NGAYKT >= NGAYBD);
+```
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.40đ
+- `logic`: 0.35đ
+
+---
+
+## Bài 30 [M03-Q2B] — Cập Nhật Mức Độ Thiệt Hại Trong HO_DAN Thuộc Xã Hiệp Phước
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `HO_DAN, XA`
+
+### 1. Đề Bài
+Cập nhật mức độ thiệt hại (MUCDO_THIETHAI) thành 'Nặng' cho các hộ gia đình thuộc xã có tên (TENXA) là 'Hiệp Phước' và có số nhân khẩu (SONKHAU) từ 5 người trở lên.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh SQL tương đương:**
+```sql
+UPDATE HD
+SET HD.MUCDO_THIETHAI = N'Nặng'
+FROM HO_DAN HD
+INNER JOIN XA X ON HD.MAXA = X.MAXA
+WHERE X.TENXA = N'Hiệp Phước'
+  AND HD.SONKHAU >= 5;
+```
 
 **Barem chấm điểm đề xuất:**
 - `syntax`: 0.40đ

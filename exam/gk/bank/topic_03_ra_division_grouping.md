@@ -316,96 +316,7 @@ SELECT ID FROM R1 WHERE NOT EXISTS (SELECT * FROM R2 WHERE NOT EXISTS (...));
 
 ---
 
-## Bài 10 [RA-D07] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 7)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `DONHANG, CHITIET, MATHANG`
-
-### 1. Đề Bài
-Cho CSDL DONHANG, CHITIET, MATHANG. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: đơn hàng mua tất cả mặt hàng loại 'Điện tử'.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Target ← π_{KEY2}(σ_{DK}(R2))
-R_Cand ← π_{KEY1, KEY2}(R1)
-KQ ← (R_Cand ÷ R_Target) ⋈ INFO
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
-
----
-
-## Bài 11 [RA-D08] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 8)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `BACSI, PHUTRACH, BENHNHAN`
-
-### 1. Đề Bài
-Cho CSDL BACSI, PHUTRACH, BENHNHAN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)
-KQ ← π_{KEY, TONG}(R_Group)
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
-
----
-
-## Bài 12 [RA-D09] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 9)
-- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `HOCVIEN, DANGKY, KHOAHOC`
-
-### 1. Đề Bài
-Cho CSDL HOCVIEN, DANGKY, KHOAHOC. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: học viên hoàn thành tất cả khóa học nâng cao.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-R_Target ← π_{KEY2}(σ_{DK}(R2))
-R_Cand ← π_{KEY1, KEY2}(R1)
-KQ ← (R_Cand ÷ R_Target) ⋈ INFO
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập mục tiêu hoặc thuộc tính gom nhóm
-1. Thực hiện phép chia / gom nhóm
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic_steps`: 0.60đ
-- `correct_syntax`: 0.40đ
-
----
-
-## Bài 13 [RA-D10] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 10)
+## Bài 10 [RA-D10] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 10)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TAU, CAPCANG, CANGBIEN`
 
@@ -434,7 +345,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 14 [RA-D11] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 11)
+## Bài 11 [RA-D11] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 11)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHA_DAUTU, GOPT_VON, DUAN`
 
@@ -464,7 +375,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 15 [RA-D12] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 12)
+## Bài 12 [RA-D12] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 12)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACH, DATTIEC, SANHTIEC`
 
@@ -493,7 +404,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 16 [RA-D13] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 13)
+## Bài 13 [RA-D13] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 13)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DOCGIA, MUONSACH, SACH, THELOAI`
 
@@ -523,7 +434,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 17 [RA-D14] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 14)
+## Bài 14 [RA-D14] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 14)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DIEMTIEM, PHIEUXUAT, CTPX, VACXIN`
 
@@ -552,7 +463,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 18 [RA-D15] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 15)
+## Bài 15 [RA-D15] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 15)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DONHANG, CHITIET, MATHANG`
 
@@ -582,7 +493,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 19 [RA-D16] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 16)
+## Bài 16 [RA-D16] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 16)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI, PHUTRACH, BENHNHAN`
 
@@ -611,7 +522,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 20 [RA-D17] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 17)
+## Bài 17 [RA-D17] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 17)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `HOCVIEN, DANGKY, KHOAHOC`
 
@@ -641,7 +552,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 21 [RA-D18] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 18)
+## Bài 18 [RA-D18] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 18)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TAU, CAPCANG, CANGBIEN`
 
@@ -670,7 +581,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 22 [RA-D19] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 19)
+## Bài 19 [RA-D19] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 19)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHA_DAUTU, GOPT_VON, DUAN`
 
@@ -700,7 +611,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 23 [RA-D20] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 20)
+## Bài 20 [RA-D20] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 20)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACH, DATTIEC, SANHTIEC`
 
@@ -729,7 +640,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 24 [RA-D21] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 21)
+## Bài 21 [RA-D21] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 21)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DOCGIA, MUONSACH, SACH, THELOAI`
 
@@ -759,7 +670,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 25 [RA-D22] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 22)
+## Bài 22 [RA-D22] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 22)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DIEMTIEM, PHIEUXUAT, CTPX, VACXIN`
 
@@ -788,7 +699,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 26 [RA-D23] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 23)
+## Bài 23 [RA-D23] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 23)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DONHANG, CHITIET, MATHANG`
 
@@ -818,7 +729,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 27 [RA-D24] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 24)
+## Bài 24 [RA-D24] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 24)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI, PHUTRACH, BENHNHAN`
 
@@ -847,7 +758,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 28 [RA-D25] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 25)
+## Bài 25 [RA-D25] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 25)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `HOCVIEN, DANGKY, KHOAHOC`
 
@@ -877,7 +788,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 29 [RA-D26] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 26)
+## Bài 26 [RA-D26] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 26)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TAU, CAPCANG, CANGBIEN`
 
@@ -906,7 +817,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 30 [RA-D27] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 27)
+## Bài 27 [RA-D27] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 27)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHA_DAUTU, GOPT_VON, DUAN`
 
@@ -936,7 +847,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 31 [RA-D28] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 28)
+## Bài 28 [RA-D28] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 28)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACH, DATTIEC, SANHTIEC`
 
@@ -965,7 +876,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 32 [RA-D29] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 29)
+## Bài 29 [RA-D29] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 29)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DOCGIA, MUONSACH, SACH, THELOAI`
 
@@ -995,7 +906,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 33 [RA-D30] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 30)
+## Bài 30 [RA-D30] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 30)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DIEMTIEM, PHIEUXUAT, CTPX, VACXIN`
 
@@ -1024,7 +935,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 34 [RA-D31] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 31)
+## Bài 31 [RA-D31] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 31)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DONHANG, CHITIET, MATHANG`
 
@@ -1054,7 +965,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 35 [RA-D32] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 32)
+## Bài 32 [RA-D32] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 32)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI, PHUTRACH, BENHNHAN`
 
@@ -1083,7 +994,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 36 [RA-D33] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 33)
+## Bài 33 [RA-D33] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 33)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `HOCVIEN, DANGKY, KHOAHOC`
 
@@ -1113,7 +1024,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 37 [RA-D34] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 34)
+## Bài 34 [RA-D34] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 34)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TAU, CAPCANG, CANGBIEN`
 
@@ -1142,7 +1053,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 38 [RA-D35] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 35)
+## Bài 35 [RA-D35] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 35)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHA_DAUTU, GOPT_VON, DUAN`
 
@@ -1172,7 +1083,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 39 [RA-D36] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 36)
+## Bài 36 [RA-D36] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 36)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACH, DATTIEC, SANHTIEC`
 
@@ -1201,7 +1112,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 40 [RA-D37] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 37)
+## Bài 37 [RA-D37] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 37)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DOCGIA, MUONSACH, SACH, THELOAI`
 
@@ -1231,7 +1142,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 41 [RA-D38] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 38)
+## Bài 38 [RA-D38] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 38)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DIEMTIEM, PHIEUXUAT, CTPX, VACXIN`
 
@@ -1260,7 +1171,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 42 [RA-D39] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 39)
+## Bài 39 [RA-D39] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 39)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DONHANG, CHITIET, MATHANG`
 
@@ -1290,7 +1201,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 43 [RA-D40] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 40)
+## Bài 40 [RA-D40] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 40)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI, PHUTRACH, BENHNHAN`
 
@@ -1319,7 +1230,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 44 [RA-D41] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 41)
+## Bài 41 [RA-D41] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 41)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `HOCVIEN, DANGKY, KHOAHOC`
 
@@ -1349,7 +1260,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 45 [RA-D42] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 42)
+## Bài 42 [RA-D42] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Tàu & Cảng Biển (Bài 42)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TAU, CAPCANG, CANGBIEN`
 
@@ -1378,7 +1289,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 46 [RA-D43] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 43)
+## Bài 43 [RA-D43] — ĐSQH Phép Chia (Tất Cả): Nhà Đầu Tư & Dự Án (Bài 43)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHA_DAUTU, GOPT_VON, DUAN`
 
@@ -1408,7 +1319,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 47 [RA-D44] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 44)
+## Bài 44 [RA-D44] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Khách Hàng & Sảnh Tiệc (Bài 44)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACH, DATTIEC, SANHTIEC`
 
@@ -1437,7 +1348,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 48 [RA-D45] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 45)
+## Bài 45 [RA-D45] — ĐSQH Phép Chia (Tất Cả): Độc Giả & Thể Loại Sách (Bài 45)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DOCGIA, MUONSACH, SACH, THELOAI`
 
@@ -1467,7 +1378,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 49 [RA-D46] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 46)
+## Bài 46 [RA-D46] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Điểm Tiêm & Vắc-Xin (Bài 46)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DIEMTIEM, PHIEUXUAT, CTPX, VACXIN`
 
@@ -1496,7 +1407,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 50 [RA-D47] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 47)
+## Bài 47 [RA-D47] — ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 47)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DONHANG, CHITIET, MATHANG`
 
@@ -1526,7 +1437,7 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 
 ---
 
-## Bài 51 [RA-D48] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 48)
+## Bài 48 [RA-D48] — ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 48)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI, PHUTRACH, BENHNHAN`
 
@@ -1555,7 +1466,7 @@ SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*)
 
 ---
 
-## Bài 52 [RA-D49] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 49)
+## Bài 49 [RA-D49] — ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 49)
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `HOCVIEN, DANGKY, KHOAHOC`
 
@@ -1582,5 +1493,102 @@ SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELE
 **Barem chấm điểm đề xuất:**
 - `logic_steps`: 0.60đ
 - `correct_syntax`: 0.40đ
+
+---
+
+## Bài 50 [M03-Q2C4] — ĐSQH Gom Nhóm Tính Tổng Tiền Ủng Hộ Theo Nhà Hảo Tâm Năm 2024
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `NHA_HAOTAM, DONG_GOP`
+
+### 1. Đề Bài
+Tính tổng số tiền ủng hộ (TONG_TIEN) của từng nhà hảo tâm đã đóng góp trong năm 2024. Thông tin hiển thị gồm: MANHT, TENNHT, TONG_TIEN.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+E1 ← σ_{NGAYDG ≥ '2024-01-01' ∧ NGAYDG ≤ '2024-12-31'}(DONG_GOP)
+E2 ← NHA_HAOTAM ⋈ E1
+KQ ← _{MANHT, TENNHT}γ_{SUM(SOTIEN) → TONG_TIEN}(E2)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT NHT.MANHT, NHT.TENNHT, SUM(DG.SOTIEN) AS TONG_TIEN FROM NHA_HAOTAM NHT INNER JOIN DONG_GOP DG ON NHT.MANHT = DG.MANHT WHERE DG.NGAYDG >= '2024-01-01' AND DG.NGAYDG <= '2024-12-31' GROUP BY NHT.MANHT, NHT.TENNHT;
+```
+
+**Các bước suy luận tư duy:**
+1. Lọc đóng góp trong năm 2024
+1. Kết nối với bảng NHA_HAOTAM
+1. Gom nhóm theo MANHT, TENNHT và tính SUM(SOTIEN)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `projection`: 0.30đ
+
+---
+
+## Bài 51 [M03-Q2C5] — ĐSQH Phép Chia Tìm Đợt Cứu Trợ Được Đóng Góp Bởi Tất Cả Doanh Nghiệp
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `DOT_CUUTRO, DONG_GOP, NHA_HAOTAM`
+
+### 1. Đề Bài
+Tìm các đợt cứu trợ (MADOT, TENDOT, NGAYBD) đã tiếp nhận tiền đóng góp từ tất cả các nhà hảo tâm thuộc loại hình 'Doanh nghiệp'.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+R ← π_{MADOT, MANHT}(DONG_GOP)
+S ← π_{MANHT}(σ_{LOAIHINH='Doanh nghiệp'}(NHA_HAOTAM))
+R_KQ ← R ÷ S
+KQ ← π_{MADOT, TENDOT, NGAYBD}(R_KQ ⋈ DOT_CUUTRO)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT DCT.MADOT, DCT.TENDOT, DCT.NGAYBD FROM DOT_CUUTRO DCT WHERE NOT EXISTS (SELECT * FROM NHA_HAOTAM NHT WHERE NHT.LOAIHINH = N'Doanh nghiệp' AND NOT EXISTS (SELECT * FROM DONG_GOP DG WHERE DG.MADOT = DCT.MADOT AND DG.MANHT = NHT.MANHT)) AND EXISTS (SELECT * FROM DONG_GOP WHERE MADOT = DCT.MADOT);
+```
+
+**Các bước suy luận tư duy:**
+1. Xác định tập bị chia R(MADOT, MANHT)
+1. Xác định tập chia S(MANHT) gồm các nhà hảo tâm Doanh nghiệp
+1. Thực hiện phép chia R ÷ S để tìm đợt cứu trợ nhận đủ tất cả doanh nghiệp
+1. Kết nối với DOT_CUUTRO để lấy thông tin đợt
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `projection`: 0.30đ
+
+---
+
+## Bài 52 [M03-Q2C6] — ĐSQH Tìm Xã Có Tổng Tiền Cứu Trợ Đã Phân Bổ Nhiều Nhất
+- **Mức độ:** Mức C | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.5 điểm
+- **Lược đồ tham chiếu:** `XA, HO_DAN, PHIEU_NHAN`
+
+### 1. Đề Bài
+Tìm thông tin xã (MAXA, TENXA, HUYEN) có tổng số tiền cứu trợ đã phân bổ cho các hộ dân (TONG_CUUTRO) nhiều nhất (bảo toàn tất cả các xã nếu có nhiều xã cùng đạt số tiền cứu trợ lớn nhất).
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+R_TongTien ← _{MAXA}γ_{SUM(SOTIEN) → TONG_CUUTRO}(HO_DAN ⋈ PHIEU_NHAN)
+R_NhoHon ← π_{R1.TONG_CUUTRO}(σ_{R1.TONG_CUUTRO < R2.TONG_CUUTRO}(ρ_{R1}(R_TongTien) × ρ_{R2}(R_TongTien)))
+R_Max ← π_{TONG_CUUTRO}(R_TongTien) - R_NhoHon
+KQ ← π_{MAXA, TENXA, HUYEN}(XA ⋈ R_TongTien ⋈ R_Max)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT TOP 1 WITH TIES X.MAXA, X.TENXA, X.HUYEN, SUM(PN.SOTIEN) AS TONG_CUUTRO FROM XA X INNER JOIN HO_DAN HD ON X.MAXA = HD.MAXA INNER JOIN PHIEU_NHAN PN ON HD.MAHO = PN.MAHO GROUP BY X.MAXA, X.TENXA, X.HUYEN ORDER BY SUM(PN.SOTIEN) DESC;
+```
+
+**Các bước suy luận tư duy:**
+1. Tính tổng tiền cứu trợ phân bổ cho từng xã
+1. Dùng tích Descartes tìm các giá trị nhỏ hơn
+1. Trừ tập hợp để tìm giá trị cực đại lớn nhất
+1. Kết nối XA và bảo toàn đồng hạng
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.40đ
+- `logic`: 0.60đ
+- `projection`: 0.50đ
 
 ---

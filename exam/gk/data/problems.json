@@ -728,100 +728,6 @@
       }
     },
     {
-      "id": "ERD-003",
-      "topic": "ERD_MAPPING",
-      "difficulty": "B",
-      "title": "Thiết Kế ERD Quản Lý Cứu Trợ Thiên Tai & Bão Lũ (Authentic 2024–2025)",
-      "prompt": "Thiết kế mô hình ERD quản lý cứu trợ bão lũ: Ghi nhận thông tin hộ dân thiệt hại theo địa bàn thôn/xã, các đợt cứu trợ và các khoản đóng góp ủng hộ của nhà hảo tâm.",
-      "schema": "ERD: XA, HO_DAN, DOT_CUUTRO, NHA_HAOTAM, PHIEU_NHAN",
-      "recommended_time_mins": 25,
-      "points": 2.0,
-      "solution": {
-        "erd_entities": [
-          {
-            "name": "XA",
-            "pk": "MaXa",
-            "attributes": [
-              "MaXa",
-              "TenXa",
-              "Huyen"
-            ]
-          },
-          {
-            "name": "HO_DAN",
-            "pk": "MaHo",
-            "attributes": [
-              "MaHo",
-              "ChuHo",
-              "SoNhanKhau",
-              "MucDoThietHai"
-            ]
-          },
-          {
-            "name": "NHA_HAOTAM",
-            "pk": "MaNHT",
-            "attributes": [
-              "MaNHT",
-              "TenNHT",
-              "SDT",
-              "LoaiHinh"
-            ]
-          },
-          {
-            "name": "DOT_CUUTRO",
-            "pk": "MaDot",
-            "attributes": [
-              "MaDot",
-              "TenDot",
-              "NgayBatDau"
-            ]
-          }
-        ],
-        "relationships": [
-          {
-            "name": "TRUC_THUOC",
-            "entities": [
-              "XA",
-              "HO_DAN"
-            ],
-            "cardinality": "1:N",
-            "min_max": "XA (1, N) - (1, 1) HO_DAN"
-          },
-          {
-            "name": "DONG_GOP",
-            "entities": [
-              "NHA_HAOTAM",
-              "DOT_CUUTRO"
-            ],
-            "cardinality": "M:N",
-            "attributes": [
-              "SoTien",
-              "NgayDongGop"
-            ],
-            "min_max": "NHA_HAOTAM (1, N) - (1, N) DOT_CUUTRO"
-          }
-        ],
-        "relational_schema": [
-          "XA (MaXa, TenXa, Huyen) - PK: MaXa",
-          "HO_DAN (MaHo, ChuHo, SoNhanKhau, MucDoThietHai, MaXa) - PK: MaHo, FK: MaXa -> XA(MaXa)",
-          "NHA_HAOTAM (MaNHT, TenNHT, SDT, LoaiHinh) - PK: MaNHT",
-          "DOT_CUUTRO (MaDot, TenDot, NgayBatDau) - PK: MaDot",
-          "DONG_GOP (MaNHT, MaDot, NgayDongGop, SoTien) - PK: (MaNHT, MaDot, NgayDongGop), FK: MaNHT -> NHA_HAOTAM, MaDot -> DOT_CUUTRO"
-        ],
-        "intermediate_steps": [
-          "Xác định thuộc tính",
-          "Bản số min-max",
-          "Ánh xạ bảng trung gian M:N."
-        ]
-      },
-      "rubric": {
-        "erd": "1.25đ",
-        "mapping": "0.75đ"
-      },
-      "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
       "id": "RA-B03",
       "topic": "RA_BASIC_JOIN",
       "difficulty": "B",
@@ -1899,81 +1805,6 @@
       },
       "rubric": {
         "ra_logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "RA-B07",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "B",
-      "title": "ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 7)",
-      "prompt": "Cho lược đồ SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.",
-      "schema": "SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "KQ ← π_{THUOCTINH}(R1 ⟕ R2)",
-        "intermediate_steps": [
-          "Xác định tập quan hệ",
-          "Phép toán đại số quan hệ",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;"
-      },
-      "rubric": {
-        "logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "RA-B08",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "B",
-      "title": "ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 8)",
-      "prompt": "Cho lược đồ KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.",
-      "schema": "KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))",
-        "intermediate_steps": [
-          "Xác định tập quan hệ",
-          "Phép toán đại số quan hệ",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT * FROM R A JOIN R B ON A.PID = B.ID;"
-      },
-      "rubric": {
-        "logic": "0.60đ",
-        "syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "RA-B09",
-      "topic": "RA_BASIC_JOIN",
-      "difficulty": "B",
-      "title": "ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 9)",
-      "prompt": "Cho lược đồ SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.",
-      "schema": "SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)",
-      "recommended_time_mins": 6,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))",
-        "intermediate_steps": [
-          "Xác định tập quan hệ",
-          "Phép toán đại số quan hệ",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;"
-      },
-      "rubric": {
-        "logic": "0.60đ",
         "syntax": "0.40đ"
       },
       "status": "VERIFIED",
@@ -3255,81 +3086,6 @@
       "verification_level": "DRAFT"
     },
     {
-      "id": "RA-D07",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "C",
-      "title": "ĐSQH Phép Chia (Tất Cả): Đơn Hàng & Mặt Hàng (Bài 7)",
-      "prompt": "Cho CSDL DONHANG, CHITIET, MATHANG. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: đơn hàng mua tất cả mặt hàng loại 'Điện tử'.",
-      "schema": "DONHANG, CHITIET, MATHANG",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
-        "intermediate_steps": [
-          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
-          "Thực hiện phép chia / gom nhóm",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
-      },
-      "rubric": {
-        "logic_steps": "0.60đ",
-        "correct_syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "RA-D08",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "C",
-      "title": "ĐSQH Gom Nhóm & Cực Trị MAX/MIN: Bác Sĩ & Bệnh Nhân (Bài 8)",
-      "prompt": "Cho CSDL BACSI, PHUTRACH, BENHNHAN. Viết biểu thức ĐSQH gom nhóm tính tổng hoặc tìm đối tượng đạt giá trị cao nhất.",
-      "schema": "BACSI, PHUTRACH, BENHNHAN",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Group ← _{KEY} γ _{SUM(VAL) → TONG, COUNT(*) → SL}(R)\nKQ ← π_{KEY, TONG}(R_Group)",
-        "intermediate_steps": [
-          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
-          "Thực hiện phép chia / gom nhóm",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT KEY, SUM(VAL) AS TONG, COUNT(*) AS SL FROM R GROUP BY KEY HAVING COUNT(*) >= 2;"
-      },
-      "rubric": {
-        "logic_steps": "0.60đ",
-        "correct_syntax": "0.40đ"
-      },
-      "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED"
-    },
-    {
-      "id": "RA-D09",
-      "topic": "RA_DIVISION_GROUPING",
-      "difficulty": "C",
-      "title": "ĐSQH Phép Chia (Tất Cả): Học Viên & Khóa Học (Bài 9)",
-      "prompt": "Cho CSDL HOCVIEN, DANGKY, KHOAHOC. Viết biểu thức ĐSQH tìm danh sách đối tượng thỏa mãn điều kiện: học viên hoàn thành tất cả khóa học nâng cao.",
-      "schema": "HOCVIEN, DANGKY, KHOAHOC",
-      "recommended_time_mins": 8,
-      "points": 1.0,
-      "solution": {
-        "relational_algebra": "R_Target ← π_{KEY2}(σ_{DK}(R2))\nR_Cand ← π_{KEY1, KEY2}(R1)\nKQ ← (R_Cand ÷ R_Target) ⋈ INFO",
-        "intermediate_steps": [
-          "Xác định tập mục tiêu hoặc thuộc tính gom nhóm",
-          "Thực hiện phép chia / gom nhóm",
-          "Chiếu kết quả."
-        ],
-        "sql": "SELECT KEY1 FROM R1 WHERE NOT EXISTS (SELECT KEY2 FROM R2 WHERE NOT EXISTS (SELECT * FROM REL WHERE REL.KEY1=R1.KEY1 AND REL.KEY2=R2.KEY2));"
-      },
-      "rubric": {
-        "logic_steps": "0.60đ",
-        "correct_syntax": "0.40đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
       "id": "RA-D10",
       "topic": "RA_DIVISION_GROUPING",
       "difficulty": "B",
@@ -4354,54 +4110,6 @@
       "verification_level": "SEMANTICALLY_REVIEWED"
     },
     {
-      "id": "SQL-D05",
-      "topic": "SQL_DDL_DML",
-      "difficulty": "B",
-      "title": "T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 5)",
-      "prompt": "Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.",
-      "schema": "R1(ID, GIA), R2(ID, LOAI)",
-      "recommended_time_mins": 5,
-      "points": 0.75,
-      "solution": {
-        "sql": "UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';",
-        "intermediate_steps": [
-          "Xác định bảng",
-          "Viết cú pháp T-SQL",
-          "Kiểm thử logic."
-        ]
-      },
-      "rubric": {
-        "syntax": "0.40đ",
-        "logic": "0.35đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
-      "id": "SQL-D06",
-      "topic": "SQL_DDL_DML",
-      "difficulty": "A",
-      "title": "T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 6)",
-      "prompt": "Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.",
-      "schema": "R1(ID, GIA), R2(ID, LOAI)",
-      "recommended_time_mins": 5,
-      "points": 0.75,
-      "solution": {
-        "sql": "ALTER TABLE BANG_6 ADD CONSTRAINT CK_BANG_6 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));",
-        "intermediate_steps": [
-          "Xác định bảng",
-          "Viết cú pháp T-SQL",
-          "Kiểm thử logic."
-        ]
-      },
-      "rubric": {
-        "syntax": "0.40đ",
-        "logic": "0.35đ"
-      },
-      "status": "DRAFT",
-      "verification_level": "DRAFT"
-    },
-    {
       "id": "SQL-D07",
       "topic": "SQL_DDL_DML",
       "difficulty": "B",
@@ -4832,6 +4540,377 @@
       },
       "status": "DRAFT",
       "verification_level": "DRAFT"
+    },
+    {
+      "id": "M03-Q1",
+      "topic": "ERD_MAPPING",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Cứu Trợ Bão Lũ",
+      "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Tiếp nhận & Phân bổ Tiền cứu trợ Bão lũ gồm các tập thực thể: XA, HO_DAN, NHA_HAOTAM, DOT_CUUTRO cùng các mối kết hợp tương ứng.",
+      "schema": "ERD: XA, HO_DAN, NHA_HAOTAM, DOT_CUUTRO, DONG_GOP, PHIEU_NHAN",
+      "recommended_time_mins": 25,
+      "points": 2.0,
+      "solution": {
+        "erd_entities": [
+          {
+            "name": "XA",
+            "pk": "MAXA",
+            "attributes": [
+              "MAXA",
+              "TENXA",
+              "HUYEN"
+            ],
+            "description": "Địa bàn hành chính cấp xã/phường."
+          },
+          {
+            "name": "HO_DAN",
+            "pk": "MAHO",
+            "attributes": [
+              "MAHO",
+              "CHUHO",
+              "SONKHAU",
+              "MUCDO_THIETHAI",
+              "MAXA"
+            ],
+            "description": "Hộ gia đình bị ảnh hưởng bão lũ."
+          },
+          {
+            "name": "NHA_HAOTAM",
+            "pk": "MANHT",
+            "attributes": [
+              "MANHT",
+              "TENNHT",
+              "SDT",
+              "LOAIHINH"
+            ],
+            "description": "Nhà hảo tâm đóng góp ủng hộ."
+          },
+          {
+            "name": "DOT_CUUTRO",
+            "pk": "MADOT",
+            "attributes": [
+              "MADOT",
+              "TENDOT",
+              "NGAYBD",
+              "NGAYKT"
+            ],
+            "description": "Đợt phát động cứu trợ."
+          }
+        ],
+        "relationships": [
+          {
+            "name": "TRUC_THUOC",
+            "entities": [
+              "XA",
+              "HO_DAN"
+            ],
+            "cardinality": "1:N",
+            "min_max": "XA (1, N) - (1, 1) HO_DAN"
+          },
+          {
+            "name": "DONG_GOP",
+            "entities": [
+              "NHA_HAOTAM",
+              "DOT_CUUTRO"
+            ],
+            "cardinality": "M:N",
+            "min_max": "NHA_HAOTAM (0, N) - (1, N) DOT_CUUTRO",
+            "attributes": [
+              "MADG",
+              "NGAYDG",
+              "SOTIEN"
+            ]
+          },
+          {
+            "name": "PHAN_BO",
+            "entities": [
+              "HO_DAN",
+              "DOT_CUUTRO"
+            ],
+            "cardinality": "M:N",
+            "min_max": "HO_DAN (0, N) - (1, N) DOT_CUUTRO",
+            "attributes": [
+              "MAPHIEU",
+              "NGAYNHAN",
+              "SOTIEN"
+            ]
+          }
+        ],
+        "relational_schema": [
+          {
+            "table": "XA",
+            "pk": [
+              "MAXA"
+            ],
+            "fk": []
+          },
+          {
+            "table": "HO_DAN",
+            "pk": [
+              "MAHO"
+            ],
+            "fk": [
+              {
+                "column": "MAXA",
+                "ref_table": "XA",
+                "ref_column": "MAXA"
+              }
+            ]
+          },
+          {
+            "table": "NHA_HAOTAM",
+            "pk": [
+              "MANHT"
+            ],
+            "fk": []
+          },
+          {
+            "table": "DOT_CUUTRO",
+            "pk": [
+              "MADOT"
+            ],
+            "fk": []
+          },
+          {
+            "table": "DONG_GOP",
+            "pk": [
+              "MADG"
+            ],
+            "fk": [
+              {
+                "column": "MANHT",
+                "ref_table": "NHA_HAOTAM",
+                "ref_column": "MANHT"
+              },
+              {
+                "column": "MADOT",
+                "ref_table": "DOT_CUUTRO",
+                "ref_column": "MADOT"
+              }
+            ]
+          },
+          {
+            "table": "PHIEU_NHAN",
+            "pk": [
+              "MAPHIEU"
+            ],
+            "fk": [
+              {
+                "column": "MAHO",
+                "ref_table": "HO_DAN",
+                "ref_column": "MAHO"
+              },
+              {
+                "column": "MADOT",
+                "ref_table": "DOT_CUUTRO",
+                "ref_column": "MADOT"
+              }
+            ]
+          }
+        ]
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.80đ",
+        "intermediate_steps": "0.80đ"
+      }
+    },
+    {
+      "id": "M03-Q2A",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên PHIEU_NHAN và DOT_CUUTRO",
+      "prompt": "Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra số tiền nhận (SOTIEN) trong bảng PHIEU_NHAN phải lớn hơn 0 (> 0), và ngày kết thúc đợt cứu trợ (NGAYKT) trong bảng DOT_CUUTRO phải lớn hơn hoặc bằng ngày bắt đầu (NGAYKT >= NGAYBD). Cả hai thuộc tính đều không được mang giá trị NULL.",
+      "schema": "PHIEU_NHAN, DOT_CUUTRO",
+      "recommended_time_mins": 10,
+      "points": 0.75,
+      "solution": {
+        "sql": "ALTER TABLE PHIEU_NHAN ALTER COLUMN SOTIEN DECIMAL(18, 2) NOT NULL;\nALTER TABLE PHIEU_NHAN ADD CONSTRAINT CK_PHIEUNHAN_SOTIEN CHECK (SOTIEN > 0);\n\nALTER TABLE DOT_CUUTRO ALTER COLUMN NGAYKT DATE NOT NULL;\nALTER TABLE DOT_CUUTRO ADD CONSTRAINT CK_DOTCUUTRO_NGAY CHECK (NGAYKT >= NGAYBD);"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "M03-Q2B",
+      "topic": "SQL_DDL_DML",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "Cập Nhật Mức Độ Thiệt Hại Trong HO_DAN Thuộc Xã Hiệp Phước",
+      "prompt": "Cập nhật mức độ thiệt hại (MUCDO_THIETHAI) thành 'Nặng' cho các hộ gia đình thuộc xã có tên (TENXA) là 'Hiệp Phước' và có số nhân khẩu (SONKHAU) từ 5 người trở lên.",
+      "schema": "HO_DAN, XA",
+      "recommended_time_mins": 10,
+      "points": 0.75,
+      "solution": {
+        "sql": "UPDATE HD\nSET HD.MUCDO_THIETHAI = N'Nặng'\nFROM HO_DAN HD\nINNER JOIN XA X ON HD.MAXA = X.MAXA\nWHERE X.TENXA = N'Hiệp Phước'\n  AND HD.SONKHAU >= 5;"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ"
+      }
+    },
+    {
+      "id": "M03-Q2C1",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "A",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Lọc Nhà Hảo Tâm Theo Loại Hình Cá Nhân",
+      "prompt": "Liệt kê danh sách các nhà hảo tâm (MANHT, TENNHT, SDT) thuộc loại hình 'Cá nhân'.",
+      "schema": "NHA_HAOTAM",
+      "recommended_time_mins": 5,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E1 ← σ_{LOAIHINH='Cá nhân'}(NHA_HAOTAM)\nKQ ← π_{MANHT, TENNHT, SDT}(E1)",
+        "intermediate_steps": [
+          "Lọc nhà hảo tâm có loại hình 'Cá nhân'",
+          "Chiếu các thuộc tính MANHT, TENNHT, SDT"
+        ],
+        "sql": "SELECT MANHT, TENNHT, SDT FROM NHA_HAOTAM WHERE LOAIHINH = N'Cá nhân';"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.35đ",
+        "projection": "0.25đ"
+      }
+    },
+    {
+      "id": "M03-Q2C2",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Kết Nối Hộ Dân Cần Giờ Thiệt Hại Nặng",
+      "prompt": "Cho biết danh sách các hộ dân (MAHO, CHUHO, SONKHAU) thuộc huyện 'Cần Giờ' có mức độ thiệt hại là 'Nặng'.",
+      "schema": "XA, HO_DAN",
+      "recommended_time_mins": 5,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E_Xa ← σ_{HUYEN='Cần Giờ'}(XA)\nE_Ho ← σ_{MUCDO_THIETHAI='Nặng'}(HO_DAN)\nKQ ← π_{MAHO, CHUHO, SONKHAU}(E_Xa ⋈ E_Ho)",
+        "intermediate_steps": [
+          "Lọc xã thuộc huyện Cần Giờ",
+          "Lọc hộ dân thiệt hại Nặng",
+          "Kết tự nhiên trên MAXA và chiếu kết quả"
+        ],
+        "sql": "SELECT HD.MAHO, HD.CHUHO, HD.SONKHAU FROM HO_DAN HD INNER JOIN XA X ON HD.MAXA = X.MAXA WHERE X.HUYEN = N'Cần Giờ' AND HD.MUCDO_THIETHAI = N'Nặng';"
+      },
+      "rubric": {
+        "syntax": "0.30đ",
+        "logic": "0.40đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M03-Q2C3",
+      "topic": "RA_BASIC_JOIN",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Kết Ngoài Xã Thuộc Huyện Cần Giờ Và Hộ Dân (Nếu Có)",
+      "prompt": "Liệt kê thông tin tất cả các xã thuộc huyện 'Cần Giờ' (MAXA, TENXA) và danh sách các mã hộ dân (MAHO), tên chủ hộ (CHUHO) trực thuộc xã đó nếu có.",
+      "schema": "XA, HO_DAN",
+      "recommended_time_mins": 5,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E_XaCG ← σ_{HUYEN='Cần Giờ'}(XA)\nKQ ← π_{MAXA, TENXA, MAHO, CHUHO}(E_XaCG ⟕ HO_DAN)",
+        "intermediate_steps": [
+          "Lọc các xã thuộc huyện Cần Giờ",
+          "Kết ngoài trái với HO_DAN để bảo tồn xã chưa có hộ dân",
+          "Chiếu các cột yêu cầu"
+        ],
+        "sql": "SELECT X.MAXA, X.TENXA, HD.MAHO, HD.CHUHO FROM XA X LEFT OUTER JOIN HO_DAN HD ON X.MAXA = HD.MAXA WHERE X.HUYEN = N'Cần Giờ';"
+      },
+      "rubric": {
+        "syntax": "0.30đ",
+        "logic": "0.40đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M03-Q2C4",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "B",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Tiền Ủng Hộ Theo Nhà Hảo Tâm Năm 2024",
+      "prompt": "Tính tổng số tiền ủng hộ (TONG_TIEN) của từng nhà hảo tâm đã đóng góp trong năm 2024. Thông tin hiển thị gồm: MANHT, TENNHT, TONG_TIEN.",
+      "schema": "NHA_HAOTAM, DONG_GOP",
+      "recommended_time_mins": 10,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "E1 ← σ_{NGAYDG ≥ '2024-01-01' ∧ NGAYDG ≤ '2024-12-31'}(DONG_GOP)\nE2 ← NHA_HAOTAM ⋈ E1\nKQ ← _{MANHT, TENNHT}γ_{SUM(SOTIEN) → TONG_TIEN}(E2)",
+        "intermediate_steps": [
+          "Lọc đóng góp trong năm 2024",
+          "Kết nối với bảng NHA_HAOTAM",
+          "Gom nhóm theo MANHT, TENNHT và tính SUM(SOTIEN)"
+        ],
+        "sql": "SELECT NHT.MANHT, NHT.TENNHT, SUM(DG.SOTIEN) AS TONG_TIEN FROM NHA_HAOTAM NHT INNER JOIN DONG_GOP DG ON NHT.MANHT = DG.MANHT WHERE DG.NGAYDG >= '2024-01-01' AND DG.NGAYDG <= '2024-12-31' GROUP BY NHT.MANHT, NHT.TENNHT;"
+      },
+      "rubric": {
+        "syntax": "0.30đ",
+        "logic": "0.40đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M03-Q2C5",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Phép Chia Tìm Đợt Cứu Trợ Được Đóng Góp Bởi Tất Cả Doanh Nghiệp",
+      "prompt": "Tìm các đợt cứu trợ (MADOT, TENDOT, NGAYBD) đã tiếp nhận tiền đóng góp từ tất cả các nhà hảo tâm thuộc loại hình 'Doanh nghiệp'.",
+      "schema": "DOT_CUUTRO, DONG_GOP, NHA_HAOTAM",
+      "recommended_time_mins": 15,
+      "points": 1.0,
+      "solution": {
+        "relational_algebra": "R ← π_{MADOT, MANHT}(DONG_GOP)\nS ← π_{MANHT}(σ_{LOAIHINH='Doanh nghiệp'}(NHA_HAOTAM))\nR_KQ ← R ÷ S\nKQ ← π_{MADOT, TENDOT, NGAYBD}(R_KQ ⋈ DOT_CUUTRO)",
+        "intermediate_steps": [
+          "Xác định tập bị chia R(MADOT, MANHT)",
+          "Xác định tập chia S(MANHT) gồm các nhà hảo tâm Doanh nghiệp",
+          "Thực hiện phép chia R ÷ S để tìm đợt cứu trợ nhận đủ tất cả doanh nghiệp",
+          "Kết nối với DOT_CUUTRO để lấy thông tin đợt"
+        ],
+        "sql": "SELECT DCT.MADOT, DCT.TENDOT, DCT.NGAYBD FROM DOT_CUUTRO DCT WHERE NOT EXISTS (SELECT * FROM NHA_HAOTAM NHT WHERE NHT.LOAIHINH = N'Doanh nghiệp' AND NOT EXISTS (SELECT * FROM DONG_GOP DG WHERE DG.MADOT = DCT.MADOT AND DG.MANHT = NHT.MANHT)) AND EXISTS (SELECT * FROM DONG_GOP WHERE MADOT = DCT.MADOT);"
+      },
+      "rubric": {
+        "syntax": "0.30đ",
+        "logic": "0.40đ",
+        "projection": "0.30đ"
+      }
+    },
+    {
+      "id": "M03-Q2C6",
+      "topic": "RA_DIVISION_GROUPING",
+      "difficulty": "C",
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "title": "ĐSQH Tìm Xã Có Tổng Tiền Cứu Trợ Đã Phân Bổ Nhiều Nhất",
+      "prompt": "Tìm thông tin xã (MAXA, TENXA, HUYEN) có tổng số tiền cứu trợ đã phân bổ cho các hộ dân (TONG_CUUTRO) nhiều nhất (bảo toàn tất cả các xã nếu có nhiều xã cùng đạt số tiền cứu trợ lớn nhất).",
+      "schema": "XA, HO_DAN, PHIEU_NHAN",
+      "recommended_time_mins": 15,
+      "points": 1.5,
+      "solution": {
+        "relational_algebra": "R_TongTien ← _{MAXA}γ_{SUM(SOTIEN) → TONG_CUUTRO}(HO_DAN ⋈ PHIEU_NHAN)\nR_NhoHon ← π_{R1.TONG_CUUTRO}(σ_{R1.TONG_CUUTRO < R2.TONG_CUUTRO}(ρ_{R1}(R_TongTien) × ρ_{R2}(R_TongTien)))\nR_Max ← π_{TONG_CUUTRO}(R_TongTien) - R_NhoHon\nKQ ← π_{MAXA, TENXA, HUYEN}(XA ⋈ R_TongTien ⋈ R_Max)",
+        "intermediate_steps": [
+          "Tính tổng tiền cứu trợ phân bổ cho từng xã",
+          "Dùng tích Descartes tìm các giá trị nhỏ hơn",
+          "Trừ tập hợp để tìm giá trị cực đại lớn nhất",
+          "Kết nối XA và bảo toàn đồng hạng"
+        ],
+        "sql": "SELECT TOP 1 WITH TIES X.MAXA, X.TENXA, X.HUYEN, SUM(PN.SOTIEN) AS TONG_CUUTRO FROM XA X INNER JOIN HO_DAN HD ON X.MAXA = HD.MAXA INNER JOIN PHIEU_NHAN PN ON HD.MAHO = PN.MAHO GROUP BY X.MAXA, X.TENXA, X.HUYEN ORDER BY SUM(PN.SOTIEN) DESC;"
+      },
+      "rubric": {
+        "syntax": "0.40đ",
+        "logic": "0.60đ",
+        "projection": "0.50đ"
+      }
     }
   ]
 }

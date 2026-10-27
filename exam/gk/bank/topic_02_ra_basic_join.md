@@ -291,91 +291,7 @@ SELECT MALO, TENLO FROM LOVACXIN WHERE HSD > '2025-12-31';
 
 ---
 
-## Bài 10 [RA-B07] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 7)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)`
-
-### 1. Đề Bài
-Cho lược đồ SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{THUOCTINH}(R1 ⟕ R2)
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 11 [RA-B08] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 8)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)`
-
-### 1. Đề Bài
-Cho lược đồ KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT * FROM R A JOIN R B ON A.PID = B.ID;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 12 [RA-B09] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 9)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)`
-
-### 1. Đề Bài
-Cho lược đồ SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 13 [RA-B10] — ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 10)
+## Bài 10 [RA-B10] — ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 10)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)`
 
@@ -403,7 +319,7 @@ SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;
 
 ---
 
-## Bài 14 [RA-B11] — ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 11)
+## Bài 11 [RA-B11] — ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 11)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)`
 
@@ -431,7 +347,7 @@ SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
 
 ---
 
-## Bài 15 [RA-B12] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 12)
+## Bài 12 [RA-B12] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 12)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)`
 
@@ -459,7 +375,7 @@ SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
 
 ---
 
-## Bài 16 [RA-B13] — ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 13)
+## Bài 13 [RA-B13] — ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 13)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)`
 
@@ -487,7 +403,7 @@ SELECT * FROM R A JOIN R B ON A.PID = B.ID;
 
 ---
 
-## Bài 17 [RA-B14] — ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 14)
+## Bài 14 [RA-B14] — ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 14)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)`
 
@@ -515,7 +431,7 @@ SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
 
 ---
 
-## Bài 18 [RA-B15] — ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 15)
+## Bài 15 [RA-B15] — ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 15)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP)`
 
@@ -543,7 +459,7 @@ SELECT ID, TEN FROM HóaĐơn WHERE DIEUKIEN;
 
 ---
 
-## Bài 19 [RA-B16] — ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 16)
+## Bài 16 [RA-B16] — ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 16)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE)`
 
@@ -571,7 +487,7 @@ SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
 
 ---
 
-## Bài 20 [RA-B17] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 17)
+## Bài 17 [RA-B17] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 17)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)`
 
@@ -599,7 +515,7 @@ SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
 
 ---
 
-## Bài 21 [RA-B18] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 18)
+## Bài 18 [RA-B18] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 18)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)`
 
@@ -627,7 +543,7 @@ SELECT * FROM R A JOIN R B ON A.PID = B.ID;
 
 ---
 
-## Bài 22 [RA-B19] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 19)
+## Bài 19 [RA-B19] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 19)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)`
 
@@ -655,7 +571,7 @@ SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
 
 ---
 
-## Bài 23 [RA-B20] — ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 20)
+## Bài 20 [RA-B20] — ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 20)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)`
 
@@ -683,7 +599,7 @@ SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;
 
 ---
 
-## Bài 24 [RA-B21] — ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 21)
+## Bài 21 [RA-B21] — ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 21)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)`
 
@@ -711,7 +627,7 @@ SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
 
 ---
 
-## Bài 25 [RA-B22] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 22)
+## Bài 22 [RA-B22] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 22)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)`
 
@@ -739,7 +655,7 @@ SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
 
 ---
 
-## Bài 26 [RA-B23] — ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 23)
+## Bài 23 [RA-B23] — ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 23)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)`
 
@@ -767,7 +683,7 @@ SELECT * FROM R A JOIN R B ON A.PID = B.ID;
 
 ---
 
-## Bài 27 [RA-B24] — ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 24)
+## Bài 24 [RA-B24] — ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 24)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)`
 
@@ -795,7 +711,7 @@ SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
 
 ---
 
-## Bài 28 [RA-B25] — ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 25)
+## Bài 25 [RA-B25] — ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 25)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP)`
 
@@ -823,7 +739,7 @@ SELECT ID, TEN FROM HóaĐơn WHERE DIEUKIEN;
 
 ---
 
-## Bài 29 [RA-B26] — ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 26)
+## Bài 26 [RA-B26] — ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 26)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE)`
 
@@ -851,7 +767,7 @@ SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
 
 ---
 
-## Bài 30 [RA-B27] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 27)
+## Bài 27 [RA-B27] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 27)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)`
 
@@ -879,7 +795,7 @@ SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
 
 ---
 
-## Bài 31 [RA-B28] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 28)
+## Bài 28 [RA-B28] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 28)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)`
 
@@ -907,7 +823,7 @@ SELECT * FROM R A JOIN R B ON A.PID = B.ID;
 
 ---
 
-## Bài 32 [RA-B29] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 29)
+## Bài 29 [RA-B29] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 29)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)`
 
@@ -935,7 +851,7 @@ SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
 
 ---
 
-## Bài 33 [RA-B30] — ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 30)
+## Bài 30 [RA-B30] — ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 30)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)`
 
@@ -963,7 +879,7 @@ SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;
 
 ---
 
-## Bài 34 [RA-B31] — ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 31)
+## Bài 31 [RA-B31] — ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 31)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)`
 
@@ -991,7 +907,7 @@ SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
 
 ---
 
-## Bài 35 [RA-B32] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 32)
+## Bài 32 [RA-B32] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 32)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)`
 
@@ -1019,7 +935,7 @@ SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
 
 ---
 
-## Bài 36 [RA-B33] — ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 33)
+## Bài 33 [RA-B33] — ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 33)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)`
 
@@ -1047,7 +963,7 @@ SELECT * FROM R A JOIN R B ON A.PID = B.ID;
 
 ---
 
-## Bài 37 [RA-B34] — ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 34)
+## Bài 34 [RA-B34] — ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 34)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)`
 
@@ -1075,7 +991,7 @@ SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
 
 ---
 
-## Bài 38 [RA-B35] — ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 35)
+## Bài 35 [RA-B35] — ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 35)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP)`
 
@@ -1103,7 +1019,7 @@ SELECT ID, TEN FROM HóaĐơn WHERE DIEUKIEN;
 
 ---
 
-## Bài 39 [RA-B36] — ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 36)
+## Bài 36 [RA-B36] — ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 36)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE)`
 
@@ -1131,7 +1047,7 @@ SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
 
 ---
 
-## Bài 40 [RA-B37] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 37)
+## Bài 37 [RA-B37] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 37)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)`
 
@@ -1159,7 +1075,7 @@ SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
 
 ---
 
-## Bài 41 [RA-B38] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 38)
+## Bài 38 [RA-B38] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 38)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)`
 
@@ -1187,7 +1103,7 @@ SELECT * FROM R A JOIN R B ON A.PID = B.ID;
 
 ---
 
-## Bài 42 [RA-B39] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 39)
+## Bài 39 [RA-B39] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 39)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)`
 
@@ -1215,7 +1131,7 @@ SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
 
 ---
 
-## Bài 43 [RA-B40] — ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 40)
+## Bài 40 [RA-B40] — ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 40)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)`
 
@@ -1243,7 +1159,7 @@ SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;
 
 ---
 
-## Bài 44 [RA-B41] — ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 41)
+## Bài 41 [RA-B41] — ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 41)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)`
 
@@ -1271,7 +1187,7 @@ SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
 
 ---
 
-## Bài 45 [RA-B42] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 42)
+## Bài 42 [RA-B42] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 42)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)`
 
@@ -1299,7 +1215,7 @@ SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
 
 ---
 
-## Bài 46 [RA-B43] — ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 43)
+## Bài 43 [RA-B43] — ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 43)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)`
 
@@ -1327,7 +1243,7 @@ SELECT * FROM R A JOIN R B ON A.PID = B.ID;
 
 ---
 
-## Bài 47 [RA-B44] — ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 44)
+## Bài 44 [RA-B44] — ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 44)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)`
 
@@ -1355,7 +1271,7 @@ SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
 
 ---
 
-## Bài 48 [RA-B45] — ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 45)
+## Bài 45 [RA-B45] — ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 45)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP)`
 
@@ -1383,7 +1299,7 @@ SELECT ID, TEN FROM HóaĐơn WHERE DIEUKIEN;
 
 ---
 
-## Bài 49 [RA-B46] — ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 46)
+## Bài 46 [RA-B46] — ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 46)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE)`
 
@@ -1411,7 +1327,7 @@ SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
 
 ---
 
-## Bài 50 [RA-B47] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 47)
+## Bài 47 [RA-B47] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 47)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)`
 
@@ -1439,7 +1355,7 @@ SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
 
 ---
 
-## Bài 51 [RA-B48] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 48)
+## Bài 48 [RA-B48] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 48)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)`
 
@@ -1467,7 +1383,7 @@ SELECT * FROM R A JOIN R B ON A.PID = B.ID;
 
 ---
 
-## Bài 52 [RA-B49] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 49)
+## Bài 49 [RA-B49] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 49)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)`
 
@@ -1495,7 +1411,7 @@ SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
 
 ---
 
-## Bài 53 [RA-B50] — ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 50)
+## Bài 50 [RA-B50] — ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 50)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)`
 
@@ -1523,7 +1439,7 @@ SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;
 
 ---
 
-## Bài 54 [RA-B51] — ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 51)
+## Bài 51 [RA-B51] — ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 51)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)`
 
@@ -1551,7 +1467,7 @@ SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
 
 ---
 
-## Bài 55 [RA-B52] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 52)
+## Bài 52 [RA-B52] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 52)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)`
 
@@ -1579,7 +1495,7 @@ SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
 
 ---
 
-## Bài 56 [RA-B53] — ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 53)
+## Bài 53 [RA-B53] — ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 53)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)`
 
@@ -1607,7 +1523,7 @@ SELECT * FROM R A JOIN R B ON A.PID = B.ID;
 
 ---
 
-## Bài 57 [RA-B54] — ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 54)
+## Bài 54 [RA-B54] — ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 54)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)`
 
@@ -1635,7 +1551,7 @@ SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
 
 ---
 
-## Bài 58 [RA-B55] — ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 55)
+## Bài 55 [RA-B55] — ĐSQH Lọc & Chiếu: Hóa Đơn & Nhân Viên (Bài 55)
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHANVIEN(MANV, HOTEN, CHUCVU), HOADON(MAHD, MANV, NGAYLAP)`
 
@@ -1663,7 +1579,7 @@ SELECT ID, TEN FROM HóaĐơn WHERE DIEUKIEN;
 
 ---
 
-## Bài 59 [RA-B56] — ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 56)
+## Bài 56 [RA-B56] — ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 56)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE)`
 
@@ -1691,7 +1607,7 @@ SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
 
 ---
 
-## Bài 60 [RA-B57] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 57)
+## Bài 57 [RA-B57] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 57)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)`
 
@@ -1719,7 +1635,7 @@ SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
 
 ---
 
-## Bài 61 [RA-B58] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 58)
+## Bài 58 [RA-B58] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 58)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)`
 
@@ -1747,7 +1663,7 @@ SELECT * FROM R A JOIN R B ON A.PID = B.ID;
 
 ---
 
-## Bài 62 [RA-B59] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 59)
+## Bài 59 [RA-B59] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 59)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)`
 
@@ -1772,5 +1688,95 @@ SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
 **Barem chấm điểm đề xuất:**
 - `logic`: 0.60đ
 - `syntax`: 0.40đ
+
+---
+
+## Bài 60 [M03-Q2C1] — ĐSQH Lọc Nhà Hảo Tâm Theo Loại Hình Cá Nhân
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `NHA_HAOTAM`
+
+### 1. Đề Bài
+Liệt kê danh sách các nhà hảo tâm (MANHT, TENNHT, SDT) thuộc loại hình 'Cá nhân'.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+E1 ← σ_{LOAIHINH='Cá nhân'}(NHA_HAOTAM)
+KQ ← π_{MANHT, TENNHT, SDT}(E1)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT MANHT, TENNHT, SDT FROM NHA_HAOTAM WHERE LOAIHINH = N'Cá nhân';
+```
+
+**Các bước suy luận tư duy:**
+1. Lọc nhà hảo tâm có loại hình 'Cá nhân'
+1. Chiếu các thuộc tính MANHT, TENNHT, SDT
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.40đ
+- `logic`: 0.35đ
+- `projection`: 0.25đ
+
+---
+
+## Bài 61 [M03-Q2C2] — ĐSQH Kết Nối Hộ Dân Cần Giờ Thiệt Hại Nặng
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `XA, HO_DAN`
+
+### 1. Đề Bài
+Cho biết danh sách các hộ dân (MAHO, CHUHO, SONKHAU) thuộc huyện 'Cần Giờ' có mức độ thiệt hại là 'Nặng'.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+E_Xa ← σ_{HUYEN='Cần Giờ'}(XA)
+E_Ho ← σ_{MUCDO_THIETHAI='Nặng'}(HO_DAN)
+KQ ← π_{MAHO, CHUHO, SONKHAU}(E_Xa ⋈ E_Ho)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT HD.MAHO, HD.CHUHO, HD.SONKHAU FROM HO_DAN HD INNER JOIN XA X ON HD.MAXA = X.MAXA WHERE X.HUYEN = N'Cần Giờ' AND HD.MUCDO_THIETHAI = N'Nặng';
+```
+
+**Các bước suy luận tư duy:**
+1. Lọc xã thuộc huyện Cần Giờ
+1. Lọc hộ dân thiệt hại Nặng
+1. Kết tự nhiên trên MAXA và chiếu kết quả
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `projection`: 0.30đ
+
+---
+
+## Bài 62 [M03-Q2C3] — ĐSQH Kết Ngoài Xã Thuộc Huyện Cần Giờ Và Hộ Dân (Nếu Có)
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `XA, HO_DAN`
+
+### 1. Đề Bài
+Liệt kê thông tin tất cả các xã thuộc huyện 'Cần Giờ' (MAXA, TENXA) và danh sách các mã hộ dân (MAHO), tên chủ hộ (CHUHO) trực thuộc xã đó nếu có.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+E_XaCG ← σ_{HUYEN='Cần Giờ'}(XA)
+KQ ← π_{MAXA, TENXA, MAHO, CHUHO}(E_XaCG ⟕ HO_DAN)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT X.MAXA, X.TENXA, HD.MAHO, HD.CHUHO FROM XA X LEFT OUTER JOIN HO_DAN HD ON X.MAXA = HD.MAXA WHERE X.HUYEN = N'Cần Giờ';
+```
+
+**Các bước suy luận tư duy:**
+1. Lọc các xã thuộc huyện Cần Giờ
+1. Kết ngoài trái với HO_DAN để bảo tồn xã chưa có hộ dân
+1. Chiếu các cột yêu cầu
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `projection`: 0.30đ
 
 ---
