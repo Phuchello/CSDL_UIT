@@ -15,7 +15,7 @@ GO
 
 -- 1. CLEANUP PREVIOUS TABLES & FOREIGN KEYS
 DECLARE @sql NVARCHAR(MAX) = N'';
-SELECT @sql += N'ALTER TABLE ' + QUOTENAME(s.name) + N'.' + QUOTENAME(t.name) + 
+SELECT @sql += N'ALTER TABLE ' + QUOTENAME(s.name) + N'.' + QUOTENAME(t.name) +
                N' DROP CONSTRAINT ' + QUOTENAME(f.name) + N';' + CHAR(13)
 FROM sys.foreign_keys f
 INNER JOIN sys.tables t ON f.parent_object_id = t.object_id
@@ -418,6 +418,8 @@ PRINT '------------------------------------------------------------';
 
 -- Target: DIACHI = 'QuanKhongTonTai' -> S = Ø
 -- Candidate universe bounded by π_MAKH(HOPDONG): exactly 4 clients have signed contracts
+
+-- Method 1: Double NOT EXISTS bounded by candidate universe
 DECLARE @empty_bounded_cnt INT;
 SELECT @empty_bounded_cnt = COUNT(*)
 FROM KHACHHANG KH
@@ -435,11 +437,59 @@ WHERE NOT EXISTS (
 )
 AND EXISTS (SELECT 1 FROM HOPDONG WHERE MAKH = KH.MAKH);
 
-IF @empty_bounded_cnt = 4
-    PRINT '  [PASS] Test 8: Empty target S=Ø semantic verified: candidate universe returns 4 active clients.';
+-- Method 2: LEFT JOIN ... HAVING COUNT on candidate universe
+DECLARE @empty_having_cnt INT;
+SELECT @empty_having_cnt = COUNT(*)
+FROM (
+    SELECT HD.MAKH
+    FROM HOPDONG HD
+    INNER JOIN CANHO CH ON HD.MACH = CH.MACH
+    LEFT JOIN (SELECT MATN FROM TOANHA WHERE DIACHI = N'QuanKhongTonTai') S ON CH.MATN = S.MATN
+    GROUP BY HD.MAKH
+    HAVING COUNT(DISTINCT S.MATN) = (SELECT COUNT(*) FROM TOANHA WHERE DIACHI = N'QuanKhongTonTai')
+) AS H;
+
+-- Set-wise comparison between Method 1 and Method 2 using EXCEPT
+DECLARE @t8_diff_1_2 INT, @t8_diff_2_1 INT;
+SELECT @t8_diff_1_2 = COUNT(*) FROM (
+    SELECT KH.MAKH FROM KHACHHANG KH
+    WHERE NOT EXISTS (
+        SELECT * FROM TOANHA TN WHERE TN.DIACHI = N'QuanKhongTonTai'
+        AND NOT EXISTS (
+            SELECT * FROM HOPDONG HD INNER JOIN CANHO CH ON HD.MACH = CH.MACH
+            WHERE HD.MAKH = KH.MAKH AND CH.MATN = TN.MATN
+        )
+    ) AND EXISTS (SELECT 1 FROM HOPDONG WHERE MAKH = KH.MAKH)
+    EXCEPT
+    SELECT HD.MAKH FROM HOPDONG HD
+    INNER JOIN CANHO CH ON HD.MACH = CH.MACH
+    LEFT JOIN (SELECT MATN FROM TOANHA WHERE DIACHI = N'QuanKhongTonTai') S ON CH.MATN = S.MATN
+    GROUP BY HD.MAKH
+    HAVING COUNT(DISTINCT S.MATN) = (SELECT COUNT(*) FROM TOANHA WHERE DIACHI = N'QuanKhongTonTai')
+) AS D1;
+
+SELECT @t8_diff_2_1 = COUNT(*) FROM (
+    SELECT HD.MAKH FROM HOPDONG HD
+    INNER JOIN CANHO CH ON HD.MACH = CH.MACH
+    LEFT JOIN (SELECT MATN FROM TOANHA WHERE DIACHI = N'QuanKhongTonTai') S ON CH.MATN = S.MATN
+    GROUP BY HD.MAKH
+    HAVING COUNT(DISTINCT S.MATN) = (SELECT COUNT(*) FROM TOANHA WHERE DIACHI = N'QuanKhongTonTai')
+    EXCEPT
+    SELECT KH.MAKH FROM KHACHHANG KH
+    WHERE NOT EXISTS (
+        SELECT * FROM TOANHA TN WHERE TN.DIACHI = N'QuanKhongTonTai'
+        AND NOT EXISTS (
+            SELECT * FROM HOPDONG HD INNER JOIN CANHO CH ON HD.MACH = CH.MACH
+            WHERE HD.MAKH = KH.MAKH AND CH.MATN = TN.MATN
+        )
+    ) AND EXISTS (SELECT 1 FROM HOPDONG WHERE MAKH = KH.MAKH)
+) AS D2;
+
+IF @empty_bounded_cnt = 4 AND @empty_having_cnt = 4 AND @t8_diff_1_2 = 0 AND @t8_diff_2_1 = 0
+    PRINT '  [PASS] Test 8: Empty target S=Ø verified with EXCEPT set comparison: RA, NOT EXISTS and HAVING COUNT identical (4 clients).';
 ELSE
 BEGIN
-    PRINT '  [FAIL] Test 8: Empty target mismatch! Expected 4, got ' + CAST(@empty_bounded_cnt AS VARCHAR);
+    PRINT '  [FAIL] Test 8: Empty target comparison failed!';
     THROW 50011, 'Test 8 Failed', 1;
 END;
 GO

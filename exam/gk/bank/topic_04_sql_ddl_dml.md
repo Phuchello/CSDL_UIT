@@ -142,7 +142,140 @@ WHERE NOT EXISTS (
 
 ---
 
-## Bài 06 [SQL-D27] — T-SQL DML Ràng Buộc Hệ Thống Tuyến Xe Buýt (Bài 27)
+## Bài 06 [M06-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_DV và DICHVU_KHAM
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `CHITIET_DV(MAPK, MADV, SOLUONG, DONGIA_THU, KETQUA), DICHVU_KHAM(MADV, TENDV, LOAIDV, DONGIA)`
+
+### 1. Đề Bài
+Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra SOLUONG > 0 trong CHITIET_DV và DONGIA > 0 trong DICHVU_KHAM, cả hai thuộc tính không được NULL.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh SQL tương đương:**
+```sql
+ALTER TABLE CHITIET_DV ADD CONSTRAINT CK_CTDV_SOLUONG CHECK (SOLUONG > 0);
+ALTER TABLE DICHVU_KHAM ADD CONSTRAINT CK_DVKHAM_DONGIA CHECK (DONGIA > 0);
+```
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
+
+---
+
+## Bài 07 [M06-Q2B] — Cập Nhật Tăng Lương Bác Sĩ Chuyên Khoa Nội Tổng Quát
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `BACSI(MABS, HOTEN, HOCVI, MAKC, LUONG), CHUYENKHOA(MAKC, TENKHOA, TRUONGKHOA)`
+
+### 1. Đề Bài
+Viết câu lệnh SQL cập nhật tăng lương cơ bản 10% cho các bác sĩ có học vị Tiến sĩ hoặc Bác sĩ CKII thuộc chuyên khoa Nội tổng quát.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh SQL tương đương:**
+```sql
+UPDATE BACSI
+SET LUONG = LUONG * 1.10
+FROM BACSI b
+JOIN CHUYENKHOA ck ON b.MAKC = ck.MAKC
+WHERE ck.TENKHOA = N'Nội tổng quát'
+  AND b.HOCVI IN (N'Tiến sĩ', N'Bác sĩ CKII');
+```
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
+
+---
+
+## Bài 08 [M07-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên SACH và CHITIET_MUON
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `SACH(MASACH, TENSACH, TACGIA, NXB, NAMXB, SOLUONGTON), CHITIET_MUON(MAPM, MASACH, NGAYTRA, TIENPHAT)`
+
+### 1. Đề Bài
+Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra SOLUONGTON >= 0 trong SACH và TIENPHAT >= 0 trong CHITIET_MUON, cả hai không được NULL.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh SQL tương đương:**
+```sql
+ALTER TABLE SACH ADD CONSTRAINT CK_SACH_SOLUONGTON CHECK (SOLUONGTON >= 0);
+ALTER TABLE CHITIET_MUON ADD CONSTRAINT CK_CTMUON_TIENPHAT CHECK (TIENPHAT >= 0);
+```
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
+
+---
+
+## Bài 09 [M07-Q2B] — Cập Nhật Gia Hạn Hạn Trả Cho Độc Giả Giảng Viên Tháng 10/2024
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `PHIEUMUON(MAPM, NGAYMUON, HANTRA, MADG, MATT, TRANGTHAI), DOCGIA(MADG, HOTEN, NGAYSINH, LOAIDG, MAKV)`
+
+### 1. Đề Bài
+Viết câu lệnh SQL cập nhật gia hạn ngày hẹn trả thêm 15 ngày cho các phiếu mượn của độc giả diện Giảng viên có ngày mượn trong tháng 10 năm 2024.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh SQL tương đương:**
+```sql
+UPDATE PHIEUMUON
+SET HANTRA = DATEADD(DAY, 15, HANTRA)
+FROM PHIEUMUON pm
+JOIN DOCGIA dg ON pm.MADG = dg.MADG
+WHERE dg.LOAIDG = N'Giảng viên'
+  AND pm.NGAYMUON >= '2024-10-01'
+  AND pm.NGAYMUON <= '2024-10-31';
+```
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
+
+---
+
+## Bài 10 [M08-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_DH và SANPHAM
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `CHITIET_DH(MADH, MASP, SOLUONG, DONGIA_BAN), SANPHAM(MASP, TENSP, LOAISP, GIANIEMYET, MAGH)`
+
+### 1. Đề Bài
+Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra SOLUONG > 0 trong CHITIET_DH và GIANIEMYET > 0 trong SANPHAM, cả hai không được NULL.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh SQL tương đương:**
+```sql
+ALTER TABLE CHITIET_DH ADD CONSTRAINT CK_CTDH_SOLUONG CHECK (SOLUONG > 0);
+ALTER TABLE SANPHAM ADD CONSTRAINT CK_SANPHAM_GIANIEMYET CHECK (GIANIEMYET > 0);
+```
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
+
+---
+
+## Bài 11 [M08-Q2B] — Cập Nhật Giảm Giá 10% Cho Hàng Gia Dụng Của Gian Hàng Lê Hoàng Nam
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
+- **Lược đồ tham chiếu:** `SANPHAM(MASP, TENSP, LOAISP, GIANIEMYET, MAGH), GIANHANG(MAGH, TENGH, NGUOIDAIDIEN, THANHPHO)`
+
+### 1. Đề Bài
+Viết câu lệnh SQL cập nhật giảm 10% giá niêm yết cho các sản phẩm loại Gia dụng do gian hàng có người đại diện Lê Hoàng Nam cung cấp.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh SQL tương đương:**
+```sql
+UPDATE SANPHAM
+SET GIANIEMYET = GIANIEMYET * 0.90
+FROM SANPHAM sp
+JOIN GIANHANG gh ON sp.MAGH = gh.MAGH
+WHERE gh.NGUOIDAIDIEN = N'Lê Hoàng Nam'
+  AND sp.LOAISP = N'Gia dụng';
+```
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.35đ
+- `logic`: 0.40đ
+
+---
+
+## Bài 12 [SQL-D27] — T-SQL DML Ràng Buộc Hệ Thống Tuyến Xe Buýt (Bài 27)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `TUYEN_XE, METRO`
 
@@ -161,7 +294,7 @@ Tạo ràng buộc toàn vẹn kiểm tra tuyến xe buýt và metro.
 
 ---
 
-## Bài 07 [SQL-D28] — T-SQL Cập Nhật Trạng Thái Chuyến Xe Buýt (Bài 28)
+## Bài 13 [SQL-D28] — T-SQL Cập Nhật Trạng Thái Chuyến Xe Buýt (Bài 28)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `CHUYEN_XE`
 
@@ -180,7 +313,7 @@ Cập nhật trạng thái chuyến xe buýt.
 
 ---
 
-## Bài 08 [SQL-D25] — T-SQL DML Ràng Buộc Trại Cứu Hộ Động Vật (Bài 25)
+## Bài 14 [SQL-D25] — T-SQL DML Ràng Buộc Trại Cứu Hộ Động Vật (Bài 25)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `DONG_VAT, CHUONG_TRAI`
 
@@ -199,7 +332,7 @@ Tạo ràng buộc toàn vẹn kiểm tra thông tin chuồng trại và động
 
 ---
 
-## Bài 09 [SQL-D26] — T-SQL Cập Nhật Khẩu Phần Ăn Trại Cứu Hộ (Bài 26)
+## Bài 15 [SQL-D26] — T-SQL Cập Nhật Khẩu Phần Ăn Trại Cứu Hộ (Bài 26)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `KHAU_PHAN`
 
@@ -218,7 +351,7 @@ Cập nhật khẩu phần ăn động vật.
 
 ---
 
-## Bài 10 [SQL-D01] — Tạo Bảng Với Khóa Ngoại Kép & Ràng Buộc CHECK
+## Bài 16 [SQL-D01] — Tạo Bảng Với Khóa Ngoại Kép & Ràng Buộc CHECK
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
 - **Lược đồ tham chiếu:** `CTPX(MAPX, MALO, SOLIEUXUAT)`
 
@@ -235,150 +368,6 @@ CREATE TABLE CTPX (MAPX VARCHAR(10), MALO VARCHAR(10), SOLIEUXUAT INT CHECK(SOLI
 1. Cú pháp T-SQL
 1. Mệnh đề WHERE lọc dữ liệu
 1. Kiểm tra ràng buộc.
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
-
----
-
-## Bài 11 [SQL-D11] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 11)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
-
-### 1. Đề Bài
-Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
-```sql
-UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định bảng
-1. Viết cú pháp T-SQL
-1. Kiểm thử logic.
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
-
----
-
-## Bài 12 [SQL-D12] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 12)
-- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
-
-### 1. Đề Bài
-Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
-```sql
-ALTER TABLE BANG_12 ADD CONSTRAINT CK_BANG_12 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định bảng
-1. Viết cú pháp T-SQL
-1. Kiểm thử logic.
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
-
----
-
-## Bài 13 [SQL-D13] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 13)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
-
-### 1. Đề Bài
-Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
-```sql
-UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định bảng
-1. Viết cú pháp T-SQL
-1. Kiểm thử logic.
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
-
----
-
-## Bài 14 [SQL-D14] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 14)
-- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
-
-### 1. Đề Bài
-Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
-```sql
-ALTER TABLE BANG_14 ADD CONSTRAINT CK_BANG_14 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định bảng
-1. Viết cú pháp T-SQL
-1. Kiểm thử logic.
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
-
----
-
-## Bài 15 [SQL-D15] — T-SQL Cập Nhật DML Liên Bảng UPDATE ... FROM (Bài 15)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
-
-### 1. Đề Bài
-Viết lệnh UPDATE tăng/giảm giá trị của một quan hệ dựa trên thông tin kết nối từ quan hệ khác.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
-```sql
-UPDATE B1 SET B1.GIA = B1.GIA * 1.05 FROM BANG_A B1 INNER JOIN BANG_B B2 ON B1.ID = B2.ID WHERE B2.LOAI = 'VIP';
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định bảng
-1. Viết cú pháp T-SQL
-1. Kiểm thử logic.
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
-
----
-
-## Bài 16 [SQL-D16] — T-SQL Tạo Ràng Buộc CHECK Miền Giá Trị (Bài 16)
-- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `R1(ID, GIA), R2(ID, LOAI)`
-
-### 1. Đề Bài
-Viết lệnh ALTER TABLE thêm ràng buộc CHECK kiểm tra giá trị cột số liệu phải dương và trạng thái hợp lệ.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
-```sql
-ALTER TABLE BANG_16 ADD CONSTRAINT CK_BANG_16 CHECK (SOLUONG > 0 AND TRANGTHAI IN ('A', 'B'));
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định bảng
-1. Viết cú pháp T-SQL
-1. Kiểm thử logic.
 
 **Barem chấm điểm đề xuất:**
 - `syntax`: 0.40đ

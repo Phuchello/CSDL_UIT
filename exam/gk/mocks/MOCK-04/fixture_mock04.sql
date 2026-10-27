@@ -13,7 +13,15 @@ SET NOCOUNT ON;
 SET ANSI_WARNINGS OFF;
 GO
 
--- 1. CLEANUP PREVIOUS TABLES
+-- 1. CLEANUP PREVIOUS TABLES & FOREIGN KEYS
+DECLARE @sql NVARCHAR(MAX) = N'';
+SELECT @sql += N'ALTER TABLE ' + QUOTENAME(s.name) + N'.' + QUOTENAME(t.name) +
+               N' DROP CONSTRAINT ' + QUOTENAME(f.name) + N';' + CHAR(13)
+FROM sys.foreign_keys f
+INNER JOIN sys.tables t ON f.parent_object_id = t.object_id
+INNER JOIN sys.schemas s ON t.schema_id = s.schema_id;
+IF @sql <> N'' EXEC sp_executesql @sql;
+
 IF OBJECT_ID('dbo.CTHD', 'U') IS NOT NULL DROP TABLE dbo.CTHD;
 IF OBJECT_ID('dbo.HOADON', 'U') IS NOT NULL DROP TABLE dbo.HOADON;
 IF OBJECT_ID('dbo.BE_CHUA', 'U') IS NOT NULL DROP TABLE dbo.BE_CHUA;
@@ -443,6 +451,8 @@ PRINT '------------------------------------------------------------';
 
 -- Target: LOAINL = 'KhongTonTai' -> S = Ø
 -- Candidate universe bounded by π_MAHD(CTHD): exactly 6 invoices have detail lines
+
+-- Method 1: Double NOT EXISTS bounded by candidate universe
 DECLARE @empty_bounded_cnt INT;
 SELECT @empty_bounded_cnt = COUNT(*)
 FROM HOADON HD
@@ -459,11 +469,50 @@ WHERE NOT EXISTS (
 )
 AND EXISTS (SELECT 1 FROM CTHD WHERE MAHD = HD.MAHD);
 
-IF @empty_bounded_cnt = 6
-    PRINT '  [PASS] Test 8: Empty target S=Ø semantic verified: candidate universe returns 6 active invoices.';
+-- Method 2: LEFT JOIN ... HAVING COUNT on candidate universe
+DECLARE @empty_having_cnt INT;
+SELECT @empty_having_cnt = COUNT(*)
+FROM (
+    SELECT CT.MAHD
+    FROM CTHD CT
+    LEFT JOIN (SELECT MANL FROM NHIENLIEU WHERE LOAINL = N'KhongTonTai') S ON CT.MANL = S.MANL
+    GROUP BY CT.MAHD
+    HAVING COUNT(DISTINCT S.MANL) = (SELECT COUNT(*) FROM NHIENLIEU WHERE LOAINL = N'KhongTonTai')
+) AS H;
+
+-- Set-wise comparison between Method 1 and Method 2 using EXCEPT
+DECLARE @t8_diff_1_2 INT, @t8_diff_2_1 INT;
+SELECT @t8_diff_1_2 = COUNT(*) FROM (
+    SELECT HD.MAHD FROM HOADON HD
+    WHERE NOT EXISTS (
+        SELECT * FROM NHIENLIEU NL WHERE NL.LOAINL = N'KhongTonTai'
+        AND NOT EXISTS (SELECT * FROM CTHD CT WHERE CT.MAHD = HD.MAHD AND CT.MANL = NL.MANL)
+    ) AND EXISTS (SELECT 1 FROM CTHD WHERE MAHD = HD.MAHD)
+    EXCEPT
+    SELECT CT.MAHD FROM CTHD CT
+    LEFT JOIN (SELECT MANL FROM NHIENLIEU WHERE LOAINL = N'KhongTonTai') S ON CT.MANL = S.MANL
+    GROUP BY CT.MAHD
+    HAVING COUNT(DISTINCT S.MANL) = (SELECT COUNT(*) FROM NHIENLIEU WHERE LOAINL = N'KhongTonTai')
+) AS D1;
+
+SELECT @t8_diff_2_1 = COUNT(*) FROM (
+    SELECT CT.MAHD FROM CTHD CT
+    LEFT JOIN (SELECT MANL FROM NHIENLIEU WHERE LOAINL = N'KhongTonTai') S ON CT.MANL = S.MANL
+    GROUP BY CT.MAHD
+    HAVING COUNT(DISTINCT S.MANL) = (SELECT COUNT(*) FROM NHIENLIEU WHERE LOAINL = N'KhongTonTai')
+    EXCEPT
+    SELECT HD.MAHD FROM HOADON HD
+    WHERE NOT EXISTS (
+        SELECT * FROM NHIENLIEU NL WHERE NL.LOAINL = N'KhongTonTai'
+        AND NOT EXISTS (SELECT * FROM CTHD CT WHERE CT.MAHD = HD.MAHD AND CT.MANL = NL.MANL)
+    ) AND EXISTS (SELECT 1 FROM CTHD WHERE MAHD = HD.MAHD)
+) AS D2;
+
+IF @empty_bounded_cnt = 6 AND @empty_having_cnt = 6 AND @t8_diff_1_2 = 0 AND @t8_diff_2_1 = 0
+    PRINT '  [PASS] Test 8: Empty target S=Ø verified with EXCEPT set comparison: RA, NOT EXISTS and HAVING COUNT identical (6 invoices).';
 ELSE
 BEGIN
-    PRINT '  [FAIL] Test 8: Empty target mismatch! Expected 6, got ' + CAST(@empty_bounded_cnt AS VARCHAR);
+    PRINT '  [FAIL] Test 8: Empty target comparison failed!';
     THROW 50012, 'Test 8 Failed', 1;
 END;
 GO

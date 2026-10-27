@@ -1,0 +1,45 @@
+﻿Changed database context to 'tempdb'.
+------------------------------------------------------------
+=== TEST 1: CHECK CONSTRAINT ADVERSARIAL INTEGRITY ===
+------------------------------------------------------------
+  [PASS] Test 1A: CK_SACH_SOLUONGTON correctly blocked negative SOLUONGTON.
+  [PASS] Test 1B: CK_CTMUON_TIENPHAT correctly blocked negative TIENPHAT.
+  [PASS] Test 1C: NOT NULL policy correctly rejected NULL SOLUONGTON (Error 515).
+------------------------------------------------------------
+=== TEST 2: QUESTION 2.1B UPDATE VERIFICATION ===
+------------------------------------------------------------
+  [PASS] Test 2: UPDATE correctly affected 2 loan slips (PM01, PM02).
+  [PASS] Test 2b: Due dates verified: PM01=2024-11-04 (+15d), PM02=2024-11-11 (+15d), PM03=2024-10-30 (unchanged).
+------------------------------------------------------------
+=== TEST 3: QUESTION 2.2A SELECTION & PROJECTION ===
+------------------------------------------------------------
+  [PASS] Test 3: Selection returned exactly 2 Computer Science students (DG01, DG02).
+------------------------------------------------------------
+=== TEST 4: QUESTION 2.2B JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 4: Join returned exactly 1 book (S04: Nh?p Môn Co S? D? Li?u).
+------------------------------------------------------------
+=== TEST 5: QUESTION 2.2C OUTER JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 5: Outer join preserved KV04 with NULL reader info (total 7 rows).
+------------------------------------------------------------
+=== TEST 6: QUESTION 2.2D GROUPING & AGGREGATE ===
+------------------------------------------------------------
+  [PASS] Test 6: Grouping SUM verified: DG01=30,000; DG02=15,000.
+------------------------------------------------------------
+=== TEST 7: QUESTION 2.2E RELATIONAL DIVISION ===
+------------------------------------------------------------
+Warning: Null value is eliminated by an aggregate or other SET operation.
+  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (DG01, DG02).
+------------------------------------------------------------
+=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
+------------------------------------------------------------
+Warning: Null value is eliminated by an aggregate or other SET operation.
+  [PASS] Test 8: Empty target S=Ø verified with EXCEPT set comparison: RA, NOT EXISTS and HAVING COUNT identical (5 readers).
+------------------------------------------------------------
+=== TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===
+------------------------------------------------------------
+  [PASS] Test 9: Extreme tie-breaking verified: S01 (3 loans) and S04 (3 loans) preserved; others excluded.
+------------------------------------------------------------
+=== ALL 9 MOCK-07 VERIFICATION SUITES PASSED WITH ASSERTIONS ===
+------------------------------------------------------------

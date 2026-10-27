@@ -93,78 +93,90 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 04 [ERD-006] — Thiết kế ERD & Ánh xạ Schema: Quản lý Bệnh Viện & Phòng Khám Đa Khoa
+## Bài 04 [M06-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Phòng Khám Đa Khoa & Hồ Sơ Khám Bệnh
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `KHOA, BAC_SI, BENH_NHAN, PHIEU_KHAM, DON_THUOC`
+- **Lược đồ tham chiếu:** `ERD: CHUYENKHOA, BACSI, BENHNHAN, DICHVU_KHAM, PHIEUKHAM, CHITIET_DV`
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Bệnh Viện & Phòng Khám Đa Khoa', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Đặt khám & Hồ sơ Bệnh án Phòng khám Đa khoa gồm các thực thể: CHUYENKHOA, BACSI, BENHNHAN, DICHVU_KHAM, PHIEUKHAM và mối kết hợp CHITIET_DV.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Bệnh Viện & Phòng Khám Đa Khoa
+- {'name': 'CHUYENKHOA', 'pk': 'MAKC', 'attributes': ['MAKC', 'TENKHOA', 'TRUONGKHOA'], 'description': 'Khoa chuyên môn điều trị.'}
+- {'name': 'BACSI', 'pk': 'MABS', 'attributes': ['MABS', 'HOTEN', 'HOCVI', 'LUONG'], 'description': 'Bác sĩ thuộc phòng khám.'}
+- {'name': 'BENHNHAN', 'pk': 'MABN', 'attributes': ['MABN', 'HOTEN', 'NGAYSINH', 'GIOITINH', 'DIACHI'], 'description': 'Bệnh nhân đăng ký khám.'}
+- {'name': 'DICHVU_KHAM', 'pk': 'MADV', 'attributes': ['MADV', 'TENDV', 'LOAIDV', 'DONGIA'], 'description': 'Dịch vụ y tế kỹ thuật niêm yết.'}
+- {'name': 'PHIEUKHAM', 'pk': 'MAPK', 'attributes': ['MAPK', 'NGAYKHAM', 'CHANDOAN'], 'description': 'Phiếu khám bệnh của bệnh nhân.'}
 **Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+- {'table': 'CHUYENKHOA', 'pk': ['MAKC'], 'fk': []}
+- {'table': 'BACSI', 'pk': ['MABS'], 'fk': [{'column': 'MAKC', 'ref_table': 'CHUYENKHOA', 'ref_column': 'MAKC'}]}
+- {'table': 'BENHNHAN', 'pk': ['MABN'], 'fk': []}
+- {'table': 'DICHVU_KHAM', 'pk': ['MADV'], 'fk': []}
+- {'table': 'PHIEUKHAM', 'pk': ['MAPK'], 'fk': [{'column': 'MABN', 'ref_table': 'BENHNHAN', 'ref_column': 'MABN'}, {'column': 'MABS', 'ref_table': 'BACSI', 'ref_column': 'MABS'}]}
+- {'table': 'CHITIET_DV', 'pk': ['MAPK', 'MADV'], 'fk': [{'column': 'MAPK', 'ref_table': 'PHIEUKHAM', 'ref_column': 'MAPK'}, {'column': 'MADV', 'ref_table': 'DICHVU_KHAM', 'ref_column': 'MADV'}]}
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `syntax`: 0.50đ
+- `logic`: 1.00đ
+- `intermediate_steps`: 1.00đ
 
 ---
 
-## Bài 05 [ERD-007] — Thiết kế ERD & Ánh xạ Schema: Quản lý Thư Viện Số UIT & Mượn Trả Sách
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `DAU_SACH, CUON_SACH, DOC_GIA, PHIEU_MUON, VI_PHAM`
+## Bài 05 [M07-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Thư Viện Đại Học & Mượn Trả Sách
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `ERD: KHOAVIEN, DOCGIA, SACH, THUTHU, PHIEUMUON, CHITIET_MUON`
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Thư Viện Số UIT & Mượn Trả Sách', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Thư viện Đại học gồm các thực thể: KHOAVIEN, DOCGIA, SACH, THUTHU, PHIEUMUON và mối kết hợp CHITIET_MUON.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Thư Viện Số UIT & Mượn Trả Sách
+- {'name': 'KHOAVIEN', 'pk': 'MAKV', 'attributes': ['MAKV', 'TENKV', 'NAMTL'], 'description': 'Khoa/Viện đào tạo trong trường đại học.'}
+- {'name': 'DOCGIA', 'pk': 'MADG', 'attributes': ['MADG', 'HOTEN', 'NGAYSINH', 'LOAIDG'], 'description': 'Độc giả sinh viên/giảng viên.'}
+- {'name': 'SACH', 'pk': 'MASACH', 'attributes': ['MASACH', 'TENSACH', 'TACGIA', 'NXB', 'NAMXB', 'SOLUONGTON'], 'description': 'Đầu sách in lưu hành.'}
+- {'name': 'THUTHU', 'pk': 'MATT', 'attributes': ['MATT', 'HOTEN', 'SODT'], 'description': 'Cán bộ thủ thư quản lý mượn trả.'}
+- {'name': 'PHIEUMUON', 'pk': 'MAPM', 'attributes': ['MAPM', 'NGAYMUON', 'HANTRA', 'TRANGTHAI'], 'description': 'Phiếu mượn tài liệu sách in.'}
 **Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+- {'table': 'KHOAVIEN', 'pk': ['MAKV'], 'fk': []}
+- {'table': 'DOCGIA', 'pk': ['MADG'], 'fk': [{'column': 'MAKV', 'ref_table': 'KHOAVIEN', 'ref_column': 'MAKV'}]}
+- {'table': 'SACH', 'pk': ['MASACH'], 'fk': []}
+- {'table': 'THUTHU', 'pk': ['MATT'], 'fk': []}
+- {'table': 'PHIEUMUON', 'pk': ['MAPM'], 'fk': [{'column': 'MADG', 'ref_table': 'DOCGIA', 'ref_column': 'MADG'}, {'column': 'MATT', 'ref_table': 'THUTHU', 'ref_column': 'MATT'}]}
+- {'table': 'CHITIET_MUON', 'pk': ['MAPM', 'MASACH'], 'fk': [{'column': 'MAPM', 'ref_table': 'PHIEUMUON', 'ref_column': 'MAPM'}, {'column': 'MASACH', 'ref_table': 'SACH', 'ref_column': 'MASACH'}]}
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
+- `syntax`: 0.50đ
+- `logic`: 1.00đ
+- `intermediate_steps`: 1.00đ
 
 ---
 
-## Bài 06 [ERD-008] — Thiết kế ERD & Ánh xạ Schema: Quản lý Sàn Thương Mại Điện Tử & Đơn Hàng
+## Bài 06 [M08-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Sàn Thương Mại Điện Tử & Đơn Hàng
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `NGUOI_BAN, SAN_PHAM, NGUOI_MUA, DON_HANG, VAN_CHUYEN`
+- **Lược đồ tham chiếu:** `ERD: GIANHANG, SANPHAM, KHACHHANG, DONHANG, VANCHUYEN, CHITIET_DH`
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Sàn Thương Mại Điện Tử & Đơn Hàng', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Sàn Thương mại Điện tử gồm các thực thể: GIANHANG, SANPHAM, KHACHHANG, DONHANG, VANCHUYEN và mối kết hợp CHITIET_DH.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Sàn Thương Mại Điện Tử & Đơn Hàng
+- {'name': 'GIANHANG', 'pk': 'MAGH', 'attributes': ['MAGH', 'TENGH', 'NGUOIDAIDIEN', 'THANHPHO'], 'description': 'Gian hàng người bán.'}
+- {'name': 'SANPHAM', 'pk': 'MASP', 'attributes': ['MASP', 'TENSP', 'LOAISP', 'GIANIEMYET'], 'description': 'Hàng hóa niêm yết bán.'}
+- {'name': 'KHACHHANG', 'pk': 'MAKH', 'attributes': ['MAKH', 'HOTEN', 'DIACHI', 'HANGTHANHVIEN'], 'description': 'Khách hàng mua sắm.'}
+- {'name': 'DONHANG', 'pk': 'MADH', 'attributes': ['MADH', 'NGAYDAT', 'HINHTHUCTT', 'TRANGTHAI'], 'description': 'Đơn đặt hàng trực tuyến.'}
+- {'name': 'VANCHUYEN', 'pk': 'MAVD', 'attributes': ['MAVD', 'DONVIVC', 'CUOCPHI', 'NGAYGIAO'], 'description': 'Vận đơn giao hàng.'}
 **Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+- {'table': 'GIANHANG', 'pk': ['MAGH'], 'fk': []}
+- {'table': 'SANPHAM', 'pk': ['MASP'], 'fk': [{'column': 'MAGH', 'ref_table': 'GIANHANG', 'ref_column': 'MAGH'}]}
+- {'table': 'KHACHHANG', 'pk': ['MAKH'], 'fk': []}
+- {'table': 'DONHANG', 'pk': ['MADH'], 'fk': [{'column': 'MAKH', 'ref_table': 'KHACHHANG', 'ref_column': 'MAKH'}]}
+- {'table': 'CHITIET_DH', 'pk': ['MADH', 'MASP'], 'fk': [{'column': 'MADH', 'ref_table': 'DONHANG', 'ref_column': 'MADH'}, {'column': 'MASP', 'ref_table': 'SANPHAM', 'ref_column': 'MASP'}]}
+- {'table': 'VANCHUYEN', 'pk': ['MAVD'], 'fk': [{'column': 'MADH', 'ref_table': 'DONHANG', 'ref_column': 'MADH'}]}
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `syntax`: 0.50đ
+- `logic`: 1.00đ
+- `intermediate_steps`: 1.00đ
 
 ---
 

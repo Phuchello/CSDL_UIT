@@ -1,0 +1,45 @@
+﻿Changed database context to 'tempdb'.
+------------------------------------------------------------
+=== TEST 1: CHECK CONSTRAINT ADVERSARIAL INTEGRITY ===
+------------------------------------------------------------
+  [PASS] Test 1A: CK_CTDH_SOLUONG correctly blocked SOLUONG = 0.
+  [PASS] Test 1B: CK_SANPHAM_GIANIEMYET correctly blocked negative GIANIEMYET.
+  [PASS] Test 1C: NOT NULL policy correctly rejected NULL GIANIEMYET (Error 515).
+------------------------------------------------------------
+=== TEST 2: QUESTION 2.1B UPDATE VERIFICATION ===
+------------------------------------------------------------
+  [PASS] Test 2: UPDATE correctly affected 3 products (SP01, SP02, SP03).
+  [PASS] Test 2b: Prices verified: SP01=2.25m (-10%), SP02=1.62m (-10%), SP03=540k (-10%), SP04=28m (unchanged).
+------------------------------------------------------------
+=== TEST 3: QUESTION 2.2A SELECTION & PROJECTION ===
+------------------------------------------------------------
+  [PASS] Test 3: Selection returned exactly 2 electronics >= 10m (SP04, SP06).
+------------------------------------------------------------
+=== TEST 4: QUESTION 2.2B JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 4: Join returned exactly 3 orders (DH01, DH03, DH06).
+------------------------------------------------------------
+=== TEST 5: QUESTION 2.2C OUTER JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 5: Outer join preserved GH03 & GH04 with NULL products (total 8 rows).
+------------------------------------------------------------
+=== TEST 6: QUESTION 2.2D GROUPING & AGGREGATE ===
+------------------------------------------------------------
+  [PASS] Test 6: Grouping SUM verified: DH01=5.5m, DH02=33.5m, DH03=9.8m, DH04=46.5m.
+------------------------------------------------------------
+=== TEST 7: QUESTION 2.2E RELATIONAL DIVISION ===
+------------------------------------------------------------
+Warning: Null value is eliminated by an aggregate or other SET operation.
+  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (DH01, DH03).
+------------------------------------------------------------
+=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
+------------------------------------------------------------
+Warning: Null value is eliminated by an aggregate or other SET operation.
+  [PASS] Test 8: Empty target S=Ø verified with EXCEPT set comparison: RA, NOT EXISTS and HAVING COUNT identical (6 orders).
+------------------------------------------------------------
+=== TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===
+------------------------------------------------------------
+  [PASS] Test 9: Extreme tie-breaking verified: KH01 (6 items) and KH02 (6 items) preserved; others excluded.
+------------------------------------------------------------
+=== ALL 9 MOCK-08 VERIFICATION SUITES PASSED WITH ASSERTIONS ===
+------------------------------------------------------------

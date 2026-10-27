@@ -12,7 +12,15 @@ SET NOCOUNT ON;
 SET ANSI_WARNINGS OFF;
 GO
 
--- 1. CLEANUP PREVIOUS OBJECTS
+-- 1. CLEANUP PREVIOUS TABLES & FOREIGN KEYS
+DECLARE @sql NVARCHAR(MAX) = N'';
+SELECT @sql += N'ALTER TABLE ' + QUOTENAME(s.name) + N'.' + QUOTENAME(t.name) +
+               N' DROP CONSTRAINT ' + QUOTENAME(f.name) + N';' + CHAR(13)
+FROM sys.foreign_keys f
+INNER JOIN sys.tables t ON f.parent_object_id = t.object_id
+INNER JOIN sys.schemas s ON t.schema_id = s.schema_id;
+IF @sql <> N'' EXEC sp_executesql @sql;
+
 IF OBJECT_ID('dbo.CT_KIEMTRA', 'U') IS NOT NULL DROP TABLE dbo.CT_KIEMTRA;
 IF OBJECT_ID('dbo.DOT_KIEMTRA', 'U') IS NOT NULL DROP TABLE dbo.DOT_KIEMTRA;
 IF OBJECT_ID('dbo.THIETBI_PCCC', 'U') IS NOT NULL DROP TABLE dbo.THIETBI_PCCC;

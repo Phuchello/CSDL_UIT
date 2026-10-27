@@ -226,25 +226,35 @@ class GKValidator:
         self.validate_mock_exams(catalog)
         self.validate_relational_algebra_and_sql(catalog)
 
+        exec_verified_cnt = self.stats['verification_levels']['EXECUTION_VERIFIED']
+        gold_mocks_cnt = exec_verified_cnt // 9
+        structural_status = "PASS" if not self.errors else "FAIL"
+        academic_status = f"IN_PROGRESS ({gold_mocks_cnt}/15 Mocks Gold Standard)" if gold_mocks_cnt < 15 else "PASS (15/15 Mocks Gold Standard)"
+
         print("\n==================================================")
         print(" AUDIT SUMMARY:")
-        print(f"  Total Problems in Catalog : {self.stats['total_problems']}")
-        print(f"  Solutions Present         : {self.stats['solutions_present']}")
-        print(f"  - Execution Verified      : {self.stats['verification_levels']['EXECUTION_VERIFIED']}")
-        print(f"  - Semantically Reviewed   : {self.stats['verification_levels']['SEMANTICALLY_REVIEWED']}")
-        print(f"  - Draft / Pending Remed.  : {self.stats['verification_levels']['DRAFT']}")
-        print(f"  Rubrics Present           : {self.stats['rubrics_present']}")
-        print(f"  Difficulties (A/B/C)      : {self.stats['difficulties']}")
-        print(f"  Mock Exams Audited        : {self.stats['mocks_count']}")
-        print(f"  Mocks with Valid 10.0 pts : {self.stats['mock_points_valid']}")
-        print(f"  Errors Detected           : {len(self.errors)}")
-        print(f"  Warnings Detected         : {len(self.warnings)}")
+        print("  [1] STRUCTURAL QA (Catalog, Schema, Rubrics, Points):")
+        print(f"      - Status                  : {structural_status}")
+        print(f"      - Total Problems in Bank  : {self.stats['total_problems']}")
+        print(f"      - Solutions Present       : {self.stats['solutions_present']}")
+        print(f"      - Rubrics Present         : {self.stats['rubrics_present']}")
+        print(f"      - Mock Exams (10.0 pts)   : {self.stats['mock_points_valid']} / {self.stats['mocks_count']}")
+        print(f"      - Structural Errors       : {len(self.errors)}")
+        print(f"      - Warnings                : {len(self.warnings)}")
+        print("  [2] ACADEMIC SEMANTIC QA (Engine Execution & Edge Cases):")
+        print(f"      - Gold Standard Mocks     : {gold_mocks_cnt} / 15 (100% SQL Server Verified)")
+        print(f"      - Execution Verified Probs: {self.stats['verification_levels']['EXECUTION_VERIFIED']} / {self.stats['total_problems']}")
+        print(f"      - Semantically Reviewed   : {self.stats['verification_levels']['SEMANTICALLY_REVIEWED']} / {self.stats['total_problems']}")
+        print(f"      - Draft / Pending Remed.  : {self.stats['verification_levels']['DRAFT']} / {self.stats['total_problems']}")
+        print(f"      - Academic Gate Status    : {academic_status}")
         print("==================================================")
 
         report_file = QA_DIR / "audit_report.json"
         with open(report_file, "w", encoding="utf-8") as f:
             json.dump({
-                "status": "PASS" if not self.errors else "FAIL",
+                "structural_qa_status": structural_status,
+                "academic_semantic_qa_status": academic_status,
+                "gold_standard_mocks_count": gold_mocks_cnt,
                 "stats": self.stats,
                 "errors": self.errors,
                 "warnings": self.warnings

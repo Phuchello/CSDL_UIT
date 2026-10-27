@@ -34,7 +34,7 @@
 ------------------------------------------------------------
 === TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
 ------------------------------------------------------------
-  [PASS] Test 8: Empty target S=Ø semantic verified: candidate universe returns 6 active invoices.
+  [PASS] Test 8: Empty target S=Ø verified with EXCEPT set comparison: RA, NOT EXISTS and HAVING COUNT identical (6 invoices).
 ------------------------------------------------------------
 === TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===
 ------------------------------------------------------------

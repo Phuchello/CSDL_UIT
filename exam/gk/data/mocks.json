@@ -398,64 +398,64 @@
           "num": "1",
           "sub": "",
           "points": 2.5,
-          "problem_id": "ERD-006"
+          "problem_id": "M06-Q1"
         },
         {
           "num": "2",
           "sub": "1a",
           "points": 0.75,
-          "problem_id": "SQL-D11"
+          "problem_id": "M06-Q2A"
         },
         {
           "num": "2",
           "sub": "1b",
           "points": 0.75,
-          "problem_id": "SQL-D12"
+          "problem_id": "M06-Q2B"
         },
         {
           "num": "2",
           "sub": "2a",
           "points": 1.0,
-          "problem_id": "RA-B16"
+          "problem_id": "M06-Q2C1"
         },
         {
           "num": "2",
           "sub": "2b",
           "points": 1.0,
-          "problem_id": "RA-B17"
+          "problem_id": "M06-Q2C2"
         },
         {
           "num": "2",
           "sub": "2c",
           "points": 1.0,
-          "problem_id": "RA-B18"
+          "problem_id": "M06-Q2C3"
         },
         {
           "num": "2",
           "sub": "2d",
           "points": 1.0,
-          "problem_id": "RA-D16"
+          "problem_id": "M06-Q2C4"
         },
         {
           "num": "2",
           "sub": "2e",
           "points": 1.0,
-          "problem_id": "RA-D17"
+          "problem_id": "M06-Q2C5"
         },
         {
           "num": "2",
           "sub": "2f",
           "points": 1.0,
-          "problem_id": "RA-D18"
+          "problem_id": "M06-Q2C6"
         }
       ]
     },
     {
       "id": "MOCK-07",
-      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 07 — Quản Lý Thư Viện Số UIT & Mượn Trả Tài Liệu",
+      "title": "Đề Thi Giữa Kỳ Mô Phỏng Số 07 — Quản Lý Thư Viện Đại Học & Mượn Trả Sách",
       "duration_mins": 75,
       "total_points": 10.0,
-      "profile": "RECENT_VERIFIED",
+      "profile": "HISTORICAL_2023_2024",
       "target_skills": [
         "ERD_DESIGN",
         "SCHEMA_MAPPING",
@@ -472,56 +472,56 @@
         {
           "num": "1",
           "sub": "",
-          "points": 2.0,
-          "problem_id": "ERD-007"
+          "points": 2.5,
+          "problem_id": "M07-Q1"
         },
         {
           "num": "2",
           "sub": "1a",
           "points": 0.75,
-          "problem_id": "SQL-D13"
+          "problem_id": "M07-Q2A"
         },
         {
           "num": "2",
           "sub": "1b",
           "points": 0.75,
-          "problem_id": "SQL-D14"
+          "problem_id": "M07-Q2B"
         },
         {
           "num": "2",
           "sub": "2a",
           "points": 1.0,
-          "problem_id": "RA-B19"
+          "problem_id": "M07-Q2C1"
         },
         {
           "num": "2",
           "sub": "2b",
           "points": 1.0,
-          "problem_id": "RA-B20"
+          "problem_id": "M07-Q2C2"
         },
         {
           "num": "2",
           "sub": "2c",
           "points": 1.0,
-          "problem_id": "RA-B21"
+          "problem_id": "M07-Q2C3"
         },
         {
           "num": "2",
           "sub": "2d",
           "points": 1.0,
-          "problem_id": "RA-D19"
+          "problem_id": "M07-Q2C4"
         },
         {
           "num": "2",
           "sub": "2e",
           "points": 1.0,
-          "problem_id": "RA-D20"
+          "problem_id": "M07-Q2C5"
         },
         {
           "num": "2",
           "sub": "2f",
-          "points": 1.5,
-          "problem_id": "RA-D21"
+          "points": 1.0,
+          "problem_id": "M07-Q2C6"
         }
       ]
     },
@@ -548,55 +548,55 @@
           "num": "1",
           "sub": "",
           "points": 2.5,
-          "problem_id": "ERD-008"
+          "problem_id": "M08-Q1"
         },
         {
           "num": "2",
           "sub": "1a",
           "points": 0.75,
-          "problem_id": "SQL-D15"
+          "problem_id": "M08-Q2A"
         },
         {
           "num": "2",
           "sub": "1b",
           "points": 0.75,
-          "problem_id": "SQL-D16"
+          "problem_id": "M08-Q2B"
         },
         {
           "num": "2",
           "sub": "2a",
           "points": 1.0,
-          "problem_id": "RA-B22"
+          "problem_id": "M08-Q2C1"
         },
         {
           "num": "2",
           "sub": "2b",
           "points": 1.0,
-          "problem_id": "RA-B23"
+          "problem_id": "M08-Q2C2"
         },
         {
           "num": "2",
           "sub": "2c",
           "points": 1.0,
-          "problem_id": "RA-B24"
+          "problem_id": "M08-Q2C3"
         },
         {
           "num": "2",
           "sub": "2d",
           "points": 1.0,
-          "problem_id": "RA-D22"
+          "problem_id": "M08-Q2C4"
         },
         {
           "num": "2",
           "sub": "2e",
           "points": 1.0,
-          "problem_id": "RA-D23"
+          "problem_id": "M08-Q2C5"
         },
         {
           "num": "2",
           "sub": "2f",
           "points": 1.0,
-          "problem_id": "RA-D24"
+          "problem_id": "M08-Q2C6"
         }
       ]
     },

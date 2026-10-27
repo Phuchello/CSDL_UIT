@@ -1,0 +1,43 @@
+﻿Changed database context to 'tempdb'.
+------------------------------------------------------------
+=== TEST 1: CHECK CONSTRAINT ADVERSARIAL INTEGRITY ===
+------------------------------------------------------------
+  [PASS] Test 1A: CK_CTDV_SOLUONG correctly blocked SOLUONG = 0.
+  [PASS] Test 1B: CK_DVKHAM_DONGIA correctly blocked negative DONGIA.
+  [PASS] Test 1C: NOT NULL policy correctly rejected NULL DONGIA (Error 515).
+------------------------------------------------------------
+=== TEST 2: QUESTION 2.1B UPDATE VERIFICATION ===
+------------------------------------------------------------
+  [PASS] Test 2: UPDATE correctly affected 2 doctors (BS01, BS03).
+  [PASS] Test 2b: Salary verified: BS01=27.5tr (+10%), BS03=24.2tr (+10%), BS02=18tr (unchanged).
+------------------------------------------------------------
+=== TEST 3: QUESTION 2.2A SELECTION & PROJECTION ===
+------------------------------------------------------------
+  [PASS] Test 3: Selection returned exactly 2 female patients in HCMC (BN01, BN02).
+------------------------------------------------------------
+=== TEST 4: QUESTION 2.2B JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 4: Join returned exactly 2 examination slips by Pediatrics (PK03, PK04).
+------------------------------------------------------------
+=== TEST 5: QUESTION 2.2C OUTER JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 5: Outer join preserved CK04 with NULL doctor info (total 6 rows).
+------------------------------------------------------------
+=== TEST 6: QUESTION 2.2D GROUPING & AGGREGATE ===
+------------------------------------------------------------
+  [PASS] Test 6: Grouping SUM verified: PK01=550,000; PK02=350,000.
+------------------------------------------------------------
+=== TEST 7: QUESTION 2.2E RELATIONAL DIVISION ===
+------------------------------------------------------------
+  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (PK01, PK03).
+------------------------------------------------------------
+=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
+------------------------------------------------------------
+  [PASS] Test 8: Empty target S=Ø verified with EXCEPT set comparison: RA, NOT EXISTS and HAVING COUNT identical (6 slips).
+------------------------------------------------------------
+=== TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===
+------------------------------------------------------------
+  [PASS] Test 9: Extreme tie-breaking verified: BS01 (2 slips) and BS04 (2 slips) preserved; BS05 (1 slip) excluded.
+------------------------------------------------------------
+=== ALL 9 MOCK-06 VERIFICATION SUITES PASSED WITH ASSERTIONS ===
+------------------------------------------------------------

@@ -263,7 +263,268 @@ WHERE LTK.TENLTK = N'Thanh toán';
 
 ---
 
-## Bài 09 [RA-B01] — ĐSQH Lọc Đơn Lô Vắc-Xin Theo Hạn Sử Dụng
+## Bài 09 [M06-Q2C1] — ĐSQH Lọc Bệnh Nhân Nữ Thường Trú TP.HCM
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BENHNHAN(MABN, HOTEN, NGAYSINH, GIOITINH, DIACHI)`
+
+### 1. Đề Bài
+Liệt kê danh sách bệnh nhân (MABN, HOTEN, NGAYSINH, DIACHI) có giới tính Nữ và địa chỉ tại TP.HCM.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MABN, HOTEN, NGAYSINH, DIACHI}(\sigma_{GIOITINH = 'Nữ' \wedge DIACHI = 'TP.HCM'}(BENHNHAN))
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT MABN, HOTEN, NGAYSINH, DIACHI FROM BENHNHAN WHERE GIOITINH = N'Nữ' AND DIACHI = N'TP.HCM';
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = \sigma_{GIOITINH = 'Nữ' \wedge DIACHI = 'TP.HCM'}(BENHNHAN)
+1. KQ = \pi_{MABN, HOTEN, NGAYSINH, DIACHI}(E_1)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 10 [M06-Q2C2] — ĐSQH Kết Nối Phiếu Khám Của Chuyên Khoa Nhi Khoa
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `PHIEUKHAM(MAPK, NGAYKHAM, MABN, MABS, CHANDOAN), BACSI(MABS, HOTEN, HOCVI, MAKC, LUONG), CHUYENKHOA(MAKC, TENKHOA, TRUONGKHOA)`
+
+### 1. Đề Bài
+Cho biết danh sách phiếu khám (MAPK, NGAYKHAM, CHANDOAN, HOTEN) do bác sĩ thuộc chuyên khoa Nhi khoa thăm khám.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MAPK, NGAYKHAM, CHANDOAN, HOTEN}(PHIEUKHAM \bowtie (BACSI \bowtie \sigma_{TENKHOA = 'Nhi khoa'}(CHUYENKHOA)))
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT pk.MAPK, pk.NGAYKHAM, pk.CHANDOAN, bs.HOTEN FROM PHIEUKHAM pk JOIN BACSI bs ON pk.MABS = bs.MABS JOIN CHUYENKHOA ck ON bs.MAKC = ck.MAKC WHERE ck.TENKHOA = N'Nhi khoa';
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = \sigma_{TENKHOA = 'Nhi khoa'}(CHUYENKHOA)
+1. E_2 = BACSI \bowtie E_1
+1. E_3 = PHIEUKHAM \bowtie E_2
+1. KQ = \pi_{MAPK, NGAYKHAM, CHANDOAN, HOTEN}(E_3)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 11 [M06-Q2C3] — ĐSQH Kết Ngoài Danh Sách Chuyên Khoa Và Bác Sĩ (Nếu Có)
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `CHUYENKHOA(MAKC, TENKHOA, TRUONGKHOA), BACSI(MABS, HOTEN, HOCVI, MAKC, LUONG)`
+
+### 1. Đề Bài
+Liệt kê tất cả chuyên khoa (MAKC, TENKHOA) và thông tin bác sĩ (MABS, HOTEN) công tác tại chuyên khoa (nếu chưa có bác sĩ thì mang giá trị NULL).
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MAKC, TENKHOA, MABS, HOTEN}(CHUYENKHOA =\bowtie BACSI)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT ck.MAKC, ck.TENKHOA, bs.MABS, bs.HOTEN FROM CHUYENKHOA ck LEFT JOIN BACSI bs ON ck.MAKC = bs.MAKC;
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = CHUYENKHOA =\bowtie BACSI
+1. KQ = \pi_{MAKC, TENKHOA, MABS, HOTEN}(E_1)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 12 [M07-Q2C1] — ĐSQH Lọc Sinh Viên Thuộc Khoa Khoa Học Máy Tính
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `DOCGIA(MADG, HOTEN, NGAYSINH, LOAIDG, MAKV), KHOAVIEN(MAKV, TENKV, NAMTL)`
+
+### 1. Đề Bài
+Liệt kê danh sách độc giả (MADG, HOTEN, NGAYSINH) có loại độc giả là Sinh viên và trực thuộc khoa viện Khoa học Máy tính.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MADG, HOTEN, NGAYSINH}(\sigma_{LOAIDG = 'Sinh viên' \wedge TENKV = 'Khoa học Máy tính'}(DOCGIA \bowtie KHOAVIEN))
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT dg.MADG, dg.HOTEN, dg.NGAYSINH FROM DOCGIA dg JOIN KHOAVIEN kv ON dg.MAKV = kv.MAKV WHERE dg.LOAIDG = N'Sinh viên' AND kv.TENKV = N'Khoa học Máy tính';
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = \sigma_{LOAIDG = 'Sinh viên'}(DOCGIA)
+1. E_2 = \sigma_{TENKV = 'Khoa học Máy tính'}(KHOAVIEN)
+1. E_3 = E_1 \bowtie E_2
+1. KQ = \pi_{MADG, HOTEN, NGAYSINH}(E_3)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 13 [M07-Q2C2] — ĐSQH Kết Nối Sách NXB Giáo Dục Được Mượn Bởi Độc Giả DG01
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `PHIEUMUON(MAPM, NGAYMUON, HANTRA, MADG, MATT, TRANGTHAI), CHITIET_MUON(MAPM, MASACH, NGAYTRA, TIENPHAT), SACH(MASACH, TENSACH, TACGIA, NXB, NAMXB, SOLUONGTON)`
+
+### 1. Đề Bài
+Cho biết danh sách các cuốn sách (MASACH, TENSACH, NXB) do NXB Giáo Dục ấn hành đã được mượn bởi độc giả có mã DG01.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MASACH, TENSACH, NXB}((\sigma_{MADG = 'DG01'}(PHIEUMUON) \bowtie CHITIET_MUON) \bowtie \sigma_{NXB = 'NXB Giáo Dục'}(SACH))
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT s.MASACH, s.TENSACH, s.NXB FROM PHIEUMUON pm JOIN CHITIET_MUON ct ON pm.MAPM = ct.MAPM JOIN SACH s ON ct.MASACH = s.MASACH WHERE pm.MADG = 'DG01' AND s.NXB = N'NXB Giáo Dục';
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = \sigma_{MADG = 'DG01'}(PHIEUMUON)
+1. E_2 = E_1 \bowtie CHITIET_MUON
+1. E_3 = \sigma_{NXB = 'NXB Giáo Dục'}(SACH)
+1. E_4 = E_2 \bowtie E_3
+1. KQ = \pi_{MASACH, TENSACH, NXB}(E_4)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 14 [M07-Q2C3] — ĐSQH Kết Ngoài Danh Sách Khoa Viện Và Độc Giả (Nếu Có)
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `KHOAVIEN(MAKV, TENKV, NAMTL), DOCGIA(MADG, HOTEN, NGAYSINH, LOAIDG, MAKV)`
+
+### 1. Đề Bài
+Liệt kê thông tin tất cả các khoa viện (MAKV, TENKV) và danh sách độc giả (MADG, HOTEN) thuộc khoa viện (nếu chưa có độc giả nào thì mang giá trị NULL).
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MAKV, TENKV, MADG, HOTEN}(KHOAVIEN =\bowtie DOCGIA)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT kv.MAKV, kv.TENKV, dg.MADG, dg.HOTEN FROM KHOAVIEN kv LEFT JOIN DOCGIA dg ON kv.MAKV = dg.MAKV;
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = KHOAVIEN =\bowtie DOCGIA
+1. KQ = \pi_{MAKV, TENKV, MADG, HOTEN}(E_1)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 15 [M08-Q2C1] — ĐSQH Lọc Sản Phẩm Điện Tử Giá Từ 10 Triệu
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SANPHAM(MASP, TENSP, LOAISP, GIANIEMYET, MAGH)`
+
+### 1. Đề Bài
+Liệt kê danh sách các sản phẩm (MASP, TENSP, GIANIEMYET) thuộc loại Điện tử có giá niêm yết từ 10.000.000 trở lên.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MASP, TENSP, GIANIEMYET}(\sigma_{LOAISP = 'Điện tử' \wedge GIANIEMYET \ge 10000000}(SANPHAM))
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT MASP, TENSP, GIANIEMYET FROM SANPHAM WHERE LOAISP = N'Điện tử' AND GIANIEMYET >= 10000000;
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = \sigma_{LOAISP = 'Điện tử' \wedge GIANIEMYET \ge 10000000}(SANPHAM)
+1. KQ = \pi_{MASP, TENSP, GIANIEMYET}(E_1)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 16 [M08-Q2C2] — ĐSQH Kết Nối Đơn Hàng Khách Hà Nội Thanh Toán Ví Điện Tử
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `DONHANG(MADH, NGAYDAT, MAKH, HINHTHUCTT, TRANGTHAI), KHACHHANG(MAKH, HOTEN, DIACHI, HANGTHANHVIEN)`
+
+### 1. Đề Bài
+Cho biết danh sách các đơn hàng (MADH, NGAYDAT, HINHTHUCTT, HOTEN) của khách hàng tại Hà Nội thanh toán bằng Ví điện tử.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MADH, NGAYDAT, HINHTHUCTT, HOTEN}(\sigma_{HINHTHUCTT = 'Ví điện tử'}(DONHANG) \bowtie \sigma_{DIACHI = 'Hà Nội'}(KHACHHANG))
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT dh.MADH, dh.NGAYDAT, dh.HINHTHUCTT, kh.HOTEN FROM DONHANG dh JOIN KHACHHANG kh ON dh.MAKH = kh.MAKH WHERE kh.DIACHI = N'Hà Nội' AND dh.HINHTHUCTT = N'Ví điện tử';
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = \sigma_{DIACHI = 'Hà Nội'}(KHACHHANG)
+1. E_2 = \sigma_{HINHTHUCTT = 'Ví điện tử'}(DONHANG)
+1. E_3 = E_1 \bowtie E_2
+1. KQ = \pi_{MADH, NGAYDAT, HINHTHUCTT, HOTEN}(E_3)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 17 [M08-Q2C3] — ĐSQH Kết Ngoài Danh Sách Gian Hàng Và Sản Phẩm (Nếu Có)
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `GIANHANG(MAGH, TENGH, NGUOIDAIDIEN, THANHPHO), SANPHAM(MASP, TENSP, LOAISP, GIANIEMYET, MAGH)`
+
+### 1. Đề Bài
+Liệt kê thông tin tất cả các gian hàng (MAGH, TENGH) cùng danh mục sản phẩm (MASP, TENSP) (nếu chưa có sản phẩm nào thì mang giá trị NULL).
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Biểu thức Đại số quan hệ:**
+```text
+KQ = \pi_{MAGH, TENGH, MASP, TENSP}(GIANHANG =\bowtie SANPHAM)
+```
+**Câu lệnh SQL tương đương:**
+```sql
+SELECT gh.MAGH, gh.TENGH, sp.MASP, sp.TENSP FROM GIANHANG gh LEFT JOIN SANPHAM sp ON gh.MAGH = sp.MAGH;
+```
+
+**Các bước suy luận tư duy:**
+1. E_1 = GIANHANG =\bowtie SANPHAM
+1. KQ = \pi_{MAGH, TENGH, MASP, TENSP}(E_1)
+
+**Barem chấm điểm đề xuất:**
+- `syntax`: 0.30đ
+- `logic`: 0.40đ
+- `intermediate_steps`: 0.30đ
+
+---
+
+## Bài 18 [RA-B01] — ĐSQH Lọc Đơn Lô Vắc-Xin Theo Hạn Sử Dụng
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `LOVACXIN(MALO, TENLO, HSD)`
 
@@ -287,258 +548,6 @@ SELECT MALO, TENLO FROM LOVACXIN WHERE HSD > '2025-12-31';
 
 **Barem chấm điểm đề xuất:**
 - `ra_logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 10 [RA-B16] — ĐSQH Kết Nối Đa Bảng: Căn Hộ & Tòa Nhà (Bài 16)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE)`
-
-### 1. Đề Bài
-Cho lược đồ TOANHA(MATOA, TENTOA, VITRI), CANHO(MACH, MATOA, DIENTICH, GIATHUE). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin căn hộ diện tích > 80m2 tại tòa nhà 'Landmark'.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{THUOCTINH}(R1 ⋈ R2)
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 11 [RA-B17] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Khoa & Sinh Viên (Bài 17)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA)`
-
-### 1. Đề Bài
-Cho lược đồ SINHVIEN(MASV, HOTEN, PHAI, MAKHOA), KHOA(MAKHOA, TENKHOA). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{THUOCTINH}(R1 ⟕ R2)
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 12 [RA-B18] — ĐSQH Tự Kết Phân Cấp: Đơn Hàng & Khách (Bài 18)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA)`
-
-### 1. Đề Bài
-Cho lược đồ KHACHHANG(MAKH, HOTEN, DIACHI), DONHANG(MADH, MAKH, NGAYDH, TRIGIA). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT * FROM R A JOIN R B ON A.PID = B.ID;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 13 [RA-B19] — ĐSQH Phép Tập Hợp Giao/Trừ: Sách & Tác Giả (Bài 19)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH)`
-
-### 1. Đề Bài
-Cho lược đồ SACH(MASACH, TENSACH, MATG, NXB), TACGIA(MATG, TENTG, QUOCTICH). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 14 [RA-B20] — ĐSQH Lọc & Chiếu: Chuyến Bay & Phi Công (Bài 20)
-- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB)`
-
-### 1. Đề Bài
-Cho lược đồ CHUYENBAY(MACB, SOHIEU, GIOBAY, NOIDI, NOIDEN), PHICONG(MAPC, HOTEN, MACB). Viết biểu thức ĐSQH liệt kê danh sách chuyến bay xuất phát từ 'SGN' đến 'HAN'.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{ID, TEN}(σ_{DIEUKIEN}(ChuyếnBay))
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT ID, TEN FROM ChuyếnBay WHERE DIEUKIEN;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 15 [RA-B21] — ĐSQH Kết Nối Đa Bảng: Phòng Khám & Bác Sĩ (Bài 21)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG)`
-
-### 1. Đề Bài
-Cho lược đồ BACSI(MABS, HOTEN, CHUYENKHOA), PHONGKHAM(MAPK, TENPK, MABS_TRUONG). Viết biểu thức ĐSQH kết nối các quan hệ để tìm thông tin bác sĩ chuyên khoa 'Tai-Mũi-Họng'.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{THUOCTINH}(R1 ⋈ R2)
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT * FROM R1 JOIN R2 ON R1.KEY = R2.KEY WHERE DIEUKIEN;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 16 [RA-B22] — ĐSQH Kết Ngoài Left Outer Join (Nếu Có): Tài Khoản & Giao Dịch (Bài 22)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD)`
-
-### 1. Đề Bài
-Cho lược đồ TAIKHOAN(SOTK, MAKH, SODU), GIAODICH(MAGD, SOTK, SOTIEN, NGAYGD). Liệt kê danh sách các đối tượng và thông tin liên quan nếu có.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{THUOCTINH}(R1 ⟕ R2)
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT * FROM R1 LEFT OUTER JOIN R2 ON R1.KEY = R2.KEY;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 17 [RA-B23] — ĐSQH Tự Kết Phân Cấp: Lớp Học & Môn Học (Bài 23)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM)`
-
-### 1. Đề Bài
-Cho lược đồ MONHOC(MAMH, TENMH, SOTC), LOPHOC(MALOP, MAMH, HOCKY, NAM). Viết biểu thức ĐSQH tự kết (Self-Join) tìm đối tượng cùng nhóm.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{THUOCTINH}(ρ_{A}(R) ⋈ ρ_{B}(R))
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT * FROM R A JOIN R B ON A.PID = B.ID;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
-- `syntax`: 0.40đ
-
----
-
-## Bài 18 [RA-B24] — ĐSQH Phép Tập Hợp Giao/Trừ: Xe Máy & Bảo Dưỡng (Bài 24)
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 1.0 điểm
-- **Lược đồ tham chiếu:** `XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI)`
-
-### 1. Đề Bài
-Cho lược đồ XEMAY(MAXE, BIENSO, DONGXE), BAODUONG(MABD, MAXE, NGAYBD, CHIPHI). Tìm các đối tượng thỏa mãn điều kiện A nhưng không thỏa điều kiện B.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Biểu thức Đại số quan hệ:**
-```text
-KQ ← π_{ID}(σ_{A}(R)) - π_{ID}(σ_{B}(R))
-```
-**Câu lệnh SQL tương đương:**
-```sql
-SELECT ID FROM R WHERE A EXCEPT SELECT ID FROM R WHERE B;
-```
-
-**Các bước suy luận tư duy:**
-1. Xác định tập quan hệ
-1. Phép toán đại số quan hệ
-1. Chiếu kết quả.
-
-**Barem chấm điểm đề xuất:**
-- `logic`: 0.60đ
 - `syntax`: 0.40đ
 
 ---

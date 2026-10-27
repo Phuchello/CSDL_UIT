@@ -12,7 +12,15 @@ SET NOCOUNT ON;
 SET ANSI_WARNINGS OFF;
 GO
 
--- 1. CLEANUP PREVIOUS OBJECTS
+-- 1. CLEANUP PREVIOUS TABLES & FOREIGN KEYS
+DECLARE @sql NVARCHAR(MAX) = N'';
+SELECT @sql += N'ALTER TABLE ' + QUOTENAME(s.name) + N'.' + QUOTENAME(t.name) +
+               N' DROP CONSTRAINT ' + QUOTENAME(f.name) + N';' + CHAR(13)
+FROM sys.foreign_keys f
+INNER JOIN sys.tables t ON f.parent_object_id = t.object_id
+INNER JOIN sys.schemas s ON t.schema_id = s.schema_id;
+IF @sql <> N'' EXEC sp_executesql @sql;
+
 IF OBJECT_ID('dbo.PHIEU_NHAN', 'U') IS NOT NULL DROP TABLE dbo.PHIEU_NHAN;
 IF OBJECT_ID('dbo.DONG_GOP', 'U') IS NOT NULL DROP TABLE dbo.DONG_GOP;
 IF OBJECT_ID('dbo.DOT_CUUTRO', 'U') IS NOT NULL DROP TABLE dbo.DOT_CUUTRO;
@@ -398,30 +406,76 @@ GO
 PRINT '------------------------------------------------------------';
 PRINT '=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===';
 PRINT '------------------------------------------------------------';
--- Edge Case: Target donor type with 0 records (e.g. 'Tập đoàn Quốc tế')
--- Pure RA: R / 0 = pi_MADOT(R). Returns all 4 active relief batches in DONG_GOP.
-DECLARE @t8_bounded_cnt INT;
-SELECT @t8_bounded_cnt = COUNT(DISTINCT DG.MADOT)
-FROM dbo.DONG_GOP DG
+-- Edge Case: Target donor type with 0 records (e.g. 'Tập đoàn Quốc tế') -> S = Ø
+-- Pure RA: R ÷ Ø = π_MADOT(R). Returns all 4 active relief batches in DONG_GOP.
+
+-- Method 1: Double NOT EXISTS bounded by candidate universe π_MADOT(DONG_GOP)
+DECLARE @t8_notexists_cnt INT;
+SELECT @t8_notexists_cnt = COUNT(DISTINCT DCT.MADOT)
+FROM dbo.DOT_CUUTRO DCT
 WHERE NOT EXISTS (
     SELECT *
     FROM dbo.NHA_HAOTAM NHT
     WHERE NHT.LOAIHINH = N'Tập đoàn Quốc tế'
       AND NOT EXISTS (
           SELECT *
-          FROM dbo.DONG_GOP DG2
-          WHERE DG2.MADOT = DG.MADOT
-            AND DG2.MANHT = NHT.MANHT
+          FROM dbo.DONG_GOP DG
+          WHERE DG.MADOT = DCT.MADOT
+            AND DG.MANHT = NHT.MANHT
       )
-);
+)
+AND EXISTS (SELECT 1 FROM dbo.DONG_GOP WHERE MADOT = DCT.MADOT);
 
-IF @t8_bounded_cnt = 4
-    PRINT '  [PASS] Test 8: Empty target S=∅ semantic verified: candidate universe returns 4 active batches.';
+-- Method 2: LEFT JOIN ... HAVING COUNT on candidate universe
+DECLARE @t8_having_cnt INT;
+SELECT @t8_having_cnt = COUNT(*)
+FROM (
+    SELECT DG.MADOT
+    FROM dbo.DONG_GOP DG
+    LEFT JOIN (SELECT MANHT FROM dbo.NHA_HAOTAM WHERE LOAIHINH = N'Tập đoàn Quốc tế') S ON DG.MANHT = S.MANHT
+    GROUP BY DG.MADOT
+    HAVING COUNT(DISTINCT S.MANHT) = (SELECT COUNT(*) FROM dbo.NHA_HAOTAM WHERE LOAIHINH = N'Tập đoàn Quốc tế')
+) AS H;
+
+-- Set-wise comparison between Method 1 and Method 2 using EXCEPT
+DECLARE @t8_diff_1_2 INT, @t8_diff_2_1 INT;
+SELECT @t8_diff_1_2 = COUNT(*) FROM (
+    SELECT DCT.MADOT
+    FROM dbo.DOT_CUUTRO DCT
+    WHERE NOT EXISTS (
+        SELECT * FROM dbo.NHA_HAOTAM NHT WHERE NHT.LOAIHINH = N'Tập đoàn Quốc tế'
+        AND NOT EXISTS (SELECT * FROM dbo.DONG_GOP DG WHERE DG.MADOT = DCT.MADOT AND DG.MANHT = NHT.MANHT)
+    ) AND EXISTS (SELECT 1 FROM dbo.DONG_GOP WHERE MADOT = DCT.MADOT)
+    EXCEPT
+    SELECT DG.MADOT
+    FROM dbo.DONG_GOP DG
+    LEFT JOIN (SELECT MANHT FROM dbo.NHA_HAOTAM WHERE LOAIHINH = N'Tập đoàn Quốc tế') S ON DG.MANHT = S.MANHT
+    GROUP BY DG.MADOT
+    HAVING COUNT(DISTINCT S.MANHT) = (SELECT COUNT(*) FROM dbo.NHA_HAOTAM WHERE LOAIHINH = N'Tập đoàn Quốc tế')
+) AS D1;
+
+SELECT @t8_diff_2_1 = COUNT(*) FROM (
+    SELECT DG.MADOT
+    FROM dbo.DONG_GOP DG
+    LEFT JOIN (SELECT MANHT FROM dbo.NHA_HAOTAM WHERE LOAIHINH = N'Tập đoàn Quốc tế') S ON DG.MANHT = S.MANHT
+    GROUP BY DG.MADOT
+    HAVING COUNT(DISTINCT S.MANHT) = (SELECT COUNT(*) FROM dbo.NHA_HAOTAM WHERE LOAIHINH = N'Tập đoàn Quốc tế')
+    EXCEPT
+    SELECT DCT.MADOT
+    FROM dbo.DOT_CUUTRO DCT
+    WHERE NOT EXISTS (
+        SELECT * FROM dbo.NHA_HAOTAM NHT WHERE NHT.LOAIHINH = N'Tập đoàn Quốc tế'
+        AND NOT EXISTS (SELECT * FROM dbo.DONG_GOP DG WHERE DG.MADOT = DCT.MADOT AND DG.MANHT = NHT.MANHT)
+    ) AND EXISTS (SELECT 1 FROM dbo.DONG_GOP WHERE MADOT = DCT.MADOT)
+) AS D2;
+
+IF @t8_notexists_cnt = 4 AND @t8_having_cnt = 4 AND @t8_diff_1_2 = 0 AND @t8_diff_2_1 = 0
+    PRINT '  [PASS] Test 8: Empty target S=Ø verified with EXCEPT set comparison: RA, NOT EXISTS and HAVING COUNT identical (4 batches).';
 ELSE
 BEGIN
-    PRINT '  [FAIL] Test 8: Empty target count mismatch!';
+    PRINT '  [FAIL] Test 8: Empty target comparison failed!';
     THROW 50012, 'Test 8 Failed', 1;
-END
+END;
 GO
 
 PRINT '------------------------------------------------------------';

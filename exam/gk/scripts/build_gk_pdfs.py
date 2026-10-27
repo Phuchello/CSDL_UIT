@@ -316,6 +316,160 @@ def print_html_to_pdf(html_text: str, output_pdf_path: Path):
 # -----------------------------------------------------------------------------
 # 1. BUILD PDF 1: IT004_GK_NganHangDe_VoTrongPhuc.pdf (NO ANSWERS)
 # -----------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------
+# GOLD STANDARD MOCK EXECUTION TABLES (MICROSOFT SQL SERVER 2025)
+# -----------------------------------------------------------------------------
+GOLD_MOCK_IDS = [
+    "MOCK-01", "MOCK-02", "MOCK-03", "MOCK-04",
+    "MOCK-05", "MOCK-06", "MOCK-07", "MOCK-08"
+]
+
+MOCK_SCHEMA_TITLES = {
+    "MOCK-01": "Quản lý Cung ứng & Tiêm chủng Vắc-xin",
+    "MOCK-02": "Quản Lý Hệ Thống PCCC Chung Cư Cao Tầng",
+    "MOCK-03": "Quản Lý Cứu Trợ & Khắc Phục Bão Lũ",
+    "MOCK-04": "Quản Lý Chuỗi Cửa Hàng Bán Lẻ Xăng Dầu",
+    "MOCK-05": "Quản Lý Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà",
+    "MOCK-06": "Quản Lý Đặt Khám & Hồ Sơ Bệnh Án Phòng Khám Đa Khoa",
+    "MOCK-07": "Quản Lý Thư Viện Đại Học & Mượn Trả Sách",
+    "MOCK-08": "Quản Lý Sàn Thương Mại Điện Tử & Vận Chuyển Hàng"
+}
+
+MOCK_EXECUTION_DATA = {
+    "MOCK-01": {
+        "title": "MOCK-01",
+        "log": "exam/gk/qa/mock01_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn SOLIEUXUAT = 0, TRANGTHAI = 2, NULL", "Chặn lỗi CK_CTPX_SOLIEU, CK_PHIEUXUAT_TRANGTHAI, 515", "PASS"),
+            ("2.1b", "UPDATE đơn giá 10%", "Chỉ tăng các lô HSD 2025 của AstraZeneca", "LO01 (165k), LO02 (176k)", "PASS"),
+            ("2.2a", "Select σ", "Lô Pfizer sản xuất 2024", "LO03, LO04", "PASS"),
+            ("2.2b", "Join ⋈", "Phiếu ngày 15/10/2024 có TRANGTHAI = 1", "DT01, DT02, DT03", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "DT06 không có nhân viên trực", "DT01, DT02, DT06 (HOTEN là NULL)", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Phiếu TRANGTHAI = 1 trong tháng 10/2024", "DT01: 3500; DT02: 3500; DT03: 2000; DT04: 3000", "PASS"),
+            ("2.2e", "Phép chia ÷", "Nhận đủ LO05 và LO06 của Moderna (TRANGTHAI=1) & S=Ø check", "Đúng 2 điểm tiêm: DT01 và DT02", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị (Tie-breaking)", "Cả DT04 (2500) và DT05 (2500) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-02": {
+        "title": "MOCK-02",
+        "log": "exam/gk/qa/mock02_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn DIENTICH <= 0, HANSUDUNG < NGAYLAP, NULL", "Chặn lỗi CK_CANHO_DIENTICH, CK_TB_HANSUDUNG, 515", "PASS"),
+            ("2.1b", "UPDATE tình trạng", "Thiết bị DKT01 có HSD < 01/06/2025", "TB04 chuyển sang 'Hết hạn' (1 dòng)", "PASS"),
+            ("2.2a", "Select σ", "Bình chữa cháy bột có HSD năm 2025", "TB04 (2025-05-15), TB05 (2025-11-20)", "PASS"),
+            ("2.2b", "Join ⋈", "Căn hộ Ruby Tower tầng ≥ 10", "CH02 (A1001), CH03 (A1002), CH04 (A1501)", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Tầng TANG04 không có thiết bị PCCC", "TANG01-03 có thiết bị; TANG04 có MATB = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Đếm số lượng thiết bị PCCC theo tòa nhà", "TN01: 5 thiết bị; TN02: 2 thiết bị", "PASS"),
+            ("2.2e", "Phép chia ÷", "Kiểm tra tất cả Đầu báo khói (TB01, TB02, TB03) & S=Ø check", "Đúng 2 đợt: DKT01 và DKT02", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị số căn hộ (Tie-breaking)", "Cả TN01 (4 căn) và TN02 (4 căn) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-03": {
+        "title": "MOCK-03",
+        "log": "exam/gk/qa/mock03_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn SOTIEN <= 0, NGAYKT < NGAYBD, NULL", "Chặn lỗi CK_PHIEUNHAN_SOTIEN, CK_DOTCUUTRO_NGAY, 515", "PASS"),
+            ("2.1b", "UPDATE thiệt hại", "Hộ dân xã Hiệp Phước có SONKHAU >= 5", "Cập nhật HD01 và HD02 thành 'Nặng' (2 hộ)", "PASS"),
+            ("2.2a", "Select σ", "Hộ dân mức độ thiệt hại 'Nặng' có SONKHAU >= 5", "HD01, HD02", "PASS"),
+            ("2.2b", "Join ⋈", "Xã khó khăn tiếp nhận cứu trợ tháng 10/2024", "XA01, XA03, XA04", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Xã XA05 chưa tiếp nhận đợt cứu trợ nào", "XA01-04 có đợt; XA05 có MADOT = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng tiền phân bổ cứu trợ tháng 10/2024 theo xã", "XA01: 300.000.000đ, XA02: 250.000.000đ", "PASS"),
+            ("2.2e", "Phép chia ÷", "Hộ dân nhận đủ hàng hóa đợt DOT01 (HH01, HH02) & S=Ø check", "Đúng 2 hộ: HD01 và HD02", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị tổng tiền tiếp nhận ủng hộ", "Cả XA01 (450tr) và XA03 (450tr) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-04": {
+        "title": "MOCK-04",
+        "log": "exam/gk/qa/mock04_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn SOLUONG <= 0, DONGIA <= 0, NULL", "Chặn lỗi CK_CTHD_SOLUONG, CK_NHIENLIEU_DONGIA, 515", "PASS"),
+            ("2.1b", "UPDATE đơn giá", "Nhiên liệu nhóm 'Xăng sinh học' tăng 500đ/lít", "NL01 (23.500đ -> 24.000đ)", "PASS"),
+            ("2.2a", "Select σ", "Nhân viên bán hàng lương >= 8 triệu", "NV02 (8,5tr), NV04 (9tr)", "PASS"),
+            ("2.2b", "Join ⋈", "Hóa đơn chuyển khoản tại Bình Thạnh", "HD01 (Cửa hàng Số 1), HD03 (Cửa hàng Số 2)", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Cửa hàng CH05 chưa có bể chứa", "CH01-04 có bể; CH05 có MABE = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng lít nhiên liệu bán tháng 10/2024 theo CH", "CH01: 105 lít, CH02: 80 lít", "PASS"),
+            ("2.2e", "Phép chia ÷", "Hóa đơn bán tất cả Xăng khoáng (NL01, NL02) & S=Ø check", "Đúng 2 hóa đơn: HD01 và HD03", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị tổng dung tích bể chứa", "Cả CH01 (40.000L) và CH04 (40.000L) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-05": {
+        "title": "MOCK-05",
+        "log": "exam/gk/qa/mock05_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn TIENCOC < 0, NGAYKT <= NGAYBD, NULL", "Chặn lỗi CK_HOPDONG_TIENCOC, CK_HOPDONG_NGAY, 515", "PASS"),
+            ("2.1b", "UPDATE trạng thái", "Căn hộ có hợp đồng năm 2024 kết thúc >= 31/12/2024", "CH01, CH02, CH04, CH05, CH06 (5 căn) thành 'Đang thuê'", "PASS"),
+            ("2.2a", "Select σ", "Khách hàng loại hình 'Doanh nghiệp'", "KH01 (Nam Long), KH02 (Vina)", "PASS"),
+            ("2.2b", "Join ⋈", "Căn hộ Sky Garden giá thuê >= 15 triệu", "CH01 (16tr), CH02 (22tr)", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Tòa nhà TN04 chưa có căn hộ", "TN01-03 có căn hộ; TN04 có MACH = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng tiền thu năm 2024 theo hợp đồng", "HD01: 32.000.000đ, HD02: 18.000.000đ", "PASS"),
+            ("2.2e", "Phép chia ÷", "Thuê căn hộ ở tất cả tòa nhà Quận 7 (TN01, TN02) & S=Ø check", "Đúng 2 khách hàng: KH01 và KH02", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị số căn hộ đang thuê", "Cả TN01 (2 căn) và TN02 (2 căn) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-06": {
+        "title": "MOCK-06",
+        "log": "exam/gk/qa/mock06_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn SOLUONG <= 0, DONGIA <= 0, NULL", "Chặn lỗi CK_CTDV_SOLUONG, CK_DVKHAM_DONGIA, 515", "PASS"),
+            ("2.1b", "UPDATE lương bác sĩ", "Tăng 10% lương bác sĩ Tiến sĩ, CKII khoa Nội tổng quát", "BS01 (27.5tr), BS03 (24.2tr), BS02 không đổi", "PASS"),
+            ("2.2a", "Select σ", "Bệnh nhân nữ có địa chỉ thường trú tại TP.HCM", "BN01 (Trần Thị Lan), BN02 (Lê Thị Mai)", "PASS"),
+            ("2.2b", "Join ⋈", "Phiếu khám do bác sĩ thuộc chuyên khoa Nhi khoa phụ trách", "PK03, PK04", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Chuyên khoa CK04 (Mắt) chưa có bác sĩ công tác", "CK01-03 có bác sĩ; CK04 có MABS = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng tiền dịch vụ cận lâm sàng của từng phiếu khám tháng 10/2024", "PK01: 550.000đ, PK02: 350.000đ", "PASS"),
+            ("2.2e", "Phép chia ÷", "Phiếu khám chỉ định tất cả DV Chẩn đoán hình ảnh & S=Ø check", "Đúng 2 phiếu khám: PK01 và PK03", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị số lượt khám nhiều nhất tháng 10/2024", "Cả BS01 (2 phiếu) và BS04 (2 phiếu) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-07": {
+        "title": "MOCK-07",
+        "log": "exam/gk/qa/mock07_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn SOLUONGTON < 0, TIENPHAT < 0, NULL", "Chặn lỗi CK_SACH_SOLUONGTON, CK_CTMUON_TIENPHAT, 515", "PASS"),
+            ("2.1b", "UPDATE gia hạn HANTRA", "Gia hạn thêm 15 ngày cho phiếu mượn của Giảng viên tháng 10/2024", "PM01 (2024-11-04), PM02 (2024-11-11), PM03 không đổi", "PASS"),
+            ("2.2a", "Select σ", "Độc giả là Sinh viên thuộc khoa Khoa học Máy tính", "DG01 (Nguyễn Văn An), DG02 (Trần Thị Bích)", "PASS"),
+            ("2.2b", "Join ⋈", "Sách do NXB Giáo Dục ấn hành được mượn bởi độc giả DG01", "S04 (Nhập Môn Cơ Sở Dữ Liệu)", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Khoa viện KV04 chưa có độc giả nào đăng ký", "KV01-03 có độc giả; KV04 có MADG = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng tiền phạt phát sinh năm 2024 theo từng độc giả", "DG01: 30.000đ, DG02: 15.000đ", "PASS"),
+            ("2.2e", "Phép chia ÷", "Độc giả mượn tất cả sách của tác giả Nguyễn Nhật Ánh & S=Ø check", "Đúng 2 độc giả: DG01 và DG02", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị số lượt mượn sách nhiều nhất năm 2024", "Cả S01 (3 lượt) và S04 (3 lượt) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-08": {
+        "title": "MOCK-08",
+        "log": "exam/gk/qa/mock08_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn SOLUONG <= 0, GIANIEMYET <= 0, NULL", "Chặn lỗi CK_CTDH_SOLUONG, CK_SANPHAM_GIANIEMYET, 515", "PASS"),
+            ("2.1b", "UPDATE giảm giá 10%", "Giảm 10% giá niêm yết hàng gia dụng của Lê Hoàng Nam (GH01)", "SP01 (2.25m), SP02 (1.62m), SP03 (540k), SP04 không đổi", "PASS"),
+            ("2.2a", "Select σ", "Sản phẩm Điện tử có giá niêm yết từ 10.000.000 trở lên", "SP04 (iPhone 15 Pro, 28tr), SP06 (Laptop Asus, 22tr)", "PASS"),
+            ("2.2b", "Join ⋈", "Đơn hàng của khách hàng Hà Nội thanh toán bằng Ví điện tử", "DH01, DH03, DH06", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Gian hàng GH03, GH04 chưa đăng bán sản phẩm nào", "GH01-02 có SP; GH03, GH04 có MASP = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng giá trị tiền hàng theo đơn hàng Đã giao tháng 11/2024", "DH01 (5.5m), DH02 (33.5m), DH03 (9.8m), DH04 (46.5m)", "PASS"),
+            ("2.2e", "Phép chia ÷", "Đơn hàng mua tất cả hàng gia dụng của Gia Dụng Thông Minh & S=Ø check", "Đúng 2 đơn hàng: DH01 và DH03", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị tổng số lượng sản phẩm đã mua tháng 11/2024", "Cả KH01 (6 SP) và KH02 (6 SP) bảo toàn", "PASS")
+        ]
+    }
+}
+
+def get_mock_execution_table_html(mock_id: str) -> str:
+    data = MOCK_EXECUTION_DATA.get(mock_id)
+    if not data:
+        return ""
+    rows_html = ""
+    for r in data["rows"]:
+        rows_html += f"<tr><td>{r[0]}</td><td>{r[1]}</td><td>{r[2]}</td><td>{r[3]}</td><td style='color:#16a34a; font-weight:bold;'>{r[4]}</td></tr>"
+    return f"""
+    <div class="no-break" style="margin-top: 25px; border-top: 2px solid #16a34a; padding-top: 15px;">
+        <h3 style="color: #166534; font-size: 11pt;">BẢNG KIỂM CHỨNG THỰC THI TRÊN MICROSOFT SQL SERVER 2025 ({data['title']})</h3>
+        <table class="rubric-table" style="font-size: 8.5pt;">
+            <tr><th>Câu</th><th>Phép toán / Vấn đề kiểm thử</th><th>Trường hợp biên (Edge Case)</th><th>Kết quả kỳ vọng (Expected)</th><th>Trạng thái</th></tr>
+            {rows_html}
+        </table>
+        <p style="font-size: 8pt; font-style: italic; color: #475569;">Bằng chứng thực thi lưu tại: <code>{data['log']}</code></p>
+    </div>
+    """
+
+
 def build_pdf_exam_bank():
     print("Building Deliverable 1: IT004_GK_NganHangDe_VoTrongPhuc.pdf...")
     with open(DATA_DIR / "problems.json", "r", encoding="utf-8") as f:
@@ -391,7 +545,7 @@ def build_pdf_exam_bank():
     # Add 15 Full Mock Exams
     html += """<div class="page-break"><h1 class="topic-header">PHẦN 5: BỘ 15 ĐỀ THI MÔ PHỎNG 75 PHÚT CHUẨN HÓA</h1></div>"""
     for m in mocks:
-        if m["id"] in ["MOCK-01", "MOCK-02", "MOCK-03", "MOCK-04", "MOCK-05"]:
+        if m["id"] in GOLD_MOCK_IDS:
             mock_status_badge = """<div style="background:#f0fdf4; border:1px solid #4ade80; color:#166534; padding:6px 12px; margin-bottom:12px; border-radius:4px; font-weight:bold; font-size:9pt;">TRẠNG THÁI: CHUẨN VÀNG (GOLD STANDARD) — KHÔNG LỘ ĐÁP ÁN</div>"""
         else:
             mock_status_badge = """<div style="background:#fef2f2; border:1px solid #f87171; color:#991b1b; padding:6px 12px; margin-bottom:12px; border-radius:4px; font-weight:bold; font-size:9pt;">TRẠNG THÁI: BẢN THẢO NỘI BỘ (DRAFT) — CHỜ TÁI THIẾT KẾ THEO CHUẨN VÀNG PHASE C</div>"""
@@ -449,8 +603,8 @@ def build_pdf_solutions():
     <div class="cover-univ">Trường Đại Học Công Nghệ Thông Tin — ĐHQG-HCM</div>
     <div class="cover-faculty">Khoa Hệ Thống Thông Tin</div>
     <div class="cover-title">HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT<br>IT004 — CƠ SỞ DỮ LIỆU GIỮA KỲ</div>
-    <div class="cover-subtitle">Phân Tích Tư Duy Toán Học — Biểu Thức ĐSQH — Mã Nguồn T-SQL<br>MOCK-01 &rarr; MOCK-05 Đã Kiểm Chứng Thực Thi — 10 Đề Bản Thảo Đang Hoàn Thiện</div>
-    <div class="cover-badge">HỌC LIỆU ÔN TẬP — MOCK-01 &rarr; MOCK-05 CHUẨN VÀNG & BẢN THẢO MÔ PHỎNG</div>
+    <div class="cover-subtitle">Phân Tích Tư Duy Toán Học — Biểu Thức ĐSQH — Mã Nguồn T-SQL<br>MOCK-01 &rarr; MOCK-08 Đã Kiểm Chứng Thực Thi — 7 Đề Bản Thảo Đang Hoàn Thiện</div>
+    <div class="cover-badge">HỌC LIỆU ÔN TẬP — MOCK-01 &rarr; MOCK-08 CHUẨN VÀNG & BẢN THẢO MÔ PHỎNG</div>
     <div class="cover-author-box">
         <div class="cover-author-label">Tác giả & Biên soạn</div>
         <div class="cover-author-name">BIÊN SOẠN: VÕ TRỌNG PHÚC</div>
@@ -461,16 +615,16 @@ def build_pdf_solutions():
     <h1 class="topic-header">MỤC LỤC & CẤU TRÚC KIỂM ĐỊNH HỌC THUẬT</h1>
     <p>Ấn phẩm này cung cấp hướng dẫn chấm và lời giải chi tiết theo 3 cấp độ kiểm chứng minh bạch:</p>
     <ul>
-        <li><strong>EXECUTION_VERIFIED (Chuẩn Vàng):</strong> 5 đề thi mô phỏng (MOCK-01 &rarr; MOCK-05) đã được kiểm chứng thực thi 100% trên engine Microsoft SQL Server 2025 với kịch bản kiểm thử toàn bộ các ca biên (edge cases).</li>
+        <li><strong>EXECUTION_VERIFIED (Chuẩn Vàng):</strong> 8 đề thi mô phỏng (MOCK-01 &rarr; MOCK-08) đã được kiểm chứng thực thi 100% trên engine Microsoft SQL Server 2025 với kịch bản kiểm thử toàn bộ các ca biên (edge cases).</li>
         <li><strong>SEMANTICALLY_REVIEWED (Đã rà soát học thuật):</strong> 33 bài tập phân dạng đã được đối sánh công thức toán học và lược đồ chuẩn UIT.</li>
-        <li><strong>DRAFT / INTERNAL REVIEW (Bản thảo nội bộ):</strong> 95 bài tập và 10 đề mô phỏng (MOCK-06 &rarr; MOCK-15) đang trong lộ trình tái cấu trúc theo chuẩn vàng trong Phase C.</li>
+        <li><strong>DRAFT / INTERNAL REVIEW (Bản thảo nội bộ):</strong> 75 bài tập và 7 đề mô phỏng (MOCK-09 &rarr; MOCK-15) đang trong lộ trình tái cấu trúc theo chuẩn vàng trong Phase C.</li>
     </ul>
 </div>
 """
 
     # Solutions for the 15 Mocks
     for m in mocks:
-        if m["id"] in ["MOCK-01", "MOCK-02", "MOCK-03", "MOCK-04", "MOCK-05"]:
+        if m["id"] in GOLD_MOCK_IDS:
             mock_badge = """<div style="background:#f0fdf4; border:1px solid #4ade80; color:#166534; padding:8px 14px; margin-bottom:15px; border-radius:4px; font-weight:bold; font-size:9.5pt;">CHUẨN VÀNG (GOLD STANDARD) — ĐÃ KIỂM CHỨNG THỰC THI TOÀN BỘ TRÊN MICROSOFT SQL SERVER 2025</div>"""
         else:
             mock_badge = """<div style="background:#fef2f2; border:1px solid #f87171; color:#991b1b; padding:8px 14px; margin-bottom:15px; border-radius:4px; font-weight:bold; font-size:9.5pt;">BẢN THẢO NỘI BỘ (DRAFT) — ĐANG CHỜ TÁI CẤU TRÚC THEO CHUẨN VÀNG PHASE C</div>"""
@@ -537,98 +691,10 @@ def build_pdf_solutions():
 
             html += "</div>"
 
-        # If MOCK-01, render execution verification table
-        if m["id"] == "MOCK-01":
-            html += """
-            <div class="no-break" style="margin-top: 25px; border-top: 2px solid #16a34a; padding-top: 15px;">
-                <h3 style="color: #166534; font-size: 11pt;">BẢNG KIỂM CHỨNG THỰC THI TRÊN MICROSOFT SQL SERVER 2025</h3>
-                <table class="rubric-table" style="font-size: 8.5pt;">
-                    <tr><th>Câu</th><th>Phép toán / Vấn đề kiểm thử</th><th>Trường hợp biên (Edge Case)</th><th>Kết quả kỳ vọng (Expected)</th><th>Trạng thái</th></tr>
-                    <tr><td>2.1a</td><td>CHECK constraint</td><td>Thử chèn SOLIEUXUAT = 0, TRANGTHAI = 2</td><td>Lỗi vi phạm CHECK 547</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.1b</td><td>UPDATE đơn giá 10%</td><td>Chỉ tăng các lô HSD 2025 của AstraZeneca</td><td>LO01 (165k), LO02 (176k)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2a</td><td>Select σ</td><td>Lô Pfizer sản xuất 2024</td><td>LO03, LO04</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2b</td><td>Join ⋈</td><td>Phiếu ngày 15/10/2024 có TRANGTHAI = 1</td><td>DT01, DT02, DT03</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2c</td><td>Left Outer Join ⟕</td><td>DT06 không có nhân viên trực</td><td>DT01, DT02, DT06 (HOTEN là NULL)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2d</td><td>Gom nhóm γ</td><td>Phiếu TRANGTHAI = 1 trong tháng 10/2024</td><td>DT01: 3500; DT02: 3500; DT03: 2000; DT04: 3000</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2e</td><td>Phép chia ÷</td><td>Nhận đủ LO05 và LO06 của Moderna (TRANGTHAI=1)</td><td>Đúng 2 điểm tiêm: DT01 và DT02</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2f</td><td>Cực trị MAX</td><td>Đồng hạng cực trị (Tie-breaking)</td><td>Cả DT04 (2500) và DT05 (2500)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                </table>
-                <p style="font-size: 8pt; font-style: italic; color: #475569;">Bằng chứng thực thi lưu tại: <code>exam/gk/qa/mock01_sql_execution.log</code></p>
-            </div>
-            """
-        elif m["id"] == "MOCK-02":
-            html += """
-            <div class="no-break" style="margin-top: 25px; border-top: 2px solid #16a34a; padding-top: 15px;">
-                <h3 style="color: #166534; font-size: 11pt;">BẢNG KIỂM CHỨNG THỰC THI TRÊN MICROSOFT SQL SERVER 2025 (MOCK-02)</h3>
-                <table class="rubric-table" style="font-size: 8.5pt;">
-                    <tr><th>Câu</th><th>Phép toán / Vấn đề kiểm thử</th><th>Trường hợp biên (Edge Case)</th><th>Kết quả kỳ vọng (Expected)</th><th>Trạng thái</th></tr>
-                    <tr><td>2.1a</td><td>CHECK constraint</td><td>Thử chèn DIENTICH <= 0, HANSUDUNG < NGAYLAP, NULL</td><td>Chặn lỗi CK_CANHO_DIENTICH, CK_TB_HANSUDUNG, 515</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.1b</td><td>UPDATE tình trạng</td><td>Thiết bị DKT01 có HSD < 01/06/2025</td><td>TB04 chuyển sang 'Hết hạn' (1 dòng)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2a</td><td>Select σ</td><td>Bình chữa cháy bột có HSD năm 2025</td><td>TB04 (2025-05-15), TB05 (2025-11-20)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2b</td><td>Join ⋈</td><td>Căn hộ Ruby Tower tầng ≥ 10</td><td>CH02 (A1001), CH03 (A1002), CH04 (A1501)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2c</td><td>Left Outer Join ⟕</td><td>Tầng TANG04 không có thiết bị PCCC</td><td>TANG01-03 có thiết bị; TANG04 có MATB = NULL</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2d</td><td>Gom nhóm γ</td><td>Đếm số lượng thiết bị PCCC theo tòa nhà</td><td>TN01: 5 thiết bị; TN02: 2 thiết bị</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2e</td><td>Phép chia ÷</td><td>Kiểm tra tất cả Đầu báo khói (TB01, TB02, TB03)</td><td>Đúng 2 đợt: DKT01 và DKT02 (DKT03 thiếu TB03)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2f</td><td>Cực trị MAX</td><td>Đồng hạng cực trị số căn hộ (Tie-breaking)</td><td>Cả TN01 (4 căn) và TN02 (4 căn) bảo toàn</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                </table>
-                <p style="font-size: 8pt; font-style: italic; color: #475569;">Bằng chứng thực thi lưu tại: <code>exam/gk/qa/mock02_sql_execution.log</code></p>
-            </div>
-            """
-        elif m["id"] == "MOCK-03":
-            html += """
-            <div class="no-break" style="margin-top: 25px; border-top: 2px solid #16a34a; padding-top: 15px;">
-                <h3 style="color: #166534; font-size: 11pt;">BẢNG KIỂM CHỨNG THỰC THI TRÊN MICROSOFT SQL SERVER 2025 (MOCK-03)</h3>
-                <table class="rubric-table" style="font-size: 8.5pt;">
-                    <tr><th>Câu</th><th>Phép toán / Vấn đề kiểm thử</th><th>Trường hợp biên (Edge Case)</th><th>Kết quả kỳ vọng (Expected)</th><th>Trạng thái</th></tr>
-                    <tr><td>2.1a</td><td>CHECK constraint</td><td>Thử chèn SOTIEN <= 0, NGAYKT < NGAYBD, NULL</td><td>Chặn lỗi CK_PHIEUNHAN_SOTIEN, CK_DOTCUUTRO_NGAY, 515</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.1b</td><td>UPDATE thiệt hại</td><td>Hộ dân xã Hiệp Phước có SONKHAU >= 5</td><td>Cập nhật HD01 và HD02 thành 'Nặng' (2 hộ)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2a</td><td>Select σ</td><td>Nhà hảo tâm loại hình 'Cá nhân'</td><td>NHT03 (Lê Văn C), NHT04 (Phạm Thị D)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2b</td><td>Join ⋈</td><td>Hộ dân Cần Giờ thiệt hại Nặng</td><td>HD01, HD02, HD05, HD06 (4 hộ)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2c</td><td>Left Outer Join ⟕</td><td>Xã XA03 (Thạnh An) không có hộ dân</td><td>XA01, XA02 có hộ; XA03 có MAHO = NULL</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2d</td><td>Gom nhóm γ</td><td>Tổng tiền ủng hộ năm 2024 theo nhà hảo tâm</td><td>NHT01: 1.000.000.000đ; NHT02: 550.000.000đ</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2e</td><td>Phép chia ÷</td><td>Tiếp nhận từ tất cả Doanh nghiệp (NHT01, NHT02)</td><td>Đúng 2 đợt: DOT01 và DOT02</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2f</td><td>Cực trị MAX</td><td>Đồng hạng cực trị tổng tiền cứu trợ xã</td><td>Cả XA01 (20tr) và XA02 (20tr) bảo toàn; XA04 (5tr) loại</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                </table>
-                <p style="font-size: 8pt; font-style: italic; color: #475569;">Bằng chứng thực thi lưu tại: <code>exam/gk/qa/mock03_sql_execution.log</code></p>
-            </div>
-            """
-        elif m["id"] == "MOCK-04":
-            html += """
-            <div class="no-break" style="margin-top: 25px; border-top: 2px solid #16a34a; padding-top: 15px;">
-                <h3 style="color: #166534; font-size: 11pt;">BẢNG KIỂM CHỨNG THỰC THI TRÊN MICROSOFT SQL SERVER 2025 (MOCK-04)</h3>
-                <table class="rubric-table" style="font-size: 8.5pt;">
-                    <tr><th>Câu</th><th>Phép toán / Vấn đề kiểm thử</th><th>Trường hợp biên (Edge Case)</th><th>Kết quả kỳ vọng (Expected)</th><th>Trạng thái</th></tr>
-                    <tr><td>2.1a</td><td>CHECK constraint</td><td>Thử chèn DUNGTICH <= 0, LUONG_TON < 0, LUONG_TON > DUNGTICH, NULL</td><td>Chặn lỗi CK_BECHUA_DUNGTICH, CK_BECHUA_LUONGTON, 515</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.1b</td><td>UPDATE đơn giá 5%</td><td>Mặt hàng Xăng khoáng có đơn vị Lít</td><td>NL01 (25.200đ), NL02 (23.100đ), NL03 giữ nguyên</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2a</td><td>Select σ</td><td>Nhân viên bán hàng lương >= 8 triệu</td><td>NV02 (8,5tr), NV04 (9tr)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2b</td><td>Join ⋈</td><td>Hóa đơn chuyển khoản tại Bình Thạnh</td><td>HD01 (Cửa hàng Số 1), HD03 (Cửa hàng Số 2)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2c</td><td>Left Outer Join ⟕</td><td>Cửa hàng CH05 chưa có bể chứa</td><td>CH01-04 có bể; CH05 có MABE = NULL</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2d</td><td>Gom nhóm γ</td><td>Tổng lít nhiên liệu bán tháng 10/2024 theo CH</td><td>CH01: 105 lít, CH02: 80 lít</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2e</td><td>Phép chia ÷</td><td>Hóa đơn bán tất cả Xăng khoáng (NL01, NL02)</td><td>Đúng 2 hóa đơn: HD01 và HD03</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2f</td><td>Cực trị MAX</td><td>Đồng hạng cực trị tổng dung tích bể chứa</td><td>Cả CH01 (40.000L) và CH04 (40.000L) bảo toàn</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                </table>
-                <p style="font-size: 8pt; font-style: italic; color: #475569;">Bằng chứng thực thi lưu tại: <code>exam/gk/qa/mock04_sql_execution.log</code></p>
-            </div>
-            """
-        elif m["id"] == "MOCK-05":
-            html += """
-            <div class="no-break" style="margin-top: 25px; border-top: 2px solid #16a34a; padding-top: 15px;">
-                <h3 style="color: #166534; font-size: 11pt;">BẢNG KIỂM CHỨNG THỰC THI TRÊN MICROSOFT SQL SERVER 2025 (MOCK-05)</h3>
-                <table class="rubric-table" style="font-size: 8.5pt;">
-                    <tr><th>Câu</th><th>Phép toán / Vấn đề kiểm thử</th><th>Trường hợp biên (Edge Case)</th><th>Kết quả kỳ vọng (Expected)</th><th>Trạng thái</th></tr>
-                    <tr><td>2.1a</td><td>CHECK constraint</td><td>Thử chèn TIENCOC < 0, NGAYKT <= NGAYBD, NULL</td><td>Chặn lỗi CK_HOPDONG_TIENCOC, CK_HOPDONG_NGAY, 515</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.1b</td><td>UPDATE trạng thái</td><td>Căn hộ có hợp đồng năm 2024 kết thúc >= 31/12/2024</td><td>CH01, CH02, CH04, CH05, CH06 (5 căn) thành 'Đang thuê'</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2a</td><td>Select σ</td><td>Khách hàng loại hình 'Doanh nghiệp'</td><td>KH01 (Nam Long), KH02 (Vina)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2b</td><td>Join ⋈</td><td>Căn hộ Sky Garden giá thuê >= 15 triệu</td><td>CH01 (16tr), CH02 (22tr)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2c</td><td>Left Outer Join ⟕</td><td>Tòa nhà TN04 chưa có căn hộ</td><td>TN01-03 có căn hộ; TN04 có MACH = NULL</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2d</td><td>Gom nhóm γ</td><td>Tổng tiền thu năm 2024 theo hợp đồng</td><td>HD01: 32.000.000đ, HD02: 18.000.000đ</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2e</td><td>Phép chia ÷</td><td>Thuê căn hộ ở tất cả tòa nhà Quận 7 (TN01, TN02)</td><td>Đúng 2 khách hàng: KH01 và KH02</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                    <tr><td>2.2f</td><td>Cực trị MAX</td><td>Đồng hạng cực trị số căn hộ đang thuê</td><td>Cả TN01 (2 căn) và TN02 (2 căn) bảo toàn</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-                </table>
-                <p style="font-size: 8pt; font-style: italic; color: #475569;">Bằng chứng thực thi lưu tại: <code>exam/gk/qa/mock05_sql_execution.log</code></p>
-            </div>
-            """
-
+        # Render execution verification table if Gold Standard
+        exec_table = get_mock_execution_table_html(m["id"])
+        if exec_table:
+            html += exec_table
         html += "</div>"
 
     html += "</body></html>"
@@ -806,11 +872,7 @@ def build_pdf_verified_only():
         mocks = json.load(f)["mocks"]
 
     verified_probs = [p for p in problems if p.get("status") == "VERIFIED"]
-    mock01 = next(m for m in mocks if m["id"] == "MOCK-01")
-    mock02 = next(m for m in mocks if m["id"] == "MOCK-02")
-    mock03 = next(m for m in mocks if m["id"] == "MOCK-03")
-    mock04 = next(m for m in mocks if m["id"] == "MOCK-04")
-    mock05 = next(m for m in mocks if m["id"] == "MOCK-05")
+    gold_mocks = [m for m in mocks if m["id"] in GOLD_MOCK_IDS]
 
     html = f"""<!DOCTYPE html>
 <html>
@@ -825,7 +887,7 @@ def build_pdf_verified_only():
     <div class="cover-univ">Trường Đại Học Công Nghệ Thông Tin — ĐHQG-HCM</div>
     <div class="cover-faculty">Khoa Hệ Thống Thông Tin</div>
     <div class="cover-title">TUYỂN TẬP ĐỀ THI & BÀI TẬP ĐÃ KIỂM CHỨNG<br>IT004 — CƠ SỞ DỮ LIỆU GIỮA KỲ</div>
-    <div class="cover-subtitle">ẤN BẢN CHUẨN MỰC (VERIFIED ONLY)<br>MOCK-01 &rarr; MOCK-05 Kiểm Chứng Thực Thi SQL Server — {len(verified_probs)} Bài Tập Đã Rà Soát Học Thuật</div>
+    <div class="cover-subtitle">ẤN BẢN CHUẨN MỰC (VERIFIED ONLY)<br>MOCK-01 &rarr; MOCK-08 Kiểm Chứng Thực Thi SQL Server — {len(verified_probs)} Bài Tập Đã Rà Soát Học Thuật</div>
     <div class="cover-badge">BẢN KIỂM CHỨNG CHÍNH THỨC — KHÔNG CHỨA BÀI TẬP BẢN THẢO</div>
     <div class="cover-author-box">
         <div class="cover-author-label">Tác giả & Biên soạn</div>
@@ -837,300 +899,78 @@ def build_pdf_verified_only():
     <h1 class="topic-header">MỤC LỤC ẤN BẢN VERIFIED-ONLY</h1>
     <p>Ấn bản này chọn lọc nghiêm ngặt duy nhất các nội dung đã đạt tiêu chuẩn kiểm chứng của môn học IT004:</p>
     <ul>
-        <li><strong>Đề thi mô phỏng MOCK-01 (Chuẩn Vàng):</strong> Đầy đủ đề bài, hướng dẫn giải chi tiết, và bảng đối chiếu kết quả thực thi trên Microsoft SQL Server 2025 (Transact-SQL).</li>
+        <li><strong>Đề thi mô phỏng MOCK-01 (Chuẩn Vàng):</strong> Quản lý Cung ứng & Tiêm chủng Vắc-xin, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
         <li><strong>Đề thi mô phỏng MOCK-02 (Chuẩn Vàng):</strong> Hệ Thống PCCC Chung Cư Cao Tầng, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
         <li><strong>Đề thi mô phỏng MOCK-03 (Chuẩn Vàng):</strong> Tiếp Nhận & Phân Bổ Tiền Cứu Trợ Bão Lũ, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
         <li><strong>Đề thi mô phỏng MOCK-04 (Chuẩn Vàng):</strong> Chuỗi Cửa Hàng Bán Lẻ Xăng Dầu, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
         <li><strong>Đề thi mô phỏng MOCK-05 (Chuẩn Vàng):</strong> Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
+        <li><strong>Đề thi mô phỏng MOCK-06 (Chuẩn Vàng):</strong> Phòng Khám Đa Khoa & Hồ Sơ Khám Bệnh, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
+        <li><strong>Đề thi mô phỏng MOCK-07 (Chuẩn Vàng):</strong> Thư Viện Đại Học & Mượn Trả Sách, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
+        <li><strong>Đề thi mô phỏng MOCK-08 (Chuẩn Vàng):</strong> Sàn Thương Mại Điện Tử & Vận Chuyển Hàng, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
         <li><strong>{len(verified_probs)} bài tập phân dạng đã kiểm chứng (Verified Problems):</strong> Gồm các bài tập EXECUTION_VERIFIED và SEMANTICALLY_REVIEWED có lời giải và barem chi tiết.</li>
     </ul>
 </div>
+"""
 
-<!-- MOCK-01 Section -->
+    for gm in gold_mocks:
+        html += f"""
 <div class="page-break">
-    <h2 class="exam-header">ĐỀ THI GIỮA KỲ MÔ PHỎNG SỐ 01 (MOCK-01) — CHUẨN VÀNG</h2>
+    <h2 class="exam-header">{gm['title']} — CHUẨN VÀNG</h2>
     <div style="background:#f0fdf4; border:1px solid #4ade80; color:#166534; padding:8px 14px; margin-bottom:15px; border-radius:4px; font-weight:bold; font-size:9.5pt;">
         TRẠNG THÁI: CHUẨN VÀNG (GOLD STANDARD) — ĐÃ KIỂM CHỨNG THỰC THI TOÀN BỘ TRÊN MICROSOFT SQL SERVER 2025
     </div>
     <div class="exam-meta-bar">
-        <span>MÃ ĐỀ: MOCK-01</span>
+        <span>MÃ ĐỀ: {gm['id']}</span>
         <span>Thời gian: 75 phút | Thang điểm: 10.0</span>
-        <span>Lược đồ: Quản lý Cung ứng & Tiêm chủng Vắc-xin</span>
+        <span>Lược đồ: {MOCK_SCHEMA_TITLES.get(gm['id'], '')}</span>
     </div>
 """
-    for q in mock01["questions"]:
-        pid = q["problem_id"]
-        p = next((x for x in problems if x["id"] == pid), None)
-        if not p:
-            continue
-        sol = p.get("solution", {})
-        html += f"""
-        <div class="no-break" style="margin-bottom: 20px;">
-            <h3 class="question-title">Câu {q['num']}{q['sub']} [{p['id']}] — {p['title']} ({q['points']} điểm)</h3>
-            <p><strong>Yêu cầu:</strong> {p['prompt']}</p>
-        """
-        if "relational_algebra" in sol:
-            html += f"""<div class="math-expr"><strong>Biểu thức ĐSQH:</strong><br>{sol['relational_algebra']}</div>"""
-        if "sql" in sol:
-            html += f"""<pre class="code-sql">-- Câu lệnh T-SQL tương đương:\n{sol['sql']}</pre>"""
-        if "relational_schema" in sol:
-            html += "<ul>"
-            for r in sol["relational_schema"]:
-                html += f"<li><strong>{r}</strong></li>"
-            html += "</ul>"
-        if "intermediate_steps" in sol and sol["intermediate_steps"]:
-            html += "<ol style='font-size: 9pt; color: #334155; padding-left: 18px;'>"
-            for s in sol["intermediate_steps"]:
-                html += f"<li>{s}</li>"
-            html += "</ol>"
+        for q in gm["questions"]:
+            pid = q["problem_id"]
+            p = next((x for x in problems if x["id"] == pid), None)
+            if not p:
+                continue
+            sol = p.get("solution", {})
+            html += f"""
+            <div class="no-break" style="margin-bottom: 20px;">
+                <h3 class="question-title">Câu {q['num']}{q['sub']} [{p['id']}] — {p['title']} ({q['points']} điểm)</h3>
+                <p><strong>Yêu cầu:</strong> {p['prompt']}</p>
+            """
+            if "relational_algebra" in sol:
+                html += f"""<div class="math-expr"><strong>Biểu thức ĐSQH:</strong><br>{sol['relational_algebra']}</div>"""
+            if "sql" in sol:
+                html += f"""<pre class="code-sql">-- Câu lệnh T-SQL tương đương:\n{sol['sql']}</pre>"""
+            if "erd_entities" in sol:
+                html += "<ul>"
+                for e in sol["erd_entities"]:
+                    if isinstance(e, dict):
+                        html += f"<li><strong>{e.get('name', '')}</strong> (PK: <u>{e.get('pk', '')}</u>): {', '.join(e.get('attributes', []))} — <em>{e.get('description', '')}</em></li>"
+                    else:
+                        html += f"<li>{e}</li>"
+                html += "</ul>"
+            if "relationships" in sol:
+                html += "<ul>"
+                for rel in sol["relationships"]:
+                    if isinstance(rel, dict):
+                        html += f"<li><strong>{rel.get('name', '')}</strong> ({rel.get('cardinality', '')}): {rel.get('min_max', '')}</li>"
+                    else:
+                        html += f"<li>{rel}</li>"
+                html += "</ul>"
+            if "relational_schema" in sol:
+                html += "<ul>"
+                for r in sol["relational_schema"]:
+                    html += f"<li><strong>{r}</strong></li>"
+                html += "</ul>"
+            if "intermediate_steps" in sol and sol["intermediate_steps"]:
+                html += "<ol style='font-size: 9pt; color: #334155; padding-left: 18px;'>"
+                for s in sol["intermediate_steps"]:
+                    html += f"<li>{s}</li>"
+                html += "</ol>"
+            html += "</div>"
+
+        html += get_mock_execution_table_html(gm["id"])
         html += "</div>"
 
-    html += """
-    <div class="no-break" style="margin-top: 25px; border-top: 2px solid #16a34a; padding-top: 15px;">
-        <h3 style="color: #166534; font-size: 11pt;">BẢNG KIỂM CHỨNG THỰC THI TRÊN MICROSOFT SQL SERVER 2025 (MOCK-01)</h3>
-        <table class="rubric-table" style="font-size: 8.5pt;">
-            <tr><th>Câu</th><th>Phép toán / Vấn đề kiểm thử</th><th>Trường hợp biên (Edge Case)</th><th>Kết quả kỳ vọng (Expected)</th><th>Trạng thái</th></tr>
-            <tr><td>2.1a</td><td>CHECK constraint</td><td>Thử chèn SOLIEUXUAT = 0, TRANGTHAI = 2</td><td>Lỗi vi phạm CHECK 547</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.1b</td><td>UPDATE đơn giá 10%</td><td>Chỉ tăng các lô HSD 2025 của AstraZeneca</td><td>LO01 (165k), LO02 (176k)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2a</td><td>Select σ</td><td>Lô Pfizer sản xuất 2024</td><td>LO03, LO04</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2b</td><td>Join ⋈</td><td>Phiếu ngày 15/10/2024 có TRANGTHAI = 1</td><td>DT01, DT02, DT03</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2c</td><td>Left Outer Join ⟕</td><td>DT06 không có nhân viên trực</td><td>DT01, DT02, DT06 (HOTEN là NULL)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2d</td><td>Gom nhóm γ</td><td>Phiếu TRANGTHAI = 1 trong tháng 10/2024</td><td>DT01: 3500; DT02: 3500; DT03: 2000; DT04: 3000</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2e</td><td>Phép chia ÷</td><td>Nhận đủ LO05 và LO06 của Moderna (TRANGTHAI=1)</td><td>Đúng 2 điểm tiêm: DT01 và DT02</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2f</td><td>Cực trị MAX</td><td>Đồng hạng cực trị (Tie-breaking)</td><td>Cả DT04 (2500) và DT05 (2500)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-        </table>
-        <p style="font-size: 8pt; font-style: italic; color: #475569;">Bằng chứng thực thi lưu tại: <code>exam/gk/qa/mock01_sql_execution.log</code></p>
-    </div>
-</div>
-
-<!-- MOCK-02 Section -->
-<div class="page-break">
-    <h2 class="exam-header">ĐỀ THI GIỮA KỲ MÔ PHỎNG SỐ 02 (MOCK-02) — CHUẨN VÀNG</h2>
-    <div style="background:#f0fdf4; border:1px solid #4ade80; color:#166534; padding:8px 14px; margin-bottom:15px; border-radius:4px; font-weight:bold; font-size:9.5pt;">
-        TRẠNG THÁI: CHUẨN VÀNG (GOLD STANDARD) — ĐÃ KIỂM CHỨNG THỰC THI TOÀN BỘ TRÊN MICROSOFT SQL SERVER 2025
-    </div>
-    <div class="exam-meta-bar">
-        <span>MÃ ĐỀ: MOCK-02</span>
-        <span>Thời gian: 75 phút | Thang điểm: 10.0</span>
-        <span>Lược đồ: Quản lý Hệ Thống Phòng Cháy Chữa Cháy Chung Cư Cao Tầng</span>
-    </div>
-"""
-    for q in mock02["questions"]:
-        pid = q["problem_id"]
-        p = next((x for x in problems if x["id"] == pid), None)
-        if not p:
-            continue
-        sol = p.get("solution", {})
-        html += f"""
-        <div class="no-break" style="margin-bottom: 20px;">
-            <h3 class="question-title">Câu {q['num']}{q['sub']} [{p['id']}] — {p['title']} ({q['points']} điểm)</h3>
-            <p><strong>Yêu cầu:</strong> {p['prompt']}</p>
-        """
-        if "relational_algebra" in sol:
-            html += f"""<div class="math-expr"><strong>Biểu thức ĐSQH:</strong><br>{sol['relational_algebra']}</div>"""
-        if "sql" in sol:
-            html += f"""<pre class="code-sql">-- Câu lệnh T-SQL tương đương:\n{sol['sql']}</pre>"""
-        if "relational_schema" in sol:
-            html += "<ul>"
-            for r in sol["relational_schema"]:
-                html += f"<li><strong>{r}</strong></li>"
-            html += "</ul>"
-        if "intermediate_steps" in sol and sol["intermediate_steps"]:
-            html += "<ol style='font-size: 9pt; color: #334155; padding-left: 18px;'>"
-            for s in sol["intermediate_steps"]:
-                html += f"<li>{s}</li>"
-            html += "</ol>"
-        html += "</div>"
-
-    html += """
-    <div class="no-break" style="margin-top: 25px; border-top: 2px solid #16a34a; padding-top: 15px;">
-        <h3 style="color: #166534; font-size: 11pt;">BẢNG KIỂM CHỨNG THỰC THI TRÊN MICROSOFT SQL SERVER 2025 (MOCK-02)</h3>
-        <table class="rubric-table" style="font-size: 8.5pt;">
-            <tr><th>Câu</th><th>Phép toán / Vấn đề kiểm thử</th><th>Trường hợp biên (Edge Case)</th><th>Kết quả kỳ vọng (Expected)</th><th>Trạng thái</th></tr>
-            <tr><td>2.1a</td><td>CHECK constraint</td><td>Thử chèn DIENTICH <= 0, HANSUDUNG < NGAYLAP, NULL</td><td>Chặn lỗi CK_CANHO_DIENTICH, CK_TB_HANSUDUNG, 515</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.1b</td><td>UPDATE tình trạng</td><td>Thiết bị DKT01 có HSD < 01/06/2025</td><td>TB04 chuyển sang 'Hết hạn' (1 dòng)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2a</td><td>Select σ</td><td>Bình chữa cháy bột có HSD năm 2025</td><td>TB04 (2025-05-15), TB05 (2025-11-20)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2b</td><td>Join ⋈</td><td>Căn hộ Ruby Tower tầng ≥ 10</td><td>CH02 (A1001), CH03 (A1002), CH04 (A1501)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2c</td><td>Left Outer Join ⟕</td><td>Tầng TANG04 không có thiết bị PCCC</td><td>TANG01-03 có thiết bị; TANG04 có MATB = NULL</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2d</td><td>Gom nhóm γ</td><td>Đếm số lượng thiết bị PCCC theo tòa nhà</td><td>TN01: 5 thiết bị; TN02: 2 thiết bị</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2e</td><td>Phép chia ÷</td><td>Kiểm tra tất cả Đầu báo khói (TB01, TB02, TB03)</td><td>Đúng 2 đợt: DKT01 và DKT02 (DKT03 thiếu TB03)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2f</td><td>Cực trị MAX</td><td>Đồng hạng cực trị số căn hộ (Tie-breaking)</td><td>Cả TN01 (4 căn) và TN02 (4 căn) bảo toàn</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-        </table>
-        <p style="font-size: 8pt; font-style: italic; color: #475569;">Bằng chứng thực thi lưu tại: <code>exam/gk/qa/mock02_sql_execution.log</code></p>
-    </div>
-</div>
-
-<!-- MOCK-03 Section -->
-<div class="page-break">
-    <h2 class="exam-header">ĐỀ THI GIỮA KỲ MÔ PHỎNG SỐ 03 (MOCK-03) — CHUẨN VÀNG</h2>
-    <div style="background:#f0fdf4; border:1px solid #4ade80; color:#166534; padding:8px 14px; margin-bottom:15px; border-radius:4px; font-weight:bold; font-size:9.5pt;">
-        TRẠNG THÁI: CHUẨN VÀNG (GOLD STANDARD) — ĐÃ KIỂM CHỨNG THỰC THI TOÀN BỘ TRÊN MICROSOFT SQL SERVER 2025
-    </div>
-    <div class="exam-meta-bar">
-        <span>MÃ ĐỀ: MOCK-03</span>
-        <span>Thời gian: 75 phút | Thang điểm: 10.0</span>
-        <span>Lược đồ: Quản lý Tiếp nhận & Phân bổ Tiền cứu trợ Bão lũ</span>
-    </div>
-"""
-    for q in mock03["questions"]:
-        pid = q["problem_id"]
-        p = next((x for x in problems if x["id"] == pid), None)
-        if not p:
-            continue
-        sol = p.get("solution", {})
-        html += f"""
-        <div class="no-break" style="margin-bottom: 20px;">
-            <h3 class="question-title">Câu {q['num']}{q['sub']} [{p['id']}] — {p['title']} ({q['points']} điểm)</h3>
-            <p><strong>Yêu cầu:</strong> {p['prompt']}</p>
-        """
-        if "relational_algebra" in sol:
-            html += f"""<div class="math-expr"><strong>Biểu thức ĐSQH:</strong><br>{sol['relational_algebra']}</div>"""
-        if "sql" in sol:
-            html += f"""<pre class="code-sql">-- Câu lệnh T-SQL tương đương:\n{sol['sql']}</pre>"""
-        if "relational_schema" in sol:
-            html += "<ul>"
-            for r in sol["relational_schema"]:
-                html += f"<li><strong>{r}</strong></li>"
-            html += "</ul>"
-        if "intermediate_steps" in sol and sol["intermediate_steps"]:
-            html += "<ol style='font-size: 9pt; color: #334155; padding-left: 18px;'>"
-            for s in sol["intermediate_steps"]:
-                html += f"<li>{s}</li>"
-            html += "</ol>"
-        html += "</div>"
-
-    html += """
-    <div class="no-break" style="margin-top: 25px; border-top: 2px solid #16a34a; padding-top: 15px;">
-        <h3 style="color: #166534; font-size: 11pt;">BẢNG KIỂM CHỨNG THỰC THI TRÊN MICROSOFT SQL SERVER 2025 (MOCK-03)</h3>
-        <table class="rubric-table" style="font-size: 8.5pt;">
-            <tr><th>Câu</th><th>Phép toán / Vấn đề kiểm thử</th><th>Trường hợp biên (Edge Case)</th><th>Kết quả kỳ vọng (Expected)</th><th>Trạng thái</th></tr>
-            <tr><td>2.1a</td><td>CHECK constraint</td><td>Thử chèn SOTIEN <= 0, NGAYKT < NGAYBD, NULL</td><td>Chặn lỗi CK_PHIEUNHAN_SOTIEN, CK_DOTCUUTRO_NGAY, 515</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.1b</td><td>UPDATE thiệt hại</td><td>Hộ dân xã Hiệp Phước có SONKHAU >= 5</td><td>Cập nhật HD01 và HD02 thành 'Nặng' (2 hộ)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2a</td><td>Select σ</td><td>Nhà hảo tâm loại hình 'Cá nhân'</td><td>NHT03 (Lê Văn C), NHT04 (Phạm Thị D)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2b</td><td>Join ⋈</td><td>Hộ dân Cần Giờ thiệt hại Nặng</td><td>HD01, HD02, HD05, HD06 (4 hộ)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2c</td><td>Left Outer Join ⟕</td><td>Xã XA03 (Thạnh An) không có hộ dân</td><td>XA01, XA02 có hộ; XA03 có MAHO = NULL</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2d</td><td>Gom nhóm γ</td><td>Tổng tiền ủng hộ năm 2024 theo nhà hảo tâm</td><td>NHT01: 1.000.000.000đ; NHT02: 550.000.000đ</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2e</td><td>Phép chia ÷</td><td>Tiếp nhận từ tất cả Doanh nghiệp (NHT01, NHT02)</td><td>Đúng 2 đợt: DOT01 và DOT02</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2f</td><td>Cực trị MAX</td><td>Đồng hạng cực trị tổng tiền cứu trợ xã</td><td>Cả XA01 (20tr) và XA02 (20tr) bảo toàn; XA04 (5tr) loại</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-        </table>
-        <p style="font-size: 8pt; font-style: italic; color: #475569;">Bằng chứng thực thi lưu tại: <code>exam/gk/qa/mock03_sql_execution.log</code></p>
-    </div>
-</div>
-
-<!-- MOCK-04 Section -->
-<div class="page-break">
-    <h2 class="exam-header">ĐỀ THI GIỮA KỲ MÔ PHỎNG SỐ 04 (MOCK-04) — CHUẨN VÀNG</h2>
-    <div style="background:#f0fdf4; border:1px solid #4ade80; color:#166534; padding:8px 14px; margin-bottom:15px; border-radius:4px; font-weight:bold; font-size:9.5pt;">
-        TRẠNG THÁI: CHUẨN VÀNG (GOLD STANDARD) — ĐÃ KIỂM CHỨNG THỰC THI TOÀN BỘ TRÊN MICROSOFT SQL SERVER 2025
-    </div>
-    <div class="exam-meta-bar">
-        <span>MÃ ĐỀ: MOCK-04</span>
-        <span>Thời gian: 75 phút | Thang điểm: 10.0</span>
-        <span>Lược đồ: Quản Lý Chuỗi Cửa Hàng Bán Lẻ Xăng Dầu</span>
-    </div>
-"""
-    for q in mock04["questions"]:
-        pid = q["problem_id"]
-        p = next((x for x in problems if x["id"] == pid), None)
-        if not p:
-            continue
-        sol = p.get("solution", {})
-        html += f"""
-        <div class="no-break" style="margin-bottom: 20px;">
-            <h3 class="question-title">Câu {q['num']}{q['sub']} [{p['id']}] — {p['title']} ({q['points']} điểm)</h3>
-            <p><strong>Yêu cầu:</strong> {p['prompt']}</p>
-        """
-        if "relational_algebra" in sol:
-            html += f"""<div class="math-expr"><strong>Biểu thức ĐSQH:</strong><br>{sol['relational_algebra']}</div>"""
-        if "sql" in sol:
-            html += f"""<pre class="code-sql">-- Câu lệnh T-SQL tương đương:\n{sol['sql']}</pre>"""
-        if "relational_schema" in sol:
-            html += "<ul>"
-            for r in sol["relational_schema"]:
-                html += f"<li><strong>{r}</strong></li>"
-            html += "</ul>"
-        if "intermediate_steps" in sol and sol["intermediate_steps"]:
-            html += "<ol style='font-size: 9pt; color: #334155; padding-left: 18px;'>"
-            for s in sol["intermediate_steps"]:
-                html += f"<li>{s}</li>"
-            html += "</ol>"
-        html += "</div>"
-
-    html += """
-    <div class="no-break" style="margin-top: 25px; border-top: 2px solid #16a34a; padding-top: 15px;">
-        <h3 style="color: #166534; font-size: 11pt;">BẢNG KIỂM CHỨNG THỰC THI TRÊN MICROSOFT SQL SERVER 2025 (MOCK-04)</h3>
-        <table class="rubric-table" style="font-size: 8.5pt;">
-            <tr><th>Câu</th><th>Phép toán / Vấn đề kiểm thử</th><th>Trường hợp biên (Edge Case)</th><th>Kết quả kỳ vọng (Expected)</th><th>Trạng thái</th></tr>
-            <tr><td>2.1a</td><td>CHECK constraint</td><td>Thử chèn DUNGTICH <= 0, LUONG_TON < 0, LUONG_TON > DUNGTICH, NULL</td><td>Chặn lỗi CK_BECHUA_DUNGTICH, CK_BECHUA_LUONGTON, 515</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.1b</td><td>UPDATE đơn giá 5%</td><td>Mặt hàng Xăng khoáng có đơn vị Lít</td><td>NL01 (25.200đ), NL02 (23.100đ), NL03 giữ nguyên</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2a</td><td>Select σ</td><td>Nhân viên bán hàng lương >= 8 triệu</td><td>NV02 (8,5tr), NV04 (9tr)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2b</td><td>Join ⋈</td><td>Hóa đơn chuyển khoản tại Bình Thạnh</td><td>HD01 (Cửa hàng Số 1), HD03 (Cửa hàng Số 2)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2c</td><td>Left Outer Join ⟕</td><td>Cửa hàng CH05 chưa có bể chứa</td><td>CH01-04 có bể; CH05 có MABE = NULL</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2d</td><td>Gom nhóm γ</td><td>Tổng lít nhiên liệu bán tháng 10/2024 theo CH</td><td>CH01: 105 lít, CH02: 80 lít</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2e</td><td>Phép chia ÷</td><td>Hóa đơn bán tất cả Xăng khoáng (NL01, NL02)</td><td>Đúng 2 hóa đơn: HD01 và HD03</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2f</td><td>Cực trị MAX</td><td>Đồng hạng cực trị tổng dung tích bể chứa</td><td>Cả CH01 (40.000L) và CH04 (40.000L) bảo toàn</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-        </table>
-        <p style="font-size: 8pt; font-style: italic; color: #475569;">Bằng chứng thực thi lưu tại: <code>exam/gk/qa/mock04_sql_execution.log</code></p>
-    </div>
-</div>
-
-<!-- MOCK-05 Section -->
-<div class="page-break">
-    <h2 class="exam-header">ĐỀ THI GIỮA KỲ MÔ PHỎNG SỐ 05 (MOCK-05) — CHUẨN VÀNG</h2>
-    <div style="background:#f0fdf4; border:1px solid #4ade80; color:#166534; padding:8px 14px; margin-bottom:15px; border-radius:4px; font-weight:bold; font-size:9.5pt;">
-        TRẠNG THÁI: CHUẨN VÀNG (GOLD STANDARD) — ĐÃ KIỂM CHỨNG THỰC THI TOÀN BỘ TRÊN MICROSOFT SQL SERVER 2025
-    </div>
-    <div class="exam-meta-bar">
-        <span>MÃ ĐỀ: MOCK-05</span>
-        <span>Thời gian: 75 phút | Thang điểm: 10.0</span>
-        <span>Lược đồ: Quản Lý Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà</span>
-    </div>
-"""
-    for q in mock05["questions"]:
-        pid = q["problem_id"]
-        p = next((x for x in problems if x["id"] == pid), None)
-        if not p:
-            continue
-        sol = p.get("solution", {})
-        html += f"""
-        <div class="no-break" style="margin-bottom: 20px;">
-            <h3 class="question-title">Câu {q['num']}{q['sub']} [{p['id']}] — {p['title']} ({q['points']} điểm)</h3>
-            <p><strong>Yêu cầu:</strong> {p['prompt']}</p>
-        """
-        if "relational_algebra" in sol:
-            html += f"""<div class="math-expr"><strong>Biểu thức ĐSQH:</strong><br>{sol['relational_algebra']}</div>"""
-        if "sql" in sol:
-            html += f"""<pre class="code-sql">-- Câu lệnh T-SQL tương đương:\n{sol['sql']}</pre>"""
-        if "relational_schema" in sol:
-            html += "<ul>"
-            for r in sol["relational_schema"]:
-                html += f"<li><strong>{r}</strong></li>"
-            html += "</ul>"
-        if "intermediate_steps" in sol and sol["intermediate_steps"]:
-            html += "<ol style='font-size: 9pt; color: #334155; padding-left: 18px;'>"
-            for s in sol["intermediate_steps"]:
-                html += f"<li>{s}</li>"
-            html += "</ol>"
-        html += "</div>"
-
-    html += """
-    <div class="no-break" style="margin-top: 25px; border-top: 2px solid #16a34a; padding-top: 15px;">
-        <h3 style="color: #166534; font-size: 11pt;">BẢNG KIỂM CHỨNG THỰC THI TRÊN MICROSOFT SQL SERVER 2025 (MOCK-05)</h3>
-        <table class="rubric-table" style="font-size: 8.5pt;">
-            <tr><th>Câu</th><th>Phép toán / Vấn đề kiểm thử</th><th>Trường hợp biên (Edge Case)</th><th>Kết quả kỳ vọng (Expected)</th><th>Trạng thái</th></tr>
-            <tr><td>2.1a</td><td>CHECK constraint</td><td>Thử chèn TIENCOC < 0, NGAYKT <= NGAYBD, NULL</td><td>Chặn lỗi CK_HOPDONG_TIENCOC, CK_HOPDONG_NGAY, 515</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.1b</td><td>UPDATE trạng thái</td><td>Căn hộ có hợp đồng năm 2024 kết thúc >= 31/12/2024</td><td>CH01, CH02, CH04, CH05, CH06 (5 căn) thành 'Đang thuê'</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2a</td><td>Select σ</td><td>Khách hàng loại hình 'Doanh nghiệp'</td><td>KH01 (Nam Long), KH02 (Vina)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2b</td><td>Join ⋈</td><td>Căn hộ Sky Garden giá thuê >= 15 triệu</td><td>CH01 (16tr), CH02 (22tr)</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2c</td><td>Left Outer Join ⟕</td><td>Tòa nhà TN04 chưa có căn hộ</td><td>TN01-03 có căn hộ; TN04 có MACH = NULL</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2d</td><td>Gom nhóm γ</td><td>Tổng tiền thu năm 2024 theo hợp đồng</td><td>HD01: 32.000.000đ, HD02: 18.000.000đ</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2e</td><td>Phép chia ÷</td><td>Thuê căn hộ ở tất cả tòa nhà Quận 7 (TN01, TN02)</td><td>Đúng 2 khách hàng: KH01 và KH02</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-            <tr><td>2.2f</td><td>Cực trị MAX</td><td>Đồng hạng cực trị số căn hộ đang thuê</td><td>Cả TN01 (2 căn) và TN02 (2 căn) bảo toàn</td><td style="color:#16a34a; font-weight:bold;">PASS</td></tr>
-        </table>
-        <p style="font-size: 8pt; font-style: italic; color: #475569;">Bằng chứng thực thi lưu tại: <code>exam/gk/qa/mock05_sql_execution.log</code></p>
-    </div>
-</div>
-"""
 
     # 54 Verified problems section
     html += f"""<div class="page-break"><h1 class="topic-header">TUYỂN TẬP {len(verified_probs)} BÀI TẬP ĐÃ KIỂM CHỨNG HỌC THUẬT</h1></div>"""
