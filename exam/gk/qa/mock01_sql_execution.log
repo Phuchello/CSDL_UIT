@@ -1,7 +1,7 @@
 ﻿Changed database context to 'IT004_MOCK01_DB'.
-======================================================================
---- [ADVERSARIAL QA 2.1a: CHECK & NOT NULL INTEGRITY VERIFICATION] ---
-======================================================================
+------------------------------------------------------------
+=== TEST 1: CHECK CONSTRAINT ADVERSARIAL INTEGRITY ===
+------------------------------------------------------------
   [PASS] CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = 0 (Confirmed Constraint: CK_CTPX_SOLIEUXUAT)
   [PASS] CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = -10
   [PASS] NOT NULL policy correctly rejected NULL in SOLIEUXUAT (Error 515)
@@ -9,59 +9,46 @@
   [PASS] CK_PHIEUXUAT_TRANGTHAI correctly rejected TRANGTHAI = -1
   [PASS] NOT NULL policy correctly rejected NULL in TRANGTHAI (Error 515)
 
---- [TEST 2.1b: UPDATE 10% AstraZeneca 2025] ---
-MALO       TENLO                                              DONGIA         HSD              MANCC
----------- -------------------------------------------------- -------------- ---------------- ----------
-LO01       Lô AZ-01                                                165000.00       2025-05-30 NCC01
-LO02       Lô AZ-02                                                176000.00       2025-11-20 NCC01
+------------------------------------------------------------
+=== TEST 2: QUESTION 2.1B UPDATE VERIFICATION ===
+------------------------------------------------------------
+  [PASS] Test 2: UPDATE correctly affected 2 rows with HSD 2025.
 
---- [TEST 2.2a: Select Pfizer 2024] ---
-MALO       TENLO                                              SOLIEU      DONGIA
----------- -------------------------------------------------- ----------- --------------
-LO03       Lô PF-01                                                 40000      250000.00
-LO04       Lô PF-02                                                 60000      270000.00
+------------------------------------------------------------
+=== TEST 3: QUESTION 2.2A SELECTION & PROJECTION ===
+------------------------------------------------------------
+  [PASS] Test 3: Selection returned exactly 2 Pfizer batches in 2024 (LO03, LO04).
 
---- [TEST 2.2b: Điểm tiêm đã tiếp nhận ngày 15/10/2024] ---
-MADT       TENDT                                                                                                QUAN
----------- ---------------------------------------------------------------------------------------------------- --------------------------------------------------
-DT01       Trạm Y Tế P.25                                                                                       Bình Thạnh
-DT02       Trung Tâm Y Tế Q.Bình Thạnh                                                                          Bình Thạnh
-DT03       Ký Túc Xá Khu A                                                                                      Thủ Đức
+------------------------------------------------------------
+=== TEST 4: QUESTION 2.2B JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 4: Join returned exactly 3 points receiving on 2024-10-15 (DT01, DT02, DT03).
 
---- [TEST 2.2c: Left Outer Join Bình Thạnh (Edge Case: DT06 có HOTEN là NULL)] ---
-MADT       TENDT                                                                                                HOTEN
----------- ---------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------
-DT01       Trạm Y Tế P.25                                                                                       Nguyễn Văn A
-DT02       Trung Tâm Y Tế Q.Bình Thạnh                                                                          Trần Thị B
-DT06       Trạm Y Tế P.12                                                                                       NULL
+------------------------------------------------------------
+=== TEST 5: QUESTION 2.2C OUTER JOIN QUERY ===
+------------------------------------------------------------
+Warning: Null value is eliminated by an aggregate or other SET operation.
+  [PASS] Test 5: Outer join correctly preserved DT06 with NULL staff (total 3, null 1).
 
---- [TEST 2.2d: Gom nhóm tổng liều đã tiếp nhận T10/2024] ---
-MADT       TONGLIEU
----------- -----------
-DT01              3500
-DT02              3500
-DT03              2000
-DT04              3000
+------------------------------------------------------------
+=== TEST 6: QUESTION 2.2D GROUPING & AGGREGATE ===
+------------------------------------------------------------
+  [PASS] Test 6: Grouping verified: DT01 received 3500 doses in 10/2024.
 
---- [TEST 2.2e (Case 1 - Chuẩn): Điểm tiêm đã tiếp nhận TẤT CẢ các lô của Moderna] ---
-MADT       TENDT
----------- ----------------------------------------------------------------------------------------------------
-DT01       Trạm Y Tế P.25
-DT02       Trung Tâm Y Tế Q.Bình Thạnh
+------------------------------------------------------------
+=== TEST 7: QUESTION 2.2E RELATIONAL DIVISION ===
+------------------------------------------------------------
+  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (DT01, DT02).
 
---- [TEST 2.2e (Case 2 - Edge Case): Phép chia với Nhà cung cấp KHÔNG CÓ LÔ NÀO (VnBiotech)] ---
-MADT       TENDT
----------- ----------------------------------------------------------------------------------------------------
-DT01       Trạm Y Tế P.25
-DT02       Trung Tâm Y Tế Q.Bình Thạnh
-DT03       Ký Túc Xá Khu A
-DT04       Ký Túc Xá Khu B
+------------------------------------------------------------
+=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
+------------------------------------------------------------
+  [PASS] Test 8: Empty target S=Ø semantic verified: bounded candidate universe returns 4 points.
 
---- [TEST 2.2f: Cực trị MAX sức chứa Thủ Đức (Tie-breaking: DT04 và DT05 cùng = 2500)] ---
-MADT       TENDT                                                                                                SUCCHUA
----------- ---------------------------------------------------------------------------------------------------- -----------
-DT04       Ký Túc Xá Khu B                                                                                             2500
-DT05       Nhà Thi Đấu Thể Thao                                                                                        2500
+------------------------------------------------------------
+=== TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===
+------------------------------------------------------------
+  [PASS] Test 9: Extreme tie-breaking verified: DT04 (2500) and DT05 (2500) preserved.
 
 ======================================================================
 === [MOCK-01 ADVERSARIAL QA: ALL TESTS AND EDGE CASES PASSED 100%] ===

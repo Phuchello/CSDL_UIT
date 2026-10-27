@@ -607,13 +607,13 @@ def build_pdf_exam_bank():
 
 <div class="page-break">
     <h1 class="topic-header">MỤC LỤC & HƯỚNG DẪN TỰ ÔN TẬP</h1>
-    <p>Tài liệu này bao gồm <strong>173 bài tập phân dạng</strong> và <strong>15 đề thi mô phỏng 75 phút</strong>. Toàn bộ đáp án chi tiết được tách rời tại ấn phẩm <em>IT004_GK_LoiGiaiChiTiet_VoTrongPhuc.pdf</em>.</p>
+    <p>Tài liệu này bao gồm <strong>150 bài tập độc lập phân dạng</strong> (ERD, ĐSQH, SQL) và <strong>15 đề thi mô phỏng 75 phút chuẩn hóa UIT (135 câu)</strong>. Toàn bộ đáp án chi tiết được tách rời tại ấn phẩm <em>IT004_GK_LoiGiaiChiTiet_VoTrongPhuc.pdf</em>.</p>
     <ul class="toc-list">
-        <li class="toc-item"><span><strong>PHẦN 1:</strong> Chuyên Đề 1 — Mô Hình Thực Thể Mối Kết Hợp (ERD) & Ánh Xạ Schema (33 bài)</span><span>Trang 2</span></li>
-        <li class="toc-item"><span><strong>PHẦN 2:</strong> Chuyên Đề 2 — Đại Số Quan Hệ Cơ Bản, Phép Tập Hợp & Kết Nối (62 bài)</span><span>Trang 10</span></li>
-        <li class="toc-item"><span><strong>PHẦN 3:</strong> Chuyên Đề 3 — Phép Chia, Gom Nhóm & Truy Vấn Phức Hợp (52 bài)</span><span>Trang 25</span></li>
-        <li class="toc-item"><span><strong>PHẦN 4:</strong> Chuyên Đề 4 — Transact-SQL DDL/DML & Chuyển Đổi ĐSQH (26 bài)</span><span>Trang 38</span></li>
-        <li class="toc-item"><span><strong>PHẦN 5:</strong> Tuyển Tập 15 Đề Thi Mô Phỏng 75 Phút Chuẩn Hóa UIT</span><span>Trang 45</span></li>
+        <li class="toc-item"><span><strong>PHẦN 1:</strong> Chuyên Đề 1 — Mô Hình Thực Thể Mối Kết Hợp (ERD) & Ánh Xạ Schema (25 bài độc lập)</span><span>Trang 2</span></li>
+        <li class="toc-item"><span><strong>PHẦN 2:</strong> Chuyên Đề 2 — Đại Số Quan Hệ Cơ Bản, Phép Tập Hợp & Kết Nối (45 bài độc lập)</span><span>Trang 10</span></li>
+        <li class="toc-item"><span><strong>PHẦN 3:</strong> Chuyên Đề 3 — Phép Chia, Gom Nhóm & Truy Vấn Phức Hợp (45 bài độc lập)</span><span>Trang 24</span></li>
+        <li class="toc-item"><span><strong>PHẦN 4:</strong> Chuyên Đề 4 — Transact-SQL DDL/DML & Ràng Buộc Toàn Vẹn (35 bài độc lập)</span><span>Trang 36</span></li>
+        <li class="toc-item"><span><strong>PHẦN 5:</strong> Tuyển Tập 15 Đề Thi Mô Phỏng 75 Phút Chuẩn Hóa UIT (135 câu hỏi)</span><span>Trang 48</span></li>
     </ul>
 </div>
 """
@@ -628,7 +628,13 @@ def build_pdf_exam_bank():
 
     for t_key, t_name in topic_map.items():
         html += f"""<div class="page-break"><h1 class="topic-header">{t_name}</h1>"""
-        t_probs = [p for p in problems if p["topic"] == t_key]
+        t_probs = [
+            p for p in problems
+            if p["topic"] == t_key and not (
+                p.get("mock_id") or
+                (p["id"].startswith("M") and len(p["id"]) >= 3 and p["id"][1:3].isdigit() and "-" in p["id"])
+            )
+        ]
         for idx, p in enumerate(t_probs, start=1):
             diff_badge = f"""<span class="badge-pill badge-{p['difficulty'].lower()}">Mức {p['difficulty']}</span>"""
             status_val = p.get("status", "DRAFT")
@@ -720,11 +726,10 @@ def build_pdf_solutions():
 
 <div class="page-break">
     <h1 class="topic-header">MỤC LỤC & CẤU TRÚC KIỂM ĐỊNH HỌC THUẬT</h1>
-    <p>Ấn phẩm này cung cấp hướng dẫn chấm và lời giải chi tiết theo 3 cấp độ kiểm chứng minh bạch:</p>
+    <p>Ấn phẩm này cung cấp hướng dẫn chấm và lời giải chi tiết theo 2 phần toàn diện:</p>
     <ul>
-        <li><strong>EXECUTION_VERIFIED (Chuẩn Vàng 100%):</strong> Toàn bộ 15 đề thi mô phỏng (MOCK-01 &rarr; MOCK-15) đã được kiểm chứng thực thi 100% trên engine Microsoft SQL Server 2025 với kịch bản kiểm thử toàn bộ các ca biên (edge cases).</li>
-        <li><strong>SEMANTICALLY_REVIEWED (Đã rà soát học thuật):</strong> 10 bài tập phân dạng đã được đối sánh công thức toán học và lược đồ chuẩn UIT.</li>
-        <li><strong>DRAFT / INTERNAL REVIEW (Bản thảo nội bộ):</strong> 28 bài tập câu hỏi bổ trợ trong ngân hàng học liệu.</li>
+        <li><strong>PHẦN 1: LỜI GIẢI 15 ĐỀ THI MÔ PHỎNG (CHUẨN VÀNG):</strong> 135 câu hỏi thuộc 15 Mock Exam, kiểm chứng thực thi 100% trên Microsoft SQL Server 2025 với kịch bản kiểm thử toàn bộ các ca biên (edge cases).</li>
+        <li><strong>PHẦN 2: LỜI GIẢI 150 BÀI TẬP ĐỘC LẬP THEO CHUYÊN ĐỀ:</strong> 150 bài tập độc lập (25 ERD, 45 ĐSQH cơ bản, 45 ĐSQH chia/gom nhóm, 35 SQL DDL/DML) đã qua rà soát học thuật và công thức toán học (SEMANTICALLY_REVIEWED).</li>
     </ul>
 </div>
 """
@@ -802,6 +807,62 @@ def build_pdf_solutions():
         exec_table = get_mock_execution_table_html(m["id"])
         if exec_table:
             html += exec_table
+        html += "</div>"
+
+    # PART 2: Solutions for 150 Independent Practice Problems
+    html += '<div class="page-break"><h1 class="topic-header">PHẦN 2: LỜI GIẢI 150 BÀI TẬP ĐỘC LẬP THEO CHUYÊN ĐỀ</h1></div>'
+
+    indep_topic_titles = {
+        "ERD_MAPPING": "CHUYÊN ĐỀ 1: MÔ HÌNH ERD & ÁNH XẠ LƯỢC ĐỒ (25 BÀI)",
+        "RA_BASIC_JOIN": "CHUYÊN ĐỀ 2: ĐẠI SỐ QUAN HỆ CƠ BẢN & PHÉP KẾT (45 BÀI)",
+        "RA_DIVISION_GROUPING": "CHUYÊN ĐỀ 3: PHÉP CHIA, GOM NHÓM & CỰC TRỊ (45 BÀI)",
+        "SQL_DDL_DML": "CHUYÊN ĐỀ 4: TRANSACT-SQL DDL/DML & RÀNG BUỘC (35 BÀI)"
+    }
+
+    for t_key, t_title in indep_topic_titles.items():
+        html += f'<div class="page-break"><h2 class="exam-header">{t_title}</h2>'
+        t_probs = [
+            p for p in problems
+            if p["topic"] == t_key and not (
+                p.get("mock_id") or
+                (p["id"].startswith("M") and len(p["id"]) >= 3 and p["id"][1:3].isdigit() and "-" in p["id"])
+            )
+        ]
+        for idx, p in enumerate(t_probs, start=1):
+            sol = p.get("solution", {})
+            html += f"""
+            <div class="no-break" style="margin-bottom: 20px;">
+                <h3 class="question-title">Bài {idx:02d} [{p['id']}] — {p['title']} ({p['points']} điểm)</h3>
+                <p><strong>Yêu cầu:</strong> {p['prompt']}</p>
+            """
+            if "relational_algebra" in sol:
+                html += f'<div class="math-expr"><strong>Biểu thức ĐSQH:</strong><br>{sol["relational_algebra"]}</div>'
+            if "sql" in sol:
+                html += f'<pre class="code-sql">-- Transact-SQL:\n{sol["sql"]}</pre>'
+            if "erd_entities" in sol:
+                html += "<ul>"
+                for e in sol["erd_entities"]:
+                    html += f"<li>{e}</li>"
+                html += "</ul>"
+            if "relationships" in sol:
+                html += "<ul>"
+                for r in sol["relationships"]:
+                    html += f"<li>{r}</li>"
+                html += "</ul>"
+            if "intermediate_steps" in sol and sol["intermediate_steps"]:
+                html += "<ol style='font-size: 9pt; color: #334155; padding-left: 18px;'>"
+                for s in sol["intermediate_steps"]:
+                    html += f"<li>{s}</li>"
+                html += "</ol>"
+            if "edge_cases" in sol and sol["edge_cases"]:
+                html += f'<div class="pitfall-box"><strong>Lưu ý ca biên:</strong> {sol["edge_cases"]}</div>'
+            rub = p.get("rubric", {})
+            if rub:
+                html += '<table class="rubric-table"><tr><th>Tiêu chí chấm</th><th>Điểm</th></tr>'
+                for rk, rv in rub.items():
+                    html += f"<tr><td>{rk}</td><td>{rv}</td></tr>"
+                html += "</table>"
+            html += "</div>"
         html += "</div>"
 
     html += "</body></html>"
@@ -1004,24 +1065,10 @@ def build_pdf_verified_only():
 
 <div class="page-break">
     <h1 class="topic-header">MỤC LỤC ẤN BẢN VERIFIED-ONLY</h1>
-    <p>Ấn bản này chọn lọc nghiêm ngặt duy nhất các nội dung đã đạt tiêu chuẩn kiểm chứng của môn học IT004:</p>
+    <p>Ấn bản này chọn lọc nghiêm ngặt 100% các nội dung đã đạt tiêu chuẩn kiểm chứng của môn học IT004 (285 bài tập):</p>
     <ul>
-        <li><strong>Đề thi mô phỏng MOCK-01 (Chuẩn Vàng):</strong> Quản lý Cung ứng & Tiêm chủng Vắc-xin, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-02 (Chuẩn Vàng):</strong> Hệ Thống PCCC Chung Cư Cao Tầng, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-03 (Chuẩn Vàng):</strong> Tiếp Nhận & Phân Bổ Tiền Cứu Trợ Bão Lũ, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-04 (Chuẩn Vàng):</strong> Chuỗi Cửa Hàng Bán Lẻ Xăng Dầu, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-05 (Chuẩn Vàng):</strong> Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-06 (Chuẩn Vàng):</strong> Phòng Khám Đa Khoa & Hồ Sơ Khám Bệnh, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-07 (Chuẩn Vàng):</strong> Thư Viện Đại Học & Mượn Trả Sách, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-08 (Chuẩn Vàng):</strong> Sàn Thương Mại Điện Tử & Vận Chuyển Hàng, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-09 (Chuẩn Vàng):</strong> Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-10 (Chuẩn Vàng):</strong> Quản Lý Gara Ô Tô & Phụ Tùng Bảo Dưỡng, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-11 (Chuẩn Vàng):</strong> Quản Lý Chuỗi Cà Phê Nhượng Quyền & Nguyên Liệu Pha Chế, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-12 (Chuẩn Vàng):</strong> Quản Lý Cụm Rạp Chiếu Phim & Đặt Vé Trực Tuyến, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-13 (Chuẩn Vàng):</strong> Quản Lý Tuyến Xe Buýt & Metro TP.HCM, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-14 (Chuẩn Vàng):</strong> Quản Lý Đề Tài Nghiên Cứu Khoa Học Trọng Điểm, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>Đề thi mô phỏng MOCK-15 (Chuẩn Vàng):</strong> Quản Lý Trại Cứu Hộ Động Vật Hoang Dã, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
-        <li><strong>{len(verified_probs)} bài tập phân dạng đã kiểm chứng (Verified Problems):</strong> Gồm các bài tập EXECUTION_VERIFIED và SEMANTICALLY_REVIEWED có lời giải và barem chi tiết.</li>
+        <li><strong>Bộ 15 Đề thi mô phỏng MOCK-01 &rarr; MOCK-15 (Chuẩn Vàng):</strong> 135 câu hỏi có lời giải, barem điểm và bảng kiểm chứng thực thi 100% trên Microsoft SQL Server 2025.</li>
+        <li><strong>Bộ 150 Bài tập độc lập theo chuyên đề (Đã kiểm chứng):</strong> Gồm 25 bài ERD, 45 bài ĐSQH cơ bản, 45 bài ĐSQH chia/gom nhóm/cực trị, và 35 bài Transact-SQL DDL/DML đã rà soát học thuật.</li>
     </ul>
 </div>
 """
@@ -1086,9 +1133,13 @@ def build_pdf_verified_only():
         html += "</div>"
 
 
-    # 54 Verified problems section
-    html += f"""<div class="page-break"><h1 class="topic-header">TUYỂN TẬP {len(verified_probs)} BÀI TẬP ĐÃ KIỂM CHỨNG HỌC THUẬT</h1></div>"""
-    for idx, p in enumerate(verified_probs, start=1):
+    # Independent Verified problems section (150 problems)
+    indep_verified = [
+        p for p in verified_probs
+        if not (p.get("mock_id") or (p["id"].startswith("M") and len(p["id"]) >= 3 and p["id"][1:3].isdigit() and "-" in p["id"]))
+    ]
+    html += f"""<div class="page-break"><h1 class="topic-header">TUYỂN TẬP {len(indep_verified)} BÀI TẬP ĐỘC LẬP ĐÃ KIỂM CHỨNG HỌC THUẬT</h1></div>"""
+    for idx, p in enumerate(indep_verified, start=1):
         html += f"""
         <div class="no-break" style="margin-bottom: 16px;">
             <div class="exam-meta-bar">

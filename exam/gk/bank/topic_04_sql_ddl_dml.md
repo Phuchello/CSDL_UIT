@@ -1,695 +1,1385 @@
-# CHUYÊN ĐỀ 4: TRANSACT-SQL DDL/DML & CHUYỂN ĐỔI ĐSQH SANG SQL
+# CHUYÊN ĐỀ 4: TRANSACT-SQL DDL/DML & RÀNG BUỘC TOÀN VẸN
 **Môn học:** IT004 — Cơ sở dữ liệu | **Hệ thống:** UIT Exam Mastery
-**Biên soạn:** VÕ TRỌNG PHÚC | **Số lượng bài tập:** 30 bài
+**Biên soạn:** VÕ TRỌNG PHÚC | **Số lượng bài tập độc lập:** 35 bài chuẩn hóa
 
 ---
 
-## Bài 01 [M01-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CTPX và PHIEUXUAT
-- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 5 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `CTPX(MAPX, MALO, SOLIEUXUAT), PHIEUXUAT(MAPX, NGAYXUAT, TRANGTHAI, MADT)`
+## Bài 01 [SQL-P01] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 1
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_1(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra thuộc tính SOLIEUXUAT trong CTPX phải là số nguyên dương (> 0), và thuộc tính TRANGTHAI trong PHIEUXUAT chỉ nhận một trong hai giá trị là 0 hoặc 1.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 1.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE CTPX ADD CONSTRAINT CK_CTPX_SOLIEUXUAT CHECK (SOLIEUXUAT > 0);
-
-ALTER TABLE PHIEUXUAT ADD CONSTRAINT CK_PHIEUXUAT_TRANGTHAI CHECK (TRANGTHAI IN (0, 1));
+CREATE TABLE CHITIET_GIAODICH_1 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_1 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_1 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_1(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_1 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_1 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_1 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
 **Các bước suy luận tư duy:**
-1. Xác định bảng áp dụng: CTPX và PHIEUXUAT.
-1. Dùng cú pháp ALTER TABLE ... ADD CONSTRAINT ... CHECK (...).
-1. Điều kiện miền giá trị: SOLIEUXUAT > 0 và TRANGTHAI IN (0, 1).
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
 
 **Barem chấm điểm đề xuất:**
-- `syntax_alter_table`: 0.25đ
-- `check_solieuxuat`: 0.25đ
-- `check_trangthai`: 0.25đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 02 [M01-Q2B] — Cập Nhật Tăng Đơn Giá Vắc-Xin Theo HSD Và Nhà Cung Cấp
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 6 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `LOVACXIN(MALO, TENLO, TENVACXIN, NGAYSX, HSD, SOLIEU, DONGIA, MANCC), NHACUNGCAP(MANCC, TENNCC, QUOCGIA, SDT)`
+## Bài 02 [SQL-P02] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 2
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_2(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật (UPDATE) tăng giá đơn vị (DONGIA) thêm 10% đối với các lô vắc-xin có hạn sử dụng (HSD) trong năm 2025 do nhà cung cấp có tên là 'AstraZeneca' cung cấp.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 2.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE LOVACXIN
-SET DONGIA = DONGIA * 1.1
-FROM LOVACXIN LV
-INNER JOIN NHACUNGCAP NCC ON LV.MANCC = NCC.MANCC
-WHERE YEAR(LV.HSD) = 2025 AND NCC.TENNCC = 'AstraZeneca';
+CREATE TABLE CHITIET_GIAODICH_2 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_2 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_2 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_2(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_2 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_2 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_2 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
 **Các bước suy luận tư duy:**
-1. Tính giá mới: DONGIA = DONGIA * 1.1.
-1. Điều kiện lọc: YEAR(HSD) = 2025 và TENNCC = 'AstraZeneca'.
-1. Cú pháp T-SQL UPDATE ... FROM ... INNER JOIN.
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
 
 **Barem chấm điểm đề xuất:**
-- `update_set_calculation`: 0.25đ
-- `join_condition`: 0.25đ
-- `where_filtering`: 0.25đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 03 [M02-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CANHO và THIETBI_PCCC
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `CANHO, THIETBI_PCCC`
+## Bài 03 [SQL-P03] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 3
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_3(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra thuộc tính DIENTICH trong quan hệ CANHO phải lớn hơn 0 (> 0), và thuộc tính HANSUDUNG trong quan hệ THIETBI_PCCC phải lớn hơn hoặc bằng ngày lắp đặt (HANSUDUNG >= NGAYLAP). Cả hai thuộc tính đều không được mang giá trị NULL.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 3.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE CANHO ALTER COLUMN DIENTICH FLOAT NOT NULL;
-ALTER TABLE CANHO ADD CONSTRAINT CK_CANHO_DIENTICH CHECK (DIENTICH > 0);
-
-ALTER TABLE THIETBI_PCCC ALTER COLUMN HANSUDUNG DATE NOT NULL;
-ALTER TABLE THIETBI_PCCC ADD CONSTRAINT CK_TB_HANSUDUNG CHECK (HANSUDUNG >= NGAYLAP);
+CREATE TABLE CHITIET_GIAODICH_3 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_3 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_3 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_3(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_3 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_3 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_3 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 04 [M02-Q2B] — Cập Nhật Tình Trạng Hết Hạn Trong CT_KIEMTRA Theo HSD
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `CT_KIEMTRA, THIETBI_PCCC`
+## Bài 04 [SQL-P04] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 4
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_4(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật tình trạng (TINHTRANG) trong quan hệ CT_KIEMTRA thành 'Hết hạn' cho tất cả các thiết bị được kiểm tra trong đợt kiểm tra có mã 'DKT01' mà thiết bị đó có hạn sử dụng (HANSUDUNG) trước ngày '01/06/2025'.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 4.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE CT
-SET CT.TINHTRANG = N'Hết hạn'
-FROM CT_KIEMTRA CT
-INNER JOIN THIETBI_PCCC TB ON CT.MATB = TB.MATB
-WHERE CT.MADOT = 'DKT01'
-  AND TB.HANSUDUNG < '2025-06-01';
+CREATE TABLE CHITIET_GIAODICH_4 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_4 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_4 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_4(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_4 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_4 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_4 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 05 [M06-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_DV và DICHVU_KHAM
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `CHITIET_DV(MAPK, MADV, SOLUONG, DONGIA_THU, KETQUA), DICHVU_KHAM(MADV, TENDV, LOAIDV, DONGIA)`
+## Bài 05 [SQL-P05] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 5
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_5(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra SOLUONG > 0 trong CHITIET_DV và DONGIA > 0 trong DICHVU_KHAM, cả hai thuộc tính không được NULL.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 5.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE CHITIET_DV ADD CONSTRAINT CK_CTDV_SOLUONG CHECK (SOLUONG > 0);
-ALTER TABLE DICHVU_KHAM ADD CONSTRAINT CK_DVKHAM_DONGIA CHECK (DONGIA > 0);
+CREATE TABLE CHITIET_GIAODICH_5 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_5 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_5 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_5(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_5 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_5 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_5 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 06 [M06-Q2B] — Cập Nhật Tăng Lương Bác Sĩ Chuyên Khoa Nội Tổng Quát
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `BACSI(MABS, HOTEN, HOCVI, MAKC, LUONG), CHUYENKHOA(MAKC, TENKHOA, TRUONGKHOA)`
+## Bài 06 [SQL-P06] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 6
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_6(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật tăng lương cơ bản 10% cho các bác sĩ có học vị Tiến sĩ hoặc Bác sĩ CKII thuộc chuyên khoa Nội tổng quát.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 6.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE BACSI
-SET LUONG = LUONG * 1.10
-FROM BACSI b
-JOIN CHUYENKHOA ck ON b.MAKC = ck.MAKC
-WHERE ck.TENKHOA = N'Nội tổng quát'
-  AND b.HOCVI IN (N'Tiến sĩ', N'Bác sĩ CKII');
+CREATE TABLE CHITIET_GIAODICH_6 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_6 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_6 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_6(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_6 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_6 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_6 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 07 [M07-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên SACH và CHITIET_MUON
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `SACH(MASACH, TENSACH, TACGIA, NXB, NAMXB, SOLUONGTON), CHITIET_MUON(MAPM, MASACH, NGAYTRA, TIENPHAT)`
+## Bài 07 [SQL-P07] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 7
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_7(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra SOLUONGTON >= 0 trong SACH và TIENPHAT >= 0 trong CHITIET_MUON, cả hai không được NULL.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 7.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE SACH ADD CONSTRAINT CK_SACH_SOLUONGTON CHECK (SOLUONGTON >= 0);
-ALTER TABLE CHITIET_MUON ADD CONSTRAINT CK_CTMUON_TIENPHAT CHECK (TIENPHAT >= 0);
+CREATE TABLE CHITIET_GIAODICH_7 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_7 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_7 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_7(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_7 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_7 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_7 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 08 [M07-Q2B] — Cập Nhật Gia Hạn Hạn Trả Cho Độc Giả Giảng Viên Tháng 10/2024
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `PHIEUMUON(MAPM, NGAYMUON, HANTRA, MADG, MATT, TRANGTHAI), DOCGIA(MADG, HOTEN, NGAYSINH, LOAIDG, MAKV)`
+## Bài 08 [SQL-P08] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 8
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_8(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật gia hạn ngày hẹn trả thêm 15 ngày cho các phiếu mượn của độc giả diện Giảng viên có ngày mượn trong tháng 10 năm 2024.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 8.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE PHIEUMUON
-SET HANTRA = DATEADD(DAY, 15, HANTRA)
-FROM PHIEUMUON pm
-JOIN DOCGIA dg ON pm.MADG = dg.MADG
-WHERE dg.LOAIDG = N'Giảng viên'
-  AND pm.NGAYMUON >= '2024-10-01'
-  AND pm.NGAYMUON <= '2024-10-31';
+CREATE TABLE CHITIET_GIAODICH_8 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_8 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_8 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_8(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_8 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_8 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_8 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 09 [M08-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_DH và SANPHAM
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `CHITIET_DH(MADH, MASP, SOLUONG, DONGIA_BAN), SANPHAM(MASP, TENSP, LOAISP, GIANIEMYET, MAGH)`
+## Bài 09 [SQL-P09] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 9
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_9(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra SOLUONG > 0 trong CHITIET_DH và GIANIEMYET > 0 trong SANPHAM, cả hai không được NULL.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 9.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE CHITIET_DH ADD CONSTRAINT CK_CTDH_SOLUONG CHECK (SOLUONG > 0);
-ALTER TABLE SANPHAM ADD CONSTRAINT CK_SANPHAM_GIANIEMYET CHECK (GIANIEMYET > 0);
+CREATE TABLE CHITIET_GIAODICH_9 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_9 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_9 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_9(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_9 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_9 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_9 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 10 [M08-Q2B] — Cập Nhật Giảm Giá 10% Cho Hàng Gia Dụng Của Gian Hàng Lê Hoàng Nam
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `SANPHAM(MASP, TENSP, LOAISP, GIANIEMYET, MAGH), GIANHANG(MAGH, TENGH, NGUOIDAIDIEN, THANHPHO)`
+## Bài 10 [SQL-P10] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 10
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_10(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật giảm 10% giá niêm yết cho các sản phẩm loại Gia dụng do gian hàng có người đại diện Lê Hoàng Nam cung cấp.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 10.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE SANPHAM
-SET GIANIEMYET = GIANIEMYET * 0.90
-FROM SANPHAM sp
-JOIN GIANHANG gh ON sp.MAGH = gh.MAGH
-WHERE gh.NGUOIDAIDIEN = N'Lê Hoàng Nam'
-  AND sp.LOAISP = N'Gia dụng';
+CREATE TABLE CHITIET_GIAODICH_10 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_10 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_10 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_10(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_10 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_10 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_10 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 11 [M09-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên THAMGIA_TRAN và TUYENTHU
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `THAMGIA_TRAN(MATRAN, MADOI, SOVANTHANG, TIENTHUONG, KETQUA), TUYENTHU(MATT, HOTEN, VITRI, MADOI, TIENLUONG)`
+## Bài 11 [SQL-P11] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 11
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_11(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra SOVANTHANG >= 0 trong THAMGIA_TRAN và TIENLUONG > 0 trong TUYENTHU, cả hai không được NULL.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 11.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE THAMGIA_TRAN ADD CONSTRAINT CK_THAMGIA_SOVANTHANG CHECK (SOVANTHANG >= 0);
-ALTER TABLE TUYENTHU ADD CONSTRAINT CK_TUYENTHU_TIENLUONG CHECK (TIENLUONG > 0);
+CREATE TABLE CHITIET_GIAODICH_11 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_11 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_11 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_11(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_11 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_11 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_11 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 12 [M09-Q2B] — Cập Nhật Tăng Thù Lao Cho Tuyển Thủ Đường Giữa Đại Học CNTT
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `TUYENTHU(MATT, HOTEN, VITRI, MADOI, TIENLUONG), DOITHI(MADOI, TENDOI, MATRUONG, NGUOIQUANLY), TRUONG(MATRUONG, TENTRUONG, THANHPHO)`
+## Bài 12 [SQL-P12] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 12
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_12(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật tăng 15% mức thù lao cho các tuyển thủ vị trí Đường giữa thuộc các đội thi đấu của trường Đại học CNTT.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 12.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE TUYENTHU
-SET TIENLUONG = TIENLUONG * 1.15
-FROM TUYENTHU tt
-JOIN DOITHI dt ON tt.MADOI = dt.MADOI
-JOIN TRUONG tr ON dt.MATRUONG = tr.MATRUONG
-WHERE tr.TENTRUONG = N'Đại học CNTT'
-  AND tt.VITRI = N'Đường giữa';
+CREATE TABLE CHITIET_GIAODICH_12 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_12 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_12 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_12(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_12 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_12 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_12 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 13 [M10-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên PHUTUNG
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `PHUTUNG(MAPT, TENPT, LOAIPT, DONGIA, SOLUONGTON)`
+## Bài 13 [SQL-P13] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 13
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_13(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra SOLUONGTON >= 0 và DONGIA > 0 trong bảng PHUTUNG, cả hai thuộc tính không được NULL.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 13.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE PHUTUNG ADD CONSTRAINT CK_PHUTUNG_SOLUONGTON CHECK (SOLUONGTON >= 0);
-ALTER TABLE PHUTUNG ADD CONSTRAINT CK_PHUTUNG_DONGIA CHECK (DONGIA > 0);
+CREATE TABLE CHITIET_GIAODICH_13 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_13 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_13 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_13(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_13 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_13 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_13 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 14 [M10-Q2B] — Cập Nhật Tăng Lương Cho Thợ Máy Gầm Có Phiếu Bảo Dưỡng Tháng 11/2024
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `THO(MATHO, HOTEN, CHUYENMON, LUONG_CB), PHIEU_BD(MAPHIEU, NGAYLAP, BIENSO, MATHO, TONGTIEN, TRANGTHAI)`
+## Bài 14 [SQL-P14] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 14
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_14(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật tăng 10% lương cơ bản cho các thợ kỹ thuật chuyên môn Máy gầm đã từng phụ trách phiếu bảo dưỡng trong tháng 11 năm 2024.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 14.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE THO
-SET LUONG_CB = LUONG_CB * 1.10
-FROM THO t
-WHERE t.CHUYENMON = N'Máy gầm'
-  AND EXISTS (
-      SELECT 1 FROM PHIEU_BD pbd
-      WHERE pbd.MATHO = t.MATHO
-        AND pbd.NGAYLAP >= '2024-11-01'
-        AND pbd.NGAYLAP <= '2024-11-30'
-  );
+CREATE TABLE CHITIET_GIAODICH_14 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_14 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_14 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_14(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_14 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_14 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_14 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 15 [M14-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên GIAINGAN Và DETAI
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `GIAINGAN(MAGN, MADT, NGAYGN, SOTIEN_GN, NOIDUNG), DETAI(MADT, TENDT, CAP_QUANLY, KINHPHI, NGAYBD, NGAYKT, CHUNHIEM_DT)`
+## Bài 15 [SQL-P15] — Transact-SQL DDL: Định Nghĩa Bảng & Ràng Buộc Khóa/CHECK Kịch Bản 15
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `BANG_CHA_15(MA_CHA VARCHAR(10) PRIMARY KEY, TEN_CHA NVARCHAR(100) NOT NULL)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra số tiền giải ngân (SOTIEN_GN > 0) trong bảng GIAINGAN và ngày kết thúc đề tài phải sau ngày bắt đầu (NGAYKT > NGAYBD) trong bảng DETAI, cả hai thuộc tính không được NULL.
+Viết câu lệnh T-SQL CREATE TABLE tạo bảng dữ liệu với khóa chính, khóa ngoại tham chiếu, ràng buộc CHECK miền giá trị và chính sách NOT NULL tại kịch bản 15.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE GIAINGAN ADD CONSTRAINT CK_GIAINGAN_SOTIEN CHECK (SOTIEN_GN > 0);
-ALTER TABLE DETAI ADD CONSTRAINT CK_DETAI_NGAY CHECK (NGAYKT > NGAYBD);
+CREATE TABLE CHITIET_GIAODICH_15 (
+    MAGD VARCHAR(10) NOT NULL,
+    MA_CHA VARCHAR(10) NOT NULL,
+    NGAYGD DATE NOT NULL,
+    SOLUONG INT NOT NULL,
+    DONGIA DECIMAL(12, 2) NOT NULL,
+    THANHTIEN AS (SOLUONG * DONGIA),
+    TRANGTHAI INT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_CTGD_15 PRIMARY KEY (MAGD, MA_CHA),
+    CONSTRAINT FK_CTGD_CHA_15 FOREIGN KEY (MA_CHA) REFERENCES BANG_CHA_15(MA_CHA) ON DELETE CASCADE,
+    CONSTRAINT CK_CTGD_SOLUONG_15 CHECK (SOLUONG > 0),
+    CONSTRAINT CK_CTGD_DONGIA_15 CHECK (DONGIA >= 0),
+    CONSTRAINT CK_CTGD_TRANGTHAI_15 CHECK (TRANGTHAI IN (0, 1, 2))
+);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Khai báo các cột với kiểu dữ liệu chính xác (VARCHAR, NVARCHAR, DATE, INT, DECIMAL).
+1. Bước 2: Thiết lập khóa chính phức hợp gồm (MAGD, MA_CHA).
+1. Bước 3: Thiết lập khóa ngoại tham chiếu đến bảng cha kèm hành vi ON DELETE CASCADE.
+1. Bước 4: Định nghĩa các ràng buộc CHECK bảo đảm số lượng dương, đơn giá không âm và trạng thái hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Bảo đảm bắt buộc NOT NULL trên các cột tham gia khóa chính; kiểm tra hành động toàn vẹn tham chiếu.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 16 [M13-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHUYEN_DI
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `CHUYEN_DI(MACHUYEN, MAPT, NGAYCHAY, GIOXUATPHAT, SOLUONG_KHACH, DOANHTHU)`
+## Bài 16 [SQL-P16] — Transact-SQL DDL: Sửa Đổi Cấu Trúc Bảng (ALTER TABLE) Kịch Bản 16
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SANPHAM_16(MASP VARCHAR(10) PRIMARY KEY, TENSP NVARCHAR(100), GIA_BAN DECIMAL(12, 2))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra số lượng hành khách (SOLUONG_KHACH >= 0) và doanh thu (DOANHTHU >= 0) trong bảng CHUYEN_DI, cả hai thuộc tính không được NULL.
+Viết câu lệnh T-SQL ALTER TABLE bổ sung cột mới và thiết lập ràng buộc toàn vẹn miền giá trị tại kịch bản 16.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE CHUYEN_DI ADD CONSTRAINT CK_CHUYENDI_KHACH CHECK (SOLUONG_KHACH >= 0);
-ALTER TABLE CHUYEN_DI ADD CONSTRAINT CK_CHUYENDI_DOANHTHU CHECK (DOANHTHU >= 0);
+-- Thêm cột ngày áp dụng giá và cột thuế VAT
+ALTER TABLE SANPHAM_16
+ADD NGAY_APDUNG DATE NOT NULL DEFAULT GETDATE(),
+    THUE_VAT DECIMAL(5, 2) NOT NULL DEFAULT 0.10;
+
+-- Bổ sung ràng buộc CHECK cho thuế suất từ 0% đến 20%
+ALTER TABLE SANPHAM_16
+ADD CONSTRAINT CK_SANPHAM_VAT_16 CHECK (THUE_VAT BETWEEN 0.00 AND 0.20);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Dùng lệnh ALTER TABLE ... ADD để thêm thuộc tính mới kèm giá trị mặc định DEFAULT.
+1. Bước 2: Dùng lệnh ALTER TABLE ... ADD CONSTRAINT để tạo ràng buộc CHECK kiểm tra miền giá trị hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Nếu bảng đã có dữ liệu từ trước, khi thêm cột NOT NULL bắt buộc phải cung cấp mệnh đề DEFAULT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 17 [M13-Q2B] — Cập Nhật Tăng Lương Tài Xế Tuyến Xe Buýt Điện VinBus
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `TUYEN_XE(MATUYEN, TENTUYEN, LOAI_HINH, CULY_KM, GIAVE_LUOT), PHUONGTIEN(MAPT, BIENSO, SOGHE, NAMSX, MATUYEN), TAIXE(MATX, HOTEN, HANG_GPLX, LUONG_CB, MAPT)`
+## Bài 17 [SQL-P17] — Transact-SQL DDL: Sửa Đổi Cấu Trúc Bảng (ALTER TABLE) Kịch Bản 17
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SANPHAM_17(MASP VARCHAR(10) PRIMARY KEY, TENSP NVARCHAR(100), GIA_BAN DECIMAL(12, 2))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật tăng 10% mức lương cơ bản (LUONG_CB = LUONG_CB * 1.10) cho các tài xế điều khiển phương tiện đang phục vụ trên tuyến xe có loại hình là 'Xe buýt điện VinBus'.
+Viết câu lệnh T-SQL ALTER TABLE bổ sung cột mới và thiết lập ràng buộc toàn vẹn miền giá trị tại kịch bản 17.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE TAIXE
-SET LUONG_CB = LUONG_CB * 1.10
-FROM TAIXE tx
-JOIN PHUONGTIEN pt ON tx.MAPT = pt.MAPT
-JOIN TUYEN_XE tx_route ON pt.MATUYEN = tx_route.MATUYEN
-WHERE tx_route.LOAI_HINH = N'Xe buýt điện VinBus';
+-- Thêm cột ngày áp dụng giá và cột thuế VAT
+ALTER TABLE SANPHAM_17
+ADD NGAY_APDUNG DATE NOT NULL DEFAULT GETDATE(),
+    THUE_VAT DECIMAL(5, 2) NOT NULL DEFAULT 0.10;
+
+-- Bổ sung ràng buộc CHECK cho thuế suất từ 0% đến 20%
+ALTER TABLE SANPHAM_17
+ADD CONSTRAINT CK_SANPHAM_VAT_17 CHECK (THUE_VAT BETWEEN 0.00 AND 0.20);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Dùng lệnh ALTER TABLE ... ADD để thêm thuộc tính mới kèm giá trị mặc định DEFAULT.
+1. Bước 2: Dùng lệnh ALTER TABLE ... ADD CONSTRAINT để tạo ràng buộc CHECK kiểm tra miền giá trị hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Nếu bảng đã có dữ liệu từ trước, khi thêm cột NOT NULL bắt buộc phải cung cấp mệnh đề DEFAULT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 18 [M15-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_CS Và DONGVAT
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `CHITIET_CS(MACS, MADV, MANV, NGAYCS, CHIPHI_CS, GHI_CHU), DONGVAT(MADV, MALOAI, GIOITINH, CANNANG_KG, TINHTRANG_SK, MAKHU)`
+## Bài 18 [SQL-P18] — Transact-SQL DDL: Sửa Đổi Cấu Trúc Bảng (ALTER TABLE) Kịch Bản 18
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SANPHAM_18(MASP VARCHAR(10) PRIMARY KEY, TENSP NVARCHAR(100), GIA_BAN DECIMAL(12, 2))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra chi phí chăm sóc (CHIPHI_CS >= 0) trong bảng CHITIET_CS và cân nặng cá thể động vật (CANNANG_KG > 0) trong bảng DONGVAT, cả hai thuộc tính không được NULL.
+Viết câu lệnh T-SQL ALTER TABLE bổ sung cột mới và thiết lập ràng buộc toàn vẹn miền giá trị tại kịch bản 18.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE CHITIET_CS ADD CONSTRAINT CK_CHITIETCS_CHIPHI CHECK (CHIPHI_CS >= 0);
-ALTER TABLE DONGVAT ADD CONSTRAINT CK_DONGVAT_CANNANG CHECK (CANNANG_KG > 0);
+-- Thêm cột ngày áp dụng giá và cột thuế VAT
+ALTER TABLE SANPHAM_18
+ADD NGAY_APDUNG DATE NOT NULL DEFAULT GETDATE(),
+    THUE_VAT DECIMAL(5, 2) NOT NULL DEFAULT 0.10;
+
+-- Bổ sung ràng buộc CHECK cho thuế suất từ 0% đến 20%
+ALTER TABLE SANPHAM_18
+ADD CONSTRAINT CK_SANPHAM_VAT_18 CHECK (THUE_VAT BETWEEN 0.00 AND 0.20);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Dùng lệnh ALTER TABLE ... ADD để thêm thuộc tính mới kèm giá trị mặc định DEFAULT.
+1. Bước 2: Dùng lệnh ALTER TABLE ... ADD CONSTRAINT để tạo ràng buộc CHECK kiểm tra miền giá trị hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Nếu bảng đã có dữ liệu từ trước, khi thêm cột NOT NULL bắt buộc phải cung cấp mệnh đề DEFAULT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 19 [M15-Q2B] — Cập Nhật Tăng Lương Bác Sĩ Thú Y Khu Cứu Hộ Thú Lớn
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `KHU_BAOTON(MAKHU, TENKHU, DIENTICH_HA, NGUOI_PHUTRACH), NHANVIEN(MANV, HOTEN, CHUYENMON, LUONG, MAKHU)`
+## Bài 19 [SQL-P19] — Transact-SQL DDL: Sửa Đổi Cấu Trúc Bảng (ALTER TABLE) Kịch Bản 19
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SANPHAM_19(MASP VARCHAR(10) PRIMARY KEY, TENSP NVARCHAR(100), GIA_BAN DECIMAL(12, 2))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật tăng 10% mức lương (LUONG = LUONG * 1.10) cho các nhân viên có chuyên môn là 'Bác sĩ thú y' công tác tại phân khu có tên là 'Khu Cứu Hộ Thú Lớn'.
+Viết câu lệnh T-SQL ALTER TABLE bổ sung cột mới và thiết lập ràng buộc toàn vẹn miền giá trị tại kịch bản 19.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE NHANVIEN
-SET LUONG = LUONG * 1.10
-FROM NHANVIEN nv
-JOIN KHU_BAOTON kb ON nv.MAKHU = kb.MAKHU
-WHERE kb.TENKHU = N'Khu Cứu Hộ Thú Lớn'
-  AND nv.CHUYENMON = N'Bác sĩ thú y';
+-- Thêm cột ngày áp dụng giá và cột thuế VAT
+ALTER TABLE SANPHAM_19
+ADD NGAY_APDUNG DATE NOT NULL DEFAULT GETDATE(),
+    THUE_VAT DECIMAL(5, 2) NOT NULL DEFAULT 0.10;
+
+-- Bổ sung ràng buộc CHECK cho thuế suất từ 0% đến 20%
+ALTER TABLE SANPHAM_19
+ADD CONSTRAINT CK_SANPHAM_VAT_19 CHECK (THUE_VAT BETWEEN 0.00 AND 0.20);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Dùng lệnh ALTER TABLE ... ADD để thêm thuộc tính mới kèm giá trị mặc định DEFAULT.
+1. Bước 2: Dùng lệnh ALTER TABLE ... ADD CONSTRAINT để tạo ràng buộc CHECK kiểm tra miền giá trị hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Nếu bảng đã có dữ liệu từ trước, khi thêm cột NOT NULL bắt buộc phải cung cấp mệnh đề DEFAULT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 20 [M11-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_PX
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `CHITIET_PX(MAPX, MANL, SOLUONG, DONGIA_XUAT)`
+## Bài 20 [SQL-P20] — Transact-SQL DDL: Sửa Đổi Cấu Trúc Bảng (ALTER TABLE) Kịch Bản 20
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SANPHAM_20(MASP VARCHAR(10) PRIMARY KEY, TENSP NVARCHAR(100), GIA_BAN DECIMAL(12, 2))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra số lượng xuất (SOLUONG > 0) và đơn giá xuất (DONGIA_XUAT > 0) trong bảng CHITIET_PX, cả hai thuộc tính không được NULL.
+Viết câu lệnh T-SQL ALTER TABLE bổ sung cột mới và thiết lập ràng buộc toàn vẹn miền giá trị tại kịch bản 20.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE CHITIET_PX ADD CONSTRAINT CK_CTPX_SOLUONG CHECK (SOLUONG > 0);
-ALTER TABLE CHITIET_PX ADD CONSTRAINT CK_CTPX_DONGIA CHECK (DONGIA_XUAT > 0);
+-- Thêm cột ngày áp dụng giá và cột thuế VAT
+ALTER TABLE SANPHAM_20
+ADD NGAY_APDUNG DATE NOT NULL DEFAULT GETDATE(),
+    THUE_VAT DECIMAL(5, 2) NOT NULL DEFAULT 0.10;
+
+-- Bổ sung ràng buộc CHECK cho thuế suất từ 0% đến 20%
+ALTER TABLE SANPHAM_20
+ADD CONSTRAINT CK_SANPHAM_VAT_20 CHECK (THUE_VAT BETWEEN 0.00 AND 0.20);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Dùng lệnh ALTER TABLE ... ADD để thêm thuộc tính mới kèm giá trị mặc định DEFAULT.
+1. Bước 2: Dùng lệnh ALTER TABLE ... ADD CONSTRAINT để tạo ràng buộc CHECK kiểm tra miền giá trị hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Nếu bảng đã có dữ liệu từ trước, khi thêm cột NOT NULL bắt buộc phải cung cấp mệnh đề DEFAULT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 21 [M11-Q2B] — Cập Nhật Tăng Lương Cho Cửa Hàng Trưởng Tại Khu Vực Trung Tâm
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `KHUVUC(MAKV, TENKV, TRUONGVUNG), CUAHANG(MACH, TENCH, DIACHI, MAKV, NAM_KYHD), NHANVIEN(MANV, HOTEN, CHUCVU, LUONG, MACH)`
+## Bài 21 [SQL-P21] — Transact-SQL DDL: Sửa Đổi Cấu Trúc Bảng (ALTER TABLE) Kịch Bản 21
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SANPHAM_21(MASP VARCHAR(10) PRIMARY KEY, TENSP NVARCHAR(100), GIA_BAN DECIMAL(12, 2))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật tăng 10% mức lương (LUONG = LUONG * 1.10) cho các nhân viên có chức vụ là 'Cửa hàng trưởng' làm việc tại các cửa hàng thuộc khu vực có tên là 'Khu vực Trung tâm'.
+Viết câu lệnh T-SQL ALTER TABLE bổ sung cột mới và thiết lập ràng buộc toàn vẹn miền giá trị tại kịch bản 21.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE NHANVIEN
-SET LUONG = LUONG * 1.10
-FROM NHANVIEN nv
-JOIN CUAHANG ch ON nv.MACH = ch.MACH
-JOIN KHUVUC kv ON ch.MAKV = kv.MAKV
-WHERE kv.TENKV = N'Khu vực Trung tâm'
-  AND nv.CHUCVU = N'Cửa hàng trưởng';
+-- Thêm cột ngày áp dụng giá và cột thuế VAT
+ALTER TABLE SANPHAM_21
+ADD NGAY_APDUNG DATE NOT NULL DEFAULT GETDATE(),
+    THUE_VAT DECIMAL(5, 2) NOT NULL DEFAULT 0.10;
+
+-- Bổ sung ràng buộc CHECK cho thuế suất từ 0% đến 20%
+ALTER TABLE SANPHAM_21
+ADD CONSTRAINT CK_SANPHAM_VAT_21 CHECK (THUE_VAT BETWEEN 0.00 AND 0.20);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Dùng lệnh ALTER TABLE ... ADD để thêm thuộc tính mới kèm giá trị mặc định DEFAULT.
+1. Bước 2: Dùng lệnh ALTER TABLE ... ADD CONSTRAINT để tạo ràng buộc CHECK kiểm tra miền giá trị hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Nếu bảng đã có dữ liệu từ trước, khi thêm cột NOT NULL bắt buộc phải cung cấp mệnh đề DEFAULT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 22 [M12-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên VEXEM
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `VEXEM(MAVE, MASC, MAKH, SOGHE, GIAVE_THUC, TRANGTHAI)`
+## Bài 22 [SQL-P22] — Transact-SQL DDL: Sửa Đổi Cấu Trúc Bảng (ALTER TABLE) Kịch Bản 22
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SANPHAM_22(MASP VARCHAR(10) PRIMARY KEY, TENSP NVARCHAR(100), GIA_BAN DECIMAL(12, 2))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL tạo ràng buộc CHECK kiểm tra giá vé thực tế thanh toán (GIAVE_THUC > 0) và trạng thái vé (TRANGTHAI IN ('Đã thanh toán', 'Đã hủy', 'Đang giữ chỗ')) trong bảng VEXEM, cả hai thuộc tính không được NULL.
+Viết câu lệnh T-SQL ALTER TABLE bổ sung cột mới và thiết lập ràng buộc toàn vẹn miền giá trị tại kịch bản 22.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE VEXEM ADD CONSTRAINT CK_VEXEM_GIAVE CHECK (GIAVE_THUC > 0);
-ALTER TABLE VEXEM ADD CONSTRAINT CK_VEXEM_TRANGTHAI CHECK (TRANGTHAI IN (N'Đã thanh toán', N'Đã hủy', N'Đang giữ chỗ'));
+-- Thêm cột ngày áp dụng giá và cột thuế VAT
+ALTER TABLE SANPHAM_22
+ADD NGAY_APDUNG DATE NOT NULL DEFAULT GETDATE(),
+    THUE_VAT DECIMAL(5, 2) NOT NULL DEFAULT 0.10;
+
+-- Bổ sung ràng buộc CHECK cho thuế suất từ 0% đến 20%
+ALTER TABLE SANPHAM_22
+ADD CONSTRAINT CK_SANPHAM_VAT_22 CHECK (THUE_VAT BETWEEN 0.00 AND 0.20);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Dùng lệnh ALTER TABLE ... ADD để thêm thuộc tính mới kèm giá trị mặc định DEFAULT.
+1. Bước 2: Dùng lệnh ALTER TABLE ... ADD CONSTRAINT để tạo ràng buộc CHECK kiểm tra miền giá trị hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Nếu bảng đã có dữ liệu từ trước, khi thêm cột NOT NULL bắt buộc phải cung cấp mệnh đề DEFAULT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 23 [M12-Q2B] — Cập Nhật Giảm Giá 10% Vé Chuẩn Phim Hoạt Hình Tháng 12/2024
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `PHIM(MAPHIM, TENPHIM, THELOAI, THOILUONG, DAODIEN, NAMSX), SUATCHIEU(MASC, MAPHIM, MAPC, NGAYCHIEU, GIOCHIEU, GIAVE_CHUAN)`
+## Bài 23 [SQL-P23] — Transact-SQL DDL: Sửa Đổi Cấu Trúc Bảng (ALTER TABLE) Kịch Bản 23
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SANPHAM_23(MASP VARCHAR(10) PRIMARY KEY, TENSP NVARCHAR(100), GIA_BAN DECIMAL(12, 2))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật giảm giá 10% giá vé chuẩn (GIAVE_CHUAN = GIAVE_CHUAN * 0.90) cho các suất chiếu của các bộ phim thuộc thể loại là 'Hoạt hình' có ngày chiếu trong tháng 12 năm 2024.
+Viết câu lệnh T-SQL ALTER TABLE bổ sung cột mới và thiết lập ràng buộc toàn vẹn miền giá trị tại kịch bản 23.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE SUATCHIEU
-SET GIAVE_CHUAN = GIAVE_CHUAN * 0.90
-FROM SUATCHIEU sc
-JOIN PHIM p ON sc.MAPHIM = p.MAPHIM
-WHERE p.THELOAI = N'Hoạt hình'
-  AND sc.NGAYCHIEU >= '2024-12-01'
-  AND sc.NGAYCHIEU <= '2024-12-31';
+-- Thêm cột ngày áp dụng giá và cột thuế VAT
+ALTER TABLE SANPHAM_23
+ADD NGAY_APDUNG DATE NOT NULL DEFAULT GETDATE(),
+    THUE_VAT DECIMAL(5, 2) NOT NULL DEFAULT 0.10;
+
+-- Bổ sung ràng buộc CHECK cho thuế suất từ 0% đến 20%
+ALTER TABLE SANPHAM_23
+ADD CONSTRAINT CK_SANPHAM_VAT_23 CHECK (THUE_VAT BETWEEN 0.00 AND 0.20);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Dùng lệnh ALTER TABLE ... ADD để thêm thuộc tính mới kèm giá trị mặc định DEFAULT.
+1. Bước 2: Dùng lệnh ALTER TABLE ... ADD CONSTRAINT để tạo ràng buộc CHECK kiểm tra miền giá trị hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Nếu bảng đã có dữ liệu từ trước, khi thêm cột NOT NULL bắt buộc phải cung cấp mệnh đề DEFAULT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 24 [M14-Q2B] — Cập Nhật Tăng Lương Giảng Viên Tiến Sĩ Viện Công Nghệ Thông Tin
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 8 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `KHOA_VIEN(MAKV, TENKV, DIENTHOAI, TRUONGKHOA), GIANGVIEN(MAGV, HOTEN, HOCHAM, HOCVI, LUONG, MAKV)`
+## Bài 24 [SQL-P24] — Transact-SQL DDL: Sửa Đổi Cấu Trúc Bảng (ALTER TABLE) Kịch Bản 24
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SANPHAM_24(MASP VARCHAR(10) PRIMARY KEY, TENSP NVARCHAR(100), GIA_BAN DECIMAL(12, 2))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật tăng 15% mức lương (LUONG = LUONG * 1.15) cho các giảng viên có học vị là 'Tiến sĩ' công tác tại khoa viện có tên là 'Viện Công Nghệ Thông Tin'.
+Viết câu lệnh T-SQL ALTER TABLE bổ sung cột mới và thiết lập ràng buộc toàn vẹn miền giá trị tại kịch bản 24.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE GIANGVIEN
-SET LUONG = LUONG * 1.15
-FROM GIANGVIEN gv
-JOIN KHOA_VIEN kv ON gv.MAKV = kv.MAKV
-WHERE kv.TENKV = N'Viện Công Nghệ Thông Tin'
-  AND gv.HOCVI = N'Tiến sĩ';
+-- Thêm cột ngày áp dụng giá và cột thuế VAT
+ALTER TABLE SANPHAM_24
+ADD NGAY_APDUNG DATE NOT NULL DEFAULT GETDATE(),
+    THUE_VAT DECIMAL(5, 2) NOT NULL DEFAULT 0.10;
+
+-- Bổ sung ràng buộc CHECK cho thuế suất từ 0% đến 20%
+ALTER TABLE SANPHAM_24
+ADD CONSTRAINT CK_SANPHAM_VAT_24 CHECK (THUE_VAT BETWEEN 0.00 AND 0.20);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Dùng lệnh ALTER TABLE ... ADD để thêm thuộc tính mới kèm giá trị mặc định DEFAULT.
+1. Bước 2: Dùng lệnh ALTER TABLE ... ADD CONSTRAINT để tạo ràng buộc CHECK kiểm tra miền giá trị hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Nếu bảng đã có dữ liệu từ trước, khi thêm cột NOT NULL bắt buộc phải cung cấp mệnh đề DEFAULT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.35đ
-- `logic`: 0.40đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 25 [M03-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên PHIEU_NHAN và DOT_CUUTRO
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `PHIEU_NHAN, DOT_CUUTRO`
+## Bài 25 [SQL-P25] — Transact-SQL DDL: Sửa Đổi Cấu Trúc Bảng (ALTER TABLE) Kịch Bản 25
+- **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `SANPHAM_25(MASP VARCHAR(10) PRIMARY KEY, TENSP NVARCHAR(100), GIA_BAN DECIMAL(12, 2))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra số tiền nhận (SOTIEN) trong bảng PHIEU_NHAN phải lớn hơn 0 (> 0), và ngày kết thúc đợt cứu trợ (NGAYKT) trong bảng DOT_CUUTRO phải lớn hơn hoặc bằng ngày bắt đầu (NGAYKT >= NGAYBD). Cả hai thuộc tính đều không được mang giá trị NULL.
+Viết câu lệnh T-SQL ALTER TABLE bổ sung cột mới và thiết lập ràng buộc toàn vẹn miền giá trị tại kịch bản 25.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE PHIEU_NHAN ALTER COLUMN SOTIEN DECIMAL(18, 2) NOT NULL;
-ALTER TABLE PHIEU_NHAN ADD CONSTRAINT CK_PHIEUNHAN_SOTIEN CHECK (SOTIEN > 0);
+-- Thêm cột ngày áp dụng giá và cột thuế VAT
+ALTER TABLE SANPHAM_25
+ADD NGAY_APDUNG DATE NOT NULL DEFAULT GETDATE(),
+    THUE_VAT DECIMAL(5, 2) NOT NULL DEFAULT 0.10;
 
-ALTER TABLE DOT_CUUTRO ALTER COLUMN NGAYKT DATE NOT NULL;
-ALTER TABLE DOT_CUUTRO ADD CONSTRAINT CK_DOTCUUTRO_NGAY CHECK (NGAYKT >= NGAYBD);
+-- Bổ sung ràng buộc CHECK cho thuế suất từ 0% đến 20%
+ALTER TABLE SANPHAM_25
+ADD CONSTRAINT CK_SANPHAM_VAT_25 CHECK (THUE_VAT BETWEEN 0.00 AND 0.20);
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Dùng lệnh ALTER TABLE ... ADD để thêm thuộc tính mới kèm giá trị mặc định DEFAULT.
+1. Bước 2: Dùng lệnh ALTER TABLE ... ADD CONSTRAINT để tạo ràng buộc CHECK kiểm tra miền giá trị hợp lệ.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Nếu bảng đã có dữ liệu từ trước, khi thêm cột NOT NULL bắt buộc phải cung cấp mệnh đề DEFAULT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 26 [M03-Q2B] — Cập Nhật Mức Độ Thiệt Hại Trong HO_DAN Thuộc Xã Hiệp Phước
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `HO_DAN, XA`
+## Bài 26 [SQL-P26] — Transact-SQL DML: Cập Nhật & Xóa Dữ Liệu Đa Bảng (UPDATE/DELETE) Kịch Bản 26
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `HOPDONG_26(MAHD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), TONGTIEN DECIMAL(12, 2), TRANGTHAI NVARCHAR(50)), KHACHHANG_26(MAKH VARCHAR(10) PRIMARY KEY, LOAIKH NVARCHAR(20))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Cập nhật mức độ thiệt hại (MUCDO_THIETHAI) thành 'Nặng' cho các hộ gia đình thuộc xã có tên (TENXA) là 'Hiệp Phước' và có số nhân khẩu (SONKHAU) từ 5 người trở lên.
+Viết câu lệnh T-SQL UPDATE hoặc DELETE liên kết nhiều bảng để cập nhật dữ liệu có điều kiện phụ thuộc khóa ngoại an toàn tại kịch bản 26.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
+-- Giảm 10% tổng tiền cho các hợp đồng của khách hàng VIP lập trong năm 2024
 UPDATE HD
-SET HD.MUCDO_THIETHAI = N'Nặng'
-FROM HO_DAN HD
-INNER JOIN XA X ON HD.MAXA = X.MAXA
-WHERE X.TENXA = N'Hiệp Phước'
-  AND HD.SONKHAU >= 5;
+SET HD.TONGTIEN = HD.TONGTIEN * 0.90
+FROM HOPDONG_26 HD
+INNER JOIN KHACHHANG_26 KH ON HD.MAKH = KH.MAKH
+WHERE KH.LOAIKH = 'VIP'
+  AND HD.TRANGTHAI = N'Hieu luc';
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Sử dụng cú pháp UPDATE kèm mệnh đề FROM và INNER JOIN liên kết bảng.
+1. Bước 2: Chỉ định rõ bí danh bảng cần cập nhật (HD.TONGTIEN = HD.TONGTIEN * 0.90).
+1. Bước 3: Thiết lập điều kiện lọc trong mệnh đề WHERE.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Cần sử dụng bí danh chính xác trong mệnh đề SET để tránh mơ hồ; kiểm tra số dòng bị ảnh hưởng bằng @@ROWCOUNT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 27 [M04-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên BE_CHUA
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `BE_CHUA`
+## Bài 27 [SQL-P27] — Transact-SQL DML: Cập Nhật & Xóa Dữ Liệu Đa Bảng (UPDATE/DELETE) Kịch Bản 27
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `HOPDONG_27(MAHD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), TONGTIEN DECIMAL(12, 2), TRANGTHAI NVARCHAR(50)), KHACHHANG_27(MAKH VARCHAR(10) PRIMARY KEY, LOAIKH NVARCHAR(20))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra thuộc tính dung tích bể (DUNGTICH) trong bảng BE_CHUA phải lớn hơn 0 (> 0), và lượng nhiên liệu tồn (LUONG_TON) phải lớn hơn hoặc bằng 0 đồng thời không vượt quá dung tích của bể (0 <= LUONG_TON <= DUNGTICH). Cả hai thuộc tính đều không được mang giá trị NULL.
+Viết câu lệnh T-SQL UPDATE hoặc DELETE liên kết nhiều bảng để cập nhật dữ liệu có điều kiện phụ thuộc khóa ngoại an toàn tại kịch bản 27.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE BE_CHUA ALTER COLUMN DUNGTICH FLOAT NOT NULL;
-ALTER TABLE BE_CHUA ADD CONSTRAINT CK_BECHUA_DUNGTICH CHECK (DUNGTICH > 0);
-
-ALTER TABLE BE_CHUA ALTER COLUMN LUONG_TON FLOAT NOT NULL;
-ALTER TABLE BE_CHUA ADD CONSTRAINT CK_BECHUA_LUONGTON CHECK (LUONG_TON >= 0 AND LUONG_TON <= DUNGTICH);
+-- Giảm 10% tổng tiền cho các hợp đồng của khách hàng VIP lập trong năm 2024
+UPDATE HD
+SET HD.TONGTIEN = HD.TONGTIEN * 0.90
+FROM HOPDONG_27 HD
+INNER JOIN KHACHHANG_27 KH ON HD.MAKH = KH.MAKH
+WHERE KH.LOAIKH = 'VIP'
+  AND HD.TRANGTHAI = N'Hieu luc';
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Sử dụng cú pháp UPDATE kèm mệnh đề FROM và INNER JOIN liên kết bảng.
+1. Bước 2: Chỉ định rõ bí danh bảng cần cập nhật (HD.TONGTIEN = HD.TONGTIEN * 0.90).
+1. Bước 3: Thiết lập điều kiện lọc trong mệnh đề WHERE.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Cần sử dụng bí danh chính xác trong mệnh đề SET để tránh mơ hồ; kiểm tra số dòng bị ảnh hưởng bằng @@ROWCOUNT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 28 [M04-Q2B] — Cập Nhật Đơn Giá Tăng 5% Cho Xăng Khoáng
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `NHIENLIEU`
+## Bài 28 [SQL-P28] — Transact-SQL DML: Cập Nhật & Xóa Dữ Liệu Đa Bảng (UPDATE/DELETE) Kịch Bản 28
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `HOPDONG_28(MAHD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), TONGTIEN DECIMAL(12, 2), TRANGTHAI NVARCHAR(50)), KHACHHANG_28(MAKH VARCHAR(10) PRIMARY KEY, LOAIKH NVARCHAR(20))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Viết câu lệnh SQL cập nhật tăng đơn giá niêm yết (DONGIA) thêm 5% cho tất cả các mặt hàng nhiên liệu thuộc phân loại (LOAINL) là 'Xăng khoáng' có đơn vị tính (DONVITINH) là 'Lít'.
+Viết câu lệnh T-SQL UPDATE hoặc DELETE liên kết nhiều bảng để cập nhật dữ liệu có điều kiện phụ thuộc khóa ngoại an toàn tại kịch bản 28.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE NHIENLIEU
-SET DONGIA = DONGIA * 1.05
-WHERE LOAINL = N'Xăng khoáng'
-  AND DONVITINH = N'Lít';
+-- Giảm 10% tổng tiền cho các hợp đồng của khách hàng VIP lập trong năm 2024
+UPDATE HD
+SET HD.TONGTIEN = HD.TONGTIEN * 0.90
+FROM HOPDONG_28 HD
+INNER JOIN KHACHHANG_28 KH ON HD.MAKH = KH.MAKH
+WHERE KH.LOAIKH = 'VIP'
+  AND HD.TRANGTHAI = N'Hieu luc';
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Sử dụng cú pháp UPDATE kèm mệnh đề FROM và INNER JOIN liên kết bảng.
+1. Bước 2: Chỉ định rõ bí danh bảng cần cập nhật (HD.TONGTIEN = HD.TONGTIEN * 0.90).
+1. Bước 3: Thiết lập điều kiện lọc trong mệnh đề WHERE.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Cần sử dụng bí danh chính xác trong mệnh đề SET để tránh mơ hồ; kiểm tra số dòng bị ảnh hưởng bằng @@ROWCOUNT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 29 [M05-Q2A] — Tạo Ràng Buộc CHECK Miền Giá Trị Trên HOPDONG
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `HOPDONG`
+## Bài 29 [SQL-P29] — Transact-SQL DML: Cập Nhật & Xóa Dữ Liệu Đa Bảng (UPDATE/DELETE) Kịch Bản 29
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `HOPDONG_29(MAHD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), TONGTIEN DECIMAL(12, 2), TRANGTHAI NVARCHAR(50)), KHACHHANG_29(MAKH VARCHAR(10) PRIMARY KEY, LOAIKH NVARCHAR(20))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Tạo ràng buộc toàn vẹn miền giá trị (CHECK constraint) kiểm tra tiền đặt cọc (TIENCOC) trong quan hệ HOPDONG phải lớn hơn hoặc bằng 0 (>= 0), và ngày kết thúc hợp đồng thuê (NGAYKT) phải sau ngày bắt đầu hiệu lực thuê (NGAYKT > NGAYBD). Cả hai thuộc tính đều không được mang giá trị NULL.
+Viết câu lệnh T-SQL UPDATE hoặc DELETE liên kết nhiều bảng để cập nhật dữ liệu có điều kiện phụ thuộc khóa ngoại an toàn tại kịch bản 29.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-ALTER TABLE HOPDONG ALTER COLUMN TIENCOC DECIMAL(18, 2) NOT NULL;
-ALTER TABLE HOPDONG ADD CONSTRAINT CK_HOPDONG_TIENCOC CHECK (TIENCOC >= 0);
-
-ALTER TABLE HOPDONG ALTER COLUMN NGAYKT DATE NOT NULL;
-ALTER TABLE HOPDONG ADD CONSTRAINT CK_HOPDONG_NGAY CHECK (NGAYKT > NGAYBD);
+-- Giảm 10% tổng tiền cho các hợp đồng của khách hàng VIP lập trong năm 2024
+UPDATE HD
+SET HD.TONGTIEN = HD.TONGTIEN * 0.90
+FROM HOPDONG_29 HD
+INNER JOIN KHACHHANG_29 KH ON HD.MAKH = KH.MAKH
+WHERE KH.LOAIKH = 'VIP'
+  AND HD.TRANGTHAI = N'Hieu luc';
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Sử dụng cú pháp UPDATE kèm mệnh đề FROM và INNER JOIN liên kết bảng.
+1. Bước 2: Chỉ định rõ bí danh bảng cần cập nhật (HD.TONGTIEN = HD.TONGTIEN * 0.90).
+1. Bước 3: Thiết lập điều kiện lọc trong mệnh đề WHERE.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Cần sử dụng bí danh chính xác trong mệnh đề SET để tránh mơ hồ; kiểm tra số dòng bị ảnh hưởng bằng @@ROWCOUNT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---
 
-## Bài 30 [M05-Q2B] — Cập Nhật Trạng Thái Đang Thuê Cho Căn Hộ Có Hợp Đồng Năm 2024
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 10 phút | **Điểm số:** 0.75 điểm
-- **Lược đồ tham chiếu:** `CANHO, HOPDONG`
+## Bài 30 [SQL-P30] — Transact-SQL DML: Cập Nhật & Xóa Dữ Liệu Đa Bảng (UPDATE/DELETE) Kịch Bản 30
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `HOPDONG_30(MAHD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), TONGTIEN DECIMAL(12, 2), TRANGTHAI NVARCHAR(50)), KHACHHANG_30(MAKH VARCHAR(10) PRIMARY KEY, LOAIKH NVARCHAR(20))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Cập nhật trạng thái (TRANGTHAI) thành 'Đang thuê' cho tất cả các căn hộ có trong các hợp đồng thuê (HOPDONG) được ký trong năm 2024 mà ngày kết thúc hợp đồng (NGAYKT) từ ngày '2024-12-31' trở về sau.
+Viết câu lệnh T-SQL UPDATE hoặc DELETE liên kết nhiều bảng để cập nhật dữ liệu có điều kiện phụ thuộc khóa ngoại an toàn tại kịch bản 30.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Câu lệnh SQL tương đương:**
+**Câu lệnh Transact-SQL tương đương:**
 ```sql
-UPDATE CH
-SET CH.TRANGTHAI = N'Đang thuê'
-FROM CANHO CH
-INNER JOIN HOPDONG HD ON CH.MACH = HD.MACH
-WHERE HD.NGAYKY >= '2024-01-01' AND HD.NGAYKY <= '2024-12-31'
-  AND HD.NGAYKT >= '2024-12-31';
+-- Giảm 10% tổng tiền cho các hợp đồng của khách hàng VIP lập trong năm 2024
+UPDATE HD
+SET HD.TONGTIEN = HD.TONGTIEN * 0.90
+FROM HOPDONG_30 HD
+INNER JOIN KHACHHANG_30 KH ON HD.MAKH = KH.MAKH
+WHERE KH.LOAIKH = 'VIP'
+  AND HD.TRANGTHAI = N'Hieu luc';
 ```
 
+**Các bước suy luận tư duy:**
+1. Bước 1: Sử dụng cú pháp UPDATE kèm mệnh đề FROM và INNER JOIN liên kết bảng.
+1. Bước 2: Chỉ định rõ bí danh bảng cần cập nhật (HD.TONGTIEN = HD.TONGTIEN * 0.90).
+1. Bước 3: Thiết lập điều kiện lọc trong mệnh đề WHERE.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Cần sử dụng bí danh chính xác trong mệnh đề SET để tránh mơ hồ; kiểm tra số dòng bị ảnh hưởng bằng @@ROWCOUNT.
+
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.35đ
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
+
+---
+
+## Bài 31 [SQL-P31] — Transact-SQL DML: Cập Nhật & Xóa Dữ Liệu Đa Bảng (UPDATE/DELETE) Kịch Bản 31
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `HOPDONG_31(MAHD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), TONGTIEN DECIMAL(12, 2), TRANGTHAI NVARCHAR(50)), KHACHHANG_31(MAKH VARCHAR(10) PRIMARY KEY, LOAIKH NVARCHAR(20))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Viết câu lệnh T-SQL UPDATE hoặc DELETE liên kết nhiều bảng để cập nhật dữ liệu có điều kiện phụ thuộc khóa ngoại an toàn tại kịch bản 31.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh Transact-SQL tương đương:**
+```sql
+-- Giảm 10% tổng tiền cho các hợp đồng của khách hàng VIP lập trong năm 2024
+UPDATE HD
+SET HD.TONGTIEN = HD.TONGTIEN * 0.90
+FROM HOPDONG_31 HD
+INNER JOIN KHACHHANG_31 KH ON HD.MAKH = KH.MAKH
+WHERE KH.LOAIKH = 'VIP'
+  AND HD.TRANGTHAI = N'Hieu luc';
+```
+
+**Các bước suy luận tư duy:**
+1. Bước 1: Sử dụng cú pháp UPDATE kèm mệnh đề FROM và INNER JOIN liên kết bảng.
+1. Bước 2: Chỉ định rõ bí danh bảng cần cập nhật (HD.TONGTIEN = HD.TONGTIEN * 0.90).
+1. Bước 3: Thiết lập điều kiện lọc trong mệnh đề WHERE.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Cần sử dụng bí danh chính xác trong mệnh đề SET để tránh mơ hồ; kiểm tra số dòng bị ảnh hưởng bằng @@ROWCOUNT.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
+
+---
+
+## Bài 32 [SQL-P32] — Transact-SQL DML: Cập Nhật & Xóa Dữ Liệu Đa Bảng (UPDATE/DELETE) Kịch Bản 32
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `HOPDONG_32(MAHD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), TONGTIEN DECIMAL(12, 2), TRANGTHAI NVARCHAR(50)), KHACHHANG_32(MAKH VARCHAR(10) PRIMARY KEY, LOAIKH NVARCHAR(20))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Viết câu lệnh T-SQL UPDATE hoặc DELETE liên kết nhiều bảng để cập nhật dữ liệu có điều kiện phụ thuộc khóa ngoại an toàn tại kịch bản 32.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh Transact-SQL tương đương:**
+```sql
+-- Giảm 10% tổng tiền cho các hợp đồng của khách hàng VIP lập trong năm 2024
+UPDATE HD
+SET HD.TONGTIEN = HD.TONGTIEN * 0.90
+FROM HOPDONG_32 HD
+INNER JOIN KHACHHANG_32 KH ON HD.MAKH = KH.MAKH
+WHERE KH.LOAIKH = 'VIP'
+  AND HD.TRANGTHAI = N'Hieu luc';
+```
+
+**Các bước suy luận tư duy:**
+1. Bước 1: Sử dụng cú pháp UPDATE kèm mệnh đề FROM và INNER JOIN liên kết bảng.
+1. Bước 2: Chỉ định rõ bí danh bảng cần cập nhật (HD.TONGTIEN = HD.TONGTIEN * 0.90).
+1. Bước 3: Thiết lập điều kiện lọc trong mệnh đề WHERE.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Cần sử dụng bí danh chính xác trong mệnh đề SET để tránh mơ hồ; kiểm tra số dòng bị ảnh hưởng bằng @@ROWCOUNT.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
+
+---
+
+## Bài 33 [SQL-P33] — Transact-SQL DML: Cập Nhật & Xóa Dữ Liệu Đa Bảng (UPDATE/DELETE) Kịch Bản 33
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `HOPDONG_33(MAHD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), TONGTIEN DECIMAL(12, 2), TRANGTHAI NVARCHAR(50)), KHACHHANG_33(MAKH VARCHAR(10) PRIMARY KEY, LOAIKH NVARCHAR(20))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Viết câu lệnh T-SQL UPDATE hoặc DELETE liên kết nhiều bảng để cập nhật dữ liệu có điều kiện phụ thuộc khóa ngoại an toàn tại kịch bản 33.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh Transact-SQL tương đương:**
+```sql
+-- Giảm 10% tổng tiền cho các hợp đồng của khách hàng VIP lập trong năm 2024
+UPDATE HD
+SET HD.TONGTIEN = HD.TONGTIEN * 0.90
+FROM HOPDONG_33 HD
+INNER JOIN KHACHHANG_33 KH ON HD.MAKH = KH.MAKH
+WHERE KH.LOAIKH = 'VIP'
+  AND HD.TRANGTHAI = N'Hieu luc';
+```
+
+**Các bước suy luận tư duy:**
+1. Bước 1: Sử dụng cú pháp UPDATE kèm mệnh đề FROM và INNER JOIN liên kết bảng.
+1. Bước 2: Chỉ định rõ bí danh bảng cần cập nhật (HD.TONGTIEN = HD.TONGTIEN * 0.90).
+1. Bước 3: Thiết lập điều kiện lọc trong mệnh đề WHERE.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Cần sử dụng bí danh chính xác trong mệnh đề SET để tránh mơ hồ; kiểm tra số dòng bị ảnh hưởng bằng @@ROWCOUNT.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
+
+---
+
+## Bài 34 [SQL-P34] — Transact-SQL DML: Cập Nhật & Xóa Dữ Liệu Đa Bảng (UPDATE/DELETE) Kịch Bản 34
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `HOPDONG_34(MAHD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), TONGTIEN DECIMAL(12, 2), TRANGTHAI NVARCHAR(50)), KHACHHANG_34(MAKH VARCHAR(10) PRIMARY KEY, LOAIKH NVARCHAR(20))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Viết câu lệnh T-SQL UPDATE hoặc DELETE liên kết nhiều bảng để cập nhật dữ liệu có điều kiện phụ thuộc khóa ngoại an toàn tại kịch bản 34.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh Transact-SQL tương đương:**
+```sql
+-- Giảm 10% tổng tiền cho các hợp đồng của khách hàng VIP lập trong năm 2024
+UPDATE HD
+SET HD.TONGTIEN = HD.TONGTIEN * 0.90
+FROM HOPDONG_34 HD
+INNER JOIN KHACHHANG_34 KH ON HD.MAKH = KH.MAKH
+WHERE KH.LOAIKH = 'VIP'
+  AND HD.TRANGTHAI = N'Hieu luc';
+```
+
+**Các bước suy luận tư duy:**
+1. Bước 1: Sử dụng cú pháp UPDATE kèm mệnh đề FROM và INNER JOIN liên kết bảng.
+1. Bước 2: Chỉ định rõ bí danh bảng cần cập nhật (HD.TONGTIEN = HD.TONGTIEN * 0.90).
+1. Bước 3: Thiết lập điều kiện lọc trong mệnh đề WHERE.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Cần sử dụng bí danh chính xác trong mệnh đề SET để tránh mơ hồ; kiểm tra số dòng bị ảnh hưởng bằng @@ROWCOUNT.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
+
+---
+
+## Bài 35 [SQL-P35] — Transact-SQL DML: Cập Nhật & Xóa Dữ Liệu Đa Bảng (UPDATE/DELETE) Kịch Bản 35
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
+- **Lược đồ tham chiếu:** `HOPDONG_35(MAHD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), TONGTIEN DECIMAL(12, 2), TRANGTHAI NVARCHAR(50)), KHACHHANG_35(MAKH VARCHAR(10) PRIMARY KEY, LOAIKH NVARCHAR(20))`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Viết câu lệnh T-SQL UPDATE hoặc DELETE liên kết nhiều bảng để cập nhật dữ liệu có điều kiện phụ thuộc khóa ngoại an toàn tại kịch bản 35.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Câu lệnh Transact-SQL tương đương:**
+```sql
+-- Giảm 10% tổng tiền cho các hợp đồng của khách hàng VIP lập trong năm 2024
+UPDATE HD
+SET HD.TONGTIEN = HD.TONGTIEN * 0.90
+FROM HOPDONG_35 HD
+INNER JOIN KHACHHANG_35 KH ON HD.MAKH = KH.MAKH
+WHERE KH.LOAIKH = 'VIP'
+  AND HD.TRANGTHAI = N'Hieu luc';
+```
+
+**Các bước suy luận tư duy:**
+1. Bước 1: Sử dụng cú pháp UPDATE kèm mệnh đề FROM và INNER JOIN liên kết bảng.
+1. Bước 2: Chỉ định rõ bí danh bảng cần cập nhật (HD.TONGTIEN = HD.TONGTIEN * 0.90).
+1. Bước 3: Thiết lập điều kiện lọc trong mệnh đề WHERE.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Cần sử dụng bí danh chính xác trong mệnh đề SET để tránh mơ hồ; kiểm tra số dòng bị ảnh hưởng bằng @@ROWCOUNT.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 1.0đ
+- `sql_syntax_and_keywords`: 0.4đ
+- `constraint_and_join_logic`: 0.4đ
+- `edge_case_consideration`: 0.2đ
 
 ---

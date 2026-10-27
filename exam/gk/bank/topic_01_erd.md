@@ -1,798 +1,1149 @@
 # CHUYÊN ĐỀ 1: MÔ HÌNH THỰC THỂ MỐI KẾT HỢP (ERD) & ÁNH XẠ QUAN HỆ
 **Môn học:** IT004 — Cơ sở dữ liệu | **Hệ thống:** UIT Exam Mastery
-**Biên soạn:** VÕ TRỌNG PHÚC | **Số lượng bài tập:** 29 bài
+**Biên soạn:** VÕ TRỌNG PHÚC | **Số lượng bài tập độc lập:** 25 bài chuẩn hóa
 
 ---
 
-## Bài 01 [M01-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Tiêm Chủng Vắc-Xin
+## Bài 01 [ERD-P01] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Đăng Ký Học Phần & Thời Khóa Biểu UIT
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `ERD: NHACUNGCAP, LOVACXIN, DIEMTIEM, NHANVIEN, PHIEUXUAT`
+- **Lược đồ tham chiếu:** `SINHVIEN(MSSV, HOTEN, NGAYSINH, PHAI, MALOP), GIANGVIEN(MAGV, HOTEN, HOCHAM, HOCVI), MONHOC(MAMH, TENMH, SOTC), LOPHOCPHAN(MALHP, MAMH, MAGV, HOCKY, NAMHOC, PHONG), DANGKY(MSSV, MALHP, DIEMGK, DIEMCK)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Tiếp nhận, Phân phối vắc-xin và Điều động nhân sự tiêm chủng.
+Thiết kế mô hình ERD và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Đăng ký học phần tín chỉ tại UIT. Hệ thống cần quản lý thông tin sinh viên, giảng viên, môn học, các lớp học phần mở trong từng học kỳ và kết quả đăng ký học phần của sinh viên.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- {'name': 'NHACUNGCAP', 'pk': 'MANCC', 'attributes': ['MANCC', 'TENNCC', 'QUOCGIA', 'SDT'], 'description': 'Nhà cung ứng nguồn vắc-xin.'}
-- {'name': 'LOVACXIN', 'pk': 'MALO', 'attributes': ['MALO', 'TENLO', 'TENVACXIN', 'NGAYSX', 'HSD', 'SOLIEU', 'DONGIA'], 'description': 'Lô vắc-xin nhập kho.'}
-- {'name': 'DIEMTIEM', 'pk': 'MADT', 'attributes': ['MADT', 'TENDT', 'DIACHI', 'QUAN', 'SUCCHUA'], 'description': 'Điểm tiêm chủng lưu động hoặc cố định.'}
-- {'name': 'NHANVIEN', 'pk': 'MANV', 'attributes': ['MANV', 'HOTEN', 'CHUYENMON', 'SDT'], 'description': 'Nhân viên y tế (bác sĩ, điều dưỡng) phục vụ tiêm chủng.'}
-- {'name': 'PHIEUXUAT', 'pk': 'MAPX', 'attributes': ['MAPX', 'NGAYXUAT', 'TRANGTHAI'], 'description': 'Phiếu xuất điều phối vắc-xin đến các điểm tiêm.'}
-**Lược đồ quan hệ chuyển đổi:**
-- NHACUNGCAP (MANCC, TENNCC, QUOCGIA, SDT) - PK: MANCC
-- LOVACXIN (MALO, TENLO, TENVACXIN, NGAYSX, HSD, SOLIEU, DONGIA, MANCC) - PK: MALO, FK: MANCC -> NHACUNGCAP(MANCC)
-- DIEMTIEM (MADT, TENDT, DIACHI, QUAN, SUCCHUA) - PK: MADT
-- NHANVIEN (MANV, HOTEN, CHUYENMON, SDT, MADT) - PK: MANV, FK: MADT -> DIEMTIEM(MADT)
-- PHIEUXUAT (MAPX, NGAYXUAT, TRANGTHAI, MADT) - PK: MAPX, FK: MADT -> DIEMTIEM(MADT)
-- CTPX (MAPX, MALO, SOLIEUXUAT) - PK: (MAPX, MALO), FK: MAPX -> PHIEUXUAT(MAPX), MALO -> LOVACXIN(MALO)
+- SINHVIEN: MSSV, HOTEN, NGAYSINH, PHAI, MALOP
+- GIANGVIEN: MAGV, HOTEN, HOCHAM, HOCVI
+- MONHOC: MAMH, TENMH, SOTC
+- LOPHOCPHAN: MALHP, HOCKY, NAMHOC, PHONG
+- DANGKY: DIEMGK, DIEMCK
 
+**Mối kết hợp và bản số min-max:**
+- SINHVIEN - DANGKY - LOPHOCPHAN: M:N (Một SV đăng ký nhiều LHP, một LHP có nhiều SV)
+- GIANGVIEN - LOPHOCPHAN: 1:N (Một GV phụ trách nhiều LHP)
+- MONHOC - LOPHOCPHAN: 1:N (Một MH mở nhiều LHP)
+
+**Lược đồ quan hệ chuyển đổi:**
+- SINHVIEN(MSSV, HOTEN, NGAYSINH, PHAI, MALOP
+- GIANGVIEN(MAGV, HOTEN, HOCHAM, HOCVI
+- MONHOC(MAMH, TENMH, SOTC
+- LOPHOCPHAN(MALHP, MAMH, MAGV, HOCKY, NAMHOC, PHONG
+- DANGKY(MSSV, MALHP, DIEMGK, DIEMCK)
 **Các bước suy luận tư duy:**
-1. Bước 1: Xác định 5 tập thực thể, thuộc tính và khóa chính.
-1. Bước 2: Phân tích 4 mối kết hợp và bản số min-max hai phía (3 quan hệ 1:N và 1 quan hệ M:N).
-1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa ngoại vào bảng phía N.
-1. Bước 4: Ánh xạ quan hệ M:N CHI_TIET_XUAT thành bảng quan hệ trung gian CTPX gồm 2 khóa ngoại làm khóa chính phức hợp và thuộc tính SOLIEUXUAT.
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `entities_and_keys`: 0.50đ
-- `relationships_and_cardinality`: 1.00đ (mỗi mối kết hợp 0.25đ)
-- `relational_mapping_pk_fk`: 1.00đ
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 02 [M02-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý PCCC Chung Cư
+## Bài 02 [ERD-P02] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Ký Túc Xá Sinh Viên Đại Học
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `ERD: TOANHA, TANG, CANHO, THIETBI_PCCC, DOT_KIEMTRA, CT_KIEMTRA`
+- **Lược đồ tham chiếu:** `TOANHA(MATN, TENTN, DIACHI, SOTANG), PHONG(MAPHONG, MATN, TENPHONG, SOGIUONG, GIALE), SINHVIEN(MSSV, HOTEN, GIOITINH, SDT, QUEQUAN), HOPDONG(MAHD, MSSV, MAPHONG, NGAYBD, NGAYKT, TIENCOC), DICHVU(MADV, TENDV, DONGIA), SUDUNG_DV(MAHD, MADV, THANG, NAM, CHISO_CU, CHISO_MOI)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý An toàn Phòng cháy Chữa cháy (PCCC) Chung Cư Cao Tầng gồm TOANHA, TANG, CANHO, THIETBI_PCCC, DOT_KIEMTRA và CT_KIEMTRA.
+Thiết kế mô hình ERD và chuyển đổi quan hệ cho Hệ thống Ký túc xá Đại học gồm các tòa nhà, phòng ở, sinh viên lưu trú, hợp đồng thuê phòng và việc sử dụng các dịch vụ (điện, nước, internet).
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- {'name': 'TOANHA', 'pk': 'MATN', 'attributes': ['MATN', 'TENTN', 'SOTANG', 'DIACHI'], 'description': 'Tòa nhà trong khu chung cư.'}
-- {'name': 'TANG', 'pk': 'MATANG', 'attributes': ['MATANG', 'MATN', 'STTTANG', 'DIENTICH'], 'description': 'Tầng thuộc tòa nhà.'}
-- {'name': 'CANHO', 'pk': 'MACANHO', 'attributes': ['MACANHO', 'MATANG', 'SOCANHO', 'DIENTICH', 'SOPHONGNGU', 'TRANGTHAI'], 'description': 'Căn hộ trên tầng.'}
-- {'name': 'THIETBI_PCCC', 'pk': 'MATB', 'attributes': ['MATB', 'MATANG', 'TENTB', 'LOAITB', 'VITRI_LAPDAT', 'NGAYLAP', 'HANSUDUNG'], 'description': 'Thiết bị PCCC được lắp đặt trên tầng.'}
-- {'name': 'DOT_KIEMTRA', 'pk': 'MADOT', 'attributes': ['MADOT', 'NGAYKT', 'NGUOIKT', 'KETLUAN_CHUNG'], 'description': 'Đợt kiểm tra an toàn PCCC.'}
+- TOANHA: MATN, TENTN, DIACHI, SOTANG
+- PHONG: MAPHONG, TENPHONG, SOGIUONG, GIALE
+- SINHVIEN: MSSV, HOTEN, GIOITINH, SDT, QUEQUAN
+- HOPDONG: MAHD, NGAYBD, NGAYKT, TIENCOC
+- DICHVU: MADV, TENDV, DONGIA
+
+**Mối kết hợp và bản số min-max:**
+- TOANHA - PHONG: 1:N (Tòa nhà có nhiều phòng)
+- PHONG - HOPDONG: 1:N (Phòng được thuê qua nhiều HĐ theo thời gian)
+- SINHVIEN - HOPDONG: 1:N (SV có thể ký nhiều HĐ qua các năm)
+- HOPDONG - DICHVU: M:N (Mối kết hợp SUDUNG_DV)
+
 **Lược đồ quan hệ chuyển đổi:**
-- {'table': 'TOANHA', 'pk': ['MATN'], 'fk': []}
-- {'table': 'TANG', 'pk': ['MATANG'], 'fk': [{'column': 'MATN', 'ref_table': 'TOANHA', 'ref_column': 'MATN'}]}
-- {'table': 'CANHO', 'pk': ['MACANHO'], 'fk': [{'column': 'MATANG', 'ref_table': 'TANG', 'ref_column': 'MATANG'}]}
-- {'table': 'THIETBI_PCCC', 'pk': ['MATB'], 'fk': [{'column': 'MATANG', 'ref_table': 'TANG', 'ref_column': 'MATANG'}]}
-- {'table': 'DOT_KIEMTRA', 'pk': ['MADOT'], 'fk': []}
-- {'table': 'CT_KIEMTRA', 'pk': ['MADOT', 'MATB'], 'fk': [{'column': 'MADOT', 'ref_table': 'DOT_KIEMTRA', 'ref_column': 'MADOT'}, {'column': 'MATB', 'ref_table': 'THIETBI_PCCC', 'ref_column': 'MATB'}]}
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.50đ
-- `logic`: 1.00đ
-- `intermediate_steps`: 1.00đ
-
----
-
-## Bài 03 [M14-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Đề Tài NCKH Trọng Điểm
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `ERD: KHOA_VIEN, GIANGVIEN, DETAI, THAMGIA_DT, SANPHAM_KH, GIAINGAN`
-
-### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Đề tài NCKH Trọng điểm gồm các thực thể: KHOA_VIEN, GIANGVIEN, DETAI, SANPHAM_KH, GIAINGAN và mối kết hợp THAMGIA_DT.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- {'name': 'KHOA_VIEN', 'pk': 'MAKV', 'attributes': ['MAKV', 'TENKV', 'DIENTHOAI', 'TRUONGKHOA'], 'description': 'Khoa viện nghiên cứu chuyên ngành.'}
-- {'name': 'GIANGVIEN', 'pk': 'MAGV', 'attributes': ['MAGV', 'HOTEN', 'HOCHAM', 'HOCVI', 'LUONG', 'MAKV'], 'description': 'Giảng viên / Nhà nghiên cứu.'}
-- {'name': 'DETAI', 'pk': 'MADT', 'attributes': ['MADT', 'TENDT', 'CAP_QUANLY', 'KINHPHI', 'NGAYBD', 'NGAYKT', 'CHUNHIEM_DT'], 'description': 'Đề tài nghiên cứu khoa học.'}
-- {'name': 'SANPHAM_KH', 'pk': 'MASP', 'attributes': ['MASP', 'TENSP', 'LOAISP', 'XEP_HANG', 'MADT'], 'description': 'Sản phẩm khoa học công bố quốc tế.'}
-- {'name': 'GIAINGAN', 'pk': 'MAGN', 'attributes': ['MAGN', 'MADT', 'NGAYGN', 'SOTIEN_GN', 'NOIDUNG'], 'description': 'Đợt giải ngân kinh phí.'}
-**Lược đồ quan hệ chuyển đổi:**
-- {'table': 'KHOA_VIEN', 'pk': ['MAKV'], 'fk': []}
-- {'table': 'GIANGVIEN', 'pk': ['MAGV'], 'fk': [{'column': 'MAKV', 'ref_table': 'KHOA_VIEN', 'ref_column': 'MAKV'}]}
-- {'table': 'DETAI', 'pk': ['MADT'], 'fk': [{'column': 'CHUNHIEM_DT', 'ref_table': 'GIANGVIEN', 'ref_column': 'MAGV'}]}
-- {'table': 'THAMGIA_DT', 'pk': ['MADT', 'MAGV'], 'fk': [{'column': 'MADT', 'ref_table': 'DETAI', 'ref_column': 'MADT'}, {'column': 'MAGV', 'ref_table': 'GIANGVIEN', 'ref_column': 'MAGV'}]}
-- {'table': 'SANPHAM_KH', 'pk': ['MASP'], 'fk': [{'column': 'MADT', 'ref_table': 'DETAI', 'ref_column': 'MADT'}]}
-- {'table': 'GIAINGAN', 'pk': ['MAGN'], 'fk': [{'column': 'MADT', 'ref_table': 'DETAI', 'ref_column': 'MADT'}]}
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.50đ
-- `logic`: 1.00đ
-- `intermediate_steps`: 1.00đ
-
----
-
-## Bài 04 [ERD-001] — Thiết kế ERD & Ánh xạ Schema: Quản lý Cung ứng & Tiêm chủng Vắc-xin
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `TTYT, LOVACXIN, NHACC, DIEMTIEM, NHANVIEN, PHANPHOI`
-
-### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Cung ứng & Tiêm chủng Vắc-xin', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Cung ứng & Tiêm chủng Vắc-xin
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
+- TOANHA(MATN, TENTN, DIACHI, SOTANG
+- PHONG(MAPHONG, MATN, TENPHONG, SOGIUONG, GIALE
+- SINHVIEN(MSSV, HOTEN, GIOITINH, SDT, QUEQUAN
+- HOPDONG(MAHD, MSSV, MAPHONG, NGAYBD, NGAYKT, TIENCOC
+- DICHVU(MADV, TENDV, DONGIA
+- SUDUNG_DV(MAHD, MADV, THANG, NAM, CHISO_CU, CHISO_MOI)
 **Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 05 [M06-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Phòng Khám Đa Khoa & Hồ Sơ Khám Bệnh
+## Bài 03 [ERD-P03] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Chuỗi Nhà Thuốc & Bán Lẻ Dược Phẩm
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `ERD: CHUYENKHOA, BACSI, BENHNHAN, DICHVU_KHAM, PHIEUKHAM, CHITIET_DV`
+- **Lược đồ tham chiếu:** `NHATHUOC(MANT, TENNT, DIACHI, DUOCSI_QL), DUOCSI(MADS, HOTEN, BANGTHOAN, SDT, MANT), THUOC(MATHUOC, TENTHUOC, HOATCHAT, DVT, DONGIA), HOADON(MAHD, MANT, MADS, NGAYLAP, HOTEN_KH), CHITIET_HD(MAHD, MATHUOC, SOLUONG, GIABAN)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Đặt khám & Hồ sơ Bệnh án Phòng khám Đa khoa gồm các thực thể: CHUYENKHOA, BACSI, BENHNHAN, DICHVU_KHAM, PHIEUKHAM và mối kết hợp CHITIET_DV.
+Thiết kế mô hình ERD và lược đồ quan hệ cho Chuỗi Nhà thuốc bán lẻ gồm thông tin nhà thuốc, dược sĩ, danh mục dược phẩm và các hóa đơn bán hàng theo đơn hoặc không kê đơn.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- {'name': 'CHUYENKHOA', 'pk': 'MAKC', 'attributes': ['MAKC', 'TENKHOA', 'TRUONGKHOA'], 'description': 'Khoa chuyên môn điều trị.'}
-- {'name': 'BACSI', 'pk': 'MABS', 'attributes': ['MABS', 'HOTEN', 'HOCVI', 'LUONG'], 'description': 'Bác sĩ thuộc phòng khám.'}
-- {'name': 'BENHNHAN', 'pk': 'MABN', 'attributes': ['MABN', 'HOTEN', 'NGAYSINH', 'GIOITINH', 'DIACHI'], 'description': 'Bệnh nhân đăng ký khám.'}
-- {'name': 'DICHVU_KHAM', 'pk': 'MADV', 'attributes': ['MADV', 'TENDV', 'LOAIDV', 'DONGIA'], 'description': 'Dịch vụ y tế kỹ thuật niêm yết.'}
-- {'name': 'PHIEUKHAM', 'pk': 'MAPK', 'attributes': ['MAPK', 'NGAYKHAM', 'CHANDOAN'], 'description': 'Phiếu khám bệnh của bệnh nhân.'}
+- NHATHUOC: MANT, TENNT, DIACHI
+- DUOCSI: MADS, HOTEN, BANGTHOAN, SDT
+- THUOC: MATHUOC, TENTHUOC, HOATCHAT, DVT, DONGIA
+- HOADON: MAHD, NGAYLAP, HOTEN_KH
+
+**Mối kết hợp và bản số min-max:**
+- NHATHUOC - DUOCSI: 1:N (Dược sĩ công tác tại 1 nhà thuốc; 1 dược sĩ làm quản lý 1:1)
+- DUOCSI - HOADON: 1:N (Dược sĩ lập hóa đơn)
+- NHATHUOC - HOADON: 1:N (Hóa đơn phát sinh tại nhà thuốc)
+- HOADON - THUOC: M:N qua CHITIET_HD
+
 **Lược đồ quan hệ chuyển đổi:**
-- {'table': 'CHUYENKHOA', 'pk': ['MAKC'], 'fk': []}
-- {'table': 'BACSI', 'pk': ['MABS'], 'fk': [{'column': 'MAKC', 'ref_table': 'CHUYENKHOA', 'ref_column': 'MAKC'}]}
-- {'table': 'BENHNHAN', 'pk': ['MABN'], 'fk': []}
-- {'table': 'DICHVU_KHAM', 'pk': ['MADV'], 'fk': []}
-- {'table': 'PHIEUKHAM', 'pk': ['MAPK'], 'fk': [{'column': 'MABN', 'ref_table': 'BENHNHAN', 'ref_column': 'MABN'}, {'column': 'MABS', 'ref_table': 'BACSI', 'ref_column': 'MABS'}]}
-- {'table': 'CHITIET_DV', 'pk': ['MAPK', 'MADV'], 'fk': [{'column': 'MAPK', 'ref_table': 'PHIEUKHAM', 'ref_column': 'MAPK'}, {'column': 'MADV', 'ref_table': 'DICHVU_KHAM', 'ref_column': 'MADV'}]}
+- NHATHUOC(MANT, TENNT, DIACHI, DUOCSI_QL
+- DUOCSI(MADS, HOTEN, BANGTHOAN, SDT, MANT
+- THUOC(MATHUOC, TENTHUOC, HOATCHAT, DVT, DONGIA
+- HOADON(MAHD, MANT, MADS, NGAYLAP, HOTEN_KH
+- CHITIET_HD(MAHD, MATHUOC, SOLUONG, GIABAN)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.50đ
-- `logic`: 1.00đ
-- `intermediate_steps`: 1.00đ
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 06 [M07-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Thư Viện Đại Học & Mượn Trả Sách
+## Bài 04 [ERD-P04] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Hãng Hàng Không & Lịch Bay Nội Địa
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `ERD: KHOAVIEN, DOCGIA, SACH, THUTHU, PHIEUMUON, CHITIET_MUON`
+- **Lược đồ tham chiếu:** `SANBAY(MASB, TENSB, THANHPHO, QUOCGIA), MAYBAY(MAMB, SOHIEU, LOAIMB, SOGHE, NAMSX), CHUYENBAY(MACB, MAMB, MASB_DI, MASB_DEN, NGAYBAY, GIOBAY, GIAGOC), HANHKHACH(MAHK, HOTEN, CCCD, SDT, EMAIL), VEBAY(MAVE, MACB, MAHK, SOGHE, HANGVE, GIATHOA)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Thư viện Đại học gồm các thực thể: KHOAVIEN, DOCGIA, SACH, THUTHU, PHIEUMUON và mối kết hợp CHITIET_MUON.
+Thiết kế mô hình ERD quản lý lịch trình các chuyến bay, máy bay khai thác, sân bay đi - đến và hành khách mua vé của một hãng hàng không nội địa.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- {'name': 'KHOAVIEN', 'pk': 'MAKV', 'attributes': ['MAKV', 'TENKV', 'NAMTL'], 'description': 'Khoa/Viện đào tạo trong trường đại học.'}
-- {'name': 'DOCGIA', 'pk': 'MADG', 'attributes': ['MADG', 'HOTEN', 'NGAYSINH', 'LOAIDG'], 'description': 'Độc giả sinh viên/giảng viên.'}
-- {'name': 'SACH', 'pk': 'MASACH', 'attributes': ['MASACH', 'TENSACH', 'TACGIA', 'NXB', 'NAMXB', 'SOLUONGTON'], 'description': 'Đầu sách in lưu hành.'}
-- {'name': 'THUTHU', 'pk': 'MATT', 'attributes': ['MATT', 'HOTEN', 'SODT'], 'description': 'Cán bộ thủ thư quản lý mượn trả.'}
-- {'name': 'PHIEUMUON', 'pk': 'MAPM', 'attributes': ['MAPM', 'NGAYMUON', 'HANTRA', 'TRANGTHAI'], 'description': 'Phiếu mượn tài liệu sách in.'}
+- SANBAY: MASB, TENSB, THANHPHO, QUOCGIA
+- MAYBAY: MAMB, SOHIEU, LOAIMB, SOGHE, NAMSX
+- CHUYENBAY: MACB, NGAYBAY, GIOBAY, GIAGOC
+- HANHKHACH: MAHK, HOTEN, CCCD, SDT
+- VEBAY: MAVE, SOGHE, HANGVE, GIATHOA
+
+**Mối kết hợp và bản số min-max:**
+- MAYBAY - CHUYENBAY: 1:N (Máy bay thực hiện nhiều chuyến bay)
+- SANBAY - CHUYENBAY (Khởi hành): 1:N
+- SANBAY - CHUYENBAY (Hạ cánh): 1:N
+- CHUYENBAY - HANHKHACH: M:N qua thực thể yếu VEBAY
+
 **Lược đồ quan hệ chuyển đổi:**
-- {'table': 'KHOAVIEN', 'pk': ['MAKV'], 'fk': []}
-- {'table': 'DOCGIA', 'pk': ['MADG'], 'fk': [{'column': 'MAKV', 'ref_table': 'KHOAVIEN', 'ref_column': 'MAKV'}]}
-- {'table': 'SACH', 'pk': ['MASACH'], 'fk': []}
-- {'table': 'THUTHU', 'pk': ['MATT'], 'fk': []}
-- {'table': 'PHIEUMUON', 'pk': ['MAPM'], 'fk': [{'column': 'MADG', 'ref_table': 'DOCGIA', 'ref_column': 'MADG'}, {'column': 'MATT', 'ref_table': 'THUTHU', 'ref_column': 'MATT'}]}
-- {'table': 'CHITIET_MUON', 'pk': ['MAPM', 'MASACH'], 'fk': [{'column': 'MAPM', 'ref_table': 'PHIEUMUON', 'ref_column': 'MAPM'}, {'column': 'MASACH', 'ref_table': 'SACH', 'ref_column': 'MASACH'}]}
+- SANBAY(MASB, TENSB, THANHPHO, QUOCGIA
+- MAYBAY(MAMB, SOHIEU, LOAIMB, SOGHE, NAMSX
+- CHUYENBAY(MACB, MAMB, MASB_DI, MASB_DEN, NGAYBAY, GIOBAY, GIAGOC
+- HANHKHACH(MAHK, HOTEN, CCCD, SDT, EMAIL
+- VEBAY(MAVE, MACB, MAHK, SOGHE, HANGVE, GIATHOA)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.50đ
-- `logic`: 1.00đ
-- `intermediate_steps`: 1.00đ
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 07 [M08-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Sàn Thương Mại Điện Tử & Đơn Hàng
+## Bài 05 [ERD-P05] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Hệ Thống Tuyển Sinh & Xét Tuyển Đại Học
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `ERD: GIANHANG, SANPHAM, KHACHHANG, DONHANG, VANCHUYEN, CHITIET_DH`
+- **Lược đồ tham chiếu:** `NGANH(MANGANH, TENNANH, CHITIEU, DIEMCHUAN), THISINH(SBD, HOTEN, NGAYSINH, KHUVUC, DIEMTOC), MONTHI(MAMT, TENMT), DIEMTHI(SBD, MAMT, DIEMSO), NGUYENVONG(SBD, THUTU_NV, MANGANH, TOHOP, TRANGTHAI)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Sàn Thương mại Điện tử gồm các thực thể: GIANHANG, SANPHAM, KHACHHANG, DONHANG, VANCHUYEN và mối kết hợp CHITIET_DH.
+Thiết kế ERD cho Hệ thống Đăng ký Xét tuyển Đại học: Thí sinh đăng ký nhiều nguyện vọng theo thứ tự ưu tiên vào các ngành học, quản lý điểm thi các môn theo tổ hợp xét tuyển.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- {'name': 'GIANHANG', 'pk': 'MAGH', 'attributes': ['MAGH', 'TENGH', 'NGUOIDAIDIEN', 'THANHPHO'], 'description': 'Gian hàng người bán.'}
-- {'name': 'SANPHAM', 'pk': 'MASP', 'attributes': ['MASP', 'TENSP', 'LOAISP', 'GIANIEMYET'], 'description': 'Hàng hóa niêm yết bán.'}
-- {'name': 'KHACHHANG', 'pk': 'MAKH', 'attributes': ['MAKH', 'HOTEN', 'DIACHI', 'HANGTHANHVIEN'], 'description': 'Khách hàng mua sắm.'}
-- {'name': 'DONHANG', 'pk': 'MADH', 'attributes': ['MADH', 'NGAYDAT', 'HINHTHUCTT', 'TRANGTHAI'], 'description': 'Đơn đặt hàng trực tuyến.'}
-- {'name': 'VANCHUYEN', 'pk': 'MAVD', 'attributes': ['MAVD', 'DONVIVC', 'CUOCPHI', 'NGAYGIAO'], 'description': 'Vận đơn giao hàng.'}
+- NGANH: MANGANH, TENNANH, CHITIEU, DIEMCHUAN
+- THISINH: SBD, HOTEN, NGAYSINH, KHUVUC
+- MONTHI: MAMT, TENMT
+- NGUYENVONG: THUTU_NV, TOHOP, TRANGTHAI
+- DIEMTHI: DIEMSO
+
+**Mối kết hợp và bản số min-max:**
+- THISINH - MONTHI: M:N qua DIEMTHI (SBD, MAMT)
+- THISINH - NGANH: M:N qua NGUYENVONG (SBD, THUTU_NV, MANGANH)
+
 **Lược đồ quan hệ chuyển đổi:**
-- {'table': 'GIANHANG', 'pk': ['MAGH'], 'fk': []}
-- {'table': 'SANPHAM', 'pk': ['MASP'], 'fk': [{'column': 'MAGH', 'ref_table': 'GIANHANG', 'ref_column': 'MAGH'}]}
-- {'table': 'KHACHHANG', 'pk': ['MAKH'], 'fk': []}
-- {'table': 'DONHANG', 'pk': ['MADH'], 'fk': [{'column': 'MAKH', 'ref_table': 'KHACHHANG', 'ref_column': 'MAKH'}]}
-- {'table': 'CHITIET_DH', 'pk': ['MADH', 'MASP'], 'fk': [{'column': 'MADH', 'ref_table': 'DONHANG', 'ref_column': 'MADH'}, {'column': 'MASP', 'ref_table': 'SANPHAM', 'ref_column': 'MASP'}]}
-- {'table': 'VANCHUYEN', 'pk': ['MAVD'], 'fk': [{'column': 'MADH', 'ref_table': 'DONHANG', 'ref_column': 'MADH'}]}
+- NGANH(MANGANH, TENNANH, CHITIEU, DIEMCHUAN
+- THISINH(SBD, HOTEN, NGAYSINH, KHUVUC, DIEMTOC
+- MONTHI(MAMT, TENMT
+- DIEMTHI(SBD, MAMT, DIEMSO
+- NGUYENVONG(SBD, THUTU_NV, MANGANH, TOHOP, TRANGTHAI)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.50đ
-- `logic`: 1.00đ
-- `intermediate_steps`: 1.00đ
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 08 [M09-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `ERD: TRUONG, DOITHI, TUYENTHU, TRANDAU, NHATAITRO, THAMGIA_TRAN`
-
-### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Giải đấu Thể thao Điện tử gồm các thực thể: TRUONG, DOITHI, TUYENTHU, TRANDAU, NHATAITRO và mối kết hợp THAMGIA_TRAN.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- {'name': 'TRUONG', 'pk': 'MATRUONG', 'attributes': ['MATRUONG', 'TENTRUONG', 'THANHPHO'], 'description': 'Trường đại học tham dự.'}
-- {'name': 'DOITHI', 'pk': 'MADOI', 'attributes': ['MADOI', 'TENDOI', 'NGUOIQUANLY'], 'description': 'Đội tuyển thi đấu.'}
-- {'name': 'TUYENTHU', 'pk': 'MATT', 'attributes': ['MATT', 'HOTEN', 'VITRI', 'TIENLUONG'], 'description': 'Tuyển thủ thi đấu.'}
-- {'name': 'TRANDAU', 'pk': 'MATRAN', 'attributes': ['MATRAN', 'NGAYDAU', 'VONGDAU', 'DIADIEM'], 'description': 'Trận đấu theo lịch trình.'}
-- {'name': 'NHATAITRO', 'pk': 'MANTT', 'attributes': ['MANTT', 'TENNTT', 'SOTIEN_TT'], 'description': 'Nhà tài trợ thương mại.'}
-**Lược đồ quan hệ chuyển đổi:**
-- {'table': 'TRUONG', 'pk': ['MATRUONG'], 'fk': []}
-- {'table': 'DOITHI', 'pk': ['MADOI'], 'fk': [{'column': 'MATRUONG', 'ref_table': 'TRUONG', 'ref_column': 'MATRUONG'}]}
-- {'table': 'TUYENTHU', 'pk': ['MATT'], 'fk': [{'column': 'MADOI', 'ref_table': 'DOITHI', 'ref_column': 'MADOI'}]}
-- {'table': 'TRANDAU', 'pk': ['MATRAN'], 'fk': []}
-- {'table': 'THAMGIA_TRAN', 'pk': ['MATRAN', 'MADOI'], 'fk': [{'column': 'MATRAN', 'ref_table': 'TRANDAU', 'ref_column': 'MATRAN'}, {'column': 'MADOI', 'ref_table': 'DOITHI', 'ref_column': 'MADOI'}]}
-- {'table': 'NHATAITRO', 'pk': ['MANTT'], 'fk': [{'column': 'MATRAN', 'ref_table': 'TRANDAU', 'ref_column': 'MATRAN'}]}
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.80đ
-- `intermediate_steps`: 0.80đ
-
----
-
-## Bài 09 [M10-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Gara Ô Tô & Lịch Trình Bảo Dưỡng
+## Bài 06 [ERD-P06] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Hệ Thống Ngân Hàng & Giao Dịch Thẻ ATM
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `ERD: KHACHHANG, XE, THO, PHUTUNG, PHIEU_BD, CHITIET_BD`
+- **Lược đồ tham chiếu:** `CHINHANH(MACN, TENCN, DIACHI, SDT), KHACHHANG(MAKH, HOTEN, CCCD, DIACHI, SDT), TAIKHOAN(SOTK, MAKH, MACN, SODU, LOAITK, NGAYMO), THE_ATM(MATHE, SOTK, NGAYPHATHANH, NGAYHETHAN, LOAITHE), GIAODICH(MAGD, MATHE, NGAYGD, SOTIEN, LOAIGD, NOIDUNG)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Gara Ô tô gồm các thực thể: KHACHHANG, XE, THO, PHUTUNG, PHIEU_BD và mối kết hợp CHITIET_BD.
+Thiết kế ERD cho Hệ thống Ngân hàng thương mại: Quản lý khách hàng, tài khoản thanh toán tại các chi nhánh, phát hành thẻ ATM và lịch sử các giao dịch gửi/rút/chuyển khoản.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- {'name': 'KHACHHANG', 'pk': 'MAKH', 'attributes': ['MAKH', 'HOTEN', 'DIENTHOAI', 'DIACHI'], 'description': 'Khách hàng chủ xe.'}
-- {'name': 'XE', 'pk': 'BIENSO', 'attributes': ['BIENSO', 'HANGXE', 'MODEL', 'NAMSX'], 'description': 'Phương tiện ô tô.'}
-- {'name': 'THO', 'pk': 'MATHO', 'attributes': ['MATHO', 'HOTEN', 'CHUYENMON', 'LUONG_CB'], 'description': 'Thợ kỹ thuật gara.'}
-- {'name': 'PHUTUNG', 'pk': 'MAPT', 'attributes': ['MAPT', 'TENPT', 'LOAIPT', 'DONGIA', 'SOLUONGTON'], 'description': 'Phụ tùng thay thế.'}
-- {'name': 'PHIEU_BD', 'pk': 'MAPHIEU', 'attributes': ['MAPHIEU', 'NGAYLAP', 'TONGTIEN', 'TRANGTHAI'], 'description': 'Phiếu bảo dưỡng ô tô.'}
+- CHINHANH: MACN, TENCN, DIACHI, SDT
+- KHACHHANG: MAKH, HOTEN, CCCD, DIACHI
+- TAIKHOAN: SOTK, SODU, LOAITK, NGAYMO
+- THE_ATM: MATHE, NGAYPHATHANH, NGAYHETHAN
+- GIAODICH: MAGD, NGAYGD, SOTIEN, LOAIGD
+
+**Mối kết hợp và bản số min-max:**
+- CHINHANH - TAIKHOAN: 1:N
+- KHACHHANG - TAIKHOAN: 1:N
+- TAIKHOAN - THE_ATM: 1:N (1 TK có thể mở nhiều thẻ phụ)
+- THE_ATM - GIAODICH: 1:N
+
 **Lược đồ quan hệ chuyển đổi:**
-- {'table': 'KHACHHANG', 'pk': ['MAKH'], 'fk': []}
-- {'table': 'XE', 'pk': ['BIENSO'], 'fk': [{'column': 'MAKH', 'ref_table': 'KHACHHANG', 'ref_column': 'MAKH'}]}
-- {'table': 'THO', 'pk': ['MATHO'], 'fk': []}
-- {'table': 'PHUTUNG', 'pk': ['MAPT'], 'fk': []}
-- {'table': 'PHIEU_BD', 'pk': ['MAPHIEU'], 'fk': [{'column': 'BIENSO', 'ref_table': 'XE', 'ref_column': 'BIENSO'}, {'column': 'MATHO', 'ref_table': 'THO', 'ref_column': 'MATHO'}]}
-- {'table': 'CHITIET_BD', 'pk': ['MAPHIEU', 'MAPT'], 'fk': [{'column': 'MAPHIEU', 'ref_table': 'PHIEU_BD', 'ref_column': 'MAPHIEU'}, {'column': 'MAPT', 'ref_table': 'PHUTUNG', 'ref_column': 'MAPT'}]}
+- CHINHANH(MACN, TENCN, DIACHI, SDT
+- KHACHHANG(MAKH, HOTEN, CCCD, DIACHI, SDT
+- TAIKHOAN(SOTK, MAKH, MACN, SODU, LOAITK, NGAYMO
+- THE_ATM(MATHE, SOTK, NGAYPHATHANH, NGAYHETHAN, LOAITHE
+- GIAODICH(MAGD, MATHE, NGAYGD, SOTIEN, LOAIGD, NOIDUNG)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.50đ
-- `logic`: 1.00đ
-- `intermediate_steps`: 1.00đ
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 10 [M11-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Chuỗi Cà Phê Nhượng Quyền
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 20 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `ERD: KHUVUC, CUAHANG, NHANVIEN, NGUYENLIEU, PHIEUXUAT, CHITIET_PX`
-
-### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Chuỗi Cà phê Nhượng quyền gồm các thực thể: KHUVUC, CUAHANG, NHANVIEN, NGUYENLIEU, PHIEUXUAT và mối kết hợp CHITIET_PX.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- {'name': 'KHUVUC', 'pk': 'MAKV', 'attributes': ['MAKV', 'TENKV', 'TRUONGVUNG'], 'description': 'Khu vực quản lý kinh doanh.'}
-- {'name': 'CUAHANG', 'pk': 'MACH', 'attributes': ['MACH', 'TENCH', 'DIACHI', 'MAKV', 'NAM_KYHD'], 'description': 'Cửa hàng chi nhánh nhượng quyền.'}
-- {'name': 'NHANVIEN', 'pk': 'MANV', 'attributes': ['MANV', 'HOTEN', 'CHUCVU', 'LUONG', 'MACH'], 'description': 'Nhân sự cửa hàng.'}
-- {'name': 'NGUYENLIEU', 'pk': 'MANL', 'attributes': ['MANL', 'TENNL', 'LOAINL', 'DONGIA_CHUAN', 'DVT'], 'description': 'Nguyên liệu pha chế.'}
-- {'name': 'PHIEUXUAT', 'pk': 'MAPX', 'attributes': ['MAPX', 'NGAYXUAT', 'MACH', 'TONGTIEN', 'TRANGTHAI'], 'description': 'Phiếu xuất kho phân phối.'}
-**Lược đồ quan hệ chuyển đổi:**
-- {'table': 'KHUVUC', 'pk': ['MAKV'], 'fk': []}
-- {'table': 'CUAHANG', 'pk': ['MACH'], 'fk': [{'column': 'MAKV', 'ref_table': 'KHUVUC', 'ref_column': 'MAKV'}]}
-- {'table': 'NHANVIEN', 'pk': ['MANV'], 'fk': [{'column': 'MACH', 'ref_table': 'CUAHANG', 'ref_column': 'MACH'}]}
-- {'table': 'NGUYENLIEU', 'pk': ['MANL'], 'fk': []}
-- {'table': 'PHIEUXUAT', 'pk': ['MAPX'], 'fk': [{'column': 'MACH', 'ref_table': 'CUAHANG', 'ref_column': 'MACH'}]}
-- {'table': 'CHITIET_PX', 'pk': ['MAPX', 'MANL'], 'fk': [{'column': 'MAPX', 'ref_table': 'PHIEUXUAT', 'ref_column': 'MAPX'}, {'column': 'MANL', 'ref_table': 'NGUYENLIEU', 'ref_column': 'MANL'}]}
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.80đ
-- `intermediate_steps`: 0.80đ
-
----
-
-## Bài 11 [M12-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Cụm Rạp Chiếu Phim & Đặt Vé
+## Bài 07 [ERD-P07] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Khách Sạn & Đặt Phòng Nghỉ Dưỡng
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `ERD: CUMRAP, PHONGCHIEU, PHIM, SUATCHIEU, KHACHHANG, VEXEM`
+- **Lược đồ tham chiếu:** `KHACHSAN(MAKS, TENKS, DIACHI, TIEUCHUAN_SAO), LOAIPHONG(MALP, TENLP, SOGIUONG, DONGIA_NGAY), PHONG(MAPHONG, MAKS, MALP, SOPHONG, TRANGTHAI), KHACHHANG(MAKH, HOTEN, SDT, QUOCTICH), PHIEUDAT(MAPD, MAKH, MAPHONG, NGAYDEN, NGAYDI, TIENCOC)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Cụm Rạp Chiếu Phim & Đặt Vé gồm các thực thể: CUMRAP, PHONGCHIEU, PHIM, SUATCHIEU, KHACHHANG, VEXEM.
+Thiết kế mô hình ERD quản lý chuỗi khách sạn nghỉ dưỡng: Quản lý chi nhánh khách sạn, các loại phòng, danh sách phòng thực tế và các phiếu đặt phòng của khách hàng.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- {'name': 'CUMRAP', 'pk': 'MACR', 'attributes': ['MACR', 'TENCR', 'DIACHI', 'THANHPHO'], 'description': 'Cụm rạp chiếu phim.'}
-- {'name': 'PHONGCHIEU', 'pk': 'MAPC', 'attributes': ['MAPC', 'TENPHONG', 'SOGHETOI_DA', 'LOAIPHONG', 'MACR'], 'description': 'Phòng chiếu phim trực thuộc cụm rạp.'}
-- {'name': 'PHIM', 'pk': 'MAPHIM', 'attributes': ['MAPHIM', 'TENPHIM', 'THELOAI', 'THOILUONG', 'DAODIEN', 'NAMSX'], 'description': 'Danh mục phim phát hành.'}
-- {'name': 'SUATCHIEU', 'pk': 'MASC', 'attributes': ['MASC', 'MAPHIM', 'MAPC', 'NGAYCHIEU', 'GIOCHIEU', 'GIAVE_CHUAN'], 'description': 'Suất chiếu phim cụ thể.'}
-- {'name': 'KHACHHANG', 'pk': 'MAKH', 'attributes': ['MAKH', 'HOTEN', 'SDT', 'EMAIL', 'LOAITHANHVIEN'], 'description': 'Thành viên rạp đặt vé.'}
-- {'name': 'VEXEM', 'pk': 'MAVE', 'attributes': ['MAVE', 'MASC', 'MAKH', 'SOGHE', 'GIAVE_THUC', 'TRANGTHAI'], 'description': 'Vé xem phim đã phát hành.'}
+- KHACHSAN: MAKS, TENKS, DIACHI, TIEUCHUAN_SAO
+- LOAIPHONG: MALP, TENLP, SOGIUONG, DONGIA_NGAY
+- PHONG: MAPHONG, SOPHONG, TRANGTHAI
+- KHACHHANG: MAKH, HOTEN, SDT, QUOCTICH
+- PHIEUDAT: MAPD, NGAYDEN, NGAYDI, TIENCOC
+
+**Mối kết hợp và bản số min-max:**
+- KHACHSAN - PHONG: 1:N
+- LOAIPHONG - PHONG: 1:N
+- KHACHHANG - PHIEUDAT: 1:N
+- PHONG - PHIEUDAT: 1:N
+
 **Lược đồ quan hệ chuyển đổi:**
-- {'table': 'CUMRAP', 'pk': ['MACR'], 'fk': []}
-- {'table': 'PHONGCHIEU', 'pk': ['MAPC'], 'fk': [{'column': 'MACR', 'ref_table': 'CUMRAP', 'ref_column': 'MACR'}]}
-- {'table': 'PHIM', 'pk': ['MAPHIM'], 'fk': []}
-- {'table': 'SUATCHIEU', 'pk': ['MASC'], 'fk': [{'column': 'MAPHIM', 'ref_table': 'PHIM', 'ref_column': 'MAPHIM'}, {'column': 'MAPC', 'ref_table': 'PHONGCHIEU', 'ref_column': 'MAPC'}]}
-- {'table': 'KHACHHANG', 'pk': ['MAKH'], 'fk': []}
-- {'table': 'VEXEM', 'pk': ['MAVE'], 'fk': [{'column': 'MASC', 'ref_table': 'SUATCHIEU', 'ref_column': 'MASC'}, {'column': 'MAKH', 'ref_table': 'KHACHHANG', 'ref_column': 'MAKH'}]}
+- KHACHSAN(MAKS, TENKS, DIACHI, TIEUCHUAN_SAO
+- LOAIPHONG(MALP, TENLP, SOGIUONG, DONGIA_NGAY
+- PHONG(MAPHONG, MAKS, MALP, SOPHONG, TRANGTHAI
+- KHACHHANG(MAKH, HOTEN, SDT, QUOCTICH
+- PHIEUDAT(MAPD, MAKH, MAPHONG, NGAYDEN, NGAYDI, TIENCOC)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.50đ
-- `logic`: 1.00đ
-- `intermediate_steps`: 1.00đ
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 12 [M13-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Tuyến Xe Buýt & Metro TP.HCM
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 20 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `ERD: TUYEN_XE, TRAM_DUNG, LOTRINH, PHUONGTIEN, TAIXE, CHUYEN_DI`
-
-### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Tuyến Xe Buýt & Metro gồm các thực thể: TUYEN_XE, TRAM_DUNG, PHUONGTIEN, TAIXE, CHUYEN_DI và mối kết hợp LOTRINH.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- {'name': 'TUYEN_XE', 'pk': 'MATUYEN', 'attributes': ['MATUYEN', 'TENTUYEN', 'LOAI_HINH', 'CULY_KM', 'GIAVE_LUOT'], 'description': 'Tuyến vận chuyển hành khách.'}
-- {'name': 'TRAM_DUNG', 'pk': 'MATRAM', 'attributes': ['MATRAM', 'TENTRAM', 'DIACHI', 'QUAN_HUYEN'], 'description': 'Trạm dừng đón trả khách.'}
-- {'name': 'PHUONGTIEN', 'pk': 'MAPT', 'attributes': ['MAPT', 'BIENSO', 'SOGHE', 'NAMSX', 'MATUYEN'], 'description': 'Phương tiện xe buýt / tàu metro.'}
-- {'name': 'TAIXE', 'pk': 'MATX', 'attributes': ['MATX', 'HOTEN', 'HANG_GPLX', 'LUONG_CB', 'MAPT'], 'description': 'Tài xế điều khiển phương tiện.'}
-- {'name': 'CHUYEN_DI', 'pk': 'MACHUYEN', 'attributes': ['MACHUYEN', 'MAPT', 'NGAYCHAY', 'GIOXUATPHAT', 'SOLUONG_KHACH', 'DOANHTHU'], 'description': 'Chuyến xe vận hành thực tế.'}
-**Lược đồ quan hệ chuyển đổi:**
-- {'table': 'TUYEN_XE', 'pk': ['MATUYEN'], 'fk': []}
-- {'table': 'TRAM_DUNG', 'pk': ['MATRAM'], 'fk': []}
-- {'table': 'LOTRINH', 'pk': ['MATUYEN', 'MATRAM'], 'fk': [{'column': 'MATUYEN', 'ref_table': 'TUYEN_XE', 'ref_column': 'MATUYEN'}, {'column': 'MATRAM', 'ref_table': 'TRAM_DUNG', 'ref_column': 'MATRAM'}]}
-- {'table': 'PHUONGTIEN', 'pk': ['MAPT'], 'fk': [{'column': 'MATUYEN', 'ref_table': 'TUYEN_XE', 'ref_column': 'MATUYEN'}]}
-- {'table': 'TAIXE', 'pk': ['MATX'], 'fk': [{'column': 'MAPT', 'ref_table': 'PHUONGTIEN', 'ref_column': 'MAPT'}]}
-- {'table': 'CHUYEN_DI', 'pk': ['MACHUYEN'], 'fk': [{'column': 'MAPT', 'ref_table': 'PHUONGTIEN', 'ref_column': 'MAPT'}]}
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.80đ
-- `intermediate_steps`: 0.80đ
-
----
-
-## Bài 13 [M15-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Trại Cứu Hộ Động Vật Hoang Dã
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 20 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `ERD: KHU_BAOTON, LOAI_DONGVAT, DONGVAT, NHANVIEN, CHITIET_CS, DOT_TAITHA`
-
-### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Trại Cứu Hộ Động Vật Hoang Dã gồm các thực thể: KHU_BAOTON, LOAI_DONGVAT, DONGVAT, NHANVIEN, CHITIET_CS, DOT_TAITHA.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- {'name': 'KHU_BAOTON', 'pk': 'MAKHU', 'attributes': ['MAKHU', 'TENKHU', 'DIENTICH_HA', 'NGUOI_PHUTRACH'], 'description': 'Phân khu bảo tồn chức năng.'}
-- {'name': 'LOAI_DONGVAT', 'pk': 'MALOAI', 'attributes': ['MALOAI', 'TENLOAI', 'TEN_KHOAHOC', 'MUC_NGUYCAP'], 'description': 'Danh mục loài động vật quý hiếm.'}
-- {'name': 'DONGVAT', 'pk': 'MADV', 'attributes': ['MADV', 'MALOAI', 'GIOITINH', 'CANNANG_KG', 'TINHTRANG_SK', 'MAKHU'], 'description': 'Cá thể động vật cứu hộ.'}
-- {'name': 'NHANVIEN', 'pk': 'MANV', 'attributes': ['MANV', 'HOTEN', 'CHUYENMON', 'LUONG', 'MAKHU'], 'description': 'Nhân viên bảo tồn và thú y.'}
-- {'name': 'CHITIET_CS', 'pk': 'MACS', 'attributes': ['MACS', 'MADV', 'MANV', 'NGAYCS', 'CHIPHI_CS', 'GHI_CHU'], 'description': 'Nhật ký chăm sóc điều trị.'}
-- {'name': 'DOT_TAITHA', 'pk': 'MADOT', 'attributes': ['MADOT', 'MADV', 'NGAYTHA', 'DIADIEM_THA', 'TRANGTHAI'], 'description': 'Đợt tái thả về tự nhiên.'}
-**Lược đồ quan hệ chuyển đổi:**
-- {'table': 'KHU_BAOTON', 'pk': ['MAKHU'], 'fk': []}
-- {'table': 'LOAI_DONGVAT', 'pk': ['MALOAI'], 'fk': []}
-- {'table': 'DONGVAT', 'pk': ['MADV'], 'fk': [{'column': 'MALOAI', 'ref_table': 'LOAI_DONGVAT', 'ref_column': 'MALOAI'}, {'column': 'MAKHU', 'ref_table': 'KHU_BAOTON', 'ref_column': 'MAKHU'}]}
-- {'table': 'NHANVIEN', 'pk': ['MANV'], 'fk': [{'column': 'MAKHU', 'ref_table': 'KHU_BAOTON', 'ref_column': 'MAKHU'}]}
-- {'table': 'CHITIET_CS', 'pk': ['MACS'], 'fk': [{'column': 'MADV', 'ref_table': 'DONGVAT', 'ref_column': 'MADV'}, {'column': 'MANV', 'ref_table': 'NHANVIEN', 'ref_column': 'MANV'}]}
-- {'table': 'DOT_TAITHA', 'pk': ['MADOT'], 'fk': [{'column': 'MADV', 'ref_table': 'DONGVAT', 'ref_column': 'MADV'}]}
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.80đ
-- `intermediate_steps`: 0.80đ
-
----
-
-## Bài 14 [ERD-016] — Thiết kế ERD & Ánh xạ Schema: Quản lý Dự Án Xây Dựng & Nhà Thầu
+## Bài 08 [ERD-P08] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Xuất Bản & Phát Hành Sách
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `DU_AN, HANG_MUC, NHA_THAU, CONG_NHAN, TIEN_DO`
+- **Lược đồ tham chiếu:** `NXB(MANXB, TENNXB, DIACHI, EMAIL), TACGIA(MATG, HOTEN, BUTDANH, QUOCTICH), SACH(MASACH, TENSACH, MANXB, NAMXB, TIENTHOA), BIENSOAN(MATG, MASACH, VAITRO), DAILI(MADL, TENDL, DIACHI, SDT), PHIEUXUAT_SACH(MAPX, MADL, MASACH, NGAYXUAT, SOLUONG, DONGIAXUAT)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Dự Án Xây Dựng & Nhà Thầu', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế mô hình ERD cho Nhà xuất bản: Quản lý tác giả biên soạn sách (một sách có thể do nhiều tác giả đồng biên soạn), bản quyền xuất bản và phân phối đến các đại lý.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Dự Án Xây Dựng & Nhà Thầu
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
+- NXB: MANXB, TENNXB, DIACHI
+- TACGIA: MATG, HOTEN, BUTDANH, QUOCTICH
+- SACH: MASACH, TENSACH, NAMXB, TIENTHOA
+- DAILI: MADL, TENDL, DIACHI, SDT
+- PHIEUXUAT: MAPX, NGAYXUAT, SOLUONG, DONGIAXUAT
 
+**Mối kết hợp và bản số min-max:**
+- NXB - SACH: 1:N
+- TACGIA - SACH: M:N qua BIENSOAN (MATG, MASACH, VAITRO)
+- SACH - DAILI: M:N qua PHIEUXUAT_SACH
+
+**Lược đồ quan hệ chuyển đổi:**
+- NXB(MANXB, TENNXB, DIACHI, EMAIL
+- TACGIA(MATG, HOTEN, BUTDANH, QUOCTICH
+- SACH(MASACH, TENSACH, MANXB, NAMXB, TIENTHOA
+- BIENSOAN(MATG, MASACH, VAITRO
+- DAILI(MADL, TENDL, DIACHI, SDT
+- PHIEUXUAT_SACH(MAPX, MADL, MASACH, NGAYXUAT, SOLUONG, DONGIAXUAT)
 **Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 15 [ERD-017] — Thiết kế ERD & Ánh xạ Schema: Quản lý Khách Sạn & Đặt Phòng Nghỉ Dưỡng
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `LOAI_PHONG, PHONG, KHACH_HANG, PHIEU_DAT, DICH_VU`
-
-### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Khách Sạn & Đặt Phòng Nghỉ Dưỡng', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Khách Sạn & Đặt Phòng Nghỉ Dưỡng
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
-
-**Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
-
----
-
-## Bài 16 [ERD-018] — Thiết kế ERD & Ánh xạ Schema: Quản lý Cảng Biển & Xuất Nhập Khẩu Container
+## Bài 09 [ERD-P09] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Giao Hàng Chuyển Phát Nhanh Express
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `TAU_HANG, CAU_CANG, CONTAINER, DOANH_NGHIEP, PHIEU_XUATNHAP`
+- **Lược đồ tham chiếu:** `BUUCUC(MABC, TENBC, DIACHI, SDT), BUUTA(MABT, HOTEN, SDT, MABC), KHACHHANG(MAKH, HOTEN, DIACHI, SDT), DONHANG(MADON, MAKH_GUI, MAKH_NHAN, MABT, NGAYGUI, TRANGTHAI, PHIVC), KIENHANG(MAKIEN, MADON, MOTA, TRONGLUONG_KG, KICHTHUOC)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Cảng Biển & Xuất Nhập Khẩu Container', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế ERD cho Hệ thống Giao hàng nhanh: Khách hàng gửi đơn hàng từ bưu cục, bưu tá nhận phụ trách vận chuyển, đơn hàng gồm nhiều kiện hàng có trọng lượng khác nhau.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Cảng Biển & Xuất Nhập Khẩu Container
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
+- BUUCUC: MABC, TENBC, DIACHI
+- BUUTA: MABT, HOTEN, SDT
+- KHACHHANG: MAKH, HOTEN, DIACHI, SDT
+- DONHANG: MADON, NGAYGUI, TRANGTHAI, PHIVC
+- KIENHANG: MAKIEN, MOTA, TRONGLUONG_KG
 
+**Mối kết hợp và bản số min-max:**
+- BUUCUC - BUUTA: 1:N
+- BUUTA - DONHANG: 1:N
+- KHACHHANG (Gửi/Nhận) - DONHANG: 1:N
+- DONHANG - KIENHANG: 1:N (Thực thể yếu Kiện hàng)
+
+**Lược đồ quan hệ chuyển đổi:**
+- BUUCUC(MABC, TENBC, DIACHI, SDT
+- BUUTA(MABT, HOTEN, SDT, MABC
+- KHACHHANG(MAKH, HOTEN, DIACHI, SDT
+- DONHANG(MADON, MAKH_GUI, MAKH_NHAN, MABT, NGAYGUI, TRANGTHAI, PHIVC
+- KIENHANG(MAKIEN, MADON, MOTA, TRONGLUONG_KG, KICHTHUOC)
 **Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 17 [ERD-019] — Thiết kế ERD & Ánh xạ Schema: Quản lý Vườn Ươm & Phân Phối Cây Cảnh
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `LOAI_CAY, CAY_CANH, VUON_UOM, NHA_VUON, DON_DAT`
-
-### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Vườn Ươm & Phân Phối Cây Cảnh', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Vườn Ươm & Phân Phối Cây Cảnh
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
-
-**Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
-
----
-
-## Bài 18 [ERD-020] — Thiết kế ERD & Ánh xạ Schema: Quản lý Thẻ Phòng Tập Gym & Huấn Luyện Viên
+## Bài 10 [ERD-P10] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Chuỗi Siêu Thị Mini & Nhà Cung Cấp
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `GOI_TAP, HOI_VIEN, HLV, BUOI_TAP, DIEM_DANH`
+- **Lược đồ tham chiếu:** `CUAHANG(MACH, TENCH, DIACHI, QUAN), NHANVIEN(MANV, HOTEN, CHUCVU, MACH), NHACUNGCAP(MANCC, TENNCC, DIACHI, SDT), MAT_HANG(MAMH, TENMH, DVT, DONGIA_BAN), DON_NHAP(MADN, MACH, MANCC, NGAYNHAP, TONGTIEN), CT_NHAP(MADN, MAMH, SOLUONG, DONGIANHAP)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Thẻ Phòng Tập Gym & Huấn Luyện Viên', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế ERD cho chuỗi siêu thị tiện lợi: Quản lý các cửa hàng chi nhánh, nhân viên làm việc, nhà cung cấp giao các lô hàng và bán hàng cho người tiêu dùng.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Thẻ Phòng Tập Gym & Huấn Luyện Viên
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
+- CUAHANG: MACH, TENCH, DIACHI, QUAN
+- NHANVIEN: MANV, HOTEN, CHUCVU
+- NHACUNGCAP: MANCC, TENNCC, DIACHI
+- MAT_HANG: MAMH, TENMH, DVT, DONGIA_BAN
+- DON_NHAP: MADN, NGAYNHAP, TONGTIEN
 
+**Mối kết hợp và bản số min-max:**
+- CUAHANG - NHANVIEN: 1:N
+- CUAHANG - DON_NHAP: 1:N
+- NHACUNGCAP - DON_NHAP: 1:N
+- DON_NHAP - MAT_HANG: M:N qua CT_NHAP
+
+**Lược đồ quan hệ chuyển đổi:**
+- CUAHANG(MACH, TENCH, DIACHI, QUAN
+- NHANVIEN(MANV, HOTEN, CHUCVU, MACH
+- NHACUNGCAP(MANCC, TENNCC, DIACHI, SDT
+- MAT_HANG(MAMH, TENMH, DVT, DONGIA_BAN
+- DON_NHAP(MADN, MACH, MANCC, NGAYNHAP, TONGTIEN
+- CT_NHAP(MADN, MAMH, SOLUONG, DONGIANHAP)
 **Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 19 [ERD-021] — Thiết kế ERD & Ánh xạ Schema: Quản lý Nhà Hàng Tiệc Cưới & Thực Đơn
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `SANH_TIEC, LOAI_TIEC, KHACH_DAT, THUC_DON, MON_AN`
-
-### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Nhà Hàng Tiệc Cưới & Thực Đơn', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Nhà Hàng Tiệc Cưới & Thực Đơn
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
-
-**Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
-
----
-
-## Bài 20 [ERD-022] — Thiết kế ERD & Ánh xạ Schema: Quản lý Học Bổng Khuyến Khích Học Tập UIT
+## Bài 11 [ERD-P11] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Trung Tâm Ngoại Ngữ & Thi Chứng Chỉ
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `LOAI_HOCBONG, SINH_VIEN, HOC_KY, HO_SO_XET, KET_QUA`
+- **Lược đồ tham chiếu:** `TRUNGTAM(MATT, TENTT, DIACHI), KHOAHOC(MAKH, TENKH, THOILUONG, HOCPHI), LOPHOC(MALOP, MAKH, MATT, NGAYBD, PHONG), GIAOVIEN(MAGV, HOTEN, CHUNGCHI, SDT), PHANCONG_DAY(MALOP, MAGV, THULAODAY), HOCVIEN(MAHV, HOTEN, NGAYSINH, SDT), DANGKY_HOC(MALOP, MAHV, NGAYDK, DIEMTHI)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Học Bổng Khuyến Khích Học Tập UIT', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế ERD quản lý trung tâm đào tạo tiếng Anh: Các khóa học (IELTS, TOEIC), mở thành nhiều lớp tại các chi nhánh, giáo viên giảng dạy và học viên đăng ký theo học.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Học Bổng Khuyến Khích Học Tập UIT
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
+- TRUNGTAM: MATT, TENTT, DIACHI
+- KHOAHOC: MAKH, TENKH, THOILUONG, HOCPHI
+- LOPHOC: MALOP, NGAYBD, PHONG
+- GIAOVIEN: MAGV, HOTEN, CHUNGCHI
+- HOCVIEN: MAHV, HOTEN, NGAYSINH
 
+**Mối kết hợp và bản số min-max:**
+- TRUNGTAM - LOPHOC: 1:N
+- KHOAHOC - LOPHOC: 1:N
+- LOPHOC - GIAOVIEN: M:N qua PHANCONG_DAY
+- LOPHOC - HOCVIEN: M:N qua DANGKY_HOC
+
+**Lược đồ quan hệ chuyển đổi:**
+- TRUNGTAM(MATT, TENTT, DIACHI
+- KHOAHOC(MAKH, TENKH, THOILUONG, HOCPHI
+- LOPHOC(MALOP, MAKH, MATT, NGAYBD, PHONG
+- GIAOVIEN(MAGV, HOTEN, CHUNGCHI, SDT
+- PHANCONG_DAY(MALOP, MAGV, THULAODAY
+- HOCVIEN(MAHV, HOTEN, NGAYSINH, SDT
+- DANGKY_HOC(MALOP, MAHV, NGAYDK, DIEMTHI)
 **Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 21 [ERD-023] — Thiết kế ERD & Ánh xạ Schema: Quản lý Trạm Sạc Xe Điện Thông Minh
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `TRAM_SAC, TRU_SAC, XE_DIEN, PHIEN_SAC, HOA_DON`
-
-### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Trạm Sạc Xe Điện Thông Minh', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Trạm Sạc Xe Điện Thông Minh
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
-
-**Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
-
----
-
-## Bài 22 [ERD-024] — Thiết kế ERD & Ánh xạ Schema: Quản lý Trung Tâm Ngoại Ngữ & Thi Chứng Chỉ
+## Bài 12 [ERD-P12] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Bảo Hiểm Y Tế & Khám Chữa Bệnh
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `KHOA_HOC, LOP_HOC, HOC_VIEN, GIANG_VIEN, CHUNG_CHI`
+- **Lược đồ tham chiếu:** `COQUAN_BH(MACQ, TENCQ, TINH_TP), BENHNHAN(MABN, HOTEN, NGAYSINH, CCCD, DIACHI), THE_BHYT(MATHE, MABN, MACQ, NGAYCAP, HANSUDUNG, MUC_HUONG), BENHVIEN(MABV, TENBV, TUYEN_BV, DIACHI), DOT_KHAM(MA_DK, MATHE, MABV, NGAYKHAM, CHANDOAN, CHIPHI_TONG, BHYT_CHITRA)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Trung Tâm Ngoại Ngữ & Thi Chứng Chỉ', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế ERD cho Hệ thống Bảo hiểm y tế toàn dân: Cơ quan BH cấp thẻ cho công dân, công dân sử dụng thẻ để khám chữa bệnh tại các bệnh viện theo tuyến quy định.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Trung Tâm Ngoại Ngữ & Thi Chứng Chỉ
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
+- COQUAN_BH: MACQ, TENCQ, TINH_TP
+- BENHNHAN: MABN, HOTEN, NGAYSINH, CCCD
+- THE_BHYT: MATHE, NGAYCAP, HANSUDUNG, MUC_HUONG
+- BENHVIEN: MABV, TENBV, TUYEN_BV
+- DOT_KHAM: MA_DK, NGAYKHAM, CHANDOAN, CHIPHI_TONG
 
+**Mối kết hợp và bản số min-max:**
+- BENHNHAN - THE_BHYT: 1:1 (hoặc 1:N theo từng đợt cấp)
+- COQUAN_BH - THE_BHYT: 1:N
+- THE_BHYT - DOT_KHAM: 1:N
+- BENHVIEN - DOT_KHAM: 1:N
+
+**Lược đồ quan hệ chuyển đổi:**
+- COQUAN_BH(MACQ, TENCQ, TINH_TP
+- BENHNHAN(MABN, HOTEN, NGAYSINH, CCCD, DIACHI
+- THE_BHYT(MATHE, MABN, MACQ, NGAYCAP, HANSUDUNG, MUC_HUONG
+- BENHVIEN(MABV, TENBV, TUYEN_BV, DIACHI
+- DOT_KHAM(MA_DK, MATHE, MABV, NGAYKHAM, CHANDOAN, CHIPHI_TONG, BHYT_CHITRA)
 **Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 23 [ERD-025] — Thiết kế ERD & Ánh xạ Schema: Quản lý Kho Vận & Robot Tự Hành AGV
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `KHO_HANG, KE_HANG, ROBOT, PALLET, DON_XUATKHO`
-
-### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Kho Vận & Robot Tự Hành AGV', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Kho Vận & Robot Tự Hành AGV
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
-
-**Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
-
----
-
-## Bài 24 [ERD-026] — Thiết kế ERD & Ánh xạ Schema: Quản lý Hệ Thống Bán Vé Tàu Hỏa Bắc - Nam
+## Bài 13 [ERD-P13] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Bãi Đỗ Xe Tự Động Smart Parking
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `GA_TAU, CHUYEN_TAU, TOA_TAU, GHE_NGOI, VE_TAU`
+- **Lược đồ tham chiếu:** `BAIDO(MABD, TENBD, DIACHI, SUCCHUA), KHUVUC(MAKV, MABD, TENKV, LOAIXE_CHO_PHEP), VITRI_DO(MAVT, MAKV, SOVITRI, TRANGTHAI), KHACHHANG(MAKH, HOTEN, SDT), PHUONGTIEN(BIENSO, MAKH, LOAIXE, MAUXE), LUOT_GUI(MALUOT, BIENSO, MAVT, THOIGIAPVAO, THOIGIARA, GIATIEN)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Hệ Thống Bán Vé Tàu Hỏa Bắc - Nam', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế ERD cho Hệ thống Bãi đỗ xe thông minh: Quản lý bãi đỗ phân chia theo các khu vực đỗ, vị trí đỗ dành cho xe máy/ô tô và các lượt gửi xe có thời gian vào - ra.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Hệ Thống Bán Vé Tàu Hỏa Bắc - Nam
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
+- BAIDO: MABD, TENBD, DIACHI, SUCCHUA
+- KHUVUC: MAKV, TENKV, LOAIXE_CHO_PHEP
+- VITRI_DO: MAVT, SOVITRI, TRANGTHAI
+- KHACHHANG: MAKH, HOTEN, SDT
+- PHUONGTIEN: BIENSO, LOAIXE
+- LUOT_GUI: MALUOT, THOIGIAPVAO, THOIGIARA, GIATIEN
 
+**Mối kết hợp và bản số min-max:**
+- BAIDO - KHUVUC: 1:N
+- KHUVUC - VITRI_DO: 1:N
+- KHACHHANG - PHUONGTIEN: 1:N
+- PHUONGTIEN - LUOT_GUI: 1:N
+- VITRI_DO - LUOT_GUI: 1:N
+
+**Lược đồ quan hệ chuyển đổi:**
+- BAIDO(MABD, TENBD, DIACHI, SUCCHUA
+- KHUVUC(MAKV, MABD, TENKV, LOAIXE_CHO_PHEP
+- VITRI_DO(MAVT, MAKV, SOVITRI, TRANGTHAI
+- KHACHHANG(MAKH, HOTEN, SDT
+- PHUONGTIEN(BIENSO, MAKH, LOAIXE, MAUXE
+- LUOT_GUI(MALUOT, BIENSO, MAVT, THOIGIAPVAO, THOIGIARA, GIATIEN)
 **Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 25 [ERD-027] — Thiết kế ERD & Ánh xạ Schema: Quản lý Ngân Hàng Máu & Hiến Máu Nhân Đạo
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `DIEM_HIENMAU, NGUOI_HIEN, TUI_MAU, BENH_VIEN, PHIEU_LINH`
-
-### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Ngân Hàng Máu & Hiến Máu Nhân Đạo', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Ngân Hàng Máu & Hiến Máu Nhân Đạo
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
-
-**Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
-
----
-
-## Bài 26 [ERD-028] — Thiết kế ERD & Ánh xạ Schema: Quản lý Sân Bay & Chuyến Bay Nội Địa
+## Bài 14 [ERD-P14] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Nhà Hàng & Bàn Ăn Trực Tuyến
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `MAY_BAY, TUYEN_BAY, CHUYEN_BAY, PHI_CONG, HANH_KHACH`
+- **Lược đồ tham chiếu:** `KHUVUC_BAN(MAKV, TENKV, PHUTHU), BANAN(MABAN, MAKV, SOBAN, SOGHE, TRANGTHAI), MONAN(MAMON, TENMON, DVT, DONGIA, LOAIMON), NHANVIEN(MANV, HOTEN, CALAM, SDT), HOADON(MAHD, MABAN, MANV, NGAYLAP, GIOLAP, TONGTIEN), CT_GOIMON(MAHD, MAMON, SOLUONG, GHICHU)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Sân Bay & Chuyến Bay Nội Địa', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế ERD quản lý nhà hàng ẩm thực: Bàn ăn phân bổ theo các khu vực (VIP, sân vườn, phòng lạnh), nhân viên phục vụ mở bàn và ghi nhận danh sách món ăn gọi cho khách.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Sân Bay & Chuyến Bay Nội Địa
-**Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
+- KHUVUC_BAN: MAKV, TENKV, PHUTHU
+- BANAN: MABAN, SOBAN, SOGHE, TRANGTHAI
+- MONAN: MAMON, TENMON, DVT, DONGIA
+- NHANVIEN: MANV, HOTEN, CALAM
+- HOADON: MAHD, NGAYLAP, GIOLAP, TONGTIEN
 
+**Mối kết hợp và bản số min-max:**
+- KHUVUC_BAN - BANAN: 1:N
+- BANAN - HOADON: 1:N
+- NHANVIEN - HOADON: 1:N
+- HOADON - MONAN: M:N qua CT_GOIMON
+
+**Lược đồ quan hệ chuyển đổi:**
+- KHUVUC_BAN(MAKV, TENKV, PHUTHU
+- BANAN(MABAN, MAKV, SOBAN, SOGHE, TRANGTHAI
+- MONAN(MAMON, TENMON, DVT, DONGIA, LOAIMON
+- NHANVIEN(MANV, HOTEN, CALAM, SDT
+- HOADON(MAHD, MABAN, MANV, NGAYLAP, GIOLAP, TONGTIEN
+- CT_GOIMON(MAHD, MAMON, SOLUONG, GHICHU)
 **Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 27 [M03-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Cứu Trợ Bão Lũ
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `ERD: XA, HO_DAN, NHA_HAOTAM, DOT_CUUTRO, DONG_GOP, PHIEU_NHAN`
-
-### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Tiếp nhận & Phân bổ Tiền cứu trợ Bão lũ gồm các tập thực thể: XA, HO_DAN, NHA_HAOTAM, DOT_CUUTRO cùng các mối kết hợp tương ứng.
-
-### 2. Hướng Dẫn & Lời Giải Chi Tiết
-**Các thực thể và thuộc tính:**
-- {'name': 'XA', 'pk': 'MAXA', 'attributes': ['MAXA', 'TENXA', 'HUYEN'], 'description': 'Địa bàn hành chính cấp xã/phường.'}
-- {'name': 'HO_DAN', 'pk': 'MAHO', 'attributes': ['MAHO', 'CHUHO', 'SONKHAU', 'MUCDO_THIETHAI', 'MAXA'], 'description': 'Hộ gia đình bị ảnh hưởng bão lũ.'}
-- {'name': 'NHA_HAOTAM', 'pk': 'MANHT', 'attributes': ['MANHT', 'TENNHT', 'SDT', 'LOAIHINH'], 'description': 'Nhà hảo tâm đóng góp ủng hộ.'}
-- {'name': 'DOT_CUUTRO', 'pk': 'MADOT', 'attributes': ['MADOT', 'TENDOT', 'NGAYBD', 'NGAYKT'], 'description': 'Đợt phát động cứu trợ.'}
-**Lược đồ quan hệ chuyển đổi:**
-- {'table': 'XA', 'pk': ['MAXA'], 'fk': []}
-- {'table': 'HO_DAN', 'pk': ['MAHO'], 'fk': [{'column': 'MAXA', 'ref_table': 'XA', 'ref_column': 'MAXA'}]}
-- {'table': 'NHA_HAOTAM', 'pk': ['MANHT'], 'fk': []}
-- {'table': 'DOT_CUUTRO', 'pk': ['MADOT'], 'fk': []}
-- {'table': 'DONG_GOP', 'pk': ['MADG'], 'fk': [{'column': 'MANHT', 'ref_table': 'NHA_HAOTAM', 'ref_column': 'MANHT'}, {'column': 'MADOT', 'ref_table': 'DOT_CUUTRO', 'ref_column': 'MADOT'}]}
-- {'table': 'PHIEU_NHAN', 'pk': ['MAPHIEU'], 'fk': [{'column': 'MAHO', 'ref_table': 'HO_DAN', 'ref_column': 'MAHO'}, {'column': 'MADOT', 'ref_table': 'DOT_CUUTRO', 'ref_column': 'MADOT'}]}
-
-**Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.80đ
-- `intermediate_steps`: 0.80đ
-
----
-
-## Bài 28 [M04-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Chuỗi Cửa Hàng Xăng Dầu
+## Bài 15 [ERD-P15] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Triển Lãm & Tác Phẩm Nghệ Thuật
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `ERD: CUAHANG, NHANVIEN, NHIENLIEU, BE_CHUA, HOADON, CTHD`
+- **Lược đồ tham chiếu:** `BAOTANG(MABT, TENBT, THANHPHO), HOASI(MAHS, HOTEN, NAMSINH, QUOCTICH, PHONGCACH), TACPHAM(MATP, TENTP, MAHS, NAMST, CHATLIEU, GIATRIdo_USD), TRIENLAM(MATL, TENTL, MABT, NGAYBD, NGAYKT), TRUNGBAY(MATL, MATP, VITRI_TREO, BAOHIEM_USD)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Chuỗi Cửa hàng Bán lẻ Xăng dầu gồm các thực thể: CUAHANG, NHANVIEN, NHIENLIEU, BE_CHUA, HOADON cùng các mối kết hợp tương ứng.
+Thiết kế ERD cho Bảo tàng mỹ thuật: Quản lý họa sĩ sáng tác tác phẩm, bảo tàng tổ chức các đợt triển lãm và danh sách tác phẩm được trưng bày trong từng đợt.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- {'name': 'CUAHANG', 'pk': 'MACH', 'attributes': ['MACH', 'TENCH', 'DIACHI', 'QUAN', 'SO_TRU_BOM'], 'description': 'Cửa hàng xăng dầu trực thuộc chuỗi.'}
-- {'name': 'NHANVIEN', 'pk': 'MANV', 'attributes': ['MANV', 'HOTEN', 'NGAYSINH', 'CHUCVU', 'LUONG'], 'description': 'Nhân viên công tác tại cửa hàng.'}
-- {'name': 'NHIENLIEU', 'pk': 'MANL', 'attributes': ['MANL', 'TENNL', 'LOAINL', 'DONVITINH', 'DONGIA'], 'description': 'Mặt hàng xăng dầu phân phối.'}
-- {'name': 'BE_CHUA', 'pk': 'MABE', 'attributes': ['MABE', 'DUNGTICH', 'LUONG_TON'], 'description': 'Bể ngầm chứa nhiên liệu tại cửa hàng.'}
-- {'name': 'HOADON', 'pk': 'MAHD', 'attributes': ['MAHD', 'NGAYHD', 'HINHTHUC_TT'], 'description': 'Hóa đơn xuất bán lẻ xăng dầu.'}
+- BAOTANG: MABT, TENBT, THANHPHO
+- HOASI: MAHS, HOTEN, NAMSINH, QUOCTICH
+- TACPHAM: MATP, TENTP, NAMST, CHATLIEU, GIATRI
+- TRIENLAM: MATL, TENTL, NGAYBD, NGAYKT
+
+**Mối kết hợp và bản số min-max:**
+- HOASI - TACPHAM: 1:N
+- BAOTANG - TRIENLAM: 1:N
+- TRIENLAM - TACPHAM: M:N qua TRUNGBAY
+
 **Lược đồ quan hệ chuyển đổi:**
-- {'table': 'CUAHANG', 'pk': ['MACH'], 'fk': []}
-- {'table': 'NHANVIEN', 'pk': ['MANV'], 'fk': [{'column': 'MACH', 'ref_table': 'CUAHANG', 'ref_column': 'MACH'}]}
-- {'table': 'NHIENLIEU', 'pk': ['MANL'], 'fk': []}
-- {'table': 'BE_CHUA', 'pk': ['MABE'], 'fk': [{'column': 'MACH', 'ref_table': 'CUAHANG', 'ref_column': 'MACH'}, {'column': 'MANL', 'ref_table': 'NHIENLIEU', 'ref_column': 'MANL'}]}
-- {'table': 'HOADON', 'pk': ['MAHD'], 'fk': [{'column': 'MACH', 'ref_table': 'CUAHANG', 'ref_column': 'MACH'}, {'column': 'MANV', 'ref_table': 'NHANVIEN', 'ref_column': 'MANV'}]}
-- {'table': 'CTHD', 'pk': ['MAHD', 'MANL'], 'fk': [{'column': 'MAHD', 'ref_table': 'HOADON', 'ref_column': 'MAHD'}, {'column': 'MANL', 'ref_table': 'NHIENLIEU', 'ref_column': 'MANL'}]}
+- BAOTANG(MABT, TENBT, THANHPHO
+- HOASI(MAHS, HOTEN, NAMSINH, QUOCTICH, PHONGCACH
+- TACPHAM(MATP, TENTP, MAHS, NAMST, CHATLIEU, GIATRIdo_USD
+- TRIENLAM(MATL, TENTL, MABT, NGAYBD, NGAYKT
+- TRUNGBAY(MATL, MATP, VITRI_TREO, BAOHIEM_USD)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.50đ
-- `logic`: 1.00đ
-- `intermediate_steps`: 1.00đ
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---
 
-## Bài 29 [M05-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `ERD: TOANHA, CANHO, KHACHHANG, NHANVIEN, HOPDONG, PHIEUTHU`
+## Bài 16 [ERD-P16] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Trạm Sạc Xe Điện Toàn Quốc
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `TRAMSAC(MATS, TENTS, DIACHI, TOADO_GPS), TRUSAC(MATRU, MATS, CONGSUAT_KW, CHUAN_CAM, TRANGTHAI), KHACHHANG(MAKH, HOTEN, SDT, SOTK_THANHTOAN), XEDIEN(BIENSO, MAKH, HANGXE, DUDUNGLUONG_PIN), PHIEN_SAC(MAPHIEN, MATRU, BIENSO, GIO_BD, GIO_KT, SODIEN_KWH, THANHTIEN)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
 
 ### 1. Đề Bài
-Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Căn hộ Chung cư & Hợp đồng Thuê nhà gồm các thực thể: TOANHA, CANHO, KHACHHANG, NHANVIEN, HOPDONG, PHIEUTHU cùng các mối kết hợp tương ứng.
+Thiết kế ERD cho Mạng lưới trạm sạc xe điện thông minh: Mỗi trạm có nhiều trụ sạc công suất khác nhau (sạc nhanh, sạc siêu nhanh), ghi nhận lịch sử phiên sạc của phương tiện.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- {'name': 'TOANHA', 'pk': 'MATN', 'attributes': ['MATN', 'TENTN', 'DIACHI', 'SOTANG'], 'description': 'Tòa nhà / Block chung cư.'}
-- {'name': 'CANHO', 'pk': 'MACH', 'attributes': ['MACH', 'SOPHONG', 'DIENTICH', 'GIATHUE_CHUAN', 'TRANGTHAI'], 'description': 'Căn hộ trong tòa nhà.'}
-- {'name': 'KHACHHANG', 'pk': 'MAKH', 'attributes': ['MAKH', 'HOTEN', 'CCCD', 'SDT', 'LOAIKH'], 'description': 'Khách hàng thuê căn hộ.'}
-- {'name': 'NHANVIEN', 'pk': 'MANV', 'attributes': ['MANV', 'HOTEN', 'PHONGBAN', 'SDT'], 'description': 'Nhân viên môi giới / quản lý.'}
-- {'name': 'HOPDONG', 'pk': 'MAHD', 'attributes': ['MAHD', 'NGAYKY', 'NGAYBD', 'NGAYKT', 'GIATHUE_THUCTE', 'TIENCOC'], 'description': 'Hợp đồng cho thuê căn hộ.'}
-- {'name': 'PHIEUTHU', 'pk': 'SOPHIEU', 'attributes': ['SOPHIEU', 'THANG', 'NAM', 'NGAYTHU', 'SOTIEN'], 'description': 'Phiếu thu tiền thuê hàng tháng.'}
+- TRAMSAC: MATS, TENTS, DIACHI, TOADO_GPS
+- TRUSAC: MATRU, CONGSUAT_KW, CHUAN_CAM
+- KHACHHANG: MAKH, HOTEN, SDT
+- XEDIEN: BIENSO, HANGXE, DUDUNGLUONG_PIN
+- PHIEN_SAC: MAPHIEN, GIO_BD, GIO_KT, SODIEN_KWH, THANHTIEN
+
+**Mối kết hợp và bản số min-max:**
+- TRAMSAC - TRUSAC: 1:N
+- KHACHHANG - XEDIEN: 1:N
+- TRUSAC - PHIEN_SAC: 1:N
+- XEDIEN - PHIEN_SAC: 1:N
+
 **Lược đồ quan hệ chuyển đổi:**
-- {'table': 'TOANHA', 'pk': ['MATN'], 'fk': []}
-- {'table': 'CANHO', 'pk': ['MACH'], 'fk': [{'column': 'MATN', 'ref_table': 'TOANHA', 'ref_column': 'MATN'}]}
-- {'table': 'KHACHHANG', 'pk': ['MAKH'], 'fk': []}
-- {'table': 'NHANVIEN', 'pk': ['MANV'], 'fk': []}
-- {'table': 'HOPDONG', 'pk': ['MAHD'], 'fk': [{'column': 'MACH', 'ref_table': 'CANHO', 'ref_column': 'MACH'}, {'column': 'MAKH', 'ref_table': 'KHACHHANG', 'ref_column': 'MAKH'}, {'column': 'MANV', 'ref_table': 'NHANVIEN', 'ref_column': 'MANV'}]}
-- {'table': 'PHIEUTHU', 'pk': ['SOPHIEU'], 'fk': [{'column': 'MAHD', 'ref_table': 'HOPDONG', 'ref_column': 'MAHD'}]}
+- TRAMSAC(MATS, TENTS, DIACHI, TOADO_GPS
+- TRUSAC(MATRU, MATS, CONGSUAT_KW, CHUAN_CAM, TRANGTHAI
+- KHACHHANG(MAKH, HOTEN, SDT, SOTK_THANHTOAN
+- XEDIEN(BIENSO, MAKH, HANGXE, DUDUNGLUONG_PIN
+- PHIEN_SAC(MAPHIEN, MATRU, BIENSO, GIO_BD, GIO_KT, SODIEN_KWH, THANHTIEN)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
 
 **Barem chấm điểm đề xuất:**
-- `syntax`: 0.40đ
-- `logic`: 0.80đ
-- `intermediate_steps`: 0.80đ
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
+
+---
+
+## Bài 17 [ERD-P17] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Nhà Hát Kịch & Vé Buổi Diễn
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `RAPHAT(MARAP, TENRAP, DIACHI, SOGHE), VOIKICH(MAVK, TENTACPHAM, DAODIEN, THOILUONG), NGHESI(MANS, HOTEN, DANHHIEU, CHUYENMON), BUOIDISEN(MABD, MARAP, MAVK, NGAYDIEN, GIODIEN, GIAVE_CHUAN), THAMGIA_VK(MAVK, MANS, VAIDIEN), VE_XEM(MAVE, MABD, SOGHE, TENKHACH, SDT, GIATHU)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Thiết kế ERD quản lý sân khấu kịch nghệ: Các vở kịch do nhiều nghệ sĩ tham gia diễn xuất, tổ chức diễn tại các rạp hát và phát hành vé ngồi cho khán giả.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- RAPHAT: MARAP, TENRAP, DIACHI, SOGHE
+- VOIKICH: MAVK, TENTACPHAM, DAODIEN, THOILUONG
+- NGHESI: MANS, HOTEN, DANHHIEU
+- BUOIDISEN: MABD, NGAYDIEN, GIODIEN
+- VE_XEM: MAVE, SOGHE, TENKHACH, GIATHU
+
+**Mối kết hợp và bản số min-max:**
+- RAPHAT - BUOIDISEN: 1:N
+- VOIKICH - BUOIDISEN: 1:N
+- VOIKICH - NGHESI: M:N qua THAMGIA_VK
+- BUOIDISEN - VE_XEM: 1:N
+
+**Lược đồ quan hệ chuyển đổi:**
+- RAPHAT(MARAP, TENRAP, DIACHI, SOGHE
+- VOIKICH(MAVK, TENTACPHAM, DAODIEN, THOILUONG
+- NGHESI(MANS, HOTEN, DANHHIEU, CHUYENMON
+- BUOIDISEN(MABD, MARAP, MAVK, NGAYDIEN, GIODIEN, GIAVE_CHUAN
+- THAMGIA_VK(MAVK, MANS, VAIDIEN
+- VE_XEM(MAVE, MABD, SOGHE, TENKHACH, SDT, GIATHU)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
+
+---
+
+## Bài 18 [ERD-P18] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Đội Xe Cứu Thương Khẩn Cấp 115
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `BENHVIEN(MABV, TENBV, DIACHI, SDT_CAPCUU), DOIXE(MADOI, MABV, TENDOI), XECUUTHUONG(MAXE, MADOI, BIENSO, TRANGTHIETBI, TRANGTHAI), NHANSU(MANS, HOTEN, CHUCDANH, MADOI), CUOCGOI_CC(MACUOC, NGAYGIO, DIACHINHAN, HOTEN_BENHNHAN, TINHTRANG), DIEUDONG(MACUOC, MAXE, MANS_TAIXE, MANS_YTA, GIO_XUATPHAT, GIO_DEN)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Thiết kế ERD cho Đội xe cứu thương khẩn cấp: Bệnh viện quản lý đội xe và nhân sự (tài xế, y tá), tiếp nhận cuộc gọi cấp cứu và điều động phương tiện đến hiện trường.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- BENHVIEN: MABV, TENBV, DIACHI
+- DOIXE: MADOI, TENDOI
+- XECUUTHUONG: MAXE, BIENSO, TRANGTHAI
+- NHANSU: MANS, HOTEN, CHUCDANH
+- CUOCGOI_CC: MACUOC, NGAYGIO, DIACHINHAN, TINHTRANG
+
+**Mối kết hợp và bản số min-max:**
+- BENHVIEN - DOIXE: 1:N
+- DOIXE - XECUUTHUONG: 1:N
+- DOIXE - NHANSU: 1:N
+- CUOCGOI_CC - DIEUDONG: 1:N
+- XECUUTHUONG - DIEUDONG: 1:N
+
+**Lược đồ quan hệ chuyển đổi:**
+- BENHVIEN(MABV, TENBV, DIACHI, SDT_CAPCUU
+- DOIXE(MADOI, MABV, TENDOI
+- XECUUTHUONG(MAXE, MADOI, BIENSO, TRANGTHIETBI, TRANGTHAI
+- NHANSU(MANS, HOTEN, CHUCDANH, MADOI
+- CUOCGOI_CC(MACUOC, NGAYGIO, DIACHINHAN, HOTEN_BENHNHAN, TINHTRANG
+- DIEUDONG(MACUOC, MAXE, MANS_TAIXE, MANS_YTA, GIO_XUATPHAT, GIO_DEN)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
+
+---
+
+## Bài 19 [ERD-P19] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Phòng Gym & Huấn Luyện Viên Cá Nhân
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `PHONGGYM(MAPG, TENPG, DIACHI, HOTLINE), HLV(MAHLV, HOTEN, CHUYENMON, CHUNGCHI, MAPG), HOIVIEN(MAHV, HOTEN, NGAYSINH, SDT, GIOITINH), GOITAP(MAGT, TENGT, THOIHAN_THANG, GIATIEN), THE_HOIVIEN(MATHE, MAHV, MAGT, MAPG, NGAYKICHHOAT, HANSUDUNG), LICHHEN_PT(MALICH, MATHE, MAHLV, NGAYTAP, GIOTAP, NOIDUNGTAP)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Thiết kế ERD cho Hệ thống Fitness & Gym: Hội viên đăng ký các gói tập (thẻ hội viên), thuê huấn luyện viên cá nhân (PT) và đặt lịch tập luyện định kỳ.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- PHONGGYM: MAPG, TENPG, DIACHI
+- HLV: MAHLV, HOTEN, CHUYENMON, CHUNGCHI
+- HOIVIEN: MAHV, HOTEN, NGAYSINH, SDT
+- GOITAP: MAGT, TENGT, THOIHAN_THANG, GIATIEN
+- THE_HOIVIEN: MATHE, NGAYKICHHOAT, HANSUDUNG
+- LICHHEN_PT: MALICH, NGAYTAP, GIOTAP
+
+**Mối kết hợp và bản số min-max:**
+- PHONGGYM - HLV: 1:N
+- HOIVIEN - THE_HOIVIEN: 1:N
+- GOITAP - THE_HOIVIEN: 1:N
+- PHONGGYM - THE_HOIVIEN: 1:N
+- THE_HOIVIEN - LICHHEN_PT: 1:N
+- HLV - LICHHEN_PT: 1:N
+
+**Lược đồ quan hệ chuyển đổi:**
+- PHONGGYM(MAPG, TENPG, DIACHI, HOTLINE
+- HLV(MAHLV, HOTEN, CHUYENMON, CHUNGCHI, MAPG
+- HOIVIEN(MAHV, HOTEN, NGAYSINH, SDT, GIOITINH
+- GOITAP(MAGT, TENGT, THOIHAN_THANG, GIATIEN
+- THE_HOIVIEN(MATHE, MAHV, MAGT, MAPG, NGAYKICHHOAT, HANSUDUNG
+- LICHHEN_PT(MALICH, MATHE, MAHLV, NGAYTAP, GIOTAP, NOIDUNGTAP)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
+
+---
+
+## Bài 20 [ERD-P20] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Nông Nghiệp Công Nghệ Cao Smart Farm
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `TRANGTRAI(MATT, TENTT, VITRI, DIENTICH_HA), KHUNHATRONG(MAKHU, MATT, TENKHU, LOAITRUONG, DIENTICH_M2), CAYTRONG(MACAY, TENCAY, GIONG, THOIVU_NGAY), DOT_TRONG(MADOT, MAKHU, MACAY, NGAYXUONGGIONG, NGAYTHUHOACH_DUKIEN, SANLUONG_KG), CAMBIEN(MACB, MAKHU, LOAICAMBIEN, NGAYLAPDAT), DULIEU_DO(MADO, MACB, THOIDIEM, NHIETDO, DOAM, PH_DAT)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Thiết kế ERD cho Trang trại nông nghiệp thông minh: Quản lý khu nhà màng, cây trồng theo từng mùa vụ và hệ thống cảm biến IoT thu thập dữ liệu đất, nhiệt độ, độ ẩm.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- TRANGTRAI: MATT, TENTT, VITRI, DIENTICH_HA
+- KHUNHATRONG: MAKHU, TENKHU, LOAITRUONG
+- CAYTRONG: MACAY, TENCAY, GIONG
+- DOT_TRONG: MADOT, NGAYXUONGGIONG, SANLUONG_KG
+- CAMBIEN: MACB, LOAICAMBIEN
+- DULIEU_DO: MADO, THOIDIEM, NHIETDO, DOAM
+
+**Mối kết hợp và bản số min-max:**
+- TRANGTRAI - KHUNHATRONG: 1:N
+- KHUNHATRONG - DOT_TRONG: 1:N
+- CAYTRONG - DOT_TRONG: 1:N
+- KHUNHATRONG - CAMBIEN: 1:N
+- CAMBIEN - DULIEU_DO: 1:N
+
+**Lược đồ quan hệ chuyển đổi:**
+- TRANGTRAI(MATT, TENTT, VITRI, DIENTICH_HA
+- KHUNHATRONG(MAKHU, MATT, TENKHU, LOAITRUONG, DIENTICH_M2
+- CAYTRONG(MACAY, TENCAY, GIONG, THOIVU_NGAY
+- DOT_TRONG(MADOT, MAKHU, MACAY, NGAYXUONGGIONG, NGAYTHUHOACH_DUKIEN, SANLUONG_KG
+- CAMBIEN(MACB, MAKHU, LOAICAMBIEN, NGAYLAPDAT
+- DULIEU_DO(MADO, MACB, THOIDIEM, NHIETDO, DOAM, PH_DAT)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
+
+---
+
+## Bài 21 [ERD-P21] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Khu Công Nghiệp & Cho Thuê Đất Xưởng
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `KHU_CN(MAKCN, TENKCN, TINH_TP, DIENTICH_HA), PHANKHU(MAPK, MAKCN, TENPK, QUYHOACH_NGANH), LODAT(MALO, MAPK, DIENTICH_M2, VITRI, GIATHUE_M2_NAM, TRANGTHAI), DOANHNGHIEP(MADN, TENDN, MASOTHUE, NGUOIDAIDIEN, QUOCTICH), HOPDONG_THUE(MAHD, MALO, MADN, NGAYKY, THOIHAN_NAM, TIENCOC, GIATHUE_HANGNAM)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Thiết kế ERD cho Ban Quản lý Khu Công nghiệp: Quản lý phân lô đất xưởng theo ngành nghề, doanh nghiệp thuê đất dài hạn và các hợp đồng pháp lý.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- KHU_CN: MAKCN, TENKCN, TINH_TP
+- PHANKHU: MAPK, TENPK, QUYHOACH_NGANH
+- LODAT: MALO, DIENTICH_M2, VITRI, GIATHUE_M2_NAM
+- DOANHNGHIEP: MADN, TENDN, MASOTHUE, QUOCTICH
+- HOPDONG_THUE: MAHD, NGAYKY, THOIHAN_NAM, TIENCOC
+
+**Mối kết hợp và bản số min-max:**
+- KHU_CN - PHANKHU: 1:N
+- PHANKHU - LODAT: 1:N
+- LODAT - HOPDONG_THUE: 1:N
+- DOANHNGHIEP - HOPDONG_THUE: 1:N
+
+**Lược đồ quan hệ chuyển đổi:**
+- KHU_CN(MAKCN, TENKCN, TINH_TP, DIENTICH_HA
+- PHANKHU(MAPK, MAKCN, TENPK, QUYHOACH_NGANH
+- LODAT(MALO, MAPK, DIENTICH_M2, VITRI, GIATHUE_M2_NAM, TRANGTHAI
+- DOANHNGHIEP(MADN, TENDN, MASOTHUE, NGUOIDAIDIEN, QUOCTICH
+- HOPDONG_THUE(MAHD, MALO, MADN, NGAYKY, THOIHAN_NAM, TIENCOC, GIATHUE_HANGNAM)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
+
+---
+
+## Bài 22 [ERD-P22] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Hãng Xe Công Nghệ & Chuyến Xe
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `DOI_XE(MADOI, TENDOI, THANHPHO), TAIXE(MATX, HOTEN, CCCD, SDT, BIENSO, LOAIXE, MADOI), KHACHHANG(MAKH, HOTEN, SDT, DIEM_TICHLUY), CHUYENXE(MACHUYEN, MATX, MAKH, DIEMDON, DIEMDEN, QUANGDUONG_KM, GIA_CUOC, THOIGIAN_BD, THOIGIAN_KT, TRANGTHAI), DANHGIA(MADG, MACHUYEN, DIEM_SAO, NHANXET)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Thiết kế ERD cho Ứng dụng đặt xe công nghệ (Ride-hailing): Quản lý tài xế theo đội xe, khách hàng đặt các chuyến đi từ điểm đón đến điểm đến và đánh giá sao.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- DOI_XE: MADOI, TENDOI, THANHPHO
+- TAIXE: MATX, HOTEN, CCCD, SDT, BIENSO, LOAIXE
+- KHACHHANG: MAKH, HOTEN, SDT, DIEM_TICHLUY
+- CHUYENXE: MACHUYEN, DIEMDON, DIEMDEN, QUANGDUONG_KM, GIA_CUOC
+- DANHGIA: MADG, DIEM_SAO, NHANXET
+
+**Mối kết hợp và bản số min-max:**
+- DOI_XE - TAIXE: 1:N
+- TAIXE - CHUYENXE: 1:N
+- KHACHHANG - CHUYENXE: 1:N
+- CHUYENXE - DANHGIA: 1:1
+
+**Lược đồ quan hệ chuyển đổi:**
+- DOI_XE(MADOI, TENDOI, THANHPHO
+- TAIXE(MATX, HOTEN, CCCD, SDT, BIENSO, LOAIXE, MADOI
+- KHACHHANG(MAKH, HOTEN, SDT, DIEM_TICHLUY
+- CHUYENXE(MACHUYEN, MATX, MAKH, DIEMDON, DIEMDEN, QUANGDUONG_KM, GIA_CUOC, THOIGIAN_BD, THOIGIAN_KT, TRANGTHAI
+- DANHGIA(MADG, MACHUYEN, DIEM_SAO, NHANXET)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
+
+---
+
+## Bài 23 [ERD-P23] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Nhà Máy Xử Lý & Tái Chế Rác Thải
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `NHAMAY(MANM, TENNM, DIACHI, CONGSUAT_TAN_NGAY), KHUVUC_GOM(MAKV, TENKV, QUAN_HUYEN), XE_THUGOM(MAXE, BIENSO, TRONGLUONG_MAX, MANM), CONGNHAN(MACN, HOTEN, SDT, MANM), CHUYEN_GOM(MACHUYEN, MAXE, MAKV, MACN_LAIXE, NGAYGOM, KHOILUONG_KG), DOTHANH_XULY(MADOT, MANM, NGAYXULY, KHOILUONG_TAICHE_KG, KHOILUONG_CHONLAP_KG)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Thiết kế ERD quản lý thu gom và tái chế rác thải đô thị: Xe chuyên dụng gom rác từ các khu vực chuyển về nhà máy xử lý phân loại tái chế hoặc chôn lấp.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- NHAMAY: MANM, TENNM, DIACHI, CONGSUAT_TAN_NGAY
+- KHUVUC_GOM: MAKV, TENKV, QUAN_HUYEN
+- XE_THUGOM: MAXE, BIENSO, TRONGLUONG_MAX
+- CONGNHAN: MACN, HOTEN, SDT
+- CHUYEN_GOM: MACHUYEN, NGAYGOM, KHOILUONG_KG
+
+**Mối kết hợp và bản số min-max:**
+- NHAMAY - XE_THUGOM: 1:N
+- NHAMAY - CONGNHAN: 1:N
+- XE_THUGOM - CHUYEN_GOM: 1:N
+- KHUVUC_GOM - CHUYEN_GOM: 1:N
+- CONGNHAN - CHUYEN_GOM: 1:N
+- NHAMAY - DOTHANH_XULY: 1:N
+
+**Lược đồ quan hệ chuyển đổi:**
+- NHAMAY(MANM, TENNM, DIACHI, CONGSUAT_TAN_NGAY
+- KHUVUC_GOM(MAKV, TENKV, QUAN_HUYEN
+- XE_THUGOM(MAXE, BIENSO, TRONGLUONG_MAX, MANM
+- CONGNHAN(MACN, HOTEN, SDT, MANM
+- CHUYEN_GOM(MACHUYEN, MAXE, MAKV, MACN_LAIXE, NGAYGOM, KHOILUONG_KG
+- DOTHANH_XULY(MADOT, MANM, NGAYXULY, KHOILUONG_TAICHE_KG, KHOILUONG_CHONLAP_KG)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
+
+---
+
+## Bài 24 [ERD-P24] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Bản Quyền Âm Nhạc Trực Tuyến
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `TRUNGTAM_BQ(MATT, TENTT, QUOCGIA), NHACSI(MANS, HOTEN, BUTDANH, QUOCTICH), CASI(MACS, NGHEDANH, SDT, EMAIL), BAIHAT(MABH, TENBH, MANS, THELOAI, NAMST, MATT), HOPDONG_BIEUDIEN(MAHD, MABH, MACS, NGAYKY, PHIBANQUYEN_USD, THOIHAN_NAM), BAN_THUAM(MABT, MABH, MACS, NGAYPHATHANH, NEN_TANG, LUOT_STREAM)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Thiết kế ERD quản lý sở hữu trí tuệ âm nhạc: Nhạc sĩ đăng ký bản quyền bài hát, cấp phép cho ca sĩ biểu diễn hoặc phát hành bản thu âm trên các nền tảng số.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- TRUNGTAM_BQ: MATT, TENTT, QUOCGIA
+- NHACSI: MANS, HOTEN, BUTDANH
+- CASI: MACS, NGHEDANH, SDT
+- BAIHAT: MABH, TENBH, THELOAI, NAMST
+- HOPDONG_BIEUDIEN: MAHD, PHIBANQUYEN_USD, THOIHAN_NAM
+- BAN_THUAM: MABT, NEN_TANG, LUOT_STREAM
+
+**Mối kết hợp và bản số min-max:**
+- TRUNGTAM_BQ - BAIHAT: 1:N
+- NHACSI - BAIHAT: 1:N
+- BAIHAT - CASI: M:N qua HOPDONG_BIEUDIEN và BAN_THUAM
+
+**Lược đồ quan hệ chuyển đổi:**
+- TRUNGTAM_BQ(MATT, TENTT, QUOCGIA
+- NHACSI(MANS, HOTEN, BUTDANH, QUOCTICH
+- CASI(MACS, NGHEDANH, SDT, EMAIL
+- BAIHAT(MABH, TENBH, MANS, THELOAI, NAMST, MATT
+- HOPDONG_BIEUDIEN(MAHD, MABH, MACS, NGAYKY, PHIBANQUYEN_USD, THOIHAN_NAM
+- BAN_THUAM(MABT, MABH, MACS, NGAYPHATHANH, NEN_TANG, LUOT_STREAM)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
+
+---
+
+## Bài 25 [ERD-P25] — Thiết kế ERD & Ánh xạ Schema: Quản Lý Trạm Khí Tượng Thủy Văn & Dự Báo
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
+- **Lược đồ tham chiếu:** `COQUAN_KT(MACQ, TENCQ, CAP_QUANLY), TRAM_DO(MATRAM, TENTRAM, TOADO_GPS, DIABAN, MACQ), THIETBI(MATB, MATRAM, LOAITB, NAMSX, TRANGTHAI), CHUYENGIA(MACG, HOTEN, CHUYENNGANH, MACQ), PHIEN_DODAC(MAPHIEN, MATRAM, THOIDIEM, NHIETDO_C, AP_SUAT_HPA, LUONGMUA_MM, TOCDOGIO_KMH), BAN_TIN_DB(MABANTIN, MACG, THOIDIEM_PHAT, PHAMVI_DUBAO, CAP_CANHBAO, NOIDUNG)`
+- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+
+### 1. Đề Bài
+Thiết kế ERD cho Mạng lưới trạm quan trắc khí tượng thủy văn: Thu thập dữ liệu nhiệt độ, áp suất, lượng mưa tự động và chuyên gia lập bản tin cảnh báo thiên tai.
+
+### 2. Hướng Dẫn & Lời Giải Chi Tiết
+**Các thực thể và thuộc tính:**
+- COQUAN_KT: MACQ, TENCQ, CAP_QUANLY
+- TRAM_DO: MATRAM, TENTRAM, TOADO_GPS, DIABAN
+- THIETBI: MATB, LOAITB, NAMSX
+- CHUYENGIA: MACG, HOTEN, CHUYENNGANH
+- PHIEN_DODAC: MAPHIEN, THOIDIEM, NHIETDO_C, LUONGMUA_MM
+- BAN_TIN_DB: MABANTIN, THOIDIEM_PHAT, CAP_CANHBAO
+
+**Mối kết hợp và bản số min-max:**
+- COQUAN_KT - TRAM_DO: 1:N
+- COQUAN_KT - CHUYENGIA: 1:N
+- TRAM_DO - THIETBI: 1:N
+- TRAM_DO - PHIEN_DODAC: 1:N
+- CHUYENGIA - BAN_TIN_DB: 1:N
+
+**Lược đồ quan hệ chuyển đổi:**
+- COQUAN_KT(MACQ, TENCQ, CAP_QUANLY
+- TRAM_DO(MATRAM, TENTRAM, TOADO_GPS, DIABAN, MACQ
+- THIETBI(MATB, MATRAM, LOAITB, NAMSX, TRANGTHAI
+- CHUYENGIA(MACG, HOTEN, CHUYENNGANH, MACQ
+- PHIEN_DODAC(MAPHIEN, MATRAM, THOIDIEM, NHIETDO_C, AP_SUAT_HPA, LUONGMUA_MM, TOCDOGIO_KMH
+- BAN_TIN_DB(MABANTIN, MACG, THOIDIEM_PHAT, PHAMVI_DUBAO, CAP_CANHBAO, NOIDUNG)
+**Các bước suy luận tư duy:**
+1. Bước 1: Xác định đầy đủ các thực thể độc lập, thực thể yếu, thuộc tính đơn, thuộc tính khóa chính (PK).
+1. Bước 2: Phân tích các mối kết hợp thực tế giữa các thực thể, xác định bản số min-max (0..1, 1..1, 0..n, 1..n).
+1. Bước 3: Ánh xạ quan hệ 1:N bằng cách đưa khóa chính của phía 1 sang làm khóa ngoại (FK) của phía N.
+1. Bước 4: Ánh xạ quan hệ M:N thành bảng liên kết trung gian, có khóa chính là khóa phức hợp gồm 2 khóa ngoại.
+
+**Phân tích trường hợp biên (Edge Cases):**
+Lưu ý không đặt trùng tên khóa ngoại; kiểm tra các thuộc tính đa trị nếu có phải tách thành bảng riêng; khóa chính bảng trung gian bắt buộc NOT NULL.
+
+**Barem chấm điểm đề xuất:**
+- `total_points`: 2.5đ
+- `entities_and_keys`: 0.5đ
+- `relationships_and_cardinalities`: 1.0đ
+- `relational_mapping_and_foreign_keys`: 1.0đ
 
 ---

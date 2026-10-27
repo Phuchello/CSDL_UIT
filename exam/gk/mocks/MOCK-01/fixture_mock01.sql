@@ -124,9 +124,9 @@ GO
 -- ============================================================================
 -- 4. ADVERSARIAL QA: KIỂM TRA CHẶT CHẼ CHECK & NOT NULL (ZERO FALSE POSITIVES)
 -- ============================================================================
-PRINT '======================================================================';
-PRINT '--- [ADVERSARIAL QA 2.1a: CHECK & NOT NULL INTEGRITY VERIFICATION] ---';
-PRINT '======================================================================';
+PRINT '------------------------------------------------------------';
+PRINT '=== TEST 1: CHECK CONSTRAINT ADVERSARIAL INTEGRITY ===';
+PRINT '------------------------------------------------------------';
 
 -- Test 1: Kiểm tra SOLIEUXUAT = 0 với Khóa Ngoại HỢP LỆ (PX01, LO01)
 -- Phải bị chặn chính xác bởi constraint CK_CTPX_SOLIEUXUAT
@@ -216,12 +216,15 @@ INSERT INTO CTPX VALUES
 GO
 
 -- ============================================================================
--- 6. THỰC THI & KIỂM CHỨNG TỪNG TRUY VẤN
+-- 6. THỰC THI & KIỂM CHỨNG TỪNG TRUY VẤN VỚI ASSERTIONS
 -- ============================================================================
 
 -- Câu 2.1b: UPDATE tăng giá 10% các lô vắc-xin HSD 2025 của AstraZeneca
 PRINT '';
-PRINT '--- [TEST 2.1b: UPDATE 10% AstraZeneca 2025] ---';
+PRINT '------------------------------------------------------------';
+PRINT '=== TEST 2: QUESTION 2.1B UPDATE VERIFICATION ===';
+PRINT '------------------------------------------------------------';
+DECLARE @upd_count INT;
 UPDATE LOVACXIN
 SET DONGIA = DONGIA * 1.1
 FROM LOVACXIN LV
@@ -229,59 +232,96 @@ INNER JOIN NHACUNGCAP NCC ON LV.MANCC = NCC.MANCC
 WHERE YEAR(LV.HSD) = 2025
   AND NCC.TENNCC = 'AstraZeneca';
 
-SELECT MALO, TENLO, DONGIA, HSD, MANCC
-FROM LOVACXIN
-WHERE MANCC = 'NCC01';
+SET @upd_count = @@ROWCOUNT;
+IF @upd_count <> 2
+    THROW 50010, 'Test 2 FAILED: UPDATE row count mismatch', 1;
+
+PRINT '  [PASS] Test 2: UPDATE correctly affected 2 rows with HSD 2025.';
 GO
 
 -- Câu 2.2a: Lô vắc-xin Pfizer-BioNTech sản xuất năm 2024
 PRINT '';
-PRINT '--- [TEST 2.2a: Select Pfizer 2024] ---';
-SELECT MALO, TENLO, SOLIEU, DONGIA
+PRINT '------------------------------------------------------------';
+PRINT '=== TEST 3: QUESTION 2.2A SELECTION & PROJECTION ===';
+PRINT '------------------------------------------------------------';
+DECLARE @cnt2a INT;
+SELECT @cnt2a = COUNT(*)
 FROM LOVACXIN
 WHERE TENVACXIN = 'Pfizer-BioNTech'
   AND NGAYSX >= '2024-01-01' AND NGAYSX <= '2024-12-31';
+
+IF @cnt2a <> 2
+    THROW 50020, 'Test 3 FAILED: Expected exactly 2 Pfizer batches in 2024 (LO03, LO04)', 1;
+
+PRINT '  [PASS] Test 3: Selection returned exactly 2 Pfizer batches in 2024 (LO03, LO04).';
 GO
 
 -- Câu 2.2b: Điểm tiêm đã tiếp nhận phiếu xuất ngày 15/10/2024 (TRANGTHAI = 1)
 PRINT '';
-PRINT N'--- [TEST 2.2b: Điểm tiêm đã tiếp nhận ngày 15/10/2024] ---';
-SELECT DISTINCT DT.MADT, DT.TENDT, DT.QUAN
+PRINT '------------------------------------------------------------';
+PRINT '=== TEST 4: QUESTION 2.2B JOIN QUERY ===';
+PRINT '------------------------------------------------------------';
+DECLARE @cnt2b INT;
+SELECT @cnt2b = COUNT(DISTINCT DT.MADT)
 FROM DIEMTIEM DT
 INNER JOIN PHIEUXUAT PX ON DT.MADT = PX.MADT
 WHERE PX.NGAYXUAT = '2024-10-15'
   AND PX.TRANGTHAI = 1;
+
+IF @cnt2b <> 3
+    THROW 50030, 'Test 4 FAILED: Expected exactly 3 points receiving on 2024-10-15 (DT01, DT02, DT03)', 1;
+
+PRINT '  [PASS] Test 4: Join returned exactly 3 points receiving on 2024-10-15 (DT01, DT02, DT03).';
 GO
 
 -- Câu 2.2c: Điểm tiêm quận Bình Thạnh và nhân viên công tác nếu có (LEFT OUTER JOIN)
 PRINT '';
-PRINT N'--- [TEST 2.2c: Left Outer Join Bình Thạnh (Edge Case: DT06 có HOTEN là NULL)] ---';
-SELECT DT.MADT, DT.TENDT, NV.HOTEN
+PRINT '------------------------------------------------------------';
+PRINT '=== TEST 5: QUESTION 2.2C OUTER JOIN QUERY ===';
+PRINT '------------------------------------------------------------';
+DECLARE @cnt2c_tot INT, @cnt2c_null INT;
+SELECT
+    @cnt2c_tot = COUNT(*),
+    @cnt2c_null = COUNT(CASE WHEN NV.HOTEN IS NULL THEN 1 END)
 FROM DIEMTIEM DT
 LEFT OUTER JOIN NHANVIEN NV ON DT.MADT = NV.MADT
 WHERE DT.QUAN = N'Bình Thạnh';
+
+IF @cnt2c_tot <> 3 OR @cnt2c_null <> 1
+    THROW 50040, 'Test 5 FAILED: Outer join did not preserve DT06 with NULL staff properly', 1;
+
+PRINT '  [PASS] Test 5: Outer join correctly preserved DT06 with NULL staff (total 3, null 1).';
 GO
 
 -- Câu 2.2d: Gom nhóm tổng số liều đã tiếp nhận (TRANGTHAI = 1) theo điểm tiêm T10/2024
 PRINT '';
-PRINT N'--- [TEST 2.2d: Gom nhóm tổng liều đã tiếp nhận T10/2024] ---';
-SELECT PX.MADT, SUM(CT.SOLIEUXUAT) AS TONGLIEU
+PRINT '------------------------------------------------------------';
+PRINT '=== TEST 6: QUESTION 2.2D GROUPING & AGGREGATE ===';
+PRINT '------------------------------------------------------------';
+DECLARE @cnt2d INT, @dt01_vol INT;
+SELECT
+    @cnt2d = COUNT(*),
+    @dt01_vol = SUM(CASE WHEN PX.MADT = 'DT01' THEN CT.SOLIEUXUAT ELSE 0 END)
 FROM PHIEUXUAT PX
 INNER JOIN CTPX CT ON PX.MAPX = CT.MAPX
 WHERE PX.NGAYXUAT >= '2024-10-01' AND PX.NGAYXUAT <= '2024-10-31'
-  AND PX.TRANGTHAI = 1
-GROUP BY PX.MADT;
+  AND PX.TRANGTHAI = 1;
+
+IF @dt01_vol <> 3500
+    THROW 50050, 'Test 6 FAILED: DT01 volume mismatch', 1;
+
+PRINT '  [PASS] Test 6: Grouping verified: DT01 received 3500 doses in 10/2024.';
 GO
 
 -- ============================================================================
 -- Câu 2.2e: PHÉP CHIA QUAN HỆ & CÁC TRƯỜNG HỢP BIÊN
 -- ============================================================================
 PRINT '';
-PRINT N'--- [TEST 2.2e (Case 1 - Chuẩn): Điểm tiêm đã tiếp nhận TẤT CẢ các lô của Moderna] ---';
--- Expected: Đúng 2 điểm tiêm DT01 (nhận trong 1 phiếu) và DT02 (nhận phân tán 2 phiếu).
--- DT04 bị loại vì thiếu LO06.
--- DT05 bị loại vì PX06 có TRANGTHAI = 0 (chưa tiếp nhận).
-SELECT DT.MADT, DT.TENDT
+PRINT '------------------------------------------------------------';
+PRINT '=== TEST 7: QUESTION 2.2E RELATIONAL DIVISION ===';
+PRINT '------------------------------------------------------------';
+DECLARE @cnt2e_std INT;
+SELECT @cnt2e_std = COUNT(*)
 FROM DIEMTIEM DT
 WHERE DT.MADT IN (SELECT MADT FROM PHIEUXUAT WHERE TRANGTHAI = 1)
   AND NOT EXISTS (
@@ -296,14 +336,19 @@ WHERE DT.MADT IN (SELECT MADT FROM PHIEUXUAT WHERE TRANGTHAI = 1)
     WHERE PX.MADT = DT.MADT
       AND PX.TRANGTHAI = 1
 );
+
+IF @cnt2e_std <> 2
+    THROW 50060, 'Test 7 FAILED: Expected exactly 2 points receiving all Moderna batches (DT01, DT02)', 1;
+
+PRINT '  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (DT01, DT02).';
 GO
 
 PRINT '';
-PRINT N'--- [TEST 2.2e (Case 2 - Edge Case): Phép chia với Nhà cung cấp KHÔNG CÓ LÔ NÀO (VnBiotech)] ---';
--- Phân tích ĐSQH: S = R_VnBiotech = rỗng.
--- Theo lý thuyết ĐSQH: R_DT_Lo / rỗng = pi_MADT(R_DT_Lo) (Tất cả điểm tiêm từng tiếp nhận vắc-xin)
--- Expected: DT01, DT02, DT03, DT04 (Không gồm DT06 vì DT06 chưa tiếp nhận vắc-xin bao giờ).
-SELECT DT.MADT, DT.TENDT
+PRINT '------------------------------------------------------------';
+PRINT '=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===';
+PRINT '------------------------------------------------------------';
+DECLARE @cnt2e_empty INT;
+SELECT @cnt2e_empty = COUNT(*)
 FROM DIEMTIEM DT
 WHERE DT.MADT IN (SELECT MADT FROM PHIEUXUAT WHERE TRANGTHAI = 1)
   AND NOT EXISTS (
@@ -318,15 +363,28 @@ WHERE DT.MADT IN (SELECT MADT FROM PHIEUXUAT WHERE TRANGTHAI = 1)
     WHERE PX.MADT = DT.MADT
       AND PX.TRANGTHAI = 1
 );
+
+IF @cnt2e_empty <> 4
+    THROW 50070, 'Test 8 FAILED: Empty target S=Ø must return all candidate points receiving any batch (DT01..DT04)', 1;
+
+PRINT '  [PASS] Test 8: Empty target S=Ø semantic verified: bounded candidate universe returns 4 points.';
 GO
 
 -- Câu 2.2f: Điểm tiêm có sức chứa lớn nhất tại Thủ Đức (Kèm Tie-breaking Đồng Hạng)
 PRINT '';
-PRINT N'--- [TEST 2.2f: Cực trị MAX sức chứa Thủ Đức (Tie-breaking: DT04 và DT05 cùng = 2500)] ---';
-SELECT MADT, TENDT, SUCCHUA
+PRINT '------------------------------------------------------------';
+PRINT '=== TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===';
+PRINT '------------------------------------------------------------';
+DECLARE @cnt2f INT;
+SELECT @cnt2f = COUNT(*)
 FROM DIEMTIEM
 WHERE QUAN = N'Thủ Đức'
   AND SUCCHUA = (SELECT MAX(SUCCHUA) FROM DIEMTIEM WHERE QUAN = N'Thủ Đức');
+
+IF @cnt2f <> 2
+    THROW 50080, 'Test 9 FAILED: Tie-breaking failed, expected DT04 and DT05 (count = 2)', 1;
+
+PRINT '  [PASS] Test 9: Extreme tie-breaking verified: DT04 (2500) and DT05 (2500) preserved.';
 GO
 
 PRINT '';

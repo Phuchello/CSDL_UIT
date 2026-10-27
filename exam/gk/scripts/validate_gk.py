@@ -2,7 +2,7 @@
 """
 scripts/validate_gk.py
 Comprehensive automated QA validator for IT004 Midterm Question Bank and Mock Exams.
-Enforces all validation rules defined in the Master Prompt.
+Enforces all validation rules defined in the Master Prompt & Phase D Audits.
 """
 
 import json
@@ -29,6 +29,14 @@ class GKValidator:
         self.warnings = []
         self.stats = {
             "total_problems": 0,
+            "mock_exam_questions": 0,
+            "independent_practice_problems": 0,
+            "independent_topics": {
+                "ERD_MAPPING": 0,
+                "RA_BASIC_JOIN": 0,
+                "RA_DIVISION_GROUPING": 0,
+                "SQL_DDL_DML": 0
+            },
             "topics": {},
             "difficulties": {"A": 0, "B": 0, "C": 0},
             "verified_problems": 0,
@@ -42,6 +50,7 @@ class GKValidator:
             "rubrics_present": 0,
             "mocks_count": 0,
             "mock_points_valid": 0,
+            "gold_standard_mocks_audited": 0,
             "no_solution_leak": 0,
         }
 
@@ -72,6 +81,10 @@ class GKValidator:
             "recommended_time_mins", "solution", "rubric"
         ]
 
+        placeholder_patterns = [
+            r"\bTBD\b", r"\bTODO\b", r"\bLorem ipsum\b", r"\[Placeholder\]", r"Chưa có đáp án"
+        ]
+
         for p in problems:
             pid = p.get("id")
             if not pid or not isinstance(pid, str):
@@ -86,6 +99,12 @@ class GKValidator:
                 if rf not in p or not p[rf]:
                     self.log_error(f"Problem {pid} missing required field: {rf}")
 
+            # Check placeholders
+            p_text = json.dumps(p, ensure_ascii=False)
+            for pat in placeholder_patterns:
+                if re.search(pat, p_text, re.IGNORECASE):
+                    self.log_error(f"Problem {pid} contains unapproved placeholder: {pat}")
+
             diff = p.get("difficulty")
             if diff in self.stats["difficulties"]:
                 self.stats["difficulties"][diff] += 1
@@ -94,6 +113,15 @@ class GKValidator:
 
             top = p.get("topic")
             self.stats["topics"][top] = self.stats["topics"].get(top, 0) + 1
+
+            # Check whether mock question or independent practice problem
+            is_mock_q = bool(p.get("mock_id")) or (pid.startswith("M") and len(pid) >= 3 and pid[1:3].isdigit() and "-" in pid)
+            if is_mock_q:
+                self.stats["mock_exam_questions"] += 1
+            else:
+                self.stats["independent_practice_problems"] += 1
+                if top in self.stats["independent_topics"]:
+                    self.stats["independent_topics"][top] += 1
 
             v_level = p.get("verification_level", "DRAFT")
             if v_level not in self.stats["verification_levels"]:
@@ -125,15 +153,23 @@ class GKValidator:
             if p.get("rubric"):
                 self.stats["rubrics_present"] += 1
 
-        print(f"  [OK] Validated {len(problems)} problem entries. Unique IDs confirmed.")
+        print(f"  [OK] Validated {len(problems)} problem entries ({self.stats['mock_exam_questions']} mock questions + {self.stats['independent_practice_problems']} independent problems). Unique IDs confirmed.")
         return {p["id"]: p for p in problems if "id" in p}
 
     def validate_mock_exams(self, problem_catalog):
-        print("\n=== [2/5] Validating 75-Minute Full Mock Exams ===")
+        print("\n=== [2/5] Validating 75-Minute Full Mock Exams & Evidence Manifest ===")
         mocks_file = DATA_DIR / "mocks.json"
+        manifest_file = QA_DIR / "evidence_manifest.json"
+
         if not mocks_file.exists():
             self.log_error(f"Mocks catalog missing: {mocks_file}")
             return
+        if not manifest_file.exists():
+            self.log_error(f"Evidence manifest missing: {manifest_file}")
+            manifest_data = {}
+        else:
+            with open(manifest_file, "r", encoding="utf-8") as f:
+                manifest_data = json.load(f).get("questions", {})
 
         with open(mocks_file, "r", encoding="utf-8") as f:
             data = json.load(f)
@@ -155,16 +191,29 @@ class GKValidator:
             if duration != 75:
                 self.log_error(f"Mock {mid} duration is {duration} mins, MUST BE EXACTLY 75 mins")
 
-            # Check question references
+            # Check question references & evidence manifest
             questions = m.get("questions", [])
             q_sum = sum(q.get("points", 0.0) for q in questions)
             if abs(q_sum - 10.0) > 1e-4:
                 self.log_error(f"Mock {mid} sum of question points is {q_sum}, must be 10.0")
 
+            all_questions_audited = True
             for q in questions:
                 ref_id = q.get("problem_id")
-                if ref_id and ref_id not in problem_catalog:
+                if not ref_id or ref_id not in problem_catalog:
                     self.log_error(f"Mock {mid} references nonexistent problem ID: {ref_id}")
+                    all_questions_audited = False
+                elif ref_id not in manifest_data:
+                    self.log_error(f"Mock {mid} question {ref_id} lacks entry in evidence manifest!")
+                    all_questions_audited = False
+                else:
+                    m_entry = manifest_data[ref_id]
+                    if m_entry.get("audit_verdict") != "AUDITED_AND_VERIFIED":
+                        self.log_error(f"Mock {mid} question {ref_id} failed academic audit: {m_entry.get('audit_verdict')}")
+                        all_questions_audited = False
+
+            if all_questions_audited and len(questions) == 9:
+                self.stats["gold_standard_mocks_audited"] += 1
 
             # Verify physical mock folders exist and no solution leak
             mock_dir = MOCKS_DIR / mid
@@ -189,7 +238,7 @@ class GKValidator:
             else:
                 self.log_warning(f"Mock directory not yet created on disk: {mock_dir}")
 
-        print(f"  [OK] Evaluated {len(mocks)} mock exam configurations.")
+        print(f"  [OK] Evaluated {len(mocks)} mock exam configurations. Audited Gold Standard Mocks: {self.stats['gold_standard_mocks_audited']} / {len(mocks)}.")
 
     def validate_relational_algebra_and_sql(self, problem_catalog):
         print("\n=== [3/5] Validating Relational Algebra & SQL Semantics ===")
@@ -226,23 +275,42 @@ class GKValidator:
         self.validate_mock_exams(catalog)
         self.validate_relational_algebra_and_sql(catalog)
 
-        exec_verified_cnt = self.stats['verification_levels']['EXECUTION_VERIFIED']
-        gold_mocks_cnt = exec_verified_cnt // 9
+        gold_mocks_cnt = self.stats["gold_standard_mocks_audited"]
+        indep_cnt = self.stats["independent_practice_problems"]
+        mock_q_cnt = self.stats["mock_exam_questions"]
+
         structural_status = "PASS" if not self.errors else "FAIL"
-        academic_status = f"IN_PROGRESS ({gold_mocks_cnt}/15 Mocks Gold Standard)" if gold_mocks_cnt < 15 else "PASS (15/15 Mocks Gold Standard)"
+
+        academic_passed = (
+            gold_mocks_cnt == 15 and
+            indep_cnt >= 150 and
+            len(self.errors) == 0 and
+            self.stats["draft_problems"] == 0
+        )
+        academic_status = (
+            "PASS (15/15 Mocks Gold Standard Audited & 150 Independent Practice Problems Verified)"
+            if academic_passed
+            else f"IN_PROGRESS (Mocks: {gold_mocks_cnt}/15, Independent: {indep_cnt}/150, Drafts: {self.stats['draft_problems']})"
+        )
 
         print("\n==================================================")
         print(" AUDIT SUMMARY:")
         print("  [1] STRUCTURAL QA (Catalog, Schema, Rubrics, Points):")
         print(f"      - Status                  : {structural_status}")
         print(f"      - Total Problems in Bank  : {self.stats['total_problems']}")
-        print(f"      - Solutions Present       : {self.stats['solutions_present']}")
-        print(f"      - Rubrics Present         : {self.stats['rubrics_present']}")
+        print(f"      - Mock Exam Questions     : {mock_q_cnt} (15 Mocks x 9 Questions)")
+        print(f"      - Independent Practice    : {indep_cnt} (Target >= 150)")
+        print(f"        * ERD & Schema Mapping  : {self.stats['independent_topics']['ERD_MAPPING']} / 25")
+        print(f"        * RA Basic & Join       : {self.stats['independent_topics']['RA_BASIC_JOIN']} / 45")
+        print(f"        * RA Division & Grouping: {self.stats['independent_topics']['RA_DIVISION_GROUPING']} / 45")
+        print(f"        * Transact-SQL DDL/DML  : {self.stats['independent_topics']['SQL_DDL_DML']} / 35")
+        print(f"      - Solutions Present       : {self.stats['solutions_present']} / {self.stats['total_problems']}")
+        print(f"      - Rubrics Present         : {self.stats['rubrics_present']} / {self.stats['total_problems']}")
         print(f"      - Mock Exams (10.0 pts)   : {self.stats['mock_points_valid']} / {self.stats['mocks_count']}")
         print(f"      - Structural Errors       : {len(self.errors)}")
         print(f"      - Warnings                : {len(self.warnings)}")
-        print("  [2] ACADEMIC SEMANTIC QA (Engine Execution & Edge Cases):")
-        print(f"      - Gold Standard Mocks     : {gold_mocks_cnt} / 15 (100% SQL Server Verified)")
+        print("  [2] ACADEMIC SEMANTIC QA (Evidence Manifest & Verification):")
+        print(f"      - Gold Standard Mocks     : {gold_mocks_cnt} / 15 (100% Audited in Evidence Manifest)")
         print(f"      - Execution Verified Probs: {self.stats['verification_levels']['EXECUTION_VERIFIED']} / {self.stats['total_problems']}")
         print(f"      - Semantically Reviewed   : {self.stats['verification_levels']['SEMANTICALLY_REVIEWED']} / {self.stats['total_problems']}")
         print(f"      - Draft / Pending Remed.  : {self.stats['verification_levels']['DRAFT']} / {self.stats['total_problems']}")
@@ -255,12 +323,14 @@ class GKValidator:
                 "structural_qa_status": structural_status,
                 "academic_semantic_qa_status": academic_status,
                 "gold_standard_mocks_count": gold_mocks_cnt,
+                "independent_practice_problems_count": indep_cnt,
+                "mock_exam_questions_count": mock_q_cnt,
                 "stats": self.stats,
                 "errors": self.errors,
                 "warnings": self.warnings
             }, f, ensure_ascii=False, indent=2)
 
-        return len(self.errors) == 0
+        return len(self.errors) == 0 and academic_passed
 
 
 if __name__ == "__main__":

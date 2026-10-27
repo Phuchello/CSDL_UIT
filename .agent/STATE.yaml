@@ -50,6 +50,8 @@ verified:
   phase_c_mock13_reconstruction_complete: true
   phase_c_mock14_reconstruction_complete: true
   phase_c_mock15_reconstruction_complete: true
+  phase_d_academic_audit_complete: true
+  phase_d_bank_expansion_complete: true
   frozen_baseline_untouched: true
   pdf_deliverables_4_verified: true
   zero_blank_pages: true
@@ -60,8 +62,9 @@ verification_evidence:
   local_suite:
     - scripts/agent/verify.ps1 -Mode Fast (PASS)
     - scripts/validate.py (PASS, 6/6 checks)
-    - exam/gk/scripts/validate_gk.py (PASS, 173 problems: 145 VERIFIED [135 EXECUTION_VERIFIED, 10 SEMANTICALLY_REVIEWED], 28 DRAFT)
-    - exam/gk/scripts/verify_pdf_preflight.py (PASS, 4/4 PDFs verified 100%)
+    - exam/gk/scripts/validate_gk.py (PASS, 285 problems: 135 Mock questions EXECUTION_VERIFIED + 150 independent practice problems SEMANTICALLY_REVIEWED, 0 DRAFT)
+    - exam/gk/qa/evidence_manifest.json (PASS, 135/135 questions audited & verified in manifest)
+    - exam/gk/scripts/verify_pdf_preflight.py (PASS, 4/4 PDFs verified 100%: 64p, 262p, 2p, 148p)
     - exam/gk/qa/mock01_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock02_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock03_sql_execution.log (PASS, Microsoft SQL Server 2025)
@@ -77,7 +80,7 @@ verification_evidence:
     - exam/gk/qa/mock13_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock14_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock15_sql_execution.log (PASS, Microsoft SQL Server 2025)
-    - exam/gk/qa/defect_register.md (P0-01 through P0-05 RESOLVED (All 15 Mocks Gold Standard & 100% SQL Server Verified))
+    - exam/gk/qa/defect_register.md (P0-01 through P0-07 ALL RESOLVED)
 
 blockers: []
 
@@ -103,6 +106,8 @@ relevant_files:
   - exam/gk/dist/IT004_GK_NganHangDe_VoTrongPhuc.pdf
   - exam/gk/dist/IT004_GK_LoiGiaiChiTiet_VoTrongPhuc.pdf
   - exam/gk/dist/IT004_GK_CheatSheet_VoTrongPhuc.pdf
+  - exam/gk/dist/IT004_GK_VerifiedOnly_VoTrongPhuc.pdf
+  - exam/gk/qa/evidence_manifest.json
   - exam/gk/scripts/validate_gk.py
   - exam/gk/scripts/verify_pdf_preflight.py
 

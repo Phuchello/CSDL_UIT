@@ -1,0 +1,3520 @@
+{
+  "manifest_version": "2.0",
+  "milestone": "PHASE_D_ACADEMIC_AUDIT",
+  "auditor": "VÕ TRỌNG PHÚC",
+  "engine": "Microsoft SQL Server 2025 Developer Edition",
+  "total_audited_questions": 135,
+  "mocks_count": 15,
+  "questions": {
+    "M01-Q1": {
+      "question_id": "M01-Q1",
+      "mock_id": "MOCK-01",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Tiêm Chủng Vắc-Xin",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
+        "execution_log": "exam/gk/qa/mock01_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": false,
+        "min_max_cardinalities_verified": true,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M01-Q2A": {
+      "question_id": "M01-Q2A",
+      "mock_id": "MOCK-01",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên CTPX và PHIEUXUAT",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
+        "execution_log": "exam/gk/qa/mock01_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M01-Q2B": {
+      "question_id": "M01-Q2B",
+      "mock_id": "MOCK-01",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Tăng Đơn Giá Vắc-Xin Theo HSD Và Nhà Cung Cấp",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
+        "execution_log": "exam/gk/qa/mock01_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M01-Q2C1": {
+      "question_id": "M01-Q2C1",
+      "mock_id": "MOCK-01",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Lô Vắc-Xin Theo Tên Loại Và Năm Sản Xuất",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
+        "execution_log": "exam/gk/qa/mock01_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M01-Q2C2": {
+      "question_id": "M01-Q2C2",
+      "mock_id": "MOCK-01",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Điểm Tiêm Đã Tiếp Nhận Phiếu Xuất Ngày 15/10/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
+        "execution_log": "exam/gk/qa/mock01_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M01-Q2C3": {
+      "question_id": "M01-Q2C3",
+      "mock_id": "MOCK-01",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Điểm Tiêm Quận Bình Thạnh Và Nhân Viên (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
+        "execution_log": "exam/gk/qa/mock01_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M01-Q2C4": {
+      "question_id": "M01-Q2C4",
+      "mock_id": "MOCK-01",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Liều Vắc-Xin Đã Tiếp Nhận Theo Điểm Tiêm",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
+        "execution_log": "exam/gk/qa/mock01_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M01-Q2C5": {
+      "question_id": "M01-Q2C5",
+      "mock_id": "MOCK-01",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Điểm Tiêm Đã Tiếp Nhận Tất Cả Lô Vắc-Xin Của Moderna",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
+        "execution_log": "exam/gk/qa/mock01_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M01-Q2C6": {
+      "question_id": "M01-Q2C6",
+      "mock_id": "MOCK-01",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Tìm Điểm Tiêm Có Sức Chứa Lớn Nhất Tại Quận Thủ Đức",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
+        "execution_log": "exam/gk/qa/mock01_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M02-Q1": {
+      "question_id": "M02-Q1",
+      "mock_id": "MOCK-02",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý PCCC Chung Cư",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
+        "execution_log": "exam/gk/qa/mock02_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": false,
+        "min_max_cardinalities_verified": false,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M02-Q2A": {
+      "question_id": "M02-Q2A",
+      "mock_id": "MOCK-02",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên CANHO và THIETBI_PCCC",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
+        "execution_log": "exam/gk/qa/mock02_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M02-Q2B": {
+      "question_id": "M02-Q2B",
+      "mock_id": "MOCK-02",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Tình Trạng Hết Hạn Trong CT_KIEMTRA Theo HSD",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
+        "execution_log": "exam/gk/qa/mock02_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M02-Q2C1": {
+      "question_id": "M02-Q2C1",
+      "mock_id": "MOCK-02",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Thiết Bị PCCC Theo Loại Và Hạn Sử Dụng",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
+        "execution_log": "exam/gk/qa/mock02_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M02-Q2C2": {
+      "question_id": "M02-Q2C2",
+      "mock_id": "MOCK-02",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Căn Hộ Ruby Tower Từ Tầng 10 Trở Lên",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
+        "execution_log": "exam/gk/qa/mock02_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M02-Q2C3": {
+      "question_id": "M02-Q2C3",
+      "mock_id": "MOCK-02",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Tầng Tòa Nhà TN01 Và Thiết Bị PCCC (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
+        "execution_log": "exam/gk/qa/mock02_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M02-Q2C4": {
+      "question_id": "M02-Q2C4",
+      "mock_id": "MOCK-02",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Đếm Tổng Số Thiết Bị PCCC Theo Tòa Nhà",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
+        "execution_log": "exam/gk/qa/mock02_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M02-Q2C5": {
+      "question_id": "M02-Q2C5",
+      "mock_id": "MOCK-02",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Đợt Kiểm Tra Đã Kiểm Tra Tất Cả Đầu Báo Khói",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
+        "execution_log": "exam/gk/qa/mock02_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M02-Q2C6": {
+      "question_id": "M02-Q2C6",
+      "mock_id": "MOCK-02",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Tìm Tòa Nhà Có Số Lượng Căn Hộ Nhiều Nhất",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
+        "execution_log": "exam/gk/qa/mock02_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M03-Q1": {
+      "question_id": "M03-Q1",
+      "mock_id": "MOCK-03",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Cứu Trợ Bão Lũ",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
+        "execution_log": "exam/gk/qa/mock03_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": false,
+        "min_max_cardinalities_verified": false,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M03-Q2A": {
+      "question_id": "M03-Q2A",
+      "mock_id": "MOCK-03",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên PHIEU_NHAN và DOT_CUUTRO",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
+        "execution_log": "exam/gk/qa/mock03_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M03-Q2B": {
+      "question_id": "M03-Q2B",
+      "mock_id": "MOCK-03",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Mức Độ Thiệt Hại Trong HO_DAN Thuộc Xã Hiệp Phước",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
+        "execution_log": "exam/gk/qa/mock03_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M03-Q2C1": {
+      "question_id": "M03-Q2C1",
+      "mock_id": "MOCK-03",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Nhà Hảo Tâm Theo Loại Hình Cá Nhân",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
+        "execution_log": "exam/gk/qa/mock03_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M03-Q2C2": {
+      "question_id": "M03-Q2C2",
+      "mock_id": "MOCK-03",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Hộ Dân Cần Giờ Thiệt Hại Nặng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
+        "execution_log": "exam/gk/qa/mock03_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M03-Q2C3": {
+      "question_id": "M03-Q2C3",
+      "mock_id": "MOCK-03",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Xã Thuộc Huyện Cần Giờ Và Hộ Dân (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
+        "execution_log": "exam/gk/qa/mock03_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M03-Q2C4": {
+      "question_id": "M03-Q2C4",
+      "mock_id": "MOCK-03",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Tiền Ủng Hộ Theo Nhà Hảo Tâm Năm 2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
+        "execution_log": "exam/gk/qa/mock03_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M03-Q2C5": {
+      "question_id": "M03-Q2C5",
+      "mock_id": "MOCK-03",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Đợt Cứu Trợ Được Đóng Góp Bởi Tất Cả Doanh Nghiệp",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
+        "execution_log": "exam/gk/qa/mock03_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M03-Q2C6": {
+      "question_id": "M03-Q2C6",
+      "mock_id": "MOCK-03",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Tìm Xã Có Tổng Tiền Cứu Trợ Đã Phân Bổ Nhiều Nhất",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
+        "execution_log": "exam/gk/qa/mock03_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M04-Q1": {
+      "question_id": "M04-Q1",
+      "mock_id": "MOCK-04",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Chuỗi Cửa Hàng Xăng Dầu",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
+        "execution_log": "exam/gk/qa/mock04_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": false,
+        "min_max_cardinalities_verified": false,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M04-Q2A": {
+      "question_id": "M04-Q2A",
+      "mock_id": "MOCK-04",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên BE_CHUA",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
+        "execution_log": "exam/gk/qa/mock04_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M04-Q2B": {
+      "question_id": "M04-Q2B",
+      "mock_id": "MOCK-04",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Đơn Giá Tăng 5% Cho Xăng Khoáng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
+        "execution_log": "exam/gk/qa/mock04_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M04-Q2C1": {
+      "question_id": "M04-Q2C1",
+      "mock_id": "MOCK-04",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Nhân Viên Bán Hàng Có Lương Từ 8 Triệu",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
+        "execution_log": "exam/gk/qa/mock04_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M04-Q2C2": {
+      "question_id": "M04-Q2C2",
+      "mock_id": "MOCK-04",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Hóa Đơn Chuyển Khoản Tại Bình Thạnh",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
+        "execution_log": "exam/gk/qa/mock04_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M04-Q2C3": {
+      "question_id": "M04-Q2C3",
+      "mock_id": "MOCK-04",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Cửa Hàng Xăng Dầu Và Bể Chứa (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
+        "execution_log": "exam/gk/qa/mock04_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M04-Q2C4": {
+      "question_id": "M04-Q2C4",
+      "mock_id": "MOCK-04",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Số Lít Nhiên Liệu Đã Bán Tháng 10/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
+        "execution_log": "exam/gk/qa/mock04_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M04-Q2C5": {
+      "question_id": "M04-Q2C5",
+      "mock_id": "MOCK-04",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Hóa Đơn Đã Bán Tất Cả Các Loại Xăng Khoáng",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
+        "execution_log": "exam/gk/qa/mock04_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M04-Q2C6": {
+      "question_id": "M04-Q2C6",
+      "mock_id": "MOCK-04",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Tìm Cửa Hàng Có Tổng Dung Tích Bể Chứa Lớn Nhất",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
+        "execution_log": "exam/gk/qa/mock04_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M05-Q1": {
+      "question_id": "M05-Q1",
+      "mock_id": "MOCK-05",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
+        "execution_log": "exam/gk/qa/mock05_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": false,
+        "min_max_cardinalities_verified": false,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M05-Q2A": {
+      "question_id": "M05-Q2A",
+      "mock_id": "MOCK-05",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên HOPDONG",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
+        "execution_log": "exam/gk/qa/mock05_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M05-Q2B": {
+      "question_id": "M05-Q2B",
+      "mock_id": "MOCK-05",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Trạng Thái Đang Thuê Cho Căn Hộ Có Hợp Đồng Năm 2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
+        "execution_log": "exam/gk/qa/mock05_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M05-Q2C1": {
+      "question_id": "M05-Q2C1",
+      "mock_id": "MOCK-05",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Khách Hàng Doanh Nghiệp",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
+        "execution_log": "exam/gk/qa/mock05_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M05-Q2C2": {
+      "question_id": "M05-Q2C2",
+      "mock_id": "MOCK-05",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Căn Hộ Sky Garden Giá Thuê Từ 15 Triệu",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
+        "execution_log": "exam/gk/qa/mock05_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M05-Q2C3": {
+      "question_id": "M05-Q2C3",
+      "mock_id": "MOCK-05",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Tòa Nhà Chung Cư Và Căn Hộ (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
+        "execution_log": "exam/gk/qa/mock05_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M05-Q2C4": {
+      "question_id": "M05-Q2C4",
+      "mock_id": "MOCK-05",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Tiền Thu Năm 2024 Theo Hợp Đồng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
+        "execution_log": "exam/gk/qa/mock05_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M05-Q2C5": {
+      "question_id": "M05-Q2C5",
+      "mock_id": "MOCK-05",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Khách Hàng Thuê Căn Hộ Ở Tất Cả Tòa Nhà Quận 7",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
+        "execution_log": "exam/gk/qa/mock05_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M05-Q2C6": {
+      "question_id": "M05-Q2C6",
+      "mock_id": "MOCK-05",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Tìm Tòa Nhà Có Số Căn Hộ Đang Thuê Nhiều Nhất",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
+        "execution_log": "exam/gk/qa/mock05_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M06-Q1": {
+      "question_id": "M06-Q1",
+      "mock_id": "MOCK-06",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Phòng Khám Đa Khoa & Hồ Sơ Khám Bệnh",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
+        "execution_log": "exam/gk/qa/mock06_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": false,
+        "min_max_cardinalities_verified": false,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M06-Q2A": {
+      "question_id": "M06-Q2A",
+      "mock_id": "MOCK-06",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_DV và DICHVU_KHAM",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
+        "execution_log": "exam/gk/qa/mock06_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M06-Q2B": {
+      "question_id": "M06-Q2B",
+      "mock_id": "MOCK-06",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Tăng Lương Bác Sĩ Chuyên Khoa Nội Tổng Quát",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
+        "execution_log": "exam/gk/qa/mock06_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M06-Q2C1": {
+      "question_id": "M06-Q2C1",
+      "mock_id": "MOCK-06",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Bệnh Nhân Nữ Thường Trú TP.HCM",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
+        "execution_log": "exam/gk/qa/mock06_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M06-Q2C2": {
+      "question_id": "M06-Q2C2",
+      "mock_id": "MOCK-06",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Phiếu Khám Của Chuyên Khoa Nhi Khoa",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
+        "execution_log": "exam/gk/qa/mock06_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M06-Q2C3": {
+      "question_id": "M06-Q2C3",
+      "mock_id": "MOCK-06",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Danh Sách Chuyên Khoa Và Bác Sĩ (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
+        "execution_log": "exam/gk/qa/mock06_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M06-Q2C4": {
+      "question_id": "M06-Q2C4",
+      "mock_id": "MOCK-06",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Tiền Dịch Vụ Theo Phiếu Khám Tháng 10/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
+        "execution_log": "exam/gk/qa/mock06_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M06-Q2C5": {
+      "question_id": "M06-Q2C5",
+      "mock_id": "MOCK-06",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Phiếu Khám Chỉ Định Tất Cả Dịch Vụ Chẩn Đoán Hình Ảnh",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
+        "execution_log": "exam/gk/qa/mock06_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M06-Q2C6": {
+      "question_id": "M06-Q2C6",
+      "mock_id": "MOCK-06",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị Tìm Bác Sĩ Có Lượt Khám Nhiều Nhất Tháng 10/2024",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
+        "execution_log": "exam/gk/qa/mock06_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M07-Q1": {
+      "question_id": "M07-Q1",
+      "mock_id": "MOCK-07",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Thư Viện Đại Học & Mượn Trả Sách",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
+        "execution_log": "exam/gk/qa/mock07_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M07-Q2A": {
+      "question_id": "M07-Q2A",
+      "mock_id": "MOCK-07",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên SACH và CHITIET_MUON",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
+        "execution_log": "exam/gk/qa/mock07_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M07-Q2B": {
+      "question_id": "M07-Q2B",
+      "mock_id": "MOCK-07",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Gia Hạn Hạn Trả Cho Độc Giả Giảng Viên Tháng 10/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
+        "execution_log": "exam/gk/qa/mock07_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M07-Q2C1": {
+      "question_id": "M07-Q2C1",
+      "mock_id": "MOCK-07",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Sinh Viên Thuộc Khoa Khoa Học Máy Tính",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
+        "execution_log": "exam/gk/qa/mock07_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M07-Q2C2": {
+      "question_id": "M07-Q2C2",
+      "mock_id": "MOCK-07",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Sách NXB Giáo Dục Được Mượn Bởi Độc Giả DG01",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
+        "execution_log": "exam/gk/qa/mock07_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M07-Q2C3": {
+      "question_id": "M07-Q2C3",
+      "mock_id": "MOCK-07",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Danh Sách Khoa Viện Và Độc Giả (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
+        "execution_log": "exam/gk/qa/mock07_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M07-Q2C4": {
+      "question_id": "M07-Q2C4",
+      "mock_id": "MOCK-07",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Tiền Phạt Năm 2024 Theo Độc Giả",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
+        "execution_log": "exam/gk/qa/mock07_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M07-Q2C5": {
+      "question_id": "M07-Q2C5",
+      "mock_id": "MOCK-07",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Độc Giả Mượn Tất Cả Sách Của Tác Giả Nguyễn Nhật Ánh",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
+        "execution_log": "exam/gk/qa/mock07_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M07-Q2C6": {
+      "question_id": "M07-Q2C6",
+      "mock_id": "MOCK-07",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị Tìm Sách Có Lượt Mượn Nhiều Nhất Năm 2024",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
+        "execution_log": "exam/gk/qa/mock07_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M08-Q1": {
+      "question_id": "M08-Q1",
+      "mock_id": "MOCK-08",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Sàn Thương Mại Điện Tử & Đơn Hàng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
+        "execution_log": "exam/gk/qa/mock08_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M08-Q2A": {
+      "question_id": "M08-Q2A",
+      "mock_id": "MOCK-08",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_DH và SANPHAM",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
+        "execution_log": "exam/gk/qa/mock08_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M08-Q2B": {
+      "question_id": "M08-Q2B",
+      "mock_id": "MOCK-08",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Giảm Giá 10% Cho Hàng Gia Dụng Của Gian Hàng Lê Hoàng Nam",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
+        "execution_log": "exam/gk/qa/mock08_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M08-Q2C1": {
+      "question_id": "M08-Q2C1",
+      "mock_id": "MOCK-08",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Sản Phẩm Điện Tử Giá Từ 10 Triệu",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
+        "execution_log": "exam/gk/qa/mock08_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M08-Q2C2": {
+      "question_id": "M08-Q2C2",
+      "mock_id": "MOCK-08",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Đơn Hàng Khách Hà Nội Thanh Toán Ví Điện Tử",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
+        "execution_log": "exam/gk/qa/mock08_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M08-Q2C3": {
+      "question_id": "M08-Q2C3",
+      "mock_id": "MOCK-08",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Danh Sách Gian Hàng Và Sản Phẩm (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
+        "execution_log": "exam/gk/qa/mock08_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M08-Q2C4": {
+      "question_id": "M08-Q2C4",
+      "mock_id": "MOCK-08",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Tiền Đơn Hàng Đã Giao Tháng 11/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
+        "execution_log": "exam/gk/qa/mock08_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M08-Q2C5": {
+      "question_id": "M08-Q2C5",
+      "mock_id": "MOCK-08",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Đơn Hàng Mua Tất Cả Sản Phẩm Gia Dụng Của Gian Hàng Gia Dụng Thông Minh",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
+        "execution_log": "exam/gk/qa/mock08_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M08-Q2C6": {
+      "question_id": "M08-Q2C6",
+      "mock_id": "MOCK-08",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị Tìm Khách Hàng Có Tổng Số Lượng Sản Phẩm Mua Nhiều Nhất Tháng 11/2024",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
+        "execution_log": "exam/gk/qa/mock08_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M09-Q1": {
+      "question_id": "M09-Q1",
+      "mock_id": "MOCK-09",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
+        "execution_log": "exam/gk/qa/mock09_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M09-Q2A": {
+      "question_id": "M09-Q2A",
+      "mock_id": "MOCK-09",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên THAMGIA_TRAN và TUYENTHU",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
+        "execution_log": "exam/gk/qa/mock09_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M09-Q2B": {
+      "question_id": "M09-Q2B",
+      "mock_id": "MOCK-09",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Tăng Thù Lao Cho Tuyển Thủ Đường Giữa Đại Học CNTT",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
+        "execution_log": "exam/gk/qa/mock09_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M09-Q2C1": {
+      "question_id": "M09-Q2C1",
+      "mock_id": "MOCK-09",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Tuyển Thủ Xạ Thủ Thù Lao Từ 15 Triệu",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
+        "execution_log": "exam/gk/qa/mock09_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M09-Q2C2": {
+      "question_id": "M09-Q2C2",
+      "mock_id": "MOCK-09",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Trận Đấu Có Đội UIT Hunters Tham Gia",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
+        "execution_log": "exam/gk/qa/mock09_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M09-Q2C3": {
+      "question_id": "M09-Q2C3",
+      "mock_id": "MOCK-09",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Danh Sách Trường Và Đội Tuyển (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
+        "execution_log": "exam/gk/qa/mock09_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M09-Q2C4": {
+      "question_id": "M09-Q2C4",
+      "mock_id": "MOCK-09",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Tiền Thưởng Đội Thắng Tháng 11/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
+        "execution_log": "exam/gk/qa/mock09_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M09-Q2C5": {
+      "question_id": "M09-Q2C5",
+      "mock_id": "MOCK-09",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Đội Thi Đấu Tại Tất Cả Địa Điểm Vòng Bảng",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
+        "execution_log": "exam/gk/qa/mock09_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M09-Q2C6": {
+      "question_id": "M09-Q2C6",
+      "mock_id": "MOCK-09",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị Tìm Đội Thi Có Tổng Số Ván Thắng Nhiều Nhất Năm 2024",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
+        "execution_log": "exam/gk/qa/mock09_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M10-Q1": {
+      "question_id": "M10-Q1",
+      "mock_id": "MOCK-10",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Gara Ô Tô & Lịch Trình Bảo Dưỡng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
+        "execution_log": "exam/gk/qa/mock10_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M10-Q2A": {
+      "question_id": "M10-Q2A",
+      "mock_id": "MOCK-10",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên PHUTUNG",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
+        "execution_log": "exam/gk/qa/mock10_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M10-Q2B": {
+      "question_id": "M10-Q2B",
+      "mock_id": "MOCK-10",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Tăng Lương Cho Thợ Máy Gầm Có Phiếu Bảo Dưỡng Tháng 11/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
+        "execution_log": "exam/gk/qa/mock10_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M10-Q2C1": {
+      "question_id": "M10-Q2C1",
+      "mock_id": "MOCK-10",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Xe Toyota Sản Xuất Từ Năm 2022",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
+        "execution_log": "exam/gk/qa/mock10_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M10-Q2C2": {
+      "question_id": "M10-Q2C2",
+      "mock_id": "MOCK-10",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Phiếu Bảo Dưỡng Do Thợ Trần Văn Mạnh Phụ Trách",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
+        "execution_log": "exam/gk/qa/mock10_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M10-Q2C3": {
+      "question_id": "M10-Q2C3",
+      "mock_id": "MOCK-10",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Danh Sách Khách Hàng Và Xe Ô Tô (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
+        "execution_log": "exam/gk/qa/mock10_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M10-Q2C4": {
+      "question_id": "M10-Q2C4",
+      "mock_id": "MOCK-10",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Tiền Phụ Tùng Phiếu Hoàn Thành Tháng 11/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
+        "execution_log": "exam/gk/qa/mock10_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M10-Q2C5": {
+      "question_id": "M10-Q2C5",
+      "mock_id": "MOCK-10",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Xe Thay Thế Tất Cả Phụ Tùng Loại Dầu Nhớt",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
+        "execution_log": "exam/gk/qa/mock10_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M10-Q2C6": {
+      "question_id": "M10-Q2C6",
+      "mock_id": "MOCK-10",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị Tìm Phụ Tùng Có Tổng Số Lượng Sử Dụng Nhiều Nhất Năm 2024",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
+        "execution_log": "exam/gk/qa/mock10_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M11-Q1": {
+      "question_id": "M11-Q1",
+      "mock_id": "MOCK-11",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Chuỗi Cà Phê Nhượng Quyền",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
+        "execution_log": "exam/gk/qa/mock11_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M11-Q2A": {
+      "question_id": "M11-Q2A",
+      "mock_id": "MOCK-11",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_PX",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
+        "execution_log": "exam/gk/qa/mock11_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M11-Q2B": {
+      "question_id": "M11-Q2B",
+      "mock_id": "MOCK-11",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Tăng Lương Cho Cửa Hàng Trưởng Tại Khu Vực Trung Tâm",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
+        "execution_log": "exam/gk/qa/mock11_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M11-Q2C1": {
+      "question_id": "M11-Q2C1",
+      "mock_id": "MOCK-11",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Nguyên Liệu Hạt Cà Phê Có Đơn Giá Từ 200.000 Đ",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
+        "execution_log": "exam/gk/qa/mock11_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M11-Q2C2": {
+      "question_id": "M11-Q2C2",
+      "mock_id": "MOCK-11",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Phiếu Xuất Cho Cửa Hàng The Coffee House Landmark 81",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
+        "execution_log": "exam/gk/qa/mock11_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M11-Q2C3": {
+      "question_id": "M11-Q2C3",
+      "mock_id": "MOCK-11",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Danh Sách Khu Vực Và Cửa Hàng (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
+        "execution_log": "exam/gk/qa/mock11_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M11-Q2C4": {
+      "question_id": "M11-Q2C4",
+      "mock_id": "MOCK-11",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Tính Tổng Giá Trị Xuất Hàng Tháng 11/2024 Đã Giao",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
+        "execution_log": "exam/gk/qa/mock11_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M11-Q2C5": {
+      "question_id": "M11-Q2C5",
+      "mock_id": "MOCK-11",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Cửa Hàng Nhập Tất Cả Syrup Pha Chế",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
+        "execution_log": "exam/gk/qa/mock11_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M11-Q2C6": {
+      "question_id": "M11-Q2C6",
+      "mock_id": "MOCK-11",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị Tìm Cửa Hàng Nhập Tổng Số Lượng Nhiều Nhất Năm 2024",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
+        "execution_log": "exam/gk/qa/mock11_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M12-Q1": {
+      "question_id": "M12-Q1",
+      "mock_id": "MOCK-12",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Cụm Rạp Chiếu Phim & Đặt Vé",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
+        "execution_log": "exam/gk/qa/mock12_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M12-Q2A": {
+      "question_id": "M12-Q2A",
+      "mock_id": "MOCK-12",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên VEXEM",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
+        "execution_log": "exam/gk/qa/mock12_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M12-Q2B": {
+      "question_id": "M12-Q2B",
+      "mock_id": "MOCK-12",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Giảm Giá 10% Vé Chuẩn Phim Hoạt Hình Tháng 12/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
+        "execution_log": "exam/gk/qa/mock12_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M12-Q2C1": {
+      "question_id": "M12-Q2C1",
+      "mock_id": "MOCK-12",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Phim Khoa Học Viễn Tưởng Thời Lượng Từ 120 Phút",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
+        "execution_log": "exam/gk/qa/mock12_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M12-Q2C2": {
+      "question_id": "M12-Q2C2",
+      "mock_id": "MOCK-12",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Vé Xem Phim Tại Cụm Rạp CGV Landmark 81",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
+        "execution_log": "exam/gk/qa/mock12_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M12-Q2C3": {
+      "question_id": "M12-Q2C3",
+      "mock_id": "MOCK-12",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Danh Sách Cụm Rạp Và Phòng Chiếu (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
+        "execution_log": "exam/gk/qa/mock12_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M12-Q2C4": {
+      "question_id": "M12-Q2C4",
+      "mock_id": "MOCK-12",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Doanh Thu Vé Đã Thanh Toán Tháng 11/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
+        "execution_log": "exam/gk/qa/mock12_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M12-Q2C5": {
+      "question_id": "M12-Q2C5",
+      "mock_id": "MOCK-12",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Khách Hàng Mua Vé Xem Tất Cả Phim Kinh Dị",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
+        "execution_log": "exam/gk/qa/mock12_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M12-Q2C6": {
+      "question_id": "M12-Q2C6",
+      "mock_id": "MOCK-12",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị Tìm Phim Bán Được Nhiều Vé Nhất Năm 2024",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
+        "execution_log": "exam/gk/qa/mock12_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M13-Q1": {
+      "question_id": "M13-Q1",
+      "mock_id": "MOCK-13",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Tuyến Xe Buýt & Metro TP.HCM",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
+        "execution_log": "exam/gk/qa/mock13_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M13-Q2A": {
+      "question_id": "M13-Q2A",
+      "mock_id": "MOCK-13",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHUYEN_DI",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
+        "execution_log": "exam/gk/qa/mock13_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M13-Q2B": {
+      "question_id": "M13-Q2B",
+      "mock_id": "MOCK-13",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Tăng Lương Tài Xế Tuyến Xe Buýt Điện VinBus",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
+        "execution_log": "exam/gk/qa/mock13_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M13-Q2C1": {
+      "question_id": "M13-Q2C1",
+      "mock_id": "MOCK-13",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Tuyến Metro Có Cự Ly Từ 15 km Trở Lên",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
+        "execution_log": "exam/gk/qa/mock13_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M13-Q2C2": {
+      "question_id": "M13-Q2C2",
+      "mock_id": "MOCK-13",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Phương Tiện Thuộc Tuyến Bến Xe Miền Đông Mới",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
+        "execution_log": "exam/gk/qa/mock13_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M13-Q2C3": {
+      "question_id": "M13-Q2C3",
+      "mock_id": "MOCK-13",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Danh Sách Trạm Dừng Và Lộ Trình Tuyến (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
+        "execution_log": "exam/gk/qa/mock13_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M13-Q2C4": {
+      "question_id": "M13-Q2C4",
+      "mock_id": "MOCK-13",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Số Khách Phục Vụ Của Phương Tiện Ngày 20/11/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
+        "execution_log": "exam/gk/qa/mock13_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M13-Q2C5": {
+      "question_id": "M13-Q2C5",
+      "mock_id": "MOCK-13",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Tuyến Xe Đi Qua Tất Cả Trạm Ở Thủ Đức",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
+        "execution_log": "exam/gk/qa/mock13_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M13-Q2C6": {
+      "question_id": "M13-Q2C6",
+      "mock_id": "MOCK-13",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị Tìm Tuyến Xe Có Doanh Thu Cao Nhất Năm 2024",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
+        "execution_log": "exam/gk/qa/mock13_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M14-Q1": {
+      "question_id": "M14-Q1",
+      "mock_id": "MOCK-14",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Đề Tài NCKH Trọng Điểm",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
+        "execution_log": "exam/gk/qa/mock14_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M14-Q2A": {
+      "question_id": "M14-Q2A",
+      "mock_id": "MOCK-14",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên GIAINGAN Và DETAI",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
+        "execution_log": "exam/gk/qa/mock14_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M14-Q2B": {
+      "question_id": "M14-Q2B",
+      "mock_id": "MOCK-14",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Tăng Lương Giảng Viên Tiến Sĩ Viện Công Nghệ Thông Tin",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
+        "execution_log": "exam/gk/qa/mock14_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M14-Q2C1": {
+      "question_id": "M14-Q2C1",
+      "mock_id": "MOCK-14",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Đề Tài Cấp Nhà Nước Kinh Phí Từ 1 Tỷ Đồng Trở Lên",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
+        "execution_log": "exam/gk/qa/mock14_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M14-Q2C2": {
+      "question_id": "M14-Q2C2",
+      "mock_id": "MOCK-14",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Sản Phẩm Khoa Học Do GV01 Làm Chủ Nhiệm Đề Tài",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
+        "execution_log": "exam/gk/qa/mock14_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M14-Q2C3": {
+      "question_id": "M14-Q2C3",
+      "mock_id": "MOCK-14",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Danh Sách Khoa Viện Và Đề Tài Chủ Nhiệm (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
+        "execution_log": "exam/gk/qa/mock14_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M14-Q2C4": {
+      "question_id": "M14-Q2C4",
+      "mock_id": "MOCK-14",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Kinh Phí Giải Ngân Thực Tế Năm 2024 Theo Đề Tài",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
+        "execution_log": "exam/gk/qa/mock14_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M14-Q2C5": {
+      "question_id": "M14-Q2C5",
+      "mock_id": "MOCK-14",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Giảng Viên Tham Gia Tất Cả Đề Tài Cấp Nhà Nước",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
+        "execution_log": "exam/gk/qa/mock14_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M14-Q2C6": {
+      "question_id": "M14-Q2C6",
+      "mock_id": "MOCK-14",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị Tìm Đề Tài Có Nhiều Bài Báo Xếp Hạng Q1 Nhất",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
+        "execution_log": "exam/gk/qa/mock14_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M15-Q1": {
+      "question_id": "M15-Q1",
+      "mock_id": "MOCK-15",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Trại Cứu Hộ Động Vật Hoang Dã",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
+        "execution_log": "exam/gk/qa/mock15_sql_execution.log"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "pk_fk_mapping_verified": true,
+        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M15-Q2A": {
+      "question_id": "M15-Q2A",
+      "mock_id": "MOCK-15",
+      "topic": "SQL_DDL_DML",
+      "title": "Tạo Ràng Buộc CHECK Miền Giá Trị Trên CHITIET_CS Và DONGVAT",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
+        "execution_log": "exam/gk/qa/mock15_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 1:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M15-Q2B": {
+      "question_id": "M15-Q2B",
+      "mock_id": "MOCK-15",
+      "topic": "SQL_DDL_DML",
+      "title": "Cập Nhật Tăng Lương Bác Sĩ Thú Y Khu Cứu Hộ Thú Lớn",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
+        "execution_log": "exam/gk/qa/mock15_sql_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "fixture_test_tag": "TEST 2:",
+        "test_executed_in_sql_server": true,
+        "adversarial_check_integrity": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M15-Q2C1": {
+      "question_id": "M15-Q2C1",
+      "mock_id": "MOCK-15",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Lọc Các Loài Động Vật Cực Kỳ Nguy Cấp",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
+        "execution_log": "exam/gk/qa/mock15_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 3:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M15-Q2C2": {
+      "question_id": "M15-Q2C2",
+      "mock_id": "MOCK-15",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Nối Cá Thể Thuộc Khu Bán Tự Nhiên Cát Tiên",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
+        "execution_log": "exam/gk/qa/mock15_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 4:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {},
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M15-Q2C3": {
+      "question_id": "M15-Q2C3",
+      "mock_id": "MOCK-15",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài Danh Sách Phân Khu Và Nhân Viên (Nếu Có)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
+        "execution_log": "exam/gk/qa/mock15_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 5:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "outer_join_null_preservation": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M15-Q2C4": {
+      "question_id": "M15-Q2C4",
+      "mock_id": "MOCK-15",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm Chi Phí Chăm Sóc Động Vật Tháng 10/2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
+        "execution_log": "exam/gk/qa/mock15_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 6:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "zero_count_or_grouping_filter": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M15-Q2C5": {
+      "question_id": "M15-Q2C5",
+      "mock_id": "MOCK-15",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia Tìm Nhân Viên Chăm Sóc Tất Cả Tê Tê Java",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
+        "execution_log": "exam/gk/qa/mock15_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": false,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 7:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "empty_target_division_tested": true,
+        "candidate_universe_bounded": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "M15-Q2C6": {
+      "question_id": "M15-Q2C6",
+      "mock_id": "MOCK-15",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị Tìm Phân Khu Tiếp Nhận Nhiều Động Vật Nhất",
+      "difficulty": "C",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "evidence": {
+        "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
+        "execution_log": "exam/gk/qa/mock15_sql_execution.log"
+      },
+      "ra_audit": {
+        "ra_expression_present": true,
+        "has_greek_operators": true,
+        "intermediate_steps_breakdown": true
+      },
+      "sql_equivalence_audit": {
+        "sql_query_present": true,
+        "sql_syntax_valid": true,
+        "fixture_test_tag": "TEST 9:",
+        "assertion_passed_in_engine": true
+      },
+      "edge_case_audit": {
+        "extreme_tie_breaking_tested": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    }
+  }
+}

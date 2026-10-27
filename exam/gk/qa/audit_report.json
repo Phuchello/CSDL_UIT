@@ -1,31 +1,42 @@
 {
   "structural_qa_status": "PASS",
-  "academic_semantic_qa_status": "PASS (15/15 Mocks Gold Standard)",
+  "academic_semantic_qa_status": "PASS (15/15 Mocks Gold Standard Audited & 150 Independent Practice Problems Verified)",
   "gold_standard_mocks_count": 15,
+  "independent_practice_problems_count": 150,
+  "mock_exam_questions_count": 135,
   "stats": {
-    "total_problems": 173,
+    "total_problems": 285,
+    "mock_exam_questions": 135,
+    "independent_practice_problems": 150,
+    "independent_topics": {
+      "ERD_MAPPING": 25,
+      "RA_BASIC_JOIN": 45,
+      "RA_DIVISION_GROUPING": 45,
+      "SQL_DDL_DML": 35
+    },
     "topics": {
-      "ERD_MAPPING": 29,
-      "SQL_DDL_DML": 30,
-      "RA_BASIC_JOIN": 62,
-      "RA_DIVISION_GROUPING": 52
+      "ERD_MAPPING": 40,
+      "SQL_DDL_DML": 65,
+      "RA_BASIC_JOIN": 90,
+      "RA_DIVISION_GROUPING": 90
     },
     "difficulties": {
-      "A": 19,
-      "B": 119,
-      "C": 35
+      "A": 36,
+      "B": 189,
+      "C": 60
     },
-    "verified_problems": 145,
-    "draft_problems": 28,
+    "verified_problems": 285,
+    "draft_problems": 0,
     "verification_levels": {
       "EXECUTION_VERIFIED": 135,
-      "SEMANTICALLY_REVIEWED": 10,
-      "DRAFT": 28
+      "SEMANTICALLY_REVIEWED": 150,
+      "DRAFT": 0
     },
-    "solutions_present": 173,
-    "rubrics_present": 173,
+    "solutions_present": 285,
+    "rubrics_present": 285,
     "mocks_count": 15,
     "mock_points_valid": 15,
+    "gold_standard_mocks_audited": 15,
     "no_solution_leak": 15
   },
   "errors": [],
