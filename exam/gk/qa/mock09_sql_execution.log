@@ -1,0 +1,45 @@
+﻿Changed database context to 'tempdb'.
+------------------------------------------------------------
+=== TEST 1: CHECK CONSTRAINT ADVERSARIAL INTEGRITY ===
+------------------------------------------------------------
+  [PASS] Test 1A: CK_THAMGIA_SOVANTHANG correctly blocked negative SOVANTHANG.
+  [PASS] Test 1B: CK_TUYENTHU_TIENLUONG correctly blocked zero TIENLUONG.
+  [PASS] Test 1C: NOT NULL policy correctly rejected NULL TIENLUONG (Error 515).
+------------------------------------------------------------
+=== TEST 2: QUESTION 2.1B UPDATE VERIFICATION ===
+------------------------------------------------------------
+  [PASS] Test 2: UPDATE correctly affected 2 Mid players (TT02, TT05).
+  [PASS] Test 2b: Salaries verified: TT02=18.4m (+15%), TT05=16.1m (+15%), TT06=15m (unchanged).
+------------------------------------------------------------
+=== TEST 3: QUESTION 2.2A SELECTION & PROJECTION ===
+------------------------------------------------------------
+  [PASS] Test 3: Selection returned exactly 2 ADC players >= 15m (TT01, TT07).
+------------------------------------------------------------
+=== TEST 4: QUESTION 2.2B JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 4: Join returned exactly 5 matches played by UIT Hunters.
+------------------------------------------------------------
+=== TEST 5: QUESTION 2.2C OUTER JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 5: Outer join preserved TR04 with NULL team info (total 5 rows).
+------------------------------------------------------------
+=== TEST 6: QUESTION 2.2D GROUPING & AGGREGATE ===
+------------------------------------------------------------
+  [PASS] Test 6: Grouping SUM verified: DT01=25,000,000d; DT03=40,000,000d.
+------------------------------------------------------------
+=== TEST 7: QUESTION 2.2E RELATIONAL DIVISION ===
+------------------------------------------------------------
+Warning: Null value is eliminated by an aggregate or other SET operation.
+  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (DT01, DT03).
+------------------------------------------------------------
+=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
+------------------------------------------------------------
+Warning: Null value is eliminated by an aggregate or other SET operation.
+  [PASS] Test 8: Empty target S=Ø verified with EXCEPT set comparison: RA, NOT EXISTS and HAVING COUNT identical (4 teams).
+------------------------------------------------------------
+=== TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===
+------------------------------------------------------------
+  [PASS] Test 9: Extreme tie-breaking verified: DT01 (11 wins) and DT03 (11 wins) preserved; others excluded.
+------------------------------------------------------------
+=== ALL 9 MOCK-09 VERIFICATION SUITES PASSED WITH ASSERTIONS ===
+------------------------------------------------------------

@@ -1,0 +1,45 @@
+﻿Changed database context to 'tempdb'.
+------------------------------------------------------------
+=== TEST 1: CHECK CONSTRAINT ADVERSARIAL INTEGRITY ===
+------------------------------------------------------------
+  [PASS] Test 1A: CK_CTPX_SOLUONG correctly blocked zero SOLUONG.
+  [PASS] Test 1B: CK_CTPX_DONGIA correctly blocked negative DONGIA_XUAT.
+  [PASS] Test 1C: NOT NULL policy correctly rejected NULL SOLUONG (Error 515).
+------------------------------------------------------------
+=== TEST 2: QUESTION 2.1B UPDATE VERIFICATION ===
+------------------------------------------------------------
+  [PASS] Test 2: UPDATE correctly affected 2 store managers (NV01, NV03).
+  [PASS] Test 2b: Salaries verified: NV01=19.8m (+10%), NV03=18.7m (+10%), NV02=12m (unchanged), NV04=16m (unchanged).
+------------------------------------------------------------
+=== TEST 3: QUESTION 2.2A SELECTION & PROJECTION ===
+------------------------------------------------------------
+  [PASS] Test 3: Selection returned exactly 2 coffee bean items >= 200k (NL01, NL02).
+------------------------------------------------------------
+=== TEST 4: QUESTION 2.2B JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 4: Join returned exactly 3 slips (PX01, PX02, PX06).
+------------------------------------------------------------
+=== TEST 5: QUESTION 2.2C OUTER JOIN QUERY ===
+------------------------------------------------------------
+  [PASS] Test 5: Outer join preserved KV04 with NULL store info (total 5 rows).
+------------------------------------------------------------
+=== TEST 6: QUESTION 2.2D GROUPING & AGGREGATE ===
+------------------------------------------------------------
+  [PASS] Test 6: Grouping SUM verified: PX01=5.80m, PX02=7.60m, PX03=7.10m, PX04=5.75m.
+------------------------------------------------------------
+=== TEST 7: QUESTION 2.2E RELATIONAL DIVISION ===
+------------------------------------------------------------
+Warning: Null value is eliminated by an aggregate or other SET operation.
+  [PASS] Test 7: Relational division verified identically across NOT EXISTS and HAVING COUNT (CH01, CH02).
+------------------------------------------------------------
+=== TEST 8: QUESTION 2.2E DIVISION EMPTY TARGET EDGE CASE ===
+------------------------------------------------------------
+Warning: Null value is eliminated by an aggregate or other SET operation.
+  [PASS] Test 8: Empty target S=Ø verified with EXCEPT set comparison: RA, NOT EXISTS and HAVING COUNT identical (4 stores).
+------------------------------------------------------------
+=== TEST 9: QUESTION 2.2F EXTREME TIE-BREAKING ===
+------------------------------------------------------------
+  [PASS] Test 9: Extreme tie-breaking verified: CH01 (60 units) and CH02 (60 units) preserved; others excluded.
+------------------------------------------------------------
+=== ALL 9 MOCK-11 VERIFICATION SUITES PASSED WITH ASSERTIONS ===
+------------------------------------------------------------

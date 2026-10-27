@@ -14,7 +14,7 @@
 | **P0-02b** | False Positive trong Test CHECK Constraint & Lỗi Tiếng Việt | **P0** (Critical) | **RESOLVED** | 23/10/2026 | 23/10/2026 |
 | **P0-03** | Validator báo cáo độ tin cậy ảo (False Confidence) | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
 | **P0-04** | Ấn phẩm PDF không phân định bản DRAFT & VERIFIED | **P0** (Critical) | **RESOLVED** | 22/10/2026 | 23/10/2026 |
-| **P0-05** | Phân mảnh lược đồ & trùng câu MOCK-02 $\to$ MOCK-15 | **P1** (High) | **IN_PROGRESS (MOCK-01 &rarr; MOCK-08 RESOLVED)** | 22/10/2026 | Đang xử lý Phase C |
+| **P0-05** | Phân mảnh lược đồ & trùng câu MOCK-02 $\to$ MOCK-15 | **P1** (High) | **IN_PROGRESS (MOCK-01 &rarr; MOCK-11 RESOLVED)** | 22/10/2026 | Đang xử lý Phase C |
 
 ---
 
@@ -149,4 +149,22 @@
      - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.5đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu x 1.0đ = 6.0đ). Thang điểm: 10.0đ.
      - Viết bài kiểm thử [`exam/gk/mocks/MOCK-08/fixture_mock08.sql`](../../exam/gk/mocks/MOCK-08/fixture_mock08.sql) có 9 suite kiểm thử đối kháng với automated assertions (`THROW 500XX`), chạy 100% PASS trên Microsoft SQL Server 2025. Log lưu tại [`exam/gk/qa/mock08_sql_execution.log`](../../exam/gk/qa/mock08_sql_execution.log).
      - Thay thế 9 câu DRAFT cũ bằng 9 câu chuẩn hóa (`M08-Q1` đến `M08-Q2C6`), nâng tổng số câu `EXECUTION_VERIFIED` lên **72 câu** (MOCK-01 đến MOCK-08: mỗi đề 9 câu). Tổng số câu toàn ngân hàng giữ vững 173 câu.
-  8. **MOCK-09 đến MOCK-15:** Giữ nguyên trạng thái `DRAFT / NOT_RELEASE_READY`, tiếp tục tái cấu trúc tuần tự trong Phase C (Batch C.5: MOCK-09, MOCK-10, MOCK-11).
+  8. **MOCK-09 (ĐÃ HOÀN TẤT & KIỂM CHỨNG 100%):**
+     - Tái thiết kế toàn diện theo miền nghiệp vụ thực tế UIT: *Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên* (Profile `RECENT_VERIFIED`).
+     - Lược đồ thống nhất 6 quan hệ: `TRUONG`, `DOITHI`, `TUYENTHU`, `TRANDAU`, `THAMGIA_TRAN`, `NHATAITRO`.
+     - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.0đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu = 6.5đ). Thang điểm: 10.0đ.
+     - Viết bài kiểm thử [`exam/gk/mocks/MOCK-09/fixture_mock09.sql`](../../exam/gk/mocks/MOCK-09/fixture_mock09.sql) có 9 suite kiểm thử đối kháng với automated assertions (`THROW 500XX`), chạy 100% PASS trên Microsoft SQL Server 2025 (`localhost`). Log lưu tại [`exam/gk/qa/mock09_sql_execution.log`](../../exam/gk/qa/mock09_sql_execution.log).
+     - Thay thế 9 câu DRAFT cũ bằng 9 câu chuẩn hóa (`M09-Q1` đến `M09-Q2C6`), nâng tổng số câu `EXECUTION_VERIFIED` lên **81 câu**.
+  9. **MOCK-10 (ĐÃ HOÀN TẤT & KIỂM CHỨNG 100%):**
+     - Tái thiết kế toàn diện theo miền nghiệp vụ: *Quản Lý Gara Ô Tô & Phụ Tùng Bảo Dưỡng* (Profile `HISTORICAL_2023_2024`).
+     - Lược đồ thống nhất 6 quan hệ: `KHACHHANG`, `XE`, `THO`, `PHUTUNG`, `PHIEU_BD`, `CHITIET_BD`.
+     - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.5đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu x 1.0đ = 6.0đ). Thang điểm: 10.0đ.
+     - Viết bài kiểm thử [`exam/gk/mocks/MOCK-10/fixture_mock10.sql`](../../exam/gk/mocks/MOCK-10/fixture_mock10.sql) có 9 suite kiểm thử đối kháng với automated assertions (`THROW 500XX`), chạy 100% PASS trên Microsoft SQL Server 2025. Log lưu tại [`exam/gk/qa/mock10_sql_execution.log`](../../exam/gk/qa/mock10_sql_execution.log).
+     - Thay thế 9 câu DRAFT cũ bằng 9 câu chuẩn hóa (`M10-Q1` đến `M10-Q2C6`), nâng tổng số câu `EXECUTION_VERIFIED` lên **90 câu**.
+  10. **MOCK-11 (ĐÃ HOÀN TẤT & KIỂM CHỨNG 100%):**
+     - Tái thiết kế toàn diện theo miền nghiệp vụ: *Quản Lý Chuỗi Cà Phê Nhượng Quyền & Nguyên Liệu Pha Chế* (Profile `RECENT_VERIFIED`).
+     - Lược đồ thống nhất 6 quan hệ: `KHUVUC`, `CUAHANG`, `NHANVIEN`, `NGUYENLIEU`, `PHIEUXUAT`, `CHITIET_PX`.
+     - Hoàn thiện đầy đủ Câu 1 (ERD & Ánh xạ CSDL - 2.0đ), Câu 2.1 (SQL CHECK & UPDATE - 1.5đ), Câu 2.2 (ĐSQH 6 câu = 6.5đ). Thang điểm: 10.0đ.
+     - Viết bài kiểm thử [`exam/gk/mocks/MOCK-11/fixture_mock11.sql`](../../exam/gk/mocks/MOCK-11/fixture_mock11.sql) có 9 suite kiểm thử đối kháng với automated assertions (`THROW 500XX`), chạy 100% PASS trên Microsoft SQL Server 2025. Log lưu tại [`exam/gk/qa/mock11_sql_execution.log`](../../exam/gk/qa/mock11_sql_execution.log).
+     - Thay thế 9 câu DRAFT cũ bằng 9 câu chuẩn hóa (`M11-Q1` đến `M11-Q2C6`), nâng tổng số câu `EXECUTION_VERIFIED` lên **99 câu** (MOCK-01 đến MOCK-11: mỗi đề 9 câu). Tổng số câu toàn ngân hàng giữ vững 173 câu.
+  11. **MOCK-12 đến MOCK-15:** Giữ nguyên trạng thái `DRAFT / NOT_RELEASE_READY`, tiếp tục tái cấu trúc tuần tự trong Phase C (Batch C.6: MOCK-12, MOCK-13, MOCK-14, MOCK-15).

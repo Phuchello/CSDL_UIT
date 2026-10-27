@@ -180,78 +180,90 @@ Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển san
 
 ---
 
-## Bài 07 [ERD-009] — Thiết kế ERD & Ánh xạ Schema: Quản lý Giải Đấu Thể Thao Điện Tử (Esports)
+## Bài 07 [M09-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `DOI_THI, TUYEN_THU, GIAI_DAU, TRAN_DAU, KET_QUA`
+- **Lược đồ tham chiếu:** `ERD: TRUONG, DOITHI, TUYENTHU, TRANDAU, NHATAITRO, THAMGIA_TRAN`
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Giải Đấu Thể Thao Điện Tử (Esports)', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Giải đấu Thể thao Điện tử gồm các thực thể: TRUONG, DOITHI, TUYENTHU, TRANDAU, NHATAITRO và mối kết hợp THAMGIA_TRAN.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Giải Đấu Thể Thao Điện Tử (Esports)
+- {'name': 'TRUONG', 'pk': 'MATRUONG', 'attributes': ['MATRUONG', 'TENTRUONG', 'THANHPHO'], 'description': 'Trường đại học tham dự.'}
+- {'name': 'DOITHI', 'pk': 'MADOI', 'attributes': ['MADOI', 'TENDOI', 'NGUOIQUANLY'], 'description': 'Đội tuyển thi đấu.'}
+- {'name': 'TUYENTHU', 'pk': 'MATT', 'attributes': ['MATT', 'HOTEN', 'VITRI', 'TIENLUONG'], 'description': 'Tuyển thủ thi đấu.'}
+- {'name': 'TRANDAU', 'pk': 'MATRAN', 'attributes': ['MATRAN', 'NGAYDAU', 'VONGDAU', 'DIADIEM'], 'description': 'Trận đấu theo lịch trình.'}
+- {'name': 'NHATAITRO', 'pk': 'MANTT', 'attributes': ['MANTT', 'TENNTT', 'SOTIEN_TT'], 'description': 'Nhà tài trợ thương mại.'}
 **Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+- {'table': 'TRUONG', 'pk': ['MATRUONG'], 'fk': []}
+- {'table': 'DOITHI', 'pk': ['MADOI'], 'fk': [{'column': 'MATRUONG', 'ref_table': 'TRUONG', 'ref_column': 'MATRUONG'}]}
+- {'table': 'TUYENTHU', 'pk': ['MATT'], 'fk': [{'column': 'MADOI', 'ref_table': 'DOITHI', 'ref_column': 'MADOI'}]}
+- {'table': 'TRANDAU', 'pk': ['MATRAN'], 'fk': []}
+- {'table': 'THAMGIA_TRAN', 'pk': ['MATRAN', 'MADOI'], 'fk': [{'column': 'MATRAN', 'ref_table': 'TRANDAU', 'ref_column': 'MATRAN'}, {'column': 'MADOI', 'ref_table': 'DOITHI', 'ref_column': 'MADOI'}]}
+- {'table': 'NHATAITRO', 'pk': ['MANTT'], 'fk': [{'column': 'MATRAN', 'ref_table': 'TRANDAU', 'ref_column': 'MATRAN'}]}
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
+- `syntax`: 0.40đ
+- `logic`: 0.80đ
+- `intermediate_steps`: 0.80đ
 
 ---
 
-## Bài 08 [ERD-010] — Thiết kế ERD & Ánh xạ Schema: Quản lý Gara Sửa Chữa & Bảo Dưỡng Ô Tô
+## Bài 08 [M10-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Gara Ô Tô & Lịch Trình Bảo Dưỡng
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.5 điểm
-- **Lược đồ tham chiếu:** `XE, KHACH_HANG, THO_SUA, PHIEU_SUACHUA, PHU_TUNG`
+- **Lược đồ tham chiếu:** `ERD: KHACHHANG, XE, THO, PHUTUNG, PHIEU_BD, CHITIET_BD`
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Gara Sửa Chữa & Bảo Dưỡng Ô Tô', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Gara Ô tô gồm các thực thể: KHACHHANG, XE, THO, PHUTUNG, PHIEU_BD và mối kết hợp CHITIET_BD.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Gara Sửa Chữa & Bảo Dưỡng Ô Tô
+- {'name': 'KHACHHANG', 'pk': 'MAKH', 'attributes': ['MAKH', 'HOTEN', 'DIENTHOAI', 'DIACHI'], 'description': 'Khách hàng chủ xe.'}
+- {'name': 'XE', 'pk': 'BIENSO', 'attributes': ['BIENSO', 'HANGXE', 'MODEL', 'NAMSX'], 'description': 'Phương tiện ô tô.'}
+- {'name': 'THO', 'pk': 'MATHO', 'attributes': ['MATHO', 'HOTEN', 'CHUYENMON', 'LUONG_CB'], 'description': 'Thợ kỹ thuật gara.'}
+- {'name': 'PHUTUNG', 'pk': 'MAPT', 'attributes': ['MAPT', 'TENPT', 'LOAIPT', 'DONGIA', 'SOLUONGTON'], 'description': 'Phụ tùng thay thế.'}
+- {'name': 'PHIEU_BD', 'pk': 'MAPHIEU', 'attributes': ['MAPHIEU', 'NGAYLAP', 'TONGTIEN', 'TRANGTHAI'], 'description': 'Phiếu bảo dưỡng ô tô.'}
 **Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+- {'table': 'KHACHHANG', 'pk': ['MAKH'], 'fk': []}
+- {'table': 'XE', 'pk': ['BIENSO'], 'fk': [{'column': 'MAKH', 'ref_table': 'KHACHHANG', 'ref_column': 'MAKH'}]}
+- {'table': 'THO', 'pk': ['MATHO'], 'fk': []}
+- {'table': 'PHUTUNG', 'pk': ['MAPT'], 'fk': []}
+- {'table': 'PHIEU_BD', 'pk': ['MAPHIEU'], 'fk': [{'column': 'BIENSO', 'ref_table': 'XE', 'ref_column': 'BIENSO'}, {'column': 'MATHO', 'ref_table': 'THO', 'ref_column': 'MATHO'}]}
+- {'table': 'CHITIET_BD', 'pk': ['MAPHIEU', 'MAPT'], 'fk': [{'column': 'MAPHIEU', 'ref_table': 'PHIEU_BD', 'ref_column': 'MAPHIEU'}, {'column': 'MAPT', 'ref_table': 'PHUTUNG', 'ref_column': 'MAPT'}]}
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.50đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 1.00đ (Ánh xạ đúng PK, FK không sót)
+- `syntax`: 0.50đ
+- `logic`: 1.00đ
+- `intermediate_steps`: 1.00đ
 
 ---
 
-## Bài 09 [ERD-011] — Thiết kế ERD & Ánh xạ Schema: Quản lý Chuỗi Cà Phê Nhượng Quyền
-- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 25 phút | **Điểm số:** 2.0 điểm
-- **Lược đồ tham chiếu:** `CUA_HANG, NHAN_VIEN, THUC_UONG, NGUYEN_LIEU, HOA_DON`
+## Bài 09 [M11-Q1] — Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Chuỗi Cà Phê Nhượng Quyền
+- **Mức độ:** Mức B | **Thời gian khuyến nghị:** 20 phút | **Điểm số:** 2.0 điểm
+- **Lược đồ tham chiếu:** `ERD: KHUVUC, CUAHANG, NHANVIEN, NGUYENLIEU, PHIEUXUAT, CHITIET_PX`
 
 ### 1. Đề Bài
-Đọc ngữ cảnh bài toán 'Quản lý Chuỗi Cà Phê Nhượng Quyền', xây dựng mô hình Thực thể – Mối kết hợp (ERD) hoàn chỉnh với đầy đủ thực thể, thuộc tính khóa, mối kết hợp và bản số min-max (0,1), (1,1), (0,N), (1,N). Sau đó ánh xạ sang Lược đồ cơ sở dữ liệu quan hệ chỉ rõ Khóa chính (PK) và Khóa ngoại (FK).
+Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Chuỗi Cà phê Nhượng quyền gồm các thực thể: KHUVUC, CUAHANG, NHANVIEN, NGUYENLIEU, PHIEUXUAT và mối kết hợp CHITIET_PX.
 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Các thực thể và thuộc tính:**
-- Thực thể chuẩn hóa cho Quản lý Chuỗi Cà Phê Nhượng Quyền
+- {'name': 'KHUVUC', 'pk': 'MAKV', 'attributes': ['MAKV', 'TENKV', 'TRUONGVUNG'], 'description': 'Khu vực quản lý kinh doanh.'}
+- {'name': 'CUAHANG', 'pk': 'MACH', 'attributes': ['MACH', 'TENCH', 'DIACHI', 'MAKV', 'NAM_KYHD'], 'description': 'Cửa hàng chi nhánh nhượng quyền.'}
+- {'name': 'NHANVIEN', 'pk': 'MANV', 'attributes': ['MANV', 'HOTEN', 'CHUCVU', 'LUONG', 'MACH'], 'description': 'Nhân sự cửa hàng.'}
+- {'name': 'NGUYENLIEU', 'pk': 'MANL', 'attributes': ['MANL', 'TENNL', 'LOAINL', 'DONGIA_CHUAN', 'DVT'], 'description': 'Nguyên liệu pha chế.'}
+- {'name': 'PHIEUXUAT', 'pk': 'MAPX', 'attributes': ['MAPX', 'NGAYXUAT', 'MACH', 'TONGTIEN', 'TRANGTHAI'], 'description': 'Phiếu xuất kho phân phối.'}
 **Lược đồ quan hệ chuyển đổi:**
-- Lược đồ quan hệ chuẩn hóa 3NF/BCNF với PK gạch chân và FK tường minh
-
-**Các bước suy luận tư duy:**
-1. Bước 1: Phân tích danh từ chỉ đối tượng để xác định Thực thể và Thuộc tính.
-1. Bước 2: Phân tích động từ và mối liên kết để xác định Mối kết hợp.
-1. Bước 3: Xác định ràng buộc số lượng để gán bản số min-max.
-1. Bước 4: Ánh xạ: Thực thể -> Bảng; Quan hệ 1:N -> Đưa PK phía 1 sang phía N làm FK; Quan hệ M:N -> Tạo bảng trung gian có khóa chính kết hợp.
+- {'table': 'KHUVUC', 'pk': ['MAKV'], 'fk': []}
+- {'table': 'CUAHANG', 'pk': ['MACH'], 'fk': [{'column': 'MAKV', 'ref_table': 'KHUVUC', 'ref_column': 'MAKV'}]}
+- {'table': 'NHANVIEN', 'pk': ['MANV'], 'fk': [{'column': 'MACH', 'ref_table': 'CUAHANG', 'ref_column': 'MACH'}]}
+- {'table': 'NGUYENLIEU', 'pk': ['MANL'], 'fk': []}
+- {'table': 'PHIEUXUAT', 'pk': ['MAPX'], 'fk': [{'column': 'MACH', 'ref_table': 'CUAHANG', 'ref_column': 'MACH'}]}
+- {'table': 'CHITIET_PX', 'pk': ['MAPX', 'MANL'], 'fk': [{'column': 'MAPX', 'ref_table': 'PHIEUXUAT', 'ref_column': 'MAPX'}, {'column': 'MANL', 'ref_table': 'NGUYENLIEU', 'ref_column': 'MANL'}]}
 
 **Barem chấm điểm đề xuất:**
-- `erd_design`: 1.20đ (Vẽ đúng thực thể, thuộc tính và bản số)
-- `schema_mapping`: 0.80đ (Ánh xạ đúng PK, FK không sót)
+- `syntax`: 0.40đ
+- `logic`: 0.80đ
+- `intermediate_steps`: 0.80đ
 
 ---
 

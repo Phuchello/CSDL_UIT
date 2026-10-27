@@ -322,7 +322,8 @@ def print_html_to_pdf(html_text: str, output_pdf_path: Path):
 # -----------------------------------------------------------------------------
 GOLD_MOCK_IDS = [
     "MOCK-01", "MOCK-02", "MOCK-03", "MOCK-04",
-    "MOCK-05", "MOCK-06", "MOCK-07", "MOCK-08"
+    "MOCK-05", "MOCK-06", "MOCK-07", "MOCK-08",
+    "MOCK-09", "MOCK-10", "MOCK-11"
 ]
 
 MOCK_SCHEMA_TITLES = {
@@ -333,7 +334,10 @@ MOCK_SCHEMA_TITLES = {
     "MOCK-05": "Quản Lý Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà",
     "MOCK-06": "Quản Lý Đặt Khám & Hồ Sơ Bệnh Án Phòng Khám Đa Khoa",
     "MOCK-07": "Quản Lý Thư Viện Đại Học & Mượn Trả Sách",
-    "MOCK-08": "Quản Lý Sàn Thương Mại Điện Tử & Vận Chuyển Hàng"
+    "MOCK-08": "Quản Lý Sàn Thương Mại Điện Tử & Vận Chuyển Hàng",
+    "MOCK-09": "Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên",
+    "MOCK-10": "Quản Lý Gara Ô Tô & Phụ Tùng Bảo Dưỡng",
+    "MOCK-11": "Quản Lý Chuỗi Cà Phê Nhượng Quyền & Nguyên Liệu Pha Chế"
 }
 
 MOCK_EXECUTION_DATA = {
@@ -447,6 +451,48 @@ MOCK_EXECUTION_DATA = {
             ("2.2d", "Gom nhóm γ", "Tổng giá trị tiền hàng theo đơn hàng Đã giao tháng 11/2024", "DH01 (5.5m), DH02 (33.5m), DH03 (9.8m), DH04 (46.5m)", "PASS"),
             ("2.2e", "Phép chia ÷", "Đơn hàng mua tất cả hàng gia dụng của Gia Dụng Thông Minh & S=Ø check", "Đúng 2 đơn hàng: DH01 và DH03", "PASS"),
             ("2.2f", "Cực trị MAX", "Đồng hạng cực trị tổng số lượng sản phẩm đã mua tháng 11/2024", "Cả KH01 (6 SP) và KH02 (6 SP) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-09": {
+        "title": "MOCK-09",
+        "log": "exam/gk/qa/mock09_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn SOVANTHANG < 0, TIENLUONG <= 0, NULL", "Chặn lỗi CK_THAMGIA_SOVANTHANG, CK_TUYENTHU_TIENLUONG, 515", "PASS"),
+            ("2.1b", "UPDATE lương tuyển thủ", "Tăng 15% lương cho tuyển thủ Mid thi đấu cho đội FPT Arena", "TT02 (18.4m), TT05 (16.1m), TT06 không đổi", "PASS"),
+            ("2.2a", "Select σ", "Tuyển thủ vị trí ADC có mức lương từ 15 triệu trở lên", "TT01 (20tr), TT07 (15tr)", "PASS"),
+            ("2.2b", "Join ⋈", "Trận đấu do đội UIT Hunters tham gia thi đấu", "M01, M02, M04, M05, M08 (5 trận)", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Trọng tài TR04 chưa điều hành trận đấu nào", "TR01-03 có trận đấu; TR04 có MATRAN = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng giá trị tài trợ nhận được của từng đội thi đấu", "DT01 (25tr), DT03 (40tr)", "PASS"),
+            ("2.2e", "Phép chia ÷", "Đội thi tham gia tất cả trận đấu thể thức BO3 & S=Ø check", "Đúng 2 đội: DT01 và DT03", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị tổng số ván thắng nhiều nhất mùa giải", "Cả DT01 (11 ván) và DT03 (11 ván) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-10": {
+        "title": "MOCK-10",
+        "log": "exam/gk/qa/mock10_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn SOLUONGTON < 0, DONGIA <= 0, NULL", "Chặn lỗi CK_PHUTUNG_SOLUONGTON, CK_PHUTUNG_DONGIA, 515", "PASS"),
+            ("2.1b", "UPDATE lương thợ", "Tăng 10% lương cho thợ máy gầm có phiếu bảo dưỡng tháng 11/2024", "TH01 (16.5m), TH02 (15.4m), TH03-04 không đổi", "PASS"),
+            ("2.2a", "Select σ", "Xe thuộc hãng Toyota sản xuất từ năm 2022 trở lại đây", "51A-12345 (2022), 51K-67890 (2023)", "PASS"),
+            ("2.2b", "Join ⋈", "Phiếu bảo dưỡng do thợ Trần Văn Mạnh phụ trách", "P01, P03, P06 (3 phiếu)", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Khách hàng KH04 chưa sở hữu xe ô tô nào", "KH01-03 có xe; KH04 có BIENSO = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng chi phí phụ tùng từng phiếu bảo dưỡng tháng 11/2024", "P01 (2.35m), P02 (1.20m), P03 (2.60m), P04 (1.55m)", "PASS"),
+            ("2.2e", "Phép chia ÷", "Xe thay thế tất cả phụ tùng loại Dầu nhớt & S=Ø check", "Đúng 2 xe: 51A-12345 và 51K-67890", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị tổng số lượng sử dụng phụ tùng năm 2024", "Cả PT01 (5 cái) và PT05 (5 cái) bảo toàn", "PASS")
+        ]
+    },
+    "MOCK-11": {
+        "title": "MOCK-11",
+        "log": "exam/gk/qa/mock11_sql_execution.log",
+        "rows": [
+            ("2.1a", "CHECK constraint", "Thử chèn SOLUONG <= 0, DONGIA_XUAT <= 0, NULL", "Chặn lỗi CK_CTPX_SOLUONG, CK_CTPX_DONGIA, 515", "PASS"),
+            ("2.1b", "UPDATE lương nhân viên", "Tăng 10% lương cho Cửa hàng trưởng ở Khu vực Trung tâm", "NV01 (19.8m), NV03 (18.7m), NV02-04 không đổi", "PASS"),
+            ("2.2a", "Select σ", "Nguyên liệu Hạt cà phê có đơn giá chuẩn >= 200.000", "NL01 (Arabica), NL02 (Robusta)", "PASS"),
+            ("2.2b", "Join ⋈", "Phiếu xuất kho cho cửa hàng The Coffee House Landmark 81", "PX01, PX02, PX06 (3 phiếu)", "PASS"),
+            ("2.2c", "Left Outer Join ⟕", "Khu vực KV04 chưa thành lập cửa hàng chi nhánh nào", "KV01-03 có cửa hàng; KV04 có MACH = NULL", "PASS"),
+            ("2.2d", "Gom nhóm γ", "Tổng giá trị xuất hàng thực tế phiếu Đã giao tháng 11/2024", "PX01 (5.8m), PX02 (7.6m), PX03 (7.1m), PX04 (5.75m)", "PASS"),
+            ("2.2e", "Phép chia ÷", "Cửa hàng nhập tất cả Syrup pha chế (NL03, NL04) & S=Ø check", "Đúng 2 cửa hàng: CH01 và CH02", "PASS"),
+            ("2.2f", "Cực trị MAX", "Đồng hạng cực trị tổng số lượng nguyên liệu nhập năm 2024", "Cả CH01 (60 đơn vị) và CH02 (60 đơn vị) bảo toàn", "PASS")
         ]
     }
 }
@@ -603,8 +649,8 @@ def build_pdf_solutions():
     <div class="cover-univ">Trường Đại Học Công Nghệ Thông Tin — ĐHQG-HCM</div>
     <div class="cover-faculty">Khoa Hệ Thống Thông Tin</div>
     <div class="cover-title">HƯỚNG DẪN CHẤM & LỜI GIẢI CHI TIẾT<br>IT004 — CƠ SỞ DỮ LIỆU GIỮA KỲ</div>
-    <div class="cover-subtitle">Phân Tích Tư Duy Toán Học — Biểu Thức ĐSQH — Mã Nguồn T-SQL<br>MOCK-01 &rarr; MOCK-08 Đã Kiểm Chứng Thực Thi — 7 Đề Bản Thảo Đang Hoàn Thiện</div>
-    <div class="cover-badge">HỌC LIỆU ÔN TẬP — MOCK-01 &rarr; MOCK-08 CHUẨN VÀNG & BẢN THẢO MÔ PHỎNG</div>
+    <div class="cover-subtitle">Phân Tích Tư Duy Toán Học — Biểu Thức ĐSQH — Mã Nguồn T-SQL<br>MOCK-01 &rarr; MOCK-11 Đã Kiểm Chứng Thực Thi — 4 Đề Bản Thảo Đang Hoàn Thiện</div>
+    <div class="cover-badge">HỌC LIỆU ÔN TẬP — MOCK-01 &rarr; MOCK-11 CHUẨN VÀNG & BẢN THẢO MÔ PHỎNG</div>
     <div class="cover-author-box">
         <div class="cover-author-label">Tác giả & Biên soạn</div>
         <div class="cover-author-name">BIÊN SOẠN: VÕ TRỌNG PHÚC</div>
@@ -615,9 +661,9 @@ def build_pdf_solutions():
     <h1 class="topic-header">MỤC LỤC & CẤU TRÚC KIỂM ĐỊNH HỌC THUẬT</h1>
     <p>Ấn phẩm này cung cấp hướng dẫn chấm và lời giải chi tiết theo 3 cấp độ kiểm chứng minh bạch:</p>
     <ul>
-        <li><strong>EXECUTION_VERIFIED (Chuẩn Vàng):</strong> 8 đề thi mô phỏng (MOCK-01 &rarr; MOCK-08) đã được kiểm chứng thực thi 100% trên engine Microsoft SQL Server 2025 với kịch bản kiểm thử toàn bộ các ca biên (edge cases).</li>
-        <li><strong>SEMANTICALLY_REVIEWED (Đã rà soát học thuật):</strong> 33 bài tập phân dạng đã được đối sánh công thức toán học và lược đồ chuẩn UIT.</li>
-        <li><strong>DRAFT / INTERNAL REVIEW (Bản thảo nội bộ):</strong> 75 bài tập và 7 đề mô phỏng (MOCK-09 &rarr; MOCK-15) đang trong lộ trình tái cấu trúc theo chuẩn vàng trong Phase C.</li>
+        <li><strong>EXECUTION_VERIFIED (Chuẩn Vàng):</strong> 11 đề thi mô phỏng (MOCK-01 &rarr; MOCK-11) đã được kiểm chứng thực thi 100% trên engine Microsoft SQL Server 2025 với kịch bản kiểm thử toàn bộ các ca biên (edge cases).</li>
+        <li><strong>SEMANTICALLY_REVIEWED (Đã rà soát học thuật):</strong> 21 bài tập phân dạng đã được đối sánh công thức toán học và lược đồ chuẩn UIT.</li>
+        <li><strong>DRAFT / INTERNAL REVIEW (Bản thảo nội bộ):</strong> 53 bài tập và 4 đề mô phỏng (MOCK-12 &rarr; MOCK-15) đang trong lộ trình tái cấu trúc theo chuẩn vàng trong Phase C.</li>
     </ul>
 </div>
 """
@@ -887,7 +933,7 @@ def build_pdf_verified_only():
     <div class="cover-univ">Trường Đại Học Công Nghệ Thông Tin — ĐHQG-HCM</div>
     <div class="cover-faculty">Khoa Hệ Thống Thông Tin</div>
     <div class="cover-title">TUYỂN TẬP ĐỀ THI & BÀI TẬP ĐÃ KIỂM CHỨNG<br>IT004 — CƠ SỞ DỮ LIỆU GIỮA KỲ</div>
-    <div class="cover-subtitle">ẤN BẢN CHUẨN MỰC (VERIFIED ONLY)<br>MOCK-01 &rarr; MOCK-08 Kiểm Chứng Thực Thi SQL Server — {len(verified_probs)} Bài Tập Đã Rà Soát Học Thuật</div>
+    <div class="cover-subtitle">ẤN BẢN CHUẨN MỰC (VERIFIED ONLY)<br>MOCK-01 &rarr; MOCK-11 Kiểm Chứng Thực Thi SQL Server — {len(verified_probs)} Bài Tập Đã Rà Soát Học Thuật</div>
     <div class="cover-badge">BẢN KIỂM CHỨNG CHÍNH THỨC — KHÔNG CHỨA BÀI TẬP BẢN THẢO</div>
     <div class="cover-author-box">
         <div class="cover-author-label">Tác giả & Biên soạn</div>
@@ -907,6 +953,9 @@ def build_pdf_verified_only():
         <li><strong>Đề thi mô phỏng MOCK-06 (Chuẩn Vàng):</strong> Phòng Khám Đa Khoa & Hồ Sơ Khám Bệnh, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
         <li><strong>Đề thi mô phỏng MOCK-07 (Chuẩn Vàng):</strong> Thư Viện Đại Học & Mượn Trả Sách, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
         <li><strong>Đề thi mô phỏng MOCK-08 (Chuẩn Vàng):</strong> Sàn Thương Mại Điện Tử & Vận Chuyển Hàng, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
+        <li><strong>Đề thi mô phỏng MOCK-09 (Chuẩn Vàng):</strong> Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
+        <li><strong>Đề thi mô phỏng MOCK-10 (Chuẩn Vàng):</strong> Quản Lý Gara Ô Tô & Phụ Tùng Bảo Dưỡng, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
+        <li><strong>Đề thi mô phỏng MOCK-11 (Chuẩn Vàng):</strong> Quản Lý Chuỗi Cà Phê Nhượng Quyền & Nguyên Liệu Pha Chế, đầy đủ đề bài, barem chấm, và bảng kiểm chứng thực thi SQL Server 2025.</li>
         <li><strong>{len(verified_probs)} bài tập phân dạng đã kiểm chứng (Verified Problems):</strong> Gồm các bài tập EXECUTION_VERIFIED và SEMANTICALLY_REVIEWED có lời giải và barem chi tiết.</li>
     </ul>
 </div>
