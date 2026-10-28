@@ -38,15 +38,56 @@
 #### C. Sơ đồ Thực thể – Mối kết hợp (ERD)
 
 ```mermaid
-flowchart TD
-    XA["XA<br><u>MAXA</u>, TENXA, HUYEN"]
-    HD["HO_DAN<br><u>MAHO</u>, CHUHO, SONKHAU, MUCDO_THIETHAI"]
-    NHT["NHA_HAOTAM<br><u>MANHT</u>, TENNHT, SDT, LOAIHINH"]
-    DOT["DOT_CUUTRO<br><u>MADOT</u>, TENDOT, NGAYBD, NGAYKT"]
+erDiagram
+    XA ||--|{ HO_DAN : "CO_HODAN (1,N) - (1,1)"
+    XA ||--o{ PHIEU_NHAN : "PHAN_BO (0,N) - (1,1)"
+    HO_DAN ||--o{ PHIEU_NHAN : "TIEP_NHAN (0,N) - (1,1)"
+    DOT_CUUTRO ||--|{ PHIEU_NHAN : "PHAT_TIEN (1,N) - (1,1)"
+    NHA_HAOTAM ||--o{ DONG_GOP : "DONG_GOP (0,N) - (1,1)"
+    DOT_CUUTRO ||--|{ DONG_GOP : "NHAN_UNGHO (1,N) - (1,1)"
 
-    XA ---|"(1, N)"| R1{"TRUC_THUOC"} ---|"(1, 1)"| HD
-    NHT ---|"(0, N)"| R2{"DONG_GOP<br>(MADG, NGAYDG, SOTIEN)"} ---|"(1, N)"| DOT
-    HD ---|"(0, N)"| R3{"PHAN_BO<br>(MAPHIEU, NGAYNHAN, SOTIEN)"} ---|"(1, N)"| DOT
+    XA {
+        string MAXA PK
+        string TENXA
+        string HUYEN
+        string MUC_KHOKHAN
+    }
+    HO_DAN {
+        string MAHD PK
+        string MAXA FK
+        string CHUHO
+        int SONKHAU
+        string MUCDOTHETHAI
+    }
+    NHA_HAOTAM {
+        string MANHT PK
+        string TENNHT
+        string LOAI_NHT
+        string SDT
+    }
+    DOT_CUUTRO {
+        string MADOT PK
+        string TENDOT
+        date NGAYBD
+        date NGAYKT
+        decimal TONGTIEN_DUKIEN
+    }
+    DONG_GOP {
+        string MADG PK
+        string MANHT FK
+        string MADOT FK
+        date NGAYDONGGOP
+        decimal SOTIEN
+        string HINHTHUC
+    }
+    PHIEU_NHAN {
+        string MAPHIEU PK
+        string MAHD FK
+        string MADOT FK
+        date NGAYNHAN
+        decimal SOTIEN_NHAN
+        string NGUOIKY
+    }
 ```
 
 **Barem chấm điểm Câu 1.1 (1.20 điểm):**

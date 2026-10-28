@@ -2,10 +2,10 @@
 ------------------------------------------------------------
 === TEST 1: CHECK CONSTRAINT ADVERSARIAL INTEGRITY ===
 ------------------------------------------------------------
-  [PASS] CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = 0 (Confirmed Constraint: CK_CTPX_SOLIEUXUAT)
-  [PASS] CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = -10
-  [PASS] NOT NULL policy correctly rejected NULL in SOLIEUXUAT (Error 515)
-  [PASS] CK_PHIEUXUAT_TRANGTHAI correctly rejected TRANGTHAI = 2 (Confirmed Constraint: CK_PHIEUXUAT_TRANGTHAI)
+  [PASS] Test 1A: CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = 0 (Confirmed Constraint: CK_CTPX_SOLIEUXUAT)
+  [PASS] Test 1B: CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = -10
+  [PASS] Test 1C: NOT NULL policy correctly rejected NULL in SOLIEUXUAT (Error 515)
+  [PASS] Test 1D: CK_PHIEUXUAT_TRANGTHAI correctly rejected TRANGTHAI = 2 (Confirmed Constraint: CK_PHIEUXUAT_TRANGTHAI)
   [PASS] CK_PHIEUXUAT_TRANGTHAI correctly rejected TRANGTHAI = -1
   [PASS] NOT NULL policy correctly rejected NULL in TRANGTHAI (Error 515)
 

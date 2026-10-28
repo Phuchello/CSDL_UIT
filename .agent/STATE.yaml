@@ -52,6 +52,9 @@ verified:
   phase_c_mock15_reconstruction_complete: true
   phase_d_academic_audit_complete: true
   phase_d_bank_expansion_complete: true
+  phase_d1_academic_quality_recovery_complete: true
+  p0_01_through_p0_12_resolved: true
+  all_110_templates_replaced_with_authentic_uit_problems: true
   frozen_baseline_untouched: true
   pdf_deliverables_4_verified: true
   zero_blank_pages: true
@@ -62,9 +65,9 @@ verification_evidence:
   local_suite:
     - scripts/agent/verify.ps1 -Mode Fast (PASS)
     - scripts/validate.py (PASS, 6/6 checks)
-    - exam/gk/scripts/validate_gk.py (PASS, 285 problems: 135 Mock questions EXECUTION_VERIFIED + 150 independent practice problems SEMANTICALLY_REVIEWED, 0 DRAFT)
-    - exam/gk/qa/evidence_manifest.json (PASS, 135/135 questions audited & verified in manifest)
-    - exam/gk/scripts/verify_pdf_preflight.py (PASS, 4/4 PDFs verified 100%: 64p, 262p, 2p, 148p)
+    - exam/gk/scripts/validate_gk.py (PASS, 285 problems: 135 Mock questions + 150 authentic independent practice problems, 0 DRAFT)
+    - exam/gk/qa/evidence_manifest.json (PASS, 170/170 questions audited & execution-verified on engine in manifest with 0 FAIL)
+    - exam/gk/scripts/verify_pdf_preflight.py (PASS, 4/4 PDFs verified 100%: 65p, 257p, 2p, 148p)
     - exam/gk/qa/mock01_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock02_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock03_sql_execution.log (PASS, Microsoft SQL Server 2025)
@@ -80,7 +83,8 @@ verification_evidence:
     - exam/gk/qa/mock13_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock14_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock15_sql_execution.log (PASS, Microsoft SQL Server 2025)
-    - exam/gk/qa/defect_register.md (P0-01 through P0-07 ALL RESOLVED)
+    - exam/gk/qa/sql_practice_execution.log (PASS, 35/35 Transact-SQL tests executed on Microsoft SQL Server 2025)
+    - exam/gk/qa/defect_register.md (P0-01 through P0-12 ALL RESOLVED)
 
 blockers: []
 

@@ -17,6 +17,11 @@
 | **P0-05** | Phân mảnh lược đồ & trùng câu MOCK-02 $\to$ MOCK-15 | **P1** (High) | **RESOLVED (15/15 Mocks Gold Standard)** | 22/10/2026 | 23/10/2026 |
 | **P0-06** | False Academic Pass do Heuristic Validator (`exec_verified_cnt // 9`) | **P0** (Critical) | **RESOLVED** | 27/10/2026 | 27/10/2026 |
 | **P0-07** | Thiếu hụt ngân hàng câu hỏi độc lập (Chưa đạt chỉ tiêu $\ge$ 150 bài) | **P0** (Critical) | **RESOLVED** | 27/10/2026 | 27/10/2026 |
+| **P0-08** | 110 Bài luyện độc lập mang tính template generic (`RA-B16..45`, `RA-D01..45`, `SQL-P01..35`) | **P0** (Critical) | **RESOLVED** | 28/10/2026 | 28/10/2026 |
+| **P0-09** | Lỗi đứt ngoặc `)` trong `relational_schema` (`ERD-P01..25`) & thiếu Mermaid ERD | **P0** (Critical) | **RESOLVED** | 28/10/2026 | 28/10/2026 |
+| **P0-10** | Lỗi ngữ nghĩa T-SQL DML (`SET alias.col = ...`) & thiếu bộ lọc thời gian năm 2024 (`SQL-P26..35`) | **P0** (Critical) | **RESOLVED** | 28/10/2026 | 28/10/2026 |
+| **P0-11** | Lỗi ĐSQH cực trị trừ toàn bảng ($R - NonMax$) gây rò rỉ nhóm khác (`RA-D45`) | **P0** (Critical) | **RESOLVED** | 28/10/2026 | 28/10/2026 |
+| **P0-12** | Hệ thống Evidence Manifest Fail-Closed & kiểm thử thực thi 35 bài SQL trên SQL Server | **P0** (Critical) | **RESOLVED** | 28/10/2026 | 28/10/2026 |
 
 ---
 
@@ -237,11 +242,62 @@ Toàn bộ 15/15 Đề thi mô phỏng (MOCK-01 đến MOCK-15) đã được ch
 
 ---
 
-## 4. KẾT LUẬN TOÀN DIỆN PHASE D (FINAL ACADEMIC AUDIT & BANK COMPLETION)
+### P0-08: 110 Bài luyện độc lập mang tính template generic
+- **Mô tả hiện tượng:** Rà soát 150 bài luyện độc lập phát hiện 110 bài có dấu hiệu template/generic (`RA-B16`..`RA-B45`, `RA-D01`..`RA-D45`, `SQL-P01`..`SQL-P35`) sử dụng tên bảng giả (`BANG_A`, `BANG_B`, `DOITUONG_THI`, `HOPDONG_xx`) và các số tăng dần cơ học.
+- **Biện pháp khắc phục (Phase D.1 Academic Quality Recovery):**
+  1. Thay thế 100% 110 bài template bằng bài tập có ngữ cảnh nghiệp vụ thực tế, lược đồ chuẩn, truy vấn xác thực, giải thích từng bước và ca biên:
+     - 10 Equi-joins (`RA-B16`..`RA-B25`): Thư viện, rạp phim, nha khoa, xe liên tỉnh, bất động sản, nhà hàng, bảo hành máy tính, v.v.
+     - 10 Left Outer Joins (`RA-B26`..`RA-B35`): Bảo toàn NULL khi chưa phát sinh giao dịch.
+     - 5 Self-joins (`RA-B36`..`RA-B40`): Đổi tên quan hệ ($\rho$) so sánh phân cấp và giá cước.
+     - 5 Phép tập hợp (`RA-B41`..`RA-B45`): Phép hợp, giao, trừ khả hợp.
+     - 15 Phép chia (`RA-D01`..`RA-D15`): Quy trình 4 bước trừ kinh điển và phân tích ca biên tập chia rỗng $S = \emptyset$.
+     - 15 Gom nhóm & hàm tổng hợp (`RA-D16`..`RA-D30`): Toán tử $\gamma$, HAVING filter.
+     - 15 Cực trị & đồng hạng (`RA-D31`..`RA-D45`): Lọc tập con phân nhóm $R_{sub}$ trước khi trừ NonMax.
+     - 35 Transact-SQL (`SQL-P01`..`SQL-P35`): 15 CREATE TABLE, 10 ALTER TABLE, 10 multi-table UPDATE/DELETE.
 
-1. **Khắc phục toàn bộ danh mục lỗi:** 100% lỗi từ P0-01 đến P0-07 đã chuyển sang trạng thái **RESOLVED**.
+---
+
+### P0-09: Lỗi đứt ngoặc `)` trong `relational_schema` & thiếu Mermaid ERD (`ERD-P01`..`ERD-P25`)
+- **Mô tả hiện tượng:** Thuật toán cũ `schema.split("), ")` làm mất dấu ngoặc đóng `)` trên mọi quan hệ trừ bảng cuối cùng; thiếu sơ đồ Mermaid ERD và bản số min-max chi tiết.
+- **Biện pháp khắc phục:**
+  1. Chuẩn hóa hàm phân tách schema, bảo đảm 100% các bảng kết thúc bằng `)`.
+  2. Bổ sung mã nguồn Mermaid `erDiagram` cho toàn bộ 25 bài tập ERD độc lập, đầy đủ thực thể, thuộc tính khóa chính PK, khóa ngoại FK và các bản số hai phía (`||--o{`, `||--||`, v.v.).
+
+---
+
+### P0-10: Lỗi cú pháp T-SQL DML (`SET alias.col = ...`) & thiếu bộ lọc thời gian (`SQL-P26`..`SQL-P35`)
+- **Mô tả hiện tượng:** Lời giải UPDATE sử dụng cú pháp không hợp lệ `SET HD.TONGTIEN = ...` thay vì `SET TONGTIEN = ...`; đề bài yêu cầu năm 2024 nhưng bảng thiếu cột ngày và mệnh đề WHERE thiếu điều kiện năm.
+- **Biện pháp khắc phục:**
+  1. Chuẩn hóa toàn bộ 10 câu UPDATE/DELETE theo cú pháp chuẩn T-SQL của Microsoft SQL Server: `UPDATE target_alias SET col = expr FROM table target_alias JOIN ...`.
+  2. Đồng bộ cột ngày (`NGAYDK`, `NGAYNHAP`, `NGAYBAY`, `NGAYKT`, `NGAYLAP`, `THANG`/`NAM`, `NGAYDEN`, `THOIGIAN_BD`, `NGAYTRA`, `NGAYTRUC`) trên tất cả các bảng và bổ sung bộ lọc thời gian năm 2024 chính xác.
+
+---
+
+### P0-11: Lỗi ĐSQH cực trị trừ toàn bảng ($R - NonMax$) gây rò rỉ nhóm khác (`RA-D45`)
+- **Mô tả hiện tượng:** Tại `RA-D45`, biểu thức lấy toàn bảng $R$ trừ đi NonMax (chỉ tính trong nhóm 45), dẫn đến các bộ thuộc các nhóm khác không có trong NonMax bị sót lại trong kết quả sai lệch.
+- **Biện pháp khắc phục:**
+  1. Áp dụng công thức chuẩn: Lọc tập con $R_{sub} = \sigma_{cond}(R)$ trước khi tích Descartes và chỉ thực hiện phép trừ trên chính $R_{sub}$:
+     $$R_{sub} = \sigma_{MAPK = 'PK\_CNC'}(DOANHNGHIEP\_KCN)$$
+     $$NonMax = \pi_{attrs}(\sigma_{val1 < val2}(\rho_{D1}(R_{sub}) \times \rho_{D2}(R_{sub})))$$
+     $$KQ = R_{sub} - NonMax$$
+  2. Áp dụng thống nhất cho toàn bộ 15 bài toán cực trị từ `RA-D31` đến `RA-D45`.
+
+---
+
+### P0-12: Hệ thống Evidence Manifest Fail-Closed & kiểm thử thực thi 35 bài SQL
+- **Mô tả hiện tượng:** Validator chấp nhận pass mà không đối chiếu log thực thi chi tiết của từng câu hỏi độc lập.
+- **Biện pháp khắc phục:**
+  1. Nâng cấp generator manifest theo nguyên lý Fail-Closed: bất kỳ cờ kiểm tra nào sai đều gán `FAIL`.
+  2. Tạo fixture `exam/gk/qa/test_sql_practice.sql` thực thi toàn bộ 35 câu T-SQL trên SQL Server 2025 (`localhost`), sinh log `exam/gk/qa/sql_practice_execution.log` với 35/35 `[PASS]`.
+  3. Cập nhật `evidence_manifest.json` đạt 170/170 câu hỏi (135 câu Mock + 35 câu SQL độc lập) được thẩm định và kiểm chứng thực thi với 0 FAIL.
+
+---
+
+## 4. KẾT LUẬN TOÀN DIỆN (ACADEMIC QUALITY RECOVERY COMPLETED)
+
+1. **Khắc phục toàn bộ danh mục lỗi:** 100% lỗi từ P0-01 đến P0-12 đã chuyển sang trạng thái **RESOLVED**.
 2. **Quy mô học thuật đạt chuẩn vượt mức:**
    - 15/15 Mock Exam đạt Chuẩn Vàng (Gold Standard), 100% kiểm chứng thực thi SQL Server 2025.
-   - 150 bài tập độc lập theo chuyên đề phân loại độ khó (A: 20, B: 195, C: 70).
-   - Tổng cộng 285 bài tập (135 câu Mock + 150 bài luyện riêng), 0 placeholder, 0 câu trùng lặp.
-3. **Ấn phẩm xuất bản A4:** Hoàn tất 4 PDF A4 đồng bộ tại workspace, đạt chuẩn xuất bản chuyên nghiệp.
+   - 150 bài tập độc lập chuẩn hóa UIT phân loại độ khó (25 ERD, 45 RA Basic, 45 RA Division & Grouping, 35 SQL DDL/DML), 0 template, 0 placeholder.
+   - Tổng cộng 285 bài tập (135 câu Mock + 150 bài luyện riêng), toàn bộ có lời giải chi tiết, phân tích tư duy, ca biên và barem chấm điểm.
+3. **Ấn phẩm xuất bản A4:** Hoàn tất 4 PDF A4 đồng bộ tại workspace và thư mục OneDrive, preflight kiểm định 100% PASS.

@@ -1,9 +1,9 @@
 {
-  "manifest_version": "2.0",
-  "milestone": "PHASE_D_ACADEMIC_AUDIT",
+  "manifest_version": "2.1",
+  "milestone": "PHASE_D_ACADEMIC_AUDIT_STRICT",
   "auditor": "VÕ TRỌNG PHÚC",
   "engine": "Microsoft SQL Server 2025 Developer Edition",
-  "total_audited_questions": 135,
+  "total_audited_questions": 170,
   "mocks_count": 15,
   "questions": {
     "M01-Q1": {
@@ -14,16 +14,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
         "execution_log": "exam/gk/qa/mock01_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
-        "has_mermaid_erd": false,
+        "has_mermaid_erd": true,
         "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -35,15 +37,18 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
         "execution_log": "exam/gk/qa/mock01_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -56,15 +61,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
         "execution_log": "exam/gk/qa/mock01_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -77,11 +85,12 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
         "execution_log": "exam/gk/qa/mock01_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -91,7 +100,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -104,11 +114,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
         "execution_log": "exam/gk/qa/mock01_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -118,7 +129,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -131,11 +143,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
         "execution_log": "exam/gk/qa/mock01_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -145,7 +158,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -160,11 +174,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
         "execution_log": "exam/gk/qa/mock01_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -174,7 +189,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -189,11 +205,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
         "execution_log": "exam/gk/qa/mock01_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -203,7 +220,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -219,11 +237,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-01/fixture_mock01.sql",
         "execution_log": "exam/gk/qa/mock01_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -233,7 +252,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -248,16 +268,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
         "execution_log": "exam/gk/qa/mock02_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
-        "has_mermaid_erd": false,
-        "min_max_cardinalities_verified": false,
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -269,15 +291,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
         "execution_log": "exam/gk/qa/mock02_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -290,15 +315,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
         "execution_log": "exam/gk/qa/mock02_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -311,11 +339,12 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
         "execution_log": "exam/gk/qa/mock02_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -325,7 +354,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -338,11 +368,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
         "execution_log": "exam/gk/qa/mock02_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -352,7 +383,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -365,11 +397,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
         "execution_log": "exam/gk/qa/mock02_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -379,7 +412,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -394,11 +428,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
         "execution_log": "exam/gk/qa/mock02_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -408,7 +443,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -423,11 +459,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
         "execution_log": "exam/gk/qa/mock02_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -437,7 +474,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -453,11 +491,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-02/fixture_mock02.sql",
         "execution_log": "exam/gk/qa/mock02_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -467,7 +506,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -482,16 +522,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
         "execution_log": "exam/gk/qa/mock03_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
-        "has_mermaid_erd": false,
-        "min_max_cardinalities_verified": false,
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -503,15 +545,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
         "execution_log": "exam/gk/qa/mock03_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -524,15 +569,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
         "execution_log": "exam/gk/qa/mock03_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -545,11 +593,12 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
         "execution_log": "exam/gk/qa/mock03_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -559,7 +608,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -572,11 +622,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
         "execution_log": "exam/gk/qa/mock03_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -586,7 +637,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -599,11 +651,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
         "execution_log": "exam/gk/qa/mock03_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -613,7 +666,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -628,11 +682,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
         "execution_log": "exam/gk/qa/mock03_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -642,7 +697,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -657,11 +713,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
         "execution_log": "exam/gk/qa/mock03_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -671,7 +728,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -687,11 +745,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-03/fixture_mock03.sql",
         "execution_log": "exam/gk/qa/mock03_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -701,7 +760,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -716,16 +776,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
         "execution_log": "exam/gk/qa/mock04_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
-        "has_mermaid_erd": false,
-        "min_max_cardinalities_verified": false,
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -737,15 +799,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
         "execution_log": "exam/gk/qa/mock04_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -758,15 +823,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
         "execution_log": "exam/gk/qa/mock04_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -779,11 +847,12 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
         "execution_log": "exam/gk/qa/mock04_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -793,7 +862,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -806,11 +876,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
         "execution_log": "exam/gk/qa/mock04_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -820,7 +891,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -833,11 +905,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
         "execution_log": "exam/gk/qa/mock04_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -847,7 +920,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -862,11 +936,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
         "execution_log": "exam/gk/qa/mock04_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -876,7 +951,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -891,11 +967,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
         "execution_log": "exam/gk/qa/mock04_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -905,7 +982,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -921,11 +999,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-04/fixture_mock04.sql",
         "execution_log": "exam/gk/qa/mock04_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -935,7 +1014,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -950,16 +1030,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
         "execution_log": "exam/gk/qa/mock05_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
-        "has_mermaid_erd": false,
-        "min_max_cardinalities_verified": false,
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -971,15 +1053,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
         "execution_log": "exam/gk/qa/mock05_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -992,15 +1077,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
         "execution_log": "exam/gk/qa/mock05_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1013,11 +1101,12 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
         "execution_log": "exam/gk/qa/mock05_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -1027,7 +1116,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1040,11 +1130,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
         "execution_log": "exam/gk/qa/mock05_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -1054,7 +1145,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1067,11 +1159,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
         "execution_log": "exam/gk/qa/mock05_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -1081,7 +1174,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -1096,11 +1190,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
         "execution_log": "exam/gk/qa/mock05_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -1110,7 +1205,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -1125,11 +1221,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
         "execution_log": "exam/gk/qa/mock05_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -1139,7 +1236,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -1155,11 +1253,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-05/fixture_mock05.sql",
         "execution_log": "exam/gk/qa/mock05_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -1169,7 +1268,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -1184,16 +1284,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
         "execution_log": "exam/gk/qa/mock06_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
-        "has_mermaid_erd": false,
-        "min_max_cardinalities_verified": false,
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -1205,15 +1307,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
         "execution_log": "exam/gk/qa/mock06_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1226,15 +1331,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
         "execution_log": "exam/gk/qa/mock06_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1247,21 +1355,23 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
         "execution_log": "exam/gk/qa/mock06_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1274,21 +1384,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
         "execution_log": "exam/gk/qa/mock06_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1301,21 +1413,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
         "execution_log": "exam/gk/qa/mock06_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -1330,21 +1444,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
         "execution_log": "exam/gk/qa/mock06_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -1359,21 +1475,23 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
         "execution_log": "exam/gk/qa/mock06_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -1389,11 +1507,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-06/fixture_mock06.sql",
         "execution_log": "exam/gk/qa/mock06_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -1403,7 +1522,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -1418,16 +1538,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
         "execution_log": "exam/gk/qa/mock07_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
         "has_mermaid_erd": true,
         "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -1439,15 +1561,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
         "execution_log": "exam/gk/qa/mock07_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1460,15 +1585,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
         "execution_log": "exam/gk/qa/mock07_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1481,21 +1609,23 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
         "execution_log": "exam/gk/qa/mock07_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1508,21 +1638,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
         "execution_log": "exam/gk/qa/mock07_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1535,21 +1667,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
         "execution_log": "exam/gk/qa/mock07_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -1564,21 +1698,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
         "execution_log": "exam/gk/qa/mock07_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -1593,21 +1729,23 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
         "execution_log": "exam/gk/qa/mock07_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -1623,11 +1761,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-07/fixture_mock07.sql",
         "execution_log": "exam/gk/qa/mock07_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -1637,7 +1776,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -1652,16 +1792,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
         "execution_log": "exam/gk/qa/mock08_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
         "has_mermaid_erd": true,
         "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -1673,15 +1815,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
         "execution_log": "exam/gk/qa/mock08_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1694,15 +1839,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
         "execution_log": "exam/gk/qa/mock08_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1715,21 +1863,23 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
         "execution_log": "exam/gk/qa/mock08_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1742,21 +1892,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
         "execution_log": "exam/gk/qa/mock08_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1769,21 +1921,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
         "execution_log": "exam/gk/qa/mock08_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -1798,21 +1952,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
         "execution_log": "exam/gk/qa/mock08_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -1827,21 +1983,23 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
         "execution_log": "exam/gk/qa/mock08_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -1857,11 +2015,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-08/fixture_mock08.sql",
         "execution_log": "exam/gk/qa/mock08_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -1871,7 +2030,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -1886,16 +2046,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
         "execution_log": "exam/gk/qa/mock09_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
         "has_mermaid_erd": true,
         "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -1907,15 +2069,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
         "execution_log": "exam/gk/qa/mock09_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1928,15 +2093,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
         "execution_log": "exam/gk/qa/mock09_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1949,21 +2117,23 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
         "execution_log": "exam/gk/qa/mock09_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -1976,21 +2146,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
         "execution_log": "exam/gk/qa/mock09_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2003,21 +2175,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
         "execution_log": "exam/gk/qa/mock09_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -2032,21 +2206,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
         "execution_log": "exam/gk/qa/mock09_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -2061,21 +2237,23 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
         "execution_log": "exam/gk/qa/mock09_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -2091,11 +2269,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-09/fixture_mock09.sql",
         "execution_log": "exam/gk/qa/mock09_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -2105,7 +2284,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -2120,16 +2300,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
         "execution_log": "exam/gk/qa/mock10_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
         "has_mermaid_erd": true,
         "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -2141,15 +2323,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
         "execution_log": "exam/gk/qa/mock10_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2162,15 +2347,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
         "execution_log": "exam/gk/qa/mock10_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2183,21 +2371,23 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
         "execution_log": "exam/gk/qa/mock10_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2210,21 +2400,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
         "execution_log": "exam/gk/qa/mock10_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2237,21 +2429,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
         "execution_log": "exam/gk/qa/mock10_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -2266,21 +2460,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
         "execution_log": "exam/gk/qa/mock10_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -2295,21 +2491,23 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
         "execution_log": "exam/gk/qa/mock10_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -2325,11 +2523,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-10/fixture_mock10.sql",
         "execution_log": "exam/gk/qa/mock10_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -2339,7 +2538,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -2354,16 +2554,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
         "execution_log": "exam/gk/qa/mock11_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
         "has_mermaid_erd": true,
         "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -2375,15 +2577,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
         "execution_log": "exam/gk/qa/mock11_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2396,15 +2601,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
         "execution_log": "exam/gk/qa/mock11_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2417,21 +2625,23 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
         "execution_log": "exam/gk/qa/mock11_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2444,21 +2654,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
         "execution_log": "exam/gk/qa/mock11_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2471,21 +2683,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
         "execution_log": "exam/gk/qa/mock11_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -2500,21 +2714,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
         "execution_log": "exam/gk/qa/mock11_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -2529,21 +2745,23 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
         "execution_log": "exam/gk/qa/mock11_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -2559,11 +2777,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-11/fixture_mock11.sql",
         "execution_log": "exam/gk/qa/mock11_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -2573,7 +2792,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -2588,16 +2808,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
         "execution_log": "exam/gk/qa/mock12_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
         "has_mermaid_erd": true,
         "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -2609,15 +2831,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
         "execution_log": "exam/gk/qa/mock12_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2630,15 +2855,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
         "execution_log": "exam/gk/qa/mock12_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2651,21 +2879,23 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
         "execution_log": "exam/gk/qa/mock12_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2678,21 +2908,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
         "execution_log": "exam/gk/qa/mock12_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2705,21 +2937,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
         "execution_log": "exam/gk/qa/mock12_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -2734,21 +2968,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
         "execution_log": "exam/gk/qa/mock12_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -2763,21 +2999,23 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
         "execution_log": "exam/gk/qa/mock12_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -2793,11 +3031,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-12/fixture_mock12.sql",
         "execution_log": "exam/gk/qa/mock12_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -2807,7 +3046,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -2822,16 +3062,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
         "execution_log": "exam/gk/qa/mock13_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
         "has_mermaid_erd": true,
         "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -2843,15 +3085,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
         "execution_log": "exam/gk/qa/mock13_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2864,15 +3109,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
         "execution_log": "exam/gk/qa/mock13_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2885,21 +3133,23 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
         "execution_log": "exam/gk/qa/mock13_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2912,11 +3162,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
         "execution_log": "exam/gk/qa/mock13_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -2926,7 +3177,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -2939,21 +3191,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
         "execution_log": "exam/gk/qa/mock13_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -2968,11 +3222,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
         "execution_log": "exam/gk/qa/mock13_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -2982,7 +3237,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -2997,21 +3253,23 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
         "execution_log": "exam/gk/qa/mock13_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -3027,11 +3285,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-13/fixture_mock13.sql",
         "execution_log": "exam/gk/qa/mock13_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -3041,7 +3300,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -3056,16 +3316,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
         "execution_log": "exam/gk/qa/mock14_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
         "has_mermaid_erd": true,
         "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -3077,15 +3339,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
         "execution_log": "exam/gk/qa/mock14_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -3098,15 +3363,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
         "execution_log": "exam/gk/qa/mock14_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -3119,21 +3387,23 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
         "execution_log": "exam/gk/qa/mock14_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -3146,21 +3416,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
         "execution_log": "exam/gk/qa/mock14_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -3173,21 +3445,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
         "execution_log": "exam/gk/qa/mock14_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -3202,11 +3476,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
         "execution_log": "exam/gk/qa/mock14_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -3216,7 +3491,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -3231,21 +3507,23 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
         "execution_log": "exam/gk/qa/mock14_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -3261,11 +3539,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-14/fixture_mock14.sql",
         "execution_log": "exam/gk/qa/mock14_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -3275,7 +3554,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
@@ -3290,16 +3570,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
         "execution_log": "exam/gk/qa/mock15_sql_execution.log"
       },
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
       "erd_audit": {
         "has_mermaid_erd": true,
         "min_max_cardinalities_verified": true,
         "pk_fk_mapping_verified": true,
-        "isolated_schema_audit": "100% unified domain schema (6 tables)"
+        "entities_defined_verified": true,
+        "schema_unification": "100% unified domain schema (6 tables)"
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
@@ -3311,15 +3593,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
         "execution_log": "exam/gk/qa/mock15_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 1:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -3332,15 +3617,18 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
         "execution_log": "exam/gk/qa/mock15_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED",
       "sql_audit": {
         "syntax_valid": true,
         "fixture_test_tag": "TEST 2:",
-        "test_executed_in_sql_server": true,
+        "test_tag_in_log": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
         "adversarial_check_integrity": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -3353,21 +3641,23 @@
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
         "execution_log": "exam/gk/qa/mock15_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 3:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -3380,21 +3670,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
         "execution_log": "exam/gk/qa/mock15_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 4:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {},
       "audit_verdict": "AUDITED_AND_VERIFIED"
@@ -3407,21 +3699,23 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
         "execution_log": "exam/gk/qa/mock15_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 5:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "outer_join_null_preservation": true
@@ -3436,11 +3730,12 @@
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
         "execution_log": "exam/gk/qa/mock15_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -3450,7 +3745,8 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 6:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "zero_count_or_grouping_filter": true
@@ -3465,21 +3761,23 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
         "execution_log": "exam/gk/qa/mock15_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
-        "has_greek_operators": false,
+        "has_greek_operators": true,
         "intermediate_steps_breakdown": true
       },
       "sql_equivalence_audit": {
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 7:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "empty_target_division_tested": true,
@@ -3495,11 +3793,12 @@
       "difficulty": "C",
       "rubric_points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
       "evidence": {
         "fixture_file": "exam/gk/mocks/MOCK-15/fixture_mock15.sql",
         "execution_log": "exam/gk/qa/mock15_sql_execution.log"
       },
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_AND_RA_VERIFIED",
       "ra_audit": {
         "ra_expression_present": true,
         "has_greek_operators": true,
@@ -3509,12 +3808,785 @@
         "sql_query_present": true,
         "sql_syntax_valid": true,
         "fixture_test_tag": "TEST 9:",
-        "assertion_passed_in_engine": true
+        "assertion_passed_in_engine": true,
+        "no_runtime_errors": true
       },
       "edge_case_audit": {
         "extreme_tie_breaking_tested": true
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P01": {
+      "question_id": "SQL-P01",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Đăng Ký Học Phần Tín Chỉ UIT",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P02": {
+      "question_id": "SQL-P02",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Phiếu Tiêm Chủng Vắc-Xin",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P03": {
+      "question_id": "SQL-P03",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Chi Tiết Hóa Đơn Dược Phẩm (Computed Column)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P04": {
+      "question_id": "SQL-P04",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Vé Máy Bay & Hạng Vé Hàng Không",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P05": {
+      "question_id": "SQL-P05",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Hợp Đồng Thuê Ký Túc Xá Sinh Viên",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P06": {
+      "question_id": "SQL-P06",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Giao Dịch Thẻ ATM Ngân Hàng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P07": {
+      "question_id": "SQL-P07",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Đặt Phòng Resort & Nghỉ Dưỡng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P08": {
+      "question_id": "SQL-P08",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Chuyến Đi Xe Công Nghệ (Ride-Hailing)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P09": {
+      "question_id": "SQL-P09",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Chi Tiết Mượn Sách & Phạt Quá Hạn",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P10": {
+      "question_id": "SQL-P10",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Phiếu Xuất Kho Hàng Hóa",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P11": {
+      "question_id": "SQL-P11",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Kết Quả Xét Nghiệm Bệnh Viện",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P12": {
+      "question_id": "SQL-P12",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Bài Học Khóa Học Trực Tuyến",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P13": {
+      "question_id": "SQL-P13",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Chỉ Số Công Tơ Điện Ký Túc Xá",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P14": {
+      "question_id": "SQL-P14",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Suất Chiếu Phim Rạp Chiếu",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P15": {
+      "question_id": "SQL-P15",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Tạo Bảng Hợp Đồng Bản Quyền Biểu Diễn Âm Nhạc",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P16": {
+      "question_id": "SQL-P16",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Sửa Bảng Thêm Cột Email & Ràng Buộc Định Dạng Email",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P17": {
+      "question_id": "SQL-P17",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Sửa Bảng Bổ Sung Hạn Sử Dụng Dược Phẩm",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P18": {
+      "question_id": "SQL-P18",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Sửa Bảng Thêm Cột Điểm Tiêu Chuẩn Môn Học",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P19": {
+      "question_id": "SQL-P19",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Sửa Bảng Bổ Sung Hệ Số Lương Nhân Viên",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P20": {
+      "question_id": "SQL-P20",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Sửa Bảng Thiết Lập Khóa Ngoại ON DELETE SET NULL",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P21": {
+      "question_id": "SQL-P21",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Sửa Bảng Thêm Cột Điểm Đánh Giá Chuyến Xe",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P22": {
+      "question_id": "SQL-P22",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Sửa Bảng Thiết Lập Ràng Buộc UNIQUE Cho Căn Cước Công Dân",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P23": {
+      "question_id": "SQL-P23",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Sửa Bảng Bổ Sung Hạn Mức Tín Dụng Thẻ ATM",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P24": {
+      "question_id": "SQL-P24",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Sửa Bảng Thêm Cột Tỷ Lệ Chiết Khấu Hóa Đơn",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P25": {
+      "question_id": "SQL-P25",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DDL: Sửa Bảng Bổ Sung Ràng Buộc Kiểm Tra Ngày Khóa Học",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P26": {
+      "question_id": "SQL-P26",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DML: Giảm 15% Học Phí Lớp Học Phần Cho Sinh Viên Hoàn Cảnh Khó Khăn Đăng Ký Năm 2024 (Sửa P0-03)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P27": {
+      "question_id": "SQL-P27",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DML: Tăng 10% Đơn Giá Lô Vắc-Xin Bảo Quản Âm Sâu Nhập Khẩu Từ Mỹ Năm 2024 (Sửa P0-03)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P28": {
+      "question_id": "SQL-P28",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DML: Cập Nhật Phụ Phí 50.000 VNĐ Chuyến Bay Đêm Cao Điểm Tết 2024 (Sửa P0-03)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P29": {
+      "question_id": "SQL-P29",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DML: Xóa Lịch Sử Đăng Ký Cư Dân Hết Hạn Hợp Đồng Thuê Trước Năm 2024 (Sửa P0-03)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P30": {
+      "question_id": "SQL-P30",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DML: Nâng Hạng Khách Hàng VIP Cho Hóa Đơn Lớn Lập Năm 2024 (Sửa P0-03)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P31": {
+      "question_id": "SQL-P31",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DML: Miễn Phí Tiền Nước Cho Phòng KTX Tình Nguyện Hè Tháng 08/2024 (Sửa P0-03)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P32": {
+      "question_id": "SQL-P32",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DML: Tặng Điểm Thưởng Khách Đặt Phòng Resort 5 Sao Tháng 12/2024 (Sửa P0-03)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P33": {
+      "question_id": "SQL-P33",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DML: Tăng 10% Cước Phí Chuyến Xe Cao Điểm Mưa Bão Tháng 10/2024 (Sửa P0-03)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P34": {
+      "question_id": "SQL-P34",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DML: Xóa Phiếu Mượn Sách Quá Hạn Đã Bồi Thường Đầy Đủ Trước Năm 2024 (Sửa P0-03)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "SQL-P35": {
+      "question_id": "SQL-P35",
+      "topic": "SQL_DDL_DML",
+      "name": "T-SQL DML: Tăng 5% Lương Cơ Bản Bác Sĩ Cấp Cứu Trực Đêm Năm 2024 (Sửa P0-03)",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "EXECUTION_VERIFIED",
+      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "evidence": {
+        "fixture_file": "exam/gk/qa/test_sql_practice.sql",
+        "execution_log": "exam/gk/qa/sql_practice_execution.log",
+        "sqlcmd_command": "sqlcmd -S localhost -E -C -f 65001 -i exam/gk/qa/test_sql_practice.sql -o exam/gk/qa/sql_practice_execution.log"
+      },
+      "sql_audit": {
+        "syntax_valid": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true,
+        "no_invalid_alias_in_set": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
     }
-  }
+  },
+  "audited_and_verified_count": 170,
+  "audit_fail_count": 0
 }

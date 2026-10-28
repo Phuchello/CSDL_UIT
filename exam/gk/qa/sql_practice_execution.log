@@ -1,0 +1,37 @@
+﻿Changed database context to 'master'.
+Changed database context to 'IT004_PRACTICE_SQL_DB'.
+  [PASS] Test SQL-P01: CREATE TABLE DANGKY_HOCPHAN_P01 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P02: CREATE TABLE TIEM_VACXIN_P02 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P03: CREATE TABLE CTHD_PHARMACY_P03 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P04: CREATE TABLE VE_MAYBAY_P04 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P05: CREATE TABLE HOPDONG_KTX_P05 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P06: CREATE TABLE GIAODICH_ATM_P06 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P07: CREATE TABLE PHIEUDAT_RESORT_P07 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P08: CREATE TABLE CHUYENXE_CONGNGHE_P08 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P09: CREATE TABLE CT_PHIEUMUON_P09 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P10: CREATE TABLE PHIEU_XUATKHO_P10 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P11: CREATE TABLE KETQUA_XETNGHIEM_P11 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P12: CREATE TABLE BAIHOC_ONLINE_P12 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P13: CREATE TABLE CONGTO_DIEN_P13 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P14: CREATE TABLE SUATCHIEU_PHIM_P14 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P15: CREATE TABLE HOPDONG_BIEUDIEN_P15 successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P16: ALTER TABLE statement successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P17: ALTER TABLE statement successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P18: ALTER TABLE statement successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P19: ALTER TABLE statement successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P20: ALTER TABLE statement successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P21: ALTER TABLE statement successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P22: ALTER TABLE statement successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P23: ALTER TABLE statement successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P24: ALTER TABLE statement successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P25: ALTER TABLE statement successfully executed and verified on SQL Server 2025.
+  [PASS] Test SQL-P26: UPDATE/DELETE multi-table statement executed successfully. Affected rows: 1
+  [PASS] Test SQL-P27: UPDATE/DELETE multi-table statement executed successfully. Affected rows: 1
+  [PASS] Test SQL-P28: UPDATE/DELETE multi-table statement executed successfully. Affected rows: 1
+  [PASS] Test SQL-P29: UPDATE/DELETE multi-table statement executed successfully. Affected rows: 1
+  [PASS] Test SQL-P30: UPDATE/DELETE multi-table statement executed successfully. Affected rows: 1
+  [PASS] Test SQL-P31: UPDATE/DELETE multi-table statement executed successfully. Affected rows: 1
+  [PASS] Test SQL-P32: UPDATE/DELETE multi-table statement executed successfully. Affected rows: 1
+  [PASS] Test SQL-P33: UPDATE/DELETE multi-table statement executed successfully. Affected rows: 1
+  [PASS] Test SQL-P34: UPDATE/DELETE multi-table statement executed successfully. Affected rows: 1
+  [PASS] Test SQL-P35: UPDATE/DELETE multi-table statement executed successfully. Affected rows: 1

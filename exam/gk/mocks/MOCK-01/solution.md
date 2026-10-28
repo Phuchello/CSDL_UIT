@@ -37,7 +37,57 @@
    - Thuộc tính của mối kết hợp: `SOLIEUXUAT` (số liều vắc-xin xuất thực tế).
    - $\implies$ **Loại quan hệ: M:N**. Bản số: `PHIEUXUAT (1, N)` — `(0, N) LOVACXIN`.
 
-#### C. Sơ đồ Thực thể – Mối kết hợp (ERD Textual Representation)
+#### C. Sơ đồ Thực thể – Mối kết hợp (ERD)
+
+```mermaid
+erDiagram
+    NHACUNGCAP ||--o{ LOVACXIN : "CUNG_CAP (0,N) - (1,1)"
+    DIEMTIEM ||--o{ NHANVIEN : "CONG_TAC (0,N) - (0,1)"
+    DIEMTIEM ||--o{ PHIEUXUAT : "XUAT_DEN (0,N) - (1,1)"
+    PHIEUXUAT ||--|{ CTPX : "GOM (1,N) - (1,1)"
+    LOVACXIN ||--o{ CTPX : "XUAT_KHO (0,N) - (1,1)"
+
+    NHACUNGCAP {
+        string MANCC PK
+        string TENNCC
+        string QUOCGIA
+        string SDT
+    }
+    LOVACXIN {
+        string MALO PK
+        string TENLO
+        string TENVACXIN
+        date NGAYSX
+        date HSD
+        int SOLIEU
+        decimal DONGIA
+        string MANCC FK
+    }
+    DIEMTIEM {
+        string MADT PK
+        string TENDT
+        string DIACHI
+        string QUAN
+        int SUCCHUA
+    }
+    NHANVIEN {
+        string MANV PK
+        string HOTEN
+        string CHUYENMON
+        string SDT
+        string MADT FK
+    }
+    PHIEUXUAT {
+        string MAPX PK
+        date NGAYXUAT
+        int TRANGTHAI
+        string MADT FK
+    }
+    CTPX {
+        string MAPX PK,FK
+        string MALO PK,FK
+        int SOLIEUXUAT
+    }
 ```
 [NHACUNGCAP] 1 ──── (0,N) ──── <CUNG_CAP> ──── (1,1) ──── N [LOVACXIN]
                                                                │

@@ -49,19 +49,54 @@
 #### C. Sơ đồ Thực thể – Mối kết hợp (ERD)
 
 ```mermaid
-flowchart TD
-    CH["CUAHANG<br><u>MACH</u>, TENCH, DIACHI, QUAN, SO_TRU_BOM"]
-    NV["NHANVIEN<br><u>MANV</u>, HOTEN, NGAYSINH, CHUCVU, LUONG"]
-    BC["BE_CHUA<br><u>MABE</u>, DUNGTICH, LUONG_TON"]
-    NL["NHIENLIEU<br><u>MANL</u>, TENNL, LOAINL, DONVITINH, DONGIA"]
-    HD["HOADON<br><u>MAHD</u>, NGAYHD, HINHTHUC_TT"]
+erDiagram
+    CUAHANG ||--|{ NHANVIEN : "CONG_TAC (1,N) - (1,1)"
+    CUAHANG ||--|{ BE_CHUA : "LAP_BE (1,N) - (1,1)"
+    NHIENLIEU ||--o{ BE_CHUA : "CHUA_NHIENLIEU (0,N) - (1,1)"
+    CUAHANG ||--o{ HOADON : "XUAT_HOADON (0,N) - (1,1)"
+    NHANVIEN ||--o{ HOADON : "LAP_HOADON (0,N) - (1,1)"
+    HOADON ||--|{ CTHD : "GOM (1,N) - (1,1)"
+    NHIENLIEU ||--o{ CTHD : "BAN_RA (0,N) - (1,1)"
 
-    CH ---|"(1, N)"| R1{"CONG_TAC"} ---|"(1, 1)"| NV
-    CH ---|"(0, N)"| R2{"LAP_DAT"} ---|"(1, 1)"| BC
-    BC ---|"(1, 1)"| R3{"CHUA_NL"} ---|"(0, N)"| NL
-    CH ---|"(0, N)"| R4{"PHAT_HANH"} ---|"(1, 1)"| HD
-    NV ---|"(0, N)"| R5{"LAP_HD"} ---|"(1, 1)"| HD
-    HD ---|"(1, N)"| R6{"CHI_TIET_BAN<br>(SOLUONG, DONGIA_BAN, THANHTIEN)"} ---|"(0, N)"| NL
+    CUAHANG {
+        string MACH PK
+        string TENCH
+        string DIACHI
+        string QUAN
+    }
+    NHANVIEN {
+        string MANV PK
+        string MACH FK
+        string HOTEN
+        string CHUCVU
+        decimal LUONG
+    }
+    NHIENLIEU {
+        string MANL PK
+        string TENNL
+        string NHOM_NL
+        decimal DONGIA
+    }
+    BE_CHUA {
+        string MABE PK
+        string MACH FK
+        string MANL FK
+        decimal DUNGTICH_LIT
+        decimal LUONGTON_LIT
+    }
+    HOADON {
+        string SOHD PK
+        string MACH FK
+        string MANV FK
+        date NGAYHD
+        string HINHTHUC_TT
+    }
+    CTHD {
+        string SOHD PK,FK
+        string MANL PK,FK
+        decimal SOLUONG_LIT
+        decimal THANHTIEN
+    }
 ```
 
 **Barem chấm điểm Câu 1.1 (1.50 điểm):**

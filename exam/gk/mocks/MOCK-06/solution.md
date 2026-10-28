@@ -43,17 +43,51 @@
 #### C. Sơ đồ Thực thể – Mối kết hợp (ERD)
 
 ```mermaid
-flowchart TD
-    CK["CHUYENKHOA<br><u>MAKC</u>, TENKHOA, TRUONGKHOA"]
-    BS["BACSI<br><u>MABS</u>, HOTEN, HOCVI, LUONG"]
-    BN["BENHNHAN<br><u>MABN</u>, HOTEN, NGAYSINH, GIOITINH, DIACHI"]
-    PK["PHIEUKHAM<br><u>MAPK</u>, NGAYKHAM, CHANDOAN"]
-    DV["DICHVU_KHAM<br><u>MADV</u>, TENDV, LOAIDV, DONGIA"]
+erDiagram
+    CHUYENKHOA ||--|{ BACSI : "THUOC_KHOA (1,N) - (1,1)"
+    BACSI ||--o{ PHIEUKHAM : "THUC_HIEN (0,N) - (1,1)"
+    BENHNHAN ||--o{ PHIEUKHAM : "KHAM_BENH (0,N) - (1,1)"
+    PHIEUKHAM ||--|{ CHITIET_DV : "GOM (1,N) - (1,1)"
+    DICHVU_KHAM ||--o{ CHITIET_DV : "CUNG_CAP (0,N) - (1,1)"
 
-    CK ---|"(0, N)"| R1{"THUOC_KHOA"} ---|"(1, 1)"| BS
-    BS ---|"(0, N)"| R2{"THUC_HIEN"} ---|"(1, 1)"| PK
-    BN ---|"(0, N)"| R3{"DANG_KY"} ---|"(1, 1)"| PK
-    PK ---|"(1, N)"| R4{"CHI_DINH<br>(SOLUONG, DONGIA_THU, KETQUA)"} ---|"(0, N)"| DV
+    CHUYENKHOA {
+        string MAKO PK
+        string TENKHOA
+        string TRUONGKHOA
+    }
+    BACSI {
+        string MABS PK
+        string MAKO FK
+        string HOTEN
+        string HOCVI
+        string SDT
+    }
+    BENHNHAN {
+        string MABN PK
+        string HOTEN
+        date NGAYSINH
+        string GIOITINH
+        string DIACHI
+    }
+    DICHVU_KHAM {
+        string MADV PK
+        string TENDV
+        decimal DONGIA
+        string LOAIDV
+    }
+    PHIEUKHAM {
+        string MAPK PK
+        string MABN FK
+        string MABS FK
+        date NGAYKHAM
+        string CHANDOAN
+    }
+    CHITIET_DV {
+        string MAPK PK,FK
+        string MADV PK,FK
+        int SOLUONG
+        decimal DONGIA_THUC
+    }
 ```
 
 **Barem chấm điểm Câu 1.1 (1.50 điểm):**

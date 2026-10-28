@@ -136,7 +136,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
     IF ERROR_MESSAGE() LIKE '%CK_CTPX_SOLIEUXUAT%'
-        PRINT '  [PASS] CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = 0 (Confirmed Constraint: CK_CTPX_SOLIEUXUAT)';
+        PRINT '  [PASS] Test 1A: CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = 0 (Confirmed Constraint: CK_CTPX_SOLIEUXUAT)';
     ELSE
         THROW 50001, 'FAILED: Error was not caused by CK_CTPX_SOLIEUXUAT!', 1;
 END CATCH;
@@ -148,7 +148,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
     IF ERROR_MESSAGE() LIKE '%CK_CTPX_SOLIEUXUAT%'
-        PRINT '  [PASS] CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = -10';
+        PRINT '  [PASS] Test 1B: CK_CTPX_SOLIEUXUAT correctly rejected SOLIEUXUAT = -10';
     ELSE
         THROW 50002, 'FAILED: Error was not caused by CK_CTPX_SOLIEUXUAT!', 1;
 END CATCH;
@@ -160,7 +160,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
     IF ERROR_NUMBER() = 515 -- Cannot insert the value NULL into column
-        PRINT '  [PASS] NOT NULL policy correctly rejected NULL in SOLIEUXUAT (Error 515)';
+        PRINT '  [PASS] Test 1C: NOT NULL policy correctly rejected NULL in SOLIEUXUAT (Error 515)';
     ELSE
         THROW 50003, 'FAILED: NULL test failed!', 1;
 END CATCH;
@@ -172,7 +172,7 @@ BEGIN TRY
 END TRY
 BEGIN CATCH
     IF ERROR_MESSAGE() LIKE '%CK_PHIEUXUAT_TRANGTHAI%'
-        PRINT '  [PASS] CK_PHIEUXUAT_TRANGTHAI correctly rejected TRANGTHAI = 2 (Confirmed Constraint: CK_PHIEUXUAT_TRANGTHAI)';
+        PRINT '  [PASS] Test 1D: CK_PHIEUXUAT_TRANGTHAI correctly rejected TRANGTHAI = 2 (Confirmed Constraint: CK_PHIEUXUAT_TRANGTHAI)';
     ELSE
         THROW 50004, 'FAILED: Error was not caused by CK_PHIEUXUAT_TRANGTHAI!', 1;
 END CATCH;

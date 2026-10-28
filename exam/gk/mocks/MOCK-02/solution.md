@@ -43,17 +43,54 @@
 #### C. Sơ đồ Thực thể – Mối kết hợp (ERD)
 
 ```mermaid
-flowchart TD
-    TN["TOANHA<br><u>MATN</u>, TENTN, SOTANG, DIACHI"]
-    TANG["TANG<br><u>MATANG</u>, STTTANG, DIENTICH"]
-    CH["CANHO<br><u>MACANHO</u>, SOCANHO, DIENTICH, SOPHONGNGU, TRANGTHAI"]
-    TB["THIETBI_PCCC<br><u>MATB</u>, TENTB, LOAITB, VITRI_LAPDAT, NGAYLAP, HANSUDUNG"]
-    DKT["DOT_KIEMTRA<br><u>MADOT</u>, NGAYKT, NGUOIKT, KETLUAN_CHUNG"]
+erDiagram
+    TOANHA ||--|{ TANG : "THUOC_TOANHA (1,N) - (1,1)"
+    TANG ||--o{ CANHO : "CO_CANHO (0,N) - (1,1)"
+    TANG ||--o{ THIETBI_PCCC : "DAT_THIETBI (0,N) - (1,1)"
+    DOT_KIEMTRA ||--|{ CT_KIEMTRA : "GOM (1,N) - (1,1)"
+    THIETBI_PCCC ||--o{ CT_KIEMTRA : "KIEM_TRA (0,N) - (1,1)"
 
-    TN ---|"(1, N)"| R1{"THUOC_TOANHA"} ---|"(1, 1)"| TANG
-    TANG ---|"(0, N)"| R2{"CO_CANHO"} ---|"(1, 1)"| CH
-    TANG ---|"(0, N)"| R3{"DAT_THIETBI"} ---|"(1, 1)"| TB
-    DKT ---|"(1, N)"| R4{"KIEM_TRA_CT<br>(TINHTRANG, GHICHU)"} ---|"(0, N)"| TB
+    TOANHA {
+        string MATN PK
+        string TENTN
+        int SOTANG
+        string DIACHI
+    }
+    TANG {
+        string MATANG PK
+        string MATN FK
+        int STTTANG
+        decimal DIENTICH
+    }
+    CANHO {
+        string MACANHO PK
+        string MATANG FK
+        string SOCANHO
+        decimal DIENTICH
+        int SOPHONGNGU
+        string TRANGTHAI
+    }
+    THIETBI_PCCC {
+        string MATB PK
+        string MATANG FK
+        string TENTB
+        string LOAITB
+        string VITRI_LAPDAT
+        date NGAYLAP
+        date HANSUDUNG
+    }
+    DOT_KIEMTRA {
+        string MADOT PK
+        date NGAYKT
+        string NGUOIKT
+        string KETLUAN_CHUNG
+    }
+    CT_KIEMTRA {
+        string MADOT PK,FK
+        string MATB PK,FK
+        string TINHTRANG
+        string GHICHU
+    }
 ```
 
 **Barem chấm điểm Câu 1.1 (1.50 điểm):**

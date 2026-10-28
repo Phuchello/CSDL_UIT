@@ -1,16 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 scripts/update_catalog_and_bank.py
-Integrates the 150 independent practice problems into problems.json
-and generates rich markdown topic files in exam/gk/bank/.
+Integrates the 150 authentic independent practice problems into problems.json
+and generates rich markdown topic files with Mermaid ERD diagrams in exam/gk/bank/.
 """
 
 import json
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(REPO_ROOT))
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent.parent
 sys.path.insert(0, str(Path(__file__).parent))
 
 DATA_DIR = REPO_ROOT / "exam" / "gk" / "data"
@@ -19,7 +18,7 @@ BANK_DIR = REPO_ROOT / "exam" / "gk" / "bank"
 from build_all_independent_problems import build_all_150_independent_problems
 
 def update_all():
-    # 1. Load existing problems
+    # 1. Load existing problems to retrieve 135 mock questions
     with open(DATA_DIR / "problems.json", "r", encoding="utf-8") as f:
         existing_data = json.load(f)
 
@@ -87,6 +86,8 @@ def update_all():
                 md_content += "\n**Lược đồ quan hệ chuyển đổi:**\n"
                 for rs in sol.get("relational_schema", []):
                     md_content += f"- {rs}\n"
+                if "mermaid_erd" in sol:
+                    md_content += f"\n**Sơ đồ Thực thể - Mối kết hợp (ERD):**\n```mermaid\n{sol['mermaid_erd']}\n```\n\n"
 
             if "relational_algebra" in sol:
                 md_content += f"**Biểu thức Đại số quan hệ (ĐSQH):**\n```text\n{sol['relational_algebra']}\n```\n\n"
@@ -113,7 +114,7 @@ def update_all():
 
         target_file = BANK_DIR / filename
         with open(target_file, "w", encoding="utf-8") as f:
-            f.write(md_content)
+            f.write(md_content.strip() + "\n")
         print(f"Generated {target_file.name} with {len(probs)} problems.")
 
 if __name__ == "__main__":

@@ -48,19 +48,54 @@
 #### C. Sơ đồ Thực thể – Mối kết hợp (ERD)
 
 ```mermaid
-flowchart TD
-    TN["TOANHA<br><u>MATN</u>, TENTN, DIACHI, SOTANG"]
-    CH["CANHO<br><u>MACH</u>, SOPHONG, DIENTICH, GIATHUE_CHUAN, TRANGTHAI"]
-    KH["KHACHHANG<br><u>MAKH</u>, HOTEN, CCCD, SDT, LOAIKH"]
-    NV["NHANVIEN<br><u>MANV</u>, HOTEN, PHONGBAN, SDT"]
-    HD["HOPDONG<br><u>MAHD</u>, NGAYKY, NGAYBD, NGAYKT, GIATHUE_THUCTE, TIENCOC"]
-    PT["PHIEUTHU<br><u>SOPHIEU</u>, THANG, NAM, NGAYTHU, SOTIEN"]
+erDiagram
+    TOANHA ||--|{ CANHO : "CO_CANHO (1,N) - (1,1)"
+    CANHO ||--o{ HOPDONG : "THUE_CANHO (0,N) - (1,1)"
+    KHACHHANG ||--o{ HOPDONG : "KY_HOPDONG (0,N) - (1,1)"
+    NHANVIEN ||--o{ HOPDONG : "LAP_HOPDONG (0,N) - (1,1)"
+    HOPDONG ||--o{ PHIEUTHU : "THANH_TOAN (0,N) - (1,1)"
 
-    TN ---|"(1, N)"| R1{"THUOC_TOA"} ---|"(1, 1)"| CH
-    CH ---|"(0, N)"| R2{"CHO_THUE"} ---|"(1, 1)"| HD
-    KH ---|"(0, N)"| R3{"KY_KET"} ---|"(1, 1)"| HD
-    NV ---|"(0, N)"| R4{"MOI_GIOI"} ---|"(1, 1)"| HD
-    HD ---|"(0, N)"| R5{"THANH_TOAN"} ---|"(1, 1)"| PT
+    TOANHA {
+        string MATN PK
+        string TENTN
+        int SOTANG
+        string DIACHI
+    }
+    CANHO {
+        string MACANHO PK
+        string MATN FK
+        string SOCANHO
+        decimal DIENTICH
+        decimal GIATHUE_THANG
+    }
+    KHACHHANG {
+        string MAKH PK
+        string HOTEN
+        string CCCD
+        string SDT
+    }
+    NHANVIEN {
+        string MANV PK
+        string HOTEN
+        string CHUCVU
+        string SDT
+    }
+    HOPDONG {
+        string MAHD PK
+        string MACANHO FK
+        string MAKH FK
+        string MANV FK
+        date NGAYBD
+        date NGAYKT
+        decimal TIENCOC
+    }
+    PHIEUTHU {
+        string MAPHIEU PK
+        string MAHD FK
+        date NGAYTHU
+        decimal SOTIEN
+        string NOIDUNG
+    }
 ```
 
 **Barem chấm điểm Câu 1.1 (1.20 điểm):**
