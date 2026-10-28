@@ -1,9 +1,23 @@
 {
   "structural_qa_status": "PASS",
-  "academic_semantic_qa_status": "PASS (15/15 Mocks Gold Standard Audited & 150 Independent Practice Problems Verified)",
+  "academic_semantic_qa_status": "PASS (15/15 Mocks Gold Standard Audited & 150 Independent Practice Problems Verified - 285/285 Evidence Verified)",
+  "total_problems_in_bank": 285,
   "gold_standard_mocks_count": 15,
   "independent_practice_problems_count": 150,
   "mock_exam_questions_count": 135,
+  "evidence_manifest_audited_count": 285,
+  "evidence_manifest_fail_count": 0,
+  "breakdown_by_category": {
+    "ERD_REVIEWED": 40,
+    "SQL_EXECUTED": 65,
+    "SQL_EXECUTED_AND_RA_VERIFIED": 90,
+    "RA_SEMANTICALLY_VERIFIED": 90
+  },
+  "breakdown_by_level": {
+    "EXECUTION_VERIFIED": 155,
+    "SEMANTICALLY_REVIEWED": 130,
+    "DRAFT": 0
+  },
   "stats": {
     "total_problems": 285,
     "mock_exam_questions": 135,
@@ -28,15 +42,23 @@
     "verified_problems": 285,
     "draft_problems": 0,
     "verification_levels": {
-      "EXECUTION_VERIFIED": 135,
-      "SEMANTICALLY_REVIEWED": 150,
+      "EXECUTION_VERIFIED": 155,
+      "SEMANTICALLY_REVIEWED": 130,
       "DRAFT": 0
+    },
+    "verification_categories": {
+      "ERD_REVIEWED": 40,
+      "SQL_EXECUTED": 65,
+      "SQL_EXECUTED_AND_RA_VERIFIED": 90,
+      "RA_SEMANTICALLY_VERIFIED": 90
     },
     "solutions_present": 285,
     "rubrics_present": 285,
     "mocks_count": 15,
     "mock_points_valid": 15,
     "gold_standard_mocks_audited": 15,
+    "evidence_manifest_audited_count": 285,
+    "evidence_manifest_fail_count": 0,
     "no_solution_leak": 15
   },
   "errors": [],

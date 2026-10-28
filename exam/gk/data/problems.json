@@ -5,7 +5,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Tiêm Chủng Vắc-Xin",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Tiếp nhận, Phân phối vắc-xin và Điều động nhân sự tiêm chủng.",
       "schema": "ERD: NHACUNGCAP, LOVACXIN, DIEMTIEM, NHANVIEN, PHIEUXUAT",
@@ -342,7 +342,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý PCCC Chung Cư",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý An toàn Phòng cháy Chữa cháy (PCCC) Chung Cư Cao Tầng gồm TOANHA, TANG, CANHO, THIETBI_PCCC, DOT_KIEMTRA và CT_KIEMTRA.",
       "schema": "ERD: TOANHA, TANG, CANHO, THIETBI_PCCC, DOT_KIEMTRA, CT_KIEMTRA",
@@ -732,7 +732,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Đề Tài NCKH Trọng Điểm",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Đề tài NCKH Trọng điểm gồm các thực thể: KHOA_VIEN, GIANGVIEN, DETAI, SANPHAM_KH, GIAINGAN và mối kết hợp THAMGIA_DT.",
       "schema": "ERD: KHOA_VIEN, GIANGVIEN, DETAI, THAMGIA_DT, SANPHAM_KH, GIAINGAN",
@@ -946,7 +946,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Phòng Khám Đa Khoa & Hồ Sơ Khám Bệnh",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Đặt khám & Hồ sơ Bệnh án Phòng khám Đa khoa gồm các thực thể: CHUYENKHOA, BACSI, BENHNHAN, DICHVU_KHAM, PHIEUKHAM và mối kết hợp CHITIET_DV.",
       "schema": "ERD: CHUYENKHOA, BACSI, BENHNHAN, DICHVU_KHAM, PHIEUKHAM, CHITIET_DV",
@@ -1335,7 +1335,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Thư Viện Đại Học & Mượn Trả Sách",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Thư viện Đại học gồm các thực thể: KHOAVIEN, DOCGIA, SACH, THUTHU, PHIEUMUON và mối kết hợp CHITIET_MUON.",
       "schema": "ERD: KHOAVIEN, DOCGIA, SACH, THUTHU, PHIEUMUON, CHITIET_MUON",
@@ -1729,7 +1729,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Sàn Thương Mại Điện Tử & Đơn Hàng",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Sàn Thương mại Điện tử gồm các thực thể: GIANHANG, SANPHAM, KHACHHANG, DONHANG, VANCHUYEN và mối kết hợp CHITIET_DH.",
       "schema": "ERD: GIANHANG, SANPHAM, KHACHHANG, DONHANG, VANCHUYEN, CHITIET_DH",
@@ -2119,7 +2119,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Giải Đấu Thể Thao Điện Tử Sinh Viên",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Giải đấu Thể thao Điện tử gồm các thực thể: TRUONG, DOITHI, TUYENTHU, TRANDAU, NHATAITRO và mối kết hợp THAMGIA_TRAN.",
       "schema": "ERD: TRUONG, DOITHI, TUYENTHU, TRANDAU, NHATAITRO, THAMGIA_TRAN",
@@ -2508,7 +2508,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Gara Ô Tô & Lịch Trình Bảo Dưỡng",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Gara Ô tô gồm các thực thể: KHACHHANG, XE, THO, PHUTUNG, PHIEU_BD và mối kết hợp CHITIET_BD.",
       "schema": "ERD: KHACHHANG, XE, THO, PHUTUNG, PHIEU_BD, CHITIET_BD",
@@ -2898,7 +2898,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Chuỗi Cà Phê Nhượng Quyền",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Chuỗi Cà phê Nhượng quyền gồm các thực thể: KHUVUC, CUAHANG, NHANVIEN, NGUYENLIEU, PHIEUXUAT và mối kết hợp CHITIET_PX.",
       "schema": "ERD: KHUVUC, CUAHANG, NHANVIEN, NGUYENLIEU, PHIEUXUAT, CHITIET_PX",
@@ -3093,7 +3093,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Cụm Rạp Chiếu Phim & Đặt Vé",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Cụm Rạp Chiếu Phim & Đặt Vé gồm các thực thể: CUMRAP, PHONGCHIEU, PHIM, SUATCHIEU, KHACHHANG, VEXEM.",
       "schema": "ERD: CUMRAP, PHONGCHIEU, PHIM, SUATCHIEU, KHACHHANG, VEXEM",
@@ -3307,7 +3307,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Tuyến Xe Buýt & Metro TP.HCM",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Tuyến Xe Buýt & Metro gồm các thực thể: TUYEN_XE, TRAM_DUNG, PHUONGTIEN, TAIXE, CHUYEN_DI và mối kết hợp LOTRINH.",
       "schema": "ERD: TUYEN_XE, TRAM_DUNG, LOTRINH, PHUONGTIEN, TAIXE, CHUYEN_DI",
@@ -3523,7 +3523,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Trại Cứu Hộ Động Vật Hoang Dã",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Trại Cứu Hộ Động Vật Hoang Dã gồm các thực thể: KHU_BAOTON, LOAI_DONGVAT, DONGVAT, NHANVIEN, CHITIET_CS, DOT_TAITHA.",
       "schema": "ERD: KHU_BAOTON, LOAI_DONGVAT, DONGVAT, NHANVIEN, CHITIET_CS, DOT_TAITHA",
@@ -4714,7 +4714,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Quản Lý Cứu Trợ Bão Lũ",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Tiếp nhận & Phân bổ Tiền cứu trợ Bão lũ gồm các tập thực thể: XA, HO_DAN, NHA_HAOTAM, DOT_CUUTRO cùng các mối kết hợp tương ứng.",
       "schema": "ERD: XA, HO_DAN, NHA_HAOTAM, DOT_CUUTRO, DONG_GOP, PHIEU_NHAN",
@@ -5085,7 +5085,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Chuỗi Cửa Hàng Xăng Dầu",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Chuỗi Cửa hàng Bán lẻ Xăng dầu gồm các thực thể: CUAHANG, NHANVIEN, NHIENLIEU, BE_CHUA, HOADON cùng các mối kết hợp tương ứng.",
       "schema": "ERD: CUAHANG, NHANVIEN, NHIENLIEU, BE_CHUA, HOADON, CTHD",
@@ -5501,7 +5501,7 @@
       "topic": "ERD_MAPPING",
       "difficulty": "B",
       "status": "VERIFIED",
-      "verification_level": "EXECUTION_VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
       "title": "Thiết Kế ERD & Ánh Xạ CSDL Căn Hộ Chung Cư & Hợp Đồng Thuê Nhà",
       "prompt": "Thiết kế mô hình Thực thể – Mối kết hợp (ERD) và chuyển sang Lược đồ quan hệ cho Hệ thống Quản lý Căn hộ Chung cư & Hợp đồng Thuê nhà gồm các thực thể: TOANHA, CANHO, KHACHHANG, NHANVIEN, HOPDONG, PHIEUTHU cùng các mối kết hợp tương ứng.",
       "schema": "ERD: TOANHA, CANHO, KHACHHANG, NHANVIEN, HOPDONG, PHIEUTHU",
@@ -8382,15 +8382,15 @@
       "status": "VERIFIED",
       "verification_level": "SEMANTICALLY_REVIEWED",
       "solution": {
-        "relational_algebra": "π_{MSSV, HOTEN}(SINHVIEN ⋈ (π_{MSSV, MAMH}(DANGKY) ÷ π_{MAMH}(σ_{CHUYENNGANH = 'An toan thong tin' ∧ LOAI_MH = 'Bat buoc'}(MONHOC))))",
-        "sql": "SELECT SV.MSSV, SV.HOTEN\nFROM SINHVIEN SV\nWHERE SV.CHUYENNGANH = N'An toan thong tin'\n  AND NOT EXISTS (\n    SELECT MH.MAMH FROM MONHOC MH\n    WHERE MH.CHUYENNGANH = N'An toan thong tin' AND MH.LOAI_MH = N'Bat buoc'\n    EXCEPT\n    SELECT DK.MAMH FROM DANGKY DK WHERE DK.MSSV = SV.MSSV\n);",
+        "relational_algebra": "π_{MSSV, HOTEN}((π_{MSSV, MAMH}(σ_{CHUYENNGANH = 'An toan thong tin'}(SINHVIEN) ⋈ DANGKY) ÷ π_{MAMH}(σ_{CHUYENNGANH = 'An toan thong tin' ∧ LOAI_MH = 'Bat buoc'}(MONHOC))) ⋈ SINHVIEN)",
+        "sql": "SELECT SV.MSSV, SV.HOTEN\nFROM SINHVIEN SV\nWHERE SV.CHUYENNGANH = N'An toan thong tin'\n  AND EXISTS (SELECT 1 FROM DANGKY DK WHERE DK.MSSV = SV.MSSV)\n  AND NOT EXISTS (\n    SELECT MH.MAMH FROM MONHOC MH\n    WHERE MH.CHUYENNGANH = N'An toan thong tin' AND MH.LOAI_MH = N'Bat buoc'\n    EXCEPT\n    SELECT DK.MAMH FROM DANGKY DK WHERE DK.MSSV = SV.MSSV\n);",
         "intermediate_steps": [
           "Bước 1 (Xác định tập chia S): R_S = π_{MAMH}(σ_{CHUYENNGANH = 'An toan thong tin' ∧ LOAI_MH = 'Bat buoc'}(MONHOC)).",
-          "Bước 2 (Xác định tập ứng viên U): R_U = π_{MSSV}(σ_{CHUYENNGANH = 'An toan thong tin'}(SINHVIEN ⋈ DANGKY)).",
+          "Bước 2 (Xác định tập ứng viên U): R_U = π_{MSSV}(σ_{CHUYENNGANH = 'An toan thong tin'}(SINHVIEN) ⋈ DANGKY).",
           "Bước 3 (Tạo tập giả định và tìm các cặp thiếu): R_All = R_U × R_S; R_Missing = π_{MSSV}(R_All - π_{MSSV, MAMH}(DANGKY)).",
           "Bước 4 (Kết quả cuối cùng): KQ = (R_U - R_Missing) ⋈ π_{MSSV, HOTEN}(SINHVIEN)."
         ],
-        "edge_cases": "Nếu tập chia S rỗng (chuyên ngành chưa có môn bắt buộc nào), theo lý thuyết ĐSQH mọi sinh viên thỏa mãn nhưng trong thực tế hệ thống coi như chưa phát sinh yêu cầu; bắt buộc chặn tập ứng viên bởi các sinh viên thuộc ngành ATTT đã có đăng ký."
+        "edge_cases": "Nếu tập chia S rỗng (chuyên ngành chưa có môn bắt buộc nào), theo lý thuyết ĐSQH chuẩn tắc R_U - ∅ = R_U trả về sinh viên ATTT đã đăng ký môn; mệnh đề SQL có điều kiện EXISTS tương ứng chặn sinh viên chưa đăng ký môn nào. Sinh viên ngành khác dù học đủ môn ATTT cũng bị loại bỏ bởi điều kiện lọc ứng viên."
       },
       "rubric": {
         "total_points": 1.5,
@@ -8441,7 +8441,7 @@
       "verification_level": "SEMANTICALLY_REVIEWED",
       "solution": {
         "relational_algebra": "π_{MABS, HOTEN}(BACSI ⋈ (π_{MABS, MADOT}(σ_{KETQUA = 'Dat'}(THAMGIA_TH)) ÷ π_{MADOT}(σ_{LOAI_TH = 'Cap cuu hoi suc'}(DOTTAPHUAN))))",
-        "sql": "SELECT BS.MABS, BS.HOTEN\nFROM BACSI BS\nWHERE EXISTS (SELECT 1 FROM THAMGIA_TH TG WHERE TG.MABS = BS.MABS)\n  AND NOT EXISTS (\n    SELECT DTH.MADOT FROM DOTTAPHUAN DTH WHERE DTH.LOAI_TH = N'Cap cuu hoi suc'\n    EXCEPT\n    SELECT TG.MADOT FROM THAMGIA_TH TG WHERE TG.MABS = BS.MABS AND TG.KETQUA = N'Dat'\n);",
+        "sql": "SELECT BS.MABS, BS.HOTEN\nFROM BACSI BS\nWHERE EXISTS (SELECT 1 FROM THAMGIA_TH TG WHERE TG.MABS = BS.MABS AND TG.KETQUA = N'Dat')\n  AND NOT EXISTS (\n    SELECT DTH.MADOT FROM DOTTAPHUAN DTH WHERE DTH.LOAI_TH = N'Cap cuu hoi suc'\n    EXCEPT\n    SELECT TG.MADOT FROM THAMGIA_TH TG WHERE TG.MABS = BS.MABS AND TG.KETQUA = N'Dat'\n);",
         "intermediate_steps": [
           "Bước 1: Tập mục tiêu S = π_{MADOT}(σ_{LOAI_TH = 'Cap cuu hoi suc'}(DOTTAPHUAN)).",
           "Bước 2: Quan hệ thực tế R_Actual = π_{MABS, MADOT}(σ_{KETQUA = 'Dat'}(THAMGIA_TH)).",
@@ -8527,15 +8527,15 @@
       "status": "VERIFIED",
       "verification_level": "SEMANTICALLY_REVIEWED",
       "solution": {
-        "relational_algebra": "π_{MANV, HOTEN}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN) ⋈ (π_{MANV, MADT}(HOPDONG) ÷ π_{MADT}(σ_{PHANLOAI = 'Chien luoc'}(DOITAC))))",
-        "sql": "SELECT NV.MANV, NV.HOTEN\nFROM NHANVIEN NV\nWHERE NV.PHONGBAN = N'Kinh doanh'\n  AND NOT EXISTS (\n    SELECT DT.MADT FROM DOITAC DT WHERE DT.PHANLOAI = N'Chien luoc'\n    EXCEPT\n    SELECT HD.MADT FROM HOPDONG HD WHERE HD.MANV = NV.MANV\n);",
+        "relational_algebra": "π_{MANV, HOTEN}((π_{MANV, MADT}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN) ⋈ HOPDONG) ÷ π_{MADT}(σ_{PHANLOAI = 'Chien luoc'}(DOITAC))) ⋈ NHANVIEN)",
+        "sql": "SELECT NV.MANV, NV.HOTEN\nFROM NHANVIEN NV\nWHERE NV.PHONGBAN = N'Kinh doanh'\n  AND EXISTS (SELECT 1 FROM HOPDONG HD WHERE HD.MANV = NV.MANV)\n  AND NOT EXISTS (\n    SELECT DT.MADT FROM DOITAC DT WHERE DT.PHANLOAI = N'Chien luoc'\n    EXCEPT\n    SELECT HD.MADT FROM HOPDONG HD WHERE HD.MANV = NV.MANV\n);",
         "intermediate_steps": [
           "Bước 1: S = π_{MADT}(σ_{PHANLOAI = 'Chien luoc'}(DOITAC)).",
-          "Bước 2: U = π_{MANV}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN ⋈ HOPDONG)).",
+          "Bước 2: U = π_{MANV}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN) ⋈ HOPDONG).",
           "Bước 3: Missing = π_{MANV}((U × S) - π_{MANV, MADT}(HOPDONG)).",
           "Bước 4: KQ = (U - Missing) ⋈ π_{MANV, HOTEN}(NHANVIEN)."
         ],
-        "edge_cases": "Nhân viên phòng ban khác dù có ký hợp đồng với tất cả đối tác chiến lược cũng bị loại trừ bởi điều kiện phòng ban."
+        "edge_cases": "Nhân viên phòng ban khác dù có ký hợp đồng với tất cả đối tác chiến lược cũng bị loại trừ bởi điều kiện phòng ban. Điều kiện EXISTS đảm bảo khi S rỗng chỉ trả về nhân viên kinh doanh đã ký hợp đồng."
       },
       "rubric": {
         "total_points": 1.5,
@@ -8557,10 +8557,10 @@
       "verification_level": "SEMANTICALLY_REVIEWED",
       "solution": {
         "relational_algebra": "π_{SBD, HOTEN}(THISINH ⋈ (π_{SBD, MAMH}(σ_{DIEMSO IS NOT NULL}(DIEMTHI)) ÷ π_{MAMH}(σ_{MATOHOP = 'A00'}(TOHOP_MON))))",
-        "sql": "SELECT TS.SBD, TS.HOTEN\nFROM THISINH TS\nWHERE EXISTS (SELECT 1 FROM DIEMTHI DT WHERE DT.SBD = TS.SBD)\n  AND NOT EXISTS (\n    SELECT TH.MAMH FROM TOHOP_MON TH WHERE TH.MATOHOP = 'A00'\n    EXCEPT\n    SELECT DT.MAMH FROM DIEMTHI DT WHERE DT.SBD = TS.SBD AND DT.DIEMSO IS NOT NULL\n);",
+        "sql": "SELECT TS.SBD, TS.HOTEN\nFROM THISINH TS\nWHERE EXISTS (SELECT 1 FROM DIEMTHI DT WHERE DT.SBD = TS.SBD AND DT.DIEMSO IS NOT NULL)\n  AND NOT EXISTS (\n    SELECT TH.MAMH FROM TOHOP_MON TH WHERE TH.MATOHOP = 'A00'\n    EXCEPT\n    SELECT DT.MAMH FROM DIEMTHI DT WHERE DT.SBD = TS.SBD AND DT.DIEMSO IS NOT NULL\n);",
         "intermediate_steps": [
           "Bước 1: S = π_{MAMH}(σ_{MATOHOP = 'A00'}(TOHOP_MON)) (gồm Toán, Lý, Hóa).",
-          "Bước 2: U = π_{SBD}(DIEMTHI).",
+          "Bước 2: U = π_{SBD}(σ_{DIEMSO IS NOT NULL}(DIEMTHI)).",
           "Bước 3: Missing = π_{SBD}((U × S) - π_{SBD, MAMH}(σ_{DIEMSO IS NOT NULL}(DIEMTHI))).",
           "Bước 4: KQ = (U - Missing) ⋈ π_{SBD, HOTEN}(THISINH)."
         ],
@@ -8615,7 +8615,7 @@
       "verification_level": "SEMANTICALLY_REVIEWED",
       "solution": {
         "relational_algebra": "π_{MAKS, HOTEN}(KYSU ⋈ (π_{MAKS, MATC}(σ_{TRANGTHAI = 'Passed'}(KETQUA_TEST)) ÷ π_{MATC}(σ_{LOAITC = 'Security Regression'}(TESTCASE))))",
-        "sql": "SELECT KS.MAKS, KS.HOTEN\nFROM KYSU KS\nWHERE EXISTS (SELECT 1 FROM KETQUA_TEST KQ WHERE KQ.MAKS = KS.MAKS)\n  AND NOT EXISTS (\n    SELECT TC.MATC FROM TESTCASE TC WHERE TC.LOAITC = 'Security Regression'\n    EXCEPT\n    SELECT KQ.MATC FROM KETQUA_TEST KQ WHERE KQ.MAKS = KS.MAKS AND KQ.TRANGTHAI = 'Passed'\n);",
+        "sql": "SELECT KS.MAKS, KS.HOTEN\nFROM KYSU KS\nWHERE EXISTS (SELECT 1 FROM KETQUA_TEST KQ WHERE KQ.MAKS = KS.MAKS AND KQ.TRANGTHAI = 'Passed')\n  AND NOT EXISTS (\n    SELECT TC.MATC FROM TESTCASE TC WHERE TC.LOAITC = 'Security Regression'\n    EXCEPT\n    SELECT KQ.MATC FROM KETQUA_TEST KQ WHERE KQ.MAKS = KS.MAKS AND KQ.TRANGTHAI = 'Passed'\n);",
         "intermediate_steps": [
           "Bước 1: S = π_{MATC}(σ_{LOAITC = 'Security Regression'}(TESTCASE)).",
           "Bước 2: R_Actual = π_{MAKS, MATC}(σ_{TRANGTHAI = 'Passed'}(KETQUA_TEST)).",
@@ -8672,15 +8672,15 @@
       "status": "VERIFIED",
       "verification_level": "SEMANTICALLY_REVIEWED",
       "solution": {
-        "relational_algebra": "π_{MSSV, HOTEN}(σ_{KHOA = 'K2021'}(SINHVIEN) ⋈ (π_{MSSV, MACD}(DANGKY_CD) ÷ π_{MACD}(σ_{NAM ≥ 2022 ∧ NAM ≤ 2024}(CHIENDICH))))",
-        "sql": "SELECT SV.MSSV, SV.HOTEN\nFROM SINHVIEN SV\nWHERE SV.KHOA = 'K2021'\n  AND NOT EXISTS (\n    SELECT CD.MACD FROM CHIENDICH CD WHERE CD.NAM BETWEEN 2022 AND 2024\n    EXCEPT\n    SELECT DK.MACD FROM DANGKY_CD DK WHERE DK.MSSV = SV.MSSV\n);",
+        "relational_algebra": "π_{MSSV, HOTEN}((π_{MSSV, MACD}(σ_{KHOA = 'K2021'}(SINHVIEN) ⋈ DANGKY_CD) ÷ π_{MACD}(σ_{NAM ≥ 2022 ∧ NAM ≤ 2024}(CHIENDICH))) ⋈ SINHVIEN)",
+        "sql": "SELECT SV.MSSV, SV.HOTEN\nFROM SINHVIEN SV\nWHERE SV.KHOA = 'K2021'\n  AND EXISTS (SELECT 1 FROM DANGKY_CD DK WHERE DK.MSSV = SV.MSSV)\n  AND NOT EXISTS (\n    SELECT CD.MACD FROM CHIENDICH CD WHERE CD.NAM BETWEEN 2022 AND 2024\n    EXCEPT\n    SELECT DK.MACD FROM DANGKY_CD DK WHERE DK.MSSV = SV.MSSV\n);",
         "intermediate_steps": [
           "Bước 1: S = π_{MACD}(σ_{NAM ≥ 2022 ∧ NAM ≤ 2024}(CHIENDICH)).",
-          "Bước 2: U = π_{MSSV}(σ_{KHOA = 'K2021'}(SINHVIEN ⋈ DANGKY_CD)).",
+          "Bước 2: U = π_{MSSV}(σ_{KHOA = 'K2021'}(SINHVIEN) ⋈ DANGKY_CD).",
           "Bước 3: Missing = π_{MSSV}((U × S) - π_{MSSV, MACD}(DANGKY_CD)).",
           "Bước 4: KQ = (U - Missing) ⋈ π_{MSSV, HOTEN}(SINHVIEN)."
         ],
-        "edge_cases": "Chỉ xét sinh viên khóa K2021 có tham gia phong trào Đoàn hội liên tục các năm."
+        "edge_cases": "Chỉ xét sinh viên khóa K2021 có tham gia phong trào Đoàn hội liên tục các năm. Điều kiện EXISTS đảm bảo khi S rỗng chỉ trả về sinh viên K2021 có đăng ký tham gia chiến dịch."
       },
       "rubric": {
         "total_points": 1.5,
@@ -8722,7 +8722,7 @@
       "id": "RA-D13",
       "topic": "RA_DIVISION_GROUPING",
       "difficulty": "C",
-      "title": "ĐSQH Phép Chia: Cửa Hàng Tiện Lợi Phân Phối Tất Cả Sản Phẩm Sữa Vinamilk",
+      "title": "ĐSQH Phép Chia: Cửa Hàng Tiện Lợi Phân Phối Tất CẢ Sản Phẩm Sữa Vinamilk",
       "prompt": "Tìm mã cửa hàng và tên cửa hàng tại quận 'Thu Duc' đã từng nhập phân phối TẤT CẢ các sản phẩm thuộc nhãn hiệu 'Vinamilk'.",
       "schema": "CUAHANG(MACH, TENCH, QUAN), SANPHAM(MASP, TENSP, NHANHIEU), NHAPHANG(MAPN, MACH, NGAYNHAP), CT_NHAP(MAPN, MASP, SOLUONG)",
       "recommended_time_mins": 20,
@@ -8730,15 +8730,15 @@
       "status": "VERIFIED",
       "verification_level": "SEMANTICALLY_REVIEWED",
       "solution": {
-        "relational_algebra": "π_{MACH, TENCH}(σ_{QUAN = 'Thu Duc'}(CUAHANG) ⋈ (π_{MACH, MASP}(NHAPHANG ⋈ CT_NHAP) ÷ π_{MASP}(σ_{NHANHIEU = 'Vinamilk'}(SANPHAM))))",
-        "sql": "SELECT CH.MACH, CH.TENCH\nFROM CUAHANG CH\nWHERE CH.QUAN = N'Thu Duc'\n  AND NOT EXISTS (\n    SELECT SP.MASP FROM SANPHAM SP WHERE SP.NHANHIEU = 'Vinamilk'\n    EXCEPT\n    SELECT CT.MASP FROM NHAPHANG NH INNER JOIN CT_NHAP CT ON NH.MAPN = CT.MAPN WHERE NH.MACH = CH.MACH\n);",
+        "relational_algebra": "π_{MACH, TENCH}((π_{MACH, MASP}(σ_{QUAN = 'Thu Duc'}(CUAHANG) ⋈ NHAPHANG ⋈ CT_NHAP) ÷ π_{MASP}(σ_{NHANHIEU = 'Vinamilk'}(SANPHAM))) ⋈ CUAHANG)",
+        "sql": "SELECT CH.MACH, CH.TENCH\nFROM CUAHANG CH\nWHERE CH.QUAN = N'Thu Duc'\n  AND EXISTS (SELECT 1 FROM NHAPHANG NH WHERE NH.MACH = CH.MACH)\n  AND NOT EXISTS (\n    SELECT SP.MASP FROM SANPHAM SP WHERE SP.NHANHIEU = 'Vinamilk'\n    EXCEPT\n    SELECT CT.MASP FROM NHAPHANG NH INNER JOIN CT_NHAP CT ON NH.MAPN = CT.MAPN WHERE NH.MACH = CH.MACH\n);",
         "intermediate_steps": [
           "Bước 1: S = π_{MASP}(σ_{NHANHIEU = 'Vinamilk'}(SANPHAM)).",
-          "Bước 2: U = π_{MACH}(σ_{QUAN = 'Thu Duc'}(CUAHANG ⋈ NHAPHANG)).",
+          "Bước 2: U = π_{MACH}(σ_{QUAN = 'Thu Duc'}(CUAHANG) ⋈ NHAPHANG).",
           "Bước 3: Missing = π_{MACH}((U × S) - π_{MACH, MASP}(NHAPHANG ⋈ CT_NHAP)).",
           "Bước 4: KQ = (U - Missing) ⋈ π_{MACH, TENCH}(CUAHANG)."
         ],
-        "edge_cases": "Cửa hàng ở quận khác phân phối đủ vẫn bị loại bởi điều kiện QUAN = 'Thu Duc'."
+        "edge_cases": "Cửa hàng ở quận khác phân phối đủ vẫn bị loại bởi điều kiện QUAN = 'Thu Duc'. EXISTS bảo đảm khi S rỗng chỉ các cửa hàng tại Thủ Đức có phát sinh nhập hàng mới được trả về."
       },
       "rubric": {
         "total_points": 1.5,
@@ -8760,7 +8760,7 @@
       "verification_level": "SEMANTICALLY_REVIEWED",
       "solution": {
         "relational_algebra": "π_{MABN, HOTEN}(BENHNHAN ⋈ (π_{MABN, MAMUI}(σ_{TRANGTHAI = 'Hoan thanh'}(LICHSU_TIEM)) ÷ π_{MAMUI}(MUITIEM_CHUAN)))",
-        "sql": "SELECT BN.MABN, BN.HOTEN\nFROM BENHNHAN BN\nWHERE EXISTS (SELECT 1 FROM LICHSU_TIEM LS WHERE LS.MABN = BN.MABN)\n  AND NOT EXISTS (\n    SELECT MTC.MAMUI FROM MUITIEM_CHUAN MTC\n    EXCEPT\n    SELECT LS.MAMUI FROM LICHSU_TIEM LS WHERE LS.MABN = BN.MABN AND LS.TRANGTHAI = N'Hoan thanh'\n);",
+        "sql": "SELECT BN.MABN, BN.HOTEN\nFROM BENHNHAN BN\nWHERE EXISTS (SELECT 1 FROM LICHSU_TIEM LS WHERE LS.MABN = BN.MABN AND LS.TRANGTHAI = N'Hoan thanh')\n  AND NOT EXISTS (\n    SELECT MTC.MAMUI FROM MUITIEM_CHUAN MTC\n    EXCEPT\n    SELECT LS.MAMUI FROM LICHSU_TIEM LS WHERE LS.MABN = BN.MABN AND LS.TRANGTHAI = N'Hoan thanh'\n);",
         "intermediate_steps": [
           "Bước 1: S = π_{MAMUI}(MUITIEM_CHUAN).",
           "Bước 2: R_Actual = π_{MABN, MAMUI}(σ_{TRANGTHAI = 'Hoan thanh'}(LICHSU_TIEM)).",
@@ -8788,15 +8788,15 @@
       "status": "VERIFIED",
       "verification_level": "SEMANTICALLY_REVIEWED",
       "solution": {
-        "relational_algebra": "π_{MALTV, HOTEN}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN) ⋈ (π_{MALTV, MASVC}(COMMIT_LOG) ÷ π_{MASVC}(σ_{PHANLOAI = 'Core Service'}(MICROSERVICE))))",
-        "sql": "SELECT LTV.MALTV, LTV.HOTEN\nFROM LAPTRINHVIEN LTV\nWHERE LTV.PHONG_DEV = 'Backend'\n  AND NOT EXISTS (\n    SELECT MS.MASVC FROM MICROSERVICE MS WHERE MS.PHANLOAI = 'Core Service'\n    EXCEPT\n    SELECT CL.MASVC FROM COMMIT_LOG CL WHERE CL.MALTV = LTV.MALTV\n);",
+        "relational_algebra": "π_{MALTV, HOTEN}((π_{MALTV, MASVC}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN) ⋈ COMMIT_LOG) ÷ π_{MASVC}(σ_{PHANLOAI = 'Core Service'}(MICROSERVICE))) ⋈ LAPTRINHVIEN)",
+        "sql": "SELECT LTV.MALTV, LTV.HOTEN\nFROM LAPTRINHVIEN LTV\nWHERE LTV.PHONG_DEV = 'Backend'\n  AND EXISTS (SELECT 1 FROM COMMIT_LOG CL WHERE CL.MALTV = LTV.MALTV)\n  AND NOT EXISTS (\n    SELECT MS.MASVC FROM MICROSERVICE MS WHERE MS.PHANLOAI = 'Core Service'\n    EXCEPT\n    SELECT CL.MASVC FROM COMMIT_LOG CL WHERE CL.MALTV = LTV.MALTV\n);",
         "intermediate_steps": [
           "Bước 1: S = π_{MASVC}(σ_{PHANLOAI = 'Core Service'}(MICROSERVICE)).",
-          "Bước 2: U = π_{MALTV}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN ⋈ COMMIT_LOG)).",
+          "Bước 2: U = π_{MALTV}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN) ⋈ COMMIT_LOG).",
           "Bước 3: Missing = π_{MALTV}((U × S) - π_{MALTV, MASVC}(COMMIT_LOG)).",
           "Bước 4: KQ = (U - Missing) ⋈ π_{MALTV, HOTEN}(LAPTRINHVIEN)."
         ],
-        "edge_cases": "Bảo đảm kiến trúc microservices được bao phủ kiểm tra đóng góp mã nguồn đầy đủ."
+        "edge_cases": "Bảo đảm kiến trúc microservices được bao phủ kiểm tra đóng góp mã nguồn đầy đủ. EXISTS bảo đảm khi S rỗng chỉ xét lập trình viên Backend có commit."
       },
       "rubric": {
         "total_points": 1.5,
@@ -9669,7 +9669,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE DANGKY_HOCPHAN_P01 (\n    MSSV VARCHAR(10) NOT NULL,\n    MALHP VARCHAR(10) NOT NULL,\n    NGAYDK DATE NOT NULL DEFAULT GETDATE(),\n    DIEMGK DECIMAL(4, 2) NULL,\n    DIEMCK DECIMAL(4, 2) NULL,\n    TRANGTHAI NVARCHAR(20) NOT NULL DEFAULT N'Da dang ky',\n    CONSTRAINT PK_DANGKY_P01 PRIMARY KEY (MSSV, MALHP),\n    CONSTRAINT FK_DANGKY_SV_P01 FOREIGN KEY (MSSV) REFERENCES SINHVIEN_P01(MSSV) ON DELETE CASCADE,\n    CONSTRAINT FK_DANGKY_LHP_P01 FOREIGN KEY (MALHP) REFERENCES LOPHOCPHAN_P01(MALHP) ON DELETE CASCADE,\n    CONSTRAINT CK_DANGKY_DIEMGK_P01 CHECK (DIEMGK BETWEEN 0.0 AND 10.0),\n    CONSTRAINT CK_DANGKY_DIEMCK_P01 CHECK (DIEMCK BETWEEN 0.0 AND 10.0),\n    CONSTRAINT CK_DANGKY_TRANGTHAI_P01 CHECK (TRANGTHAI IN (N'Da dang ky', N'Da huy', N'Hoan thanh'))\n);",
         "intermediate_steps": [
@@ -9697,7 +9697,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE TIEM_VACXIN_P02 (\n    MAPHIEU VARCHAR(10) NOT NULL,\n    MABS VARCHAR(10) NOT NULL,\n    MABN VARCHAR(10) NOT NULL,\n    MALO VARCHAR(10) NOT NULL,\n    NGAYTIEM DATETIME NOT NULL DEFAULT GETDATE(),\n    LIEULUONG_ML DECIMAL(4, 2) NOT NULL,\n    PHANUNG_SAUTIEM NVARCHAR(50) NOT NULL DEFAULT N'Binh thuong',\n    CONSTRAINT PK_TIEM_VACXIN_P02 PRIMARY KEY (MAPHIEU),\n    CONSTRAINT FK_TIEM_BS_P02 FOREIGN KEY (MABS) REFERENCES BACSI_P02(MABS),\n    CONSTRAINT FK_TIEM_BN_P02 FOREIGN KEY (MABN) REFERENCES BENHNHAN_P02(MABN),\n    CONSTRAINT FK_TIEM_LO_P02 FOREIGN KEY (MALO) REFERENCES LOVACXIN_P02(MALO),\n    CONSTRAINT CK_TIEM_LIEULUONG_P02 CHECK (LIEULUONG_ML > 0.0),\n    CONSTRAINT CK_TIEM_PHANUNG_P02 CHECK (PHANUNG_SAUTIEM IN (N'Binh thuong', N'Sot nhe', N'Di ung', N'Theo doi dac biet'))\n);",
         "intermediate_steps": [
@@ -9724,7 +9724,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE CTHD_PHARMACY_P03 (\n    MAHD VARCHAR(10) NOT NULL,\n    MATHUOC VARCHAR(10) NOT NULL,\n    SOLUONG INT NOT NULL,\n    DONGIA DECIMAL(12, 2) NOT NULL,\n    GIAMGIA DECIMAL(4, 2) NOT NULL DEFAULT 0.00,\n    THANHTIEN AS (SOLUONG * DONGIA * (1.00 - GIAMGIA)),\n    CONSTRAINT PK_CTHD_PHARMACY_P03 PRIMARY KEY (MAHD, MATHUOC),\n    CONSTRAINT FK_CTHD_HD_P03 FOREIGN KEY (MAHD) REFERENCES HOADON_P03(MAHD) ON DELETE CASCADE,\n    CONSTRAINT FK_CTHD_THUOC_P03 FOREIGN KEY (MATHUOC) REFERENCES THUOC_P03(MATHUOC),\n    CONSTRAINT CK_CTHD_SOLUONG_P03 CHECK (SOLUONG > 0),\n    CONSTRAINT CK_CTHD_DONGIA_P03 CHECK (DONGIA >= 0.0),\n    CONSTRAINT CK_CTHD_GIAMGIA_P03 CHECK (GIAMGIA BETWEEN 0.00 AND 0.50)\n);",
         "intermediate_steps": [
@@ -9751,7 +9751,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE VE_MAYBAY_P04 (\n    MAVE VARCHAR(10) NOT NULL,\n    MACB VARCHAR(10) NOT NULL,\n    MAHK VARCHAR(10) NOT NULL,\n    SOGHE VARCHAR(10) NOT NULL,\n    HANGVE VARCHAR(20) NOT NULL,\n    GIAVE DECIMAL(12, 2) NOT NULL,\n    NGAYDAT DATETIME NOT NULL DEFAULT GETDATE(),\n    CONSTRAINT PK_VE_MAYBAY_P04 PRIMARY KEY (MAVE),\n    CONSTRAINT FK_VE_CB_P04 FOREIGN KEY (MACB) REFERENCES CHUYENBAY_P04(MACB),\n    CONSTRAINT FK_VE_HK_P04 FOREIGN KEY (MAHK) REFERENCES HANHKHACH_P04(MAHK),\n    CONSTRAINT CK_VE_HANGVE_P04 CHECK (HANGVE IN ('Eco', 'Deluxe', 'Business')),\n    CONSTRAINT CK_VE_GIAVE_P04 CHECK (GIAVE > 0),\n    CONSTRAINT UQ_VE_GHE_CB_P04 UNIQUE (MACB, SOGHE)\n);",
         "intermediate_steps": [
@@ -9778,7 +9778,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE HOPDONG_KTX_P05 (\n    MAHD VARCHAR(10) NOT NULL,\n    MSSV VARCHAR(10) NOT NULL,\n    MAPHONG VARCHAR(10) NOT NULL,\n    NGAYBD DATE NOT NULL,\n    NGAYKT DATE NOT NULL,\n    TIENCOC DECIMAL(10, 2) NOT NULL DEFAULT 0.00,\n    TIENPHONG_THANG DECIMAL(10, 2) NOT NULL,\n    CONSTRAINT PK_HOPDONG_KTX_P05 PRIMARY KEY (MAHD),\n    CONSTRAINT FK_HDKTX_SV_P05 FOREIGN KEY (MSSV) REFERENCES SINHVIEN_P05(MSSV),\n    CONSTRAINT FK_HDKTX_PHONG_P05 FOREIGN KEY (MAPHONG) REFERENCES PHONG_P05(MAPHONG),\n    CONSTRAINT CK_HDKTX_NGAY_P05 CHECK (NGAYKT > NGAYBD),\n    CONSTRAINT CK_HDKTX_TIENCOC_P05 CHECK (TIENCOC >= 0.0),\n    CONSTRAINT CK_HDKTX_GIA_P05 CHECK (TIENPHONG_THANG > 0.0)\n);",
         "intermediate_steps": [
@@ -9805,7 +9805,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE GIAODICH_ATM_P06 (\n    MAGD VARCHAR(20) NOT NULL,\n    MATHE VARCHAR(20) NOT NULL,\n    THOIGIAN DATETIME NOT NULL DEFAULT GETDATE(),\n    SOTIEN DECIMAL(14, 2) NOT NULL,\n    LOAIGD NVARCHAR(30) NOT NULL,\n    LEPHI DECIMAL(8, 2) NOT NULL DEFAULT 0.00,\n    CONSTRAINT PK_GIAODICH_ATM_P06 PRIMARY KEY (MAGD),\n    CONSTRAINT FK_GD_THE_P06 FOREIGN KEY (MATHE) REFERENCES THE_ATM_P06(MATHE),\n    CONSTRAINT CK_GD_SOTIEN_P06 CHECK (SOTIEN > 0),\n    CONSTRAINT CK_GD_LEPHI_P06 CHECK (LEPHI >= 0),\n    CONSTRAINT CK_GD_LOAIGD_P06 CHECK (LOAIGD IN (N'Rut tien', N'Chuyen khoan', N'Nop tien', N'Thanh toan'))\n);",
         "intermediate_steps": [
@@ -9832,7 +9832,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE PHIEUDAT_RESORT_P07 (\n    MAPD VARCHAR(10) NOT NULL,\n    MARS VARCHAR(10) NOT NULL,\n    MAKH VARCHAR(10) NOT NULL,\n    MAPHONG VARCHAR(10) NOT NULL,\n    NGAYDEN DATE NOT NULL,\n    NGAYDI DATE NOT NULL,\n    SOKHACH INT NOT NULL DEFAULT 2,\n    TIEN_DATCOC DECIMAL(12, 2) NOT NULL DEFAULT 0.00,\n    CONSTRAINT PK_PHIEUDAT_RESORT_P07 PRIMARY KEY (MAPD),\n    CONSTRAINT FK_PD_RESORT_P07 FOREIGN KEY (MARS) REFERENCES RESORT_P07(MARS),\n    CONSTRAINT FK_PD_KH_P07 FOREIGN KEY (MAKH) REFERENCES KHACHHANG_P07(MAKH),\n    CONSTRAINT FK_PD_PHONG_P07 FOREIGN KEY (MAPHONG) REFERENCES PHONG_P07(MAPHONG),\n    CONSTRAINT CK_PD_NGAY_P07 CHECK (NGAYDI > NGAYDEN),\n    CONSTRAINT CK_PD_SOKHACH_P07 CHECK (SOKHACH BETWEEN 1 AND 10),\n    CONSTRAINT CK_PD_TIENCOC_P07 CHECK (TIEN_DATCOC >= 0.0)\n);",
         "intermediate_steps": [
@@ -9859,7 +9859,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE CHUYENXE_CONGNGHE_P08 (\n    MACHUYEN VARCHAR(10) NOT NULL,\n    MATX VARCHAR(10) NOT NULL,\n    MAKH VARCHAR(10) NOT NULL,\n    QUANGDUONG_KM DECIMAL(6, 2) NOT NULL,\n    CUOCPHI DECIMAL(10, 2) NOT NULL,\n    THOIGIAN_BD DATETIME NOT NULL DEFAULT GETDATE(),\n    TRANGTHAI NVARCHAR(20) NOT NULL DEFAULT N'Da dat',\n    CONSTRAINT PK_CHUYENXE_P08 PRIMARY KEY (MACHUYEN),\n    CONSTRAINT FK_CX_TX_P08 FOREIGN KEY (MATX) REFERENCES TAIXE_P08(MATX),\n    CONSTRAINT FK_CX_KH_P08 FOREIGN KEY (MAKH) REFERENCES KHACHHANG_P08(MAKH),\n    CONSTRAINT CK_CX_QUANGDUONG_P08 CHECK (QUANGDUONG_KM > 0.0),\n    CONSTRAINT CK_CX_CUOCPHI_P08 CHECK (CUOCPHI > 0.0),\n    CONSTRAINT CK_CX_TRANGTHAI_P08 CHECK (TRANGTHAI IN (N'Da dat', N'Dang di', N'Hoan thanh', N'Huy'))\n);",
         "intermediate_steps": [
@@ -9886,7 +9886,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE CT_PHIEUMUON_P09 (\n    MAPM VARCHAR(10) NOT NULL,\n    MACS VARCHAR(10) NOT NULL,\n    NGAYTRA_THUC DATE NULL,\n    TIENPHAT DECIMAL(10, 2) NOT NULL DEFAULT 0.00,\n    TINHTRANG_SACH NVARCHAR(30) NOT NULL DEFAULT N'Tot',\n    CONSTRAINT PK_CT_PHIEUMUON_P09 PRIMARY KEY (MAPM, MACS),\n    CONSTRAINT FK_CTPM_PM_P09 FOREIGN KEY (MAPM) REFERENCES PHIEUMUON_P09(MAPM) ON DELETE CASCADE,\n    CONSTRAINT FK_CTPM_CS_P09 FOREIGN KEY (MACS) REFERENCES CUONSACH_P09(MACS),\n    CONSTRAINT CK_CTPM_TIENPHAT_P09 CHECK (TIENPHAT >= 0.0),\n    CONSTRAINT CK_CTPM_TINHTRANG_P09 CHECK (TINHTRANG_SACH IN (N'Tot', N'Hong nhe', N'Hong nang', N'Mat sach'))\n);",
         "intermediate_steps": [
@@ -9913,7 +9913,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE PHIEU_XUATKHO_P10 (\n    MAPX VARCHAR(10) NOT NULL,\n    MAKHO VARCHAR(10) NOT NULL,\n    MANV VARCHAR(10) NOT NULL,\n    NGAYXUAT DATETIME NOT NULL DEFAULT GETDATE(),\n    TONGTRIGIA DECIMAL(14, 2) NOT NULL DEFAULT 0.00,\n    TRANGTHAI NVARCHAR(20) NOT NULL DEFAULT N'Cho xuat',\n    CONSTRAINT PK_PHIEU_XUATKHO_P10 PRIMARY KEY (MAPX),\n    CONSTRAINT FK_PX_KHO_P10 FOREIGN KEY (MAKHO) REFERENCES KHO_P10(MAKHO),\n    CONSTRAINT FK_PX_NV_P10 FOREIGN KEY (MANV) REFERENCES NHANVIEN_P10(MANV),\n    CONSTRAINT CK_PX_TONGTRIGIA_P10 CHECK (TONGTRIGIA >= 0.0),\n    CONSTRAINT CK_PX_TRANGTHAI_P10 CHECK (TRANGTHAI IN (N'Cho xuat', N'Da xuat', N'Huy'))\n);",
         "intermediate_steps": [
@@ -9940,7 +9940,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE KETQUA_XETNGHIEM_P11 (\n    MAXN VARCHAR(10) NOT NULL,\n    MABN VARCHAR(10) NOT NULL,\n    MABS_CHIDINH VARCHAR(10) NOT NULL,\n    NGAYXN DATETIME NOT NULL DEFAULT GETDATE(),\n    LOAIXN NVARCHAR(50) NOT NULL,\n    KETQUA_SO DECIMAL(8, 2) NOT NULL,\n    DONVI_DO VARCHAR(20) NOT NULL,\n    CONSTRAINT PK_KETQUA_XN_P11 PRIMARY KEY (MAXN),\n    CONSTRAINT FK_XN_BN_P11 FOREIGN KEY (MABN) REFERENCES BENHNHAN_P11(MABN),\n    CONSTRAINT FK_XN_BS_P11 FOREIGN KEY (MABS_CHIDINH) REFERENCES BACSI_P11(MABS),\n    CONSTRAINT CK_XN_KETQUA_P11 CHECK (KETQUA_SO >= 0.0)\n);",
         "intermediate_steps": [
@@ -9967,7 +9967,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE BAIHOC_ONLINE_P12 (\n    MABH VARCHAR(10) NOT NULL,\n    MAKH VARCHAR(10) NOT NULL,\n    THUTU_BAI INT NOT NULL,\n    TIEUDE NVARCHAR(150) NOT NULL,\n    THOILUONG_PHUT INT NOT NULL,\n    MIENPHI BIT NOT NULL DEFAULT 0,\n    CONSTRAINT PK_BAIHOC_ONLINE_P12 PRIMARY KEY (MABH),\n    CONSTRAINT FK_BH_KH_P12 FOREIGN KEY (MAKH) REFERENCES KHOAHOC_P12(MAKH) ON DELETE CASCADE,\n    CONSTRAINT CK_BH_THUTU_P12 CHECK (THUTU_BAI > 0),\n    CONSTRAINT CK_BH_THOILUONG_P12 CHECK (THOILUONG_PHUT BETWEEN 1 AND 300),\n    CONSTRAINT UQ_BH_THUTU_KH_P12 UNIQUE (MAKH, THUTU_BAI)\n);",
         "intermediate_steps": [
@@ -9994,7 +9994,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE CONGTO_DIEN_P13 (\n    MAPHONG VARCHAR(10) NOT NULL,\n    THANG INT NOT NULL,\n    NAM INT NOT NULL,\n    CHISO_CU INT NOT NULL,\n    CHISO_MOI INT NOT NULL,\n    SANLUONG_KWH AS (CHISO_MOI - CHISO_CU),\n    CONSTRAINT PK_CONGTO_DIEN_P13 PRIMARY KEY (MAPHONG, THANG, NAM),\n    CONSTRAINT FK_CTD_PHONG_P13 FOREIGN KEY (MAPHONG) REFERENCES PHONG_P13(MAPHONG),\n    CONSTRAINT CK_CTD_THANG_P13 CHECK (THANG BETWEEN 1 AND 12),\n    CONSTRAINT CK_CTD_NAM_P13 CHECK (NAM >= 2020),\n    CONSTRAINT CK_CTD_CHISO_P13 CHECK (CHISO_MOI >= CHISO_CU)\n);",
         "intermediate_steps": [
@@ -10021,7 +10021,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE SUATCHIEU_PHIM_P14 (\n    MASC VARCHAR(10) NOT NULL,\n    MAPHIM VARCHAR(10) NOT NULL,\n    MAPHONG VARCHAR(10) NOT NULL,\n    NGAYCHIEU DATE NOT NULL,\n    GIOCHIEU TIME NOT NULL,\n    GIAGOC DECIMAL(10, 2) NOT NULL,\n    CONSTRAINT PK_SUATCHIEU_P14 PRIMARY KEY (MASC),\n    CONSTRAINT FK_SC_PHIM_P14 FOREIGN KEY (MAPHIM) REFERENCES PHIM_P14(MAPHIM),\n    CONSTRAINT FK_SC_PHONG_P14 FOREIGN KEY (MAPHONG) REFERENCES PHONGCHIEU_P14(MAPHONG),\n    CONSTRAINT CK_SC_GIAGOC_P14 CHECK (GIAGOC >= 45000.0)\n);",
         "intermediate_steps": [
@@ -10048,7 +10048,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "CREATE TABLE HOPDONG_BIEUDIEN_P15 (\n    MAHD VARCHAR(10) NOT NULL,\n    MABH VARCHAR(10) NOT NULL,\n    MACS VARCHAR(10) NOT NULL,\n    NGAYKY DATE NOT NULL DEFAULT GETDATE(),\n    PHIBANQUYEN_USD DECIMAL(10, 2) NOT NULL DEFAULT 0.00,\n    THOIHAN_THANG INT NOT NULL,\n    CONSTRAINT PK_HDBD_P15 PRIMARY KEY (MAHD),\n    CONSTRAINT FK_HDBD_BH_P15 FOREIGN KEY (MABH) REFERENCES BAIHAT_P15(MABH),\n    CONSTRAINT FK_HDBD_CS_P15 FOREIGN KEY (MACS) REFERENCES CASI_P15(MACS),\n    CONSTRAINT CK_HDBD_PHI_P15 CHECK (PHIBANQUYEN_USD >= 0.0),\n    CONSTRAINT CK_HDBD_THOIHAN_P15 CHECK (THOIHAN_THANG BETWEEN 1 AND 120)\n);",
         "intermediate_steps": [
@@ -10075,7 +10075,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Thêm cột EMAIL kèm ràng buộc CHECK định dạng\nALTER TABLE SINHVIEN_P16\nADD EMAIL VARCHAR(100) NULL\n    CONSTRAINT CK_SINHVIEN_EMAIL_P16 CHECK (EMAIL LIKE '%_@__%.__%');",
         "intermediate_steps": [
@@ -10101,7 +10101,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Thêm cột HSD\nALTER TABLE DUOCPHAM_P17\nADD HSD DATE NULL;\nGO\n\n-- Ràng buộc CHECK hạn sử dụng phải sau hoặc bằng ngày sản xuất\nALTER TABLE DUOCPHAM_P17\nADD CONSTRAINT CK_DUOCPHAM_HSD_P17 CHECK (HSD >= NGAYSX);",
         "intermediate_steps": [
@@ -10127,7 +10127,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Thêm cột điểm chuẩn qua môn kèm DEFAULT 5.0 và CHECK thang điểm 10\nALTER TABLE MONHOC_P18\nADD DIEM_CHUAN_QUA_MON DECIMAL(3, 1) NOT NULL\n    CONSTRAINT DF_MONHOC_DIEM_P18 DEFAULT 5.0\n    CONSTRAINT CK_MONHOC_DIEM_P18 CHECK (DIEM_CHUAN_QUA_MON BETWEEN 0.0 AND 10.0);",
         "intermediate_steps": [
@@ -10153,7 +10153,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Thêm cột hệ số lương kèm DEFAULT 1.00 và CHECK >= 1.00\nALTER TABLE NHANVIEN_P19\nADD HE_SO_LUONG DECIMAL(4, 2) NOT NULL\n    CONSTRAINT DF_NV_HESOLUONG_P19 DEFAULT 1.00\n    CONSTRAINT CK_NV_HESOLUONG_P19 CHECK (HE_SO_LUONG >= 1.00);",
         "intermediate_steps": [
@@ -10179,7 +10179,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "ALTER TABLE NHANVIEN_P20\nADD CONSTRAINT FK_NV_PB_P20 FOREIGN KEY (MAPB)\nREFERENCES PHONGBAN_P20(MAPB)\nON DELETE SET NULL;",
         "intermediate_steps": [
@@ -10205,7 +10205,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Thêm cột điểm đánh giá sao kèm CHECK thang 1 đến 5\nALTER TABLE CHUYENXE_P21\nADD DIEM_DANHGIA INT NULL\n    CONSTRAINT CK_CX_DIEM_P21 CHECK (DIEM_DANHGIA BETWEEN 1 AND 5);",
         "intermediate_steps": [
@@ -10231,7 +10231,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "ALTER TABLE KHACHHANG_P22\nADD CONSTRAINT UQ_KHACHHANG_CCCD_P22 UNIQUE (CCCD);",
         "intermediate_steps": [
@@ -10256,7 +10256,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Thêm cột hạn mức tín dụng kèm DEFAULT và CHECK >= 0\nALTER TABLE THE_ATM_P23\nADD HANMUC_TINDUNG DECIMAL(12, 2) NOT NULL\n    CONSTRAINT DF_THE_HANMUC_P23 DEFAULT 10000000.00\n    CONSTRAINT CK_THE_HANMUC_P23 CHECK (HANMUC_TINDUNG >= 0.0);",
         "intermediate_steps": [
@@ -10282,7 +10282,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Thêm cột chiết khấu phần trăm kèm DEFAULT 0 và CHECK <= 30%\nALTER TABLE HOADON_P24\nADD CHIETKHAU_PT DECIMAL(4, 2) NOT NULL\n    CONSTRAINT DF_HD_CHIETKHAU_P24 DEFAULT 0.00\n    CONSTRAINT CK_HD_CHIETKHAU_P24 CHECK (CHIETKHAU_PT BETWEEN 0.00 AND 0.30);",
         "intermediate_steps": [
@@ -10308,7 +10308,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "ALTER TABLE KHOAHOC_P25\nADD CONSTRAINT CK_KHOAHOC_THOIGIAN_P25 CHECK (NGAY_KT > NGAY_BD);",
         "intermediate_steps": [
@@ -10333,7 +10333,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Giảm 15% học phí cho sinh viên khó khăn đăng ký trong năm 2024\nUPDATE DK\nSET HOCPHI_PHAITHU = DK.HOCPHI_PHAITHU * 0.85\nFROM DANGKY_P26 DK\nINNER JOIN SINHVIEN_P26 SV ON DK.MSSV = SV.MSSV\nWHERE SV.LOAI_SV = N'Kho khan'\n  AND YEAR(DK.NGAYDK) = 2024;",
         "intermediate_steps": [
@@ -10361,7 +10361,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Tăng 10% đơn giá lô vắc-xin âm sâu nhập từ Mỹ trong năm 2024\nUPDATE LV\nSET DONGIA = LV.DONGIA * 1.10\nFROM LOVACXIN_P27 LV\nINNER JOIN NHACUNGCAP_P27 NCC ON LV.MANCC = NCC.MANCC\nWHERE NCC.QUOCGIA = N'My'\n  AND LV.LOAI_BQ = N'Am sau'\n  AND YEAR(LV.NGAYNHAP) = 2024;",
         "intermediate_steps": [
@@ -10389,7 +10389,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Cập nhật phụ phí 50.000 VNĐ cho chuyến bay đêm cao điểm Tết 2024\nUPDATE CB\nSET PHUPHI = CB.PHUPHI + 50000.00\nFROM CHUYENBAY_P28 CB\nWHERE CB.GIOBAY >= '22:00:00'\n  AND CB.NGAYBAY BETWEEN '2024-02-01' AND '2024-02-15';",
         "intermediate_steps": [
@@ -10416,7 +10416,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Xóa lịch sử lưu trú của hợp đồng hết hạn trước năm 2024\nDELETE CD\nFROM CUDAN_LUTRUG_P29 CD\nINNER JOIN HOPDONG_P29 HD ON CD.MAHD = HD.MAHD\nWHERE HD.NGAYKT < '2024-01-01';",
         "intermediate_steps": [
@@ -10443,7 +10443,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Nâng hạng khách hàng VIP cho khách có hóa đơn trên 50 triệu năm 2024\nUPDATE KH\nSET HANG_THE = N'VIP'\nFROM KHACHHANG_P30 KH\nINNER JOIN HOADON_P30 HD ON KH.MAKH = HD.MAKH\nWHERE HD.TONGTIEN >= 50000000.00\n  AND YEAR(HD.NGAYLAP) = 2024;",
         "intermediate_steps": [
@@ -10470,7 +10470,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Miễn phí tiền nước cho phòng tình nguyện hè tháng 8/2024\nUPDATE DV\nSET TIEN_NUOC = 0.00\nFROM TIEN_DICHVU_P31 DV\nINNER JOIN PHONG_P31 P ON DV.MAPHONG = P.MAPHONG\nWHERE P.LOAIPHONG = N'Tinh nguyen he'\n  AND DV.THANG = 8\n  AND DV.NAM = 2024;",
         "intermediate_steps": [
@@ -10497,7 +10497,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Tặng 200 điểm tích lũy cho khách đặt phòng resort 5 sao tháng 12/2024\nUPDATE KH\nSET DIEM_TICHLUY = KH.DIEM_TICHLUY + 200\nFROM KHACHHANG_P32 KH\nINNER JOIN PHIEUDAT_P32 PD ON KH.MAKH = PD.MAKH\nWHERE PD.HANG_SAO = 5\n  AND MONTH(PD.NGAYDEN) = 12\n  AND YEAR(PD.NGAYDEN) = 2024;",
         "intermediate_steps": [
@@ -10524,7 +10524,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Tăng 10% cước phí chuyến xe giờ mưa bão tháng 10/2024\nUPDATE CX\nSET CUOCPHI = CX.CUOCPHI * 1.10\nFROM CHUYENXE_P33 CX\nINNER JOIN KHUVUC_P33 KV ON CX.MAKV = KV.MAKV\nWHERE KV.TINHTRANG_THOITIET = N'Mua bao'\n  AND MONTH(CX.THOIGIAN_BD) = 10\n  AND YEAR(CX.THOIGIAN_BD) = 2024;",
         "intermediate_steps": [
@@ -10551,7 +10551,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Xóa phiếu mượn sách đã bồi thường xong trước năm 2024\nDELETE PM\nFROM PHIEUMUON_P34 PM\nWHERE PM.TRANGTHAI = N'Da boi thuong'\n  AND PM.NGAYTRA < '2024-01-01';",
         "intermediate_steps": [
@@ -10577,7 +10577,7 @@
       "recommended_time_mins": 15,
       "points": 1.0,
       "status": "VERIFIED",
-      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_level": "EXECUTION_VERIFIED",
       "solution": {
         "sql": "-- Tăng 5% lương cơ bản cho bác sĩ cấp cứu có tham gia trực đêm năm 2024\nUPDATE BS\nSET LUONGCB = BS.LUONGCB * 1.05\nFROM BACSI_P35 BS\nINNER JOIN CATRUC_P35 CT ON BS.MABS = CT.MABS\nWHERE BS.CHUYENKHOA = N'Cap cuu'\n  AND CT.LOAICATRUC = N'Truc dem'\n  AND YEAR(CT.NGAYTRUC) = 2024;",
         "intermediate_steps": [

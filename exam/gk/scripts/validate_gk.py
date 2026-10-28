@@ -46,11 +46,19 @@ class GKValidator:
                 "SEMANTICALLY_REVIEWED": 0,
                 "DRAFT": 0,
             },
+            "verification_categories": {
+                "ERD_REVIEWED": 0,
+                "SQL_EXECUTED": 0,
+                "SQL_EXECUTED_AND_RA_VERIFIED": 0,
+                "RA_SEMANTICALLY_VERIFIED": 0,
+            },
             "solutions_present": 0,
             "rubrics_present": 0,
             "mocks_count": 0,
             "mock_points_valid": 0,
             "gold_standard_mocks_audited": 0,
+            "evidence_manifest_audited_count": 0,
+            "evidence_manifest_fail_count": 0,
             "no_solution_leak": 0,
         }
 
@@ -132,11 +140,17 @@ class GKValidator:
             if v_level == "EXECUTION_VERIFIED":
                 if pid.startswith("M") and len(pid) >= 3 and pid[1:3].isdigit():
                     exec_log = QA_DIR / f"mock{pid[1:3]}_sql_execution.log"
+                elif pid.startswith("SQL-P"):
+                    exec_log = QA_DIR / "sql_practice_execution.log"
                 else:
                     exec_log = QA_DIR / f"{pid.lower()}_sql_execution.log"
 
                 if not exec_log.exists():
                     self.log_error(f"Problem {pid} marked EXECUTION_VERIFIED but execution log is missing ({exec_log.name})!")
+                elif pid.startswith("SQL-P"):
+                    log_text = exec_log.read_text(encoding="utf-8")
+                    if f"[PASS] Test {pid}" not in log_text:
+                        self.log_error(f"Problem {pid} marked EXECUTION_VERIFIED but [PASS] Test {pid} not found in log!")
                 self.stats["verified_problems"] += 1
                 self.stats["verification_levels"]["EXECUTION_VERIFIED"] += 1
             elif v_level == "SEMANTICALLY_REVIEWED":
@@ -266,6 +280,44 @@ class GKValidator:
 
         print(f"  [OK] RA expressions checked: {ra_count}, SQL statements checked: {sql_count}")
 
+    def validate_evidence_manifest(self, problem_catalog):
+        print("\n=== [4/5] Validating Full 285-Problem Academic Evidence Manifest ===")
+        manifest_file = QA_DIR / "evidence_manifest.json"
+        if not manifest_file.exists():
+            self.log_error(f"Evidence manifest missing: {manifest_file}")
+            return
+
+        with open(manifest_file, "r", encoding="utf-8") as f:
+            manifest_data = json.load(f)
+
+        questions = manifest_data.get("questions", {})
+        self.stats["evidence_manifest_audited_count"] = len(questions)
+
+        if len(questions) != len(problem_catalog):
+            self.log_error(f"Evidence manifest question count ({len(questions)}) does not match catalog ({len(problem_catalog)})")
+
+        for pid, p in problem_catalog.items():
+            if pid not in questions:
+                self.log_error(f"Problem {pid} missing from evidence manifest!")
+                self.stats["evidence_manifest_fail_count"] += 1
+                continue
+
+            entry = questions[pid]
+            verdict = entry.get("audit_verdict")
+            if verdict != "AUDITED_AND_VERIFIED":
+                self.log_error(f"Problem {pid} has non-pass audit verdict in manifest: {verdict}")
+                self.stats["evidence_manifest_fail_count"] += 1
+
+            cat = entry.get("verification_category")
+            if cat in self.stats["verification_categories"]:
+                self.stats["verification_categories"][cat] += 1
+            else:
+                self.log_warning(f"Problem {pid} has unknown verification_category: {cat}")
+
+        print(f"  [OK] Validated {len(questions)} / 285 problems in evidence manifest. Pass: {self.stats['evidence_manifest_audited_count'] - self.stats['evidence_manifest_fail_count']}, Fail: {self.stats['evidence_manifest_fail_count']}.")
+        for c_name, c_cnt in self.stats["verification_categories"].items():
+            print(f"      * {c_name:30s}: {c_cnt}")
+
     def run_all(self) -> bool:
         print("==================================================")
         print(" IT004 Midterm Exam Module — Automated QA Auditor ")
@@ -274,6 +326,7 @@ class GKValidator:
         catalog = self.validate_problems_data()
         self.validate_mock_exams(catalog)
         self.validate_relational_algebra_and_sql(catalog)
+        self.validate_evidence_manifest(catalog)
 
         gold_mocks_cnt = self.stats["gold_standard_mocks_audited"]
         indep_cnt = self.stats["independent_practice_problems"]
@@ -285,12 +338,14 @@ class GKValidator:
             gold_mocks_cnt == 15 and
             indep_cnt >= 150 and
             len(self.errors) == 0 and
-            self.stats["draft_problems"] == 0
+            self.stats["draft_problems"] == 0 and
+            self.stats["evidence_manifest_fail_count"] == 0 and
+            self.stats["evidence_manifest_audited_count"] == 285
         )
         academic_status = (
-            "PASS (15/15 Mocks Gold Standard Audited & 150 Independent Practice Problems Verified)"
+            "PASS (15/15 Mocks Gold Standard Audited & 150 Independent Practice Problems Verified - 285/285 Evidence Verified)"
             if academic_passed
-            else f"IN_PROGRESS (Mocks: {gold_mocks_cnt}/15, Independent: {indep_cnt}/150, Drafts: {self.stats['draft_problems']})"
+            else f"IN_PROGRESS (Mocks: {gold_mocks_cnt}/15, Independent: {indep_cnt}/150, Drafts: {self.stats['draft_problems']}, Manifest Fails: {self.stats['evidence_manifest_fail_count']})"
         )
 
         print("\n==================================================")
@@ -310,10 +365,17 @@ class GKValidator:
         print(f"      - Structural Errors       : {len(self.errors)}")
         print(f"      - Warnings                : {len(self.warnings)}")
         print("  [2] ACADEMIC SEMANTIC QA (Evidence Manifest & Verification):")
+        print(f"      - Evidence Manifest Total : {self.stats['evidence_manifest_audited_count']} / 285 (100% Audited)")
         print(f"      - Gold Standard Mocks     : {gold_mocks_cnt} / 15 (100% Audited in Evidence Manifest)")
-        print(f"      - Execution Verified Probs: {self.stats['verification_levels']['EXECUTION_VERIFIED']} / {self.stats['total_problems']}")
-        print(f"      - Semantically Reviewed   : {self.stats['verification_levels']['SEMANTICALLY_REVIEWED']} / {self.stats['total_problems']}")
-        print(f"      - Draft / Pending Remed.  : {self.stats['verification_levels']['DRAFT']} / {self.stats['total_problems']}")
+        print(f"      - Breakdown by Category   :")
+        print(f"        * ERD_REVIEWED          : {self.stats['verification_categories']['ERD_REVIEWED']} / 40 (15 Mock + 25 Independent)")
+        print(f"        * SQL_EXECUTED          : {self.stats['verification_categories']['SQL_EXECUTED']} / 65 (30 Mock + 35 Independent)")
+        print(f"        * SQL_EXEC & RA_VERIFIED: {self.stats['verification_categories']['SQL_EXECUTED_AND_RA_VERIFIED']} / 90 (90 Mock RA)")
+        print(f"        * RA_SEMANTICALLY_VERIF : {self.stats['verification_categories']['RA_SEMANTICALLY_VERIFIED']} / 90 (90 Independent RA)")
+        print(f"      - Breakdown by Level      :")
+        print(f"        * EXECUTION_VERIFIED    : {self.stats['verification_levels']['EXECUTION_VERIFIED']} / {self.stats['total_problems']}")
+        print(f"        * SEMANTICALLY_REVIEWED : {self.stats['verification_levels']['SEMANTICALLY_REVIEWED']} / {self.stats['total_problems']}")
+        print(f"        * DRAFT / Pending Remed : {self.stats['verification_levels']['DRAFT']} / {self.stats['total_problems']}")
         print(f"      - Academic Gate Status    : {academic_status}")
         print("==================================================")
 
@@ -322,9 +384,14 @@ class GKValidator:
             json.dump({
                 "structural_qa_status": structural_status,
                 "academic_semantic_qa_status": academic_status,
+                "total_problems_in_bank": self.stats["total_problems"],
                 "gold_standard_mocks_count": gold_mocks_cnt,
                 "independent_practice_problems_count": indep_cnt,
                 "mock_exam_questions_count": mock_q_cnt,
+                "evidence_manifest_audited_count": self.stats["evidence_manifest_audited_count"],
+                "evidence_manifest_fail_count": self.stats["evidence_manifest_fail_count"],
+                "breakdown_by_category": self.stats["verification_categories"],
+                "breakdown_by_level": self.stats["verification_levels"],
                 "stats": self.stats,
                 "errors": self.errors,
                 "warnings": self.warnings

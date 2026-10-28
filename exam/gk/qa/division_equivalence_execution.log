@@ -1,0 +1,22 @@
+﻿Changed database context to 'tempdb'.
+============================================================================
+ STARTING ADVERSARIAL QA FOR 15 RELATIONAL DIVISION PROBLEMS (RA-D01..RA-D15)
+============================================================================
+  [PASS] Test RA-D01: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D02: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D03: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D04: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D05: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D06: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D07: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D08: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D09: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D10: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D11: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D12: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D13: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D14: Relational division equivalence and counter-example checks passed
+  [PASS] Test RA-D15: Relational division equivalence and counter-example checks passed
+============================================================================
+ ALL 15 RELATIONAL DIVISION PROBLEMS VALIDATED WITH ZERO ADVERSARIAL FLAWS!
+============================================================================

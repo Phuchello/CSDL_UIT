@@ -15,7 +15,7 @@ Tìm mã số sinh viên và họ tên của các sinh viên chuyên ngành 'An 
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ (ĐSQH):**
 ```text
-π_{MSSV, HOTEN}(SINHVIEN ⋈ (π_{MSSV, MAMH}(DANGKY) ÷ π_{MAMH}(σ_{CHUYENNGANH = 'An toan thong tin' ∧ LOAI_MH = 'Bat buoc'}(MONHOC))))
+π_{MSSV, HOTEN}((π_{MSSV, MAMH}(σ_{CHUYENNGANH = 'An toan thong tin'}(SINHVIEN) ⋈ DANGKY) ÷ π_{MAMH}(σ_{CHUYENNGANH = 'An toan thong tin' ∧ LOAI_MH = 'Bat buoc'}(MONHOC))) ⋈ SINHVIEN)
 ```
 
 **Câu lệnh Transact-SQL tương đương:**
@@ -23,6 +23,7 @@ Tìm mã số sinh viên và họ tên của các sinh viên chuyên ngành 'An 
 SELECT SV.MSSV, SV.HOTEN
 FROM SINHVIEN SV
 WHERE SV.CHUYENNGANH = N'An toan thong tin'
+  AND EXISTS (SELECT 1 FROM DANGKY DK WHERE DK.MSSV = SV.MSSV)
   AND NOT EXISTS (
     SELECT MH.MAMH FROM MONHOC MH
     WHERE MH.CHUYENNGANH = N'An toan thong tin' AND MH.LOAI_MH = N'Bat buoc'
@@ -33,12 +34,12 @@ WHERE SV.CHUYENNGANH = N'An toan thong tin'
 
 **Các bước suy luận tư duy:**
 1. Bước 1 (Xác định tập chia S): R_S = π_{MAMH}(σ_{CHUYENNGANH = 'An toan thong tin' ∧ LOAI_MH = 'Bat buoc'}(MONHOC)).
-1. Bước 2 (Xác định tập ứng viên U): R_U = π_{MSSV}(σ_{CHUYENNGANH = 'An toan thong tin'}(SINHVIEN ⋈ DANGKY)).
+1. Bước 2 (Xác định tập ứng viên U): R_U = π_{MSSV}(σ_{CHUYENNGANH = 'An toan thong tin'}(SINHVIEN) ⋈ DANGKY).
 1. Bước 3 (Tạo tập giả định và tìm các cặp thiếu): R_All = R_U × R_S; R_Missing = π_{MSSV}(R_All - π_{MSSV, MAMH}(DANGKY)).
 1. Bước 4 (Kết quả cuối cùng): KQ = (R_U - R_Missing) ⋈ π_{MSSV, HOTEN}(SINHVIEN).
 
 **Phân tích trường hợp biên (Edge Cases):**
-Nếu tập chia S rỗng (chuyên ngành chưa có môn bắt buộc nào), theo lý thuyết ĐSQH mọi sinh viên thỏa mãn nhưng trong thực tế hệ thống coi như chưa phát sinh yêu cầu; bắt buộc chặn tập ứng viên bởi các sinh viên thuộc ngành ATTT đã có đăng ký.
+Nếu tập chia S rỗng (chuyên ngành chưa có môn bắt buộc nào), theo lý thuyết ĐSQH chuẩn tắc R_U - ∅ = R_U trả về sinh viên ATTT đã đăng ký môn; mệnh đề SQL có điều kiện EXISTS tương ứng chặn sinh viên chưa đăng ký môn nào. Sinh viên ngành khác dù học đủ môn ATTT cũng bị loại bỏ bởi điều kiện lọc ứng viên.
 
 **Barem chấm điểm đề xuất:**
 - `total_points`: 1.5đ
@@ -109,7 +110,7 @@ Tìm mã bác sĩ và họ tên của các bác sĩ đã hoàn thành đạt (KE
 ```sql
 SELECT BS.MABS, BS.HOTEN
 FROM BACSI BS
-WHERE EXISTS (SELECT 1 FROM THAMGIA_TH TG WHERE TG.MABS = BS.MABS)
+WHERE EXISTS (SELECT 1 FROM THAMGIA_TH TG WHERE TG.MABS = BS.MABS AND TG.KETQUA = N'Dat')
   AND NOT EXISTS (
     SELECT DTH.MADOT FROM DOTTAPHUAN DTH WHERE DTH.LOAI_TH = N'Cap cuu hoi suc'
     EXCEPT
@@ -231,7 +232,7 @@ Tìm mã nhân viên và họ tên của các nhân viên phòng 'Kinh doanh' đ
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ (ĐSQH):**
 ```text
-π_{MANV, HOTEN}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN) ⋈ (π_{MANV, MADT}(HOPDONG) ÷ π_{MADT}(σ_{PHANLOAI = 'Chien luoc'}(DOITAC))))
+π_{MANV, HOTEN}((π_{MANV, MADT}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN) ⋈ HOPDONG) ÷ π_{MADT}(σ_{PHANLOAI = 'Chien luoc'}(DOITAC))) ⋈ NHANVIEN)
 ```
 
 **Câu lệnh Transact-SQL tương đương:**
@@ -239,6 +240,7 @@ Tìm mã nhân viên và họ tên của các nhân viên phòng 'Kinh doanh' đ
 SELECT NV.MANV, NV.HOTEN
 FROM NHANVIEN NV
 WHERE NV.PHONGBAN = N'Kinh doanh'
+  AND EXISTS (SELECT 1 FROM HOPDONG HD WHERE HD.MANV = NV.MANV)
   AND NOT EXISTS (
     SELECT DT.MADT FROM DOITAC DT WHERE DT.PHANLOAI = N'Chien luoc'
     EXCEPT
@@ -248,12 +250,12 @@ WHERE NV.PHONGBAN = N'Kinh doanh'
 
 **Các bước suy luận tư duy:**
 1. Bước 1: S = π_{MADT}(σ_{PHANLOAI = 'Chien luoc'}(DOITAC)).
-1. Bước 2: U = π_{MANV}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN ⋈ HOPDONG)).
+1. Bước 2: U = π_{MANV}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN) ⋈ HOPDONG).
 1. Bước 3: Missing = π_{MANV}((U × S) - π_{MANV, MADT}(HOPDONG)).
 1. Bước 4: KQ = (U - Missing) ⋈ π_{MANV, HOTEN}(NHANVIEN).
 
 **Phân tích trường hợp biên (Edge Cases):**
-Nhân viên phòng ban khác dù có ký hợp đồng với tất cả đối tác chiến lược cũng bị loại trừ bởi điều kiện phòng ban.
+Nhân viên phòng ban khác dù có ký hợp đồng với tất cả đối tác chiến lược cũng bị loại trừ bởi điều kiện phòng ban. Điều kiện EXISTS đảm bảo khi S rỗng chỉ trả về nhân viên kinh doanh đã ký hợp đồng.
 
 **Barem chấm điểm đề xuất:**
 - `total_points`: 1.5đ
@@ -281,7 +283,7 @@ Tìm số báo danh và họ tên của các thí sinh đã tham gia thi và có
 ```sql
 SELECT TS.SBD, TS.HOTEN
 FROM THISINH TS
-WHERE EXISTS (SELECT 1 FROM DIEMTHI DT WHERE DT.SBD = TS.SBD)
+WHERE EXISTS (SELECT 1 FROM DIEMTHI DT WHERE DT.SBD = TS.SBD AND DT.DIEMSO IS NOT NULL)
   AND NOT EXISTS (
     SELECT TH.MAMH FROM TOHOP_MON TH WHERE TH.MATOHOP = 'A00'
     EXCEPT
@@ -291,7 +293,7 @@ WHERE EXISTS (SELECT 1 FROM DIEMTHI DT WHERE DT.SBD = TS.SBD)
 
 **Các bước suy luận tư duy:**
 1. Bước 1: S = π_{MAMH}(σ_{MATOHOP = 'A00'}(TOHOP_MON)) (gồm Toán, Lý, Hóa).
-1. Bước 2: U = π_{SBD}(DIEMTHI).
+1. Bước 2: U = π_{SBD}(σ_{DIEMSO IS NOT NULL}(DIEMTHI)).
 1. Bước 3: Missing = π_{SBD}((U × S) - π_{SBD, MAMH}(σ_{DIEMSO IS NOT NULL}(DIEMTHI))).
 1. Bước 4: KQ = (U - Missing) ⋈ π_{SBD, HOTEN}(THISINH).
 
@@ -367,7 +369,7 @@ Tìm mã kỹ sư và họ tên của các kỹ sư kiểm thử đã thực thi
 ```sql
 SELECT KS.MAKS, KS.HOTEN
 FROM KYSU KS
-WHERE EXISTS (SELECT 1 FROM KETQUA_TEST KQ WHERE KQ.MAKS = KS.MAKS)
+WHERE EXISTS (SELECT 1 FROM KETQUA_TEST KQ WHERE KQ.MAKS = KS.MAKS AND KQ.TRANGTHAI = 'Passed')
   AND NOT EXISTS (
     SELECT TC.MATC FROM TESTCASE TC WHERE TC.LOAITC = 'Security Regression'
     EXCEPT
@@ -446,7 +448,7 @@ Cho biết mã sinh viên và họ tên của các sinh viên khóa 'K2021' đã
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ (ĐSQH):**
 ```text
-π_{MSSV, HOTEN}(σ_{KHOA = 'K2021'}(SINHVIEN) ⋈ (π_{MSSV, MACD}(DANGKY_CD) ÷ π_{MACD}(σ_{NAM ≥ 2022 ∧ NAM ≤ 2024}(CHIENDICH))))
+π_{MSSV, HOTEN}((π_{MSSV, MACD}(σ_{KHOA = 'K2021'}(SINHVIEN) ⋈ DANGKY_CD) ÷ π_{MACD}(σ_{NAM ≥ 2022 ∧ NAM ≤ 2024}(CHIENDICH))) ⋈ SINHVIEN)
 ```
 
 **Câu lệnh Transact-SQL tương đương:**
@@ -454,6 +456,7 @@ Cho biết mã sinh viên và họ tên của các sinh viên khóa 'K2021' đã
 SELECT SV.MSSV, SV.HOTEN
 FROM SINHVIEN SV
 WHERE SV.KHOA = 'K2021'
+  AND EXISTS (SELECT 1 FROM DANGKY_CD DK WHERE DK.MSSV = SV.MSSV)
   AND NOT EXISTS (
     SELECT CD.MACD FROM CHIENDICH CD WHERE CD.NAM BETWEEN 2022 AND 2024
     EXCEPT
@@ -463,12 +466,12 @@ WHERE SV.KHOA = 'K2021'
 
 **Các bước suy luận tư duy:**
 1. Bước 1: S = π_{MACD}(σ_{NAM ≥ 2022 ∧ NAM ≤ 2024}(CHIENDICH)).
-1. Bước 2: U = π_{MSSV}(σ_{KHOA = 'K2021'}(SINHVIEN ⋈ DANGKY_CD)).
+1. Bước 2: U = π_{MSSV}(σ_{KHOA = 'K2021'}(SINHVIEN) ⋈ DANGKY_CD).
 1. Bước 3: Missing = π_{MSSV}((U × S) - π_{MSSV, MACD}(DANGKY_CD)).
 1. Bước 4: KQ = (U - Missing) ⋈ π_{MSSV, HOTEN}(SINHVIEN).
 
 **Phân tích trường hợp biên (Edge Cases):**
-Chỉ xét sinh viên khóa K2021 có tham gia phong trào Đoàn hội liên tục các năm.
+Chỉ xét sinh viên khóa K2021 có tham gia phong trào Đoàn hội liên tục các năm. Điều kiện EXISTS đảm bảo khi S rỗng chỉ trả về sinh viên K2021 có đăng ký tham gia chiến dịch.
 
 **Barem chấm điểm đề xuất:**
 - `total_points`: 1.5đ
@@ -521,7 +524,7 @@ WHERE EXISTS (SELECT 1 FROM PHIEUMUON PM WHERE PM.MADG = DG.MADG)
 
 ---
 
-## Bài 13 [RA-D13] — ĐSQH Phép Chia: Cửa Hàng Tiện Lợi Phân Phối Tất Cả Sản Phẩm Sữa Vinamilk
+## Bài 13 [RA-D13] — ĐSQH Phép Chia: Cửa Hàng Tiện Lợi Phân Phối Tất CẢ Sản Phẩm Sữa Vinamilk
 - **Mức độ:** Mức C | **Thời gian khuyến nghị:** 20 phút | **Điểm số:** 1.5 điểm
 - **Lược đồ tham chiếu:** `CUAHANG(MACH, TENCH, QUAN), SANPHAM(MASP, TENSP, NHANHIEU), NHAPHANG(MAPN, MACH, NGAYNHAP), CT_NHAP(MAPN, MASP, SOLUONG)`
 - **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
@@ -532,7 +535,7 @@ Tìm mã cửa hàng và tên cửa hàng tại quận 'Thu Duc' đã từng nh�
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ (ĐSQH):**
 ```text
-π_{MACH, TENCH}(σ_{QUAN = 'Thu Duc'}(CUAHANG) ⋈ (π_{MACH, MASP}(NHAPHANG ⋈ CT_NHAP) ÷ π_{MASP}(σ_{NHANHIEU = 'Vinamilk'}(SANPHAM))))
+π_{MACH, TENCH}((π_{MACH, MASP}(σ_{QUAN = 'Thu Duc'}(CUAHANG) ⋈ NHAPHANG ⋈ CT_NHAP) ÷ π_{MASP}(σ_{NHANHIEU = 'Vinamilk'}(SANPHAM))) ⋈ CUAHANG)
 ```
 
 **Câu lệnh Transact-SQL tương đương:**
@@ -540,6 +543,7 @@ Tìm mã cửa hàng và tên cửa hàng tại quận 'Thu Duc' đã từng nh�
 SELECT CH.MACH, CH.TENCH
 FROM CUAHANG CH
 WHERE CH.QUAN = N'Thu Duc'
+  AND EXISTS (SELECT 1 FROM NHAPHANG NH WHERE NH.MACH = CH.MACH)
   AND NOT EXISTS (
     SELECT SP.MASP FROM SANPHAM SP WHERE SP.NHANHIEU = 'Vinamilk'
     EXCEPT
@@ -549,12 +553,12 @@ WHERE CH.QUAN = N'Thu Duc'
 
 **Các bước suy luận tư duy:**
 1. Bước 1: S = π_{MASP}(σ_{NHANHIEU = 'Vinamilk'}(SANPHAM)).
-1. Bước 2: U = π_{MACH}(σ_{QUAN = 'Thu Duc'}(CUAHANG ⋈ NHAPHANG)).
+1. Bước 2: U = π_{MACH}(σ_{QUAN = 'Thu Duc'}(CUAHANG) ⋈ NHAPHANG).
 1. Bước 3: Missing = π_{MACH}((U × S) - π_{MACH, MASP}(NHAPHANG ⋈ CT_NHAP)).
 1. Bước 4: KQ = (U - Missing) ⋈ π_{MACH, TENCH}(CUAHANG).
 
 **Phân tích trường hợp biên (Edge Cases):**
-Cửa hàng ở quận khác phân phối đủ vẫn bị loại bởi điều kiện QUAN = 'Thu Duc'.
+Cửa hàng ở quận khác phân phối đủ vẫn bị loại bởi điều kiện QUAN = 'Thu Duc'. EXISTS bảo đảm khi S rỗng chỉ các cửa hàng tại Thủ Đức có phát sinh nhập hàng mới được trả về.
 
 **Barem chấm điểm đề xuất:**
 - `total_points`: 1.5đ
@@ -582,7 +586,7 @@ Tìm mã bệnh nhân và họ tên của các bệnh nhân đã tiêm hoàn t�
 ```sql
 SELECT BN.MABN, BN.HOTEN
 FROM BENHNHAN BN
-WHERE EXISTS (SELECT 1 FROM LICHSU_TIEM LS WHERE LS.MABN = BN.MABN)
+WHERE EXISTS (SELECT 1 FROM LICHSU_TIEM LS WHERE LS.MABN = BN.MABN AND LS.TRANGTHAI = N'Hoan thanh')
   AND NOT EXISTS (
     SELECT MTC.MAMUI FROM MUITIEM_CHUAN MTC
     EXCEPT
@@ -618,7 +622,7 @@ Cho biết mã lập trình viên và họ tên của các lập trình viên th
 ### 2. Hướng Dẫn & Lời Giải Chi Tiết
 **Biểu thức Đại số quan hệ (ĐSQH):**
 ```text
-π_{MALTV, HOTEN}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN) ⋈ (π_{MALTV, MASVC}(COMMIT_LOG) ÷ π_{MASVC}(σ_{PHANLOAI = 'Core Service'}(MICROSERVICE))))
+π_{MALTV, HOTEN}((π_{MALTV, MASVC}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN) ⋈ COMMIT_LOG) ÷ π_{MASVC}(σ_{PHANLOAI = 'Core Service'}(MICROSERVICE))) ⋈ LAPTRINHVIEN)
 ```
 
 **Câu lệnh Transact-SQL tương đương:**
@@ -626,6 +630,7 @@ Cho biết mã lập trình viên và họ tên của các lập trình viên th
 SELECT LTV.MALTV, LTV.HOTEN
 FROM LAPTRINHVIEN LTV
 WHERE LTV.PHONG_DEV = 'Backend'
+  AND EXISTS (SELECT 1 FROM COMMIT_LOG CL WHERE CL.MALTV = LTV.MALTV)
   AND NOT EXISTS (
     SELECT MS.MASVC FROM MICROSERVICE MS WHERE MS.PHANLOAI = 'Core Service'
     EXCEPT
@@ -635,12 +640,12 @@ WHERE LTV.PHONG_DEV = 'Backend'
 
 **Các bước suy luận tư duy:**
 1. Bước 1: S = π_{MASVC}(σ_{PHANLOAI = 'Core Service'}(MICROSERVICE)).
-1. Bước 2: U = π_{MALTV}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN ⋈ COMMIT_LOG)).
+1. Bước 2: U = π_{MALTV}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN) ⋈ COMMIT_LOG).
 1. Bước 3: Missing = π_{MALTV}((U × S) - π_{MALTV, MASVC}(COMMIT_LOG)).
 1. Bước 4: KQ = (U - Missing) ⋈ π_{MALTV, HOTEN}(LAPTRINHVIEN).
 
 **Phân tích trường hợp biên (Edge Cases):**
-Bảo đảm kiến trúc microservices được bao phủ kiểm tra đóng góp mã nguồn đầy đủ.
+Bảo đảm kiến trúc microservices được bao phủ kiểm tra đóng góp mã nguồn đầy đủ. EXISTS bảo đảm khi S rỗng chỉ xét lập trình viên Backend có commit.
 
 **Barem chấm điểm đề xuất:**
 - `total_points`: 1.5đ

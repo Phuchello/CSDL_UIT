@@ -53,8 +53,12 @@ verified:
   phase_d_academic_audit_complete: true
   phase_d_bank_expansion_complete: true
   phase_d1_academic_quality_recovery_complete: true
-  p0_01_through_p0_12_resolved: true
+  phase_d_final_academic_consistency_audit_complete: true
+  p0_01_through_p0_15_resolved: true
   all_110_templates_replaced_with_authentic_uit_problems: true
+  evidence_manifest_285_audited_and_verified: true
+  test_negative_audits_passed: true
+  test_division_equivalence_passed: true
   frozen_baseline_untouched: true
   pdf_deliverables_4_verified: true
   zero_blank_pages: true
@@ -66,7 +70,9 @@ verification_evidence:
     - scripts/agent/verify.ps1 -Mode Fast (PASS)
     - scripts/validate.py (PASS, 6/6 checks)
     - exam/gk/scripts/validate_gk.py (PASS, 285 problems: 135 Mock questions + 150 authentic independent practice problems, 0 DRAFT)
-    - exam/gk/qa/evidence_manifest.json (PASS, 170/170 questions audited & execution-verified on engine in manifest with 0 FAIL)
+    - exam/gk/qa/evidence_manifest.json (PASS, 285/285 questions audited & execution/semantically verified in manifest with 0 FAIL)
+    - exam/gk/qa/test_negative_audits.py (PASS, 7/7 fail-closed defect injection gates verified)
+    - exam/gk/qa/division_equivalence_execution.log (PASS, 15/15 relational division counter-example tests on Microsoft SQL Server 2025)
     - exam/gk/scripts/verify_pdf_preflight.py (PASS, 4/4 PDFs verified 100%: 65p, 257p, 2p, 148p)
     - exam/gk/qa/mock01_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock02_sql_execution.log (PASS, Microsoft SQL Server 2025)
@@ -84,7 +90,7 @@ verification_evidence:
     - exam/gk/qa/mock14_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/mock15_sql_execution.log (PASS, Microsoft SQL Server 2025)
     - exam/gk/qa/sql_practice_execution.log (PASS, 35/35 Transact-SQL tests executed on Microsoft SQL Server 2025)
-    - exam/gk/qa/defect_register.md (P0-01 through P0-12 ALL RESOLVED)
+    - exam/gk/qa/defect_register.md (P0-01 through P0-15 ALL RESOLVED)
 
 blockers: []
 

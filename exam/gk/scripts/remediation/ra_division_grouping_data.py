@@ -16,15 +16,15 @@ def get_remediated_ra_division_grouping_problems():
         ("RA-D01", "ĐSQH Phép Chia: Sinh Viên Đăng Ký Tất Cả Môn Học Bắt Buộc Chuyên Ngành ATTT",
          "SINHVIEN(MSSV, HOTEN, CHUYENNGANH), MONHOC(MAMH, TENMH, CHUYENNGANH, LOAI_MH), DANGKY(MSSV, MAMH, HOCKY)",
          "Tìm mã số sinh viên và họ tên của các sinh viên chuyên ngành 'An toan thong tin' đã đăng ký tham gia TẤT CẢ các môn học bắt buộc (LOAI_MH = 'Bat buoc') của chuyên ngành này.",
-         "π_{MSSV, HOTEN}(SINHVIEN ⋈ (π_{MSSV, MAMH}(DANGKY) ÷ π_{MAMH}(σ_{CHUYENNGANH = 'An toan thong tin' ∧ LOAI_MH = 'Bat buoc'}(MONHOC))))",
-         "SELECT SV.MSSV, SV.HOTEN\nFROM SINHVIEN SV\nWHERE SV.CHUYENNGANH = N'An toan thong tin'\n  AND NOT EXISTS (\n    SELECT MH.MAMH FROM MONHOC MH\n    WHERE MH.CHUYENNGANH = N'An toan thong tin' AND MH.LOAI_MH = N'Bat buoc'\n    EXCEPT\n    SELECT DK.MAMH FROM DANGKY DK WHERE DK.MSSV = SV.MSSV\n);",
+         "π_{MSSV, HOTEN}((π_{MSSV, MAMH}(σ_{CHUYENNGANH = 'An toan thong tin'}(SINHVIEN) ⋈ DANGKY) ÷ π_{MAMH}(σ_{CHUYENNGANH = 'An toan thong tin' ∧ LOAI_MH = 'Bat buoc'}(MONHOC))) ⋈ SINHVIEN)",
+         "SELECT SV.MSSV, SV.HOTEN\nFROM SINHVIEN SV\nWHERE SV.CHUYENNGANH = N'An toan thong tin'\n  AND EXISTS (SELECT 1 FROM DANGKY DK WHERE DK.MSSV = SV.MSSV)\n  AND NOT EXISTS (\n    SELECT MH.MAMH FROM MONHOC MH\n    WHERE MH.CHUYENNGANH = N'An toan thong tin' AND MH.LOAI_MH = N'Bat buoc'\n    EXCEPT\n    SELECT DK.MAMH FROM DANGKY DK WHERE DK.MSSV = SV.MSSV\n);",
          [
              "Bước 1 (Xác định tập chia S): R_S = π_{MAMH}(σ_{CHUYENNGANH = 'An toan thong tin' ∧ LOAI_MH = 'Bat buoc'}(MONHOC)).",
-             "Bước 2 (Xác định tập ứng viên U): R_U = π_{MSSV}(σ_{CHUYENNGANH = 'An toan thong tin'}(SINHVIEN ⋈ DANGKY)).",
+             "Bước 2 (Xác định tập ứng viên U): R_U = π_{MSSV}(σ_{CHUYENNGANH = 'An toan thong tin'}(SINHVIEN) ⋈ DANGKY).",
              "Bước 3 (Tạo tập giả định và tìm các cặp thiếu): R_All = R_U × R_S; R_Missing = π_{MSSV}(R_All - π_{MSSV, MAMH}(DANGKY)).",
              "Bước 4 (Kết quả cuối cùng): KQ = (R_U - R_Missing) ⋈ π_{MSSV, HOTEN}(SINHVIEN)."
          ],
-         "Nếu tập chia S rỗng (chuyên ngành chưa có môn bắt buộc nào), theo lý thuyết ĐSQH mọi sinh viên thỏa mãn nhưng trong thực tế hệ thống coi như chưa phát sinh yêu cầu; bắt buộc chặn tập ứng viên bởi các sinh viên thuộc ngành ATTT đã có đăng ký."),
+         "Nếu tập chia S rỗng (chuyên ngành chưa có môn bắt buộc nào), theo lý thuyết ĐSQH chuẩn tắc R_U - ∅ = R_U trả về sinh viên ATTT đã đăng ký môn; mệnh đề SQL có điều kiện EXISTS tương ứng chặn sinh viên chưa đăng ký môn nào. Sinh viên ngành khác dù học đủ môn ATTT cũng bị loại bỏ bởi điều kiện lọc ứng viên."),
 
         ("RA-D02", "ĐSQH Phép Chia: Khách Hàng Mua Tất Cả Sản Phẩm Apple Năm 2024",
          "KHACHHANG(MAKH, HOTEN, EMAIL), SANPHAM(MASP, TENSP, HANGSX, NAMSX), DONHANG(MADON, MAKH, NGAYDAT), CTHD(MADON, MASP)",
@@ -43,7 +43,7 @@ def get_remediated_ra_division_grouping_problems():
          "BACSI(MABS, HOTEN, MAKHOA), DOTTAPHUAN(MADOT, TENDOT, LOAI_TH), THAMGIA_TH(MABS, MADOT, KETQUA)",
          "Tìm mã bác sĩ và họ tên của các bác sĩ đã hoàn thành đạt (KETQUA = 'Dat') TẤT CẢ các đợt tập huấn thuộc loại 'Cap cuu hoi suc'.",
          "π_{MABS, HOTEN}(BACSI ⋈ (π_{MABS, MADOT}(σ_{KETQUA = 'Dat'}(THAMGIA_TH)) ÷ π_{MADOT}(σ_{LOAI_TH = 'Cap cuu hoi suc'}(DOTTAPHUAN))))",
-         "SELECT BS.MABS, BS.HOTEN\nFROM BACSI BS\nWHERE EXISTS (SELECT 1 FROM THAMGIA_TH TG WHERE TG.MABS = BS.MABS)\n  AND NOT EXISTS (\n    SELECT DTH.MADOT FROM DOTTAPHUAN DTH WHERE DTH.LOAI_TH = N'Cap cuu hoi suc'\n    EXCEPT\n    SELECT TG.MADOT FROM THAMGIA_TH TG WHERE TG.MABS = BS.MABS AND TG.KETQUA = N'Dat'\n);",
+         "SELECT BS.MABS, BS.HOTEN\nFROM BACSI BS\nWHERE EXISTS (SELECT 1 FROM THAMGIA_TH TG WHERE TG.MABS = BS.MABS AND TG.KETQUA = N'Dat')\n  AND NOT EXISTS (\n    SELECT DTH.MADOT FROM DOTTAPHUAN DTH WHERE DTH.LOAI_TH = N'Cap cuu hoi suc'\n    EXCEPT\n    SELECT TG.MADOT FROM THAMGIA_TH TG WHERE TG.MABS = BS.MABS AND TG.KETQUA = N'Dat'\n);",
          [
              "Bước 1: Tập mục tiêu S = π_{MADOT}(σ_{LOAI_TH = 'Cap cuu hoi suc'}(DOTTAPHUAN)).",
              "Bước 2: Quan hệ thực tế R_Actual = π_{MABS, MADOT}(σ_{KETQUA = 'Dat'}(THAMGIA_TH)).",
@@ -81,24 +81,24 @@ def get_remediated_ra_division_grouping_problems():
         ("RA-D06", "ĐSQH Phép Chia: Nhân Viên Kinh Doanh Ký Hợp Đồng Với Tất Cả Đối Tác Chiến Lược",
          "NHANVIEN(MANV, HOTEN, PHONGBAN), DOITAC(MADT, TENDT, PHANLOAI), HOPDONG(MAHD, MANV, MADT, NGAYKY)",
          "Tìm mã nhân viên và họ tên của các nhân viên phòng 'Kinh doanh' đã ký hợp đồng với TẤT CẢ các đối tác có phân loại là 'Chien luoc'.",
-         "π_{MANV, HOTEN}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN) ⋈ (π_{MANV, MADT}(HOPDONG) ÷ π_{MADT}(σ_{PHANLOAI = 'Chien luoc'}(DOITAC))))",
-         "SELECT NV.MANV, NV.HOTEN\nFROM NHANVIEN NV\nWHERE NV.PHONGBAN = N'Kinh doanh'\n  AND NOT EXISTS (\n    SELECT DT.MADT FROM DOITAC DT WHERE DT.PHANLOAI = N'Chien luoc'\n    EXCEPT\n    SELECT HD.MADT FROM HOPDONG HD WHERE HD.MANV = NV.MANV\n);",
+         "π_{MANV, HOTEN}((π_{MANV, MADT}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN) ⋈ HOPDONG) ÷ π_{MADT}(σ_{PHANLOAI = 'Chien luoc'}(DOITAC))) ⋈ NHANVIEN)",
+         "SELECT NV.MANV, NV.HOTEN\nFROM NHANVIEN NV\nWHERE NV.PHONGBAN = N'Kinh doanh'\n  AND EXISTS (SELECT 1 FROM HOPDONG HD WHERE HD.MANV = NV.MANV)\n  AND NOT EXISTS (\n    SELECT DT.MADT FROM DOITAC DT WHERE DT.PHANLOAI = N'Chien luoc'\n    EXCEPT\n    SELECT HD.MADT FROM HOPDONG HD WHERE HD.MANV = NV.MANV\n);",
          [
              "Bước 1: S = π_{MADT}(σ_{PHANLOAI = 'Chien luoc'}(DOITAC)).",
-             "Bước 2: U = π_{MANV}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN ⋈ HOPDONG)).",
+             "Bước 2: U = π_{MANV}(σ_{PHONGBAN = 'Kinh doanh'}(NHANVIEN) ⋈ HOPDONG).",
              "Bước 3: Missing = π_{MANV}((U × S) - π_{MANV, MADT}(HOPDONG)).",
              "Bước 4: KQ = (U - Missing) ⋈ π_{MANV, HOTEN}(NHANVIEN)."
          ],
-         "Nhân viên phòng ban khác dù có ký hợp đồng với tất cả đối tác chiến lược cũng bị loại trừ bởi điều kiện phòng ban."),
+         "Nhân viên phòng ban khác dù có ký hợp đồng với tất cả đối tác chiến lược cũng bị loại trừ bởi điều kiện phòng ban. Điều kiện EXISTS đảm bảo khi S rỗng chỉ trả về nhân viên kinh doanh đã ký hợp đồng."),
 
         ("RA-D07", "ĐSQH Phép Chia: Thí Sinh Dự Thi Đủ Tất Cả Môn Tổ Hợp A00",
          "THISINH(SBD, HOTEN, KHUVUC), TOHOP_MON(MATOHOP, MAMH), DIEMTHI(SBD, MAMH, DIEMSO)",
          "Tìm số báo danh và họ tên của các thí sinh đã tham gia thi và có điểm số (DIEMSO IS NOT NULL) ở TẤT CẢ các môn học thuộc tổ hợp xét tuyển 'A00'.",
          "π_{SBD, HOTEN}(THISINH ⋈ (π_{SBD, MAMH}(σ_{DIEMSO IS NOT NULL}(DIEMTHI)) ÷ π_{MAMH}(σ_{MATOHOP = 'A00'}(TOHOP_MON))))",
-         "SELECT TS.SBD, TS.HOTEN\nFROM THISINH TS\nWHERE EXISTS (SELECT 1 FROM DIEMTHI DT WHERE DT.SBD = TS.SBD)\n  AND NOT EXISTS (\n    SELECT TH.MAMH FROM TOHOP_MON TH WHERE TH.MATOHOP = 'A00'\n    EXCEPT\n    SELECT DT.MAMH FROM DIEMTHI DT WHERE DT.SBD = TS.SBD AND DT.DIEMSO IS NOT NULL\n);",
+         "SELECT TS.SBD, TS.HOTEN\nFROM THISINH TS\nWHERE EXISTS (SELECT 1 FROM DIEMTHI DT WHERE DT.SBD = TS.SBD AND DT.DIEMSO IS NOT NULL)\n  AND NOT EXISTS (\n    SELECT TH.MAMH FROM TOHOP_MON TH WHERE TH.MATOHOP = 'A00'\n    EXCEPT\n    SELECT DT.MAMH FROM DIEMTHI DT WHERE DT.SBD = TS.SBD AND DT.DIEMSO IS NOT NULL\n);",
          [
              "Bước 1: S = π_{MAMH}(σ_{MATOHOP = 'A00'}(TOHOP_MON)) (gồm Toán, Lý, Hóa).",
-             "Bước 2: U = π_{SBD}(DIEMTHI).",
+             "Bước 2: U = π_{SBD}(σ_{DIEMSO IS NOT NULL}(DIEMTHI)).",
              "Bước 3: Missing = π_{SBD}((U × S) - π_{SBD, MAMH}(σ_{DIEMSO IS NOT NULL}(DIEMTHI))).",
              "Bước 4: KQ = (U - Missing) ⋈ π_{SBD, HOTEN}(THISINH)."
          ],
@@ -121,7 +121,7 @@ def get_remediated_ra_division_grouping_problems():
          "KYSU(MAKS, HOTEN, TRINHDOHOCVAN), TESTCASE(MATC, LOAITC, MUC_DO), KETQUA_TEST(MAKS, MATC, NGAYCHAY, TRANGTHAI)",
          "Tìm mã kỹ sư và họ tên của các kỹ sư kiểm thử đã thực thi (TRANGTHAI = 'Passed') TẤT CẢ các test case thuộc loại kiểm thử hồi quy bảo mật (LOAITC = 'Security Regression').",
          "π_{MAKS, HOTEN}(KYSU ⋈ (π_{MAKS, MATC}(σ_{TRANGTHAI = 'Passed'}(KETQUA_TEST)) ÷ π_{MATC}(σ_{LOAITC = 'Security Regression'}(TESTCASE))))",
-         "SELECT KS.MAKS, KS.HOTEN\nFROM KYSU KS\nWHERE EXISTS (SELECT 1 FROM KETQUA_TEST KQ WHERE KQ.MAKS = KS.MAKS)\n  AND NOT EXISTS (\n    SELECT TC.MATC FROM TESTCASE TC WHERE TC.LOAITC = 'Security Regression'\n    EXCEPT\n    SELECT KQ.MATC FROM KETQUA_TEST KQ WHERE KQ.MAKS = KS.MAKS AND KQ.TRANGTHAI = 'Passed'\n);",
+         "SELECT KS.MAKS, KS.HOTEN\nFROM KYSU KS\nWHERE EXISTS (SELECT 1 FROM KETQUA_TEST KQ WHERE KQ.MAKS = KS.MAKS AND KQ.TRANGTHAI = 'Passed')\n  AND NOT EXISTS (\n    SELECT TC.MATC FROM TESTCASE TC WHERE TC.LOAITC = 'Security Regression'\n    EXCEPT\n    SELECT KQ.MATC FROM KETQUA_TEST KQ WHERE KQ.MAKS = KS.MAKS AND KQ.TRANGTHAI = 'Passed'\n);",
          [
              "Bước 1: S = π_{MATC}(σ_{LOAITC = 'Security Regression'}(TESTCASE)).",
              "Bước 2: R_Actual = π_{MAKS, MATC}(σ_{TRANGTHAI = 'Passed'}(KETQUA_TEST)).",
@@ -146,15 +146,15 @@ def get_remediated_ra_division_grouping_problems():
         ("RA-D11", "ĐSQH Phép Chia: Sinh Viên Tham Gia Tất Cả Chiến Dịch Mùa Hè Xanh",
          "SINHVIEN(MSSV, HOTEN, KHOA), CHIENDICH(MACD, TENCD, NAM), DANGKY_CD(MSSV, MACD, VAITRO)",
          "Cho biết mã sinh viên và họ tên của các sinh viên khóa 'K2021' đã tham gia TẤT CẢ các chiến dịch Mùa hè xanh được tổ chức trong giai đoạn từ năm 2022 đến 2024.",
-         "π_{MSSV, HOTEN}(σ_{KHOA = 'K2021'}(SINHVIEN) ⋈ (π_{MSSV, MACD}(DANGKY_CD) ÷ π_{MACD}(σ_{NAM ≥ 2022 ∧ NAM ≤ 2024}(CHIENDICH))))",
-         "SELECT SV.MSSV, SV.HOTEN\nFROM SINHVIEN SV\nWHERE SV.KHOA = 'K2021'\n  AND NOT EXISTS (\n    SELECT CD.MACD FROM CHIENDICH CD WHERE CD.NAM BETWEEN 2022 AND 2024\n    EXCEPT\n    SELECT DK.MACD FROM DANGKY_CD DK WHERE DK.MSSV = SV.MSSV\n);",
+         "π_{MSSV, HOTEN}((π_{MSSV, MACD}(σ_{KHOA = 'K2021'}(SINHVIEN) ⋈ DANGKY_CD) ÷ π_{MACD}(σ_{NAM ≥ 2022 ∧ NAM ≤ 2024}(CHIENDICH))) ⋈ SINHVIEN)",
+         "SELECT SV.MSSV, SV.HOTEN\nFROM SINHVIEN SV\nWHERE SV.KHOA = 'K2021'\n  AND EXISTS (SELECT 1 FROM DANGKY_CD DK WHERE DK.MSSV = SV.MSSV)\n  AND NOT EXISTS (\n    SELECT CD.MACD FROM CHIENDICH CD WHERE CD.NAM BETWEEN 2022 AND 2024\n    EXCEPT\n    SELECT DK.MACD FROM DANGKY_CD DK WHERE DK.MSSV = SV.MSSV\n);",
          [
              "Bước 1: S = π_{MACD}(σ_{NAM ≥ 2022 ∧ NAM ≤ 2024}(CHIENDICH)).",
-             "Bước 2: U = π_{MSSV}(σ_{KHOA = 'K2021'}(SINHVIEN ⋈ DANGKY_CD)).",
+             "Bước 2: U = π_{MSSV}(σ_{KHOA = 'K2021'}(SINHVIEN) ⋈ DANGKY_CD).",
              "Bước 3: Missing = π_{MSSV}((U × S) - π_{MSSV, MACD}(DANGKY_CD)).",
              "Bước 4: KQ = (U - Missing) ⋈ π_{MSSV, HOTEN}(SINHVIEN)."
          ],
-         "Chỉ xét sinh viên khóa K2021 có tham gia phong trào Đoàn hội liên tục các năm."),
+         "Chỉ xét sinh viên khóa K2021 có tham gia phong trào Đoàn hội liên tục các năm. Điều kiện EXISTS đảm bảo khi S rỗng chỉ trả về sinh viên K2021 có đăng ký tham gia chiến dịch."),
 
         ("RA-D12", "ĐSQH Phép Chia: Độc Giả Mượn Tất Cả Các Tập Bộ Sách Lịch Sử",
          "DOCGIA(MADG, HOTEN, SDT), CUONSACH(MACS, MABO, SOTAP), PHIEUMUON(MAPM, MADG, NGAYMUON), CTPM(MAPM, MACS)",
@@ -169,24 +169,24 @@ def get_remediated_ra_division_grouping_problems():
          ],
          "Độc giả có thể mượn từng tập ở các lần mượn khác nhau."),
 
-        ("RA-D13", "ĐSQH Phép Chia: Cửa Hàng Tiện Lợi Phân Phối Tất Cả Sản Phẩm Sữa Vinamilk",
+        ("RA-D13", "ĐSQH Phép Chia: Cửa Hàng Tiện Lợi Phân Phối Tất CẢ Sản Phẩm Sữa Vinamilk",
          "CUAHANG(MACH, TENCH, QUAN), SANPHAM(MASP, TENSP, NHANHIEU), NHAPHANG(MAPN, MACH, NGAYNHAP), CT_NHAP(MAPN, MASP, SOLUONG)",
          "Tìm mã cửa hàng và tên cửa hàng tại quận 'Thu Duc' đã từng nhập phân phối TẤT CẢ các sản phẩm thuộc nhãn hiệu 'Vinamilk'.",
-         "π_{MACH, TENCH}(σ_{QUAN = 'Thu Duc'}(CUAHANG) ⋈ (π_{MACH, MASP}(NHAPHANG ⋈ CT_NHAP) ÷ π_{MASP}(σ_{NHANHIEU = 'Vinamilk'}(SANPHAM))))",
-         "SELECT CH.MACH, CH.TENCH\nFROM CUAHANG CH\nWHERE CH.QUAN = N'Thu Duc'\n  AND NOT EXISTS (\n    SELECT SP.MASP FROM SANPHAM SP WHERE SP.NHANHIEU = 'Vinamilk'\n    EXCEPT\n    SELECT CT.MASP FROM NHAPHANG NH INNER JOIN CT_NHAP CT ON NH.MAPN = CT.MAPN WHERE NH.MACH = CH.MACH\n);",
+         "π_{MACH, TENCH}((π_{MACH, MASP}(σ_{QUAN = 'Thu Duc'}(CUAHANG) ⋈ NHAPHANG ⋈ CT_NHAP) ÷ π_{MASP}(σ_{NHANHIEU = 'Vinamilk'}(SANPHAM))) ⋈ CUAHANG)",
+         "SELECT CH.MACH, CH.TENCH\nFROM CUAHANG CH\nWHERE CH.QUAN = N'Thu Duc'\n  AND EXISTS (SELECT 1 FROM NHAPHANG NH WHERE NH.MACH = CH.MACH)\n  AND NOT EXISTS (\n    SELECT SP.MASP FROM SANPHAM SP WHERE SP.NHANHIEU = 'Vinamilk'\n    EXCEPT\n    SELECT CT.MASP FROM NHAPHANG NH INNER JOIN CT_NHAP CT ON NH.MAPN = CT.MAPN WHERE NH.MACH = CH.MACH\n);",
          [
              "Bước 1: S = π_{MASP}(σ_{NHANHIEU = 'Vinamilk'}(SANPHAM)).",
-             "Bước 2: U = π_{MACH}(σ_{QUAN = 'Thu Duc'}(CUAHANG ⋈ NHAPHANG)).",
+             "Bước 2: U = π_{MACH}(σ_{QUAN = 'Thu Duc'}(CUAHANG) ⋈ NHAPHANG).",
              "Bước 3: Missing = π_{MACH}((U × S) - π_{MACH, MASP}(NHAPHANG ⋈ CT_NHAP)).",
              "Bước 4: KQ = (U - Missing) ⋈ π_{MACH, TENCH}(CUAHANG)."
          ],
-         "Cửa hàng ở quận khác phân phối đủ vẫn bị loại bởi điều kiện QUAN = 'Thu Duc'."),
+         "Cửa hàng ở quận khác phân phối đủ vẫn bị loại bởi điều kiện QUAN = 'Thu Duc'. EXISTS bảo đảm khi S rỗng chỉ các cửa hàng tại Thủ Đức có phát sinh nhập hàng mới được trả về."),
 
         ("RA-D14", "ĐSQH Phép Chia: Bệnh Nhân Tiêm Đủ Phác Đồ 5 Mũi Phòng Dại",
          "BENHNHAN(MABN, HOTEN, SDT), MUITIEM_CHUAN(MAMUI, TENMUI, NGAYTHU), LICHSU_TIEM(MABN, MAMUI, NGAYTIEM_THUC, TRANGTHAI)",
          "Tìm mã bệnh nhân và họ tên của các bệnh nhân đã tiêm hoàn tất (TRANGTHAI = 'Hoan thanh') TẤT CẢ các mũi tiêm trong phác đồ phòng dại (thuộc danh mục MUITIEM_CHUAN).",
          "π_{MABN, HOTEN}(BENHNHAN ⋈ (π_{MABN, MAMUI}(σ_{TRANGTHAI = 'Hoan thanh'}(LICHSU_TIEM)) ÷ π_{MAMUI}(MUITIEM_CHUAN)))",
-         "SELECT BN.MABN, BN.HOTEN\nFROM BENHNHAN BN\nWHERE EXISTS (SELECT 1 FROM LICHSU_TIEM LS WHERE LS.MABN = BN.MABN)\n  AND NOT EXISTS (\n    SELECT MTC.MAMUI FROM MUITIEM_CHUAN MTC\n    EXCEPT\n    SELECT LS.MAMUI FROM LICHSU_TIEM LS WHERE LS.MABN = BN.MABN AND LS.TRANGTHAI = N'Hoan thanh'\n);",
+         "SELECT BN.MABN, BN.HOTEN\nFROM BENHNHAN BN\nWHERE EXISTS (SELECT 1 FROM LICHSU_TIEM LS WHERE LS.MABN = BN.MABN AND LS.TRANGTHAI = N'Hoan thanh')\n  AND NOT EXISTS (\n    SELECT MTC.MAMUI FROM MUITIEM_CHUAN MTC\n    EXCEPT\n    SELECT LS.MAMUI FROM LICHSU_TIEM LS WHERE LS.MABN = BN.MABN AND LS.TRANGTHAI = N'Hoan thanh'\n);",
          [
              "Bước 1: S = π_{MAMUI}(MUITIEM_CHUAN).",
              "Bước 2: R_Actual = π_{MABN, MAMUI}(σ_{TRANGTHAI = 'Hoan thanh'}(LICHSU_TIEM)).",
@@ -198,15 +198,15 @@ def get_remediated_ra_division_grouping_problems():
         ("RA-D15", "ĐSQH Phép Chia: Lập Trình Viên Đóng Góp Vào Tất Cả Microservices Lõi",
          "LAPTRINHVIEN(MALTV, HOTEN, PHONG_DEV), MICROSERVICE(MASVC, TENSVC, PHANLOAI), COMMIT_LOG(MA_COMMIT, MALTV, MASVC, NGAY_COMMIT)",
          "Cho biết mã lập trình viên và họ tên của các lập trình viên thuộc phòng 'Backend' đã từng đóng góp commit vào TẤT CẢ các microservice có phân loại là 'Core Service'.",
-         "π_{MALTV, HOTEN}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN) ⋈ (π_{MALTV, MASVC}(COMMIT_LOG) ÷ π_{MASVC}(σ_{PHANLOAI = 'Core Service'}(MICROSERVICE))))",
-         "SELECT LTV.MALTV, LTV.HOTEN\nFROM LAPTRINHVIEN LTV\nWHERE LTV.PHONG_DEV = 'Backend'\n  AND NOT EXISTS (\n    SELECT MS.MASVC FROM MICROSERVICE MS WHERE MS.PHANLOAI = 'Core Service'\n    EXCEPT\n    SELECT CL.MASVC FROM COMMIT_LOG CL WHERE CL.MALTV = LTV.MALTV\n);",
+         "π_{MALTV, HOTEN}((π_{MALTV, MASVC}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN) ⋈ COMMIT_LOG) ÷ π_{MASVC}(σ_{PHANLOAI = 'Core Service'}(MICROSERVICE))) ⋈ LAPTRINHVIEN)",
+         "SELECT LTV.MALTV, LTV.HOTEN\nFROM LAPTRINHVIEN LTV\nWHERE LTV.PHONG_DEV = 'Backend'\n  AND EXISTS (SELECT 1 FROM COMMIT_LOG CL WHERE CL.MALTV = LTV.MALTV)\n  AND NOT EXISTS (\n    SELECT MS.MASVC FROM MICROSERVICE MS WHERE MS.PHANLOAI = 'Core Service'\n    EXCEPT\n    SELECT CL.MASVC FROM COMMIT_LOG CL WHERE CL.MALTV = LTV.MALTV\n);",
          [
              "Bước 1: S = π_{MASVC}(σ_{PHANLOAI = 'Core Service'}(MICROSERVICE)).",
-             "Bước 2: U = π_{MALTV}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN ⋈ COMMIT_LOG)).",
+             "Bước 2: U = π_{MALTV}(σ_{PHONG_DEV = 'Backend'}(LAPTRINHVIEN) ⋈ COMMIT_LOG).",
              "Bước 3: Missing = π_{MALTV}((U × S) - π_{MALTV, MASVC}(COMMIT_LOG)).",
              "Bước 4: KQ = (U - Missing) ⋈ π_{MALTV, HOTEN}(LAPTRINHVIEN)."
          ],
-         "Bảo đảm kiến trúc microservices được bao phủ kiểm tra đóng góp mã nguồn đầy đủ.")
+         "Bảo đảm kiến trúc microservices được bao phủ kiểm tra đóng góp mã nguồn đầy đủ. EXISTS bảo đảm khi S rỗng chỉ xét lập trình viên Backend có commit.")
     ]
 
     for item in division_problems:

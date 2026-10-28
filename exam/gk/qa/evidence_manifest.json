@@ -1,10 +1,23 @@
 {
-  "manifest_version": "2.1",
-  "milestone": "PHASE_D_ACADEMIC_AUDIT_STRICT",
+  "manifest_version": "3.0",
+  "milestone": "PHASE_D_FINAL_ACADEMIC_CONSISTENCY_AUDIT",
   "auditor": "VÕ TRỌNG PHÚC",
   "engine": "Microsoft SQL Server 2025 Developer Edition",
-  "total_audited_questions": 170,
+  "total_audited_questions": 285,
   "mocks_count": 15,
+  "breakdown": {
+    "by_category": {
+      "ERD_REVIEWED": 40,
+      "SQL_EXECUTED": 65,
+      "SQL_EXECUTED_AND_RA_VERIFIED": 90,
+      "RA_SEMANTICALLY_VERIFIED": 90
+    },
+    "by_level": {
+      "EXECUTION_VERIFIED": 155,
+      "SEMANTICALLY_REVIEWED": 130,
+      "DRAFT": 0
+    }
+  },
   "questions": {
     "M01-Q1": {
       "question_id": "M01-Q1",
@@ -3816,15 +3829,2485 @@
       },
       "audit_verdict": "AUDITED_AND_VERIFIED"
     },
+    "ERD-P01": {
+      "question_id": "ERD-P01",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Đăng Ký Học Phần & Thời Khóa Biểu UIT",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P02": {
+      "question_id": "ERD-P02",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Ký Túc Xá Sinh Viên Đại Học",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P03": {
+      "question_id": "ERD-P03",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Chuỗi Nhà Thuốc & Bán Lẻ Dược Phẩm",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P04": {
+      "question_id": "ERD-P04",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Hãng Hàng Không & Lịch Bay Nội Địa",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P05": {
+      "question_id": "ERD-P05",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Hệ Thống Tuyển Sinh & Xét Tuyển Đại Học",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P06": {
+      "question_id": "ERD-P06",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Hệ Thống Ngân Hàng & Giao Dịch Thẻ ATM",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P07": {
+      "question_id": "ERD-P07",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Khách Sạn & Đặt Phòng Nghỉ Dưỡng",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P08": {
+      "question_id": "ERD-P08",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Garage Sửa Chữa & Bảo Dưỡng Ô Tô",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P09": {
+      "question_id": "ERD-P09",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Chuỗi Siêu Thị Mini & Điểm Bán Hàng (POS)",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P10": {
+      "question_id": "ERD-P10",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Thư Viện Đại Học & Mượn Trả Tài Liệu",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P11": {
+      "question_id": "ERD-P11",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Cụm Rạp Chiếu Phim Đa Cụm",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P12": {
+      "question_id": "ERD-P12",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Sàn Giao Dịch Thương Mại Điện Tử",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P13": {
+      "question_id": "ERD-P13",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Chuỗi Cửa Hàng Cà Phê Nhượng Quyền",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P14": {
+      "question_id": "ERD-P14",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Trung Tâm Thể Thao & Phòng Tập Gym/Fitness",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P15": {
+      "question_id": "ERD-P15",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Kho Bãi & Vận Tải Logistics Đa Phương Thức",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P16": {
+      "question_id": "ERD-P16",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Sàn Giao Dịch Bất Động Sản & Dự Án Đô Thị",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P17": {
+      "question_id": "ERD-P17",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Bệnh Viện Đa Khoa & Khám Chữa Bệnh Ngoại Trú",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P18": {
+      "question_id": "ERD-P18",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Công Ty Lữ Hành & Tour Du Lịch Quốc Tế",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P19": {
+      "question_id": "ERD-P19",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Viện Nghiên Cứu & Đề Tài Khoa Học Công Nghệ",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P20": {
+      "question_id": "ERD-P20",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Nền Tảng Học Trực Tuyến & Khóa Học E-Learning",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P21": {
+      "question_id": "ERD-P21",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Khu Công Nghiệp & Cho Thuê Đất Xưởng",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P22": {
+      "question_id": "ERD-P22",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Hãng Xe Công Nghệ & Chuyến Xe",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P23": {
+      "question_id": "ERD-P23",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Nhà Máy Xử Lý & Tái Chế Rác Thải",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P24": {
+      "question_id": "ERD-P24",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Bản Quyền Âm Nhạc Trực Tuyến",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "ERD-P25": {
+      "question_id": "ERD-P25",
+      "topic": "ERD_MAPPING",
+      "title": "Thiết kế ERD & Ánh xạ Schema: Quản Lý Trạm Khí Tượng Thủy Văn & Dự Báo",
+      "difficulty": "B",
+      "rubric_points": 2.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "ERD_REVIEWED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_01_erd.md",
+        "generator_module": "exam/gk/scripts/remediation/erd_data.py"
+      },
+      "erd_audit": {
+        "has_mermaid_erd": true,
+        "min_max_cardinalities_verified": true,
+        "relational_schema_defined": true,
+        "schema_parentheses_well_formed": true,
+        "entities_and_attributes_verified": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B01": {
+      "question_id": "RA-B01",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Lọc Đơn Lô Vắc-Xin Theo Hạn Sử Dụng & Đơn Giá",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B02": {
+      "question_id": "RA-B02",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Lọc Danh Sách Sinh Viên Thuộc Lớp & Điểm Xét Tuyển",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B03": {
+      "question_id": "RA-B03",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Lọc Sản Phẩm Điện Tử Xuất Xứ Nhật Bản Hoặc Hàn Quốc",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B04": {
+      "question_id": "RA-B04",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Lọc Tài Khoản Ngân Hàng Số Dư Lớn Mở Năm 2024",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B05": {
+      "question_id": "RA-B05",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Lọc Chuyến Bay Khởi Hành Từ Sân Bay Tân Sơn Nhất",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B06": {
+      "question_id": "RA-B06",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Lọc Hóa Đơn Giá Trị Cao Thanh Toán Bằng Thẻ Tín Dụng",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B07": {
+      "question_id": "RA-B07",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Lọc Khách Hàng VIP Tại Khu Vực TP.HCM",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B08": {
+      "question_id": "RA-B08",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Lọc Phòng Học Dung Tích Lớn Có Trang Bị Máy Chiếu",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B09": {
+      "question_id": "RA-B09",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Lọc Thuốc Kê Đơn Có Giá Bán Dưới 50.000 VNĐ",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B10": {
+      "question_id": "RA-B10",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Lọc Bác Sĩ Chuyên Khoa Có Học Vị Tiến Sĩ",
+      "difficulty": "A",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B11": {
+      "question_id": "RA-B11",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Bảng Đơn Hàng Và Khách Hàng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B12": {
+      "question_id": "RA-B12",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Đa Bảng Sinh Viên Đăng Ký Khóa Học Ngoại Ngữ",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B13": {
+      "question_id": "RA-B13",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Giảng Viên Và Lớp Học Phần Phụ Trách",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B14": {
+      "question_id": "RA-B14",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Bệnh Nhân, Bác Sĩ Và Phiếu Khám Bệnh",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B15": {
+      "question_id": "RA-B15",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Đơn Hàng Và Phương Thức Vận Chuyển",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B16": {
+      "question_id": "RA-B16",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Bạn Đọc Mượn Sách Chuyên Ngành CNTT Năm 2023",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B17": {
+      "question_id": "RA-B17",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Suất Chiếu Phim Định Dạng IMAX Sau 18 Giờ",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B18": {
+      "question_id": "RA-B18",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Lô Hàng Nhập Khẩu Sữa Úc Đơn Giá Cao",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B19": {
+      "question_id": "RA-B19",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Lịch Hẹn Nha Khoa Bác Sĩ Chuyên Khoa I",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B20": {
+      "question_id": "RA-B20",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Chuyến Xe Giường Nằm Đi Đà Lạt Ban Đêm",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B21": {
+      "question_id": "RA-B21",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Hợp Đồng Thuê Căn Hộ Cao Cấp Landmark",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B22": {
+      "question_id": "RA-B22",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Hóa Đơn Nhà Hàng Ẩm Thực Gọi Món Hải Sản Tại Bàn VIP",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B23": {
+      "question_id": "RA-B23",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Khách Hàng Thay Pin Laptop Chính Hãng Dell",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B24": {
+      "question_id": "RA-B24",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Học Viên Lớp IELTS Đã Hoàn Tất Học Phí",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B25": {
+      "question_id": "RA-B25",
+      "topic": "RA_BASIC_JOIN",
+      "title": "Kết Nối Vận Đơn Hàng Hóa Tươi Sống Vận Chuyển Đi Tokyo",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B26": {
+      "question_id": "RA-B26",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài: Khách Hàng VIP Chưa Phát Sinh Đơn Hàng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B27": {
+      "question_id": "RA-B27",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài: Giảng Viên Cơ Hữu Chưa Hướng Dẫn Khóa Luận",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B28": {
+      "question_id": "RA-B28",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài: Phòng Deluxe Chưa Được Thuê Trong Tháng 12",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B29": {
+      "question_id": "RA-B29",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài: Sách Tin Học Chưa Từng Được Mượn",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B30": {
+      "question_id": "RA-B30",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài: Căn Hộ Đã Bàn Giao Nhưng Chưa Có Cư Dân Lưu Trú",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B31": {
+      "question_id": "RA-B31",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài: Tuyến Xe Buýt Trục Chính Chưa Phân Công Tài Xế",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B32": {
+      "question_id": "RA-B32",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài: Nhân Viên Kỹ Thuật Chưa Từng Nhận Khen Thưởng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B33": {
+      "question_id": "RA-B33",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài: Khóa Học Chuyên Đề Chưa Có Học Viên Đăng Ký",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B34": {
+      "question_id": "RA-B34",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài: Thiết Bị Y Tế Chưa Từng Qua Bảo Trì Định Kỳ",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B35": {
+      "question_id": "RA-B35",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Kết Ngoài: Nhà Cung Cấp Đã Ký Kết Nhưng Chưa Từng Giao Hàng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B36": {
+      "question_id": "RA-B36",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Tự Kết Phân Cấp: Nhân Viên Có Lương Cao Hơn Quản Lý",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B37": {
+      "question_id": "RA-B37",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Tự Kết: Chuyến Bay Khứ Hồi Giữa Hai Sân Bay Trong Cùng Ngày",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B38": {
+      "question_id": "RA-B38",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Tự Kết: Môn Học Có Số Tín Chỉ Lớn Hơn Môn Tiên Quyết",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B39": {
+      "question_id": "RA-B39",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Tự Kết: Sản Phẩm Cùng Loại Có Giá Bán Gấp Đôi",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B40": {
+      "question_id": "RA-B40",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Tự Kết: Bác Sĩ Cùng Chuyên Khoa Có Thâm Niên Cao Hơn Trưởng Khoa",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B41": {
+      "question_id": "RA-B41",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Phép Hợp (Union): Sinh Viên Đạt Học Bổng Kỳ 1 Hoặc Kỳ 2",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B42": {
+      "question_id": "RA-B42",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Phép Giao (Intersect): Khách Hàng Mua Cả Smart TV Và Loa Soundbar",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B43": {
+      "question_id": "RA-B43",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Phép Trừ (Except): Giảng Viên Dạy Lý Thuyết Nhưng Không Dạy Thực Hành",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B44": {
+      "question_id": "RA-B44",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Phép Trừ: Dược Phẩm Có Ở Kho Quận 1 Nhưng Hết Ở Kho Quận 5",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-B45": {
+      "question_id": "RA-B45",
+      "topic": "RA_BASIC_JOIN",
+      "title": "ĐSQH Phép Giao: Bạn Đọc Vừa Là Sinh Viên Vừa Là Cán Bộ Nghiên Cứu",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_02_ra_basic_join.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_basic_data.py"
+      },
+      "ra_audit": {
+        "has_ra_expression": true,
+        "has_greek_operators": true,
+        "steps_breakdown_present": true,
+        "sql_equivalent_syntax_valid": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D01": {
+      "question_id": "RA-D01",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Sinh Viên Đăng Ký Tất Cả Môn Học Bắt Buộc Chuyên Ngành ATTT",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D02": {
+      "question_id": "RA-D02",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Khách Hàng Mua Tất Cả Sản Phẩm Apple Năm 2024",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D03": {
+      "question_id": "RA-D03",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Bác Sĩ Tham Gia Tất Cả Đợt Tập Huấn Cấp Cứu",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D04": {
+      "question_id": "RA-D04",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Giảng Viên Đã Giảng Dạy Ở Tất Cả Cơ Sở Đào Tạo",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D05": {
+      "question_id": "RA-D05",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Tàu Hàng Cập Bến Tất Cả Cảng Biển Loại 1 Miền Nam",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D06": {
+      "question_id": "RA-D06",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Nhân Viên Kinh Doanh Ký Hợp Đồng Với Tất Cả Đối Tác Chiến Lược",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D07": {
+      "question_id": "RA-D07",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Thí Sinh Dự Thi Đủ Tất Cả Môn Tổ Hợp A00",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D08": {
+      "question_id": "RA-D08",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Phi Công Điều Khiển Tất Cả Dòng Máy Bay Thân Rộng",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D09": {
+      "question_id": "RA-D09",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Kỹ Sư Kiểm Thử Thực Hiện Tất Cả Test Case Hồi Quy Bảo Mật",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D10": {
+      "question_id": "RA-D10",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Khách Hàng Lưu Trú Tại Tất Cả Khu Resort 5 Sao",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D11": {
+      "question_id": "RA-D11",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Sinh Viên Tham Gia Tất Cả Chiến Dịch Mùa Hè Xanh",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D12": {
+      "question_id": "RA-D12",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Độc Giả Mượn Tất Cả Các Tập Bộ Sách Lịch Sử",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D13": {
+      "question_id": "RA-D13",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Cửa Hàng Tiện Lợi Phân Phối Tất CẢ Sản Phẩm Sữa Vinamilk",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D14": {
+      "question_id": "RA-D14",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Bệnh Nhân Tiêm Đủ Phác Đồ 5 Mũi Phòng Dại",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D15": {
+      "question_id": "RA-D15",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Phép Chia: Lập Trình Viên Đóng Góp Vào Tất Cả Microservices Lõi",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py",
+        "counter_example_fixture": "exam/gk/qa/test_division_equivalence.sql",
+        "execution_log": "exam/gk/qa/division_equivalence_execution.log"
+      },
+      "division_audit": {
+        "has_canonical_division_formula": true,
+        "four_step_canonical_subtraction": true,
+        "bounded_candidate_universe": true,
+        "engine_assertion_passed": true,
+        "no_runtime_errors": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D16": {
+      "question_id": "RA-D16",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Thống Kê Số Lượng Sinh Viên Theo Từng Ngành",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D17": {
+      "question_id": "RA-D17",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Tính Tổng Tiền Mua Hàng Khách Hàng VIP Năm 2024",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D18": {
+      "question_id": "RA-D18",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Đếm Số Ca Mổ Của Bác Sĩ Ngoại Khoa Quý 4",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D19": {
+      "question_id": "RA-D19",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Tính Điểm Trung Bình Tích Lũy Theo Từng Lớp",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D20": {
+      "question_id": "RA-D20",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Tổng Doanh Thu Chi Nhánh Nhà Thuốc Quý 4",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D21": {
+      "question_id": "RA-D21",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Số Lượt Chuyến Bay Khai Thác Theo Tàu Bay",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D22": {
+      "question_id": "RA-D22",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Tổng Khối Lượng Rác Tái Chế Theo Khu Vực",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D23": {
+      "question_id": "RA-D23",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Số Đề Tài Nghiên Cứu Khoa Học Của Bộ Môn",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D24": {
+      "question_id": "RA-D24",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Giá Cước Trung Bình Chuyến Xe Theo Tài Xế",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D25": {
+      "question_id": "RA-D25",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Số Phòng Đã Cho Thuê Theo Tòa Nhà Chung Cư",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D26": {
+      "question_id": "RA-D26",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Tổng Lượng Mưa Quan Trắc Theo Trạm Khí Tượng",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D27": {
+      "question_id": "RA-D27",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Tổng Tiền Thuê Đất Theo Doanh Nghiệp KCN",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D28": {
+      "question_id": "RA-D28",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Đếm Số Bản Thu Âm Triệu Stream Của Nhạc Sĩ",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D29": {
+      "question_id": "RA-D29",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Số Lượng Thiết Bị Y Tế Hỏng Cần Bảo Trì",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D30": {
+      "question_id": "RA-D30",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Gom Nhóm: Tổng Số Tiết Giảng Dạy Của Giảng Viên Vượt Chuẩn",
+      "difficulty": "B",
+      "rubric_points": 1.0,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "grouping_audit": {
+        "has_gamma_operator": true,
+        "has_aggregate_function": true,
+        "has_intermediate_steps": true,
+        "sql_group_by_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D31": {
+      "question_id": "RA-D31",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Sinh Viên Điểm GPA Cao Nhất Khoa Công Nghệ Phần Mềm",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D32": {
+      "question_id": "RA-D32",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Sản Phẩm Bán Chạy Nhất Danh Mục Điện Thoại",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D33": {
+      "question_id": "RA-D33",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Bác Sĩ Có Nhiều Ca Khám Bệnh Nhất Khoa Cấp Cứu",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D34": {
+      "question_id": "RA-D34",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Chuyến Bay Có Giá Vé Thấp Nhất Chặng SGN - DAD",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D35": {
+      "question_id": "RA-D35",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Căn Hộ Có Diện Tích Lớn Nhất Tòa Skyview",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D36": {
+      "question_id": "RA-D36",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Khách Hàng Có Chi Tiêu Cao Nhất Ngày Black Friday",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D37": {
+      "question_id": "RA-D37",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Lô Vắc-Xin Nhập Nhiều Liều Nhất Của Moderna",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D38": {
+      "question_id": "RA-D38",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Đề Tài NCKH Có Kinh Phí Lớn Nhất Năm 2024",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D39": {
+      "question_id": "RA-D39",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Tài Xế Công Nghệ Điểm Sao Cao Nhất Đội Xe 01",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D40": {
+      "question_id": "RA-D40",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Trạm Đo Ghi Nhận Lượng Mưa Cao Nhất Đợt Bão",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D41": {
+      "question_id": "RA-D41",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Cuốn Sách Được Mượn Nhiều Nhất Thể Loại CSDL",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D42": {
+      "question_id": "RA-D42",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Nhà Thuốc Có Doanh Thu Cao Nhất Chuỗi Quận 1",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D43": {
+      "question_id": "RA-D43",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Phòng Khách Sạn Đơn Giá Thấp Nhất Hạng Executive Suite",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D44": {
+      "question_id": "RA-D44",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Nhân Viên Có Số Năm Công Tác Lâu Nhất Phòng Kỹ Thuật",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
+    "RA-D45": {
+      "question_id": "RA-D45",
+      "topic": "RA_DIVISION_GROUPING",
+      "title": "ĐSQH Cực Trị: Doanh Nghiệp Thuê Diện Tích Lớn Nhất Phân Khu CNC (Sửa P0-04)",
+      "difficulty": "C",
+      "rubric_points": 1.5,
+      "status": "VERIFIED",
+      "verification_level": "SEMANTICALLY_REVIEWED",
+      "verification_category": "RA_SEMANTICALLY_VERIFIED",
+      "evidence": {
+        "source_bank_file": "exam/gk/bank/topic_03_ra_division_grouping.md",
+        "generator_module": "exam/gk/scripts/remediation/ra_division_grouping_data.py"
+      },
+      "extreme_value_audit": {
+        "subgroup_subtraction_math_verified": true,
+        "has_intermediate_steps": true,
+        "sql_extreme_subquery_equivalence": true
+      },
+      "audit_verdict": "AUDITED_AND_VERIFIED"
+    },
     "SQL-P01": {
       "question_id": "SQL-P01",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Đăng Ký Học Phần Tín Chỉ UIT",
+      "title": "T-SQL DDL: Tạo Bảng Đăng Ký Học Phần Tín Chỉ UIT",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -3841,12 +6324,12 @@
     "SQL-P02": {
       "question_id": "SQL-P02",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Phiếu Tiêm Chủng Vắc-Xin",
+      "title": "T-SQL DDL: Tạo Bảng Phiếu Tiêm Chủng Vắc-Xin",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -3863,12 +6346,12 @@
     "SQL-P03": {
       "question_id": "SQL-P03",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Chi Tiết Hóa Đơn Dược Phẩm (Computed Column)",
+      "title": "T-SQL DDL: Tạo Bảng Chi Tiết Hóa Đơn Dược Phẩm (Computed Column)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -3885,12 +6368,12 @@
     "SQL-P04": {
       "question_id": "SQL-P04",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Vé Máy Bay & Hạng Vé Hàng Không",
+      "title": "T-SQL DDL: Tạo Bảng Vé Máy Bay & Hạng Vé Hàng Không",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -3907,12 +6390,12 @@
     "SQL-P05": {
       "question_id": "SQL-P05",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Hợp Đồng Thuê Ký Túc Xá Sinh Viên",
+      "title": "T-SQL DDL: Tạo Bảng Hợp Đồng Thuê Ký Túc Xá Sinh Viên",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -3929,12 +6412,12 @@
     "SQL-P06": {
       "question_id": "SQL-P06",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Giao Dịch Thẻ ATM Ngân Hàng",
+      "title": "T-SQL DDL: Tạo Bảng Giao Dịch Thẻ ATM Ngân Hàng",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -3951,12 +6434,12 @@
     "SQL-P07": {
       "question_id": "SQL-P07",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Đặt Phòng Resort & Nghỉ Dưỡng",
+      "title": "T-SQL DDL: Tạo Bảng Đặt Phòng Resort & Nghỉ Dưỡng",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -3973,12 +6456,12 @@
     "SQL-P08": {
       "question_id": "SQL-P08",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Chuyến Đi Xe Công Nghệ (Ride-Hailing)",
+      "title": "T-SQL DDL: Tạo Bảng Chuyến Đi Xe Công Nghệ (Ride-Hailing)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -3995,12 +6478,12 @@
     "SQL-P09": {
       "question_id": "SQL-P09",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Chi Tiết Mượn Sách & Phạt Quá Hạn",
+      "title": "T-SQL DDL: Tạo Bảng Chi Tiết Mượn Sách & Phạt Quá Hạn",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4017,12 +6500,12 @@
     "SQL-P10": {
       "question_id": "SQL-P10",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Phiếu Xuất Kho Hàng Hóa",
+      "title": "T-SQL DDL: Tạo Bảng Phiếu Xuất Kho Hàng Hóa",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4039,12 +6522,12 @@
     "SQL-P11": {
       "question_id": "SQL-P11",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Kết Quả Xét Nghiệm Bệnh Viện",
+      "title": "T-SQL DDL: Tạo Bảng Kết Quả Xét Nghiệm Bệnh Viện",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4061,12 +6544,12 @@
     "SQL-P12": {
       "question_id": "SQL-P12",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Bài Học Khóa Học Trực Tuyến",
+      "title": "T-SQL DDL: Tạo Bảng Bài Học Khóa Học Trực Tuyến",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4083,12 +6566,12 @@
     "SQL-P13": {
       "question_id": "SQL-P13",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Chỉ Số Công Tơ Điện Ký Túc Xá",
+      "title": "T-SQL DDL: Tạo Bảng Chỉ Số Công Tơ Điện Ký Túc Xá",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4105,12 +6588,12 @@
     "SQL-P14": {
       "question_id": "SQL-P14",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Suất Chiếu Phim Rạp Chiếu",
+      "title": "T-SQL DDL: Tạo Bảng Suất Chiếu Phim Rạp Chiếu",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4127,12 +6610,12 @@
     "SQL-P15": {
       "question_id": "SQL-P15",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Tạo Bảng Hợp Đồng Bản Quyền Biểu Diễn Âm Nhạc",
+      "title": "T-SQL DDL: Tạo Bảng Hợp Đồng Bản Quyền Biểu Diễn Âm Nhạc",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4149,12 +6632,12 @@
     "SQL-P16": {
       "question_id": "SQL-P16",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Sửa Bảng Thêm Cột Email & Ràng Buộc Định Dạng Email",
+      "title": "T-SQL DDL: Sửa Bảng Thêm Cột Email & Ràng Buộc Định Dạng Email",
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4171,12 +6654,12 @@
     "SQL-P17": {
       "question_id": "SQL-P17",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Sửa Bảng Bổ Sung Hạn Sử Dụng Dược Phẩm",
+      "title": "T-SQL DDL: Sửa Bảng Bổ Sung Hạn Sử Dụng Dược Phẩm",
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4193,12 +6676,12 @@
     "SQL-P18": {
       "question_id": "SQL-P18",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Sửa Bảng Thêm Cột Điểm Tiêu Chuẩn Môn Học",
+      "title": "T-SQL DDL: Sửa Bảng Thêm Cột Điểm Tiêu Chuẩn Môn Học",
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4215,12 +6698,12 @@
     "SQL-P19": {
       "question_id": "SQL-P19",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Sửa Bảng Bổ Sung Hệ Số Lương Nhân Viên",
+      "title": "T-SQL DDL: Sửa Bảng Bổ Sung Hệ Số Lương Nhân Viên",
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4237,12 +6720,12 @@
     "SQL-P20": {
       "question_id": "SQL-P20",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Sửa Bảng Thiết Lập Khóa Ngoại ON DELETE SET NULL",
+      "title": "T-SQL DDL: Sửa Bảng Thiết Lập Khóa Ngoại ON DELETE SET NULL",
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4259,12 +6742,12 @@
     "SQL-P21": {
       "question_id": "SQL-P21",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Sửa Bảng Thêm Cột Điểm Đánh Giá Chuyến Xe",
+      "title": "T-SQL DDL: Sửa Bảng Thêm Cột Điểm Đánh Giá Chuyến Xe",
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4281,12 +6764,12 @@
     "SQL-P22": {
       "question_id": "SQL-P22",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Sửa Bảng Thiết Lập Ràng Buộc UNIQUE Cho Căn Cước Công Dân",
+      "title": "T-SQL DDL: Sửa Bảng Thiết Lập Ràng Buộc UNIQUE Cho Căn Cước Công Dân",
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4303,12 +6786,12 @@
     "SQL-P23": {
       "question_id": "SQL-P23",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Sửa Bảng Bổ Sung Hạn Mức Tín Dụng Thẻ ATM",
+      "title": "T-SQL DDL: Sửa Bảng Bổ Sung Hạn Mức Tín Dụng Thẻ ATM",
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4325,12 +6808,12 @@
     "SQL-P24": {
       "question_id": "SQL-P24",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Sửa Bảng Thêm Cột Tỷ Lệ Chiết Khấu Hóa Đơn",
+      "title": "T-SQL DDL: Sửa Bảng Thêm Cột Tỷ Lệ Chiết Khấu Hóa Đơn",
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4347,12 +6830,12 @@
     "SQL-P25": {
       "question_id": "SQL-P25",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DDL: Sửa Bảng Bổ Sung Ràng Buộc Kiểm Tra Ngày Khóa Học",
+      "title": "T-SQL DDL: Sửa Bảng Bổ Sung Ràng Buộc Kiểm Tra Ngày Khóa Học",
       "difficulty": "A",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4369,12 +6852,12 @@
     "SQL-P26": {
       "question_id": "SQL-P26",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DML: Giảm 15% Học Phí Lớp Học Phần Cho Sinh Viên Hoàn Cảnh Khó Khăn Đăng Ký Năm 2024 (Sửa P0-03)",
+      "title": "T-SQL DML: Giảm 15% Học Phí Lớp Học Phần Cho Sinh Viên Hoàn Cảnh Khó Khăn Đăng Ký Năm 2024 (Sửa P0-03)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4391,12 +6874,12 @@
     "SQL-P27": {
       "question_id": "SQL-P27",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DML: Tăng 10% Đơn Giá Lô Vắc-Xin Bảo Quản Âm Sâu Nhập Khẩu Từ Mỹ Năm 2024 (Sửa P0-03)",
+      "title": "T-SQL DML: Tăng 10% Đơn Giá Lô Vắc-Xin Bảo Quản Âm Sâu Nhập Khẩu Từ Mỹ Năm 2024 (Sửa P0-03)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4413,12 +6896,12 @@
     "SQL-P28": {
       "question_id": "SQL-P28",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DML: Cập Nhật Phụ Phí 50.000 VNĐ Chuyến Bay Đêm Cao Điểm Tết 2024 (Sửa P0-03)",
+      "title": "T-SQL DML: Cập Nhật Phụ Phí 50.000 VNĐ Chuyến Bay Đêm Cao Điểm Tết 2024 (Sửa P0-03)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4435,12 +6918,12 @@
     "SQL-P29": {
       "question_id": "SQL-P29",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DML: Xóa Lịch Sử Đăng Ký Cư Dân Hết Hạn Hợp Đồng Thuê Trước Năm 2024 (Sửa P0-03)",
+      "title": "T-SQL DML: Xóa Lịch Sử Đăng Ký Cư Dân Hết Hạn Hợp Đồng Thuê Trước Năm 2024 (Sửa P0-03)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4457,12 +6940,12 @@
     "SQL-P30": {
       "question_id": "SQL-P30",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DML: Nâng Hạng Khách Hàng VIP Cho Hóa Đơn Lớn Lập Năm 2024 (Sửa P0-03)",
+      "title": "T-SQL DML: Nâng Hạng Khách Hàng VIP Cho Hóa Đơn Lớn Lập Năm 2024 (Sửa P0-03)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4479,12 +6962,12 @@
     "SQL-P31": {
       "question_id": "SQL-P31",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DML: Miễn Phí Tiền Nước Cho Phòng KTX Tình Nguyện Hè Tháng 08/2024 (Sửa P0-03)",
+      "title": "T-SQL DML: Miễn Phí Tiền Nước Cho Phòng KTX Tình Nguyện Hè Tháng 08/2024 (Sửa P0-03)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4501,12 +6984,12 @@
     "SQL-P32": {
       "question_id": "SQL-P32",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DML: Tặng Điểm Thưởng Khách Đặt Phòng Resort 5 Sao Tháng 12/2024 (Sửa P0-03)",
+      "title": "T-SQL DML: Tặng Điểm Thưởng Khách Đặt Phòng Resort 5 Sao Tháng 12/2024 (Sửa P0-03)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4523,12 +7006,12 @@
     "SQL-P33": {
       "question_id": "SQL-P33",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DML: Tăng 10% Cước Phí Chuyến Xe Cao Điểm Mưa Bão Tháng 10/2024 (Sửa P0-03)",
+      "title": "T-SQL DML: Tăng 10% Cước Phí Chuyến Xe Cao Điểm Mưa Bão Tháng 10/2024 (Sửa P0-03)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4545,12 +7028,12 @@
     "SQL-P34": {
       "question_id": "SQL-P34",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DML: Xóa Phiếu Mượn Sách Quá Hạn Đã Bồi Thường Đầy Đủ Trước Năm 2024 (Sửa P0-03)",
+      "title": "T-SQL DML: Xóa Phiếu Mượn Sách Quá Hạn Đã Bồi Thường Đầy Đủ Trước Năm 2024 (Sửa P0-03)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4567,12 +7050,12 @@
     "SQL-P35": {
       "question_id": "SQL-P35",
       "topic": "SQL_DDL_DML",
-      "name": "T-SQL DML: Tăng 5% Lương Cơ Bản Bác Sĩ Cấp Cứu Trực Đêm Năm 2024 (Sửa P0-03)",
+      "title": "T-SQL DML: Tăng 5% Lương Cơ Bản Bác Sĩ Cấp Cứu Trực Đêm Năm 2024 (Sửa P0-03)",
       "difficulty": "B",
       "rubric_points": 1.0,
       "status": "VERIFIED",
       "verification_level": "EXECUTION_VERIFIED",
-      "verification_category": "SQL_EXECUTED_ON_ENGINE",
+      "verification_category": "SQL_EXECUTED",
       "evidence": {
         "fixture_file": "exam/gk/qa/test_sql_practice.sql",
         "execution_log": "exam/gk/qa/sql_practice_execution.log",
@@ -4587,6 +7070,6 @@
       "audit_verdict": "AUDITED_AND_VERIFIED"
     }
   },
-  "audited_and_verified_count": 170,
+  "audited_and_verified_count": 285,
   "audit_fail_count": 0
 }

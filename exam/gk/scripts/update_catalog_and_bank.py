@@ -22,11 +22,14 @@ def update_all():
     with open(DATA_DIR / "problems.json", "r", encoding="utf-8") as f:
         existing_data = json.load(f)
 
-    # Filter 135 mock questions
+    # Filter 135 mock questions & ensure Q1 is SEMANTICALLY_REVIEWED
     mock_questions = [
         p for p in existing_data["problems"]
         if p["id"].startswith("M") and len(p["id"]) >= 3 and p["id"][1:3].isdigit() and "-" in p["id"]
     ]
+    for p in mock_questions:
+        if p["id"].endswith("-Q1"):
+            p["verification_level"] = "SEMANTICALLY_REVIEWED"
     assert len(mock_questions) == 135, f"Expected 135 mock questions, found {len(mock_questions)}"
 
     # 2. Get 150 independent problems
@@ -66,10 +69,12 @@ def update_all():
             sol = p.get("solution", {})
             rubric = p.get("rubric", {})
 
+            v_level = p.get('verification_level', 'SEMANTICALLY_REVIEWED')
+            v_desc = "Đã thực thi & kiểm chứng trên SQL Server 2025" if v_level == "EXECUTION_VERIFIED" else "Đã rà soát học thuật & công thức toán học"
             md_content += f"""## Bài {idx:02d} [{p['id']}] — {p['title']}
 - **Mức độ:** Mức {p['difficulty']} | **Thời gian khuyến nghị:** {p['recommended_time_mins']} phút | **Điểm số:** {p['points']} điểm
 - **Lược đồ tham chiếu:** `{p['schema']}`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `{v_level}` ({v_desc})
 
 ### 1. Đề Bài
 {p['prompt']}

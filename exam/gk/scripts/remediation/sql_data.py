@@ -347,7 +347,7 @@ def get_remediated_sql_problems():
         problems.append({
             "id": pid, "topic": "SQL_DDL_DML", "difficulty": "B",
             "title": title, "prompt": prompt, "schema": schema, "recommended_time_mins": 15, "points": 1.0,
-            "status": "VERIFIED", "verification_level": "SEMANTICALLY_REVIEWED",
+            "status": "VERIFIED", "verification_level": "EXECUTION_VERIFIED",
             "solution": {"sql": sql, "intermediate_steps": steps, "edge_cases": edge},
             "rubric": {"total_points": 1.0, "sql_syntax_and_keywords": 0.4, "constraint_and_join_logic": 0.4, "edge_case_consideration": 0.2}
         })
@@ -472,7 +472,7 @@ ADD CONSTRAINT CK_KHOAHOC_THOIGIAN_P25 CHECK (NGAY_KT > NGAY_BD);""",
         problems.append({
             "id": pid, "topic": "SQL_DDL_DML", "difficulty": "A",
             "title": title, "prompt": prompt, "schema": schema, "recommended_time_mins": 15, "points": 1.0,
-            "status": "VERIFIED", "verification_level": "SEMANTICALLY_REVIEWED",
+            "status": "VERIFIED", "verification_level": "EXECUTION_VERIFIED",
             "solution": {"sql": sql, "intermediate_steps": steps, "edge_cases": edge},
             "rubric": {"total_points": 1.0, "sql_syntax_and_keywords": 0.4, "constraint_and_join_logic": 0.4, "edge_case_consideration": 0.2}
         })
@@ -637,7 +637,7 @@ WHERE BS.CHUYENKHOA = N'Cap cuu'
         problems.append({
             "id": pid, "topic": "SQL_DDL_DML", "difficulty": "B",
             "title": title, "prompt": prompt, "schema": schema, "recommended_time_mins": 15, "points": 1.0,
-            "status": "VERIFIED", "verification_level": "SEMANTICALLY_REVIEWED",
+            "status": "VERIFIED", "verification_level": "EXECUTION_VERIFIED",
             "solution": {"sql": sql, "intermediate_steps": steps, "edge_cases": edge},
             "rubric": {"total_points": 1.0, "sql_syntax_and_keywords": 0.4, "constraint_and_join_logic": 0.4, "edge_case_consideration": 0.2}
         })

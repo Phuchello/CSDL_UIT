@@ -7,7 +7,7 @@
 ## Bài 01 [SQL-P01] — T-SQL DDL: Tạo Bảng Đăng Ký Học Phần Tín Chỉ UIT
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `LOPHOCPHAN_P01(MALHP VARCHAR(10) PRIMARY KEY), SINHVIEN_P01(MSSV VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng DANGKY_HOCPHAN_P01 với khóa chính phức hợp (MSSV, MALHP), các khóa ngoại tham chiếu, ràng buộc CHECK điểm số giữa 0.0 và 10.0, và giá trị mặc định cho ngày đăng ký.
@@ -51,7 +51,7 @@ Các cột tham gia khóa chính bắt buộc phải khai báo NOT NULL; cột �
 ## Bài 02 [SQL-P02] — T-SQL DDL: Tạo Bảng Phiếu Tiêm Chủng Vắc-Xin
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI_P02(MABS VARCHAR(10) PRIMARY KEY), BENHNHAN_P02(MABN VARCHAR(10) PRIMARY KEY), LOVACXIN_P02(MALO VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng TIEM_VACXIN_P02 gồm mã phiếu, bác sĩ chỉ định, bệnh nhân, lô vắc-xin, liều lượng (ml), ngày tiêm và phản ứng sau tiêm.
@@ -95,7 +95,7 @@ Bảo đảm an toàn tiêm chủng với liều lượng dương và kiểm so�
 ## Bài 03 [SQL-P03] — T-SQL DDL: Tạo Bảng Chi Tiết Hóa Đơn Dược Phẩm (Computed Column)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `HOADON_P03(MAHD VARCHAR(10) PRIMARY KEY), THUOC_P03(MATHUOC VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng CTHD_PHARMACY_P03 với khóa chính phức hợp (MAHD, MATHUOC), số lượng bán > 0, đơn giá bán >= 0, mức giảm giá từ 0% đến 50% và cột tính toán THANHTIEN tự động.
@@ -138,7 +138,7 @@ Cột tính toán AS không cần chỉ định kiểu dữ liệu; SQL Server t
 ## Bài 04 [SQL-P04] — T-SQL DDL: Tạo Bảng Vé Máy Bay & Hạng Vé Hàng Không
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `CHUYENBAY_P04(MACB VARCHAR(10) PRIMARY KEY), HANHKHACH_P04(MAHK VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng VE_MAYBAY_P04 với ràng buộc kiểm tra hạng vé chỉ nhận các giá trị ('Eco', 'Deluxe', 'Business'), giá vé > 0 và số ghế không rỗng.
@@ -182,7 +182,7 @@ Ràng buộc UNIQUE kết hợp hai cột giúp loại trừ lỗi bán trùng c
 ## Bài 05 [SQL-P05] — T-SQL DDL: Tạo Bảng Hợp Đồng Thuê Ký Túc Xá Sinh Viên
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SINHVIEN_P05(MSSV VARCHAR(10) PRIMARY KEY), PHONG_P05(MAPHONG VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng HOPDONG_KTX_P05 với ràng buộc ngày kết thúc phải sau ngày bắt đầu, tiền cọc không âm và tiền phòng tháng > 0.
@@ -226,7 +226,7 @@ Ràng buộc CHECK bảng có thể tham chiếu đồng thời 2 cột trong c�
 ## Bài 06 [SQL-P06] — T-SQL DDL: Tạo Bảng Giao Dịch Thẻ ATM Ngân Hàng
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `THE_ATM_P06(MATHE VARCHAR(20) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng GIAODICH_ATM_P06 ghi nhận lịch sử giao dịch với ràng buộc loại giao dịch ('Rut tien', 'Chuyen khoan', 'Nop tien', 'Thanh toan'), số tiền > 0 và lệ phí >= 0.
@@ -268,7 +268,7 @@ Cần dùng NVARCHAR cho tiếng Việt Unicode có dấu kèm tiền tố N'...
 ## Bài 07 [SQL-P07] — T-SQL DDL: Tạo Bảng Đặt Phòng Resort & Nghỉ Dưỡng
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `RESORT_P07(MARS VARCHAR(10) PRIMARY KEY), KHACHHANG_P07(MAKH VARCHAR(10) PRIMARY KEY), PHONG_P07(MAPHONG VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng PHIEUDAT_RESORT_P07 kiểm tra ngày đi NGAYDI > NGAYDEN, số lượng khách tối đa từ 1 đến 10 người và tiền cọc >= 0.
@@ -314,7 +314,7 @@ Bảo đảm dữ liệu lưu trú hợp lệ không bị âm ngày ở.
 ## Bài 08 [SQL-P08] — T-SQL DDL: Tạo Bảng Chuyến Đi Xe Công Nghệ (Ride-Hailing)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `TAIXE_P08(MATX VARCHAR(10) PRIMARY KEY), KHACHHANG_P08(MAKH VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng CHUYENXE_CONGNGHE_P08 với quãng đường di chuyển > 0 km, cước phí > 0, và trạng thái chuyến xe ('Da dat', 'Dang di', 'Hoan thanh', 'Huy').
@@ -358,7 +358,7 @@ Trạng thái chuyến xe mặc định là 'Da dat' khi khách vừa tạo cu�
 ## Bài 09 [SQL-P09] — T-SQL DDL: Tạo Bảng Chi Tiết Mượn Sách & Phạt Quá Hạn
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `PHIEUMUON_P09(MAPM VARCHAR(10) PRIMARY KEY), CUONSACH_P09(MACS VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng CT_PHIEUMUON_P09 với khóa chính phức hợp (MAPM, MACS), tình trạng sách lúc trả ('Tot', 'Hong nhe', 'Hong nang', 'Mat sach'), tiền phạt >= 0.
@@ -399,7 +399,7 @@ Bảo đảm toàn vẹn thư viện: sách trả hỏng hoặc mất sẽ bị 
 ## Bài 10 [SQL-P10] — T-SQL DDL: Tạo Bảng Phiếu Xuất Kho Hàng Hóa
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHO_P10(MAKHO VARCHAR(10) PRIMARY KEY), NHANVIEN_P10(MANV VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng PHIEU_XUATKHO_P10 có tổng trị giá không âm, trạng thái phiếu xuất ('Cho xuat', 'Da xuat', 'Huy') và ngày xuất mặc định là ngày hiện tại.
@@ -441,7 +441,7 @@ Tổng giá trị phiếu xuất kho không được phép mang giá trị âm.
 ## Bài 11 [SQL-P11] — T-SQL DDL: Tạo Bảng Kết Quả Xét Nghiệm Bệnh Viện
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BENHNHAN_P11(MABN VARCHAR(10) PRIMARY KEY), BACSI_P11(MABS VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng KETQUA_XETNGHIEM_P11 lưu trữ kết quả định lượng y khoa với kết quả số >= 0, loại xét nghiệm không rỗng và đơn vị đo chuẩn.
@@ -483,7 +483,7 @@ Bảo đảm dữ liệu y tế định lượng chính xác.
 ## Bài 12 [SQL-P12] — T-SQL DDL: Tạo Bảng Bài Học Khóa Học Trực Tuyến
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHOAHOC_P12(MAKH VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng BAIHOC_ONLINE_P12 với thứ tự bài học > 0, thời lượng bài học (phút) từ 1 đến 300 phút, cờ miễn phí chỉ nhận 0 hoặc 1.
@@ -525,7 +525,7 @@ Cột cờ BIT chỉ nhận giá trị 0 (trả phí) hoặc 1 (học thử mi�
 ## Bài 13 [SQL-P13] — T-SQL DDL: Tạo Bảng Chỉ Số Công Tơ Điện Ký Túc Xá
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `PHONG_P13(MAPHONG VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng CONGTO_DIEN_P13 với khóa chính phức hợp (MAPHONG, THANG, NAM), tháng từ 1 đến 12, năm >= 2020 và chỉ số mới phải lớn hơn hoặc bằng chỉ số cũ.
@@ -567,7 +567,7 @@ Chỉ số điện không bao giờ được phép giảm lùi trong cùng kỳ 
 ## Bài 14 [SQL-P14] — T-SQL DDL: Tạo Bảng Suất Chiếu Phim Rạp Chiếu
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `PHIM_P14(MAPHIM VARCHAR(10) PRIMARY KEY), PHONGCHIEU_P14(MAPHONG VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng SUATCHIEU_PHIM_P14 với giá vé gốc từ 45.000 VNĐ trở lên, ngày chiếu không rỗng và giờ chiếu hợp lệ.
@@ -608,7 +608,7 @@ CREATE TABLE SUATCHIEU_PHIM_P14 (
 ## Bài 15 [SQL-P15] — T-SQL DDL: Tạo Bảng Hợp Đồng Bản Quyền Biểu Diễn Âm Nhạc
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BAIHAT_P15(MABH VARCHAR(10) PRIMARY KEY), CASI_P15(MACS VARCHAR(10) PRIMARY KEY)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL CREATE TABLE tạo bảng HOPDONG_BIEUDIEN_P15 với phí bản quyền >= 0, thời hạn hợp đồng (tháng) từ 1 đến 120 tháng, và ngày ký hợp đồng.
@@ -650,7 +650,7 @@ Bảo vệ quyền sở hữu trí tuệ âm nhạc trực tuyến theo chuẩn 
 ## Bài 16 [SQL-P16] — T-SQL DDL: Sửa Bảng Thêm Cột Email & Ràng Buộc Định Dạng Email
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SINHVIEN_P16(MSSV VARCHAR(10) PRIMARY KEY, HOTEN NVARCHAR(100), NGAYSINH DATE)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL ALTER TABLE thêm cột EMAIL vào bảng SINHVIEN_P16 và bổ sung ràng buộc CHECK kiểm tra định dạng email hợp lệ (phải chứa ký tự '@' và '.').
@@ -682,7 +682,7 @@ Khai báo ràng buộc CHECK inline cùng lệnh ADD giúp thực thi an toàn t
 ## Bài 17 [SQL-P17] — T-SQL DDL: Sửa Bảng Bổ Sung Hạn Sử Dụng Dược Phẩm
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `DUOCPHAM_P17(MATHUOC VARCHAR(10) PRIMARY KEY, TENTHUOC NVARCHAR(100), NGAYSX DATE NOT NULL)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL ALTER TABLE thêm cột HSD (Hạn sử dụng) vào bảng DUOCPHAM_P17 và tạo ràng buộc CHECK bảo đảm HSD >= NGAYSX.
@@ -718,7 +718,7 @@ Cần phân tách batch bằng GO khi ràng buộc mức bảng tham chiếu đ�
 ## Bài 18 [SQL-P18] — T-SQL DDL: Sửa Bảng Thêm Cột Điểm Tiêu Chuẩn Môn Học
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `MONHOC_P18(MAMH VARCHAR(10) PRIMARY KEY, TENMH NVARCHAR(100), SOTC INT)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL ALTER TABLE thêm cột DIEM_CHUAN_QUA_MON vào bảng MONHOC_P18 với giá trị mặc định là 5.0 và ràng buộc điểm trong khoảng [0.0, 10.0].
@@ -751,7 +751,7 @@ Cung cấp CONSTRAINT DF_... DEFAULT cho cột NOT NULL bảo đảm lệnh ALTE
 ## Bài 19 [SQL-P19] — T-SQL DDL: Sửa Bảng Bổ Sung Hệ Số Lương Nhân Viên
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHANVIEN_P19(MANV VARCHAR(10) PRIMARY KEY, HOTEN NVARCHAR(100), LUONGCB DECIMAL(12, 2))`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL ALTER TABLE bổ sung cột HE_SO_LUONG với giá trị mặc định là 1.00 và ràng buộc CHECK hệ số lương phải lớn hơn hoặc bằng 1.00.
@@ -784,7 +784,7 @@ Bảo đảm quyền lợi nhân viên theo quy chế tiền lương.
 ## Bài 20 [SQL-P20] — T-SQL DDL: Sửa Bảng Thiết Lập Khóa Ngoại ON DELETE SET NULL
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `PHONGBAN_P20(MAPB VARCHAR(10) PRIMARY KEY, TENPB NVARCHAR(100)), NHANVIEN_P20(MANV VARCHAR(10) PRIMARY KEY, HOTEN NVARCHAR(100), MAPB VARCHAR(10))`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL ALTER TABLE tạo ràng buộc khóa ngoại từ NHANVIEN_P20(MAPB) tham chiếu đến PHONGBAN_P20(MAPB) kèm hành vi ON DELETE SET NULL.
@@ -816,7 +816,7 @@ Cột MAPB trong bảng NHANVIEN_P20 bắt buộc phải cho phép NULL để h�
 ## Bài 21 [SQL-P21] — T-SQL DDL: Sửa Bảng Thêm Cột Điểm Đánh Giá Chuyến Xe
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `CHUYENXE_P21(MACHUYEN VARCHAR(10) PRIMARY KEY, CUOCPHI DECIMAL(10, 2))`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL ALTER TABLE thêm cột DIEM_DANHGIA vào bảng CHUYENXE_P21 và ràng buộc CHECK điểm đánh giá chỉ được nhận số nguyên từ 1 đến 5 sao.
@@ -848,7 +848,7 @@ Giá trị NULL hợp lệ khi khách hàng bỏ qua bước đánh giá sau chu
 ## Bài 22 [SQL-P22] — T-SQL DDL: Sửa Bảng Thiết Lập Ràng Buộc UNIQUE Cho Căn Cước Công Dân
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACHHANG_P22(MAKH VARCHAR(10) PRIMARY KEY, HOTEN NVARCHAR(100), CCCD VARCHAR(20) NOT NULL)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL ALTER TABLE bổ sung ràng buộc UNIQUE cho cột số căn cước công dân (CCCD) trong bảng KHACHHANG_P22.
@@ -877,7 +877,7 @@ Ràng buộc UNIQUE tự động tạo Unique Non-Clustered Index trong SQL Serv
 ## Bài 23 [SQL-P23] — T-SQL DDL: Sửa Bảng Bổ Sung Hạn Mức Tín Dụng Thẻ ATM
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `THE_ATM_P23(MATHE VARCHAR(20) PRIMARY KEY, SOTK VARCHAR(20) NOT NULL)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL ALTER TABLE thêm cột HANMUC_TINDUNG với giá trị mặc định là 10.000.000 VNĐ và ràng buộc CHECK hạn mức >= 0.
@@ -910,7 +910,7 @@ Bảo đảm an toàn hạn mức tài khoản thẻ ngân hàng.
 ## Bài 24 [SQL-P24] — T-SQL DDL: Sửa Bảng Thêm Cột Tỷ Lệ Chiết Khấu Hóa Đơn
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `HOADON_P24(MAHD VARCHAR(10) PRIMARY KEY, NGAYLAP DATE NOT NULL, TONGTIEN DECIMAL(12, 2) NOT NULL)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL ALTER TABLE thêm cột CHIETKHAU_PT (phần trăm chiết khấu) vào bảng HOADON_P24 với giá trị mặc định là 0% và ràng buộc CHECK không vượt quá 30%.
@@ -943,7 +943,7 @@ Kiểm soát chính sách khuyến mãi hóa đơn bán hàng.
 ## Bài 25 [SQL-P25] — T-SQL DDL: Sửa Bảng Bổ Sung Ràng Buộc Kiểm Tra Ngày Khóa Học
 - **Mức độ:** Mức A | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHOAHOC_P25(MAKH VARCHAR(10) PRIMARY KEY, TENKH NVARCHAR(100), NGAY_BD DATE NOT NULL, NGAY_KT DATE NOT NULL)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL ALTER TABLE bổ sung ràng buộc toàn vẹn CHECK bảo đảm ngày kết thúc khóa học NGAY_KT phải sau ngày bắt đầu NGAY_BD.
@@ -972,7 +972,7 @@ Bảo đảm tính logic của thời lượng khóa học đào tạo.
 ## Bài 26 [SQL-P26] — T-SQL DML: Giảm 15% Học Phí Lớp Học Phần Cho Sinh Viên Hoàn Cảnh Khó Khăn Đăng Ký Năm 2024 (Sửa P0-03)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `SINHVIEN_P26(MSSV VARCHAR(10) PRIMARY KEY, HOTEN NVARCHAR(100), LOAI_SV NVARCHAR(30)), DANGKY_P26(MSSV VARCHAR(10), MALHP VARCHAR(10), NGAYDK DATE, HOCPHI_PHAITHU DECIMAL(12, 2), PRIMARY KEY (MSSV, MALHP))`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL UPDATE giảm 15% học phí phải thu (HOCPHI_PHAITHU = HOCPHI_PHAITHU * 0.85) cho các lượt đăng ký lớp học phần của sinh viên thuộc diện 'Kho khan' đăng ký trong năm 2024.
@@ -1009,7 +1009,7 @@ WHERE SV.LOAI_SV = N'Kho khan'
 ## Bài 27 [SQL-P27] — T-SQL DML: Tăng 10% Đơn Giá Lô Vắc-Xin Bảo Quản Âm Sâu Nhập Khẩu Từ Mỹ Năm 2024 (Sửa P0-03)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `NHACUNGCAP_P27(MANCC VARCHAR(10) PRIMARY KEY, TENNCC NVARCHAR(100), QUOCGIA NVARCHAR(50)), LOVACXIN_P27(MALO VARCHAR(10) PRIMARY KEY, MANCC VARCHAR(10), LOAI_BQ NVARCHAR(30), NGAYNHAP DATE, DONGIA DECIMAL(12, 2))`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL UPDATE tăng 10% đơn giá (DONGIA = DONGIA * 1.10) cho các lô vắc-xin yêu cầu bảo quản 'Am sau' do nhà cung cấp có quốc gia 'My' cung ứng và nhập kho trong năm 2024.
@@ -1047,7 +1047,7 @@ Cột NGAYNHAP đảm bảo tính nhất quán dữ liệu với năm 2024 đư�
 ## Bài 28 [SQL-P28] — T-SQL DML: Cập Nhật Phụ Phí 50.000 VNĐ Chuyến Bay Đêm Cao Điểm Tết 2024 (Sửa P0-03)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `CHUYENBAY_P28(MACB VARCHAR(10) PRIMARY KEY, NGAYBAY DATE, GIOBAY TIME, PHUPHI DECIMAL(10, 2), LOAICHUYEN NVARCHAR(30))`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL UPDATE cộng thêm phụ phí 50.000 VNĐ vào cột PHUPHI cho các chuyến bay cất cánh sau 22:00 (GIOBAY >= '22:00:00') thuộc đợt cao điểm Tết năm 2024 (từ 2024-02-01 đến 2024-02-15).
@@ -1082,7 +1082,7 @@ Mệnh đề WHERE kiểm tra đồng thời cả giờ bay và ngày bay cụ t
 ## Bài 29 [SQL-P29] — T-SQL DML: Xóa Lịch Sử Đăng Ký Cư Dân Hết Hạn Hợp Đồng Thuê Trước Năm 2024 (Sửa P0-03)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `HOPDONG_P29(MAHD VARCHAR(10) PRIMARY KEY, MACAN VARCHAR(10), NGAYKT DATE), CUDAN_LUTRUG_P29(MACD VARCHAR(10) PRIMARY KEY, MAHD VARCHAR(10), HOTEN NVARCHAR(100), NGAY_DANGKY DATE)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL DELETE xóa toàn bộ bản ghi lưu trú của cư dân tại bảng CUDAN_LUTRUG_P29 thuộc các hợp đồng thuê nhà đã hết hạn trước ngày '2024-01-01' (NGAYKT < '2024-01-01').
@@ -1116,7 +1116,7 @@ Cú pháp DELETE table_alias FROM table table_alias JOIN là cú pháp chuẩn c
 ## Bài 30 [SQL-P30] — T-SQL DML: Nâng Hạng Khách Hàng VIP Cho Hóa Đơn Lớn Lập Năm 2024 (Sửa P0-03)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACHHANG_P30(MAKH VARCHAR(10) PRIMARY KEY, HOTEN NVARCHAR(100), HANG_THE NVARCHAR(20)), HOADON_P30(MAHD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), NGAYLAP DATE, TONGTIEN DECIMAL(12, 2))`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL UPDATE cập nhật nâng hạng thẻ thành 'VIP' trong bảng KHACHHANG_P30 cho các khách hàng có hóa đơn mua sắm trong năm 2024 đạt tổng tiền từ 50.000.000 VNĐ trở lên.
@@ -1152,7 +1152,7 @@ Cú pháp chuẩn SET HANG_THE = N'VIP' (không có KH.HANG_THE trong SET).
 ## Bài 31 [SQL-P31] — T-SQL DML: Miễn Phí Tiền Nước Cho Phòng KTX Tình Nguyện Hè Tháng 08/2024 (Sửa P0-03)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `PHONG_P31(MAPHONG VARCHAR(10) PRIMARY KEY, LOAIPHONG NVARCHAR(30)), TIEN_DICHVU_P31(MAPHONG VARCHAR(10), THANG INT, NAM INT, TIEN_NUOC DECIMAL(10, 2), PRIMARY KEY (MAPHONG, THANG, NAM))`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL UPDATE gán TIEN_NUOC = 0 cho các phòng ký túc xá thuộc loại 'Tinh nguyen hè' (LOAIPHONG = 'Tinh nguyen he') trong kỳ thu phí tháng 8 năm 2024.
@@ -1189,7 +1189,7 @@ Cột THANG và NAM trong TIEN_DICHVU_P31 đảm bảo lọc chính xác thời 
 ## Bài 32 [SQL-P32] — T-SQL DML: Tặng Điểm Thưởng Khách Đặt Phòng Resort 5 Sao Tháng 12/2024 (Sửa P0-03)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHACHHANG_P32(MAKH VARCHAR(10) PRIMARY KEY, HOTEN NVARCHAR(100), DIEM_TICHLUY INT), PHIEUDAT_P32(MAPD VARCHAR(10) PRIMARY KEY, MAKH VARCHAR(10), HANG_SAO INT, NGAYDEN DATE)`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL UPDATE cộng thêm 200 điểm thưởng tích lũy (DIEM_TICHLUY = DIEM_TICHLUY + 200) cho các khách hàng có phiếu đặt phòng tại resort đạt tiêu chuẩn 5 sao có ngày đến trong tháng 12/2024.
@@ -1226,7 +1226,7 @@ Cập nhật tăng giá trị tích lũy an toàn trên dữ liệu đa bảng.
 ## Bài 33 [SQL-P33] — T-SQL DML: Tăng 10% Cước Phí Chuyến Xe Cao Điểm Mưa Bão Tháng 10/2024 (Sửa P0-03)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `KHUVUC_P33(MAKV VARCHAR(10) PRIMARY KEY, TINHTRANG_THOITIET NVARCHAR(30)), CHUYENXE_P33(MACHUYEN VARCHAR(10) PRIMARY KEY, MAKV VARCHAR(10), THOIGIAN_BD DATETIME, CUOCPHI DECIMAL(10, 2))`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL UPDATE tăng 10% cước phí (CUOCPHI = CUOCPHI * 1.10) cho các chuyến xe xuất phát tại khu vực có thời tiết 'Mua bao' trong tháng 10 năm 2024.
@@ -1263,7 +1263,7 @@ Chính sách phụ thu thời tiết bất lợi trong ứng dụng gọi xe cô
 ## Bài 34 [SQL-P34] — T-SQL DML: Xóa Phiếu Mượn Sách Quá Hạn Đã Bồi Thường Đầy Đủ Trước Năm 2024 (Sửa P0-03)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `PHIEUMUON_P34(MAPM VARCHAR(10) PRIMARY KEY, NGAYTRA DATE, TRANGTHAI NVARCHAR(30), TIENBOITHUONG DECIMAL(10, 2))`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL DELETE xóa các phiếu mượn sách đã hoàn tất bồi thường (TRANGTHAI = 'Da boi thuong') có ngày trả hoặc thanh lý trước ngày '2024-01-01'.
@@ -1296,7 +1296,7 @@ Dọn dẹp dữ liệu lịch sử các khoản nợ thư viện đã được 
 ## Bài 35 [SQL-P35] — T-SQL DML: Tăng 5% Lương Cơ Bản Bác Sĩ Cấp Cứu Trực Đêm Năm 2024 (Sửa P0-03)
 - **Mức độ:** Mức B | **Thời gian khuyến nghị:** 15 phút | **Điểm số:** 1.0 điểm
 - **Lược đồ tham chiếu:** `BACSI_P35(MABS VARCHAR(10) PRIMARY KEY, HOTEN NVARCHAR(100), CHUYENKHOA NVARCHAR(50), LUONGCB DECIMAL(12, 2)), CATRUC_P35(MACATRUC VARCHAR(10) PRIMARY KEY, MABS VARCHAR(10), NGAYTRUC DATE, LOAICATRUC NVARCHAR(20))`
-- **Trạng thái kiểm định:** `SEMANTICALLY_REVIEWED` (Đã rà soát học thuật & công thức toán học)
+- **Trạng thái kiểm định:** `EXECUTION_VERIFIED` (Đã thực thi & kiểm chứng trên SQL Server 2025)
 
 ### 1. Đề Bài
 Viết câu lệnh T-SQL UPDATE tăng 5% lương cơ bản (LUONGCB = LUONGCB * 1.05) trong bảng BACSI_P35 cho các bác sĩ thuộc chuyên khoa 'Cap cuu' đã tham gia ca trực 'Truc dem' trong năm 2024.

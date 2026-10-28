@@ -21,13 +21,20 @@ Module này cung cấp học liệu ôn tập toàn diện cho sinh viên ôn th
 
 3. **Tiêu chuẩn kiểm chứng học thuật (Academic Verification Status)**:
    - **Tổng quy mô toàn ngân hàng:** **285 bài tập** (135 câu thuộc 15 Mock Exam + 150 bài luyện độc lập).
-   - **EXECUTION_VERIFIED (Chuẩn Vàng SQL Server):** 135 câu (15 đề thi mô phỏng).
-   - **SEMANTICALLY_REVIEWED (Đã rà soát học thuật & công thức):** 150 bài luyện độc lập.
-   - **DRAFT / PENDING REMEDIATION:** **0 bài (100% hoàn thiện)**.
+   - **Phân cấp xác minh thực tế:**
+     * `EXECUTION_VERIFIED`: **155 bài** (120 câu Mock DDL/DML & RA + 35 bài luyện T-SQL độc lập thực thi trên SQL Server 2025).
+     * `SEMANTICALLY_REVIEWED`: **130 bài** (15 câu Mock ERD + 25 bài luyện ERD + 90 bài luyện ĐSQH).
+     * `DRAFT / PENDING REMEDIATION`: **0 bài (100% hoàn thiện)**.
+   - **Thống kê phân loại kiểm định chuyên sâu (Verification Categories)**:
+     * `ERD_REVIEWED`: **40 bài** (15 Mock Q1 + 25 Independent ERD).
+     * `SQL_EXECUTED`: **65 bài** (30 Mock Q2A/Q2B + 35 Independent SQL).
+     * `SQL_EXECUTED_AND_RA_VERIFIED`: **90 bài** (90 Mock RA Q2C1..Q2C6).
+     * `RA_SEMANTICALLY_VERIFIED`: **90 bài** (45 Independent RA Basic + 45 Independent Division & Grouping, kèm bộ kiểm thử phản ví dụ 15 bài phép chia).
+   - **Minh chứng minh bạch:** Toàn bộ 285/285 câu hỏi được lưu trữ bằng chứng chi tiết tại [evidence_manifest.json](qa/evidence_manifest.json) và [audit_report.json](qa/audit_report.json).
 
 4. **Bộ 4 ấn phẩm PDF A4 chất lượng cao**:
-   - `IT004_GK_NganHangDe_VoTrongPhuc.pdf` (64 trang A4): Đề bài 150 bài tập độc lập & 15 Mock Exam sạch (tuyệt đối không lộ đáp án).
-   - `IT004_GK_LoiGiaiChiTiet_VoTrongPhuc.pdf` (262 trang A4): Toàn bộ hướng dẫn giải chi tiết 285 bài, phân tích tư duy toán học, barem điểm từng ý và bảng kiểm chứng thực thi.
+   - `IT004_GK_NganHangDe_VoTrongPhuc.pdf` (65 trang A4): Đề bài 150 bài tập độc lập & 15 Mock Exam sạch (tuyệt đối không lộ đáp án).
+   - `IT004_GK_LoiGiaiChiTiet_VoTrongPhuc.pdf` (257 trang A4): Toàn bộ hướng dẫn giải chi tiết 285 bài, phân tích tư duy toán học, barem điểm từng ý và bảng kiểm chứng thực thi.
    - `IT004_GK_CheatSheet_VoTrongPhuc.pdf` (2 trang A4): Tóm tắt công thức, checklist phòng thi, mẹo nhận diện từ khóa.
    - `IT004_GK_VerifiedOnly_VoTrongPhuc.pdf` (148 trang A4): Ấn bản tuyển tập chọn lọc nghiêm ngặt CHỈ chứa các nội dung đã kiểm chứng học thuật.
 
